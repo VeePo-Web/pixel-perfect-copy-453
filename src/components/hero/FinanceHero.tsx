@@ -176,7 +176,7 @@ const FinanceHero = () => {
         <div className="absolute -top-32 -left-32 h-[480px] w-[480px] rounded-full bg-champagne-300/[0.06] blur-3xl motion-safe:animate-[pulse_20s_ease-in-out_infinite]" />
         <div className="absolute -bottom-40 -right-32 h-[520px] w-[520px] rounded-full bg-emerald-900/[0.18] blur-3xl motion-safe:animate-[pulse_24s_ease-in-out_infinite]" />
         {/* Ghost briefing-card silhouette behind right column */}
-        <div className="absolute right-[6%] top-[28%] hidden h-[520px] w-[380px] rotate-[-3deg] rounded-2xl border border-champagne-300/10 bg-charcoal-800/20 opacity-[0.5] blur-[2px] lg:block" />
+        <div className="absolute right-[6%] top-[28%] hidden h-[520px] w-[380px] rotate-[-3deg] rounded-2xl border border-champagne-300/10 bg-charcoal-800/20 opacity-[0.5] blur-[2px] motion-safe:animate-ghost-drift lg:block" />
       </div>
 
       <HeroNav />
