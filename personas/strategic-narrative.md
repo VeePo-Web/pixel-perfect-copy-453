@@ -1,96 +1,93 @@
-/**
- * HICKORY & ROSE — Strategic Narrative & Brand Foundation
- * 
- * DECISION-MAKING REFERENCE ONLY. Does not render anything.
- * This is the authoritative brand narrative that all copy, messaging,
- * positioning, and experience decisions should be filtered through.
- */
+# Strategic Narrative
 
-export const STRATEGIC_NARRATIVE = {
+**DECISION-MAKING REFERENCE ONLY. Does not render anything.**
 
-  // ═══════════════════════════════════════════════════════════════════
-  // THE STRATEGIC NARRATIVE
-  // ═══════════════════════════════════════════════════════════════════
-  narrative: {
-    paragraph1: "Hickory & Rose Wedding and Event Planning is a luxury planning studio devoted to celebrations that feel as beautiful as they are meaningful—refined in execution, elevated in design, and deeply personal in the moments that matter. Based in Edmonton, Hickory & Rose supports couples through day-of coordination, partial planning, and full-service planning—each tailored to a client's unique vision and story—so the entire experience feels intentional, cohesive, and unmistakably 'them.'",
-    paragraph2: "At its core, Hickory & Rose exists to protect what couples value most on a wedding day: presence, peace of mind, and the freedom to fully feel it. When emotions run high and expectations are heavy, calm becomes a luxury. With a steady, organized approach, Hickory & Rose holds the details—timing, flow, vendor coordination, and on-the-ground decision-making—so clients aren't forced to choose between being the host and being the heart of the celebration. The result is a day that feels effortless to live inside, because every moving part is being thoughtfully managed.",
-    paragraph3: "The Hickory & Rose couple is drawn to a luxury experience with a creative, rustic, and elegant aesthetic—couples who care about detail, design, and the feeling their guests carry home. They often have a clear vision and strong taste, but want an expert to translate that vision into a seamless reality without the stress, second-guessing, or mental overload that can creep into the planning process. With a bubbly, friendly personality and a collaborative spirit, Hickory & Rose naturally connects with couples who value warmth, positivity, and trust—turning ideas into an elevated celebration that feels both polished and profoundly personal.",
-  },
+The narrative system that orders every section, headline, and CTA on
+the site. Use this when sequencing content.
 
-  // ═══════════════════════════════════════════════════════════════════
-  // CORE DIFFERENTIATORS (USPs)
-  // ═══════════════════════════════════════════════════════════════════
-  differentiators: {
-    calmLeadership: {
-      label: "Calm leadership under pressure",
-      description: "A grounded, organized presence that shields clients from stress so they can stay emotionally present and enjoy the day.",
-    },
-    luxuryPersonal: {
-      label: "Luxury that still feels personal",
-      description: "Refined celebrations that balance elevated design with intentional, story-driven moments—never generic, never cookie-cutter.",
-    },
-    tailoredSupport: {
-      label: "Tailored planning support",
-      description: "Day-of coordination, partial planning, and full-service planning designed around each couple's needs, vision, and level of involvement.",
-    },
-    seamlessLogistics: {
-      label: "Seamless logistics + elevated design",
-      description: "A deliberate blend of behind-the-scenes precision and aesthetic cohesion so the event feels effortless and looks exceptional.",
-    },
-    vendorCollaboration: {
-      label: "Trusted vendor collaboration",
-      description: "Close work with trusted vendors to deliver a smooth, high-quality experience where every detail is handled with care.",
-    },
-  },
+---
 
-  // ═══════════════════════════════════════════════════════════════════
-  // SERVICES & INVESTMENT
-  // ═══════════════════════════════════════════════════════════════════
-  services: {
-    dayOfCoordination: {
-      label: "Day-Of Coordination",
-      description: "Luxury-level support focused on thoughtful management of the wedding day so you can be fully present. Hickory & Rose brings calm structure to the experience, ensuring key details are handled, logistics run smoothly, and the day feels effortless from your perspective.",
-      investment: "", // TODO: Awaiting pricing details
-    },
-    partialPlanning: {
-      label: "Partial Planning",
-      description: "Strategic planning support for couples who have started the process and want an expert to bring clarity, cohesion, and confident direction. Ideal for detail-driven couples who value refined execution and want professional oversight to elevate the experience and reduce planning stress.",
-      investment: "", // TODO: Awaiting pricing details
-    },
-    fullServicePlanning: {
-      label: "Full-Service Planning",
-      description: "Comprehensive planning support for couples who want a guided, luxury experience from vision to execution. Built for couples who want the confidence of an expert managing both the creative direction and the logistics—so the celebration is beautifully designed, intentionally paced, and seamlessly delivered.",
-      investment: "", // TODO: Awaiting pricing details
-    },
-  },
+## The core conversion thesis
 
-  // ═══════════════════════════════════════════════════════════════════
-  // GEOGRAPHIC SERVICE AREA
-  // ═══════════════════════════════════════════════════════════════════
-  serviceArea: {
-    base: "Edmonton",
-    expanded: "", // TODO: Additional service areas if provided
-  },
+The buyer does not wake up wanting "AI financial automation." She
+wakes up thinking: *Why does cash still feel tight? Can I afford to
+hire? Why does revenue look good but the business still feels fragile?
+Do I actually know what's happening, or am I just checking the bank
+account and hoping?*
 
-  // ═══════════════════════════════════════════════════════════════════
-  // VISION & MISSION
-  // ═══════════════════════════════════════════════════════════════════
-  vision: "To be the planning house couples trust when they want more than a beautiful event—creating celebrations in Edmonton that feel elevated, effortless, and deeply personal, where refined design and intentional moments come together so clients can be fully present in the experience they've dreamed of.",
+The site has one job: **make the visitor feel the difference between
+having financial data and having financial clarity.**
 
-  mission: "Hickory & Rose Wedding and Event Planning exists to deliver luxury wedding and event experiences through calm, organized planning support—offering day-of coordination, partial planning, and full-service planning tailored to each client's vision—by blending elevated design with seamless logistics and trusted vendor collaboration, so every celebration feels effortless, meaningful, and unforgettable.",
+---
 
-  // ═══════════════════════════════════════════════════════════════════
-  // KEY PHRASES FOR COPY DECISIONS
-  // Reusable language that should appear across the site
-  // ═══════════════════════════════════════════════════════════════════
-  keyPhrases: [
-    "Calm becomes a luxury",
-    "Effortless to live inside",
-    "Refined in execution, elevated in design, deeply personal in the moments that matter",
-    "Protect what couples value most: presence, peace of mind, and the freedom to fully feel it",
-    "Intentional, cohesive, and unmistakably 'them'",
-    "Polished and profoundly personal",
-    "Being the host and being the heart of the celebration",
-    "Every moving part is being thoughtfully managed",
-  ],
-} as const;
+## The belief chain (must be built in order)
+
+1. **"They understand my real problem."** — Pain recognition. *Your
+   bank account tells you what's left. It does not tell you what
+   changed, what is risky, or what decision deserves your attention.*
+2. **"This is not just another spreadsheet."** — Category reframing.
+   *The spreadsheet is the structure. The briefing is the
+   interpretation. The monthly call is the rhythm.*
+3. **"This is not just software."** — Competitor contrast. *Dashboards
+   show data. The Monthly Finance Desk helps explain meaning.*
+4. **"This is serious enough for my business."** — Design + proof +
+   qualification. *Built for owner-led businesses that have outgrown
+   messy spreadsheets and once-a-year financial advice.*
+5. **"I can try it safely."** — Product-led preview. *No bank
+   connection required for the preview.*
+6. **"$1,500/month makes sense."** — Price anchoring. *Less than a
+   CFO. More strategic than a template. More personal than a
+   dashboard. More consistent than waiting until tax season.*
+7. **"Applying is the right next step."** — Selective language. *Apply
+   for the Monthly Finance Desk.*
+
+If any belief is missing or out of order, conversion drops.
+
+---
+
+## Awareness-stage map
+
+- **Problem-aware** → Headline: *Stop Running Your Business From Your Bank Balance.* CTA: *Generate Sample Finance Briefing.*
+- **Solution-aware** → Section: *More than bookkeeping. Lighter than a full CFO.* CTA: *See What the Monthly Finance Desk Includes.*
+- **Product-aware** → Section: *$1,500/month for a recurring finance rhythm.* Proof: sample report, offer stack, comparison table, founder credibility, FAQ.
+- **Most aware** → CTA: *Apply for the Monthly Finance Desk.* Microcopy: *Application takes under 3 minutes. No bank connection required to apply.*
+
+---
+
+## The emotional arc of the hero
+
+1. **Recognition** — *Stop Running Your Business From Your Bank Balance.* → "That is exactly what I do."
+2. **Relief** — *Most owners have bank statements, bookkeeping reports, and spreadsheets.* → "I'm not the only one."
+3. **Curiosity** — *Describe your business and what you want to understand about your numbers.* → "What would this say about me?"
+4. **Safety** — *No bank connection required.* → "I can try this without exposing anything sensitive."
+5. **Desire** — Sample briefing renders. → "I want this every two weeks."
+6. **Justification** — Pricing framing. → "$1,500/month could be reasonable."
+7. **Action** — *Apply for the Monthly Finance Desk.* → "I should see if I qualify."
+
+---
+
+## Homepage section order (canonical)
+
+1. Interactive hero (the Finance Desk Test).
+2. Pain clarification — *You have financial data. You do not have financial clarity.*
+3. Category creation — *A Monthly Finance Desk for owner-led businesses.*
+4. How it works — five steps (templates → Plaid → AI organization → bi-weekly briefings → monthly strategy call).
+5. Sample report preview.
+6. What you get — five-card offer stack.
+7. Why not just software? — competitor contrast.
+8. *More than bookkeeping. Lighter than a full CFO.*
+9. Pricing.
+10. Who it's for.
+11. Who it's not for.
+12. Proof — sample briefing, dashboard, before/after, founder, comparison, security, FAQ.
+13. Final CTA.
+
+---
+
+## The North-Star principle
+
+**Show the value before asking for the commitment.**
+
+The real conversion target is the thought: *"I want my own version of
+that finance briefing."* Once Claire thinks that, the site has done
+its job.
