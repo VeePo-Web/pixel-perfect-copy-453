@@ -19,7 +19,7 @@ export default function FinalCTA() {
         <p className="mx-auto mt-5 max-w-xl text-[15px] leading-[1.7] text-bone/65">{c.sub}</p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
           <a
-            href="#apply"
+            href="#/apply"
             className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
           >
             <span className="relative z-10">{c.primary}</span>
