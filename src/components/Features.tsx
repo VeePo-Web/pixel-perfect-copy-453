@@ -98,7 +98,7 @@ const Features = () => {
 
         <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
           <BentoCard
-            src="videos/feature-1.mp4"
+            src={new URL("/videos/feature-1.mp4.asset.json", import.meta.url).pathname.replace(/\.asset\.json$/, "") && (await import("../../public/videos/feature-1.mp4.asset.json")).url}
             title={
               <>
                 radia<b>n</b>t
