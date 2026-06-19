@@ -11,16 +11,17 @@ recurring rhythm — not spreadsheets, not AI, not dashboards.
 
 ## Read order
 
-1. **`strategic-narrative.md`** — master conversion-architecture doc.
-   Read this before any copy work. Contains the belief chain, hero
-   emotional arc, hero variants A–D, word-by-word headline
-   psychology, canonical sample briefing output, and the "must-not-say" list.
-2. **`ideal-customer.md`** — Cashflow-Clarity Claire in depth. Internal
-   monologue, hidden emotional state ladder, objection map, awareness stages.
-3. **`brand-identity-architect.md`** — positioning, voice, mission/vision,
-   phrases to use/avoid, and the explicit Goldman Sachs disclosure rule.
-4. **`market-research.md`** — the "between three worlds" gap analysis.
-5. Everything else (visual, motion, nav, footer, SEO, perf, engineering, responsive).
+1. **`brand-identity-and-decisions-filter.md`** — **THE MASTER FILTER.** Read first.
+   Synthesizes all 5 source PDFs into locked facts, voice rules, hero spec,
+   homepage section order, visual system, objection bank, and the 12-question
+   Decisions Filter every change must pass before ship.
+2. **`strategic-narrative.md`** — master conversion-architecture doc.
+   Belief chain, hero emotional arc, hero variants A–D, headline psychology.
+3. **`ideal-customer.md`** — Cashflow-Clarity Claire in depth.
+4. **`brand-identity-architect.md`** — positioning, voice, Goldman Sachs disclosure rule.
+5. **`market-research.md`** — the "between three worlds" gap analysis.
+6. Everything else (visual, motion, nav, footer, SEO, perf, engineering, responsive).
+
 
 ## Files
 
