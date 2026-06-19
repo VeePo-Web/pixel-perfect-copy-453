@@ -44,7 +44,7 @@ export default function StepLanding({ onStart, showWelcomeBack, onResume }: Prop
           <span className="border-b border-bone/20 pb-0.5 group-hover:border-champagne-200/60">{c.secondary}</span>
           <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
         </button>
-        <a href="#templates" className="text-[13px] text-bone/55 hover:text-champagne-100 underline-offset-4 hover:underline">
+        <a href="#/templates" className="text-[13px] text-bone/55 hover:text-champagne-100 underline-offset-4 hover:underline">
           {c.tertiary}
         </a>
       </div>

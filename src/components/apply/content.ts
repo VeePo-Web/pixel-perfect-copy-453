@@ -165,7 +165,7 @@ export const APPLY = {
     primary: "Generate a Sample Finance Briefing",
     secondary: "Explore Free Templates",
     wait: [
-      { t: "Download Cash Flow Forecast Template", href: "#templates" },
+      { t: "Download Cash Flow Forecast Template", href: "#/templates" },
       { t: "Preview Full Sample Briefing", href: "#top" },
       { t: "Read: Why Your Bank Balance Is Not a Financial Strategy", href: "#how-it-works" },
     ],

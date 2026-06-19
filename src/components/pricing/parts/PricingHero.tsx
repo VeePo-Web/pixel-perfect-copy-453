@@ -38,7 +38,7 @@ export default function PricingHero() {
                 Generate Sample Finance Briefing
               </a>
               <a
-                href="#templates"
+                href="#/templates"
                 className="text-[12.5px] text-bone/55 underline-offset-4 transition-colors hover:text-bone hover:underline"
               >
                 Start With Free Templates

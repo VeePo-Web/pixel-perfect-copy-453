@@ -66,7 +66,7 @@ export default function StepFit({ state, update, errors, onBack, onContinue }: P
               {c.lowFit}
               <div className="mt-3 flex flex-wrap gap-3">
                 <button onClick={onContinue} className="text-[12.5px] text-champagne-100 underline-offset-4 hover:underline">Continue Application →</button>
-                <a href="#templates" className="text-[12.5px] text-bone/65 underline-offset-4 hover:underline hover:text-bone">Start with Free Templates</a>
+                <a href="#/templates" className="text-[12.5px] text-bone/65 underline-offset-4 hover:underline hover:text-bone">Start with Free Templates</a>
               </div>
             </FitSignalCard>
           </div>

@@ -64,7 +64,7 @@ export default function SuccessPage({ onClear }: { onClear: () => void }) {
             <span className="relative z-10">{c.primary}</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
           </button>
-          <a href="#templates" className="rounded-full border border-white/15 px-6 py-3.5 text-[13px] text-bone/80 hover:border-champagne-200/40 hover:text-bone transition-all">
+          <a href="#/templates" className="rounded-full border border-white/15 px-6 py-3.5 text-[13px] text-bone/80 hover:border-champagne-200/40 hover:text-bone transition-all">
             {c.secondary}
           </a>
         </div>

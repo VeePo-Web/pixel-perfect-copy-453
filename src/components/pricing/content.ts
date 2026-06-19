@@ -30,7 +30,7 @@ export const plans: PricingPlan[] = [
       "Subscription Expense Tracker",
       "Tax Reserve Tracker",
     ],
-    cta: { label: "Get Free Templates", href: "#templates" },
+    cta: { label: "Get Free Templates", href: "#/templates" },
     tone: "entry",
   },
   {
@@ -48,7 +48,7 @@ export const plans: PricingPlan[] = [
       "Hiring affordability worksheet",
       "Expense cleanup workflow",
     ],
-    cta: { label: "Start With Toolkit", href: "#templates" },
+    cta: { label: "Start With Toolkit", href: "#/templates" },
     tone: "self",
     note: "Optional self-guided layer",
   },
@@ -303,7 +303,7 @@ export const planFit = [
       "You want to organize manually",
       "You are not ready for a premium subscription",
     ],
-    cta: { label: "Get Free Templates", href: "#templates" },
+    cta: { label: "Get Free Templates", href: "#/templates" },
     tone: "entry" as PlanTone,
   },
   {
@@ -403,7 +403,7 @@ export function recommend(a: SelectorAnswers): Recommendation {
       planId: "templates",
       headline: "Start with Free Templates.",
       body: "You have a real shot at meaningful clarity with a stronger self-guided foundation first.",
-      cta: { label: "Get Free Templates", href: "#templates" },
+      cta: { label: "Get Free Templates", href: "#/templates" },
     };
   }
   if (veryHighRev && wantsStrategy) {
@@ -419,7 +419,7 @@ export function recommend(a: SelectorAnswers): Recommendation {
       planId: "toolkit",
       headline: "Start with the Financial Clarity Toolkit.",
       body: "A self-guided layer between free templates and a monthly subscription.",
-      cta: { label: "Start With Toolkit", href: "#templates" },
+      cta: { label: "Start With Toolkit", href: "#/templates" },
     };
   }
   return {
