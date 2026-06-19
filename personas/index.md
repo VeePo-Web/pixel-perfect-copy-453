@@ -25,6 +25,9 @@ recurring rhythm — not spreadsheets, not AI, not dashboards.
 
 ## Files
 
+- `brand-identity-and-decisions-filter.md` — **Master decisions filter.** Synthesis of all 5 source PDFs. Locked offer facts, voice rules, hero spec, section order, visual system, objection bank, 12-question pre-ship checklist.
+
+
 - `strategic-narrative.md` — Master conversion architecture. Belief chain, awareness stages, hero arc, hero variants, sample briefing output.
 - `ideal-customer.md` — Cashflow-Clarity Claire, the master buyer persona.
 - `brand-identity-architect.md` — Positioning, category, tone, mission/vision, Goldman Sachs disclosure rule.
