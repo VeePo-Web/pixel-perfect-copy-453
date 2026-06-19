@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { supabase } from "../../integrations/supabase/client";
+
+type BriefingSection = { label: string; body: string };
 
 type HeroState = "idle" | "loading" | "briefing";
 
@@ -77,10 +80,18 @@ const COPY = {
   },
 } as const;
 
+const DEMO_PROMPT =
+  "I run a 12-person agency doing $90K/month. Revenue is growing, but cash still feels tight.";
+const EXAMPLE_FALLBACK_PROMPT = DEMO_PROMPT;
+
+const FALLBACK_SECTIONS: BriefingSection[] = COPY.briefing.map((s) => ({ ...s }));
+
 const FinanceHero = () => {
   const [state, setState] = useState<HeroState>("idle");
   const [loadingStep, setLoadingStep] = useState(0);
   const [prompt, setPrompt] = useState("");
+  const [briefingData, setBriefingData] =
+    useState<BriefingSection[]>(FALLBACK_SECTIONS);
   const timeouts = useRef<number[]>([]);
 
   const clearTimers = () => {
@@ -90,7 +101,7 @@ const FinanceHero = () => {
 
   useEffect(() => () => clearTimers(), []);
 
-  const startDemo = () => {
+  const runBriefing = async (sourcePrompt: string) => {
     clearTimers();
     setState("loading");
     setLoadingStep(0);
@@ -98,18 +109,52 @@ const FinanceHero = () => {
       const id = window.setTimeout(() => setLoadingStep(i), i * 750);
       timeouts.current.push(id);
     });
-    const finishId = window.setTimeout(() => {
-      setState("briefing");
-    }, COPY.loading.length * 750 + 400);
-    timeouts.current.push(finishId);
+
+    const minLoadingMs = COPY.loading.length * 750 + 400;
+    const minDelay = new Promise<void>((resolve) => {
+      const id = window.setTimeout(() => resolve(), minLoadingMs);
+      timeouts.current.push(id);
+    });
+
+    const fetchBriefing = (async (): Promise<BriefingSection[]> => {
+      try {
+        const { data, error } = await supabase.functions.invoke(
+          "generate-briefing",
+          { body: { prompt: sourcePrompt } }
+        );
+        if (error) throw error;
+        const sections = (data as { sections?: BriefingSection[] } | null)
+          ?.sections;
+        if (
+          Array.isArray(sections) &&
+          sections.length === 6 &&
+          sections.every((s) => s && typeof s.body === "string" && s.body.trim())
+        ) {
+          return sections;
+        }
+        return FALLBACK_SECTIONS;
+      } catch (e) {
+        console.error("briefing fetch failed", e);
+        return FALLBACK_SECTIONS;
+      }
+    })();
+
+    const [sections] = await Promise.all([fetchBriefing, minDelay]);
+    setBriefingData(sections);
+    setState("briefing");
+  };
+
+  const startDemo = () => {
+    const source = prompt.trim() || EXAMPLE_FALLBACK_PROMPT;
+    void runBriefing(source);
   };
 
   const useDemoData = () => {
-    setPrompt(
-      "I run a 12-person agency doing $90K/month. Revenue is growing, but cash still feels tight."
-    );
-    startDemo();
+    setPrompt(DEMO_PROMPT);
+    void runBriefing(DEMO_PROMPT);
   };
+
+  const ctasDisabled = state === "loading";
 
   return (
     <section className="relative w-full bg-charcoal-950 text-bone">
@@ -171,7 +216,8 @@ const FinanceHero = () => {
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <button
                   onClick={startDemo}
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-champagne-200 px-6 py-3.5 font-general text-[0.78rem] uppercase tracking-[0.18em] text-charcoal-950 transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.5)]"
+                  disabled={ctasDisabled}
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-champagne-200 px-6 py-3.5 font-general text-[0.78rem] uppercase tracking-[0.18em] text-charcoal-950 transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.5)] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {COPY.primaryCta}
                   <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
@@ -180,7 +226,8 @@ const FinanceHero = () => {
                 </button>
                 <button
                   onClick={useDemoData}
-                  className="inline-flex items-center justify-center rounded-full border border-bone/20 px-6 py-3.5 font-general text-[0.78rem] uppercase tracking-[0.18em] text-bone/85 transition-colors duration-300 hover:border-champagne-200/60 hover:text-champagne-100"
+                  disabled={ctasDisabled}
+                  className="inline-flex items-center justify-center rounded-full border border-bone/20 px-6 py-3.5 font-general text-[0.78rem] uppercase tracking-[0.18em] text-bone/85 transition-colors duration-300 hover:border-champagne-200/60 hover:text-champagne-100 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {COPY.secondaryCta}
                 </button>
@@ -194,7 +241,7 @@ const FinanceHero = () => {
 
           {/* RIGHT: briefing panel */}
           <div className="lg:col-span-5">
-            <BriefingPanel state={state} loadingStep={loadingStep} />
+            <BriefingPanel state={state} loadingStep={loadingStep} sections={briefingData} />
 
             {/* badges */}
             <div className="mt-5 flex flex-wrap gap-2">
@@ -219,9 +266,11 @@ const FinanceHero = () => {
 const BriefingPanel = ({
   state,
   loadingStep,
+  sections,
 }: {
   state: HeroState;
   loadingStep: number;
+  sections: BriefingSection[];
 }) => {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-champagne-300/20 bg-gradient-to-b from-charcoal-800/80 to-charcoal-900/80 p-6 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] backdrop-blur-sm sm:p-7">
@@ -313,7 +362,7 @@ const BriefingPanel = ({
 
         {state === "briefing" && (
           <div className="space-y-5 animate-fade-in">
-            {COPY.briefing.map((s) => (
+            {sections.map((s) => (
               <div key={s.label}>
                 <p className="font-general text-[0.66rem] uppercase tracking-[0.2em] text-champagne-200">
                   {s.label}

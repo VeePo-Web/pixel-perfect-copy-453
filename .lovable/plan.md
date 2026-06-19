@@ -1,68 +1,63 @@
-# Build: The Monthly Finance Desk — Hero (Final Copy Lock)
+# Make the Generate button actually use the prompt
 
-Replace the existing gaming Hero with a calm, premium, two-column finance hero using the user's exact copy verbatim. No "AI magic" language, no confetti, no gradient orbs.
+Right now "Generate Sample Finance Briefing" always renders the same hardcoded sample. This plan makes it read whatever the owner typed (or the placeholder example if empty), send it to a server-side AI call, and render the response in the existing briefing panel — same six-section structure, same calm voice, no hype.
 
-## Layout
+## Behavior
 
-Two-column desktop, single-column mobile. Anchored inside the existing dark page shell.
+1. User types into the composer (or clicks **Use Demo Business Data** to prefill the agency example, unchanged).
+2. On **Generate Sample Finance Briefing**:
+   - If the textarea is empty, fall back to the `Example:` sentence already shown under the input ("I run a 12-person agency doing $90K/month…") so the button never feels broken.
+   - Switch panel to `loading`, run the existing 4-line loading sequence on a timer.
+   - In parallel, call a new edge function with the prompt text.
+   - When the response arrives AND the loading sequence has finished, switch to `briefing` and render the returned sections.
+3. If the call fails or returns malformed data, fall back to the current hardcoded `COPY.briefing` so the hero never shows an error state. A small muted line under the panel notes "Showing sample briefing." Reduced-motion users skip the fade.
+
+The post-demo CTA block still reveals once `state === "briefing"`, unchanged.
+
+## Briefing shape (locked)
+
+The AI must return exactly these six sections in this order, matching the empty-state list and the current sample's tone:
 
 ```text
-┌─────────────────────────────────────────────────────────────┐
-│ EYEBROW · For serious small business owners                 │
-│                                                             │
-│ Stop Running Your Business        ┌────────────────────┐    │
-│ From Your Bank Balance            │ Sample Bi-Weekly   │    │
-│                                   │ Finance Briefing   │    │
-│ [subheadline paragraph]           │                    │    │
-│                                   │ • Cash Movement    │    │
-│ ┌──────────────────────────────┐  │ • Revenue Trend    │    │
-│ │ Describe your business…      │  │ • Expense Pattern  │    │
-│ └──────────────────────────────┘  │ • Unusual Spend    │    │
-│ Example: "I run a 12-person…"     │ • Questions to …   │    │
-│                                   │ • Decisions to …   │    │
-│ [Generate Sample Finance Brief.]  │                    │    │
-│ [Use Demo Business Data]          └────────────────────┘    │
-│                                   [badge][badge][badge]     │
-│ No bank connection required…                                │
-└─────────────────────────────────────────────────────────────┘
+Cash Movement
+Revenue Trend
+Expense Pattern
+Unusual Spend
+Questions to Review
+Decisions to Consider
 ```
 
-On click of either CTA → the right panel fades through the 4-line loading sequence, then renders the full Sample Bi-Weekly Finance Briefing inline (replacing empty-state sections). After the briefing settles, a post-demo conversion block reveals beneath the briefing panel.
+Each section: one short paragraph, 2–4 sentences, plain English, no emojis, no exclamation marks, no "AI," no "supercharge," no advice to "leverage" anything. Dollar figures allowed and encouraged when the prompt implies a size; otherwise qualitative. If the prompt is vague, the model invents reasonable demo numbers and labels the panel state as "Sample" (already the case).
 
-## Copy lock (verbatim from user message)
+## Backend
 
-Every line — eyebrow, slogan, headline, subheadline, prompt placeholder, example prompt, both CTAs, trust microcopy, panel label, six empty-state sections, three badges, four loading lines, the five briefing sections, the post-demo headline + body + two CTAs + microcopy, and the tighter mobile variant — used exactly as written. No paraphrasing.
+Requires Lovable Cloud (for the edge function + Lovable AI Gateway). If not yet enabled, enable it as part of this build.
 
-## Components to create
+- New edge function `generate-briefing`:
+  - Input: `{ prompt: string }`.
+  - Calls Lovable AI Gateway with `google/gemini-2.5-flash` (fast, cheap, good enough for this).
+  - System prompt locks: persona (calm senior finance operator briefing a small business owner), the six-section structure, tone rules (no hype, no AI talk), and the JSON output contract.
+  - Uses tool/structured output so the response is guaranteed JSON: `{ sections: [{ label, body }, …] }` with `label` constrained to the six allowed strings.
+  - Returns the parsed JSON. No auth required (public hero demo). Rate-limit via the gateway's built-in 429 — surface as the hardcoded fallback.
+- No DB tables, no storage, no user accounts. Nothing is persisted.
 
-- `src/components/hero/FinanceHero.tsx` — orchestrates state (`idle` → `loading` → `briefing`), holds copy constants, responsive layout.
-- `src/components/hero/BriefingPanel.tsx` — right column. Renders empty-state sections, loading sequence, or filled briefing based on state. Calm fade transitions (300ms), no bounce.
-- `src/components/hero/PromptComposer.tsx` — textarea + example caption + primary/secondary CTAs + trust microcopy.
-- `src/components/hero/PostDemoCTA.tsx` — reveals after briefing renders.
-- `src/content/hero-copy.ts` — single source of truth for all strings (desktop + mobile variants).
+## Frontend changes
 
-## Wiring
+- `src/components/hero/FinanceHero.tsx`:
+  - Add `briefingData` state (defaults to `COPY.briefing`).
+  - `startDemo()` becomes async: kicks off the loader timers AND the fetch in parallel, awaits both, then sets state to `briefing` with either the AI response or the fallback.
+  - Disable both CTAs while `state === "loading"`.
+  - `BriefingPanel` reads sections from props instead of `COPY.briefing` directly.
+- No copy changes anywhere else. Eyebrow, slogan, headline, subheadline, placeholder, example, CTAs, trust line, badges, post-demo block — all untouched.
 
-- Replace `<Hero />` in `src/App.tsx` with `<FinanceHero />`. Remove old `Hero.tsx`, gaming video assets stay untouched (other sections still reference theme; out of scope).
-- Mobile (<768px): swap to the tighter mobile copy block from the spec; stack composer above the briefing panel; briefing panel collapses to a single card preview until CTA clicked.
-- Reduced motion: replace fades with instant swaps; loading lines render as a static list, then briefing.
+## Out of scope
 
-## Visual system
-
-- Background: existing dark charcoal page surface.
-- Type: existing site fonts; headline uses the display weight, body uses the regular sans. No serif.
-- Accent: champagne gold for the primary CTA, eyebrow underline, and briefing dollar figures. Bronze rim on the briefing panel edge. No purple, no neon, no gradient blobs.
-- Inputs/buttons: shadcn primitives, semantic tokens only (no hardcoded hex in components).
-- Briefing panel: smoked-glass card (`bg-card/60 backdrop-blur`), thin 1px champagne-tinted border, soft inner shadow.
-
-## Out of scope (this build)
-
-- The Kling backdrop loop, the 4-reel Zentry-style click-to-expand mechanic, real backend submission of the prompt, application/onboarding flow, About/Features/Story/Contact section rewrites. Those land in follow-up turns.
+- Saving briefings, accounts, real bank connection, streaming the response token-by-token, editing the prompt mid-stream, the 4-reel mechanic, other page sections.
 
 ## Acceptance
 
-- Every string on the new hero matches the user's copy block character-for-character.
-- Clicking either CTA runs the 4-line loading sequence then renders the full sample briefing in the right panel.
-- Post-demo CTA block appears beneath the briefing once it's rendered.
-- Mobile <768px uses the tighter mobile copy variant.
-- No "AI," "magic," "supercharge," confetti, or gradient-orb language anywhere on the hero.
+- Typing a custom business description and clicking Generate produces a briefing whose numbers and details reflect what was typed.
+- Empty textarea + Generate uses the on-screen example sentence and still produces a coherent briefing.
+- All six section labels render in the fixed order, every time.
+- Network failure or malformed model output falls back silently to the current hardcoded sample; no error UI.
+- Loading sequence still plays for its full duration even if the AI responds faster, so the panel never flashes.
