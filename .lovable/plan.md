@@ -1,136 +1,113 @@
+# Free Template Library — Implementation Plan
 
-# Pricing Page — Implementation Plan
+A new `#/templates` route that mirrors the visual system, motion language, and conversion architecture already established by the Apply funnel, Sample Briefing, and Pricing pages. Static data only, no backend writes — the email capture is a client-side success simulation that hands the user off to `#/sample-briefing` and `#/apply`.
 
-A new product-led pricing page at `#/pricing` that frames the $1,500/month Monthly Finance Desk as the obvious serious option, anchored by a 5-tier ladder, value reframing, comparison table, decision-cost framing, guided plan selector, FAQ, and trust block. Built to match the existing dark/editorial system already shipped in the hero, How It Works, Apply funnel, and Sample Briefing.
+## Route & shell
 
-## Scope
+- Extend `useHashRoute.ts` with `"templates"`.
+- Add route in `src/App.tsx` rendering `<FreeTemplateLibraryPage />`.
+- Update existing nav/footers and any "Free templates" links currently pointing elsewhere to `#/templates`.
+- Add `<MobileStickyTemplateCTA />` mounted by the page (not globally).
 
-- Add `#/pricing` to the existing hash router (`useHashRoute.ts`) and `src/App.tsx`.
-- Build the page as a self-contained module under `src/components/pricing/`.
-- Reuse existing tokens (`charcoal-950/900`, `champagne-100/200/300`, `green.signal/deep`, `bone`), motion utilities (`panel-rise`, `section-in`, `shimmer-slow`, `soft-pulse`), and existing `useInView` + `useReducedMotion` hooks.
-- All pricing data static. No backend, no Stripe, no checkout — every CTA points to existing routes (`#/apply`, `#/sample-briefing`, `#templates`).
-- No new dependencies.
-
-## Page Architecture
-
-Route: `#/pricing`
-Top component: `PricingPage`
+## File layout
 
 ```text
-PricingTopBar                  (reused-style nav with Apply CTA)
-PricingHero                    (1) eyebrow / headline / 3 layered preview cards
-PricingLadder                  (2) 5-tier offer ladder; tier 3 visually dominant
-  PricingCard x5
-RecommendedPlanSpotlight       (3) cinematic $1,500/mo card + 4-week rhythm
-WhyItMakesSense                (4) 4 reframing cards + closing line
-ValueStack                     (5) 5 stacked items (scroll-revealed)
-CostComparisonTable            (6) desktop table / mobile expandable cards
-DecisionCostSection            (7) 4 decision-risk cards
-PlanSelector                   (8) 3-question guided recommendation
-PricingFAQ                     (9) accessible accordion (8 Qs)
-PlanFitSection                 (10) 3-column self-select with per-column CTA
-SampleBriefingPricingPreview   (11) condensed briefing card + dual CTA
-PricingTrustBlock              (12) 6 privacy cards
-PricingFinalCTA                (13) cinematic close with layered cards
-MobileStickyCTA                (post-ladder, hash-aware)
+src/components/templates/
+  FreeTemplateLibraryPage.tsx
+  content.ts                 // templates[], categories, paths, faq, comparison
+  hooks/
+    useTemplateFilters.ts    // category + recommended-path state
+    useLeadCaptureFlow.ts    // modal open/close, selected template, success state
+  parts/
+    TemplateLibraryHero.tsx
+    PainToValueReframe.tsx
+    TemplateCategoryFilters.tsx     // sticky chips, horizontal scroll on mobile
+    TemplateGrid.tsx
+    TemplateCard.tsx
+    TemplatePreviewModal.tsx        // shadcn Sheet (right side, full-screen on mobile)
+    TemplateLeadCaptureModal.tsx    // shadcn Dialog with zod-validated form
+    TemplateSuccessState.tsx        // rendered inside the capture Dialog
+    RecommendedStartingPaths.tsx
+    ManualVsMonthlyDesk.tsx
+    FeaturedTemplatePreview.tsx     // Cash Flow Forecast detail
+    TemplateToFinanceDeskBridge.tsx // 4-step bridge
+    TemplateTrustSection.tsx
+    TemplateFAQ.tsx                 // native <details>
+    TemplateFinalCTA.tsx
+    MobileStickyTemplateCTA.tsx
+    SpreadsheetPreview.tsx          // lightweight SVG/CSS grid used by cards + modal
 ```
 
-## Files to Create
+## Data (`content.ts`)
 
-```text
-src/components/pricing/
-  PricingPage.tsx
-  content.ts                    (plans, comparison rows, faq, selector logic, decision cards, value stack)
-  hooks/usePlanSelector.ts      (3-question state + recommendation logic)
-  parts/PricingTopBar.tsx
-  parts/PricingHero.tsx
-  parts/PricingLadder.tsx
-  parts/PricingCard.tsx
-  parts/RecommendedPlanSpotlight.tsx
-  parts/WhyItMakesSense.tsx
-  parts/ValueStack.tsx
-  parts/CostComparisonTable.tsx
-  parts/DecisionCostSection.tsx
-  parts/PlanSelector.tsx
-  parts/PricingFAQ.tsx
-  parts/PlanFitSection.tsx
-  parts/SampleBriefingPricingPreview.tsx
-  parts/PricingTrustBlock.tsx
-  parts/PricingFinalCTA.tsx
-  parts/MobileStickyCTA.tsx
-```
+- `categories`: 11 chips (All + 10 categories from the spec).
+- `templates`: 12 entries with `id, name, category, description, bestFor, timeToUse, difficulty, ctaText, painPointTags[], previewRows[]` (rows are static label/value pairs rendered by `SpreadsheetPreview`).
+- `recommendedPaths`: 5 question cards, each referencing template ids.
+- `comparison`: free-vs-desk feature lists.
+- `faq`: 8 Q&A.
+- `bridgeSteps`: 4 steps.
+- `trustCards`: 4 outcome cards.
 
-## Files to Edit
+## Sections (in order)
 
-- `src/components/apply/hooks/useHashRoute.ts` — add `pricing` route.
-- `src/App.tsx` — render `PricingPage` when route === `pricing`.
-- `src/components/hero/FinanceHero.tsx` and `src/components/how-it-works/HowItWorks.tsx` — add a "Pricing" link in nav/secondary CTAs where appropriate (single-line additions, no structural change).
-- `src/components/sample-briefing/SampleBriefingPage.tsx` — add "Pricing" link in `TopBar`.
-
-## Content
-
-`content.ts` exports:
-- `plans: PricingPlan[]` — 5 tiers with `id`, `name`, `price`, `priceSuffix`, `badge?`, `positioning`, `bestFor`, `includes[]`, `cta: { label, href }`, `tone: 'entry'|'self'|'flagship'|'plus'|'private'`, `note?`.
-- `comparisonRows` — 6 alternatives × 5 columns (role / helps with / misses / investment / best fit).
-- `faq` — 8 Q/A.
-- `decisionCards` — 4 items.
-- `valueStack` — 5 items with `title`, `value`, `why`, `trust?`.
-- `whyCards` — 4 reframing cards.
-- `planFit` — 3 columns with bullets + CTA target.
-- `selector` — questions, options, and a `recommend(answers)` pure function returning a `planId` + headline + CTA.
-
-## Visual System
-
-- Page bg: `bg-charcoal-950` with soft champagne radial wash behind hero and final CTA, faint 80px grid overlay at ~6% opacity.
-- Cards: `rounded-2xl border border-white/[0.07] bg-charcoal-900/55 backdrop-blur-sm`. Hover: `-translate-y-0.5`, border → `champagne-200/25`, top hairline fades in, soft shadow `0_24px_60px_-30px_rgba(217,190,130,0.25)`.
-- Flagship Monthly Finance Desk card: `border-champagne-200/40`, larger scale on lg (`lg:scale-[1.04]`), animated hairline at top, subtle pulsing accent dot, premium gradient CTA button (champagne-100 → champagne-300) with shimmer.
-- Other tiers: muted borders, no glow. Free Templates uses `border-white/[0.06]` only.
-- Comparison table: thin dividers, sticky first column on desktop, monthly desk row highlighted with `bg-champagne-300/[0.04]` + champagne left rail.
-- Decision-cost cards: amber-leaning champagne caution accent.
-- Trust block: green-signal dot bullets.
-
-## Motion
-
-- `panel-rise` on hero preview cards staggered by 80ms.
-- `useInView` triggers `section-in` on each major section.
-- Value stack reveals item-by-item via incremental `IntersectionObserver` thresholds (no scroll listener thrash).
-- Plan selector step transitions: 320ms cross-fade.
-- FAQ accordion: native `<details>` styled with chevron rotate + max-height transition.
-- `useReducedMotion` short-circuits transforms and stagger delays.
+1. Hero — eyebrow, headline, sub, 3 CTAs, trust line, layered `SpreadsheetPreview` stack that fans out on scroll (CSS transform driven by `IntersectionObserver`, no Framer needed beyond what's already in the project).
+2. Pain → Value reframe with before/after columns.
+3. Sticky category filter bar (becomes sticky once scrolled past hero; `position: sticky; top: 0; z-index: 30`).
+4. Featured template grid (12 cards, responsive 1/2/3 columns).
+5. Recommended Starting Paths (5 question cards; clicking highlights matching cards by scrolling back to grid and flashing the matched cards via `data-highlighted`).
+6. Manual vs Monthly Finance Desk comparison.
+7. Featured Cash Flow Forecast preview (large `SpreadsheetPreview` + plain-English side notes).
+8. Templates → Premium System bridge (4 steps).
+9. Trust section (no fake testimonials — proxy cards only).
+10. FAQ (native `<details>` for a11y + zero JS cost).
+11. Final CTA + disclaimer microcopy.
 
 ## Interactions
 
-- **Plan ladder**: 5 cards in a responsive grid (`grid-cols-1 md:grid-cols-2 lg:grid-cols-5`). Flagship spans full width on md, sits in column 3 on lg. Each card focusable; CTA is a real `<a>`.
-- **Plan selector**: 3 sequential question screens with previous/next, progress dots, and a final recommendation panel with dynamic headline + CTA. Keyboard arrow nav inside each option group; `role="radiogroup"`.
-- **Comparison table**: real `<table>` on `md+` with `<th scope>`; on `<md` rendered as a list of `<details>` cards (one per alternative) with the 5 columns inside.
-- **FAQ**: `<details><summary>` — accessible by default, no JS focus traps.
-- **Sticky mobile CTA**: appears after `window.scrollY > 720`; swaps CTA target if the selector recommendation is for templates vs apply.
-- **Reduced motion**: disables transforms, scroll-linked stagger, and shimmer.
+- Filtering: pure client state, instant; chips have `role="radiogroup"`, arrow-key nav, active chip uses champagne border + subtle glow.
+- Card hover: `translate-y-[-2px]`, border brightens to `border-champagne-200/30`, internal preview sheet shifts up 6px, "what this helps you decide" line fades in.
+- Preview Sheet: shadcn `Sheet` side="right" on desktop, full-screen on mobile; contains larger `SpreadsheetPreview`, meta, inline lead capture, upgrade bridge.
+- Lead capture Dialog: zod schema (firstName 1–60, email valid + ≤120, businessType enum, optional goal chips multi-select). On submit → 700ms simulated send → swap content to `TemplateSuccessState` with Generate Briefing / Apply / Browse More CTAs.
+- Sticky mobile CTA: appears after `scrollY > 640`; flips label to "Generate Sample Briefing" once `sessionStorage["mfd.templateDownloaded"]` is set on success.
+- Reduced motion: all transforms/transitions short-circuited via `useReducedMotion` hook already present in the codebase (reuse from sample-briefing).
+
+## Analytics
+
+`src/components/templates/analytics.ts` exporting a single `track(event, payload?)` that wraps `window.dataLayer?.push` defensively. Fires the 9 named events from the spec. Never throws.
 
 ## Accessibility
 
-- One `<main>` per route (already enforced by `App.tsx`).
-- Semantic `<section>` with `aria-labelledby` on every major block.
-- Plan cards use `<article>` with `<h3>` titles; CTAs are real `<a>` with descriptive accessible names ("Apply for the Monthly Finance Desk").
-- Plan selector: `role="radiogroup"` per question; arrow keys move focus; `aria-checked` on options.
-- FAQ: native `<details>` for built-in keyboard support.
-- All decorative SVG/radial gradients marked `aria-hidden`.
-- Min 44×44 tap targets on mobile CTAs.
-- Color is never the only signal — flagship tier uses badge text + border + size + label, not just color.
+- One `<main>` (the page root, since route swaps the whole document body region).
+- Each section is a `<section aria-labelledby="...">` with a real heading.
+- Modals use shadcn `Dialog` / `Sheet` (Radix, focus-trapped, ESC closes).
+- Filter chips and path cards keyboard navigable, `aria-pressed` reflects state.
+- All inputs labelled; errors announced via `aria-live="polite"`.
+- 44×44 tap targets on chips and card CTAs.
+- Color is never the only signal (difficulty has text + dot, status uses icon + label).
 
-## Out of Scope
+## Visual system
 
-- No real payment flow, Stripe, or checkout.
-- No monthly/annual toggle (no real annual price to honor).
-- No CMS, no backend, no analytics events.
+Reuse existing tokens — no new colors. Background `bg-charcoal-950`, surfaces `bg-white/[0.02]` with `border-white/[0.07]`, champagne accents `text-champagne-200` / `border-champagne-200/30`, deep green for positive cells, amber for caution, muted blue for automation references. Headlines use the same editorial display font already configured; body in the existing sans stack. No new fonts, no new gradients.
+
+## Performance
+
+- No images — all previews are inline SVG/CSS grids rendered by `SpreadsheetPreview`.
+- Templates rendered from a static array; filtering is `useMemo` over ~12 items.
+- Below-fold heavy sections (FeaturedTemplatePreview, Bridge, FAQ) wrapped in a tiny `<LazySection>` that mounts on first intersection.
 - No new dependencies.
+
+## Files touched outside `templates/`
+
+- `src/components/apply/hooks/useHashRoute.ts` — add `"templates"` route.
+- `src/App.tsx` — render the new page.
+- `src/components/finance-hero/FinanceHero.tsx` (and any nav/footer with a "templates" link if present) — point existing CTA at `#/templates`.
 
 ## Verification
 
-- Build passes.
-- Playwright run at desktop (1280×1800) and mobile (390×844):
-  - Load `#/pricing` → screenshot hero + ladder.
-  - Scroll to comparison table → confirm flagship row highlighted on desktop and expandable cards on mobile.
-  - Run the plan selector with answers that should recommend the Monthly Finance Desk → confirm recommendation panel + CTA target.
-  - Open one FAQ item via keyboard → confirm expansion.
-  - Scroll to bottom on mobile → confirm sticky CTA visible.
+After build, drive Playwright at `localhost:8080/#/templates`:
+1. Screenshot hero + grid.
+2. Click a category chip → assert filtered count.
+3. Click a Recommended Path → assert matching cards get `data-highlighted="true"`.
+4. Click "Get Template" → fill modal → submit → assert success state + sticky CTA label flips.
+5. Open Preview Sheet, ESC closes, focus returns to card.
+6. Mobile viewport (390×844) screenshot.
