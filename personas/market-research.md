@@ -8,14 +8,70 @@ ad angles.
 
 ---
 
+## The "between three worlds" framing
+
+The offer sits at the intersection of three established categories.
+It is none of them alone.
+
+```text
+                  ┌──────────────────────────┐
+                  │   High-level financial   │
+                  │       advisory           │
+                  │   (CFOs, FP&A firms)     │
+                  └─────────────┬────────────┘
+                                │
+                                │
+   ┌───────────────────┐   ┌────┴─────┐   ┌──────────────────────┐
+   │  Spreadsheet      │   │ Monthly  │   │  Modern finance      │
+   │  templates        ├───┤ Finance  ├───┤  automation          │
+   │  (Etsy, courses)  │   │  Desk    │   │  (Ramp, Mercury,     │
+   └───────────────────┘   └──────────┘   │   QuickBooks, Brex)  │
+                                          └──────────────────────┘
+```
+
+- **Spreadsheet templates** give structure but no automation, no
+  interpretation, and no rhythm.
+- **Modern finance automation** gives speed and data but no
+  interpretation and no human review.
+- **High-level financial advisory** gives interpretation and review
+  but is too expensive and too heavy for businesses doing $300K–$3M.
+
+The Monthly Finance Desk takes the *structure* from category 1, the
+*automation* from category 2, and the *interpretation + rhythm* from
+category 3 — at a price point that fits an owner-led business.
+
+It is **not** just bookkeeping. **Not** just a dashboard. **Not** just
+a consultant. It is a recurring financial operating system.
+
+---
+
 ## Adjacent categories (what owners already use)
 
-- **Accounting platforms** — QuickBooks, Xero. *Job: record what happened.* Gap: no interpretation, no rhythm.
-- **Spend management** — Ramp, Brex, Divvy. *Job: control spend.* Gap: shows charts; doesn't tell you what to do.
-- **Banking** — Mercury, Relay, Bluevine. *Job: hold and move money.* Gap: surfaces balance, not meaning.
-- **Bookkeepers** — local or remote. *Job: keep records clean.* Gap: don't translate the books into decisions.
-- **Fractional CFOs** — Pilot CFO, Paro, indie operators. *Job: full strategic finance.* Gap: too expensive ($3K–$10K+/month), too heavy for $300K–$3M businesses.
-- **Templates / courses** — Etsy spreadsheets, YouTube creators. *Job: DIY.* Gap: one-time artifact, no recurring discipline.
+| Category               | Examples                     | Their job                       | The gap                                                |
+| ---------------------- | ---------------------------- | ------------------------------- | ------------------------------------------------------ |
+| Accounting platforms   | QuickBooks, Xero             | Record what happened            | No interpretation, no rhythm                           |
+| Spend management       | Ramp, Brex, Divvy            | Control spend                   | Charts, no recommendation                              |
+| Banking                | Mercury, Relay, Bluevine     | Hold and move money             | Surfaces balance, not meaning                          |
+| Bookkeepers            | Local, remote, firms         | Keep records clean              | Don't translate books into decisions                   |
+| Fractional CFOs        | Pilot CFO, Paro, indies      | Full strategic finance          | Too expensive ($3K–$10K+), too heavy for SMBs          |
+| Templates / courses    | Etsy, YouTube creators       | DIY                             | One-time artifact, no recurring discipline             |
+
+---
+
+## The value-stack contrast (use in copy, ads, and the pricing section)
+
+Frame the price against the *alternative cost*, not the floor:
+
+- **Hiring a CFO** can be $3,000–$10,000+/month, plus equity.
+- **Hiring a financial analyst** can be $6,000–$10,000+/month, plus benefits.
+- **Building custom spreadsheets** takes weeks and gets stale.
+- **Manually updating financial sheets** is tedious and gets dropped.
+- **Software dashboards** show numbers without interpretation.
+- **Bookkeeping alone** doesn't deliver strategic insight.
+- **A CPA seen only at tax season** is reactive, not rhythmic.
+
+The Monthly Finance Desk gives small businesses *a simpler path to
+more serious financial visibility* — at one predictable monthly fee.
 
 ---
 
@@ -24,14 +80,13 @@ ad angles.
 Owners between $300K–$3M revenue have data everywhere and clarity
 nowhere. They don't need another tool. They need:
 
-- Structured visibility
-- Written interpretation
-- A monthly finance conversation
+1. Structured visibility
+2. Written interpretation
+3. A monthly finance conversation
 
 That gap is **Financial Clarity-as-a-Service.** The offer name is the
-**Monthly Finance Desk.**
-
-Positioning line: *More than bookkeeping. Lighter than a full CFO.*
+**Monthly Finance Desk.** The positioning line is *More than
+bookkeeping. Lighter than a full CFO.*
 
 ---
 
@@ -58,7 +113,7 @@ their own brand terms.
 - "Best fractional CFO alternative for small business"
 - "Plain-English financial reporting for small business"
 
-### Template queries (lead capture funnel)
+### Template queries (lead-capture funnel)
 
 - "Free cash flow forecast template"
 - "Monthly financial review template"
@@ -70,25 +125,27 @@ their own brand terms.
 
 ## Pricing landscape
 
-- DIY templates: $0–$50
-- Bookkeeping: $300–$1,200/mo
-- **Monthly Finance Desk: $1,500/mo**
-- Fractional CFO: $3,000–$10,000+/mo
-- Full-time CFO: $200K+/year
+| Tier                   | Range                  | Position                                       |
+| ---------------------- | ---------------------- | ---------------------------------------------- |
+| DIY templates          | $0–$50                 | Floor                                          |
+| Bookkeeping            | $300–$1,200/mo         | Below us                                       |
+| **Monthly Finance Desk** | **$1,500/mo USD**    | **Our slot — deliberate gap above bookkeeping** |
+| Fractional CFO         | $3,000–$10,000+/mo     | Ceiling we anchor against                      |
+| Full-time CFO          | $200K+/year            | Far ceiling                                    |
 
 The price sits in a deliberate gap. Anchor against the CFO ceiling,
 not the bookkeeping floor.
 
 ---
 
-## Buyer trust priorities
+## Buyer trust priorities (in order)
 
-1. Founder credibility (Chris Sam, institutional finance background).
-2. A real sample bi-weekly briefing they can read.
+1. Founder credibility (Chris Sam, institutional finance background — see public-positioning rule in `brand-identity-architect.md`).
+2. A real sample bi-weekly briefing the visitor can read.
 3. A real sample spreadsheet view.
 4. A clear privacy/data-handling story (Plaid, what is stored, where).
 5. A comparison table showing where this sits vs adjacent categories.
-6. FAQ that names objections directly.
+6. An FAQ that names objections directly.
 
 Reviews/testimonials come later. Until they exist, lean harder on
-artifacts and founder credibility.
+artifacts and founder credibility — never fake or pad social proof.

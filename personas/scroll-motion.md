@@ -6,7 +6,11 @@
 
 ## Philosophy
 
-This is a finance product. Calm beats excitement. Motion exists to:
+This is a finance product. Calm beats excitement. Motion should feel
+like *the room settling*, not like the page performing.
+
+The site is a **calm financial command center**, not a marketing
+animation reel. Motion exists to:
 
 1. Confirm the system is thinking (briefing generation).
 2. Reveal structure as the visitor scrolls (one section at a time).
@@ -55,6 +59,7 @@ Never use:
 - "Unlocking AI magic…"
 - "Supercharging your data…"
 - "Crunching the numbers…" (cliché)
+- "Revolutionizing your finances…"
 
 ---
 

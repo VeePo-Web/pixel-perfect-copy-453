@@ -8,6 +8,40 @@ tokens in `tailwind.config.ts` — never hardcode hex values in components.
 
 ---
 
+## The "feeling target" (use this as the design rubric)
+
+After 10 seconds on the page, the visitor should feel:
+
+- **Premium**
+- **Quiet**
+- **Intelligent**
+- **Focused**
+- **Private**
+- **Executive**
+- **Trustworthy**
+
+Every design choice should contribute to at least one of those
+feelings. If it doesn't, cut it.
+
+### The anti-list (what we are NOT)
+
+- Generic SaaS template.
+- Cheap spreadsheet-download site.
+- Casual bookkeeping app.
+- Technical AI finance product.
+- Crypto / fintech / Web3 aesthetic.
+- Cartoon icons. Playful finance graphics. Clip-art charts.
+- Stock photos of "businesspeople in suits."
+- Fake Wall Street imagery (stock tickers, candlestick charts, bull statues).
+- Confetti, spinning loaders, "AI sparkle" particles.
+- Auto-playing video backgrounds.
+- Bright blue + purple gradient hero (the default AI-generic look).
+
+The site should feel like a **premium financial command center**, not
+a marketing landing page.
+
+---
+
 ## Color system (HSL)
 
 ### Base
@@ -60,8 +94,7 @@ body minimum 16px (never smaller).
 ## Surface treatments
 
 ### Glass report card
-- Background: `hsl(var(--surface-elevated))` with 1px border
-  `hsl(var(--border))`.
+- Background: `hsl(var(--surface-elevated))` with 1px border `hsl(var(--border))`.
 - Border-radius: 6px (sharp, not pill).
 - Shadow: `0 24px 64px hsl(0 0% 0% / 0.4), 0 1px 0 hsl(45 25% 96% / 0.04) inset`.
 - Interior padding: 32px.
