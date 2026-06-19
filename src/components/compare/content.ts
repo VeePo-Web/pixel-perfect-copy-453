@@ -197,7 +197,7 @@ export const comparisonCards: ComparisonCard[] = [
     coreInsight:
       "The right choice depends on whether your main gap is records, interpretation, or strategic leadership.",
     ctaText: "Compare All Three",
-    anchorId: "fast-answer",
+    anchorId: "/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk",
   },
   {
     id: "data-vs-clarity",
