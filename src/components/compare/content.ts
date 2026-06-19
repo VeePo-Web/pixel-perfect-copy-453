@@ -197,7 +197,7 @@ export const comparisonCards: ComparisonCard[] = [
     coreInsight:
       "The right choice depends on whether your main gap is records, interpretation, or strategic leadership.",
     ctaText: "Compare All Three",
-    anchorId: "fast-answer",
+    anchorId: "/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk",
   },
   {
     id: "data-vs-clarity",
@@ -473,7 +473,7 @@ export const pageIndex: { id: string; title: string; who: string; diff: string; 
     title: "Bookkeeper vs Fractional CFO vs Monthly Finance Desk",
     who: "Owners unsure what level of support they actually need.",
     diff: "Records vs recurring clarity vs strategic leadership.",
-    href: "#fast-answer",
+    href: "#/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk",
   },
   {
     id: "idx-data",

@@ -5,6 +5,7 @@ import SampleBriefingPage from "./components/sample-briefing/SampleBriefingPage"
 import PricingPage from "./components/pricing/PricingPage";
 import FreeTemplateLibraryPage from "./components/templates/FreeTemplateLibraryPage";
 import ComparisonHubPage from "./components/compare/ComparisonHubPage";
+import BookkeeperVsFractionalCFOPage from "./components/three-way-compare/BookkeeperVsFractionalCFOPage";
 import { useHashRoute } from "./components/apply/hooks/useHashRoute";
 
 const App = () => {
@@ -38,6 +39,14 @@ const App = () => {
     return (
       <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
         <FreeTemplateLibraryPage />
+      </main>
+    );
+  }
+
+  if (route === "three-way-compare") {
+    return (
+      <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
+        <BookkeeperVsFractionalCFOPage />
       </main>
     );
   }
