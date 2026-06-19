@@ -157,21 +157,31 @@ const FinanceHero = () => {
   const ctasDisabled = state === "loading";
 
   return (
-    <section className="relative w-full bg-charcoal-950 text-bone">
-      {/* subtle vignette */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(201,163,90,0.06),transparent_60%)]"
-      />
-      <div className="relative mx-auto flex min-h-dvh w-full max-w-7xl flex-col px-5 pb-24 pt-28 sm:px-8 lg:px-12">
-        {/* Wordmark */}
-        <div className="mb-10 flex items-center justify-between text-xs uppercase tracking-[0.22em] text-bone/60">
-          <span className="font-general">The Monthly Finance Desk</span>
-          <span className="hidden font-general sm:inline">
-            Los Angeles &middot; Est. by Chris Sam
-          </span>
-        </div>
+    <section id="top" className="relative w-full overflow-hidden bg-charcoal-950 text-bone">
+      {/* Cinematic background */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        {/* Base radial wash */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_-10%,rgba(201,163,90,0.10),transparent_55%),radial-gradient(ellipse_at_90%_110%,rgba(34,72,55,0.18),transparent_60%)]" />
+        {/* Dot matrix */}
+        <div
+          className="absolute inset-0 opacity-[0.05] [background-image:radial-gradient(rgba(237,231,218,0.6)_1px,transparent_1px)] [background-size:40px_40px]"
+          style={{
+            maskImage:
+              "radial-gradient(ellipse at center, black 40%, transparent 80%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse at center, black 40%, transparent 80%)",
+          }}
+        />
+        {/* Slow glow drift */}
+        <div className="absolute -top-32 -left-32 h-[480px] w-[480px] rounded-full bg-champagne-300/[0.06] blur-3xl motion-safe:animate-[pulse_20s_ease-in-out_infinite]" />
+        <div className="absolute -bottom-40 -right-32 h-[520px] w-[520px] rounded-full bg-emerald-900/[0.18] blur-3xl motion-safe:animate-[pulse_24s_ease-in-out_infinite]" />
+        {/* Ghost briefing-card silhouette behind right column */}
+        <div className="absolute right-[6%] top-[28%] hidden h-[520px] w-[380px] rotate-[-3deg] rounded-2xl border border-champagne-300/10 bg-charcoal-800/20 opacity-[0.5] blur-[2px] lg:block" />
+      </div>
 
+      <HeroNav />
+
+      <div className="relative mx-auto flex min-h-[calc(100dvh-72px)] w-full max-w-7xl flex-col px-5 pb-24 pt-10 sm:px-8 lg:px-12 lg:pt-14">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10">
           {/* LEFT: copy + composer */}
           <div className="lg:col-span-7">
@@ -195,52 +205,65 @@ const FinanceHero = () => {
 
             {/* Subheadline */}
             <p className="mt-7 max-w-2xl font-circular-web text-base leading-relaxed text-bone/75 sm:text-lg">
-              {COPY.subheadline}
+              <span className="hidden md:inline">{COPY.subheadline}</span>
+              <span className="md:hidden">{COPY.mobile.sub}</span>
             </p>
 
-            {/* Composer */}
+            {/* Command-style composer */}
             <div className="mt-9 max-w-2xl">
-              <div className="rounded-2xl border border-champagne-300/15 bg-charcoal-900/80 p-1.5 shadow-[0_20px_60px_-30px_rgba(0,0,0,0.9)] backdrop-blur">
-                <textarea
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  placeholder={COPY.placeholder}
-                  rows={3}
-                  className="w-full resize-none rounded-xl bg-transparent px-4 py-3 font-circular-web text-base text-bone placeholder:text-bone/40 focus:outline-none"
-                />
+              <div className="group relative overflow-hidden rounded-2xl border border-champagne-300/20 bg-charcoal-900/70 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(237,231,218,0.04)] backdrop-blur-md transition-colors duration-300 focus-within:border-champagne-200/60">
+                <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-champagne-200/[0.08] blur-3xl transition-opacity duration-500 group-focus-within:opacity-100" />
+                <div className="flex flex-col sm:flex-row sm:items-stretch">
+                  <textarea
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    placeholder={COPY.placeholder}
+                    aria-label="Describe your business"
+                    rows={3}
+                    className="relative flex-1 resize-none bg-transparent px-5 py-4 font-circular-web text-base text-bone placeholder:text-bone/40 focus:outline-none sm:py-5"
+                  />
+                  <div className="relative flex items-stretch border-t border-champagne-300/10 p-2 sm:border-l sm:border-t-0">
+                    <button
+                      onClick={startDemo}
+                      disabled={ctasDisabled}
+                      className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-charcoal-950 transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.6)] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:rounded-lg"
+                    >
+                      <span className="hidden md:inline">{COPY.primaryCta}</span>
+                      <span className="md:hidden">{COPY.mobile.cta}</span>
+                      <span
+                        aria-hidden
+                        className="transition-transform duration-300 group-hover/btn:translate-x-0.5"
+                      >
+                        &rarr;
+                      </span>
+                    </button>
+                  </div>
+                </div>
               </div>
+
               <p className="mt-3 pl-1 font-circular-web text-sm italic text-bone/50">
                 {COPY.example}
               </p>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <button
-                  onClick={startDemo}
-                  disabled={ctasDisabled}
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-champagne-200 px-6 py-3.5 font-general text-[0.78rem] uppercase tracking-[0.18em] text-charcoal-950 transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.5)] disabled:cursor-not-allowed disabled:opacity-60"
-                >
-                  {COPY.primaryCta}
-                  <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
-                    &rarr;
-                  </span>
-                </button>
+              <div className="mt-4 pl-1">
                 <button
                   onClick={useDemoData}
                   disabled={ctasDisabled}
-                  className="inline-flex items-center justify-center rounded-full border border-bone/20 px-6 py-3.5 font-general text-[0.78rem] uppercase tracking-[0.18em] text-bone/85 transition-colors duration-300 hover:border-champagne-200/60 hover:text-champagne-100 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="font-general text-[0.68rem] uppercase tracking-[0.2em] text-bone/45 underline-offset-4 transition-colors hover:text-champagne-100 hover:underline disabled:opacity-50"
                 >
-                  {COPY.secondaryCta}
+                  Try demo business data
                 </button>
               </div>
 
               <p className="mt-5 max-w-md font-circular-web text-xs leading-relaxed text-bone/45">
-                {COPY.trust}
+                <span className="hidden md:inline">{COPY.trust}</span>
+                <span className="md:hidden">{COPY.mobile.trust}</span>
               </p>
             </div>
           </div>
 
           {/* RIGHT: briefing panel */}
-          <div className="lg:col-span-5">
+          <div id="sample" className="lg:col-span-5">
             <BriefingPanel state={state} loadingStep={loadingStep} sections={briefingData} />
 
             {/* badges */}
@@ -260,6 +283,72 @@ const FinanceHero = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+const NAV_LINKS = [
+  { label: "How It Works", href: "#how" },
+  { label: "Sample Briefing", href: "#sample" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "FAQ", href: "#faq" },
+] as const;
+
+const HeroNav = () => {
+  const [open, setOpen] = useState(false);
+  return (
+    <header className="relative z-20 border-b border-bone/5 bg-charcoal-950/60 backdrop-blur-md">
+      <div className="mx-auto flex h-[72px] w-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
+        <a
+          href="#top"
+          className="font-general text-[0.78rem] uppercase tracking-[0.22em] text-bone"
+        >
+          Monthly Finance Desk
+        </a>
+        <nav className="hidden gap-9 md:flex">
+          {NAV_LINKS.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="font-general text-[0.7rem] uppercase tracking-[0.2em] text-bone/65 transition-colors hover:text-champagne-100"
+            >
+              {l.label}
+            </a>
+          ))}
+        </nav>
+        <button
+          type="button"
+          aria-label="Open menu"
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-bone/15 text-bone/80 md:hidden"
+        >
+          <span className="relative block h-2.5 w-4">
+            <span
+              className={`absolute left-0 top-0 h-px w-full bg-current transition-transform ${open ? "translate-y-[5px] rotate-45" : ""}`}
+            />
+            <span
+              className={`absolute bottom-0 left-0 h-px w-full bg-current transition-transform ${open ? "-translate-y-[5px] -rotate-45" : ""}`}
+            />
+          </span>
+        </button>
+      </div>
+      {open && (
+        <div className="border-t border-bone/5 bg-charcoal-950/95 md:hidden">
+          <nav className="mx-auto flex w-full max-w-7xl flex-col px-5 py-4 sm:px-8">
+            {NAV_LINKS.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="border-b border-bone/5 py-3 font-general text-[0.78rem] uppercase tracking-[0.2em] text-bone/75 last:border-b-0 hover:text-champagne-100"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      )}
+    </header>
   );
 };
 

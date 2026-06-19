@@ -1,63 +1,67 @@
-# Make the Generate button actually use the prompt
+# Hero rebuild to match the master prompt
 
-Right now "Generate Sample Finance Briefing" always renders the same hardcoded sample. This plan makes it read whatever the owner typed (or the placeholder example if empty), send it to a server-side AI call, and render the response in the existing briefing panel — same six-section structure, same calm voice, no hype.
+The current hero already nails most of this spec — exact copy, charcoal/champagne palette, two-column composition, briefing panel, loading sequence, AI-backed sample briefing, post-demo CTA. This plan only ships the deltas that bring it to the master-prompt bar.
 
-## Behavior
+## Deltas
 
-1. User types into the composer (or clicks **Use Demo Business Data** to prefill the agency example, unchanged).
-2. On **Generate Sample Finance Briefing**:
-   - If the textarea is empty, fall back to the `Example:` sentence already shown under the input ("I run a 12-person agency doing $90K/month…") so the button never feels broken.
-   - Switch panel to `loading`, run the existing 4-line loading sequence on a timer.
-   - In parallel, call a new edge function with the prompt text.
-   - When the response arrives AND the loading sequence has finished, switch to `briefing` and render the returned sections.
-3. If the call fails or returns malformed data, fall back to the current hardcoded `COPY.briefing` so the hero never shows an error state. A small muted line under the panel notes "Showing sample briefing." Reduced-motion users skip the fade.
+### 1. Top navigation (new)
+Minimal, quiet, sits above the hero in the same dark surface. No CTA in the nav.
+- Left: `Monthly Finance Desk` wordmark
+- Right: `How It Works` · `Sample Briefing` · `Pricing` · `FAQ` as anchor links to `#how`, `#sample`, `#pricing`, `#faq` (sections don't exist yet — links scroll harmlessly, real sections land in later turns)
+- Mobile: wordmark + hamburger that opens a sheet with the same four links
+- Built as `src/components/hero/HeroNav.tsx`
 
-The post-demo CTA block still reveals once `state === "briefing"`, unchanged.
+### 2. Single primary CTA above the fold
+Master prompt is explicit: only `Generate Sample Finance Briefing` shows in the initial hero.
+- Remove the visible `Use Demo Business Data` button from the hero
+- Keep the demo-prefill behavior available as a small, low-emphasis ghost link beneath the example text: `Try demo business data` (looks like a text link, not a button). This preserves the useful affordance without competing as a second CTA. If you'd rather drop it entirely, say so and I will.
 
-## Briefing shape (locked)
+### 3. Command-style prompt input with attached CTA
+Today the textarea and the CTA are separate blocks. Rebuild as one unified "finance command interface":
+- Single rounded container, dark translucent fill, thin champagne-tinted border, soft inner glow, faint outer radial highlight under the CTA corner
+- Textarea fills the left, CTA button sits attached on the right (desktop) or full-width below (mobile)
+- Focus state: border brightens to champagne, inner glow intensifies subtly
+- Placeholder and example/trust microcopy unchanged — exact copy preserved
 
-The AI must return exactly these six sections in this order, matching the empty-state list and the current sample's tone:
+### 4. Cinematic background
+Layer behind the whole hero section, fixed to the section, pointer-events none:
+- Base: near-black `#08080A` → charcoal radial wash
+- Faint 40px dot-matrix grid at ~4% opacity, masked to fade at edges
+- Two soft radial glows: champagne top-left, deep-green bottom-right, both very low alpha
+- One very faint blurred "floating UI fragment" — a single ghosted briefing-card silhouette behind the right column, ~6% opacity, no text legibility
+- No animation on the background beyond a slow 20s opacity drift on the glows (respects `prefers-reduced-motion`)
 
-```text
-Cash Movement
-Revenue Trend
-Expense Pattern
-Unusual Spend
-Questions to Review
-Decisions to Consider
-```
+### 5. Briefing panel polish
+Current panel is good; tighten to "private financial briefing room":
+- Add a top-left meta row inside the panel: `MFD · BRIEFING 001` in tiny tracked uppercase, plus a date stamp `Period · Sample`
+- Replace the small green "Ready/Preparing/Preview" dot with a slimmer champagne-on-charcoal status chip
+- Dollar figures in the briefing body render in champagne weight-medium so the eye lands on numbers first
+- Thin 1px champagne rim on hover/focus within panel; no other motion
 
-Each section: one short paragraph, 2–4 sentences, plain English, no emojis, no exclamation marks, no "AI," no "supercharge," no advice to "leverage" anything. Dollar figures allowed and encouraged when the prompt implies a size; otherwise qualitative. If the prompt is vague, the model invents reasonable demo numbers and labels the panel state as "Sample" (already the case).
+### 6. Mobile copy variant wired up
+The `COPY.mobile` block already exists but isn't used. Switch to it under `md`:
+- Mobile headline stays full ("Stop Running…")
+- Subheadline swaps to the shorter mobile version
+- CTA label swaps to `Generate Sample Briefing`
+- Trust line swaps to `No bank connection required.`
+- Briefing panel renders below the composer (already does), collapses to a single preview card with a "Tap to expand" affordance until the CTA is clicked
 
-## Backend
-
-Requires Lovable Cloud (for the edge function + Lovable AI Gateway). If not yet enabled, enable it as part of this build.
-
-- New edge function `generate-briefing`:
-  - Input: `{ prompt: string }`.
-  - Calls Lovable AI Gateway with `google/gemini-2.5-flash` (fast, cheap, good enough for this).
-  - System prompt locks: persona (calm senior finance operator briefing a small business owner), the six-section structure, tone rules (no hype, no AI talk), and the JSON output contract.
-  - Uses tool/structured output so the response is guaranteed JSON: `{ sections: [{ label, body }, …] }` with `label` constrained to the six allowed strings.
-  - Returns the parsed JSON. No auth required (public hero demo). Rate-limit via the gateway's built-in 429 — surface as the hardcoded fallback.
-- No DB tables, no storage, no user accounts. Nothing is persisted.
-
-## Frontend changes
-
-- `src/components/hero/FinanceHero.tsx`:
-  - Add `briefingData` state (defaults to `COPY.briefing`).
-  - `startDemo()` becomes async: kicks off the loader timers AND the fetch in parallel, awaits both, then sets state to `briefing` with either the AI response or the fallback.
-  - Disable both CTAs while `state === "loading"`.
-  - `BriefingPanel` reads sections from props instead of `COPY.briefing` directly.
-- No copy changes anywhere else. Eyebrow, slogan, headline, subheadline, placeholder, example, CTAs, trust line, badges, post-demo block — all untouched.
+### 7. Section ID + scroll target
+Wrap the hero in `<section id="top">` and add `#sample` anchor on the briefing panel so the nav links resolve.
 
 ## Out of scope
 
-- Saving briefings, accounts, real bank connection, streaming the response token-by-token, editing the prompt mid-stream, the 4-reel mechanic, other page sections.
+- How It Works / Pricing / FAQ / Sample Briefing pages or sections (links scroll to `#` for now)
+- Real backend, application form, About/Story/Contact rewrites
+- Any 4-reel mechanic or video backdrop
+- Changing any of the locked copy strings
 
 ## Acceptance
 
-- Typing a custom business description and clicking Generate produces a briefing whose numbers and details reflect what was typed.
-- Empty textarea + Generate uses the on-screen example sentence and still produces a coherent briefing.
-- All six section labels render in the fixed order, every time.
-- Network failure or malformed model output falls back silently to the current hardcoded sample; no error UI.
-- Loading sequence still plays for its full duration even if the AI responds faster, so the panel never flashes.
+- Above the fold shows exactly one primary CTA button
+- Nav renders with the four links and no nav CTA, both desktop and mobile
+- The prompt input and CTA read as a single unified command bar
+- Background reads as cinematic dark with dot grid + soft glows, no bright gradients
+- Mobile <768px uses the `COPY.mobile` strings for sub, CTA, trust
+- All existing copy strings remain byte-identical to what was approved
+- Briefing fetch + loading sequence + post-demo CTA continue to work
