@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+
+type BriefingSection = { label: string; body: string };
 
 type HeroState = "idle" | "loading" | "briefing";
 
@@ -77,10 +80,18 @@ const COPY = {
   },
 } as const;
 
+const DEMO_PROMPT =
+  "I run a 12-person agency doing $90K/month. Revenue is growing, but cash still feels tight.";
+const EXAMPLE_FALLBACK_PROMPT = DEMO_PROMPT;
+
+const FALLBACK_SECTIONS: BriefingSection[] = COPY.briefing.map((s) => ({ ...s }));
+
 const FinanceHero = () => {
   const [state, setState] = useState<HeroState>("idle");
   const [loadingStep, setLoadingStep] = useState(0);
   const [prompt, setPrompt] = useState("");
+  const [briefingData, setBriefingData] =
+    useState<BriefingSection[]>(FALLBACK_SECTIONS);
   const timeouts = useRef<number[]>([]);
 
   const clearTimers = () => {
@@ -90,7 +101,7 @@ const FinanceHero = () => {
 
   useEffect(() => () => clearTimers(), []);
 
-  const startDemo = () => {
+  const runBriefing = async (sourcePrompt: string) => {
     clearTimers();
     setState("loading");
     setLoadingStep(0);
@@ -98,18 +109,52 @@ const FinanceHero = () => {
       const id = window.setTimeout(() => setLoadingStep(i), i * 750);
       timeouts.current.push(id);
     });
-    const finishId = window.setTimeout(() => {
-      setState("briefing");
-    }, COPY.loading.length * 750 + 400);
-    timeouts.current.push(finishId);
+
+    const minLoadingMs = COPY.loading.length * 750 + 400;
+    const minDelay = new Promise<void>((resolve) => {
+      const id = window.setTimeout(() => resolve(), minLoadingMs);
+      timeouts.current.push(id);
+    });
+
+    const fetchBriefing = (async (): Promise<BriefingSection[]> => {
+      try {
+        const { data, error } = await supabase.functions.invoke(
+          "generate-briefing",
+          { body: { prompt: sourcePrompt } }
+        );
+        if (error) throw error;
+        const sections = (data as { sections?: BriefingSection[] } | null)
+          ?.sections;
+        if (
+          Array.isArray(sections) &&
+          sections.length === 6 &&
+          sections.every((s) => s && typeof s.body === "string" && s.body.trim())
+        ) {
+          return sections;
+        }
+        return FALLBACK_SECTIONS;
+      } catch (e) {
+        console.error("briefing fetch failed", e);
+        return FALLBACK_SECTIONS;
+      }
+    })();
+
+    const [sections] = await Promise.all([fetchBriefing, minDelay]);
+    setBriefingData(sections);
+    setState("briefing");
+  };
+
+  const startDemo = () => {
+    const source = prompt.trim() || EXAMPLE_FALLBACK_PROMPT;
+    void runBriefing(source);
   };
 
   const useDemoData = () => {
-    setPrompt(
-      "I run a 12-person agency doing $90K/month. Revenue is growing, but cash still feels tight."
-    );
-    startDemo();
+    setPrompt(DEMO_PROMPT);
+    void runBriefing(DEMO_PROMPT);
   };
+
+  const ctasDisabled = state === "loading";
 
   return (
     <section className="relative w-full bg-charcoal-950 text-bone">
