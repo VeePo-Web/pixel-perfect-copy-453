@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase } from "../../integrations/supabase/client";
 
 type BriefingSection = { label: string; body: string };
 
@@ -216,7 +216,8 @@ const FinanceHero = () => {
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <button
                   onClick={startDemo}
-                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-champagne-200 px-6 py-3.5 font-general text-[0.78rem] uppercase tracking-[0.18em] text-charcoal-950 transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.5)]"
+                  disabled={ctasDisabled}
+                  className="group inline-flex items-center justify-center gap-2 rounded-full bg-champagne-200 px-6 py-3.5 font-general text-[0.78rem] uppercase tracking-[0.18em] text-charcoal-950 transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.5)] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {COPY.primaryCta}
                   <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
@@ -225,7 +226,8 @@ const FinanceHero = () => {
                 </button>
                 <button
                   onClick={useDemoData}
-                  className="inline-flex items-center justify-center rounded-full border border-bone/20 px-6 py-3.5 font-general text-[0.78rem] uppercase tracking-[0.18em] text-bone/85 transition-colors duration-300 hover:border-champagne-200/60 hover:text-champagne-100"
+                  disabled={ctasDisabled}
+                  className="inline-flex items-center justify-center rounded-full border border-bone/20 px-6 py-3.5 font-general text-[0.78rem] uppercase tracking-[0.18em] text-bone/85 transition-colors duration-300 hover:border-champagne-200/60 hover:text-champagne-100 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {COPY.secondaryCta}
                 </button>
@@ -239,7 +241,7 @@ const FinanceHero = () => {
 
           {/* RIGHT: briefing panel */}
           <div className="lg:col-span-5">
-            <BriefingPanel state={state} loadingStep={loadingStep} />
+            <BriefingPanel state={state} loadingStep={loadingStep} sections={briefingData} />
 
             {/* badges */}
             <div className="mt-5 flex flex-wrap gap-2">
@@ -264,9 +266,11 @@ const FinanceHero = () => {
 const BriefingPanel = ({
   state,
   loadingStep,
+  sections,
 }: {
   state: HeroState;
   loadingStep: number;
+  sections: BriefingSection[];
 }) => {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-champagne-300/20 bg-gradient-to-b from-charcoal-800/80 to-charcoal-900/80 p-6 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] backdrop-blur-sm sm:p-7">
@@ -358,7 +362,7 @@ const BriefingPanel = ({
 
         {state === "briefing" && (
           <div className="space-y-5 animate-fade-in">
-            {COPY.briefing.map((s) => (
+            {sections.map((s) => (
               <div key={s.label}>
                 <p className="font-general text-[0.66rem] uppercase tracking-[0.2em] text-champagne-200">
                   {s.label}
