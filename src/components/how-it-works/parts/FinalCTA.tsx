@@ -28,7 +28,7 @@ export default function FinalCTA() {
           <a href="#top" className="rounded-full border border-white/15 px-6 py-3.5 text-[13px] text-bone/80 transition-all duration-300 hover:border-champagne-200/40 hover:text-bone">
             {c.secondary}
           </a>
-          <a href="#templates" className="text-[13px] text-bone/55 underline-offset-4 hover:text-champagne-100 hover:underline">
+          <a href="#/templates" className="text-[13px] text-bone/55 underline-offset-4 hover:text-champagne-100 hover:underline">
             {c.tertiary}
           </a>
         </div>
