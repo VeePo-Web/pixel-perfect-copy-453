@@ -1,0 +1,15 @@
+{
+  "name": "Hickory & Rose — Edmonton Luxury Wedding Planner",
+  "short_name": "Hickory & Rose",
+  "description": "Refined, calm wedding planning in Edmonton & the Canadian Rockies.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f4f0",
+  "theme_color": "#f7f4f0",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" },
+    { "src": "/favicon.png", "type": "image/png", "sizes": "512x512", "purpose": "any" },
+    { "src": "/apple-touch-icon.png", "type": "image/png", "sizes": "180x180", "purpose": "any" }
+  ]
+}

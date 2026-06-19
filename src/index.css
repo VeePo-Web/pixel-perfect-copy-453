@@ -1,0 +1,369 @@
+/* Fonts loaded via <link> in index.html for non-blocking render */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Lenis smooth scroll */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@layer base {
+  :root {
+    /* Hickory & Rose — Refined Rustic Elegance */
+    --background: 40 20% 98%;
+    --foreground: 30 18% 16%;
+
+    --card: 40 30% 95%;
+    --card-foreground: 30 15% 20%;
+
+    --popover: 40 20% 98%;
+    --popover-foreground: 30 15% 20%;
+
+    --primary: 140 25% 35%;
+    --primary-foreground: 40 20% 98%;
+
+    --secondary: 140 25% 90%;
+    --secondary-foreground: 140 25% 35%;
+
+    --muted: 140 15% 96%;
+    --muted-foreground: 30 12% 32%;
+
+    --accent: 180 25% 35%;
+    --accent-foreground: 40 20% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 35 20% 88%;
+    --input: 35 20% 88%;
+    --ring: 140 25% 35%;
+
+    --radius: 0.25rem;
+
+    /* Brand-specific extended tokens */
+    --sage-deep: 140 25% 35%;
+    --sage: 140 20% 45%;
+    --sage-light: 140 25% 90%;
+    --sage-mist: 140 15% 96%;
+    --cream: 40 30% 95%;
+    --cream-dark: 35 20% 88%;
+    --warm-white: 40 20% 98%;
+    --text-primary: 30 15% 20%;
+    --text-secondary: 30 12% 32%;
+    --text-tertiary: 30 10% 42%;
+    --text-decorative: 30 10% 45%;
+    --text-ghost: 30 8% 55%;
+    --teal: 180 25% 35%;
+    --teal-light: 180 20% 90%;
+    --gold: 40 50% 55%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Hickory & Rose is a warm brand — dark mode mirrors light for brand consistency */
+    --background: 30 10% 10%;
+    --foreground: 40 20% 92%;
+
+    --card: 30 10% 14%;
+    --card-foreground: 40 20% 92%;
+
+    --popover: 30 10% 12%;
+    --popover-foreground: 40 20% 92%;
+
+    --primary: 140 25% 55%;
+    --primary-foreground: 30 10% 10%;
+
+    --secondary: 140 15% 20%;
+    --secondary-foreground: 140 25% 80%;
+
+    --muted: 30 10% 18%;
+    --muted-foreground: 30 12% 68%;
+
+    --accent: 180 20% 45%;
+    --accent-foreground: 30 10% 10%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 30 10% 22%;
+    --input: 30 10% 22%;
+    --ring: 140 25% 55%;
+
+    --sage-deep: 140 25% 55%;
+    --sage: 140 20% 50%;
+    --sage-light: 140 15% 20%;
+    --sage-mist: 140 10% 14%;
+    --cream: 40 15% 16%;
+    --cream-dark: 35 10% 22%;
+    --warm-white: 30 10% 10%;
+    --text-primary: 40 20% 92%;
+    --text-secondary: 30 10% 72%;
+    --text-tertiary: 30 10% 58%;
+    --text-decorative: 30 8% 55%;
+    --text-ghost: 30 6% 48%;
+    --teal: 180 20% 45%;
+    --teal-light: 180 10% 18%;
+    --gold: 40 40% 50%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* Sitewide readability floor — no body text below 14px, no body weight below 400.
+     Display headings (Cormorant) intentionally exempted via :where selector below. */
+  p, li, a, span, button, input, textarea, select, label,
+  small, figcaption, blockquote, td, th, dd, dt {
+    font-size: max(1em, 0.875rem);
+  }
+  :where(p, li, a, span, button, input, textarea, select, label,
+    small, figcaption, blockquote, td, th, dd, dt).font-light {
+    font-weight: 400;
+  }
+
+
+  h1, h2, h3, h4, h5 {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: -0.025em;
+    font-weight: 400;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: hsl(140 25% 35% / 0.15);
+    color: hsl(30 15% 20%);
+  }
+}
+
+/* Skip-to-content link — visible only on keyboard focus. Lets sighted keyboard
+   users bypass the Navigation, LoadingScreen, and cursor effects. */
+.skip-to-content {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  font-family: 'Jost', sans-serif;
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transform: translateY(-120%);
+  transition: transform 200ms ease-out;
+}
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid hsl(var(--gold, 40 50% 55%));
+  outline-offset: 2px;
+}
+
+@layer utilities {
+  .font-script {
+    font-family: 'Great Vibes', cursive;
+  }
+  
+  .font-serif-wedding {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  
+  .font-sans-wedding {
+    font-family: 'Jost', sans-serif;
+  }
+
+  .font-overline {
+    font-family: 'Jost', sans-serif;
+    font-size: 0.875rem;
+
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+
+  /* Intentional decorative light-weight for large display text or ornamental elements */
+  .font-light-editorial {
+    font-weight: 300;
+  }
+
+  /* Editorial drop cap — apply to the first paragraph of a prose section */
+  .drop-cap::first-letter {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 3.5em;
+    line-height: 0.8;
+    float: left;
+    margin-right: 0.08em;
+    margin-top: 0.05em;
+    color: hsl(var(--foreground));
+  }
+
+  /* Thin editorial rule — horizontal separator */
+  .editorial-rule {
+    width: 3rem;
+    height: 1px;
+    background-color: hsl(var(--primary));
+    border: none;
+    margin: 0;
+  }
+
+  /* Pull-quote with decorative em dash */
+  .pull-quote-dashes::before,
+  .pull-quote-dashes::after {
+    content: '—';
+    display: inline-block;
+    margin: 0 0.35em;
+    opacity: 0.3;
+  }
+
+  /* Gold shimmer for editorial accents */
+  @keyframes shimmer-gold {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .shimmer-gold {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--gold)) 50%,
+      hsl(var(--primary)) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer-gold 4s ease-in-out infinite;
+  }
+
+  /* Shimmer sweep for accordion open state */
+  @keyframes shimmer-sweep {
+    0% { transform: translateX(-100%); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateX(200%); opacity: 0; }
+  }
+
+  /* Gold underline focus effect for Inquire form inputs */
+  .input-gold-focus {
+    position: relative;
+  }
+  .input-gold-focus::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--gold)), hsl(var(--primary)));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+  .input-gold-focus:focus-within::after {
+    transform: scaleX(1);
+  }
+
+  /* Cinematic film grain texture overlay — apply to hero sections for editorial depth */
+  .grain-overlay {
+    position: relative;
+  }
+  .grain-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
+    mix-blend-mode: overlay;
+  }
+
+  /* Subtle vignette for cinematic hero sections */
+  .vignette::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.25) 100%);
+  }
+}
+
+/* Breathing diamond — CSS-only infinite animations (off JS thread) */
+@keyframes breathing-glow {
+  0%, 100% { opacity: 0.3; transform: scale(0.85); }
+  50% { opacity: 0.7; transform: scale(1.15); }
+}
+@keyframes breathing-scale {
+  0%, 100% { opacity: 0.6; transform: rotate(45deg) scale(0.9); }
+  50% { opacity: 1; transform: rotate(45deg) scale(1.1); }
+}
+
+/* Ambient floating bokeh particles */
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+  20% { opacity: var(--particle-opacity, 0.04); }
+  80% { opacity: var(--particle-opacity, 0.04); }
+  50% { transform: translateY(-40px) translateX(8px); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

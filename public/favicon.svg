@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300&amp;family=Great+Vibes&amp;display=swap');
+  </style>
+  <text x="2" y="24" font-family="'Cormorant Garamond', serif" font-weight="300" font-size="20" fill="#c2a24d">H</text>
+  <text x="13" y="22" font-family="'Great Vibes', cursive" font-size="12" fill="#c2a24d" opacity="0.6">&amp;</text>
+  <text x="19" y="24" font-family="'Great Vibes', cursive" font-size="20" fill="#c2a24d">R</text>
+</svg>
