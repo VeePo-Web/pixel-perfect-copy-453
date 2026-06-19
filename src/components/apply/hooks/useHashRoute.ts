@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-export type ApplyRoute = "home" | "apply" | "thank-you" | "sample-briefing" | "pricing";
+export type ApplyRoute =
+  | "home"
+  | "apply"
+  | "thank-you"
+  | "sample-briefing"
+  | "pricing"
+  | "templates";
 
 function parse(): ApplyRoute {
   const h = window.location.hash || "";
@@ -8,6 +14,7 @@ function parse(): ApplyRoute {
   if (h.startsWith("#/apply")) return "apply";
   if (h.startsWith("#/sample-briefing")) return "sample-briefing";
   if (h.startsWith("#/pricing")) return "pricing";
+  if (h.startsWith("#/templates")) return "templates";
   return "home";
 }
 
