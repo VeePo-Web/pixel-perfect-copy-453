@@ -40,6 +40,10 @@ export default {
           400: "#A8853F",
         },
         bone: "#EDE7DA",
+        green: {
+          signal: "#3F7A5E",
+          deep: "#1F3B2D",
+        },
       },
       transitionTimingFunction: {
         cinema: "cubic-bezier(0.22, 1, 0.36, 1)",
