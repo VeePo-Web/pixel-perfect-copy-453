@@ -361,115 +361,181 @@ const BriefingPanel = ({
   loadingStep: number;
   sections: BriefingSection[];
 }) => {
+  const totalSteps = COPY.loading.length;
+  const progressPct =
+    state === "briefing"
+      ? 100
+      : state === "loading"
+      ? Math.min(100, ((loadingStep + 1) / totalSteps) * 100)
+      : 0;
+
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-champagne-300/20 bg-gradient-to-b from-charcoal-800/80 to-charcoal-900/80 p-6 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] backdrop-blur-sm sm:p-7">
+    <div className="group/panel relative overflow-hidden rounded-2xl border border-champagne-300/20 bg-gradient-to-b from-charcoal-800/80 to-charcoal-900/80 p-6 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] backdrop-blur-sm motion-safe:animate-panel-rise sm:p-7">
       {/* top rim */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px origin-left bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent motion-safe:animate-rim-in" />
+
+      {/* progress bar */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-champagne-300/0 via-champagne-200/80 to-champagne-300/0 transition-[width] duration-[750ms] ease-cinema"
+          style={{ width: `${progressPct}%` }}
+        />
+      </div>
 
       {/* panel header */}
       <div className="flex items-center justify-between border-b border-bone/10 pb-4">
         <div>
           <p className="font-general text-[0.62rem] uppercase tracking-[0.22em] text-champagne-200/80">
-            Sample
+            MFD &middot; Briefing 001
           </p>
           <p className="mt-1 font-circular-web text-base text-bone">
             {COPY.panelLabel}
           </p>
         </div>
         <span
-          className={`inline-flex items-center gap-2 rounded-full border px-2.5 py-1 font-general text-[0.6rem] uppercase tracking-[0.18em] ${
+          className={`inline-flex items-center gap-2 rounded-full border px-2.5 py-1 font-general text-[0.6rem] uppercase tracking-[0.18em] transition-colors duration-[400ms] ease-cinema ${
             state === "briefing"
               ? "border-champagne-200/40 text-champagne-100"
               : "border-bone/15 text-bone/55"
           }`}
         >
           <span
-            className={`h-1.5 w-1.5 rounded-full ${
+            className={`h-1.5 w-1.5 rounded-full transition-colors duration-[400ms] ease-cinema ${
               state === "briefing"
                 ? "bg-champagne-200"
                 : state === "loading"
-                ? "animate-pulse bg-champagne-300"
+                ? "bg-champagne-300 motion-safe:animate-soft-pulse"
                 : "bg-bone/40"
             }`}
           />
-          {state === "briefing" ? "Ready" : state === "loading" ? "Preparing" : "Preview"}
+          <span key={state} className="motion-safe:animate-[fade-in_180ms_ease-out]">
+            {state === "briefing"
+              ? "Ready"
+              : state === "loading"
+              ? `${String(loadingStep + 1).padStart(2, "0")} / ${String(totalSteps).padStart(2, "0")}`
+              : "Preview"}
+          </span>
         </span>
       </div>
 
       {/* body */}
       <div className="relative mt-5 min-h-[380px]">
-        {state === "idle" && (
-          <ul className="space-y-3">
-            {COPY.emptySections.map((label, i) => (
-              <li
-                key={label}
-                className="flex items-center justify-between rounded-lg border border-bone/5 bg-charcoal-900/40 px-4 py-3"
-              >
-                <span className="flex items-center gap-3">
-                  <span className="font-general text-[0.62rem] tracking-[0.18em] text-bone/35">
-                    0{i + 1}
-                  </span>
-                  <span className="font-circular-web text-sm text-bone/80">{label}</span>
-                </span>
-                <span className="h-px w-10 bg-bone/15" />
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {state === "loading" && (
-          <div className="space-y-3 pt-2">
-            {COPY.loading.map((line, i) => {
-              const active = i === loadingStep;
-              const done = i < loadingStep;
-              return (
-                <div
-                  key={line}
-                  className={`flex items-center gap-3 font-circular-web text-sm transition-all duration-300 ${
-                    active
-                      ? "text-bone"
-                      : done
-                      ? "text-bone/55"
-                      : "text-bone/25"
-                  }`}
+        <div key={state} className="motion-safe:animate-[fade-in_280ms_cubic-bezier(0.22,1,0.36,1)]">
+          {state === "idle" && (
+            <ul className="space-y-3">
+              {COPY.emptySections.map((label, i) => (
+                <li
+                  key={label}
+                  style={{ animationDelay: `${i * 70}ms` }}
+                  className="relative flex items-center justify-between overflow-hidden rounded-lg border border-bone/5 bg-charcoal-900/40 px-4 py-3 motion-safe:animate-section-in"
                 >
-                  <span
-                    className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                      active
-                        ? "animate-pulse bg-champagne-200"
-                        : done
-                        ? "bg-champagne-300/70"
-                        : "bg-bone/20"
-                    }`}
-                  />
-                  {line}
-                </div>
-              );
-            })}
-          </div>
-        )}
+                  <span className="flex items-center gap-3">
+                    <span className="font-general text-[0.62rem] tracking-[0.18em] text-bone/35">
+                      0{i + 1}
+                    </span>
+                    <span className="font-circular-web text-sm text-bone/80">{label}</span>
+                  </span>
+                  <span className="relative h-px w-16 overflow-hidden bg-bone/10">
+                    <span className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent motion-safe:animate-shimmer" />
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
 
-        {state === "briefing" && (
-          <div className="space-y-5 animate-fade-in">
-            {sections.map((s) => (
-              <div key={s.label}>
-                <p className="font-general text-[0.66rem] uppercase tracking-[0.2em] text-champagne-200">
-                  {s.label}
-                </p>
-                <p className="mt-1.5 font-circular-web text-[0.95rem] leading-relaxed text-bone/85">
-                  {s.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        )}
+          {state === "loading" && (
+            <div className="space-y-3 pt-2">
+              {COPY.loading.map((line, i) => {
+                const active = i === loadingStep;
+                const done = i < loadingStep;
+                return (
+                  <div
+                    key={line}
+                    className={`flex items-center gap-3 font-circular-web text-sm transition-[color,opacity] duration-[240ms] ease-cinema ${
+                      active ? "text-bone" : done ? "text-bone/55" : "text-bone/25"
+                    }`}
+                  >
+                    {done ? (
+                      <svg viewBox="0 0 12 12" className="h-3 w-3 shrink-0 text-champagne-200" aria-hidden>
+                        <path
+                          d="M2 6.5 L5 9 L10 3"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.25"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    ) : (
+                      <span
+                        className={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors duration-[300ms] ${
+                          active
+                            ? "bg-champagne-200 motion-safe:animate-soft-pulse"
+                            : "bg-bone/20"
+                        }`}
+                      />
+                    )}
+                    <span className="flex-1">{line}</span>
+                    {active && (
+                      <span
+                        aria-hidden
+                        className="ml-1 inline-block h-3 w-px bg-champagne-200 motion-safe:animate-caret-blink"
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {state === "briefing" && (
+            <div className="space-y-5">
+              {sections.map((s, i) => (
+                <div
+                  key={s.label}
+                  style={{ animationDelay: `${i * 70}ms` }}
+                  className="motion-safe:animate-section-in"
+                >
+                  <div className="flex items-center gap-2">
+                    <p className="font-general text-[0.66rem] uppercase tracking-[0.2em] text-champagne-200">
+                      {s.label}
+                    </p>
+                    <span
+                      style={{ animationDelay: `${i * 70 + 120}ms` }}
+                      className="h-px flex-1 origin-left bg-gradient-to-r from-champagne-200/30 to-transparent motion-safe:animate-rim-in"
+                    />
+                  </div>
+                  <p className="mt-1.5 font-circular-web text-[0.95rem] leading-relaxed text-bone/85">
+                    {highlightFigures(s.body)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
+const highlightFigures = (text: string) => {
+  const parts = text.split(/(\$[\d,]+(?:\.\d+)?|\d+%)/g);
+  return parts.map((part, i) =>
+    /^(\$[\d,]+(?:\.\d+)?|\d+%)$/.test(part) ? (
+      <span key={i} className="font-medium text-champagne-100">
+        {part}
+      </span>
+    ) : (
+      <span key={i}>{part}</span>
+    )
+  );
+};
+
 const PostDemoCTA = () => (
-  <div className="mt-6 rounded-2xl border border-champagne-300/20 bg-charcoal-800/60 p-6 animate-fade-in">
+  <div
+    className="relative mt-6 overflow-hidden rounded-2xl border border-champagne-300/20 bg-charcoal-800/60 p-6 motion-safe:animate-panel-rise"
+    style={{ animationDelay: "250ms" }}
+  >
     <h3 className="font-zentry text-2xl font-black uppercase leading-tight text-bone sm:text-3xl">
       {COPY.postDemo.headline}
     </h3>
@@ -477,11 +543,15 @@ const PostDemoCTA = () => (
       {COPY.postDemo.body}
     </p>
     <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-      <button className="inline-flex items-center justify-center gap-2 rounded-full bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-charcoal-950 transition-colors hover:bg-champagne-100">
-        {COPY.postDemo.primary}
-        <span aria-hidden>&rarr;</span>
+      <button className="group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-charcoal-950 transition-colors duration-[400ms] ease-cinema hover:bg-champagne-100">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow group-hover/cta:opacity-0"
+        />
+        <span className="relative">{COPY.postDemo.primary}</span>
+        <span aria-hidden className="relative">&rarr;</span>
       </button>
-      <button className="inline-flex items-center justify-center rounded-full border border-bone/20 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-bone/85 transition-colors hover:border-champagne-200/60 hover:text-champagne-100">
+      <button className="inline-flex items-center justify-center rounded-full border border-bone/20 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-bone/85 transition-colors duration-[400ms] ease-cinema hover:border-champagne-200/60 hover:text-champagne-100">
         {COPY.postDemo.secondary}
       </button>
     </div>
