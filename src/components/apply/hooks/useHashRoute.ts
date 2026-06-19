@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 
-export type ApplyRoute = "home" | "apply" | "thank-you";
+export type ApplyRoute = "home" | "apply" | "thank-you" | "sample-briefing";
 
 function parse(): ApplyRoute {
   const h = window.location.hash || "";
   if (h.startsWith("#/apply/thank-you")) return "thank-you";
   if (h.startsWith("#/apply")) return "apply";
+  if (h.startsWith("#/sample-briefing")) return "sample-briefing";
   return "home";
 }
 
@@ -25,7 +26,6 @@ export function navigate(to: string) {
   if (window.location.hash !== to) {
     window.location.hash = to;
   } else {
-    // force re-trigger
     window.dispatchEvent(new HashChangeEvent("hashchange"));
   }
   window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
