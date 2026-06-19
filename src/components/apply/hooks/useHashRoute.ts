@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
-export type ApplyRoute = "home" | "apply" | "thank-you" | "sample-briefing";
+export type ApplyRoute = "home" | "apply" | "thank-you" | "sample-briefing" | "pricing";
 
 function parse(): ApplyRoute {
   const h = window.location.hash || "";
   if (h.startsWith("#/apply/thank-you")) return "thank-you";
   if (h.startsWith("#/apply")) return "apply";
   if (h.startsWith("#/sample-briefing")) return "sample-briefing";
+  if (h.startsWith("#/pricing")) return "pricing";
   return "home";
 }
 

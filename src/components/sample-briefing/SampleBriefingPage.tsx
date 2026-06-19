@@ -81,6 +81,12 @@ function TopBar() {
             Sample Briefing
           </a>
           <a
+            href="#/pricing"
+            className="hidden text-bone/55 transition-colors hover:text-bone md:inline"
+          >
+            Pricing
+          </a>
+          <a
             href="#/apply"
             className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-charcoal-950 transition-all duration-300 hover:shadow-[0_8px_28px_-10px_rgba(217,190,130,0.55)]"
           >
