@@ -1,67 +1,79 @@
-# Motion polish for the briefing panel
+## Plan: "How It Works" page section for Monthly Finance Desk
 
-Tighten the panel's transitions and loading states to feel cinematic and premium without ever distracting from the copy. All motion respects `prefers-reduced-motion` and uses a shared easing/timing system so nothing feels ad-hoc.
+Build a cinematic, scroll-driven "How It Works" experience that lives directly below the existing `FinanceHero` on the home page. Same dark champagne/green token system, same restrained motion language already established in the hero. No new dependencies — uses Tailwind tokens + IntersectionObserver + existing keyframes (`panel-rise`, `section-in`, `shimmer`, `soft-pulse`).
 
-## Motion system (added once, reused)
+### Where it goes
 
-Add four keyframes to `tailwind.config.ts` and lean on a single easing curve (`cubic-bezier(0.22, 1, 0.36, 1)` — a calm "out-expo"). Durations stay long enough to read as deliberate, short enough to never block:
+`src/App.tsx` renders a new `<HowItWorks />` after `<FinanceHero />`. The section gets `id="how-it-works"` so the hero nav anchor works.
 
-- `panel-rise` — 600ms: opacity 0 → 1, `translateY(8px) → 0`, `scale(0.985) → 1`. Used for the briefing panel itself when it mounts.
-- `section-in` — 500ms staggered: per-section fade + 6px rise. Each of the six briefing sections animates with a 70ms incremental delay so they cascade in like a document being typed out, not a list popping.
-- `shimmer` — 1.8s linear infinite: a soft champagne sheen that travels diagonally across loading skeletons.
-- `caret-blink` — 1.1s steps(2): a thin champagne caret on the active loading line.
+### File structure
 
-`motion-reduce:` variants disable all transforms and stagger; opacity-only fades remain for state legibility.
+New folder `src/components/how-it-works/`:
 
-## Panel mount + state transitions
+```text
+HowItWorks.tsx              — section orchestrator, scroll progress, sticky mobile CTA
+parts/
+  SectionHeader.tsx         — eyebrow + headline + subhead primitive
+  HowItWorksIntro.tsx       — S1 hero intro with animated rhythm loop
+  ProcessTimeline.tsx       — S2 sticky-left 5-step rhythm (desktop scroll-linked, mobile vertical)
+  ProcessStepVisual.tsx     — per-step right-rail visual (spreadsheet form, Plaid line, sort, briefing fill, calendar+agenda)
+  WhatYouDoVsWeDo.tsx       — S3 two-column comparison
+  MonthlyCycle.tsx          — S4 circular 4-week operating loop
+  BeforeAfter.tsx           — S5 split-screen with hover/scroll morph
+  SampleBriefingPreview.tsx — S6 tabbed briefing report
+  DifferenceTable.tsx       — S7 elevated comparison table
+  TrustSection.tsx          — S8 calm trust cards
+  FinalCTA.tsx              — S9 closing block with drifting report cards
+hooks/
+  useInViewProgress.ts      — IntersectionObserver + scroll progress helper
+  useReducedMotion.ts       — prefers-reduced-motion hook
+content.ts                  — all copy strings, step data, tab data, table rows in one file
+```
 
-- The panel mounts with `panel-rise`. The thin top rim brightens from 0 → 40% champagne over the same 600ms.
-- State swaps (`idle` → `loading` → `briefing`) cross-fade the panel body using a 280ms opacity dissolve. A keyed wrapper around the body forces the swap so React unmounts the previous state cleanly.
-- The status chip's label (Preview / Preparing / Ready) cross-fades on change (180ms); the dot color animates via `transition-colors` over 400ms instead of swapping instantly.
+Each part is a small focused component. `content.ts` keeps copy byte-accurate to the brief and easy to edit.
 
-## Idle state
+### Section-by-section approach
 
-- Replace the six static empty-state rows with skeleton placeholders: 1px champagne-tinted lines with the `shimmer` keyframe traveling across them at 4% opacity. Section labels stay legible; the line value is a moving sheen suggesting "data not yet read."
-- Each row stagger-fades in once on mount (70ms increments).
+**S1 Intro** — Left: eyebrow `HOW IT WORKS`, large editorial headline, subhead, primary CTA (`Apply for the Monthly Finance Desk`), secondary ghost link (`Generate Sample Finance Briefing`), trust microcopy. Right: a 4-node looping rhythm strip (Bank → Spreadsheet → Briefing → Review) where the active node glows champagne every 2.4s using `soft-pulse` + a sweeping hairline connector.
 
-## Loading state — the most important upgrade
+**S2 Process Timeline** — Desktop: two-column. Left column sticks (`position: sticky`) with the 5 step labels stacked vertically; the active step is set by IntersectionObserver as each right-column visual scrolls past mid-viewport. Right column is a tall stack of 5 visuals, each ~90vh, with `panel-rise` on enter:
+- 01 spreadsheet grid assembling from transaction fragments (CSS grid with staggered `section-in`)
+- 02 secure Plaid connection line: bank card on left, desk module on right, animated dashed SVG path drawing in
+- 03 rows sorting into category lanes (revenue / payroll / software / contractors / tax reserve / owner draw / subscriptions) — each row translates from a "raw" column to its labeled lane with stagger
+- 04 briefing panel that fills line-by-line (reuses the same shimmer/cascade vocabulary as the hero briefing) — visually the most important step
+- 05 calendar tile + agenda card side by side
+Mobile: collapses to a single-column vertical timeline with a champagne hairline rail and dot markers; visuals shrink but keep the same motion.
 
-The current loading list jumps between steps. Rework it as a calm progression:
+**S3 What You Do vs What We Do** — Two glass cards side by side with hairline divider down the middle. Champagne checkmarks on the "Finance Desk" side, neutral dashes on "What you do" side to signal it's lighter work. CTA below: `See a Sample Briefing` (scrolls to S6).
 
-- A thin champagne progress bar at the top of the panel body (1px tall) advances in four equal segments, transitioning width over the same 750ms as the step timer with the shared easing.
-- Each line:
-  - Pending: 25% opacity, no caret.
-  - Active: opacity rises to 100% over 240ms, dot pulses softly (custom slow pulse, 1.6s, opacity 60% → 100%), a thin caret blinks at the end of the line.
-  - Done: opacity settles at 55%, dot fills champagne, a 12px hairline tick draws in (`stroke-dashoffset` from 12 → 0 over 220ms).
-- Replace the "Preparing" chip with a small inline counter `01 / 04` that ticks with the step, also cross-faded.
+**S4 Monthly Cycle** — Circular SVG ring with 4 nodes at 12/3/6/9 positions, labeled Week 1–4. A champagne arc traces around the ring on scroll (stroke-dashoffset tied to in-view progress). Center label morphs through the four weeks then settles on `Clearer decisions for the next month.` Below: the discipline conversion line.
 
-## Briefing state
+**S5 Before/After** — Split-screen with a vertical draggable/scroll-linked divider. Left half desaturated cool grey with the "before" bullets; right half full color with champagne accents and "after" bullets. On hover (desktop) or scroll-into-view (mobile), the divider sweeps right to reveal "after." Closing emotional line centered below.
 
-- The full panel body fades in (280ms), then sections cascade via `section-in` with the 70ms stagger. Total cascade: ~6 × 70ms + 500ms ≈ <1s — feels intentional, not slow.
-- Section labels animate the underline rim (1px champagne) from `scaleX(0)` → `scaleX(1)` left-origin over 500ms, only on first render.
-- Dollar figures in section bodies get a one-time `text-shadow` lift (champagne at 30% → 0%) over 800ms so the eye lands on them without movement.
+**S6 Sample Briefing Preview** — Full-width premium report card with horizontal tab pills: Cash Movement / Revenue Trend / Expense Pattern / Unusual Spend / Questions to Review / Decisions to Consider. Tab switch fades content with the same 280ms dissolve from the hero. Each panel has a short paragraph + 2–4 hairline rows with sample numbers. CTA inside the card: `Generate My Sample Finance Briefing` (scrolls to hero composer). Mobile: tabs become a horizontal scroll-pill row.
 
-## Post-demo CTA
+**S7 Difference Table** — Rows: Bookkeeper / Dashboard / Spreadsheet Template / Fractional CFO / **Monthly Finance Desk** (highlighted with a champagne left rim and slightly brighter card background). Columns: What it helps with / What it usually misses / Best fit. Sticky first column on mobile horizontal scroll.
 
-- Reveals 250ms after the cascade finishes with `panel-rise` (shorter: 450ms, 6px translate).
-- The primary button gets a very slow ambient sheen — the same `shimmer` keyframe at 6s duration, 8% opacity — so it reads as "alive" without flashing. Pauses on hover (replaced by the existing shadow lift).
+**S8 Trust** — 5 small glass cards in a responsive grid; calm copy, no compliance badges. Subtle champagne hairlines only.
 
-## Composer + nav (light touches only)
+**S9 Final CTA** — Large centered headline + subhead. Background: 3–4 ghost briefing cards drifting slowly using `ghost-drift` at low opacity. Primary CTA (champagne fill, shimmer-slow sheen), secondary CTA (ghost), tertiary text link `Start with Free Templates`. Microcopy underneath.
 
-- Composer focus ring transitions border + inner glow over 400ms (already 300ms — bump to 400ms with shared easing).
-- The right-side ghost briefing-card silhouette drifts ±4px on a 16s ease-in-out loop. Pauses under `prefers-reduced-motion`.
-- Nothing else on the page moves on scroll; this is a hero, not a parallax demo.
+### Interactions
 
-## Implementation
+- **Scroll-linked step progression** — `useInViewProgress` returns the active step index from a list of refs; left sticky column highlights the matching label and animates a champagne progress bar down the rail.
+- **Briefing fill animation** — reuses existing `section-in` stagger; triggers once when S2-step-04 or S6 enters viewport.
+- **Hover** — cards: `transition-all duration-400 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/40 hover:shadow-[0_8px_40px_-12px_rgba(217,190,130,0.18)]`.
+- **Primary CTA hover** — champagne gradient brightens, `shimmer-slow` sheen sweeps across.
+- **Mobile sticky CTA** — fixed bottom bar appears after the hero scrolls out (IntersectionObserver on hero sentinel); shows `Generate Sample Briefing` until S6, then swaps to `Apply for the Monthly Finance Desk`. Hidden on `md:` and up.
+- **Reduced motion** — `useReducedMotion` short-circuits all keyframe animations to simple opacity fades; no transforms, no shimmer, no drift.
+- **Keyboard a11y** — tabs use `role="tablist"`/`role="tab"` with arrow-key navigation; all CTAs are real `<button>`/`<a>`; focus rings use champagne ring tokens.
 
-- Extend `tailwind.config.ts` `keyframes`/`animation` with the four entries above and a `transition-timing-function` token `--ease-cinema`.
-- All changes are inside `src/components/hero/FinanceHero.tsx` (panel, loader, sections, post-demo CTA). No new files.
-- No copy changes anywhere. No layout changes. No new dependencies.
+### Tokens & styling
 
-## Acceptance
+All colors, shadows, glows come from existing Tailwind tokens (`charcoal-*`, `champagne-*`, `bone`). One new semantic addition only if needed: a `green-signal` token for the "deep green for healthy financial movement" — added to `tailwind.config.ts` as `green: { signal: "#3F7A5E" }` and used sparingly (cash-positive deltas, after-state accents). No other token changes.
 
-- Panel mount, state swap, loading progression, and briefing cascade all use the same easing and feel like one motion language.
-- Loading no longer "jumps" — there's a continuous progress bar plus per-line activation.
-- Reduced-motion users see opacity-only transitions, no transforms, no shimmer, no caret blink.
-- Total briefing reveal under 1s; nothing loops indefinitely except the very low-amplitude ambient sheen on the primary CTA and ghost card drift.
-- No motion competes with reading the copy.
+### Out of scope
+
+- No backend wiring; the inline `Generate My Sample Finance Briefing` CTA scrolls to the existing hero composer rather than calling the edge function from S6.
+- No new dependencies (no Framer Motion, no GSAP) — restraint matches the established motion vocabulary.
+- Existing files outside `src/App.tsx` and `tailwind.config.ts` (one color token) are untouched.
