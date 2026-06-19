@@ -1,61 +1,52 @@
-/**
- * HICKORY & ROSE — Navigation UI/UX Persona
- * 
- * DECISION-MAKING REFERENCE ONLY. Does not render anything.
- * All navigation design decisions should be filtered through this persona
- * and the Hickory & Rose brand identity (refined rustic elegance, calm luxury).
- */
+# Navigation — Visual Rules
 
-export const NAV_PERSONA = {
-  expertise: "Senior UI/UX architect specializing in luxury wedding and event planning navigation patterns",
+**DECISION-MAKING REFERENCE ONLY. Does not render anything.**
 
-  principles: {
-    clarity: "Navigation must communicate site structure in under 2 seconds",
-    hierarchy: "Primary CTA (Inquire) must be visually distinct from navigation links",
-    consistency: "Navigation behavior must be predictable across all pages and breakpoints",
-    conversion: "Every nav state should subtly guide toward inquiry — the primary conversion action",
-    trust: "Navigation design signals professionalism — sloppy nav = sloppy planner perception",
-    calm: "Navigation should feel calm and editorial — reflecting Hickory & Rose's brand promise",
-  },
+---
 
-  decisions: {
-    stickyBehavior: {
-      rule: "Sticky nav on scroll — reduces friction for long pages",
-      rationale: "Wedding planning clients browse extensively; persistent access to CTA and key pages is essential",
-    },
-    mobilePattern: {
-      rule: "Hamburger menu with full-screen overlay on mobile",
-      rationale: "Clean mobile experience; overlay creates focus and feels intentional — matching the calm luxury brand",
-    },
-    activeState: {
-      rule: "Subtle underline or color shift — never heavy borders or background fills",
-      rationale: "Active states should inform, not distract. Refined restraint matches brand identity",
-    },
-    ctaPlacement: {
-      rule: "Primary CTA ('Inquire') as right-aligned button in nav",
-      rationale: "Separates action from exploration; always accessible for Polished Paige when she's ready",
-    },
-    transparency: {
-      rule: "Transparent nav on hero sections; solid on scroll and inner pages",
-      rationale: "Maximizes hero impact (portfolio imagery) while maintaining readability on content pages",
-    },
-    spacing: {
-      rule: "Generous horizontal spacing between nav items; comfortable click/tap targets",
-      rationale: "Prevents misclicks; communicates quality through breathing room — a luxury signal",
-    },
-    dropdowns: {
-      rule: "Use sparingly — only if service categories (day-of, partial, full-service) need sub-navigation",
-      rationale: "Flat navigation is faster and clearer; Polished Paige has decision fatigue — don't add more",
-    },
-  },
+## Surface
 
-  antiPatterns: [
-    "Mega menus for a wedding planning site — unnecessary complexity",
-    "Nav items that compete visually with the Inquire CTA",
-    "Animated hamburger icons that feel playful when the brand is calm and editorial",
-    "Too many nav items (max 6-7 including CTA)",
-    "Nav that disappears on scroll without a way to re-access",
-    "Inconsistent nav between pages",
-    "Overly trendy nav patterns that won't feel timeless",
-  ],
-} as const;
+- Background: translucent near-black (`hsl(220 15% 6% / 0.7)`) with
+  backdrop-blur 12px when scrolled past 24px. Fully transparent at
+  top of page.
+- Bottom border: 1px hairline `hsl(45 15% 90% / 0.06)` only when
+  scrolled.
+- Height: 72px desktop, 64px tablet, 56px mobile.
+- Max content width: 1280px, centered, with 32px horizontal padding
+  (16px on mobile).
+
+## Logo
+
+- Wordmark in editorial sans (see `ui-visual.md`).
+- 16px desktop, weight 500, letter-spacing -0.01em.
+- Color: warm white `hsl(45 25% 96%)`.
+
+## Links
+
+- 14px, weight 450, letter-spacing 0.02em.
+- Color: `hsl(45 10% 75%)` resting → `hsl(45 25% 96%)` hover.
+- Active section: 1px underline 4px below baseline, champagne
+  `hsl(40 55% 70%)`, animates in over 180ms.
+- Gap: 32px between links desktop, stacked on mobile.
+
+## Primary CTA — "Apply for Premium"
+
+- Background: champagne `hsl(40 55% 70%)`.
+- Text: near-black `hsl(220 15% 8%)`, weight 500, 13px, uppercase, letter-spacing 0.08em.
+- Padding: 12px 20px. Border-radius: 4px (sharp, not pill).
+- Hover: lift 1px, shadow `0 8px 24px hsl(40 55% 70% / 0.25)`.
+- No glow, no gradient, no shimmer.
+
+## Mobile sheet
+
+- Slide-in from right, 320px wide, near-black background.
+- Links stack with 24px gap, 18px font size.
+- CTA pinned to bottom of sheet.
+- Close button top-right, no icon, just "Close" in 13px.
+
+## Motion
+
+- Nav fade-in on first paint over 240ms.
+- Background blur transition on scroll: 180ms ease-out.
+- Never animate on hover beyond opacity/transform — no color shimmer,
+  no slide-underline-on-hover.

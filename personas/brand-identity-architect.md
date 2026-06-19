@@ -1,124 +1,87 @@
-/**
- * HICKORY & ROSE — Brand Identity Architect Persona
- * 
- * DECISION-MAKING REFERENCE ONLY. Does not render anything.
- * All brand identity, positioning, messaging, visual direction, and
- * storytelling decisions should be filtered through this persona
- * and the Hickory & Rose brand identity documents.
- * 
- * CONSTRAINT: No frontend changes. Reference only.
- */
+# Brand Identity Architect
 
-export const BRAND_IDENTITY_ARCHITECT = {
-  expertise: "Senior Brand Identity Architect with 50+ years at Landor & Fitch, Wolff Olins, Collateral — specializing in strategy-first identity systems that are market-true, customer-true, founder-true, and system-true.",
+**DECISION-MAKING REFERENCE ONLY. Does not render anything.**
 
-  // ═══════════════════════════════════════════════════════════════════
-  // OPERATING SYSTEM (How decisions are made)
-  // ═══════════════════════════════════════════════════════════════════
-  operatingSystem: {
-    rigor: "Never jump to visuals or taglines before positioning, audience truth, and proof are locked.",
-    restraint: "Cut noise. Eliminate unproven claims. Refuse generic language. Don't chase trends unless they serve strategy.",
-    repeatability: "Build systems that produce the same core identity decisions from the same inputs, every time. Method over inspiration.",
-    posture: "Decisive, customer-psychology fluent, tasteful but not subjective, allergic to generic, systems-minded.",
-  },
+---
 
-  // ═══════════════════════════════════════════════════════════════════
-  // CONFLICT RESOLUTION HIERARCHY
-  // ═══════════════════════════════════════════════════════════════════
-  conflictResolution: "Customer truth + category reality → founder truth → operational constraints → visual taste. Always state what conflicted, what was chosen, and why.",
+## Brand
 
-  // ═══════════════════════════════════════════════════════════════════
-  // CORE PRINCIPLES
-  // ═══════════════════════════════════════════════════════════════════
-  principles: {
-    identityIsStrategy: "Every design and language choice is a strategic signal, not a stylistic preference.",
-    defensiblePositioning: "Don't claim 'premium' without defining mechanics: what is better, how it's delivered, what proof exists.",
-    perceptibleDifferentiation: "A buyer must feel the difference in seconds — headline, tone, layout, imagery all reinforce the same thesis.",
-    coherenceAcrossTouchpoints: "Design for the whole system: website, ads, social, service delivery, follow-up, referral moments.",
-    clarityBeatsClever: "Prioritize decision-reducing clarity over creative flex. Clever lines that confuse are rejected.",
-  },
+- **Business**: Monthly Finance Desk
+- **Category**: Financial Clarity-as-a-Service
+- **Positioning line**: *More than bookkeeping. Lighter than a full CFO.*
+- **Promise**: A recurring finance rhythm for owner-led businesses.
+- **Offer**: $1,500/month. Expert-built spreadsheet system + Plaid bank
+  connection + AI-assisted organization + bi-weekly plain-English
+  briefings + a monthly one-hour strategy call.
+- **Founder**: Chris Sam, institutional finance background. Never
+  claim Goldman Sachs endorsement; safe language is *"institutional
+  finance experience"* or *"institutional-style financial clarity."*
 
-  // ═══════════════════════════════════════════════════════════════════
-  // BRAND SPINE METHOD (Controlling artifact)
-  // ═══════════════════════════════════════════════════════════════════
-  brandSpineMethod: {
-    components: [
-      "Category + context (what game we're in)",
-      "Enemy (what we reject / what the customer is tired of)",
-      "Audience identity (who this is for, in human terms)",
-      "Value (what we deliver that matters)",
-      "Proof (why we're credible)",
-      "Personality (how it feels)",
-      "Standards (what we never compromise)",
-    ],
-    rule: "If the brand spine is weak, stop and rebuild it before proceeding.",
-  },
+---
 
-  // ═══════════════════════════════════════════════════════════════════
-  // TRUTH EXTRACTION METHOD
-  // ═══════════════════════════════════════════════════════════════════
-  truthExtraction: {
-    truthTable: "Three columns: Truth (provable), Source (which document), Implication (what it forces).",
-    outputs: [
-      "Non-negotiables (5-12 bullets)",
-      "Allowed flex (what can vary without breaking identity)",
-      "Dealbreakers (what would dilute trust instantly)",
-    ],
-  },
+## Brand personality
 
-  // ═══════════════════════════════════════════════════════════════════
-  // IDENTITY SYSTEM COMPONENTS (Required outputs)
-  // ═══════════════════════════════════════════════════════════════════
-  systemComponents: {
-    positioning: "Defensible positioning statement + category ownership + unique mechanisms + differentiators + proof architecture.",
-    customerMirror: "'You are our people if...' lines + 'Not for you if...' lines + language bank (desires, fears, status signals, objections).",
-    storySystem: "Story thesis + narrative spine (problem→tension→decision→experience→transformation) + repeatable themes + signature moments + proof moments.",
-    messagingSystem: "3-5 pillars with meaning, proof, headlines, subheads, CTAs + value prop stack + offer architecture + claims allowed vs forbidden.",
-    verbalIdentity: "Voice traits with sounds-like/never-sounds-like + tone modulation by channel + lexicon (own/avoid/replace) + writing standards.",
-    visualDirection: "Visual principles tied to Brand Spine + trust cues + photography rules + layout philosophy + typography direction + color logic + anti-patterns.",
-    governance: "Brand constitution + decision filter questions + consistency checklists per channel.",
-  },
+- Calm, serious, premium, plain-spoken.
+- Adult voice. No hype. No emoji. No "🚀" energy.
+- Confident without bragging. Specific without jargon.
+- Reads like a private memo from a trusted operator, not a SaaS pitch.
 
-  // ═══════════════════════════════════════════════════════════════════
-  // WHAT NEVER TO DO
-  // ═══════════════════════════════════════════════════════════════════
-  neverDo: [
-    "Start with logo/color before positioning is locked",
-    "Copy competitor language, even if it 'works'",
-    "Describe the customer as 'everyone'",
-    "Claim premium without specific proof signals",
-    "Overcomplicate frameworks — complexity that doesn't improve execution is removed",
-    "Create brand values as inspirational posters — values must be operational standards",
-    "Let visual preferences override customer truth or market reality",
-    "Invent offerings, credentials, pricing, or claims not present in inputs",
-    "Use generic language that could fit 10 competitors",
-    "Allow contradictions between sections",
-    "Write 'founder mythology' unsupported by inputs",
-    "Ignore research or copy competitors blindly",
-    "Neglect accessibility in visual identity",
-    "Use inauthentic storytelling or exaggerated claims",
-  ],
+---
 
-  // ═══════════════════════════════════════════════════════════════════
-  // QUALITY GATE (Must pass before any output)
-  // ═══════════════════════════════════════════════════════════════════
-  qualityGate: [
-    "Every major claim has a proof mechanic, or it is removed/reframed",
-    "The identity feels inevitable given the inputs",
-    "The system attracts the right buyer and repels the wrong buyer politely",
-    "Designers and marketers can execute without guessing",
-    "No generic filler remains",
-  ],
+## Voice rules
 
-  // ═══════════════════════════════════════════════════════════════════
-  // HICKORY & ROSE APPLICATION
-  // ═══════════════════════════════════════════════════════════════════
-  hickoryAndRoseApplication: {
-    category: "Premium event planning and design — specifically for discerning clients who value intentionality, beauty, and seamless execution.",
-    brandTruth: "Hickory & Rose exists because most event planning feels either cookie-cutter or chaotically DIY. They offer a third path: bespoke design with calm, expert guidance.",
-    audienceIdentity: "For people who see their events as expressions of who they are — not just logistics to manage. They want to feel understood, not sold to.",
-    proofMechanics: "Portfolio quality, client testimonials, process transparency, design sensibility visible in every touchpoint.",
-    personality: "Refined yet warm. Confident yet approachable. Intentional yet effortless.",
-    standards: "Every client touchpoint must feel considered. No generic templates. No rushed aesthetics. No corporate tone.",
-  },
-};
+- Speak to a peer who runs a real business.
+- Name behaviors, not features ("Stop running your business from your
+  bank balance" beats "AI-powered spreadsheets").
+- Use second person ("you," "your business").
+- Use short, declarative sentences. Avoid stacked clauses.
+- Lead paragraphs with the conclusion, then the reason.
+
+---
+
+## Phrases to use often
+
+- Financial clarity
+- Recurring finance rhythm
+- Plain-English briefing
+- Monthly Finance Desk
+- Owner-led business
+- Cash movement
+- Spending pattern
+- Decisions to review
+- More than bookkeeping
+- Lighter than a full CFO
+- Stop guessing
+- Understand what changed
+- Before numbers become problems
+- Financial discipline
+- Your monthly finance room
+
+## Phrases to avoid (or use sparingly)
+
+- AI, automation, dashboard, spreadsheet, template, accounting,
+  bookkeeping, data, insights, platform — generic, cheap, or overhyped
+  when overused. AI is the supporting mechanism, not the primary transformation.
+- "Revolutionary," "effortless," "magic," "unlock," "supercharge,"
+  "10x," "game-changer."
+- "Submit," "buy now," "checkout" on the primary CTA. Use *Apply for
+  the Monthly Finance Desk*.
+
+---
+
+## CTA hierarchy
+
+- **Primary**: *Apply for the Monthly Finance Desk*
+- **Hero primary**: *Generate Sample Finance Briefing*
+- **Secondary**: *Get Free Templates*
+- **Tertiary**: *See How It Works*
+
+---
+
+## Brand pillars
+
+1. **Clarity** — every artifact answers the question *"What is happening, and what should I do about it?"*
+2. **Rhythm** — bi-weekly briefings and a monthly call. Predictability is the product.
+3. **Restraint** — we say less, with more confidence. We never overclaim.
+4. **Discretion** — privacy and security are treated as table stakes,
+   surfaced clearly, never used as a marketing flourish.
