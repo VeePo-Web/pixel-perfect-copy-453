@@ -21,7 +21,7 @@ export default function MonthlyCycle() {
       <div ref={ref} className="mt-14 grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_auto_1fr]">
         {/* Left intro list */}
         <ul className="space-y-4 lg:text-right">
-          {c.weeks.slice(0, 2).map((w, i) => (
+          {c.weeks.slice(0, 2).map((w) => (
             <li key={w.w}>
               <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">{w.w}</div>
               <div className="mt-1 text-[15px] text-bone/85">{w.t}</div>
