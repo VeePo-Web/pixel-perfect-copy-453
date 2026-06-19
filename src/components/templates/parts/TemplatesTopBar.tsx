@@ -1,4 +1,4 @@
-type Props = { currentPath?: "templates" | "pricing" | "sample-briefing" | "home" };
+type Props = { currentPath?: "templates" | "pricing" | "sample-briefing" | "compare" | "home" };
 
 export default function TemplatesTopBar({ currentPath = "templates" }: Props) {
   const link = (label: string, href: string, active = false) => (
@@ -22,6 +22,7 @@ export default function TemplatesTopBar({ currentPath = "templates" }: Props) {
         </a>
         <nav className="flex items-center gap-5">
           {link("Templates", "#/templates", currentPath === "templates")}
+          {link("Compare", "#/compare", currentPath === "compare")}
           {link("Sample Briefing", "#/sample-briefing", currentPath === "sample-briefing")}
           {link("Pricing", "#/pricing", currentPath === "pricing")}
           <a
