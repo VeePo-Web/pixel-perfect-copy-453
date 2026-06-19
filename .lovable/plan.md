@@ -1,113 +1,129 @@
-## Plan: Application Funnel — `/apply`
 
-Build a 6-screen premium application funnel (landing + 5 steps + success) that lives on the existing site and matches the established dark/champagne/green token system. Same restraint as the hero and "How It Works" — no new heavyweight dependencies (no Framer Motion, no router library), reuses the existing `panel-rise` / `section-in` / `ease-cinema` motion vocabulary.
+# Sample Briefing Page — Implementation Plan
 
-### Routing
+A new product-led page at `#/sample-briefing` that lets Claire interact with a realistic bi-weekly finance briefing, then converts her toward the Monthly Finance Desk application. Built to match the existing dark, editorial system already shipped in the hero, How It Works, and Apply funnel.
 
-The project has no router today. To keep the dependency footprint flat, the funnel is mounted via a **hash route**: when `window.location.hash` starts with `#/apply`, the new `<ApplicationFunnel />` component renders full-screen and the home content (`FinanceHero` + `HowItWorks`) is hidden. `#/apply/thank-you` renders the success state. A tiny `useHashRoute` hook listens to `hashchange`. All existing CTAs that point to `#apply` are updated to `#/apply` so they enter the funnel.
+## Scope
 
-This avoids `react-router-dom` install while still giving real, shareable URLs.
+- Add `#/sample-briefing` to the existing hash router in `src/App.tsx` (no new routing library).
+- Build the page as a self-contained module under `src/components/sample-briefing/`.
+- Reuse existing tokens (`background`, `foreground`, `green.signal`, `green.deep`, champagne/gold accents) and motion utilities (`fade-in`, `scale-in`, `useInView`, `useReducedMotion`) from the How It Works module — no new dependencies.
+- All sample data is static/local. No backend, no AI call. "Generate" is a scripted reveal.
+- Update CTAs across hero / How It Works / Apply landing to link to `#/sample-briefing` where the brief specifies "Generate Sample Briefing".
 
-### File structure
+## Page Architecture
 
-New folder `src/components/apply/`:
+Route: `#/sample-briefing`
+Top component: `SampleBriefingPage`
 
 ```text
-ApplicationFunnel.tsx         — page shell, step state machine, layout
-content.ts                    — all copy, option lists, chips
-hooks/
-  useHashRoute.ts             — tiny hash router
-  useApplicationState.ts      — controlled form state + localStorage persistence + validation
-parts/
-  ApplicationHeader.tsx       — minimal top bar (logo + "Application" label + secondary link)
-  FunnelProgress.tsx          — premium 5-step indicator (numbered, hairline rail, active glow)
-  ApplicationStepShell.tsx    — left-column layout primitive (eyebrow, headline, sub, slot, footer nav)
-  StickyFinancePreview.tsx    — right-column sticky preview panel that updates per step
-  SelectableCard.tsx          — single-select large card (keyboard, aria-pressed, glow on select)
-  MultiSelectCardGroup.tsx    — multi-select cards (checkbox semantics)
-  TextField.tsx               — labeled text/email input with calm error
-  TextAreaWithChips.tsx       — textarea + suggested chips that append to text
-  FitSignalCard.tsx           — small reassurance card (used for low-revenue + non-budget paths)
-  ApplicationSummary.tsx      — review cards with edit links
-  TrustReassuranceBlock.tsx   — "what happens after you apply" block
-  StepLanding.tsx             — Step 0 hero
-  StepFit.tsx                 — Step 1
-  StepSetup.tsx               — Step 2
-  StepDecisions.tsx           — Step 3
-  StepReadiness.tsx           — Step 4
-  StepReview.tsx              — Step 5 + submit
-  SubmissionLoading.tsx       — premium loader (3 rotating status lines, hairline progress)
-  SuccessPage.tsx             — /apply/thank-you
-schema.ts                     — zod schemas per step + full submission
+SampleBriefingHero            (1) intro + prompt + demo chips
+  BusinessPromptInput
+  DemoBusinessSelector
+  BriefingPanelPreview        (skeleton -> generated)
+    BriefingGenerationState   (2) restrained loader
+BriefingReportShell           (3) full report with sticky nav
+  StickyReportNav              (desktop side rail)
+  ExecutiveSummaryCard         (4)
+  CashMovementModule           (5) SVG line chart
+  RevenueTrendModule           (6) SVG line + concentration meter
+  ExpensePatternModule         (7) SVG donut + category cards
+  UnusualSpendModule           (8)
+  QuestionsToReviewModule      (9)
+  DecisionsToConsiderModule    (10)
+  MonthlyStrategyFocus         (11)
+RawDataVsClarity              (12) scroll-linked left->right transform
+BriefingTabs                  (13) Cash / Revenue / Expenses / Risk / Questions / Decisions
+WhatThisIsNot                 (14)
+PrivacyTrustBlock             (15)
+SampleBriefingCTA             (16)
+TemplateBridge                (17)
+MobileStickyCTA               (state-aware: pre/post generation)
 ```
 
-### Backend
+## Content & Data
 
-Add one migration that creates `public.applications`:
+`src/components/sample-briefing/content.ts` exports:
 
-- columns: `id uuid pk default gen_random_uuid()`, `created_at timestamptz default now()`, `first_name text`, `email text`, `business_name text`, `business_type text`, `revenue_range text`, `current_tools text[]`, `clarity_gap text`, `decisions text[]`, `clarity_outcome text`, `monthly_review text`, `budget_fit text`, `worth_it text`, `timeline text`, `consent boolean`
-- `GRANT INSERT ON public.applications TO anon, authenticated`; `GRANT ALL TO service_role`
-- RLS enabled; single policy `FOR INSERT TO anon, authenticated WITH CHECK (true)` (write-only public form). No `SELECT` policy — applications are not readable from the client.
-- Light input length caps enforced both client-side (zod) and server-side (column `text` is fine; zod caps long fields at 2000 chars, emails at 255).
+- `demoBusinesses` — 6 industries (Agency, Clinic, Trades, Restaurant, E-commerce, Professional Services). Each carries: `id`, `label`, `prefillPrompt`, `reportTitle`, `period`, `cash`, `revenue`, `expenses`, `cashDelta`, `revenueDelta`, `expensesDelta`, `expenseMix[]`, `executiveSummary`, `unusualSpend[]`, `questions[]`, `decisions[]`, `monthlyFocus[]`, `cashSeries[]`, `revenueSeries[]`, `mainRisk`.
+- `tabContent` — per-tab metric, interpretation, why it matters, monthly call question (generated from active business).
+- `templateBridgeItems`, `whatThisIsNot`, `privacyCards`, `loaderLines`.
 
-Submission path: client-side zod validation → `supabase.from('applications').insert(...)` → on success, navigate to `#/apply/thank-you`. No edge function needed (keeps scope minimal). Errors surface in the calm `ApplicationErrorMessage` style.
+State: `useBriefingState()` hook holds `selectedBusinessId`, `prompt`, `status: 'idle'|'loading'|'ready'`, `revealedAt`. Selecting a chip sets prompt + business; clicking Generate transitions `idle -> loading` (1.6s, scripted loader lines) -> `ready` and scrolls report into view (respects reduced motion).
 
-### Layout & visual
+## Interactions
 
-**Desktop (≥ lg)** — Two-column grid inside a max-w-7xl shell:
-- Left (7/12): `ApplicationStepShell` — eyebrow `APPLICATION · 0X / 05`, large editorial headline, sub, fields, footer with Back / Continue
-- Right (5/12): sticky `StickyFinancePreview` that morphs per step (landing shows the $1,500/month rhythm card; Step 1 shows "Likely fit signal"; Step 2 shows "Financial Clarity Gap"; Step 3 shows "First Briefing Focus" personalized by selected decisions; Step 4 shows "Readiness Signals"; Step 5 shows full mini-summary).
+- **Demo selector**: chip row, keyboard arrow nav, selected state with champagne border.
+- **Prompt**: textarea with helper example and inline "Use Demo Business Data" link.
+- **Generation**: skeleton panels morph to populated cards; loader lines fade in/out sequentially. No spinners, no emojis.
+- **Sticky report nav** (desktop ≥lg): left rail with 8 anchors, active item tracked via IntersectionObserver.
+- **Scroll-reveal**: each module fades + 8px rise on first intersect via existing `useInView`.
+- **Tabs**: roving tabindex, ArrowLeft/Right, Home/End, `role="tablist"`. Mobile = horizontal scroll pills with snap.
+- **Raw vs Clarity**: two columns; on scroll progress 0→1, left "messy" cards desaturate and slide slightly while right "clarity" cards lift and brighten. Pure CSS transform driven by a single scroll listener (no GSAP).
+- **CTA timing**: primary "Apply" CTA is muted in hero, becomes prominent after report `status==='ready'` (executive summary onward). Mobile sticky CTA swaps copy on the same trigger.
+- **Hover**: cards `translate-y-[-2px]`, hairline border brightens to champagne/20, soft inner glow.
+- **Reduced motion**: disables transforms, scroll-linked transitions, and loader timing (jumps straight to ready).
 
-**Mobile** — Single column. `FunnelProgress` at top, fields in the middle, sticky bottom `Continue` bar (champagne fill). The right-side preview collapses into an expandable "What happens next?" disclosure between fields and the sticky bar.
+## Charts
 
-**Header** — Tiny: "Monthly Finance Desk" wordmark left, "Application" label center (hidden on mobile), `Not ready? Generate Sample Briefing` link right (points to `#top`).
+All SVG, hand-rolled, no chart library:
 
-**Progress** — 5 numbered chips on a hairline rail. Completed = champagne dot; active = champagne ring + glow; upcoming = bone/15 dot. Step labels visible on ≥ md.
+- `MiniLineChart` — cash & revenue series, gradient stroke, soft area fill, last-point marker.
+- `Donut` — expense mix, 5 slices with thin gaps, center label.
+- `ConcentrationMeter` — horizontal bar showing top-3 client share.
 
-### Step behavior
+Sized to remain legible on mobile (min 280×140), simplified to a single sparkline + KPI on <sm.
 
-- **Step 0 Landing** — Hero copy + primary CTA (`Start Application` → advances to step 1) + secondary (`Generate Sample Finance Briefing` → `#top`) + tertiary (`Start with Free Templates` → `#templates` placeholder).
-- **Step 1 Fit** — First name, work email, business name (text), business type (10 selectable cards in a 2-col grid), revenue (6 cards). Sub-$30K shows `FitSignalCard` with two CTAs (`Continue Application`, `Start With Free Templates`). ≥$30K shows positive note.
-- **Step 2 Setup** — Multi-select tools (10 cards) + `TextAreaWithChips` for clarity gap (chip click appends as a new sentence if not already present).
-- **Step 3 Decisions** — 10 decision cards + `clarity outcome` textarea. After ≥1 decision, the right preview re-renders the "First Briefing Focus" list dynamically.
-- **Step 4 Readiness** — 4 question groups; certain answers trigger inline reassurance text under the option group (no modal).
-- **Step 5 Review** — `ApplicationSummary` cards with "Edit" link per section (jumps back to that step preserving state). Consent checkbox required. `TrustReassuranceBlock` and submit button. `Save and Finish Later` button copies a resumable URL to clipboard (`#/apply?step=N`) and shows a toast.
+## Files to Create
 
-### Persistence
+```text
+src/components/sample-briefing/
+  SampleBriefingPage.tsx
+  content.ts
+  hooks/useBriefingState.ts
+  hooks/useActiveSection.ts
+  parts/SampleBriefingHero.tsx
+  parts/BusinessPromptInput.tsx
+  parts/DemoBusinessSelector.tsx
+  parts/BriefingPanelPreview.tsx
+  parts/BriefingGenerationState.tsx
+  parts/BriefingReportShell.tsx
+  parts/StickyReportNav.tsx
+  parts/ExecutiveSummaryCard.tsx
+  parts/CashMovementModule.tsx
+  parts/RevenueTrendModule.tsx
+  parts/ExpensePatternModule.tsx
+  parts/UnusualSpendModule.tsx
+  parts/QuestionsToReviewModule.tsx
+  parts/DecisionsToConsiderModule.tsx
+  parts/MonthlyStrategyFocus.tsx
+  parts/RawDataVsClarity.tsx
+  parts/BriefingTabs.tsx
+  parts/WhatThisIsNot.tsx
+  parts/PrivacyTrustBlock.tsx
+  parts/SampleBriefingCTA.tsx
+  parts/TemplateBridge.tsx
+  parts/MobileStickyCTA.tsx
+  charts/MiniLineChart.tsx
+  charts/Donut.tsx
+  charts/ConcentrationMeter.tsx
+```
 
-`useApplicationState` keeps the whole form object in React state and mirrors it to `localStorage` under `mfd:application:v1`. On hash route enter, state hydrates from storage. If a returning visitor lands on `#/apply` with persisted data, the landing step shows a small `Welcome back. Continue your Monthly Finance Desk application.` banner with a `Resume` button.
+## Files to Edit
 
-### Motion
+- `src/App.tsx` — add `#/sample-briefing` to hash router (alongside `/`, `/apply`, `/apply/thank-you`).
+- `src/components/hero/FinanceHero.tsx` — point "Generate Sample Briefing" CTA to `#/sample-briefing`.
+- `src/components/how-it-works/parts/SampleBriefingPreview.tsx` — add deep link to full sample page.
+- `src/components/apply/parts/ApplyHeader.tsx` (or equivalent) — "Not ready? Generate Sample Briefing" → `#/sample-briefing`.
 
-- Step transitions: 320ms cross-fade + 6px translate using a keyed wrapper (same dissolve as the hero state swaps).
-- Card hover: `hover:-translate-y-0.5 hover:border-champagne-200/40 hover:shadow-[0_8px_40px_-12px_rgba(217,190,130,0.18)]`.
-- Card selected: champagne 200/30 border + inner champagne 200/[0.04] tint + small champagne dot in the corner.
-- Submit loader: keyed status lines cycle through the three loading strings every 900ms while the insert is in flight; a 1px champagne hairline progresses left→right under the status.
-- All animations gated behind `motion-safe:` to honor `prefers-reduced-motion`.
+## Out of Scope
 
-### Accessibility
+- No backend, no real AI generation, no Plaid.
+- No new dependencies (no Framer Motion, no chart library).
+- No SEO meta beyond a basic `<title>` update via existing pattern.
+- Free templates remain a CTA only — no downloads wired up.
 
-- All inputs have visible labels; cards use `role="radio"` (single) or `role="checkbox"` (multi) inside `role="radiogroup"`/`role="group"` with arrow-key + space activation; selected state communicated via `aria-checked` plus visual ring (not color alone).
-- Errors rendered with `role="alert"` and warm amber (not red) hairline + text; copy from the spec.
-- Tab order: progress → fields top-to-bottom → back / continue.
-- Sticky mobile continue bar respects `env(safe-area-inset-bottom)`.
+## Verification
 
-### Success page
-
-`#/apply/thank-you` renders `SuccessPage`: large headline, confirmation card (4 lines), 5-step timeline (vertical hairline + champagne dot for the completed first step), primary CTA `Generate a Sample Finance Briefing` (→ `#top`), secondary `Explore Free Templates`. Optional `Schedule Intro Call` button omitted (no scheduling integration exists). "While You Wait" section with three quiet text-link cards. On mount, clears the persisted draft.
-
-### Out of scope
-
-- No email send on submission (relies on the row insert; future edge function can subscribe).
-- No real "Save and Finish Later" email link — `localStorage` resume + clipboard URL only.
-- No "Schedule Intro Call" CTA (no calendar integration).
-- No analytics events wired (component structure is event-ready).
-- No router library installed; hash routing only.
-
-### Files touched outside the new folder
-
-- `src/App.tsx` — when hash route starts with `#/apply`, render `<ApplicationFunnel />` and skip `FinanceHero`/`HowItWorks`.
-- `src/components/how-it-works/parts/FinalCTA.tsx`, `src/components/how-it-works/HowItWorks.tsx`, hero CTAs — update `#apply` → `#/apply`.
-- New Supabase migration for `applications` table.
-
-Nothing else changes.
+- Build passes.
+- Playwright run: load `#/sample-briefing`, click Agency chip, click Generate, screenshot before/after, verify sticky nav active states change on scroll, verify tabs keyboard navigation, verify mobile sticky CTA copy swap at 375×800.
