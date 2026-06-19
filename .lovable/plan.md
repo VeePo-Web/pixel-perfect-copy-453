@@ -1,67 +1,67 @@
-# Hero rebuild to match the master prompt
+# Motion polish for the briefing panel
 
-The current hero already nails most of this spec — exact copy, charcoal/champagne palette, two-column composition, briefing panel, loading sequence, AI-backed sample briefing, post-demo CTA. This plan only ships the deltas that bring it to the master-prompt bar.
+Tighten the panel's transitions and loading states to feel cinematic and premium without ever distracting from the copy. All motion respects `prefers-reduced-motion` and uses a shared easing/timing system so nothing feels ad-hoc.
 
-## Deltas
+## Motion system (added once, reused)
 
-### 1. Top navigation (new)
-Minimal, quiet, sits above the hero in the same dark surface. No CTA in the nav.
-- Left: `Monthly Finance Desk` wordmark
-- Right: `How It Works` · `Sample Briefing` · `Pricing` · `FAQ` as anchor links to `#how`, `#sample`, `#pricing`, `#faq` (sections don't exist yet — links scroll harmlessly, real sections land in later turns)
-- Mobile: wordmark + hamburger that opens a sheet with the same four links
-- Built as `src/components/hero/HeroNav.tsx`
+Add four keyframes to `tailwind.config.ts` and lean on a single easing curve (`cubic-bezier(0.22, 1, 0.36, 1)` — a calm "out-expo"). Durations stay long enough to read as deliberate, short enough to never block:
 
-### 2. Single primary CTA above the fold
-Master prompt is explicit: only `Generate Sample Finance Briefing` shows in the initial hero.
-- Remove the visible `Use Demo Business Data` button from the hero
-- Keep the demo-prefill behavior available as a small, low-emphasis ghost link beneath the example text: `Try demo business data` (looks like a text link, not a button). This preserves the useful affordance without competing as a second CTA. If you'd rather drop it entirely, say so and I will.
+- `panel-rise` — 600ms: opacity 0 → 1, `translateY(8px) → 0`, `scale(0.985) → 1`. Used for the briefing panel itself when it mounts.
+- `section-in` — 500ms staggered: per-section fade + 6px rise. Each of the six briefing sections animates with a 70ms incremental delay so they cascade in like a document being typed out, not a list popping.
+- `shimmer` — 1.8s linear infinite: a soft champagne sheen that travels diagonally across loading skeletons.
+- `caret-blink` — 1.1s steps(2): a thin champagne caret on the active loading line.
 
-### 3. Command-style prompt input with attached CTA
-Today the textarea and the CTA are separate blocks. Rebuild as one unified "finance command interface":
-- Single rounded container, dark translucent fill, thin champagne-tinted border, soft inner glow, faint outer radial highlight under the CTA corner
-- Textarea fills the left, CTA button sits attached on the right (desktop) or full-width below (mobile)
-- Focus state: border brightens to champagne, inner glow intensifies subtly
-- Placeholder and example/trust microcopy unchanged — exact copy preserved
+`motion-reduce:` variants disable all transforms and stagger; opacity-only fades remain for state legibility.
 
-### 4. Cinematic background
-Layer behind the whole hero section, fixed to the section, pointer-events none:
-- Base: near-black `#08080A` → charcoal radial wash
-- Faint 40px dot-matrix grid at ~4% opacity, masked to fade at edges
-- Two soft radial glows: champagne top-left, deep-green bottom-right, both very low alpha
-- One very faint blurred "floating UI fragment" — a single ghosted briefing-card silhouette behind the right column, ~6% opacity, no text legibility
-- No animation on the background beyond a slow 20s opacity drift on the glows (respects `prefers-reduced-motion`)
+## Panel mount + state transitions
 
-### 5. Briefing panel polish
-Current panel is good; tighten to "private financial briefing room":
-- Add a top-left meta row inside the panel: `MFD · BRIEFING 001` in tiny tracked uppercase, plus a date stamp `Period · Sample`
-- Replace the small green "Ready/Preparing/Preview" dot with a slimmer champagne-on-charcoal status chip
-- Dollar figures in the briefing body render in champagne weight-medium so the eye lands on numbers first
-- Thin 1px champagne rim on hover/focus within panel; no other motion
+- The panel mounts with `panel-rise`. The thin top rim brightens from 0 → 40% champagne over the same 600ms.
+- State swaps (`idle` → `loading` → `briefing`) cross-fade the panel body using a 280ms opacity dissolve. A keyed wrapper around the body forces the swap so React unmounts the previous state cleanly.
+- The status chip's label (Preview / Preparing / Ready) cross-fades on change (180ms); the dot color animates via `transition-colors` over 400ms instead of swapping instantly.
 
-### 6. Mobile copy variant wired up
-The `COPY.mobile` block already exists but isn't used. Switch to it under `md`:
-- Mobile headline stays full ("Stop Running…")
-- Subheadline swaps to the shorter mobile version
-- CTA label swaps to `Generate Sample Briefing`
-- Trust line swaps to `No bank connection required.`
-- Briefing panel renders below the composer (already does), collapses to a single preview card with a "Tap to expand" affordance until the CTA is clicked
+## Idle state
 
-### 7. Section ID + scroll target
-Wrap the hero in `<section id="top">` and add `#sample` anchor on the briefing panel so the nav links resolve.
+- Replace the six static empty-state rows with skeleton placeholders: 1px champagne-tinted lines with the `shimmer` keyframe traveling across them at 4% opacity. Section labels stay legible; the line value is a moving sheen suggesting "data not yet read."
+- Each row stagger-fades in once on mount (70ms increments).
 
-## Out of scope
+## Loading state — the most important upgrade
 
-- How It Works / Pricing / FAQ / Sample Briefing pages or sections (links scroll to `#` for now)
-- Real backend, application form, About/Story/Contact rewrites
-- Any 4-reel mechanic or video backdrop
-- Changing any of the locked copy strings
+The current loading list jumps between steps. Rework it as a calm progression:
+
+- A thin champagne progress bar at the top of the panel body (1px tall) advances in four equal segments, transitioning width over the same 750ms as the step timer with the shared easing.
+- Each line:
+  - Pending: 25% opacity, no caret.
+  - Active: opacity rises to 100% over 240ms, dot pulses softly (custom slow pulse, 1.6s, opacity 60% → 100%), a thin caret blinks at the end of the line.
+  - Done: opacity settles at 55%, dot fills champagne, a 12px hairline tick draws in (`stroke-dashoffset` from 12 → 0 over 220ms).
+- Replace the "Preparing" chip with a small inline counter `01 / 04` that ticks with the step, also cross-faded.
+
+## Briefing state
+
+- The full panel body fades in (280ms), then sections cascade via `section-in` with the 70ms stagger. Total cascade: ~6 × 70ms + 500ms ≈ <1s — feels intentional, not slow.
+- Section labels animate the underline rim (1px champagne) from `scaleX(0)` → `scaleX(1)` left-origin over 500ms, only on first render.
+- Dollar figures in section bodies get a one-time `text-shadow` lift (champagne at 30% → 0%) over 800ms so the eye lands on them without movement.
+
+## Post-demo CTA
+
+- Reveals 250ms after the cascade finishes with `panel-rise` (shorter: 450ms, 6px translate).
+- The primary button gets a very slow ambient sheen — the same `shimmer` keyframe at 6s duration, 8% opacity — so it reads as "alive" without flashing. Pauses on hover (replaced by the existing shadow lift).
+
+## Composer + nav (light touches only)
+
+- Composer focus ring transitions border + inner glow over 400ms (already 300ms — bump to 400ms with shared easing).
+- The right-side ghost briefing-card silhouette drifts ±4px on a 16s ease-in-out loop. Pauses under `prefers-reduced-motion`.
+- Nothing else on the page moves on scroll; this is a hero, not a parallax demo.
+
+## Implementation
+
+- Extend `tailwind.config.ts` `keyframes`/`animation` with the four entries above and a `transition-timing-function` token `--ease-cinema`.
+- All changes are inside `src/components/hero/FinanceHero.tsx` (panel, loader, sections, post-demo CTA). No new files.
+- No copy changes anywhere. No layout changes. No new dependencies.
 
 ## Acceptance
 
-- Above the fold shows exactly one primary CTA button
-- Nav renders with the four links and no nav CTA, both desktop and mobile
-- The prompt input and CTA read as a single unified command bar
-- Background reads as cinematic dark with dot grid + soft glows, no bright gradients
-- Mobile <768px uses the `COPY.mobile` strings for sub, CTA, trust
-- All existing copy strings remain byte-identical to what was approved
-- Briefing fetch + loading sequence + post-demo CTA continue to work
+- Panel mount, state swap, loading progression, and briefing cascade all use the same easing and feel like one motion language.
+- Loading no longer "jumps" — there's a continuous progress bar plus per-line activation.
+- Reduced-motion users see opacity-only transitions, no transforms, no shimmer, no caret blink.
+- Total briefing reveal under 1s; nothing loops indefinitely except the very low-amplitude ambient sheen on the primary CTA and ghost card drift.
+- No motion competes with reading the copy.
