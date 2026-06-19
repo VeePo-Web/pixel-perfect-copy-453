@@ -1,6 +1,8 @@
-type Props = { currentPath?: "templates" | "pricing" | "sample-briefing" | "compare" | "home" };
+type Props = {
+  currentPath?: "compare" | "templates" | "pricing" | "sample-briefing" | "home";
+};
 
-export default function TemplatesTopBar({ currentPath = "templates" }: Props) {
+export default function CompareTopBar({ currentPath = "compare" }: Props) {
   const link = (label: string, href: string, active = false) => (
     <a
       href={href}
@@ -21,9 +23,11 @@ export default function TemplatesTopBar({ currentPath = "templates" }: Props) {
           </span>
         </a>
         <nav className="flex items-center gap-5">
-          {link("Templates", "#/templates", currentPath === "templates")}
           {link("Compare", "#/compare", currentPath === "compare")}
-          {link("Sample Briefing", "#/sample-briefing", currentPath === "sample-briefing")}
+          {link("Templates", "#/templates", currentPath === "templates")}
+          <span className="hidden sm:inline">
+            {link("Sample Briefing", "#/sample-briefing", currentPath === "sample-briefing")}
+          </span>
           {link("Pricing", "#/pricing", currentPath === "pricing")}
           <a
             href="#/apply"

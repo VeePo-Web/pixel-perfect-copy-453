@@ -81,6 +81,12 @@ function TopBar() {
             Sample Briefing
           </a>
           <a
+            href="#/compare"
+            className="hidden text-bone/55 transition-colors hover:text-bone md:inline"
+          >
+            Compare
+          </a>
+          <a
             href="#/pricing"
             className="hidden text-bone/55 transition-colors hover:text-bone md:inline"
           >

@@ -1,94 +1,101 @@
-# Free Template Library — Implementation Plan
+# Comparison Hub — Implementation Plan
 
-> Note: this page already exists at `#/templates` from the previous turn. Re-approving this plan will rebuild/overwrite the same files. If you want changes (different sections, visual direction, copy, interactions), reply with the specifics and I'll plan that instead.
-
-A `#/templates` route mirroring the visual system, motion language, and conversion architecture already established by Apply, Sample Briefing, and Pricing. Static data only — email capture is a client-side success simulation that hands off to `#/sample-briefing` and `#/apply`.
+A `#/compare` route that mirrors the visual system, motion language, and conversion architecture of Apply, Sample Briefing, Pricing, and Templates. Static data only; the Fit Finder is local state, the comparison sub-pages are deferred (linked as section anchors within the hub, not separate routes) so this ships as one fast page without routing sprawl.
 
 ## Route & shell
 
-- `useHashRoute.ts` includes `"templates"`.
-- `src/App.tsx` renders `<FreeTemplateLibraryPage />` for that route.
-- Existing `#templates` anchors across Apply / Pricing / How-It-Works / Sample Briefing rewritten to `#/templates`.
-- `MobileStickyTemplateCTA` mounted by the page.
+- `useHashRoute.ts` adds `"compare"` to `ApplyRoute`, parses `#/compare`.
+- `src/App.tsx` renders `<ComparisonHubPage />` for that route.
+- Top bars on Sample Briefing, Pricing, Templates get a "Compare" link to `#/compare`.
 
 ## File layout
 
 ```text
-src/components/templates/
-  FreeTemplateLibraryPage.tsx
-  content.ts                 // templates[], categories, paths, faq, comparison, chips
-  analytics.ts               // track(event, payload) → window.dataLayer, never throws
+src/components/compare/
+  ComparisonHubPage.tsx
+  content.ts                 // options, fitFinder, useCases, faq, comparisonCards, pageIndex
+  analytics.ts               // defensive window.dataLayer push, never throws
   hooks/
-    useTemplateFilters.ts    // category + recommended-path highlight state
-    useLeadCaptureFlow.ts    // modal lifecycle + 750ms simulated send + sessionStorage flag
+    useFitFinder.ts          // 3 questions, recommendation derivation
   parts/
-    TemplatesTopBar.tsx
-    TemplateLibraryHero.tsx          // layered SpreadsheetPreview stack
-    PainToValueReframe.tsx           // before/after columns
-    TemplateCategoryFilters.tsx      // sticky, role=radiogroup, arrow-key nav
-    TemplateGrid.tsx
-    TemplateCard.tsx                 // hover lift + decision-line reveal + upgrade bridge
-    ModalShell.tsx                   // focus-trap, ESC, click-outside, restore focus
-    TemplatePreviewModal.tsx         // right-side panel
-    TemplateLeadCaptureModal.tsx     // zod-validated form
-    TemplateSuccessState.tsx         // 3 CTAs, Generate Briefing primary
-    RecommendedStartingPaths.tsx     // 5 question cards → highlight matching grid cards
-    ManualVsMonthlyDesk.tsx
-    FeaturedTemplatePreview.tsx      // Cash Flow Forecast detail + plain-English notes
-    TemplateToFinanceDeskBridge.tsx  // 4-step bridge
-    TemplateTrustSection.tsx
-    TemplateFAQ.tsx                  // native <details>
-    TemplateFinalCTA.tsx
-    MobileStickyTemplateCTA.tsx      // label flips after first download
-    SpreadsheetPreview.tsx           // SVG/CSS grid, tone-coded rows
+    CompareTopBar.tsx
+    ComparisonHero.tsx                 // decision-map SVG with MFD highlighted as middle layer
+    CoreQuestionSection.tsx            // 3-part job-to-be-done framing
+    FitFinderDiagnostic.tsx            // 3-step diagnostic with dynamic recommendation panel
+    CategorySpectrum.tsx               // horizontal spectrum, MFD = "missing middle"
+    ComparisonCardGrid.tsx
+    ComparisonCard.tsx                 // hover lift, preview-line reveal, scroll-to anchor
+    FastAnswerTable.tsx                // desktop table + mobile expandable cards
+    MissingMiddleSection.tsx           // 3-column too-light / MFD / too-heavy
+    UseCasePaths.tsx                   // 6 expanding use-case cards
+    SampleBriefingProofBlock.tsx       // condensed briefing modules with one insight
+    ComparisonFAQ.tsx                  // native <details> accordion
+    ComparisonPageIndex.tsx            // 8 SEO-style index cards (anchor links within hub)
+    SoftConversionBridge.tsx           // 3 cards: sample briefing / templates / pricing
+    ComparisonFinalCTA.tsx
+    MobileStickyCompareCTA.tsx         // label flips after Fit Finder completes
 ```
 
 ## Data (`content.ts`)
 
-12 templates with `id, name, shortName, category, description, bestFor, decisionLine, timeToUse, difficulty, ctaText, painPointTags[], previewRows[]`. 11 chips. 5 recommended paths. Free-vs-Desk comparison. 4 bridge steps. 4 trust cards. 8 FAQ items. Business-type list + goal chips.
+- 8 `optionTypes`: DIY templates, bookkeeper, QuickBooks, dashboard, spend tools, fractional CFO, internal team, MFD — each with `{label, bestWhen, usuallyMisses, chooseIf, ctaText, anchorId, position}` driving spectrum, table, and cards.
+- `fitFinder`: 3 questions with the exact options from the brief, plus a `recommend(setup, problem, maturity)` function returning one of 4 recommendation states: `bookkeepingFirst`, `mfdFit`, `cfoCompare`, `templatesFirst`. Each state has `{title, summary, primaryCTA, secondaryCTA}`.
+- 8 `comparisonCards`: title, bestFor, coreInsight, ctaText, anchorId.
+- 6 `useCases`: quote, recommendation, primaryCTA, secondaryCTA, href.
+- 8 FAQ items.
+- Soft bridge cards + final CTA copy.
 
 ## Sections (in order)
 
-Hero → Pain reframe → Sticky filter bar → Grid (12 cards) → Recommended Paths → Manual vs Desk → Featured Cash Flow detail → 4-step bridge → Trust proxies → FAQ + disclaimer → Final CTA.
+Hero → Core Question → Fit Finder → Category Spectrum → Comparison Cards → Fast Answer Table → Missing Middle → Use Case Paths → Sample Briefing Proof → FAQ + disclaimer → Comparison Page Index → Soft Conversion Bridge → Final CTA.
 
 ## Interactions
 
-- Instant client-side category filtering, `role="radiogroup"` + arrow keys.
-- Recommended path click → scroll to grid, matching cards get `data-highlighted="true"` + champagne ring.
-- Card hover: `-translate-y-0.5`, brighter border, preview shifts up, decision line fades in.
-- Preview opens right-side panel (full-screen on mobile via flex layout).
-- Lead capture: zod schema (firstName, email, businessType required; goals optional chips). 750ms simulated send → success state with Generate Briefing primary CTA.
-- Sticky mobile CTA appears after `scrollY > 640`; flips to "Generate Sample Briefing" once `sessionStorage["mfd.templateDownloaded"]` is set.
-- `useReducedMotion` short-circuits transforms via `motion-safe:` Tailwind variants already used across the app.
+- Fit Finder: 3 radio-style steps (`role="radiogroup"`, arrow-key nav), reveals recommendation card with smooth height transition; recommendation drives the MobileStickyCompareCTA label (Generate Briefing / Apply / Get Templates) and stores completion in sessionStorage.
+- Category Spectrum: SVG rail with 8 nodes, MFD node highlighted with champagne ring; on scroll into view, nodes fade in left-to-right via `motion-safe` opacity/translate (no JS scroll listener — pure IntersectionObserver via existing `LazySection` pattern).
+- Comparison Card hover: `-translate-y-0.5`, brighter border, preview line fades in, CTA chevron animates. Card click scrolls to a deeper detail anchor inside the Fast Answer Table row for that option.
+- Fast Answer Table: real `<table>` on `md+`, expandable `<details>`-based cards on mobile, preserving column meaning via labelled rows.
+- Use Case cards: click expands recommended path inline with primary + secondary CTAs.
+- FAQ: native `<details>` for keyboard-free accessibility, single-open behavior optional.
+- Reduced motion via `motion-safe:` Tailwind variants throughout.
 
 ## Analytics
 
-`analytics.ts` exposes `track(event, payload?)` that defensively pushes to `window.dataLayer`. Fires all 9 named events.
+`analytics.ts` exposes `track(event, payload?)` that defensively pushes to `window.dataLayer`. Fires all 10 named events listed in the brief.
+
+## SEO
+
+- Update `index.html` `<title>` and `<meta name="description">` only when no per-route head is in place; since this is a hash-routed SPA, add a small `useDocumentHead` effect inside `ComparisonHubPage` that sets `document.title` and the meta description while the route is active and restores them on unmount.
+- Suggested H1 lives in the hero. Section headings use logical h2 → h3 hierarchy.
+- FAQ schema added inline as `<script type="application/ld+json">` injected via the same head-effect.
 
 ## Accessibility
 
-One `<main>` (route wrapper). Each section `<section aria-labelledby>`. ModalShell traps focus, restores on close, ESC closes. Inputs labelled, errors `role="alert" aria-live="polite"`. 44×44 tap targets on chips, CTAs, card buttons. Difficulty uses dot + text (color is never the only signal).
+- One `<main>` (route wrapper), each section `<section aria-labelledby>`.
+- Fit Finder is a fieldset per step; selected state uses ring + check icon, not color alone.
+- Tap targets ≥44×44 on chips, CTAs, accordion triggers.
+- Tables include `<caption class="sr-only">` and `<th scope="col">`.
 
 ## Visual system
 
-Reuses existing tokens: `bg-charcoal-950`, `border-white/[0.07]` surfaces, `champagne-100…300` accents, `green-signal` for positive, `champagne-300` for caution. No new fonts, no new gradients, no images, no new deps.
+Reuses existing tokens: `bg-charcoal-950`, `border-white/[0.07]`, `champagne-100…300` accents, `green-signal` for fit/positive, `champagne-300` for caution, `blue/300` muted for software/data references. No new fonts, gradients, images, or dependencies.
 
 ## Performance
 
-All previews are inline SVG/CSS via `SpreadsheetPreview`. Filtering is `useMemo` over 12 items. No new dependencies.
+All visuals are inline SVG/CSS. Fit Finder is `useMemo` over static config. Below-fold sections wrapped in the existing lazy reveal pattern. No new dependencies.
 
-## Files touched outside `templates/`
+## Files touched outside `compare/`
 
-- `src/components/apply/hooks/useHashRoute.ts` — add `templates` route.
+- `src/components/apply/hooks/useHashRoute.ts` — add `compare` route.
 - `src/App.tsx` — render the page.
-- All files containing `"#templates"` — rewritten to `"#/templates"`.
+- `src/components/sample-briefing/parts/*TopBar.tsx`, `src/components/pricing/parts/PricingTopBar.tsx`, `src/components/templates/parts/TemplatesTopBar.tsx` — add Compare link.
 
 ## Verification
 
-Playwright at `localhost:8080/#/templates`:
-1. Screenshot hero + grid.
-2. Click Cash Flow chip → assert card count drops.
-3. Click "Why does cash still feel tight?" path → assert 3 cards get `data-highlighted="true"`.
-4. Click Get Cash Flow Template → fill form → submit → assert success state visible.
-5. Open preview, ESC closes.
-6. Mobile viewport screenshot.
+Playwright at `localhost:8080/#/compare`:
+1. Screenshot hero + spectrum.
+2. Step through Fit Finder (unclear → cash flow → $30–75K) → assert MFD recommendation visible.
+3. Click a comparison card → assert scroll to anchored table row.
+4. Expand mobile table card → assert "Best when / Usually misses / Choose this if" visible.
+5. Mobile viewport screenshot.
+6. Console error scan.

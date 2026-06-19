@@ -6,7 +6,8 @@ export type ApplyRoute =
   | "thank-you"
   | "sample-briefing"
   | "pricing"
-  | "templates";
+  | "templates"
+  | "compare";
 
 function parse(): ApplyRoute {
   const h = window.location.hash || "";
@@ -15,6 +16,7 @@ function parse(): ApplyRoute {
   if (h.startsWith("#/sample-briefing")) return "sample-briefing";
   if (h.startsWith("#/pricing")) return "pricing";
   if (h.startsWith("#/templates")) return "templates";
+  if (h.startsWith("#/compare")) return "compare";
   return "home";
 }
 
