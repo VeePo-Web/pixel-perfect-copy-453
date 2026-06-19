@@ -7,7 +7,8 @@ export type ApplyRoute =
   | "sample-briefing"
   | "pricing"
   | "templates"
-  | "compare";
+  | "compare"
+  | "three-way-compare";
 
 function parse(): ApplyRoute {
   const h = window.location.hash || "";
@@ -16,6 +17,8 @@ function parse(): ApplyRoute {
   if (h.startsWith("#/sample-briefing")) return "sample-briefing";
   if (h.startsWith("#/pricing")) return "pricing";
   if (h.startsWith("#/templates")) return "templates";
+  if (h.startsWith("#/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk"))
+    return "three-way-compare";
   if (h.startsWith("#/compare")) return "compare";
   return "home";
 }
