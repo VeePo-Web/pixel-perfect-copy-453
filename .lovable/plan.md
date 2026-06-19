@@ -1,79 +1,113 @@
-## Plan: "How It Works" page section for Monthly Finance Desk
+## Plan: Application Funnel — `/apply`
 
-Build a cinematic, scroll-driven "How It Works" experience that lives directly below the existing `FinanceHero` on the home page. Same dark champagne/green token system, same restrained motion language already established in the hero. No new dependencies — uses Tailwind tokens + IntersectionObserver + existing keyframes (`panel-rise`, `section-in`, `shimmer`, `soft-pulse`).
+Build a 6-screen premium application funnel (landing + 5 steps + success) that lives on the existing site and matches the established dark/champagne/green token system. Same restraint as the hero and "How It Works" — no new heavyweight dependencies (no Framer Motion, no router library), reuses the existing `panel-rise` / `section-in` / `ease-cinema` motion vocabulary.
 
-### Where it goes
+### Routing
 
-`src/App.tsx` renders a new `<HowItWorks />` after `<FinanceHero />`. The section gets `id="how-it-works"` so the hero nav anchor works.
+The project has no router today. To keep the dependency footprint flat, the funnel is mounted via a **hash route**: when `window.location.hash` starts with `#/apply`, the new `<ApplicationFunnel />` component renders full-screen and the home content (`FinanceHero` + `HowItWorks`) is hidden. `#/apply/thank-you` renders the success state. A tiny `useHashRoute` hook listens to `hashchange`. All existing CTAs that point to `#apply` are updated to `#/apply` so they enter the funnel.
+
+This avoids `react-router-dom` install while still giving real, shareable URLs.
 
 ### File structure
 
-New folder `src/components/how-it-works/`:
+New folder `src/components/apply/`:
 
 ```text
-HowItWorks.tsx              — section orchestrator, scroll progress, sticky mobile CTA
-parts/
-  SectionHeader.tsx         — eyebrow + headline + subhead primitive
-  HowItWorksIntro.tsx       — S1 hero intro with animated rhythm loop
-  ProcessTimeline.tsx       — S2 sticky-left 5-step rhythm (desktop scroll-linked, mobile vertical)
-  ProcessStepVisual.tsx     — per-step right-rail visual (spreadsheet form, Plaid line, sort, briefing fill, calendar+agenda)
-  WhatYouDoVsWeDo.tsx       — S3 two-column comparison
-  MonthlyCycle.tsx          — S4 circular 4-week operating loop
-  BeforeAfter.tsx           — S5 split-screen with hover/scroll morph
-  SampleBriefingPreview.tsx — S6 tabbed briefing report
-  DifferenceTable.tsx       — S7 elevated comparison table
-  TrustSection.tsx          — S8 calm trust cards
-  FinalCTA.tsx              — S9 closing block with drifting report cards
+ApplicationFunnel.tsx         — page shell, step state machine, layout
+content.ts                    — all copy, option lists, chips
 hooks/
-  useInViewProgress.ts      — IntersectionObserver + scroll progress helper
-  useReducedMotion.ts       — prefers-reduced-motion hook
-content.ts                  — all copy strings, step data, tab data, table rows in one file
+  useHashRoute.ts             — tiny hash router
+  useApplicationState.ts      — controlled form state + localStorage persistence + validation
+parts/
+  ApplicationHeader.tsx       — minimal top bar (logo + "Application" label + secondary link)
+  FunnelProgress.tsx          — premium 5-step indicator (numbered, hairline rail, active glow)
+  ApplicationStepShell.tsx    — left-column layout primitive (eyebrow, headline, sub, slot, footer nav)
+  StickyFinancePreview.tsx    — right-column sticky preview panel that updates per step
+  SelectableCard.tsx          — single-select large card (keyboard, aria-pressed, glow on select)
+  MultiSelectCardGroup.tsx    — multi-select cards (checkbox semantics)
+  TextField.tsx               — labeled text/email input with calm error
+  TextAreaWithChips.tsx       — textarea + suggested chips that append to text
+  FitSignalCard.tsx           — small reassurance card (used for low-revenue + non-budget paths)
+  ApplicationSummary.tsx      — review cards with edit links
+  TrustReassuranceBlock.tsx   — "what happens after you apply" block
+  StepLanding.tsx             — Step 0 hero
+  StepFit.tsx                 — Step 1
+  StepSetup.tsx               — Step 2
+  StepDecisions.tsx           — Step 3
+  StepReadiness.tsx           — Step 4
+  StepReview.tsx              — Step 5 + submit
+  SubmissionLoading.tsx       — premium loader (3 rotating status lines, hairline progress)
+  SuccessPage.tsx             — /apply/thank-you
+schema.ts                     — zod schemas per step + full submission
 ```
 
-Each part is a small focused component. `content.ts` keeps copy byte-accurate to the brief and easy to edit.
+### Backend
 
-### Section-by-section approach
+Add one migration that creates `public.applications`:
 
-**S1 Intro** — Left: eyebrow `HOW IT WORKS`, large editorial headline, subhead, primary CTA (`Apply for the Monthly Finance Desk`), secondary ghost link (`Generate Sample Finance Briefing`), trust microcopy. Right: a 4-node looping rhythm strip (Bank → Spreadsheet → Briefing → Review) where the active node glows champagne every 2.4s using `soft-pulse` + a sweeping hairline connector.
+- columns: `id uuid pk default gen_random_uuid()`, `created_at timestamptz default now()`, `first_name text`, `email text`, `business_name text`, `business_type text`, `revenue_range text`, `current_tools text[]`, `clarity_gap text`, `decisions text[]`, `clarity_outcome text`, `monthly_review text`, `budget_fit text`, `worth_it text`, `timeline text`, `consent boolean`
+- `GRANT INSERT ON public.applications TO anon, authenticated`; `GRANT ALL TO service_role`
+- RLS enabled; single policy `FOR INSERT TO anon, authenticated WITH CHECK (true)` (write-only public form). No `SELECT` policy — applications are not readable from the client.
+- Light input length caps enforced both client-side (zod) and server-side (column `text` is fine; zod caps long fields at 2000 chars, emails at 255).
 
-**S2 Process Timeline** — Desktop: two-column. Left column sticks (`position: sticky`) with the 5 step labels stacked vertically; the active step is set by IntersectionObserver as each right-column visual scrolls past mid-viewport. Right column is a tall stack of 5 visuals, each ~90vh, with `panel-rise` on enter:
-- 01 spreadsheet grid assembling from transaction fragments (CSS grid with staggered `section-in`)
-- 02 secure Plaid connection line: bank card on left, desk module on right, animated dashed SVG path drawing in
-- 03 rows sorting into category lanes (revenue / payroll / software / contractors / tax reserve / owner draw / subscriptions) — each row translates from a "raw" column to its labeled lane with stagger
-- 04 briefing panel that fills line-by-line (reuses the same shimmer/cascade vocabulary as the hero briefing) — visually the most important step
-- 05 calendar tile + agenda card side by side
-Mobile: collapses to a single-column vertical timeline with a champagne hairline rail and dot markers; visuals shrink but keep the same motion.
+Submission path: client-side zod validation → `supabase.from('applications').insert(...)` → on success, navigate to `#/apply/thank-you`. No edge function needed (keeps scope minimal). Errors surface in the calm `ApplicationErrorMessage` style.
 
-**S3 What You Do vs What We Do** — Two glass cards side by side with hairline divider down the middle. Champagne checkmarks on the "Finance Desk" side, neutral dashes on "What you do" side to signal it's lighter work. CTA below: `See a Sample Briefing` (scrolls to S6).
+### Layout & visual
 
-**S4 Monthly Cycle** — Circular SVG ring with 4 nodes at 12/3/6/9 positions, labeled Week 1–4. A champagne arc traces around the ring on scroll (stroke-dashoffset tied to in-view progress). Center label morphs through the four weeks then settles on `Clearer decisions for the next month.` Below: the discipline conversion line.
+**Desktop (≥ lg)** — Two-column grid inside a max-w-7xl shell:
+- Left (7/12): `ApplicationStepShell` — eyebrow `APPLICATION · 0X / 05`, large editorial headline, sub, fields, footer with Back / Continue
+- Right (5/12): sticky `StickyFinancePreview` that morphs per step (landing shows the $1,500/month rhythm card; Step 1 shows "Likely fit signal"; Step 2 shows "Financial Clarity Gap"; Step 3 shows "First Briefing Focus" personalized by selected decisions; Step 4 shows "Readiness Signals"; Step 5 shows full mini-summary).
 
-**S5 Before/After** — Split-screen with a vertical draggable/scroll-linked divider. Left half desaturated cool grey with the "before" bullets; right half full color with champagne accents and "after" bullets. On hover (desktop) or scroll-into-view (mobile), the divider sweeps right to reveal "after." Closing emotional line centered below.
+**Mobile** — Single column. `FunnelProgress` at top, fields in the middle, sticky bottom `Continue` bar (champagne fill). The right-side preview collapses into an expandable "What happens next?" disclosure between fields and the sticky bar.
 
-**S6 Sample Briefing Preview** — Full-width premium report card with horizontal tab pills: Cash Movement / Revenue Trend / Expense Pattern / Unusual Spend / Questions to Review / Decisions to Consider. Tab switch fades content with the same 280ms dissolve from the hero. Each panel has a short paragraph + 2–4 hairline rows with sample numbers. CTA inside the card: `Generate My Sample Finance Briefing` (scrolls to hero composer). Mobile: tabs become a horizontal scroll-pill row.
+**Header** — Tiny: "Monthly Finance Desk" wordmark left, "Application" label center (hidden on mobile), `Not ready? Generate Sample Briefing` link right (points to `#top`).
 
-**S7 Difference Table** — Rows: Bookkeeper / Dashboard / Spreadsheet Template / Fractional CFO / **Monthly Finance Desk** (highlighted with a champagne left rim and slightly brighter card background). Columns: What it helps with / What it usually misses / Best fit. Sticky first column on mobile horizontal scroll.
+**Progress** — 5 numbered chips on a hairline rail. Completed = champagne dot; active = champagne ring + glow; upcoming = bone/15 dot. Step labels visible on ≥ md.
 
-**S8 Trust** — 5 small glass cards in a responsive grid; calm copy, no compliance badges. Subtle champagne hairlines only.
+### Step behavior
 
-**S9 Final CTA** — Large centered headline + subhead. Background: 3–4 ghost briefing cards drifting slowly using `ghost-drift` at low opacity. Primary CTA (champagne fill, shimmer-slow sheen), secondary CTA (ghost), tertiary text link `Start with Free Templates`. Microcopy underneath.
+- **Step 0 Landing** — Hero copy + primary CTA (`Start Application` → advances to step 1) + secondary (`Generate Sample Finance Briefing` → `#top`) + tertiary (`Start with Free Templates` → `#templates` placeholder).
+- **Step 1 Fit** — First name, work email, business name (text), business type (10 selectable cards in a 2-col grid), revenue (6 cards). Sub-$30K shows `FitSignalCard` with two CTAs (`Continue Application`, `Start With Free Templates`). ≥$30K shows positive note.
+- **Step 2 Setup** — Multi-select tools (10 cards) + `TextAreaWithChips` for clarity gap (chip click appends as a new sentence if not already present).
+- **Step 3 Decisions** — 10 decision cards + `clarity outcome` textarea. After ≥1 decision, the right preview re-renders the "First Briefing Focus" list dynamically.
+- **Step 4 Readiness** — 4 question groups; certain answers trigger inline reassurance text under the option group (no modal).
+- **Step 5 Review** — `ApplicationSummary` cards with "Edit" link per section (jumps back to that step preserving state). Consent checkbox required. `TrustReassuranceBlock` and submit button. `Save and Finish Later` button copies a resumable URL to clipboard (`#/apply?step=N`) and shows a toast.
 
-### Interactions
+### Persistence
 
-- **Scroll-linked step progression** — `useInViewProgress` returns the active step index from a list of refs; left sticky column highlights the matching label and animates a champagne progress bar down the rail.
-- **Briefing fill animation** — reuses existing `section-in` stagger; triggers once when S2-step-04 or S6 enters viewport.
-- **Hover** — cards: `transition-all duration-400 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/40 hover:shadow-[0_8px_40px_-12px_rgba(217,190,130,0.18)]`.
-- **Primary CTA hover** — champagne gradient brightens, `shimmer-slow` sheen sweeps across.
-- **Mobile sticky CTA** — fixed bottom bar appears after the hero scrolls out (IntersectionObserver on hero sentinel); shows `Generate Sample Briefing` until S6, then swaps to `Apply for the Monthly Finance Desk`. Hidden on `md:` and up.
-- **Reduced motion** — `useReducedMotion` short-circuits all keyframe animations to simple opacity fades; no transforms, no shimmer, no drift.
-- **Keyboard a11y** — tabs use `role="tablist"`/`role="tab"` with arrow-key navigation; all CTAs are real `<button>`/`<a>`; focus rings use champagne ring tokens.
+`useApplicationState` keeps the whole form object in React state and mirrors it to `localStorage` under `mfd:application:v1`. On hash route enter, state hydrates from storage. If a returning visitor lands on `#/apply` with persisted data, the landing step shows a small `Welcome back. Continue your Monthly Finance Desk application.` banner with a `Resume` button.
 
-### Tokens & styling
+### Motion
 
-All colors, shadows, glows come from existing Tailwind tokens (`charcoal-*`, `champagne-*`, `bone`). One new semantic addition only if needed: a `green-signal` token for the "deep green for healthy financial movement" — added to `tailwind.config.ts` as `green: { signal: "#3F7A5E" }` and used sparingly (cash-positive deltas, after-state accents). No other token changes.
+- Step transitions: 320ms cross-fade + 6px translate using a keyed wrapper (same dissolve as the hero state swaps).
+- Card hover: `hover:-translate-y-0.5 hover:border-champagne-200/40 hover:shadow-[0_8px_40px_-12px_rgba(217,190,130,0.18)]`.
+- Card selected: champagne 200/30 border + inner champagne 200/[0.04] tint + small champagne dot in the corner.
+- Submit loader: keyed status lines cycle through the three loading strings every 900ms while the insert is in flight; a 1px champagne hairline progresses left→right under the status.
+- All animations gated behind `motion-safe:` to honor `prefers-reduced-motion`.
+
+### Accessibility
+
+- All inputs have visible labels; cards use `role="radio"` (single) or `role="checkbox"` (multi) inside `role="radiogroup"`/`role="group"` with arrow-key + space activation; selected state communicated via `aria-checked` plus visual ring (not color alone).
+- Errors rendered with `role="alert"` and warm amber (not red) hairline + text; copy from the spec.
+- Tab order: progress → fields top-to-bottom → back / continue.
+- Sticky mobile continue bar respects `env(safe-area-inset-bottom)`.
+
+### Success page
+
+`#/apply/thank-you` renders `SuccessPage`: large headline, confirmation card (4 lines), 5-step timeline (vertical hairline + champagne dot for the completed first step), primary CTA `Generate a Sample Finance Briefing` (→ `#top`), secondary `Explore Free Templates`. Optional `Schedule Intro Call` button omitted (no scheduling integration exists). "While You Wait" section with three quiet text-link cards. On mount, clears the persisted draft.
 
 ### Out of scope
 
-- No backend wiring; the inline `Generate My Sample Finance Briefing` CTA scrolls to the existing hero composer rather than calling the edge function from S6.
-- No new dependencies (no Framer Motion, no GSAP) — restraint matches the established motion vocabulary.
-- Existing files outside `src/App.tsx` and `tailwind.config.ts` (one color token) are untouched.
+- No email send on submission (relies on the row insert; future edge function can subscribe).
+- No real "Save and Finish Later" email link — `localStorage` resume + clipboard URL only.
+- No "Schedule Intro Call" CTA (no calendar integration).
+- No analytics events wired (component structure is event-ready).
+- No router library installed; hash routing only.
+
+### Files touched outside the new folder
+
+- `src/App.tsx` — when hash route starts with `#/apply`, render `<ApplicationFunnel />` and skip `FinanceHero`/`HowItWorks`.
+- `src/components/how-it-works/parts/FinalCTA.tsx`, `src/components/how-it-works/HowItWorks.tsx`, hero CTAs — update `#apply` → `#/apply`.
+- New Supabase migration for `applications` table.
+
+Nothing else changes.
