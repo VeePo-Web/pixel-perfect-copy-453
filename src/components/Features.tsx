@@ -1,5 +1,6 @@
 import React, { MouseEvent, ReactElement, useRef, useState } from "react";
 import { TiLocationArrow } from "react-icons/ti";
+import feature1Asset from "../../public/videos/feature-1.mp4.asset.json";
 
 interface bentoProsp {
   src: string;
