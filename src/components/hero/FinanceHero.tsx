@@ -351,10 +351,6 @@ const HeroNav = () => {
     </header>
   );
 };
-      </div>
-    </section>
-  );
-};
 
 const BriefingPanel = ({
   state,
