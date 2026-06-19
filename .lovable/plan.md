@@ -1,71 +1,161 @@
-## Goal
+# The Interactive Hero — Built To Sell On Every Frame
 
-Produce a complete prompt package for a Zentry-style 3D hero video reskinned for **The Monthly Finance Desk**, then generate the **starting frame** and **ending frame** with Nano Banana (Gemini 3.1 Flash Image, premium tier) and deliver them as downloadable artifacts in chat.
+The Zentry mechanic stays: a small tile in the center, click it, it explodes to fullscreen, the next one cues underneath. We keep the *physics* of that interaction and replace the gaming spectacle with something Claire has never seen a finance brand do — **a hero that demos the product on click.**
 
-No project code changes. No persona doc changes. Output lives in `/mnt/documents/`.
+Every reel, every caption, every micro-label below is written to sell. Nothing decorative. Nothing cute. Each line is a hook, a mirror, or a close.
 
-## Creative direction (locked from `personas/brand-identity-and-decisions-filter.md`)
+---
 
-- **Feel target:** private finance room · executive reporting environment · high-trust command center. *Never* SaaS-cute, never neon, never confetti.
-- **Palette:** deep charcoal/near-black background (`hsl(220 18% 5%)`), warm off-white type, champagne gold primary accent (`hsl(40 55% 70%)`), restrained institutional deep-green secondary, soft warm-gray 1px borders. No purple, no cyan, no gradient orbs.
-- **Materials:** brushed obsidian, smoked glass, polished bronze edges, frosted acrylic, holographic data-mesh, thin gold filament linework.
-- **Forbidden:** stock people, cartoon coins, dollar-bill clipart, isometric SaaS illustrations, jittery counters, "AI magic" energy bursts.
-- **Emotional arc the video must carry:** Recognition → Discomfort → Curiosity → Safety → Desire.
-- **Single visual thesis:** *"A private finance room materializing around the viewer."*
+## The headline that anchors all of it
 
-## Deliverable 1 — Master Kling 3.0 video prompt (5–10s hero loop)
+Hero headline, fixed, never animates away:
 
-A long-form cinematic prompt (~350 words) describing camera movement, scene transformation from frame 1 → frame N, materials, lighting, motion design, and forbidden elements. Includes:
+> **You don't need another dashboard.**
+> **You need someone reading the numbers with you.**
 
-- **Shot:** slow dolly-in + slight orbit-right, 35mm equivalent, shallow depth of field, anamorphic flares restrained.
-- **Scene state:** opens on a single floating glass "Bi-Weekly Finance Briefing" card suspended in volumetric charcoal mist with one champagne god-ray; resolves into a curved arc of 5–7 glass briefing cards (Cash Movement, Revenue Trend, Expense Pattern, Unusual Spend, Questions, Decisions) connected by thin gold cash-flow filaments, with a faint ticker-tape ribbon arcing overhead and a subtle hex/grid floor plane catching specular light.
-- **Motion design:** cards drift in with calm 600–1000ms easing (no snap), gold filaments draw on like ink, particulate dust drifts slowly, no UI animation, no text typewriter effects.
-- **Lighting:** key light = warm champagne from upper-left, fill = cool institutional steel from below-right at 15% intensity, rim = soft bronze on card edges, volumetric haze, subtle bloom.
-- **Audio cue note** (for later sound pass): low cinematic sub-drone, single resonant brass swell at the resolve, no ticking, no synth pads.
-- **Negative prompt:** no neon, no purple/indigo, no glowing orbs, no people, no cartoon icons, no text scrambles, no glitch, no chromatic aberration, no cyberpunk, no spaceship UI, no Iron-Man HUD, no Wall-Street bull, no dollar signs, no stock charts going up.
+Sub-line under it:
 
-## Deliverable 2 — Starting-frame image prompt (Nano Banana)
+> The Monthly Finance Desk. A private finance room for owners who've outgrown the bank-balance method.
 
-Tight, image-specific prompt (~180 words) describing the *exact composition* Kling will be told to animate **from**:
+CTA, always visible, never moves:
 
-- Single hero glass briefing card floating dead-center-left, 30% of frame, tilted 8° toward camera.
-- Title bar on card reads **"Bi-Weekly Finance Briefing"** in a refined serif/grotesk; six section labels visible but muted (Cash Movement, Revenue Trend, Expense Pattern, Unusual Spend, Questions, Decisions); figures rendered as tabular monospaced gold-on-charcoal.
-- Background: deep charcoal volumetric mist, one diagonal champagne god-ray, faint hex-grid floor disappearing into haze, single soft bronze rim-light on the card edge.
-- Mood: quiet, anticipatory, "before the room turns on."
-- Aspect 16:9, cinematic, photoreal CGI, octane-render quality, restrained, no text artifacts beyond the named labels.
+> **Generate My Sample Briefing →**
+> *No bank connection. No signup. 90 seconds.*
 
-## Deliverable 3 — Ending-frame image prompt (Nano Banana)
+That's the frame. Now the interactive tile lives inside that frame, doing the heavy selling.
 
-Tight, image-specific prompt (~180 words) describing the resolved hero composition Kling animates **to**:
+---
 
-- 5–7 glass briefing cards arranged in a gentle concave arc wrapping the camera, the original hero card still slightly forward-left, depth falloff blurring rear cards.
-- Thin champagne-gold filament lines connecting cards like a cash-flow graph; small particulate gold dust drifting; ticker-tape ribbon arcing overhead at low opacity.
-- Floor: dark mirrored obsidian with the cards' reflections; subtle hex-grid catching specular light.
-- A discreet wordmark "**The Monthly Finance Desk**" etched in champagne on the lower-right floor plane (small, premium, never billboard).
-- Same lighting rig as starting frame but +20% bloom and added bronze rim on every card edge.
-- Aspect 16:9, photoreal CGI, octane-render quality, executive, calm, expensive.
+## The interactive tile — what plays on each click
 
-## Generation step
+Four reels. Each is a 4–6 second loop. Each one is a sales argument disguised as a moment.
 
-Run two Nano Banana generations in parallel (`model: premium.gemini`):
+### Reel 1 — The Mirror *(default, what she lands on)*
 
-1. `/mnt/documents/monthly-finance-desk_hero_start.jpg` (16:9, 1920×1088)
-2. `/mnt/documents/monthly-finance-desk_hero_end.jpg` (16:9, 1920×1088)
+A real-looking iPhone notification slides in over a charcoal void:
 
-JPG keeps file size light for chat download.
+> **Wells Fargo · 9:14 AM**
+> *Available balance: $48,212.07*
 
-## Delivery
+It hovers. A single line of champagne text writes itself underneath:
 
-In the build-mode reply you'll see:
+> *This is how most owners check on their business.*
 
-- The full master Kling 3.0 video prompt (copy-paste ready).
-- The two image prompts (copy-paste ready if you want to re-roll).
-- Two `<presentation-artifact>` cards — one per frame — that the chat renders as click-to-download tiles.
+Then the notification dissolves. The glass briefing card from the end-frame fades up in its place. One line of caption:
 
-## Out of scope
+> *There is a more serious way.*
 
-- No Remotion / no in-browser video.
-- No site code changes.
-- No Kling API call (you'll paste the prompts into Kling yourself).
-- No audio generation.
-- No motion test renders.
+**Corner label**: `01 — The Method Most Owners Use`
+
+**Why it sells**: It names her exact morning ritual. Recognition is the most powerful emotion a hero can trigger. She thinks: *"That's me. Every morning. That's literally me."*
+
+---
+
+### Reel 2 — The Briefing
+
+The glass card is now full-frame. Inside, a real **Bi-Weekly Finance Briefing** types itself in. Calm. Tabular. Champagne gold on charcoal:
+
+> **Cash Movement** — *Position improved $18,400. Driven by faster client collections, not new revenue.*
+>
+> **Unusual Spend** — *Software up 34%. Three new subscriptions added in May. None reviewed.*
+>
+> **The Question This Raises** — *Are we buying tools faster than we're using them?*
+
+**Corner label**: `02 — What Arrives Every Two Weeks`
+
+CTA microcopy fades in below the card for 1.5s, then out:
+
+> *This is roughly what yours would look like.*
+
+**Why it sells**: She doesn't have to imagine the deliverable. She just saw it. The product stopped being abstract.
+
+---
+
+### Reel 3 — The Decision
+
+Three questions stack up, one at a time, in the briefing voice:
+
+> *Can I afford to hire a $75K role in Q3?*
+> *Should I raise prices, or hold them through year-end?*
+> *Is the agency actually profitable, or does it just feel that way?*
+
+Then a single line resolves underneath, in champagne:
+
+> *These are the questions your Monthly Review answers — in writing, every month.*
+
+**Corner label**: `03 — The Decisions On Your Desk Right Now`
+
+**Why it sells**: Those are her literal thoughts, lifted verbatim from the persona doc. She feels seen, then sold the exact instrument that answers them.
+
+---
+
+### Reel 4 — The Identity Close
+
+No data. No card. Just one slow line writing itself across the charcoal, with the wordmark resolving underneath:
+
+> *Operate like a CEO.*
+> *Not like someone duct-taping the finances together.*
+>
+> **— The Monthly Finance Desk**
+
+**Corner label**: `04 — Why Owners Stay`
+
+**Why it sells**: This is the identity-layer close from the persona's "hidden emotional state ladder." It's not about features anymore. It's about who she becomes by signing up.
+
+---
+
+## The micro-interactions that make it feel award-winning
+
+Every detail below is a sales detail, not a polish detail.
+
+- **The tile itself** carries a permanent, almost-imperceptible label: `Click to see the next briefing →`. After 4 seconds of inactivity, it pulses once, softly, in champagne. One pulse. Not a nag — an invitation.
+- **Counter in the corner**: `01 / 04` in tiny monospaced champagne. Tells her there *is* more, which makes the first click inevitable.
+- **On click**, the tile doesn't just expand — it *settles*. 800ms ease-out, no bounce. The sound of confidence, visually.
+- **Between reels**, a single thin champagne filament draws across the screen for 200ms — the same filament that connects the cards in the end-frame. Visual continuity = brand authority.
+- **After reel 4**, the tile resets to reel 1, but the CTA below the hero pulses once. The whole loop has quietly walked her from *recognition* → *product* → *decisions* → *identity* → *click*.
+- **Reduced motion**: replace expansions with 400ms crossfades. Copy unchanged. The sell does not depend on motion.
+
+---
+
+## The corner wordmark
+
+Where the Zentry site has `GAMING` bleeding off the bottom-right, we have, etched small and confident in champagne:
+
+> **The Monthly Finance Desk**
+> *Los Angeles · Est. by Chris Sam*
+
+The Zentry energy comes from typography that *owns* the corner. We earn the same energy through restraint instead of size.
+
+---
+
+## Why this beats a normal hero (the strategic case)
+
+A normal finance hero says *"We help you understand your numbers."* It's a claim. Claims don't sell.
+
+This hero **demonstrates the deliverable in 20 seconds of clickable cinema**. By the time she reaches the CTA, she has already:
+
+1. Seen herself in reel 1 *(problem agreement)*
+2. Seen the actual briefing in reel 2 *(product clarity)*
+3. Seen her own questions answered in reel 3 *(value made specific)*
+4. Been offered a new identity in reel 4 *(emotional close)*
+
+Four sales arguments. Zero paragraphs. One click each. That's the Zentry mechanic doing real commercial work.
+
+---
+
+## Production path
+
+- **Route B — rendered React/Canvas reels** for all four. Real type, perfect crispness, infinitely editable copy, no video weight, ships in days. Matches the `SampleBriefing` type already specced in `frontend-engineer.md`.
+- **Route A — Kling-rendered ambient backdrop** only behind the tile, looping the start-frame → end-frame transition we already prompted. Used as atmosphere, not as the demo itself.
+
+The reels are the salespeople. The Kling backdrop is the room they're standing in.
+
+---
+
+## What I need from you to proceed to build
+
+1. **Approve the 4-reel sequence and the copy above** — or mark any line you want sharpened.
+2. **Confirm Route B (rendered reels) + Route A (Kling backdrop)** as the production split.
+3. **Confirm the headline + sub-line + CTA copy** stays as written, or give edits.
+
+Once approved, the build plan covers: a `<HeroReel>` component (typed JSON-driven), the Zentry-style expand-on-click mechanic ported to GSAP with calmer easings, the four reel definitions in `/src/content/hero-reels/*.ts`, the Kling backdrop loop wired as the ambient layer, reduced-motion fallback, and the wordmark + counter chrome.
