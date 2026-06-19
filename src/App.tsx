@@ -43,6 +43,14 @@ const App = () => {
     );
   }
 
+  if (route === "three-way-compare") {
+    return (
+      <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
+        <BookkeeperVsFractionalCFOPage />
+      </main>
+    );
+  }
+
   if (route === "compare") {
     return (
       <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
