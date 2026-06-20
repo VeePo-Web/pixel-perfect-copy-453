@@ -22,19 +22,20 @@ export default function SecurityFinalCTA() {
           Ready to take the first safe step?
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-ink/65">
-          Preview the experience, apply without bank connection, or start with free
-          templates. The first step should feel clear before it asks for trust.
+          Now that you know how the connection works, the next step is simple: have your
+          reports filled for you every month — read-only, cancel anytime. Or preview a
+          briefing first.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
-            href="#/apply"
+            href="#/pricing#auto-fill"
             onClick={() => {
-              track("final_security_cta_clicked", { target: "apply" });
-              trackCtaByHref("#/apply", "security_faq_final");
+              track("final_security_cta_clicked", { target: "reports" });
+              trackCtaByHref("#/pricing#auto-fill", "security_faq_final");
             }}
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
           >
-            Apply for the GoldFin Desk
+            Auto-fill my reports — $99/mo
           </a>
           <a
             href="#/sample-briefing"
@@ -44,7 +45,7 @@ export default function SecurityFinalCTA() {
             }}
             className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-6 text-[13.5px] text-ink transition-colors hover:border-ink/30 hover:bg-ink/[0.03]"
           >
-            Generate Sample Finance Briefing
+            See a sample briefing
           </a>
           <a
             href="#/templates"
@@ -54,11 +55,11 @@ export default function SecurityFinalCTA() {
             }}
             className="inline-flex min-h-11 items-center text-[13px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
-            Start with free templates →
+            Or get the free Template Vault →
           </a>
         </div>
         <p className="mt-6 text-[12px] text-ink/45">
-          No payment or bank connection required to apply.
+          $99/mo. Read-only connection. No bank connection required to start.
         </p>
       </div>
     </section>

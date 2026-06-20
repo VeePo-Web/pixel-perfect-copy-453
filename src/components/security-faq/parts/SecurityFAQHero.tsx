@@ -46,11 +46,11 @@ export default function SecurityFAQHero() {
             Generate Sample Finance Briefing
           </a>
           <a
-            href="#/apply"
-            onClick={() => trackCtaByHref("#/apply", "security_faq_hero")}
+            href="#/pricing#auto-fill"
+            onClick={() => trackCtaByHref("#/pricing#auto-fill", "security_faq_hero")}
             className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-6 text-[13.5px] text-ink transition-colors duration-300 hover:border-ink/30 hover:bg-ink/[0.03]"
           >
-            Apply for the GoldFin Desk
+            Auto-fill my reports — $99/mo
           </a>
           <a
             href="#/templates"

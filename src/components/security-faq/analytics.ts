@@ -7,6 +7,7 @@ export type SecurityFAQEvent =
   | "plaid_section_viewed"
   | "sample_briefing_clicked_from_security_faq"
   | "apply_clicked_from_security_faq"
+  | "autofill_clicked_from_security_faq"
   | "templates_clicked_from_security_faq"
   | "compare_clicked_from_security_faq"
   | "final_security_cta_clicked";
@@ -23,7 +24,8 @@ export function track(event: SecurityFAQEvent, payload?: Record<string, unknown>
 }
 
 export function trackCtaByHref(href: string, source: string) {
-  if (href === "#/apply") track("apply_clicked_from_security_faq", { source });
+  if (href.startsWith("#/pricing")) track("autofill_clicked_from_security_faq", { source });
+  else if (href === "#/apply") track("apply_clicked_from_security_faq", { source });
   else if (href === "#/sample-briefing")
     track("sample_briefing_clicked_from_security_faq", { source });
   else if (href === "#/templates")
