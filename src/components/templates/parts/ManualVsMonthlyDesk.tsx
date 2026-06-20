@@ -10,38 +10,40 @@ export default function ManualVsMonthlyDesk() {
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="max-w-[60ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
-            Manual vs GoldFin Desk
+            Two ways to use the Vault
           </div>
           <h2
             id="manual-vs-desk-heading"
             className="mt-3 font-light text-ink text-[30px] leading-[1.12] tracking-[-0.01em] sm:text-[40px]"
           >
-            Templates are the starting point. The GoldFin Desk is the rhythm.
+            Use them yourself — or have them filled for you every month.
           </h2>
         </div>
 
         <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-2">
           <Card
             label={comparison.free.label}
+            time={comparison.free.time}
             positioning={comparison.free.positioning}
             items={comparison.free.items}
             bestFor={comparison.free.bestFor}
             tone="muted"
-            cta={{ label: "Browse Templates", href: "#template-grid" }}
+            cta={{ label: "Browse the Vault", href: "#template-grid" }}
           />
           <Card
             label={comparison.desk.label}
+            time={comparison.desk.time}
             positioning={comparison.desk.positioning}
             items={comparison.desk.items}
             bestFor={comparison.desk.bestFor}
             tone="flagship"
-            cta={{ label: "Apply for the GoldFin Desk", href: "#/apply" }}
-            secondary={{ label: "Generate Sample Briefing", href: "#/sample-briefing" }}
+            cta={{ label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" }}
+            secondary={{ label: "See a sample briefing", href: "#/sample-briefing" }}
           />
         </div>
 
         <p className="mt-8 max-w-[68ch] text-[14px] leading-relaxed text-ink/65">
-          If you use the templates and realize, “I do not want to keep doing this manually,” that is exactly what the GoldFin Desk is built for.
+          If you use the Vault and realize, “I don't want to keep doing this manually,” that is exactly what GoldFin Reports is built for — the same templates, filled for you, for $99/mo.
         </p>
       </div>
     </section>
@@ -50,6 +52,7 @@ export default function ManualVsMonthlyDesk() {
 
 function Card({
   label,
+  time,
   positioning,
   items,
   bestFor,
@@ -58,6 +61,7 @@ function Card({
   secondary,
 }: {
   label: string;
+  time: string;
   positioning: string;
   items: string[];
   bestFor: string;
@@ -77,8 +81,13 @@ function Card({
       {flag ? (
         <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/60 to-transparent" />
       ) : null}
-      <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/80">
-        {label}
+      <div className="flex items-center justify-between gap-3">
+        <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/80">
+          {label}
+        </div>
+        <div className={`shrink-0 text-[11px] font-medium tabular-nums ${flag ? "text-champagne-100" : "text-ink/45"}`}>
+          {time}
+        </div>
       </div>
       <div className="mt-2 text-[20px] font-light text-ink">{positioning}</div>
       <ul className="mt-5 space-y-2.5">
@@ -97,7 +106,7 @@ function Card({
         <a
           href={cta.href}
           onClick={() => {
-            if (cta.href === "#/apply") track("apply_clicked_from_templates", { source: "comparison" });
+            if (cta.href.includes("auto-fill")) track("autofill_clicked_from_templates", { source: "comparison" });
           }}
           className={
             flag
