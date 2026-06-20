@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import type { TemplateItem } from "../content";
 import SpreadsheetPreview from "./SpreadsheetPreview";
 import { track } from "../analytics";
@@ -11,8 +12,29 @@ type Props = {
 
 export default function TemplateCard({ template, highlighted, onGet, onPreview }: Props) {
   const diffDot = template.difficulty === "Beginner" ? "bg-green-signal" : "bg-champagne-300";
+  const ref = useRef<HTMLElement | null>(null);
+  const seen = useRef(false);
+  useEffect(() => {
+    if (!ref.current || seen.current) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting && !seen.current) {
+            seen.current = true;
+            track("template_card_viewed", { templateId: template.id });
+            io.disconnect();
+            break;
+          }
+        }
+      },
+      { threshold: 0.5 }
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, [template.id]);
   return (
     <article
+      ref={ref}
       data-template-id={template.id}
       data-highlighted={highlighted ? "true" : "false"}
       className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-white/[0.02] p-5 transition-all duration-500 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/30 hover:bg-white/[0.035] ${
