@@ -16,16 +16,21 @@ const json = (body: unknown, status = 200) =>
 
 function deliveryHtml(firstName: string, templateName: string, siteUrl: string) {
   const hi = firstName ? `Hi ${firstName},` : 'Hi,';
-  const tpl = templateName || 'finance template';
+  const tpl = templateName || 'GoldFin Template Vault';
+  const body = 'font-size:16px;line-height:1.65;margin:0 0 18px';
+  const muted = 'font-size:14px;line-height:1.65;color:#5A6170;margin:0 0 10px';
   return `<!doctype html><html><body style="margin:0;background:#ffffff;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0B0D12">
   <div style="max-width:560px;margin:0 auto;padding:40px 28px">
-    <p style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#B8893A;margin:0 0 18px">Monthly Finance Desk</p>
-    <p style="font-size:16px;line-height:1.6;margin:0 0 14px">${hi}</p>
-    <p style="font-size:16px;line-height:1.6;margin:0 0 20px">Here is your <strong>${tpl}</strong>. Open it, drop in your numbers, and you will have a clearer view of the business in about ten minutes.</p>
-    <p style="margin:0 0 28px"><a href="${siteUrl}/#/templates" style="display:inline-block;background:#D4A845;color:#0F1B3D;text-decoration:none;font-weight:600;font-size:14px;padding:12px 22px;border-radius:9999px">Open my template</a></p>
-    <hr style="border:none;border-top:1px solid #E6E8EC;margin:28px 0" />
-    <p style="font-size:14px;line-height:1.6;color:#5A6170;margin:0 0 8px">Over the next few days I will show you how owners actually use each template to make hiring, pricing, and cash-flow calls.</p>
-    <p style="font-size:14px;line-height:1.6;color:#5A6170;margin:0">Prefer it done for you? <a href="${siteUrl}/#/pricing#auto-fill" style="color:#B8893A">Have your templates filled for you every month for $99 →</a></p>
+    <p style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#B8893A;margin:0 0 20px">GoldFin Desk</p>
+    <p style="${body}">${hi}</p>
+    <p style="${body}">Here is your <strong>${tpl}</strong> — cash flow, monthly review, expense audit, hiring affordability, subscription tracker, and tax reserve. Open it, drop in your numbers, and you'll see the business more clearly in about ten minutes.</p>
+    <p style="margin:0 0 28px"><a href="${siteUrl}/#/templates" style="display:inline-block;background:#D4A845;color:#0F1B3D;text-decoration:none;font-weight:600;font-size:14px;padding:13px 24px;border-radius:9999px">Open my Vault</a></p>
+    <p style="${body}">One thing before you go. Most owners check the <strong>bank balance</strong> to feel safe. It's the fastest number to find — and the most misleading. It tells you what's <em>left</em>. It says nothing about what's <em>coming</em>: payroll, taxes, the invoice that hasn't cleared, the client who pays late.</p>
+    <p style="${body}">Over the next five days I'll send one short email showing how owners actually use each template to make real decisions — hiring, pricing, cash reserves. No spam. Just the thinking.</p>
+    <p style="font-size:15px;line-height:1.6;margin:0 0 4px">— Chris Sam</p>
+    <p style="font-size:13px;line-height:1.5;color:#8A93A3;margin:0 0 28px">GoldFin Desk</p>
+    <hr style="border:none;border-top:1px solid #E6E8EC;margin:0 0 20px" />
+    <p style="${muted}"><strong style="color:#0B0D12">P.S.</strong> Prefer not to fill these in yourself every month? That's exactly what GoldFin Reports does for $99/mo — your templates filled from your numbers, with a plain-English briefing. <a href="${siteUrl}/#/pricing#auto-fill" style="color:#B8893A">See how it works →</a></p>
   </div></body></html>`;
 }
 
