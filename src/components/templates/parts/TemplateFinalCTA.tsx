@@ -20,33 +20,33 @@ export default function TemplateFinalCTA() {
           Start free. Upgrade when you want the rhythm.
         </h2>
         <p className="mx-auto mt-5 max-w-[60ch] text-[15px] leading-relaxed text-ink/65">
-          Download the templates to begin organizing your financial view, or apply for the GoldFin Desk when you are ready for structure, automation, bi-weekly briefings, and a monthly strategy review.
+          Get the free GoldFin Template Vault to start organizing your numbers today — or have them filled for you every month with GoldFin Reports at $99/mo. No spreadsheet work, cancel anytime.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
-            href="#template-grid"
+            href="#vault-capture"
             className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
           >
-            <span className="relative z-10">Get Free Templates</span>
+            <span className="relative z-10">Send me the Vault</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </a>
           <a
-            href="#/apply"
-            onClick={() => track("apply_clicked_from_templates", { source: "final" })}
+            href="#/pricing#auto-fill"
+            onClick={() => track("autofill_clicked_from_templates", { source: "final" })}
             className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
           >
-            Apply for GoldFin Desk
+            Auto-fill my reports — $99/mo
           </a>
           <a
             href="#/sample-briefing"
             onClick={() => track("sample_briefing_clicked_from_templates", { source: "final" })}
             className="text-[12.5px] text-ink/55 underline-offset-4 hover:text-ink hover:underline"
           >
-            Generate Sample Finance Briefing
+            Or see a sample briefing
           </a>
         </div>
         <p className="mt-6 text-[11.5px] uppercase tracking-[0.22em] text-ink/40">
-          No bank connection required to start.
+          Free, email-only. No bank connection required to start.
         </p>
       </div>
     </section>
