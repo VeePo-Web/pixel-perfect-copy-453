@@ -20,15 +20,15 @@ export default function ComparisonFinalCTA() {
           Start with the missing layer.
         </h2>
         <p className="mx-auto mt-5 max-w-[64ch] text-[15px] leading-relaxed text-ink/65">
-          If your books exist, your tools are active, and your business still feels financially unclear, the GoldFin Desk may be the monthly rhythm your business has been missing.
+          If your books exist, your tools are active, and your business still feels financially unclear, GoldFin Reports is the missing layer — your numbers filled and briefed in plain English every month, for $99.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
-            href="#/apply"
-            onClick={() => track("apply_clicked_from_compare", { source: "final" })}
+            href="#/pricing#auto-fill"
+            onClick={() => track("autofill_clicked_from_compare", { source: "final" })}
             className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
           >
-            <span className="relative z-10">Apply for the GoldFin Desk</span>
+            <span className="relative z-10">Auto-fill my reports — $99/mo</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </a>
           <a
@@ -36,18 +36,18 @@ export default function ComparisonFinalCTA() {
             onClick={() => track("sample_briefing_clicked_from_compare", { source: "final" })}
             className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
           >
-            Generate Sample Finance Briefing
+            See a sample briefing
           </a>
           <a
             href="#/templates"
             onClick={() => track("templates_clicked_from_compare", { source: "final" })}
             className="text-[12.5px] text-ink/55 underline-offset-4 hover:text-ink hover:underline"
           >
-            Start With Free Templates
+            Or get the free Template Vault
           </a>
         </div>
         <p className="mt-6 text-[11.5px] uppercase tracking-[0.22em] text-ink/40">
-          No payment or bank connection required to apply.
+          $99/mo. No bank connection required to start. Cancel anytime.
         </p>
       </div>
     </section>

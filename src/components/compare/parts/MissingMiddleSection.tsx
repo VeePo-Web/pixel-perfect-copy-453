@@ -48,11 +48,11 @@ export default function MissingMiddleSection() {
 
         <div className="mt-8">
           <a
-            href="#/apply"
-            onClick={() => track("apply_clicked_from_compare", { source: "missing-middle" })}
+            href="#/pricing#auto-fill"
+            onClick={() => track("autofill_clicked_from_compare", { source: "missing-middle" })}
             className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.55)]"
           >
-            Apply for the GoldFin Desk
+            Auto-fill my reports — $99/mo
           </a>
         </div>
       </div>

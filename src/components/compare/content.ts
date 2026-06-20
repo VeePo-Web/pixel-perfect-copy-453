@@ -94,8 +94,8 @@ export const options: SupportOption[] = [
       "Not a replacement for tax, legal, bookkeeping cleanup, or full CFO leadership.",
     chooseIf:
       "You have financial data but need recurring clarity before decisions.",
-    ctaText: "Apply for the GoldFin Desk",
-    ctaHref: "#/apply",
+    ctaText: "Auto-fill my reports — $99/mo",
+    ctaHref: "#/pricing#auto-fill",
     anchorId: "row-mfd",
     position: 0.66,
     isMfd: true,
@@ -225,7 +225,7 @@ export const useCases: UseCase[] = [
     recommendation:
       "Bookkeeping keeps records clean, but does not interpret them. The GoldFin Desk adds a recurring layer of plain-English review on top of your existing bookkeeper.",
     primaryCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
   },
   {
     id: "cash-still-tight",
@@ -241,7 +241,7 @@ export const useCases: UseCase[] = [
     recommendation:
       "Pair the Hiring Affordability template with a GoldFin Desk briefing to see whether current cash flow can support another fixed payroll cost.",
     primaryCTA: { label: "Review Hiring Readiness", href: "#/templates" },
-    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
   },
   {
     id: "considering-cfo",
@@ -249,7 +249,7 @@ export const useCases: UseCase[] = [
     recommendation:
       "Many owner-led businesses get most of the value from a recurring clarity rhythm before they ever need full CFO leadership.",
     primaryCTA: { label: "Compare CFO Options", href: "#row-cfo" },
-    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
   },
   {
     id: "structure-first",
@@ -265,7 +265,7 @@ export const useCases: UseCase[] = [
     recommendation:
       "Dashboards visualize data. The GoldFin Desk turns that data into questions to review and decisions to consider every two weeks.",
     primaryCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
   },
 ];
 
@@ -341,7 +341,7 @@ export const recommendations: Record<RecommendationKey, Recommendation> = {
     summary:
       "You already have financial data — bookkeeper, software, dashboards, or spreadsheets — but lack a recurring way to understand what it means. The GoldFin Desk adds structure, plain-English bi-weekly briefings, and a monthly strategy review.",
     primaryCTA: { label: "Generate Sample Finance Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
     mobileCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
   },
   cfoCompare: {
@@ -351,8 +351,8 @@ export const recommendations: Record<RecommendationKey, Recommendation> = {
     summary:
       "A fractional CFO provides deeper strategic leadership. The GoldFin Desk is the lighter recurring clarity layer many owners find sufficient before that step. Compare both before committing.",
     primaryCTA: { label: "Compare Fractional CFO", href: "#row-cfo" },
-    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
-    mobileCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
+    mobileCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
   },
   templatesFirst: {
     key: "templatesFirst",

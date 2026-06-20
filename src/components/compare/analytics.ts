@@ -6,6 +6,7 @@ export type CompareEvent =
   | "use_case_selected"
   | "sample_briefing_clicked_from_compare"
   | "apply_clicked_from_compare"
+  | "autofill_clicked_from_compare"
   | "templates_clicked_from_compare"
   | "comparison_faq_opened"
   | "comparison_page_link_clicked";

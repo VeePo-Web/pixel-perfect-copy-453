@@ -30,8 +30,8 @@ export default function MobileStickyCTA({ recommendation }: Props) {
   let eyebrow = "60-second diagnostic";
 
   if (pastBriefing) {
-    label = "Apply for GoldFin Desk";
-    href = "#/apply";
+    label = "Auto-fill my reports — $99/mo";
+    href = "#/pricing#auto-fill";
     eyebrow = "Your next step";
   } else if (recommendation) {
     label = recommendation.mobileCTA.label;

@@ -30,6 +30,6 @@ export function trackCtaByHref(href: string, source: string) {
     track("sample_briefing_clicked_from_three_way_compare", { source });
   else if (href === "#/templates")
     track("templates_clicked_from_three_way_compare", { source });
-  else if (href === "#/pricing")
+  else if (href.startsWith("#/pricing"))
     track("pricing_clicked_from_three_way_compare", { source });
 }

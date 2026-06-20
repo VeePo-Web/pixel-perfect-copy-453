@@ -45,11 +45,11 @@ export default function ComparisonHero() {
                 Generate Sample Finance Briefing
               </a>
               <a
-                href="#/apply"
-                onClick={() => track("apply_clicked_from_compare", { source: "hero" })}
+                href="#/pricing#auto-fill"
+                onClick={() => track("autofill_clicked_from_compare", { source: "hero" })}
                 className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
-                Apply for the GoldFin Desk
+                Or have it done for you — $99/mo
               </a>
             </div>
             <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
