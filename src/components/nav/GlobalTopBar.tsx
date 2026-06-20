@@ -65,7 +65,7 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
             <a
               href="#/apply"
               aria-current={currentPath === "apply" ? "page" : undefined}
-              className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 hover:shadow-[0_8px_28px_-10px_rgba(217,190,130,0.55)]"
+              className="rounded-full bg-navy px-4 py-1.5 text-[12px] font-medium text-white ring-1 ring-gold-500/60 transition-all duration-300 hover:ring-gold-500"
             >
               Apply
             </a>
