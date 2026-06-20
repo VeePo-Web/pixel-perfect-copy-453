@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import PricingTopBar from "./parts/PricingTopBar";
+
 import PricingHero from "./parts/PricingHero";
 import PricingLadder from "./parts/PricingLadder";
 import RecommendedPlanSpotlight from "./parts/RecommendedPlanSpotlight";
@@ -26,7 +26,7 @@ export default function PricingPage() {
 
   return (
     <div className="relative pb-24 lg:pb-0">
-      <PricingTopBar currentPath="pricing" />
+      
       <PricingHero />
       <PricingLadder />
       <RecommendedPlanSpotlight />
