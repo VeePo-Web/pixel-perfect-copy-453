@@ -19,29 +19,20 @@ export default function FinalCTA() {
         <p className="mx-auto mt-5 max-w-xl text-[15px] leading-[1.7] text-ink/65">{c.sub}</p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
           <a
-            href="#/apply"
+            href="#/templates"
             className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
           >
             <span className="relative z-10">{c.primary}</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </a>
-          <a href="#top" className="rounded-full border border-ink/15 px-6 py-3.5 text-[13px] text-ink/80 transition-all duration-300 hover:border-champagne-200/40 hover:text-ink">
+          <a href="#/pricing#auto-fill" className="rounded-full border border-ink/15 px-6 py-3.5 text-[13px] text-ink/80 transition-all duration-300 hover:border-champagne-200/40 hover:text-ink">
             {c.secondary}
           </a>
-          <a href="#/templates" className="text-[13px] text-ink/55 underline-offset-4 hover:text-champagne-100 hover:underline">
+          <a href="#/apply" className="text-[13px] text-ink/55 underline-offset-4 hover:text-champagne-100 hover:underline">
             {c.tertiary}
           </a>
         </div>
         <p className="mt-6 text-[11.5px] uppercase tracking-[0.22em] text-ink/35">{c.micro}</p>
-        <p className="mt-5 text-[13px] text-ink/55">
-          Or have the templates filled for you every month.{" "}
-          <a
-            href="#/pricing#auto-fill"
-            className="text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline"
-          >
-            See how $99/mo auto-fill works →
-          </a>
-        </p>
       </div>
     </div>
   );

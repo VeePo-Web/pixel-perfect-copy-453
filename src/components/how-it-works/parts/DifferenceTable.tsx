@@ -45,7 +45,7 @@ export default function DifferenceTable() {
       </div>
       <div className="mt-8">
         <a
-          href="#/apply"
+          href="#/pricing#auto-fill"
           className="group relative overflow-hidden inline-block rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
         >
           <span className="relative z-10">{c.cta}</span>

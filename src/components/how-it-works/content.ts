@@ -2,8 +2,8 @@ export const HIW_COPY = {
   intro: {
     eyebrow: "HOW IT WORKS",
     headline: "Your monthly finance rhythm, built for owner-led businesses.",
-    sub: "The GoldFin Desk turns scattered financial activity into organized spreadsheets, bi-weekly plain-English briefings, and a monthly strategy review — so you can stop guessing from your bank balance.",
-    primary: "Apply for the GoldFin Desk",
+    sub: "GoldFin Desk turns scattered financial activity into organized spreadsheets, plain-English briefings, and a monthly review — so you can stop guessing from your bank balance. Start free, or have it done for you for $99/mo.",
+    primary: "Get the free Template Vault",
     secondary: "Generate Sample Finance Briefing",
     trust: "No bank connection required to preview the experience.",
     loop: ["Bank activity", "Spreadsheet structure", "Plain-English briefing", "Monthly review"],
@@ -201,7 +201,7 @@ export const HIW_COPY = {
         highlight: true,
       },
     ],
-    cta: "Apply for the GoldFin Desk",
+    cta: "Auto-fill my reports — $99/mo",
   },
   trust: {
     headline: "Preview safely. Connect only after trust is built.",
@@ -215,10 +215,10 @@ export const HIW_COPY = {
   },
   final: {
     headline: "Ready to stop guessing from your bank balance?",
-    sub: "Apply for the GoldFin Desk and build a recurring financial rhythm around your business: structured spreadsheets, bi-weekly briefings, and a monthly strategy review.",
-    primary: "Apply for the GoldFin Desk",
-    secondary: "Generate Sample Finance Briefing",
-    tertiary: "Start with Free Templates",
-    micro: "Application takes only a few minutes. No bank connection required to apply.",
+    sub: "Start with the free GoldFin Template Vault and organize your numbers today — or have them filled for you every month with GoldFin Reports at $99/mo.",
+    primary: "Get the free Template Vault",
+    secondary: "Auto-fill my reports — $99/mo",
+    tertiary: "Or apply for GoldFin Advisory",
+    micro: "Free, email-only. No bank connection. Upgrade anytime.",
   },
 };
