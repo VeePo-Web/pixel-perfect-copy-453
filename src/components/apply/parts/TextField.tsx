@@ -25,7 +25,7 @@ export default function TextField({ label, value, onChange, placeholder, type = 
         autoComplete={autoComplete}
         maxLength={maxLength}
         className={`w-full rounded-xl border bg-charcoal-900/50 px-4 py-3 text-[14.5px] text-bone placeholder:text-bone/30 transition-all duration-300 ease-cinema focus:outline-none focus:border-champagne-200/50 focus:bg-charcoal-900/70 ${
-          error ? "border-champagne-300/50" : "border-white/[0.08]"
+          error ? "border-champagne-300/50" : "border-ink/[0.08]"
         }`}
       />
       {error && (

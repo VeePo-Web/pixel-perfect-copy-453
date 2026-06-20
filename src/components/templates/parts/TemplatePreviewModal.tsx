@@ -12,7 +12,7 @@ export default function TemplatePreviewModal({ template, onClose, onGet }: Props
   if (!template) return null;
   return (
     <ModalShell open={!!template} onClose={onClose} labelledBy="preview-heading" size="panel">
-      <div className="flex items-center justify-between border-b border-white/[0.06] px-6 py-4">
+      <div className="flex items-center justify-between border-b border-ink/[0.06] px-6 py-4">
         <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/80">
           Template Preview
         </div>
@@ -20,7 +20,7 @@ export default function TemplatePreviewModal({ template, onClose, onGet }: Props
           type="button"
           onClick={onClose}
           aria-label="Close preview"
-          className="rounded-full border border-white/[0.08] px-3 py-1 text-[11.5px] text-bone/70 transition-colors hover:border-white/20 hover:text-bone"
+          className="rounded-full border border-ink/[0.08] px-3 py-1 text-[11.5px] text-bone/70 transition-colors hover:border-ink/20 hover:text-bone"
         >
           Close
         </button>
@@ -36,14 +36,14 @@ export default function TemplatePreviewModal({ template, onClose, onGet }: Props
           <SpreadsheetPreview rows={template.previewRows} title={template.shortName} />
         </div>
 
-        <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-white/[0.06] pt-5 text-[12.5px]">
+        <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-ink/[0.06] pt-5 text-[12.5px]">
           <Pair label="Best for" value={template.bestFor} />
           <Pair label="Time to use" value={template.timeToUse} />
           <Pair label="Difficulty" value={template.difficulty} />
           <Pair label="Category" value={template.category} />
         </dl>
 
-        <div className="mt-6 rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
+        <div className="mt-6 rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-4">
           <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/75">
             What it helps you decide
           </div>
@@ -60,7 +60,7 @@ export default function TemplatePreviewModal({ template, onClose, onGet }: Props
           </button>
           <a
             href="#/apply"
-            className="rounded-full border border-white/[0.12] px-6 py-3 text-center text-[12.5px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+            className="rounded-full border border-ink/[0.12] px-6 py-3 text-center text-[12.5px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
           >
             Want this automated and reviewed monthly? Apply for the Monthly Finance Desk
           </a>

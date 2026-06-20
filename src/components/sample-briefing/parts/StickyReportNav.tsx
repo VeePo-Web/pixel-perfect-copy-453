@@ -23,7 +23,7 @@ export default function StickyReportNav({ active }: Props) {
                 >
                   <span
                     className={`h-px transition-all duration-300 ${
-                      isActive ? "w-6 bg-champagne-200" : "w-3 bg-white/15 group-hover:w-5 group-hover:bg-white/30"
+                      isActive ? "w-6 bg-champagne-200" : "w-3 bg-ink/15 group-hover:w-5 group-hover:bg-ink/30"
                     }`}
                   />
                   {s.label}

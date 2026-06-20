@@ -26,7 +26,7 @@ function StepContent({ step, state }: { step: number; state: ApplicationState })
             </li>
           ))}
         </ul>
-        <div className="mt-5 flex items-end justify-between border-t border-white/[0.06] pt-4">
+        <div className="mt-5 flex items-end justify-between border-t border-ink/[0.06] pt-4">
           <span className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">Investment</span>
           <span className="font-zentry text-[22px] tracking-tight text-champagne-100">{r.price}</span>
         </div>
@@ -64,7 +64,7 @@ function StepContent({ step, state }: { step: number; state: ApplicationState })
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">Tools you use</div>
             <div className="mt-2 flex flex-wrap gap-1.5">
               {state.current_tools.slice(0, 6).map((t) => (
-                <span key={t} className="rounded-full border border-white/10 px-2.5 py-1 text-[11.5px] text-bone/65">
+                <span key={t} className="rounded-full border border-ink/10 px-2.5 py-1 text-[11.5px] text-bone/65">
                   {t}
                 </span>
               ))}
@@ -105,7 +105,7 @@ function StepContent({ step, state }: { step: number; state: ApplicationState })
       <Card label="Readiness Signals" title="What we look for">
         <ul className="space-y-3">
           {signals.map((s) => (
-            <li key={s.l} className="flex items-start justify-between gap-3 border-b border-white/[0.05] pb-3 last:border-0 last:pb-0">
+            <li key={s.l} className="flex items-start justify-between gap-3 border-b border-ink/[0.05] pb-3 last:border-0 last:pb-0">
               <span className="text-[12.5px] text-bone/55">{s.l}</span>
               <span className="text-right text-[12.5px] text-bone/85">{s.v}</span>
             </li>
@@ -145,7 +145,7 @@ export default function StickyFinancePreview({ step, state }: { step: number; st
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}
-          className="flex w-full items-center justify-between rounded-xl border border-white/[0.07] bg-charcoal-900/40 px-4 py-3 text-left"
+          className="flex w-full items-center justify-between rounded-xl border border-ink/[0.07] bg-charcoal-900/40 px-4 py-3 text-left"
           aria-expanded={open}
         >
           <span className="text-[12px] uppercase tracking-[0.22em] text-champagne-200/70">What happens next?</span>

@@ -5,7 +5,7 @@ export default function UpfrontRequirementsSection() {
   return (
     <section
       aria-labelledby="upfront-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
@@ -23,7 +23,7 @@ export default function UpfrontRequirementsSection() {
           {noUpfrontCards.map((c) => (
             <li
               key={c.title}
-              className="group relative rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/[0.2] hover:bg-white/[0.04] motion-safe:hover:-translate-y-0.5"
+              className="group relative rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 transition-all duration-300 hover:border-ink/[0.2] hover:bg-ink/[0.04] motion-safe:hover:-translate-y-0.5"
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-400/25 bg-emerald-400/[0.07] text-emerald-200/90">
                 <svg

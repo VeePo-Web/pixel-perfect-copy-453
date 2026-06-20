@@ -8,7 +8,7 @@ type Props = {
 
 export default function BusinessPromptInput({ value, onChange, onGenerate, onUseDemo, disabled }: Props) {
   return (
-    <div className="relative rounded-2xl border border-white/[0.08] bg-charcoal-900/50 p-5 backdrop-blur-sm transition-colors duration-400 ease-cinema focus-within:border-champagne-200/30">
+    <div className="relative rounded-2xl border border-ink/[0.08] bg-charcoal-900/50 p-5 backdrop-blur-sm transition-colors duration-400 ease-cinema focus-within:border-champagne-200/30">
       <label htmlFor="bp" className="sr-only">
         Describe your business
       </label>
@@ -31,12 +31,12 @@ export default function BusinessPromptInput({ value, onChange, onGenerate, onUse
           className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] disabled:opacity-60"
         >
           <span className="relative z-10">Generate My Sample Briefing</span>
-          <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+          <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
         </button>
         <button
           type="button"
           onClick={onUseDemo}
-          className="rounded-full border border-white/[0.1] px-5 py-3 text-[13px] text-bone/80 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+          className="rounded-full border border-ink/[0.1] px-5 py-3 text-[13px] text-bone/80 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
         >
           Use Demo Business Data
         </button>

@@ -21,7 +21,7 @@ export default function DecisionsToConsiderModule({ business }: { business: Demo
         {business.decisions.map((d, i) => (
           <div
             key={d}
-            className="flex items-start gap-3 rounded-xl border border-white/[0.07] bg-white/[0.02] px-5 py-4 transition-all duration-300 ease-cinema hover:border-champagne-200/25 hover:bg-white/[0.04]"
+            className="flex items-start gap-3 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-5 py-4 transition-all duration-300 ease-cinema hover:border-champagne-200/25 hover:bg-ink/[0.04]"
           >
             <span className="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-champagne-200" aria-hidden />
             <div>

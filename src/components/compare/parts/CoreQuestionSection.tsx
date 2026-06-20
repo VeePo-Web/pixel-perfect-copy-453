@@ -19,7 +19,7 @@ export default function CoreQuestionSection() {
   return (
     <section
       aria-labelledby="core-question-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.1fr]">
@@ -38,7 +38,7 @@ export default function CoreQuestionSection() {
             </p>
             <a
               href="#fit-finder"
-              className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/[0.12] px-5 py-2.5 text-[12.5px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+              className="mt-7 inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
             >
               Find the right fit <span aria-hidden>→</span>
             </a>
@@ -47,7 +47,7 @@ export default function CoreQuestionSection() {
             {rows.map((r) => (
               <li
                 key={r.n}
-                className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 transition-colors duration-300 hover:border-champagne-200/25"
+                className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5 transition-colors duration-300 hover:border-champagne-200/25"
               >
                 <div className="flex items-baseline gap-4">
                   <span className="font-light text-champagne-200/70 text-[22px] leading-none">{r.n}</span>

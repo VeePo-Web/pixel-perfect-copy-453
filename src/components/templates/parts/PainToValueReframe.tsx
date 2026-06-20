@@ -16,7 +16,7 @@ export default function PainToValueReframe() {
   return (
     <section
       aria-labelledby="reframe-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.1fr]">
@@ -35,7 +35,7 @@ export default function PainToValueReframe() {
             </p>
             <a
               href="#template-grid"
-              className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/[0.12] px-5 py-2.5 text-[12.5px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+              className="mt-7 inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
             >
               Browse the Template Library <span aria-hidden>→</span>
             </a>
@@ -65,7 +65,7 @@ function Column({
       className={`rounded-2xl border p-6 ${
         isLit
           ? "border-champagne-200/30 bg-charcoal-900/70 shadow-[0_30px_80px_-40px_rgba(217,190,130,0.35)]"
-          : "border-white/[0.07] bg-white/[0.02]"
+          : "border-ink/[0.07] bg-ink/[0.02]"
       }`}
     >
       <div
@@ -80,7 +80,7 @@ function Column({
           <li key={x} className="flex items-center gap-3">
             <span
               className={`h-1.5 w-1.5 rounded-full ${
-                isLit ? "bg-champagne-200" : "bg-white/15"
+                isLit ? "bg-champagne-200" : "bg-ink/15"
               }`}
             />
             <span className={`text-[14px] ${isLit ? "text-bone" : "text-bone/55"}`}>{x}</span>

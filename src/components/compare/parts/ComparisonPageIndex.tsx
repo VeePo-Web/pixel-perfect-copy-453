@@ -5,7 +5,7 @@ export default function ComparisonPageIndex() {
   return (
     <section
       aria-labelledby="index-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="max-w-[60ch]">
@@ -25,7 +25,7 @@ export default function ComparisonPageIndex() {
               <a
                 href={p.href}
                 onClick={() => track("comparison_page_link_clicked", { id: p.id })}
-                className="group flex h-full flex-col rounded-xl border border-white/[0.06] bg-white/[0.015] p-4 transition-colors duration-300 hover:border-champagne-200/25 hover:bg-white/[0.03]"
+                className="group flex h-full flex-col rounded-xl border border-ink/[0.06] bg-ink/[0.015] p-4 transition-colors duration-300 hover:border-champagne-200/25 hover:bg-ink/[0.03]"
               >
                 <div className="text-[10.5px] uppercase tracking-[0.24em] text-bone/40">
                   Compare

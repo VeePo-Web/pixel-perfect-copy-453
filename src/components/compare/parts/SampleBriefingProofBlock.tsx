@@ -5,7 +5,7 @@ export default function SampleBriefingProofBlock() {
   return (
     <section
       aria-labelledby="proof-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr]">
@@ -39,7 +39,7 @@ export default function SampleBriefingProofBlock() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(0,0,0,0.6)]">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(0,0,0,0.6)]">
             <div className="flex items-center justify-between text-[10.5px] uppercase tracking-[0.26em] text-bone/45">
               <span>Bi-weekly briefing · preview</span>
               <span className="text-champagne-200/80">Plain English</span>
@@ -48,7 +48,7 @@ export default function SampleBriefingProofBlock() {
               {sampleBriefingProof.modules.map((m) => (
                 <li
                   key={m.title}
-                  className="rounded-xl border border-white/[0.06] bg-charcoal-900/40 p-4"
+                  className="rounded-xl border border-ink/[0.06] bg-charcoal-900/40 p-4"
                 >
                   <div className="text-[10.5px] uppercase tracking-[0.24em] text-champagne-200/70">
                     Module

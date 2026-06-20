@@ -33,7 +33,7 @@ export default function ProcessTimeline() {
             A repeatable monthly operating rhythm.
           </h3>
           <ol className="mt-10 relative">
-            <div className="absolute left-[10px] top-2 bottom-2 w-px bg-white/[0.06]" />
+            <div className="absolute left-[10px] top-2 bottom-2 w-px bg-ink/[0.06]" />
             <div
               className="absolute left-[10px] top-2 w-px bg-gradient-to-b from-champagne-200/80 to-champagne-200/0 transition-all duration-700 ease-cinema"
               style={{ height: `${(active / Math.max(steps.length - 1, 1)) * 100}%` }}
@@ -46,7 +46,7 @@ export default function ProcessTimeline() {
                     className={`absolute left-[5px] top-[18px] h-3 w-3 rounded-full border transition-all duration-500 ${
                       isActive
                         ? "border-champagne-200 bg-champagne-200 shadow-[0_0_0_4px_rgba(217,190,130,0.12)]"
-                        : "border-white/15 bg-charcoal-900"
+                        : "border-ink/15 bg-charcoal-900"
                     }`}
                   />
                   <div

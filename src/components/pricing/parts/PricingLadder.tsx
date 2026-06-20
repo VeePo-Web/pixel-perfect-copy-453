@@ -4,7 +4,7 @@ import PricingCard from "./PricingCard";
 export default function PricingLadder() {
   // order for desktop: templates, toolkit, desk (center), plus, private
   return (
-    <section id="plans" aria-labelledby="ladder-title" className="border-b border-white/[0.05] bg-charcoal-950">
+    <section id="plans" aria-labelledby="ladder-title" className="border-b border-ink/[0.05] bg-charcoal-950">
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="mb-12 max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">

@@ -26,7 +26,7 @@ export default function TemplateSuccessState({ template, onClose, headingId }: P
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className="rounded-full border border-white/[0.08] px-2.5 py-1 text-[11px] text-bone/60 hover:text-bone"
+          className="rounded-full border border-ink/[0.08] px-2.5 py-1 text-[11px] text-bone/60 hover:text-bone"
         >
           ✕
         </button>
@@ -45,7 +45,7 @@ export default function TemplateSuccessState({ template, onClose, headingId }: P
         <a
           href="#/apply"
           onClick={() => track("apply_clicked_from_templates", { source: "success", templateId: template.id })}
-          className="block rounded-2xl border border-white/[0.08] bg-white/[0.02] p-4 transition-all duration-300 ease-cinema hover:border-white/20"
+          className="block rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-4 transition-all duration-300 ease-cinema hover:border-ink/20"
         >
           <div className="text-[15px] text-bone">Apply for the Monthly Finance Desk</div>
           <div className="mt-1 text-[12.5px] text-bone/55">$1,500/month. No bank connection required to apply.</div>
@@ -53,7 +53,7 @@ export default function TemplateSuccessState({ template, onClose, headingId }: P
         <button
           type="button"
           onClick={onClose}
-          className="block w-full rounded-2xl border border-white/[0.06] bg-transparent p-4 text-left transition-colors hover:border-white/15"
+          className="block w-full rounded-2xl border border-ink/[0.06] bg-transparent p-4 text-left transition-colors hover:border-ink/15"
         >
           <div className="text-[15px] text-bone/85">Browse more templates</div>
           <div className="mt-1 text-[12.5px] text-bone/50">Keep exploring the library.</div>

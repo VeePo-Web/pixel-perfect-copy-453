@@ -4,7 +4,7 @@ export default function PrivacyPrinciplesSection() {
   return (
     <section
       aria-labelledby="principles-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
@@ -28,7 +28,7 @@ export default function PrivacyPrinciplesSection() {
           {privacyPrinciples.map((p, i) => (
             <article
               key={p.title}
-              className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/[0.18] motion-safe:hover:-translate-y-0.5"
+              className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 transition-all duration-300 hover:border-ink/[0.18] motion-safe:hover:-translate-y-0.5"
             >
               <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">
                 Principle {i + 1}

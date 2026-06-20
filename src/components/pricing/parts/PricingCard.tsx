@@ -9,7 +9,7 @@ export default function PricingCard({ plan, emphasis }: Props) {
       className={`group relative flex h-full flex-col rounded-2xl border p-6 backdrop-blur-sm transition-all duration-500 ease-cinema sm:p-7 ${
         flagship
           ? "border-champagne-200/40 bg-charcoal-900/75 shadow-[0_30px_80px_-30px_rgba(217,190,130,0.35)] lg:scale-[1.04]"
-          : "border-white/[0.07] bg-charcoal-900/55 hover:-translate-y-0.5 hover:border-champagne-200/25 hover:shadow-[0_24px_60px_-30px_rgba(217,190,130,0.25)]"
+          : "border-ink/[0.07] bg-charcoal-900/55 hover:-translate-y-0.5 hover:border-champagne-200/25 hover:shadow-[0_24px_60px_-30px_rgba(217,190,130,0.25)]"
       }`}
     >
       <div
@@ -64,7 +64,7 @@ export default function PricingCard({ plan, emphasis }: Props) {
           className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-[13px] font-medium tracking-wide transition-all duration-400 ease-cinema ${
             flagship
               ? "bg-gradient-to-b from-champagne-100 to-champagne-300 text-charcoal-950 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
-              : "border border-white/[0.12] text-bone/90 hover:border-champagne-200/40 hover:text-bone"
+              : "border border-ink/[0.12] text-bone/90 hover:border-champagne-200/40 hover:text-bone"
           }`}
         >
           {plan.cta.label}

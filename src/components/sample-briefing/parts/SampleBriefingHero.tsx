@@ -17,7 +17,7 @@ type Props = {
 
 export default function SampleBriefingHero(props: Props) {
   return (
-    <section className="relative isolate overflow-hidden border-b border-white/[0.05] bg-charcoal-950">
+    <section className="relative isolate overflow-hidden border-b border-ink/[0.05] bg-charcoal-950">
       {/* ambient backdrop */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(70%_50%_at_70%_0%,rgba(201,163,90,0.10),transparent_60%)]" />

@@ -29,7 +29,7 @@ export default function TextAreaWithChips({ label, value, onChange, placeholder,
         rows={4}
         maxLength={maxLength}
         className={`w-full resize-none rounded-xl border bg-charcoal-900/50 px-4 py-3 text-[14.5px] leading-[1.6] text-bone placeholder:text-bone/30 transition-all duration-300 ease-cinema focus:outline-none focus:border-champagne-200/50 focus:bg-charcoal-900/70 ${
-          error ? "border-champagne-300/50" : "border-white/[0.08]"
+          error ? "border-champagne-300/50" : "border-ink/[0.08]"
         }`}
       />
       {chips && (
@@ -39,7 +39,7 @@ export default function TextAreaWithChips({ label, value, onChange, placeholder,
               key={c}
               type="button"
               onClick={() => appendChip(c)}
-              className="rounded-full border border-white/[0.07] bg-charcoal-900/40 px-3 py-1.5 text-[11.5px] text-bone/65 transition-all duration-300 hover:border-champagne-200/30 hover:text-bone"
+              className="rounded-full border border-ink/[0.07] bg-charcoal-900/40 px-3 py-1.5 text-[11.5px] text-bone/65 transition-all duration-300 hover:border-champagne-200/30 hover:text-bone"
             >
               + {c}
             </button>

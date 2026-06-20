@@ -22,7 +22,7 @@ export default function FinancialSupportFitFinder({ finder }: Props) {
     <section
       id="fit-finder"
       aria-labelledby="fit-finder-heading"
-      className="relative scroll-mt-24 border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
@@ -41,7 +41,7 @@ export default function FinancialSupportFitFinder({ finder }: Props) {
         </div>
 
         <div className="mt-10 grid items-start gap-5 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 sm:p-7">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 sm:p-7">
             <Step
               index={1}
               total={3}
@@ -70,7 +70,7 @@ export default function FinancialSupportFitFinder({ finder }: Props) {
               name="three-way-fit-stage"
               last
             />
-            <div className="mt-6 flex items-center justify-between gap-3 border-t border-white/[0.06] pt-5">
+            <div className="mt-6 flex items-center justify-between gap-3 border-t border-ink/[0.06] pt-5">
               <p className="text-[11.5px] uppercase tracking-[0.22em] text-bone/40">
                 {finder.completed ? "Recommendation ready" : "Three quick questions"}
               </p>
@@ -122,7 +122,7 @@ function Step({
   last?: boolean;
 }) {
   return (
-    <div className={last ? "" : "mb-7 border-b border-white/[0.05] pb-7"}>
+    <div className={last ? "" : "mb-7 border-b border-ink/[0.05] pb-7"}>
       <div className="flex items-baseline justify-between gap-3">
         <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/75">
           Step {index} / {total}
@@ -142,7 +142,7 @@ function Step({
                 className={`group inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-[12.5px] transition-all duration-300 ease-cinema ${
                   checked
                     ? "border-champagne-200/55 bg-champagne-200/[0.08] text-bone shadow-[0_8px_30px_-12px_rgba(217,190,130,0.45)]"
-                    : "border-white/[0.10] bg-white/[0.02] text-bone/70 hover:border-champagne-200/30 hover:text-bone"
+                    : "border-ink/[0.10] bg-ink/[0.02] text-bone/70 hover:border-champagne-200/30 hover:text-bone"
                 }`}
               >
                 <input
@@ -156,7 +156,7 @@ function Step({
                 <span
                   aria-hidden
                   className={`inline-block h-3.5 w-3.5 shrink-0 rounded-full border ${
-                    checked ? "border-champagne-200 bg-champagne-200" : "border-white/25"
+                    checked ? "border-champagne-200 bg-champagne-200" : "border-ink/25"
                   }`}
                 />
                 <span>{opt.label}</span>
@@ -171,7 +171,7 @@ function Step({
 
 function EmptyPanel({ filled }: { filled: number }) {
   return (
-    <div className="rounded-2xl border border-dashed border-white/[0.10] bg-white/[0.01] p-7">
+    <div className="rounded-2xl border border-dashed border-ink/[0.10] bg-ink/[0.01] p-7">
       <div className="text-[10.5px] uppercase tracking-[0.28em] text-bone/45">
         Your recommendation
       </div>
@@ -179,7 +179,7 @@ function EmptyPanel({ filled }: { filled: number }) {
         Answer the three questions to see whether you most likely need a bookkeeper first, the
         Monthly Finance Desk, a fractional CFO, or the free templates.
       </p>
-      <div className="mt-6 h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
+      <div className="mt-6 h-1.5 w-full overflow-hidden rounded-full bg-ink/[0.06]">
         <div
           className="h-full rounded-full bg-gradient-to-r from-champagne-100 to-champagne-300 transition-all duration-500 ease-cinema"
           style={{ width: `${(filled / 3) * 100}%` }}

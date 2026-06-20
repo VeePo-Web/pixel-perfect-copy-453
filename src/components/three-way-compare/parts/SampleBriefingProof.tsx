@@ -31,7 +31,7 @@ export default function SampleBriefingProof() {
     <section
       id="sample-briefing"
       aria-labelledby="briefing-proof-heading"
-      className="relative scroll-mt-24 border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr]">
@@ -67,7 +67,7 @@ export default function SampleBriefingProof() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(0,0,0,0.6)]">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(0,0,0,0.6)]">
             <div className="flex items-center justify-between text-[10.5px] uppercase tracking-[0.26em] text-bone/45">
               <span>{briefing.title}</span>
               <span className="text-champagne-200/80">Plain English</span>
@@ -76,7 +76,7 @@ export default function SampleBriefingProof() {
               {briefing.modules.map((m, i) => (
                 <li
                   key={m.title}
-                  className={`rounded-xl border border-white/[0.06] bg-charcoal-900/40 p-4 transition-all duration-500 ease-cinema ${
+                  className={`rounded-xl border border-ink/[0.06] bg-charcoal-900/40 p-4 transition-all duration-500 ease-cinema ${
                     visible
                       ? "translate-y-0 opacity-100"
                       : "translate-y-2 opacity-0"

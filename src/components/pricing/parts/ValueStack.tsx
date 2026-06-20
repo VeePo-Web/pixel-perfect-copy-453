@@ -3,7 +3,7 @@ import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function ValueStack() {
   return (
-    <section aria-labelledby="value-title" className="border-b border-white/[0.05] bg-charcoal-950">
+    <section aria-labelledby="value-title" className="border-b border-ink/[0.05] bg-charcoal-950">
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
@@ -27,7 +27,7 @@ export default function ValueStack() {
           >
             <span className="relative z-10">Apply for the Monthly Finance Desk</span>
             <span aria-hidden className="relative z-10">→</span>
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </a>
         </div>
       </div>
@@ -40,7 +40,7 @@ function ValueRow({ index, item }: { index: number; item: (typeof valueStack)[nu
   return (
     <li
       ref={ref}
-      className={`grid items-start gap-6 rounded-2xl border border-white/[0.07] bg-charcoal-900/55 p-6 transition-all duration-700 ease-cinema sm:p-8 md:grid-cols-[60px_1fr_1fr] ${
+      className={`grid items-start gap-6 rounded-2xl border border-ink/[0.07] bg-charcoal-900/55 p-6 transition-all duration-700 ease-cinema sm:p-8 md:grid-cols-[60px_1fr_1fr] ${
         inView ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
       }`}
       style={{ transitionDelay: `${index * 60}ms` }}
@@ -55,7 +55,7 @@ function ValueRow({ index, item }: { index: number; item: (typeof valueStack)[nu
           <p className="mt-3 text-[12px] uppercase tracking-[0.18em] text-bone/45">{item.trust}</p>
         )}
       </div>
-      <div className="rounded-xl border border-white/[0.05] bg-white/[0.02] p-5">
+      <div className="rounded-xl border border-ink/[0.05] bg-ink/[0.02] p-5">
         <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/50">Why it matters</div>
         <p className="mt-2 text-[14px] leading-[1.65] text-bone/80">{item.why}</p>
       </div>

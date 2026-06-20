@@ -10,7 +10,7 @@ export default function ConcentrationMeter({ value, label = "Top-3 client share"
         <span className="text-[10.5px] uppercase tracking-[0.22em] text-bone/55">{label}</span>
         <span className="text-[13px] tabular-nums text-bone/85">{pct.toFixed(0)}%</span>
       </div>
-      <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
+      <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-ink/[0.06]">
         <div
           className={`h-full ${tone} transition-[width] duration-700 ease-cinema`}
           style={{ width: `${pct}%` }}

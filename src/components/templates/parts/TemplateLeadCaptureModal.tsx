@@ -80,7 +80,7 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
               type="button"
               aria-label="Close"
               onClick={onClose}
-              className="rounded-full border border-white/[0.08] px-2.5 py-1 text-[11px] text-bone/60 hover:text-bone"
+              className="rounded-full border border-ink/[0.08] px-2.5 py-1 text-[11px] text-bone/60 hover:text-bone"
             >
               ✕
             </button>
@@ -125,7 +125,7 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
                       className={`min-h-[34px] rounded-full border px-3 py-1.5 text-[12px] transition-all duration-300 ease-cinema ${
                         on
                           ? "border-champagne-200/60 bg-champagne-200/[0.08] text-bone"
-                          : "border-white/[0.08] bg-white/[0.02] text-bone/65 hover:border-white/20"
+                          : "border-ink/[0.08] bg-ink/[0.02] text-bone/65 hover:border-ink/20"
                       }`}
                     >
                       {g.label}
@@ -181,7 +181,7 @@ function Field({
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-err` : undefined}
-        className="mt-1.5 w-full rounded-xl border border-white/[0.1] bg-white/[0.02] px-3.5 py-3 text-[14px] text-bone outline-none transition-colors focus:border-champagne-200/50"
+        className="mt-1.5 w-full rounded-xl border border-ink/[0.1] bg-ink/[0.02] px-3.5 py-3 text-[14px] text-bone outline-none transition-colors focus:border-champagne-200/50"
       />
       {error ? (
         <p id={`${id}-err`} role="alert" aria-live="polite" className="mt-1.5 text-[11.5px] text-champagne-300">
@@ -217,7 +217,7 @@ function SelectField({
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-err` : undefined}
-        className="mt-1.5 w-full appearance-none rounded-xl border border-white/[0.1] bg-white/[0.02] px-3.5 py-3 text-[14px] text-bone outline-none transition-colors focus:border-champagne-200/50"
+        className="mt-1.5 w-full appearance-none rounded-xl border border-ink/[0.1] bg-ink/[0.02] px-3.5 py-3 text-[14px] text-bone outline-none transition-colors focus:border-champagne-200/50"
       >
         <option value="" disabled>
           Select…

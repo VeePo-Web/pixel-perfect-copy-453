@@ -30,7 +30,7 @@ export default function TemplateBridge() {
           {templateBridgeItems.map((t) => (
             <div
               key={t.title}
-              className="group rounded-2xl border border-white/[0.07] bg-charcoal-900/50 p-6 transition-all duration-400 ease-cinema hover:-translate-y-1 hover:border-champagne-200/30"
+              className="group rounded-2xl border border-ink/[0.07] bg-charcoal-900/50 p-6 transition-all duration-400 ease-cinema hover:-translate-y-1 hover:border-champagne-200/30"
             >
               <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/45">Template</div>
               <h3 className="mt-2 text-[17px] font-light text-bone">{t.title}</h3>

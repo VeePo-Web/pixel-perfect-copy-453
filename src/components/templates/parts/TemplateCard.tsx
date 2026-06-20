@@ -37,10 +37,10 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
       ref={ref}
       data-template-id={template.id}
       data-highlighted={highlighted ? "true" : "false"}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-white/[0.02] p-5 transition-all duration-500 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/30 hover:bg-white/[0.035] ${
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-ink/[0.02] p-5 transition-all duration-500 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/30 hover:bg-ink/[0.035] ${
         highlighted
           ? "border-champagne-200/55 shadow-[0_0_0_1px_rgba(217,190,130,0.25),0_30px_60px_-30px_rgba(217,190,130,0.35)]"
-          : "border-white/[0.07]"
+          : "border-ink/[0.07]"
       }`}
     >
       <div className="flex items-start justify-between gap-3">
@@ -97,7 +97,7 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
         </button>
       </div>
 
-      <div className="mt-4 border-t border-white/[0.06] pt-3">
+      <div className="mt-4 border-t border-ink/[0.06] pt-3">
         <a
           href="#/apply"
           className="text-[11.5px] text-bone/50 transition-colors hover:text-champagne-200"

@@ -12,7 +12,7 @@ export default function TrustSection() {
         {c.cards.map((card, i) => (
           <div
             key={card}
-            className={`relative rounded-xl border border-white/[0.06] bg-charcoal-900/40 p-5 transition-all duration-500 ease-cinema hover:border-champagne-200/30 hover:-translate-y-0.5 ${
+            className={`relative rounded-xl border border-ink/[0.06] bg-charcoal-900/40 p-5 transition-all duration-500 ease-cinema hover:border-champagne-200/30 hover:-translate-y-0.5 ${
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
             }`}
             style={{ transitionDelay: `${80 + i * 80}ms` }}

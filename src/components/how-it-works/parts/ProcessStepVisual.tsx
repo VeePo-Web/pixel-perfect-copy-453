@@ -67,7 +67,7 @@ function StepPlaid() {
     <div ref={ref}>
       <Frame label="Secure data connection">
         <div className="relative grid grid-cols-3 items-center gap-4 py-6">
-          <div className="rounded-xl border border-white/[0.06] bg-charcoal-800/60 p-4">
+          <div className="rounded-xl border border-ink/[0.06] bg-charcoal-800/60 p-4">
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">Bank</div>
             <div className="mt-3 text-[15px] text-bone/85">Operating Account</div>
             <div className="mt-1 text-[11.5px] text-bone/40">•••• 4821</div>
@@ -110,7 +110,7 @@ function StepOrganize() {
           {items.map((it, i) => (
             <li
               key={it.from}
-              className={`grid grid-cols-[1.2fr_auto_1fr] items-center gap-3 rounded-md border border-white/[0.04] bg-charcoal-900/50 px-3 py-2.5 transition-all duration-500 ease-cinema ${
+              className={`grid grid-cols-[1.2fr_auto_1fr] items-center gap-3 rounded-md border border-ink/[0.04] bg-charcoal-900/50 px-3 py-2.5 transition-all duration-500 ease-cinema ${
                 inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-3"
               }`}
               style={{ transitionDelay: `${120 + i * 90}ms` }}
@@ -141,7 +141,7 @@ function StepBriefing() {
           {lines.map((ln, i) => (
             <div
               key={ln.l}
-              className={`rounded-md border border-white/[0.04] bg-charcoal-900/50 p-3 transition-all duration-500 ease-cinema ${
+              className={`rounded-md border border-ink/[0.04] bg-charcoal-900/50 p-3 transition-all duration-500 ease-cinema ${
                 inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
               }`}
               style={{ transitionDelay: `${160 + i * 130}ms` }}
@@ -168,7 +168,7 @@ function StepReview() {
             <div className="mt-1 font-zentry text-3xl leading-none text-bone">28</div>
             <div className="mt-1 text-[10.5px] text-champagne-200/70">1:00 PM</div>
           </div>
-          <div className="rounded-xl border border-white/[0.06] bg-charcoal-900/50 p-4">
+          <div className="rounded-xl border border-ink/[0.06] bg-charcoal-900/50 p-4">
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">Agenda</div>
             <ul className="mt-2 space-y-1.5">
               {agenda.map((a, i) => (

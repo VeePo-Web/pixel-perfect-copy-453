@@ -6,7 +6,7 @@ export default function SecurityFAQHero() {
   return (
     <section
       id="trust-flow"
-      className="relative scroll-mt-24 overflow-hidden border-b border-white/[0.05] bg-charcoal-950 pt-28 lg:pt-32"
+      className="relative scroll-mt-24 overflow-hidden border-b border-ink/[0.05] bg-charcoal-950 pt-28 lg:pt-32"
     >
       <div
         aria-hidden
@@ -48,7 +48,7 @@ export default function SecurityFAQHero() {
           <a
             href="#/apply"
             onClick={() => trackCtaByHref("#/apply", "security_faq_hero")}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-6 text-[13.5px] text-bone transition-colors duration-300 hover:border-white/30 hover:bg-white/[0.03]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-6 text-[13.5px] text-bone transition-colors duration-300 hover:border-ink/30 hover:bg-ink/[0.03]"
           >
             Apply for the Monthly Finance Desk
           </a>

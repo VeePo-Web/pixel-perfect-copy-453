@@ -17,7 +17,7 @@ export default function MobileStickyCTA({ status, onGenerate }: Props) {
   const ready = status === "ready";
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-40 transform border-t border-white/[0.08] bg-charcoal-950/95 backdrop-blur-md transition-all duration-500 ease-cinema lg:hidden ${
+      className={`fixed inset-x-0 bottom-0 z-40 transform border-t border-ink/[0.08] bg-charcoal-950/95 backdrop-blur-md transition-all duration-500 ease-cinema lg:hidden ${
         visible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
       }`}
       style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}

@@ -5,7 +5,7 @@ export default function DecisionGuideSummary() {
   return (
     <section
       aria-labelledby="decision-summary-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="max-w-[60ch]">
@@ -20,7 +20,7 @@ export default function DecisionGuideSummary() {
           </h2>
         </div>
 
-        <ul className="mt-8 divide-y divide-white/[0.06] rounded-2xl border border-white/[0.07] bg-white/[0.02]">
+        <ul className="mt-8 divide-y divide-ink/[0.06] rounded-2xl border border-ink/[0.07] bg-ink/[0.02]">
           {decisionSummary.map((row, i) => (
             <li
               key={row.need}
@@ -36,7 +36,7 @@ export default function DecisionGuideSummary() {
               <a
                 href={row.href}
                 onClick={() => trackCtaByHref(row.href, `decision-${i}`)}
-                className="justify-self-start rounded-full border border-white/[0.12] px-4 py-2 text-[12.5px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone sm:justify-self-end"
+                className="justify-self-start rounded-full border border-ink/[0.12] px-4 py-2 text-[12.5px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone sm:justify-self-end"
               >
                 Go →
               </a>

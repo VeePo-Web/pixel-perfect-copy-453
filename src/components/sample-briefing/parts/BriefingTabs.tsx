@@ -37,7 +37,7 @@ export default function BriefingTabs({ business }: { business: DemoBusiness }) {
   const current = content[active];
 
   return (
-    <section className="border-b border-white/[0.05] bg-charcoal-950">
+    <section className="border-b border-ink/[0.05] bg-charcoal-950">
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
@@ -70,7 +70,7 @@ export default function BriefingTabs({ business }: { business: DemoBusiness }) {
                   className={`whitespace-nowrap rounded-full border px-5 py-2.5 text-[13px] tracking-wide transition-all duration-300 ease-cinema ${
                     isActive
                       ? "border-champagne-200/50 bg-charcoal-800/80 text-bone shadow-[0_0_0_1px_rgba(217,190,130,0.18)]"
-                      : "border-white/[0.08] text-bone/55 hover:border-white/20 hover:text-bone/85"
+                      : "border-ink/[0.08] text-bone/55 hover:border-ink/20 hover:text-bone/85"
                   }`}
                 >
                   {t.label}
@@ -113,7 +113,7 @@ function Panel({
       ? "border-champagne-200/25 bg-champagne-300/[0.04]"
       : accent === "green"
       ? "border-green-signal/30 bg-green-deep/20"
-      : "border-white/[0.07] bg-white/[0.02]";
+      : "border-ink/[0.07] bg-ink/[0.02]";
   return (
     <div
       className={`rounded-2xl border ${accentClass} p-6 transition-all duration-300 ease-cinema hover:-translate-y-0.5`}

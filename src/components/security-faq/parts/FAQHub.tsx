@@ -9,7 +9,7 @@ export default function FAQHub() {
     <section
       id="faq"
       aria-labelledby="faq-hub-heading"
-      className="relative scroll-mt-24 border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
@@ -36,7 +36,7 @@ export default function FAQHub() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search security, pricing, application, or process questions…"
-              className="h-12 w-full rounded-full border border-white/[0.08] bg-white/[0.02] pl-12 pr-5 text-[13.5px] text-bone placeholder:text-bone/35 focus:border-champagne-200/40 focus:outline-none focus:ring-2 focus:ring-champagne-200/20"
+              className="h-12 w-full rounded-full border border-ink/[0.08] bg-ink/[0.02] pl-12 pr-5 text-[13.5px] text-bone placeholder:text-bone/35 focus:border-champagne-200/40 focus:outline-none focus:ring-2 focus:ring-champagne-200/20"
             />
             <svg
               aria-hidden
@@ -83,11 +83,11 @@ export default function FAQHub() {
           {/* Accordions */}
           <div>
             {filtered.length === 0 ? (
-              <p className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 text-[13.5px] text-bone/55">
+              <p className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 text-[13.5px] text-bone/55">
                 No questions match that search. Try a different word, or pick a category.
               </p>
             ) : (
-              <div className="divide-y divide-white/[0.06] rounded-2xl border border-white/[0.07] bg-white/[0.02]">
+              <div className="divide-y divide-ink/[0.06] rounded-2xl border border-ink/[0.07] bg-ink/[0.02]">
                 {filtered.map((f) => {
                   const open = openId === f.id;
                   return (
@@ -152,7 +152,7 @@ function CategoryChip({
       className={`shrink-0 rounded-full border px-3 py-1.5 text-[12.5px] transition-colors lg:w-full lg:rounded-lg lg:text-left lg:px-3 ${
         active
           ? "border-champagne-200/40 bg-champagne-200/[0.08] text-bone"
-          : "border-white/[0.08] bg-transparent text-bone/55 hover:border-white/[0.18] hover:text-bone"
+          : "border-ink/[0.08] bg-transparent text-bone/55 hover:border-ink/[0.18] hover:text-bone"
       }`}
     >
       {label}

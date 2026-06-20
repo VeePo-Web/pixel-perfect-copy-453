@@ -13,7 +13,7 @@ export default function ModuleShell({ id, eyebrow, title, children, cta, classNa
   return (
     <section
       id={id}
-      className={`group relative scroll-mt-28 rounded-2xl border border-white/[0.06] bg-charcoal-900/55 p-7 backdrop-blur-sm transition-all duration-500 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/25 hover:shadow-[0_24px_60px_-30px_rgba(217,190,130,0.25)] sm:p-9 ${className ?? ""}`}
+      className={`group relative scroll-mt-28 rounded-2xl border border-ink/[0.06] bg-charcoal-900/55 p-7 backdrop-blur-sm transition-all duration-500 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/25 hover:shadow-[0_24px_60px_-30px_rgba(217,190,130,0.25)] sm:p-9 ${className ?? ""}`}
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       {eyebrow && (

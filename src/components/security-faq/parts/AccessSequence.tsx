@@ -6,7 +6,7 @@ export default function AccessSequence() {
     <section
       id="sequence"
       aria-labelledby="sequence-heading"
-      className="relative scroll-mt-24 border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
@@ -22,7 +22,7 @@ export default function AccessSequence() {
           {accessSequence.map((s) => (
             <li
               key={s.n}
-              className="group relative flex flex-col rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 transition-all duration-300 hover:border-white/[0.18] hover:bg-white/[0.035] motion-safe:hover:-translate-y-0.5"
+              className="group relative flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5 transition-all duration-300 hover:border-ink/[0.18] hover:bg-ink/[0.035] motion-safe:hover:-translate-y-0.5"
             >
               <div className="flex items-center justify-between">
                 <span className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">
@@ -45,7 +45,7 @@ export default function AccessSequence() {
             onClick={() =>
               trackCtaByHref("#/sample-briefing", "security_faq_sequence")
             }
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-5 text-[13px] text-bone transition-colors hover:border-white/30 hover:bg-white/[0.03]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-bone transition-colors hover:border-ink/30 hover:bg-ink/[0.03]"
           >
             Start With a Safe Preview →
           </a>

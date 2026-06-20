@@ -34,7 +34,7 @@ export default function PlaidExplanationSection() {
       id="plaid"
       ref={ref}
       aria-labelledby="plaid-heading"
-      className="relative scroll-mt-24 border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
@@ -55,7 +55,7 @@ export default function PlaidExplanationSection() {
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-center">
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6">
             <p className="text-[14px] leading-relaxed text-bone/75">
               Plaid is used to help connect financial data from business bank accounts
               after onboarding. This helps reduce manual entry and allows the Monthly
@@ -84,7 +84,7 @@ export default function PlaidExplanationSection() {
             {flow.map((label, i) => (
               <li
                 key={label}
-                className="flex items-center gap-3 rounded-xl border border-white/[0.06] bg-white/[0.015] px-4 py-3"
+                className="flex items-center gap-3 rounded-xl border border-ink/[0.06] bg-ink/[0.015] px-4 py-3"
               >
                 <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-sky-400/30 bg-sky-400/[0.08] text-[11px] text-sky-200/90">
                   {i + 1}
@@ -101,7 +101,7 @@ export default function PlaidExplanationSection() {
             onClick={() =>
               trackCtaByHref("#/sample-briefing", "security_faq_plaid")
             }
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-5 text-[13px] text-bone transition-colors hover:border-white/30 hover:bg-white/[0.03]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-bone transition-colors hover:border-ink/30 hover:bg-ink/[0.03]"
           >
             Generate a Sample Briefing Without Plaid →
           </a>

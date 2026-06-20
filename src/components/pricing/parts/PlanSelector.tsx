@@ -6,7 +6,7 @@ export default function PlanSelector() {
   const q = !s.done ? selectorQuestions[s.step] : null;
 
   return (
-    <section aria-labelledby="selector-title" className="border-b border-white/[0.05] bg-charcoal-950">
+    <section aria-labelledby="selector-title" className="border-b border-ink/[0.05] bg-charcoal-950">
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
           <div>
@@ -26,7 +26,7 @@ export default function PlanSelector() {
                   <span
                     key={i}
                     className={`h-1 flex-1 max-w-[60px] rounded-full transition-colors duration-400 ${
-                      reached ? "bg-champagne-200" : "bg-white/[0.08]"
+                      reached ? "bg-champagne-200" : "bg-ink/[0.08]"
                     }`}
                   />
                 );
@@ -37,7 +37,7 @@ export default function PlanSelector() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-white/[0.08] bg-charcoal-900/65 p-6 backdrop-blur-sm sm:p-8">
+          <div className="rounded-3xl border border-ink/[0.08] bg-charcoal-900/65 p-6 backdrop-blur-sm sm:p-8">
             {q && (
               <div key={q.key} className="motion-safe:animate-section-in">
                 <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/45">
@@ -57,7 +57,7 @@ export default function PlanSelector() {
                         className={`flex items-center justify-between gap-3 rounded-xl border px-5 py-3.5 text-left text-[14px] transition-all duration-300 ease-cinema ${
                           selected
                             ? "border-champagne-200/50 bg-charcoal-800/80 text-bone"
-                            : "border-white/[0.08] bg-white/[0.02] text-bone/80 hover:border-white/20 hover:text-bone"
+                            : "border-ink/[0.08] bg-ink/[0.02] text-bone/80 hover:border-ink/20 hover:text-bone"
                         }`}
                       >
                         <span>{opt.label}</span>
@@ -101,12 +101,12 @@ export default function PlanSelector() {
                     className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
                   >
                     <span className="relative z-10">{s.recommendation.cta.label}</span>
-                    <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+                    <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
                   </a>
                   <button
                     type="button"
                     onClick={s.reset}
-                    className="rounded-full border border-white/[0.12] px-5 py-3 text-[13px] text-bone/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-bone"
+                    className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-bone/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-bone"
                   >
                     Start over
                   </button>

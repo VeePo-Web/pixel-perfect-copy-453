@@ -61,7 +61,7 @@ export default function ApplicationStepShell({
               className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema enabled:hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <span className="relative z-10">{continueLabel}</span>
-              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
             </button>
           )}
         </div>
@@ -70,7 +70,7 @@ export default function ApplicationStepShell({
       {/* Mobile sticky continue */}
       {onContinue && (
         <div
-          className="fixed inset-x-0 bottom-0 z-30 border-t border-white/[0.06] bg-charcoal-950/90 px-4 pb-4 pt-3 backdrop-blur-md md:hidden"
+          className="fixed inset-x-0 bottom-0 z-30 border-t border-ink/[0.06] bg-charcoal-950/90 px-4 pb-4 pt-3 backdrop-blur-md md:hidden"
           style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 0.75rem)" }}
         >
           <div className="flex items-center gap-3">
@@ -78,7 +78,7 @@ export default function ApplicationStepShell({
               <button
                 type="button"
                 onClick={onBack}
-                className="rounded-full border border-white/15 px-4 py-3 text-[13px] text-bone/75"
+                className="rounded-full border border-ink/15 px-4 py-3 text-[13px] text-bone/75"
               >
                 Back
               </button>

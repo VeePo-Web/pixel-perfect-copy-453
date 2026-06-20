@@ -9,7 +9,7 @@ export default function ExpensePatternModule({ business }: { business: DemoBusin
   return (
     <ModuleShell id="expense-pattern" eyebrow="Expense Pattern" title="Where the money went, and what is moving.">
       <div className="grid gap-6 lg:grid-cols-[auto_1fr]">
-        <div className="flex flex-col items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.02] p-6">
+        <div className="flex flex-col items-center justify-center rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-6">
           <Donut slices={business.expenseMix} size={210} />
           <div className="mt-4 text-center">
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/55">Total expenses</div>
@@ -20,7 +20,7 @@ export default function ExpensePatternModule({ business }: { business: DemoBusin
           </div>
         </div>
         <div>
-          <ul className="divide-y divide-white/[0.05] overflow-hidden rounded-xl border border-white/[0.07] bg-white/[0.02]">
+          <ul className="divide-y divide-ink/[0.05] overflow-hidden rounded-xl border border-ink/[0.07] bg-ink/[0.02]">
             {business.expenseMix.map((s, i) => (
               <li key={s.label} className="grid grid-cols-[16px_1fr_auto_auto] items-center gap-4 px-4 py-3.5">
                 <span

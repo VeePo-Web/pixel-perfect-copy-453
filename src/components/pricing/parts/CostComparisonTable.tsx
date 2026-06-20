@@ -10,7 +10,7 @@ const COLS: { key: keyof typeof comparisonRows[number]; label: string }[] = [
 
 export default function CostComparisonTable() {
   return (
-    <section aria-labelledby="compare-title" className="border-b border-white/[0.05] bg-charcoal-950">
+    <section aria-labelledby="compare-title" className="border-b border-ink/[0.05] bg-charcoal-950">
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
@@ -25,10 +25,10 @@ export default function CostComparisonTable() {
         </div>
 
         {/* Desktop table */}
-        <div className="mt-12 hidden overflow-hidden rounded-2xl border border-white/[0.07] bg-charcoal-900/55 md:block">
+        <div className="mt-12 hidden overflow-hidden rounded-2xl border border-ink/[0.07] bg-charcoal-900/55 md:block">
           <table className="w-full border-collapse text-left">
             <thead>
-              <tr className="border-b border-white/[0.06]">
+              <tr className="border-b border-ink/[0.06]">
                 <th scope="col" className="w-[20%] px-5 py-4 text-[10.5px] font-medium uppercase tracking-[0.22em] text-bone/55">
                   Alternative
                 </th>
@@ -43,10 +43,10 @@ export default function CostComparisonTable() {
               {comparisonRows.map((r) => (
                 <tr
                   key={r.alternative}
-                  className={`border-b border-white/[0.05] align-top transition-colors ${
+                  className={`border-b border-ink/[0.05] align-top transition-colors ${
                     r.flagship
                       ? "bg-champagne-300/[0.04]"
-                      : "hover:bg-white/[0.015]"
+                      : "hover:bg-ink/[0.015]"
                   }`}
                 >
                   <th
@@ -90,7 +90,7 @@ export default function CostComparisonTable() {
               className={`group rounded-2xl border p-5 transition-colors ${
                 r.flagship
                   ? "border-champagne-200/35 bg-champagne-300/[0.05]"
-                  : "border-white/[0.07] bg-charcoal-900/55"
+                  : "border-ink/[0.07] bg-charcoal-900/55"
               }`}
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4">

@@ -5,7 +5,7 @@ export default function FastAnswerTable() {
     <section
       id="fast-answer"
       aria-labelledby="fast-answer-heading"
-      className="relative scroll-mt-24 border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
@@ -21,11 +21,11 @@ export default function FastAnswerTable() {
         </div>
 
         {/* Desktop table */}
-        <div className="mt-10 hidden overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] lg:block">
+        <div className="mt-10 hidden overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.02] lg:block">
           <table className="w-full border-collapse text-left text-[13px]">
             <caption className="sr-only">Comparison of financial support options.</caption>
             <thead>
-              <tr className="border-b border-white/[0.07] text-[10.5px] uppercase tracking-[0.24em] text-bone/45">
+              <tr className="border-b border-ink/[0.07] text-[10.5px] uppercase tracking-[0.24em] text-bone/45">
                 <th scope="col" className="px-5 py-4 font-normal">Option</th>
                 <th scope="col" className="px-5 py-4 font-normal">Best when you need</th>
                 <th scope="col" className="px-5 py-4 font-normal">Usually misses</th>
@@ -37,7 +37,7 @@ export default function FastAnswerTable() {
                 <tr
                   key={o.id}
                   id={o.anchorId}
-                  className={`scroll-mt-24 border-b border-white/[0.05] align-top last:border-b-0 ${
+                  className={`scroll-mt-24 border-b border-ink/[0.05] align-top last:border-b-0 ${
                     o.isMfd ? "bg-champagne-200/[0.04]" : ""
                   }`}
                 >
@@ -67,7 +67,7 @@ export default function FastAnswerTable() {
               className={`rounded-2xl border ${
                 o.isMfd
                   ? "border-champagne-200/45 bg-charcoal-900/70"
-                  : "border-white/[0.07] bg-white/[0.02]"
+                  : "border-ink/[0.07] bg-ink/[0.02]"
               }`}
             >
               <details className="group [&_summary::-webkit-details-marker]:hidden" open={o.isMfd}>
@@ -80,7 +80,7 @@ export default function FastAnswerTable() {
                     +
                   </span>
                 </summary>
-                <div className="grid gap-3 border-t border-white/[0.06] px-5 py-4 text-[13px]">
+                <div className="grid gap-3 border-t border-ink/[0.06] px-5 py-4 text-[13px]">
                   <Row label="Best when" value={o.bestWhen} />
                   <Row label="Usually misses" value={o.usuallyMisses} tone="muted" />
                   <Row label="Choose this if" value={o.chooseIf} />

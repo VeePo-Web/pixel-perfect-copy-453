@@ -18,7 +18,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
   return (
     <section
       aria-labelledby="featured-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="max-w-[60ch]">
@@ -42,7 +42,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
             {notes.map((n) => (
               <div
                 key={n.tag}
-                className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-4"
+                className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-4"
               >
                 <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/80">
                   {n.tag}
@@ -61,7 +61,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
               <a
                 href="#/sample-briefing"
                 onClick={() => track("sample_briefing_clicked_from_templates", { source: "featured" })}
-                className="rounded-full border border-white/[0.12] px-5 py-2.5 text-[12.5px] text-bone/85 transition-colors hover:border-champagne-200/40 hover:text-bone"
+                className="rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-bone/85 transition-colors hover:border-champagne-200/40 hover:text-bone"
               >
                 See How This Becomes a Monthly Finance Desk Briefing
               </a>

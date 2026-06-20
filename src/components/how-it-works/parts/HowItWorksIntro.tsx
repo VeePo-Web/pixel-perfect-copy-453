@@ -53,7 +53,7 @@ export default function HowItWorksIntro() {
             className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
           >
             <span className="relative z-10">{c.primary}</span>
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </a>
           <a
             href="#top"
@@ -82,7 +82,7 @@ export default function HowItWorksIntro() {
                   className={`flex items-center gap-4 rounded-lg border px-4 py-3 transition-all duration-500 ease-cinema ${
                     isActive
                       ? "border-champagne-200/30 bg-charcoal-800/60"
-                      : "border-white/[0.04] bg-transparent"
+                      : "border-ink/[0.04] bg-transparent"
                   }`}
                 >
                   <span
@@ -106,7 +106,7 @@ export default function HowItWorksIntro() {
               );
             })}
           </ol>
-          <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-ink/10 to-transparent" />
           <p className="mt-4 text-[11.5px] leading-[1.6] text-bone/40">
             A recurring operating loop — not a one-time report.
           </p>

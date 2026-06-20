@@ -5,7 +5,7 @@ export default function SecurityFinalCTA() {
     <section
       id="apply"
       aria-labelledby="final-cta-heading"
-      className="relative scroll-mt-24 overflow-hidden border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 overflow-hidden border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div
         aria-hidden
@@ -42,7 +42,7 @@ export default function SecurityFinalCTA() {
               track("final_security_cta_clicked", { target: "sample-briefing" });
               trackCtaByHref("#/sample-briefing", "security_faq_final");
             }}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-6 text-[13.5px] text-bone transition-colors hover:border-white/30 hover:bg-white/[0.03]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-6 text-[13.5px] text-bone transition-colors hover:border-ink/30 hover:bg-ink/[0.03]"
           >
             Generate Sample Finance Briefing
           </a>

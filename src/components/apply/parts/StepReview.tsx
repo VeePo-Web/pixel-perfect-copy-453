@@ -55,7 +55,7 @@ export default function StepReview({ state, update, onBack, onEdit, onSubmit, su
     >
       <ApplicationSummary state={state} onEdit={onEdit} />
       <TrustReassuranceBlock />
-      <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-white/[0.07] bg-charcoal-900/40 p-4 transition-colors hover:border-champagne-200/30">
+      <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-ink/[0.07] bg-charcoal-900/40 p-4 transition-colors hover:border-champagne-200/30">
         <input
           type="checkbox"
           checked={state.consent}

@@ -4,7 +4,7 @@ export default function TemplateTrustSection() {
   return (
     <section
       aria-labelledby="trust-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="max-w-[60ch]">
@@ -22,7 +22,7 @@ export default function TemplateTrustSection() {
           {trustCards.map((c) => (
             <div
               key={c.title}
-              className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 transition-colors hover:border-champagne-200/25"
+              className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5 transition-colors hover:border-champagne-200/25"
             >
               <div className="h-px w-8 bg-champagne-200/60" />
               <div className="mt-4 text-[15px] font-light leading-snug text-bone">{c.title}</div>

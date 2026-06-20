@@ -18,7 +18,7 @@ export default function SubmissionLoading() {
       <div key={i} className="text-[14.5px] text-bone/85 motion-safe:animate-section-in">
         {APPLY.step5.loading[i]}
       </div>
-      <div className="mt-5 h-px w-full overflow-hidden bg-white/[0.06]">
+      <div className="mt-5 h-px w-full overflow-hidden bg-ink/[0.06]">
         <div className="h-full w-1/3 bg-gradient-to-r from-champagne-200/0 via-champagne-200 to-champagne-200/0 motion-safe:animate-shimmer" />
       </div>
     </div>

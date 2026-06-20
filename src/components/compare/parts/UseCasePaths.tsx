@@ -7,7 +7,7 @@ export default function UseCasePaths() {
   return (
     <section
       aria-labelledby="use-cases-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[60ch]">
@@ -31,7 +31,7 @@ export default function UseCasePaths() {
                 className={`rounded-2xl border p-5 transition-all duration-400 ease-cinema ${
                   open
                     ? "border-champagne-200/45 bg-charcoal-900/70 shadow-[0_30px_70px_-30px_rgba(217,190,130,0.35)]"
-                    : "border-white/[0.07] bg-white/[0.02] hover:border-champagne-200/25"
+                    : "border-ink/[0.07] bg-ink/[0.02] hover:border-champagne-200/25"
                 }`}
               >
                 <button

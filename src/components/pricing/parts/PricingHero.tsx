@@ -5,7 +5,7 @@ export default function PricingHero() {
     { name: "Private Finance Room", price: "$5K–$7.5K/mo", muted: true },
   ];
   return (
-    <section className="relative isolate overflow-hidden border-b border-white/[0.05] bg-charcoal-950">
+    <section className="relative isolate overflow-hidden border-b border-ink/[0.05] bg-charcoal-950">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(70%_50%_at_70%_0%,rgba(201,163,90,0.10),transparent_60%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(0,0,0,0.45))]" />
@@ -29,11 +29,11 @@ export default function PricingHero() {
                 className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
               >
                 <span className="relative z-10">Apply for the Monthly Finance Desk</span>
-                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </a>
               <a
                 href="#/sample-briefing"
-                className="rounded-full border border-white/[0.12] px-6 py-3.5 text-[13px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+                className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
               >
                 Generate Sample Finance Briefing
               </a>
@@ -67,7 +67,7 @@ export default function PricingHero() {
                     className={`overflow-hidden rounded-2xl border backdrop-blur-sm ${
                       t.flagship
                         ? "border-champagne-200/40 bg-charcoal-900/80 shadow-[0_30px_80px_-30px_rgba(217,190,130,0.45)]"
-                        : "border-white/[0.07] bg-charcoal-900/60"
+                        : "border-ink/[0.07] bg-charcoal-900/60"
                     }`}
                   >
                     <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent" />
@@ -82,8 +82,8 @@ export default function PricingHero() {
                       <div className="mt-5 space-y-2">
                         {[0, 1, 2, 3].map((k) => (
                           <div key={k} className="flex items-center gap-2">
-                            <span className={`h-1.5 w-1.5 rounded-full ${t.flagship ? "bg-champagne-200" : "bg-white/15"}`} />
-                            <span className={`h-1.5 rounded ${t.flagship ? "bg-white/15" : "bg-white/[0.06]"}`} style={{ width: `${50 + ((k * 13) % 35)}%` }} />
+                            <span className={`h-1.5 w-1.5 rounded-full ${t.flagship ? "bg-champagne-200" : "bg-ink/15"}`} />
+                            <span className={`h-1.5 rounded ${t.flagship ? "bg-ink/15" : "bg-ink/[0.06]"}`} style={{ width: `${50 + ((k * 13) % 35)}%` }} />
                           </div>
                         ))}
                       </div>

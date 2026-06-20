@@ -15,7 +15,7 @@ const toneClass = {
 } as const;
 
 const toneDot = {
-  neutral: "bg-white/20",
+  neutral: "bg-ink/20",
   positive: "bg-green-signal",
   caution: "bg-champagne-300",
   data: "bg-champagne-200/70",
@@ -31,17 +31,17 @@ export default function SpreadsheetPreview({
     <div
       role="img"
       aria-label={`${title} — illustrative preview`}
-      className={`relative overflow-hidden rounded-xl border border-white/[0.07] bg-charcoal-900/60 ${className}`}
+      className={`relative overflow-hidden rounded-xl border border-ink/[0.07] bg-charcoal-900/60 ${className}`}
     >
       {/* sheet header chrome */}
-      <div className="flex items-center justify-between border-b border-white/[0.05] px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-ink/[0.05] px-4 py-2.5">
         <div className="flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-white/15" />
-          <span className="h-1.5 w-1.5 rounded-full bg-white/10" />
-          <span className="h-1.5 w-1.5 rounded-full bg-white/10" />
+          <span className="h-1.5 w-1.5 rounded-full bg-ink/15" />
+          <span className="h-1.5 w-1.5 rounded-full bg-ink/10" />
+          <span className="h-1.5 w-1.5 rounded-full bg-ink/10" />
         </div>
         <span className="text-[9.5px] uppercase tracking-[0.24em] text-bone/40">{title}</span>
-        <span className="h-px w-8 bg-white/10" />
+        <span className="h-px w-8 bg-ink/10" />
       </div>
       {/* faint grid */}
       <div
@@ -54,7 +54,7 @@ export default function SpreadsheetPreview({
           return (
             <div
               key={row.label}
-              className={`flex items-center justify-between gap-3 border-b border-white/[0.04] last:border-b-0 ${
+              className={`flex items-center justify-between gap-3 border-b border-ink/[0.04] last:border-b-0 ${
                 dense ? "py-1.5" : "py-2"
               }`}
             >

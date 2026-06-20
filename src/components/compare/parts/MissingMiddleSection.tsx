@@ -6,7 +6,7 @@ export default function MissingMiddleSection() {
     <section
       id="missing-middle"
       aria-labelledby="missing-middle-heading"
-      className="relative scroll-mt-24 border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
@@ -74,19 +74,19 @@ function SideColumn({
   footer: string;
 }) {
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6">
+    <div className="flex h-full flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6">
       <div className={`text-[10.5px] uppercase tracking-[0.28em] ${tone === "muted" ? "text-bone/45" : "text-champagne-200/85"}`}>
         {label}
       </div>
       <ul className="mt-4 space-y-2.5">
         {items.map((x) => (
           <li key={x} className="flex items-start gap-2.5 text-[13.5px] text-bone/70">
-            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white/20" />
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink/20" />
             {x}
           </li>
         ))}
       </ul>
-      <div className="mt-auto border-t border-white/[0.06] pt-4 text-[12.5px] text-bone/55">
+      <div className="mt-auto border-t border-ink/[0.06] pt-4 text-[12.5px] text-bone/55">
         <span className="text-bone/40">{footerLabel} · </span>
         {footer}
       </div>
@@ -107,7 +107,7 @@ function MfdColumn({ label, items, outcome }: { label: string; items: string[]; 
           </li>
         ))}
       </ul>
-      <div className="mt-auto border-t border-white/[0.06] pt-4 text-[12.5px] text-bone/70">
+      <div className="mt-auto border-t border-ink/[0.06] pt-4 text-[12.5px] text-bone/70">
         <span className="text-bone/40">Outcome · </span>
         {outcome}
       </div>

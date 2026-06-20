@@ -30,7 +30,7 @@ export default function SuccessPage({ onClear }: { onClear: () => void }) {
             <div
               key={line}
               className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-[13.5px] ${
-                i === 0 ? "border-green-signal/40 bg-green-deep/15 text-bone" : "border-white/[0.06] bg-charcoal-900/40 text-bone/70"
+                i === 0 ? "border-green-signal/40 bg-green-deep/15 text-bone" : "border-ink/[0.06] bg-charcoal-900/40 text-bone/70"
               }`}
             >
               <span className={`h-1.5 w-1.5 rounded-full ${i === 0 ? "bg-green-signal" : "bg-champagne-200/60"}`} />
@@ -39,15 +39,15 @@ export default function SuccessPage({ onClear }: { onClear: () => void }) {
           ))}
         </div>
 
-        <div className="mt-12 rounded-2xl border border-white/[0.06] bg-charcoal-900/40 p-6">
+        <div className="mt-12 rounded-2xl border border-ink/[0.06] bg-charcoal-900/40 p-6">
           <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">What happens next</div>
           <ol className="relative mt-5">
-            <div className="absolute left-[10px] top-2 bottom-2 w-px bg-white/[0.06]" />
+            <div className="absolute left-[10px] top-2 bottom-2 w-px bg-ink/[0.06]" />
             {c.timeline.map((t, i) => (
               <li key={t} className="relative pl-8 py-2.5">
                 <span
                   className={`absolute left-[5px] top-[14px] h-3 w-3 rounded-full border ${
-                    i === 0 ? "border-champagne-200 bg-champagne-200" : "border-white/15 bg-charcoal-900"
+                    i === 0 ? "border-champagne-200 bg-champagne-200" : "border-ink/15 bg-charcoal-900"
                   }`}
                 />
                 <span className={`text-[14px] ${i === 0 ? "text-bone" : "text-bone/55"}`}>{t}</span>
@@ -62,9 +62,9 @@ export default function SuccessPage({ onClear }: { onClear: () => void }) {
             className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
           >
             <span className="relative z-10">{c.primary}</span>
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </button>
-          <a href="#/templates" className="rounded-full border border-white/15 px-6 py-3.5 text-[13px] text-bone/80 hover:border-champagne-200/40 hover:text-bone transition-all">
+          <a href="#/templates" className="rounded-full border border-ink/15 px-6 py-3.5 text-[13px] text-bone/80 hover:border-champagne-200/40 hover:text-bone transition-all">
             {c.secondary}
           </a>
         </div>
@@ -76,7 +76,7 @@ export default function SuccessPage({ onClear }: { onClear: () => void }) {
               <a
                 key={w.t}
                 href={w.href}
-                className="group rounded-xl border border-white/[0.06] bg-charcoal-900/40 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-champagne-200/30"
+                className="group rounded-xl border border-ink/[0.06] bg-charcoal-900/40 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-champagne-200/30"
               >
                 <div className="text-[13.5px] leading-[1.5] text-bone/85 group-hover:text-bone">{w.t}</div>
                 <div className="mt-3 text-[11px] uppercase tracking-[0.22em] text-champagne-200/60">Open →</div>

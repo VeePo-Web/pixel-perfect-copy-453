@@ -5,7 +5,7 @@ export default function FeaturedFAQPreview() {
   return (
     <section
       aria-labelledby="featured-faq-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-5xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
@@ -26,7 +26,7 @@ export default function FeaturedFAQPreview() {
                   track("faq_opened", { id: `featured-${i}`, question: f.q });
                 }
               }}
-              className="group rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 transition-colors hover:border-white/[0.18] [&_summary::-webkit-details-marker]:hidden"
+              className="group rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5 transition-colors hover:border-ink/[0.18] [&_summary::-webkit-details-marker]:hidden"
             >
               <summary className="flex cursor-pointer items-start justify-between gap-4 text-[15px] font-medium text-bone">
                 <span>{f.q}</span>

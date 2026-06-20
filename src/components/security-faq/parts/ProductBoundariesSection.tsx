@@ -6,7 +6,7 @@ export default function ProductBoundariesSection() {
     <section
       id="boundaries"
       aria-labelledby="boundaries-heading"
-      className="relative scroll-mt-24 border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
@@ -76,7 +76,7 @@ export default function ProductBoundariesSection() {
           <a
             href="#/compare"
             onClick={() => trackCtaByHref("#/compare", "security_faq_boundaries")}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-5 text-[13px] text-bone transition-colors hover:border-white/30 hover:bg-white/[0.03]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-bone transition-colors hover:border-ink/30 hover:bg-ink/[0.03]"
           >
             Compare Your Options →
           </a>

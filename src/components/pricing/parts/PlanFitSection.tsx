@@ -2,7 +2,7 @@ import { planFit } from "../content";
 
 export default function PlanFitSection() {
   return (
-    <section aria-labelledby="fit-title" className="border-b border-white/[0.05] bg-charcoal-950">
+    <section aria-labelledby="fit-title" className="border-b border-ink/[0.05] bg-charcoal-950">
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
@@ -22,7 +22,7 @@ export default function PlanFitSection() {
                 className={`flex h-full flex-col rounded-2xl border p-7 transition-all duration-400 ease-cinema hover:-translate-y-0.5 ${
                   flagship
                     ? "border-champagne-200/40 bg-charcoal-900/75 shadow-[0_30px_80px_-30px_rgba(217,190,130,0.3)]"
-                    : "border-white/[0.07] bg-charcoal-900/55 hover:border-champagne-200/25"
+                    : "border-ink/[0.07] bg-charcoal-900/55 hover:border-champagne-200/25"
                 }`}
               >
                 <h3 className={`text-[18px] font-light ${flagship ? "text-bone" : "text-bone/90"}`}>{col.title}</h3>
@@ -44,7 +44,7 @@ export default function PlanFitSection() {
                   className={`mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-[13px] font-medium tracking-wide transition-all duration-400 ease-cinema ${
                     flagship
                       ? "bg-gradient-to-b from-champagne-100 to-champagne-300 text-charcoal-950 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
-                      : "border border-white/[0.12] text-bone/90 hover:border-champagne-200/40 hover:text-bone"
+                      : "border border-ink/[0.12] text-bone/90 hover:border-champagne-200/40 hover:text-bone"
                   }`}
                 >
                   {col.cta.label}

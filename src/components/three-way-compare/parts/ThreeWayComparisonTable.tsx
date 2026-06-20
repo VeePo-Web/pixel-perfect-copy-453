@@ -22,7 +22,7 @@ export default function ThreeWayComparisonTable() {
     <section
       id="compare"
       aria-labelledby="three-way-table-heading"
-      className="relative scroll-mt-24 border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
@@ -38,13 +38,13 @@ export default function ThreeWayComparisonTable() {
         </div>
 
         {/* Desktop table */}
-        <div className="mt-10 hidden overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] lg:block">
+        <div className="mt-10 hidden overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.02] lg:block">
           <table className="w-full border-collapse text-left text-[13px]">
             <caption className="sr-only">
               Comparison of Bookkeeper, Monthly Finance Desk, and Fractional CFO.
             </caption>
             <thead>
-              <tr className="border-b border-white/[0.07] text-[11px] uppercase tracking-[0.24em] text-bone/55">
+              <tr className="border-b border-ink/[0.07] text-[11px] uppercase tracking-[0.24em] text-bone/55">
                 <th scope="col" className="w-[18%] px-5 py-5 font-normal" />
                 <th
                   scope="col"
@@ -93,7 +93,7 @@ export default function ThreeWayComparisonTable() {
             </thead>
             <tbody>
               {tableRows.map((r) => (
-                <tr key={r.id} className="border-b border-white/[0.05] align-top last:border-b-0">
+                <tr key={r.id} className="border-b border-ink/[0.05] align-top last:border-b-0">
                   <th
                     scope="row"
                     className="px-5 py-5 text-[10.5px] uppercase tracking-[0.24em] text-bone/45"
@@ -113,7 +113,7 @@ export default function ThreeWayComparisonTable() {
                   <a
                     href={tableCTAs.bookkeeper.href}
                     onClick={() => trackCtaByHref(tableCTAs.bookkeeper.href, "table-bookkeeper")}
-                    className="inline-flex rounded-full border border-white/[0.12] px-4 py-2 text-[12px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+                    className="inline-flex rounded-full border border-ink/[0.12] px-4 py-2 text-[12px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
                   >
                     {tableCTAs.bookkeeper.label}
                   </a>
@@ -131,7 +131,7 @@ export default function ThreeWayComparisonTable() {
                   <a
                     href={tableCTAs.cfo.href}
                     onClick={() => trackCtaByHref(tableCTAs.cfo.href, "table-cfo")}
-                    className="inline-flex rounded-full border border-white/[0.12] px-4 py-2 text-[12px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+                    className="inline-flex rounded-full border border-ink/[0.12] px-4 py-2 text-[12px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
                   >
                     {tableCTAs.cfo.label}
                   </a>
@@ -165,7 +165,7 @@ export default function ThreeWayComparisonTable() {
                 className={`group rounded-2xl border [&_summary::-webkit-details-marker]:hidden ${
                   isMfd
                     ? "border-champagne-200/45 bg-charcoal-900/70"
-                    : "border-white/[0.07] bg-white/[0.02]"
+                    : "border-ink/[0.07] bg-ink/[0.02]"
                 }`}
               >
                 <summary className="flex cursor-pointer items-center justify-between gap-3 px-5 py-4">
@@ -186,7 +186,7 @@ export default function ThreeWayComparisonTable() {
                     +
                   </span>
                 </summary>
-                <div className="grid gap-3 border-t border-white/[0.06] px-5 py-4 text-[13px]">
+                <div className="grid gap-3 border-t border-ink/[0.06] px-5 py-4 text-[13px]">
                   {tableRows.map((r) => (
                     <div key={r.id}>
                       <div className="text-[10.5px] uppercase tracking-[0.24em] text-bone/40">
@@ -203,7 +203,7 @@ export default function ThreeWayComparisonTable() {
                     className={`mt-2 inline-flex w-fit rounded-full px-4 py-2 text-[12px] transition-all duration-300 ease-cinema ${
                       isMfd
                         ? "bg-gradient-to-b from-champagne-100 to-champagne-300 font-medium text-charcoal-950"
-                        : "border border-white/[0.12] text-bone/85 hover:border-champagne-200/40 hover:text-bone"
+                        : "border border-ink/[0.12] text-bone/85 hover:border-champagne-200/40 hover:text-bone"
                     }`}
                   >
                     {cta.label}

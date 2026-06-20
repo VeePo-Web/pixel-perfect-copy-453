@@ -26,7 +26,7 @@ export default function ExecutiveSummaryCard({ business }: Props) {
         {business.summaryTags.map((t) => (
           <span
             key={t}
-            className="rounded-full border border-white/[0.1] bg-white/[0.02] px-3 py-1 text-[11.5px] uppercase tracking-[0.18em] text-bone/70"
+            className="rounded-full border border-ink/[0.1] bg-ink/[0.02] px-3 py-1 text-[11.5px] uppercase tracking-[0.18em] text-bone/70"
           >
             {t}
           </span>

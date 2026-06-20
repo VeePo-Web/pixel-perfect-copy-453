@@ -17,7 +17,7 @@ export default function BeforeAfter() {
         ref={ref}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        className="relative mx-auto mt-12 overflow-hidden rounded-2xl border border-white/[0.06] bg-charcoal-900/40 backdrop-blur-sm"
+        className="relative mx-auto mt-12 overflow-hidden rounded-2xl border border-ink/[0.06] bg-charcoal-900/40 backdrop-blur-sm"
       >
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Before */}

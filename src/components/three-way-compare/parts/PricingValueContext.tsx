@@ -5,7 +5,7 @@ export default function PricingValueContext() {
   return (
     <section
       aria-labelledby="pricing-context-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1fr]">
@@ -43,7 +43,7 @@ export default function PricingValueContext() {
               <a
                 href="#/pricing"
                 onClick={() => trackCtaByHref("#/pricing", "pricing-context")}
-                className="rounded-full border border-white/[0.12] px-5 py-2.5 text-[12.5px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+                className="rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
               >
                 View Pricing
               </a>
@@ -70,7 +70,7 @@ export default function PricingValueContext() {
                 $1,500 / mo
               </div>
             </div>
-            <ul className="mt-5 divide-y divide-white/[0.06]">
+            <ul className="mt-5 divide-y divide-ink/[0.06]">
               {valueStack.map((item) => (
                 <li
                   key={item}

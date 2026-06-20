@@ -6,7 +6,7 @@ export default function ComparisonFAQ() {
     <section
       id="faq"
       aria-labelledby="three-way-faq-heading"
-      className="relative scroll-mt-24 border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-4xl px-6 py-20 lg:px-10">
         <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
@@ -18,7 +18,7 @@ export default function ComparisonFAQ() {
         >
           Questions owners ask before choosing.
         </h2>
-        <div className="mt-8 divide-y divide-white/[0.06] rounded-2xl border border-white/[0.07] bg-white/[0.02]">
+        <div className="mt-8 divide-y divide-ink/[0.06] rounded-2xl border border-ink/[0.07] bg-ink/[0.02]">
           {faq.map((item, i) => (
             <details
               key={item.q}

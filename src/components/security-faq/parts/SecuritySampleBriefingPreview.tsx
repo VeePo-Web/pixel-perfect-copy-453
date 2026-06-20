@@ -5,7 +5,7 @@ export default function SecuritySampleBriefingPreview() {
   return (
     <section
       aria-labelledby="sample-briefing-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -37,14 +37,14 @@ export default function SecuritySampleBriefingPreview() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6">
-            <div className="flex items-center justify-between border-b border-white/[0.06] pb-4">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6">
+            <div className="flex items-center justify-between border-b border-ink/[0.06] pb-4">
               <div className="text-[11px] uppercase tracking-[0.24em] text-bone/45">
                 Sample briefing · preview
               </div>
               <div className="text-[10.5px] text-bone/35">demo data</div>
             </div>
-            <dl className="mt-4 divide-y divide-white/[0.05]">
+            <dl className="mt-4 divide-y divide-ink/[0.05]">
               {sampleBriefingPreview.rows.map((r) => (
                 <div
                   key={r.label}

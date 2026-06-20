@@ -5,7 +5,7 @@ export default function CategorySpectrum() {
     <section
       id="spectrum"
       aria-labelledby="spectrum-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[60ch]">
@@ -25,14 +25,14 @@ export default function CategorySpectrum() {
 
         {/* Desktop spectrum */}
         <div className="mt-12 hidden lg:block">
-          <div className="relative h-[200px] rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6">
+          <div className="relative h-[200px] rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6">
             <div className="flex h-full flex-col justify-between">
               <div className="flex items-center justify-between text-[10.5px] uppercase tracking-[0.26em] text-bone/45">
                 <span>DIY / Low support</span>
                 <span className="text-champagne-200/80">Structure + Interpretation</span>
                 <span>High-touch finance leadership</span>
               </div>
-              <div className="relative h-px w-full bg-gradient-to-r from-white/15 via-champagne-200/40 to-white/15" />
+              <div className="relative h-px w-full bg-gradient-to-r from-ink/15 via-champagne-200/40 to-ink/15" />
               <div className="relative h-[88px]">
                 {options.map((o) => (
                   <SpectrumNode key={o.id} option={o} />
@@ -50,7 +50,7 @@ export default function CategorySpectrum() {
               className={`flex items-start justify-between gap-4 rounded-xl border p-4 ${
                 o.isMfd
                   ? "border-champagne-200/45 bg-charcoal-900/70"
-                  : "border-white/[0.07] bg-white/[0.02]"
+                  : "border-ink/[0.07] bg-ink/[0.02]"
               }`}
             >
               <div>
@@ -80,7 +80,7 @@ function SpectrumNode({ option }: { option: import("../content").SupportOption }
         className={`mx-auto h-3 w-3 -translate-y-[7px] rounded-full border ${
           flagship
             ? "border-champagne-200 bg-champagne-200 shadow-[0_0_0_6px_rgba(217,190,130,0.18)]"
-            : "border-white/30 bg-charcoal-950"
+            : "border-ink/30 bg-charcoal-950"
         }`}
       />
       <div

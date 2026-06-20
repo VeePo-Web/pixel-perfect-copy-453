@@ -10,7 +10,7 @@ export default function RevenueTrendModule({ business }: { business: DemoBusines
   return (
     <ModuleShell id="revenue-trend" eyebrow="Revenue Trend" title="Growth, with context.">
       <div className="grid gap-6 lg:grid-cols-[1.3fr_1fr]">
-        <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
+        <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
           <div className="flex items-end justify-between">
             <div>
               <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/55">Total revenue</div>
@@ -25,7 +25,7 @@ export default function RevenueTrendModule({ business }: { business: DemoBusines
           </div>
         </div>
         <div className="space-y-4">
-          <div className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-5">
+          <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
             <ConcentrationMeter value={business.topClientConcentration} />
             <p className="mt-4 text-[14px] leading-[1.65] text-bone/80">{business.insights.revenue}</p>
           </div>

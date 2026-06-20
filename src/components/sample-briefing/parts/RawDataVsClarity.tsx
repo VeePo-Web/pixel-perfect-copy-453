@@ -26,7 +26,7 @@ export default function RawDataVsClarity() {
   }, []);
 
   return (
-    <section className="border-b border-white/[0.05] bg-charcoal-950">
+    <section className="border-b border-ink/[0.05] bg-charcoal-950">
       <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
@@ -51,7 +51,7 @@ export default function RawDataVsClarity() {
                 return (
                   <li
                     key={item}
-                    className="rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-[14px] text-bone/80 transition-all duration-500 ease-cinema"
+                    className="rounded-lg border border-ink/[0.06] bg-ink/[0.02] px-4 py-3 text-[14px] text-bone/80 transition-all duration-500 ease-cinema"
                     style={{
                       transform: `translateX(${(-12 * localP).toFixed(1)}px)`,
                       opacity: 1 - localP * 0.55,

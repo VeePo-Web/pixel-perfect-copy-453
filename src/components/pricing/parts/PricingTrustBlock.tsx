@@ -2,7 +2,7 @@ import { trustCards } from "../content";
 
 export default function PricingTrustBlock() {
   return (
-    <section aria-labelledby="trust-title" className="border-b border-white/[0.05] bg-charcoal-950">
+    <section aria-labelledby="trust-title" className="border-b border-ink/[0.05] bg-charcoal-950">
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
           <div>
@@ -20,7 +20,7 @@ export default function PricingTrustBlock() {
             {trustCards.map((t) => (
               <li
                 key={t}
-                className="flex items-start gap-3 rounded-xl border border-white/[0.07] bg-white/[0.02] px-5 py-4 transition-all duration-300 hover:border-green-signal/40 hover:bg-green-deep/15"
+                className="flex items-start gap-3 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-5 py-4 transition-all duration-300 hover:border-green-signal/40 hover:bg-green-deep/15"
               >
                 <span aria-hidden className="mt-1.5 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-green-signal" />
                 <span className="text-[14px] leading-[1.55] text-bone/85">{t}</span>

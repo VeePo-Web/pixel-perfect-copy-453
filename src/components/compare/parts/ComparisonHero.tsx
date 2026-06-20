@@ -5,7 +5,7 @@ export default function ComparisonHero() {
   return (
     <section
       aria-labelledby="compare-hero-heading"
-      className="relative isolate overflow-hidden border-b border-white/[0.05] bg-charcoal-950"
+      className="relative isolate overflow-hidden border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(70%_50%_at_70%_0%,rgba(201,163,90,0.10),transparent_60%)]" />
@@ -35,12 +35,12 @@ export default function ComparisonHero() {
                 className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
               >
                 <span className="relative z-10">Find My Best Fit</span>
-                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </a>
               <a
                 href="#/sample-briefing"
                 onClick={() => track("sample_briefing_clicked_from_compare", { source: "hero" })}
-                className="rounded-full border border-white/[0.12] px-6 py-3.5 text-[13px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+                className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
               >
                 Generate Sample Finance Briefing
               </a>
@@ -75,7 +75,7 @@ function DecisionMap() {
   const tools = options.filter((o) => ["dashboard", "spend-tools"].includes(o.id));
 
   return (
-    <div className="relative rounded-3xl border border-white/[0.07] bg-white/[0.02] p-6 shadow-[0_30px_120px_-40px_rgba(0,0,0,0.6)] sm:p-8">
+    <div className="relative rounded-3xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_120px_-40px_rgba(0,0,0,0.6)] sm:p-8">
       <div className="text-[10.5px] uppercase tracking-[0.28em] text-bone/45">
         Financial support map
       </div>
@@ -96,14 +96,14 @@ function DecisionMap() {
 
 function Column({ label, items, align }: { label: string; items: string[]; align?: "right" }) {
   return (
-    <div className={`flex h-full flex-col rounded-2xl border border-white/[0.06] bg-charcoal-900/40 p-4 ${align === "right" ? "items-end text-right" : ""}`}>
+    <div className={`flex h-full flex-col rounded-2xl border border-ink/[0.06] bg-charcoal-900/40 p-4 ${align === "right" ? "items-end text-right" : ""}`}>
       <div className="text-[9.5px] uppercase tracking-[0.26em] text-bone/40">{label}</div>
       <ul className="mt-3 space-y-2">
         {items.map((i) => (
           <li key={i} className="flex items-center gap-2 text-[12px] text-bone/70">
-            {align === "right" ? null : <span className="h-1 w-1 rounded-full bg-white/25" />}
+            {align === "right" ? null : <span className="h-1 w-1 rounded-full bg-ink/25" />}
             <span>{i}</span>
-            {align === "right" ? <span className="h-1 w-1 rounded-full bg-white/25" /> : null}
+            {align === "right" ? <span className="h-1 w-1 rounded-full bg-ink/25" /> : null}
           </li>
         ))}
       </ul>

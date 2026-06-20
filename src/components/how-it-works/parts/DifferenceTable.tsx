@@ -10,7 +10,7 @@ export default function DifferenceTable() {
       <SectionHeader headline={c.headline} />
       <div
         ref={ref}
-        className={`mt-10 overflow-x-auto rounded-2xl border border-white/[0.06] bg-charcoal-900/40 transition-all duration-700 ease-cinema ${
+        className={`mt-10 overflow-x-auto rounded-2xl border border-ink/[0.06] bg-charcoal-900/40 transition-all duration-700 ease-cinema ${
           inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
         }`}
       >
@@ -27,8 +27,8 @@ export default function DifferenceTable() {
             {c.rows.map((r) => (
               <tr
                 key={r.name}
-                className={`border-t border-white/[0.05] transition-colors duration-300 ${
-                  r.highlight ? "bg-champagne-200/[0.04]" : "hover:bg-white/[0.02]"
+                className={`border-t border-ink/[0.05] transition-colors duration-300 ${
+                  r.highlight ? "bg-champagne-200/[0.04]" : "hover:bg-ink/[0.02]"
                 }`}
               >
                 <td className={`relative px-5 py-5 align-top sticky left-0 ${r.highlight ? "bg-charcoal-900/80" : "bg-charcoal-900/60"} backdrop-blur-sm`}>
@@ -49,7 +49,7 @@ export default function DifferenceTable() {
           className="group relative overflow-hidden inline-block rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
         >
           <span className="relative z-10">{c.cta}</span>
-          <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+          <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
         </a>
       </div>
     </div>

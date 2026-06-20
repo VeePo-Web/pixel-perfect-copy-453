@@ -24,7 +24,7 @@ export default function ThreeWayTopBar() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.05] bg-charcoal-950/85 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-ink/[0.05] bg-charcoal-950/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-3.5 lg:px-10">
         <a href="#/" className="group flex shrink-0 items-center gap-3">
           <span className="h-1.5 w-1.5 rounded-full bg-champagne-200 transition-transform duration-400 group-hover:scale-125" />

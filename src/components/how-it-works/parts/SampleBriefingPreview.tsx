@@ -21,7 +21,7 @@ export default function SampleBriefingPreview() {
         <div className="absolute" />
         <div className="relative">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/50 to-transparent" />
-          <div className="flex items-center justify-between border-b border-white/[0.06] px-6 py-4">
+          <div className="flex items-center justify-between border-b border-ink/[0.06] px-6 py-4">
             <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">Sample bi-weekly briefing</div>
             <div className="text-[10.5px] uppercase tracking-[0.28em] text-bone/35">Demo data</div>
           </div>
@@ -39,7 +39,7 @@ export default function SampleBriefingPreview() {
                   className={`whitespace-nowrap rounded-full border px-4 py-2 text-[12px] transition-all duration-300 ease-cinema ${
                     isActive
                       ? "border-champagne-200/40 bg-charcoal-800/80 text-bone"
-                      : "border-white/[0.06] bg-transparent text-bone/55 hover:text-bone hover:border-white/15"
+                      : "border-ink/[0.06] bg-transparent text-bone/55 hover:text-bone hover:border-ink/15"
                   }`}
                 >
                   {t.label}
@@ -51,7 +51,7 @@ export default function SampleBriefingPreview() {
           {/* Panel */}
           <div key={tab.id} className="px-6 pb-8 motion-safe:animate-section-in">
             <p className="max-w-2xl text-[15px] leading-[1.7] text-bone/80">{tab.body}</p>
-            <div className="mt-6 divide-y divide-white/[0.05] rounded-lg border border-white/[0.05] bg-charcoal-900/40">
+            <div className="mt-6 divide-y divide-ink/[0.05] rounded-lg border border-ink/[0.05] bg-charcoal-900/40">
               {tab.rows.map((r, i) => (
                 <div
                   key={i}
@@ -73,7 +73,7 @@ export default function SampleBriefingPreview() {
                 className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
               >
                 <span className="relative z-10">{c.cta}</span>
-                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </a>
             </div>
           </div>

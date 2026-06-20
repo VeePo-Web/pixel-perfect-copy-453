@@ -37,7 +37,7 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.05] bg-charcoal-950/80 backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-ink/[0.05] bg-charcoal-950/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 lg:px-10">
           <a href="#/" className="group flex items-center gap-3" aria-label="Monthly Finance Desk — Home">
             <span className="h-1.5 w-1.5 rounded-full bg-champagne-200 transition-transform duration-400 group-hover:scale-125" />
@@ -85,7 +85,7 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
               aria-expanded={open}
               aria-controls="global-nav-sheet"
               onClick={() => setOpen((v) => !v)}
-              className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 text-bone/80 hover:text-bone hover:border-white/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-200/60"
+              className="flex h-9 w-9 items-center justify-center rounded-md border border-ink/10 text-bone/80 hover:text-bone hover:border-ink/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-200/60"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 {open ? (
@@ -120,7 +120,7 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
                   href={l.href}
                   aria-current={active ? "page" : undefined}
                   onClick={() => setOpen(false)}
-                  className={`flex items-center justify-between border-b border-white/[0.06] py-4 text-[15px] ${
+                  className={`flex items-center justify-between border-b border-ink/[0.06] py-4 text-[15px] ${
                     active ? "text-bone" : "text-bone/70"
                   }`}
                 >

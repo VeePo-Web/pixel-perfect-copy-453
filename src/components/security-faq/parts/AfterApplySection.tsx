@@ -5,7 +5,7 @@ export default function AfterApplySection() {
   return (
     <section
       aria-labelledby="after-apply-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
@@ -22,11 +22,11 @@ export default function AfterApplySection() {
             The application is designed to understand fit, not collect sensitive access.
           </p>
         </div>
-        <ol className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] sm:grid-cols-2 lg:grid-cols-5">
+        <ol className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.02] sm:grid-cols-2 lg:grid-cols-5">
           {afterApplySteps.map((s) => (
             <li
               key={s.n}
-              className="relative bg-charcoal-950/40 p-6 transition-colors hover:bg-white/[0.025]"
+              className="relative bg-charcoal-950/40 p-6 transition-colors hover:bg-ink/[0.025]"
             >
               <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">
                 Step {s.n}

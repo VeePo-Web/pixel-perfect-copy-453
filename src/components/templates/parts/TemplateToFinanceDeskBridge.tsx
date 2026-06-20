@@ -5,7 +5,7 @@ export default function TemplateToFinanceDeskBridge() {
   return (
     <section
       aria-labelledby="bridge-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="max-w-[60ch]">
@@ -23,7 +23,7 @@ export default function TemplateToFinanceDeskBridge() {
           {bridgeSteps.map((s, i) => (
             <li
               key={s.n}
-              className="relative rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5"
+              className="relative rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5"
             >
               <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/70">
                 Step {s.n}
@@ -31,7 +31,7 @@ export default function TemplateToFinanceDeskBridge() {
               <div className="mt-2 text-[16px] font-light leading-snug text-bone">{s.title}</div>
               <p className="mt-2 text-[13px] leading-relaxed text-bone/60">{s.copy}</p>
               {i < bridgeSteps.length - 1 ? (
-                <span aria-hidden className="pointer-events-none absolute right-[-8px] top-1/2 hidden h-px w-4 bg-white/15 lg:block" />
+                <span aria-hidden className="pointer-events-none absolute right-[-8px] top-1/2 hidden h-px w-4 bg-ink/15 lg:block" />
               ) : null}
             </li>
           ))}
