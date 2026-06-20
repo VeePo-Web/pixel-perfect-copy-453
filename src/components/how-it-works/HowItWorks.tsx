@@ -36,21 +36,8 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="relative isolate bg-charcoal-950 text-ink"
-      style={{
-        backgroundImage:
-          "radial-gradient(1100px 700px at 12% -10%, rgba(217,190,130,0.06), transparent 60%), radial-gradient(900px 600px at 88% 110%, rgba(63,122,94,0.07), transparent 60%)",
-      }}
+      className="relative isolate bg-white text-ink"
     >
-      {/* dot matrix */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: "radial-gradient(circle, rgba(237,231,218,0.6) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
 
       <Sentinel onChange={(v) => setHeroPassed(!v)} />
 

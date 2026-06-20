@@ -25,39 +25,39 @@ export default {
           100: "#8e983f",
           300: "#edff66",
         },
-        // Light-theme aliases. Keys retained for backward compat — values flipped to paper/ink/gold.
+        // Pure-white trust palette. Keys retained for backward compat — values flipped to white/ink/gold.
         charcoal: {
-          950: "#FAF8F3", // page background — warm paper
-          900: "#F4F0E6", // raised surface
-          800: "#ECE6D6", // subtle band
-          700: "#DCD6C7", // hairline / divider
-          600: "#C7BFAB", // muted border
+          950: "#FFFFFF", // page background — pure white
+          900: "#FFFFFF", // flatten tinted cards to white (translucent /55 etc become invisible washes)
+          800: "#FAFAFB", // subtle elevation only (tables, sticky nav)
+          700: "#E6E8EC", // hairline border
+          600: "#C9CED6", // muted border
         },
         champagne: {
-          50: "#F7EFD8",   // soft gold tint (hover wash)
-          100: "#ECD8A3",  // light gold
-          200: "#C9A24B",  // decorative gold (rules, dots, borders)
-          300: "#A8842F",  // emphasis gold
-          400: "#7A5F1F",  // darkest gold for small text
+          50: "#FBF5E4",
+          100: "#ECD8A3",
+          200: "#D4A845", // decorative gold (rules, dots)
+          300: "#B8893A", // accessible gold text/icons (AA on white)
+          400: "#8A6422",
         },
-        bone: "#191C22", // ink — primary text
+        bone: "#0B0D12", // ink — primary text
         ink: {
-          DEFAULT: "#191C22",
-          muted: "#5A5F6A",
+          DEFAULT: "#0B0D12",
+          muted: "#5A6170",
         },
         paper: {
-          DEFAULT: "#FAF8F3",
-          raised: "#FDFBF7",
+          DEFAULT: "#FFFFFF",
+          raised: "#FAFAFB",
           white: "#FFFFFF",
         },
         gold: {
           300: "#ECD8A3",
-          500: "#C9A24B",
-          700: "#997327",
+          500: "#D4A845",
+          700: "#B8893A",
         },
-        navy: "#1B2A44",
+        navy: "#0F1B3D",
         green: {
-          signal: "#356B4F",
+          signal: "#2E6B4A",
           deep: "#1F3B2D",
         },
       },

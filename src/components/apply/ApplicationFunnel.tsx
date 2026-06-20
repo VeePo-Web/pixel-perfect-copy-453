@@ -87,22 +87,9 @@ export default function ApplicationFunnel() {
   };
 
   return (
-    <div
-      className="min-h-screen bg-charcoal-950 text-ink"
-      style={{
-        backgroundImage:
-          "radial-gradient(1100px 700px at 12% -10%, rgba(217,190,130,0.06), transparent 60%), radial-gradient(900px 600px at 88% 110%, rgba(63,122,94,0.06), transparent 60%)",
-      }}
-    >
+    <div className="min-h-screen bg-white text-ink">
       <ApplicationHeader />
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 opacity-[0.035]"
-        style={{
-          backgroundImage: "radial-gradient(circle, rgba(237,231,218,0.6) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-        }}
-      />
+
 
       <main className="mx-auto max-w-6xl px-5 pb-32 pt-10 md:px-8">
         {step > 0 && (

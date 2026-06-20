@@ -157,27 +157,10 @@ const FinanceHero = () => {
   const ctasDisabled = state === "loading";
 
   return (
-    <section id="top" className="relative w-full overflow-hidden bg-charcoal-950 text-ink">
-      {/* Cinematic background */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        {/* Base radial wash */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_-10%,rgba(201,163,90,0.10),transparent_55%),radial-gradient(ellipse_at_90%_110%,rgba(34,72,55,0.18),transparent_60%)]" />
-        {/* Dot matrix */}
-        <div
-          className="absolute inset-0 opacity-[0.05] [background-image:radial-gradient(rgba(237,231,218,0.6)_1px,transparent_1px)] [background-size:40px_40px]"
-          style={{
-            maskImage:
-              "radial-gradient(ellipse at center, black 40%, transparent 80%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse at center, black 40%, transparent 80%)",
-          }}
-        />
-        {/* Slow glow drift */}
-        <div className="absolute -top-32 -left-32 h-[480px] w-[480px] rounded-full bg-champagne-300/[0.06] blur-3xl motion-safe:animate-[pulse_20s_ease-in-out_infinite]" />
-        <div className="absolute -bottom-40 -right-32 h-[520px] w-[520px] rounded-full bg-emerald-900/[0.18] blur-3xl motion-safe:animate-[pulse_24s_ease-in-out_infinite]" />
-        {/* Ghost briefing-card silhouette behind right column */}
-        <div className="absolute right-[6%] top-[28%] hidden h-[520px] w-[380px] rotate-[-3deg] rounded-2xl border border-champagne-300/10 bg-charcoal-800/20 opacity-[0.5] blur-[2px] motion-safe:animate-ghost-drift lg:block" />
-      </div>
+    <section id="top" className="relative w-full overflow-hidden bg-white text-ink">
+      {/* Quiet hairline accents — no dark washes */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
+
 
       <HeroNav />
 
@@ -211,7 +194,7 @@ const FinanceHero = () => {
 
             {/* Command-style composer */}
             <div className="mt-9 max-w-2xl">
-              <div className="group relative overflow-hidden rounded-2xl border border-champagne-300/20 bg-charcoal-900/70 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(237,231,218,0.04)] backdrop-blur-md transition-colors duration-300 focus-within:border-champagne-200/60">
+              <div className="group relative overflow-hidden rounded-2xl border border-ink/[0.09] bg-white shadow-[0_1px_0_rgba(15,23,42,0.04),0_12px_32px_-20px_rgba(15,23,42,0.18)] transition-colors duration-300 focus-within:border-gold-500/70">
                 <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-champagne-200/[0.08] blur-3xl transition-opacity duration-500 group-focus-within:opacity-100" />
                 <div className="flex flex-col sm:flex-row sm:items-stretch">
                   <textarea
@@ -370,7 +353,7 @@ const BriefingPanel = ({
       : 0;
 
   return (
-    <div className="group/panel relative overflow-hidden rounded-2xl border border-champagne-300/20 bg-gradient-to-b from-charcoal-800/80 to-charcoal-900/80 p-6 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] backdrop-blur-sm motion-safe:animate-panel-rise sm:p-7">
+    <div className="group/panel relative overflow-hidden rounded-2xl border border-ink/[0.09] bg-white p-6 shadow-[0_1px_0_rgba(15,23,42,0.04),0_18px_40px_-24px_rgba(15,23,42,0.18)] motion-safe:animate-panel-rise sm:p-7">
       {/* top rim */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px origin-left bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent motion-safe:animate-rim-in" />
 
