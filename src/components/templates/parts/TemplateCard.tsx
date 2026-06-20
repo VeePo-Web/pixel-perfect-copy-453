@@ -43,6 +43,11 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
           : "border-ink/[0.07]"
       }`}
     >
+      {/* Premium hover hairline */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/50 to-transparent opacity-0 transition-opacity duration-500 ease-cinema group-hover:opacity-100"
+      />
       <div className="flex items-start justify-between gap-3">
         <div className="text-[10px] uppercase tracking-[0.26em] text-champagne-200/70">
           {template.category}
@@ -81,7 +86,7 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
             onGet();
             track("template_download_started", { templateId: template.id });
           }}
-          className="min-h-[40px] rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_10px_32px_-12px_rgba(217,190,130,0.6)]"
+          className="min-h-[44px] rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_10px_32px_-12px_rgba(217,190,130,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-[0.98]"
         >
           {template.ctaText}
         </button>
@@ -91,7 +96,7 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
             onPreview();
             track("template_preview_opened", { templateId: template.id });
           }}
-          className="text-[12px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
+          className="min-h-[44px] rounded-md px-1 text-[12px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/60"
         >
           Preview
         </button>
@@ -99,11 +104,11 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
 
       <div className="mt-4 border-t border-ink/[0.06] pt-3">
         <a
-          href="#/apply"
-          className="text-[11.5px] text-ink/50 transition-colors hover:text-champagne-200"
-          onClick={() => track("apply_clicked_from_templates", { source: "card", templateId: template.id })}
+          href="#/pricing#auto-fill"
+          className="text-[11.5px] text-ink/50 transition-colors hover:text-champagne-300"
+          onClick={() => track("autofill_clicked_from_templates", { source: "card", templateId: template.id })}
         >
-          Want this automated? <span className="underline-offset-4 hover:underline">GoldFin Desk →</span>
+          Want this filled for you every month? <span className="underline-offset-4 hover:underline">GoldFin Reports · $99/mo →</span>
         </a>
       </div>
     </article>
