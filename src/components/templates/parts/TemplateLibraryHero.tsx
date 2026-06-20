@@ -1,4 +1,5 @@
 import SpreadsheetPreview from "./SpreadsheetPreview";
+import HeroVaultCapture from "./HeroVaultCapture";
 import { templates } from "../content";
 
 const heroIds = ["cash-flow-forecast", "monthly-review", "hiring-calculator", "expense-audit", "tax-reserve"];
@@ -18,7 +19,7 @@ export default function TemplateLibraryHero() {
         <div className="grid items-start gap-14 lg:grid-cols-[1.05fr_1.05fr] lg:gap-16">
           <div className="motion-safe:animate-section-in">
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
-              Free Financial Templates
+              GoldFin Template Vault · Free
             </div>
             <h1
               id="templates-hero-heading"
@@ -26,32 +27,19 @@ export default function TemplateLibraryHero() {
             >
               Start organizing your numbers before they surprise you.
             </h1>
-            <p className="mt-5 max-w-[58ch] text-[15.5px] leading-[1.7] text-ink/70">
-              Practical spreadsheet templates for cash flow, expenses, hiring decisions, monthly reviews, and tax reserves — built for small business owners who want a clearer financial view.
+            <p className="mt-5 max-w-[54ch] text-[15.5px] leading-[1.7] text-ink/70">
+              The full Vault — cash flow, expenses, hiring decisions, monthly reviews, and tax reserves — sent to your inbox. Built for owners who want a clearer financial view, free.
             </p>
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              <a
-                href="#template-grid"
-                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
-              >
-                <span className="relative z-10">Get Free Templates</span>
-                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-              </a>
+
+            <HeroVaultCapture />
+
+            <p className="mt-6">
               <a
                 href="#/sample-briefing"
-                className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
+                className="text-[13px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
-                Generate Sample Finance Briefing
+                Or see a sample briefing first →
               </a>
-              <a
-                href="#/apply"
-                className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
-              >
-                Apply for the GoldFin Desk
-              </a>
-            </div>
-            <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
-              Free to start. No bank connection required.
             </p>
           </div>
 

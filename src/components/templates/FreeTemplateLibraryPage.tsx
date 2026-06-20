@@ -7,6 +7,7 @@ import TemplateGrid from "./parts/TemplateGrid";
 import RecommendedStartingPaths from "./parts/RecommendedStartingPaths";
 import ManualVsMonthlyDesk from "./parts/ManualVsMonthlyDesk";
 import FeaturedTemplatePreview from "./parts/FeaturedTemplatePreview";
+import SoapOperaPromise from "./parts/SoapOperaPromise";
 import TemplateToFinanceDeskBridge from "./parts/TemplateToFinanceDeskBridge";
 import TemplateTrustSection from "./parts/TemplateTrustSection";
 import TemplateFAQ from "./parts/TemplateFAQ";
@@ -56,6 +57,7 @@ export default function FreeTemplateLibraryPage() {
       <RecommendedStartingPaths activeId={highlightPathId} onSelect={setHighlightPathId} />
       <ManualVsMonthlyDesk />
       <FeaturedTemplatePreview onGet={handleFeaturedGet} />
+      <SoapOperaPromise />
       <TemplateToFinanceDeskBridge />
       <TemplateTrustSection />
       <TemplateFAQ />

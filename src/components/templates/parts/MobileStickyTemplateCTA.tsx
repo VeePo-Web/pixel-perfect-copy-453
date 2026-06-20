@@ -12,8 +12,8 @@ export default function MobileStickyTemplateCTA({ downloaded }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const href = downloaded ? "#/sample-briefing" : "#template-grid";
-  const label = downloaded ? "Generate Sample Briefing" : "Get Free Templates";
+  const href = downloaded ? "#/pricing#auto-fill" : "#vault-capture";
+  const label = downloaded ? "Auto-fill my reports — $99/mo" : "Send me the Vault";
 
   return (
     <div
@@ -29,7 +29,7 @@ export default function MobileStickyTemplateCTA({ downloaded }: Props) {
         <a
           href={href}
           onClick={() => {
-            if (downloaded) track("sample_briefing_clicked_from_templates", { source: "mobile-sticky" });
+            if (downloaded) track("autofill_clicked_from_templates", { source: "mobile-sticky" });
           }}
           className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"
         >
