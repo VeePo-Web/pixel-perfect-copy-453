@@ -227,7 +227,7 @@ const FinanceHero = () => {
                     <button
                       onClick={startDemo}
                       disabled={ctasDisabled}
-                      className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.6)] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:rounded-lg"
+                      className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:rounded-lg"
                     >
                       <span className="hidden md:inline">{COPY.primaryCta}</span>
                       <span className="md:hidden">{COPY.mobile.cta}</span>
