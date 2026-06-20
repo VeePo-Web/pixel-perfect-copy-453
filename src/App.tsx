@@ -60,6 +60,14 @@ const App = () => {
     );
   }
 
+  if (route === "security-faq") {
+    return (
+      <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
+        <SecurityFAQPage />
+      </main>
+    );
+  }
+
   return (
     <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
       <FinanceHero />
