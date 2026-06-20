@@ -19,7 +19,7 @@ export default function TemplateGrid({ templates, highlightedIds, onGet, onPrevi
         <div className="mb-8 flex items-end justify-between gap-6">
           <div>
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
-              Template Library
+              GoldFin Template Vault
             </div>
             <h2
               id="grid-heading"
@@ -38,14 +38,19 @@ export default function TemplateGrid({ templates, highlightedIds, onGet, onPrevi
           </div>
         ) : (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {templates.map((t) => (
-              <TemplateCard
+            {templates.map((t, i) => (
+              <div
                 key={t.id}
-                template={t}
-                highlighted={highlightedIds.has(t.id)}
-                onGet={() => onGet(t)}
-                onPreview={() => onPreview(t)}
-              />
+                style={{ animationDelay: `${Math.min(i, 8) * 55}ms` }}
+                className="motion-safe:animate-section-in"
+              >
+                <TemplateCard
+                  template={t}
+                  highlighted={highlightedIds.has(t.id)}
+                  onGet={() => onGet(t)}
+                  onPreview={() => onPreview(t)}
+                />
+              </div>
             ))}
           </div>
         )}
