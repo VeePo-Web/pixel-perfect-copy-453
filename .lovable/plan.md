@@ -1,23 +1,48 @@
-## Status: page already exists
+## Problem
 
-The Free Template Library page is already built and live at `#/templates`. The current implementation already covers every section, component, and behavior in this brief:
+All the new pages already exist and render correctly at their hash routes (`#/templates`, `#/security-faq`, `#/pricing`, `#/compare`, `#/sample-briefing`, `#/apply`). They're invisible to visitors because:
 
-**Existing files** in `src/components/templates/`:
-- `FreeTemplateLibraryPage.tsx` — composes all sections, manages preview/lead-capture state
-- `content.ts` — 12 templates, categories, recommended paths, FAQ
-- `analytics.ts` — event hooks
-- `hooks/useTemplateFilters.ts`, `hooks/useLeadCaptureFlow.ts`
-- 19 part components: `TemplatesTopBar`, `TemplateLibraryHero`, `PainToValueReframe`, `TemplateCategoryFilters`, `TemplateGrid`, `TemplateCard`, `TemplatePreviewModal`, `TemplateLeadCaptureModal`, `TemplateSuccessState` (inside modal), `RecommendedStartingPaths`, `ManualVsMonthlyDesk`, `FeaturedTemplatePreview`, `TemplateToFinanceDeskBridge`, `TemplateTrustSection`, `TemplateFAQ`, `TemplateFinalCTA`, `MobileStickyTemplateCTA`, `SpreadsheetPreview`, `ModalShell`
+1. The **home page** (`FinanceHero` + `HowItWorks`) has no top navigation at all — nothing links out to Templates, Pricing, Compare, or Security & FAQ from the landing screen.
+2. The existing per-page top bars (`TemplatesTopBar`, `CompareTopBar`, `SecurityFAQTopBar`) are inconsistent — different link sets, no Security & FAQ link anywhere.
 
-Every section from the new brief (hero, pain-to-value, sticky filters, 12 template cards, preview modal, low-friction lead capture, success state with upgrade bridge, recommended starting paths, manual vs MFD, featured cash-flow preview, 4-step bridge, trust section, FAQ, final CTA, mobile sticky CTA, analytics, a11y, dark premium styling) is already implemented.
+## Plan: Single shared GlobalTopBar on every page
 
-## Recommendation: pick a scope
+### 1. Create `src/components/nav/GlobalTopBar.tsx`
 
-Rather than rebuilding what's there, tell me which of these you actually want:
+One reusable header, matching the existing premium aesthetic from `TemplatesTopBar` (fixed, `bg-charcoal-950/80` blur, champagne dot + "Monthly Finance Desk" wordmark, champagne gradient Apply pill).
 
-1. **Audit & polish** — I diff the existing page against the new brief, list any gaps (copy drift, missing field, missing event, weak interaction), and patch only those.
-2. **Targeted enhancement** — name one section to redesign (e.g. richer hero animation, better preview modal, real spreadsheet-style preview).
-3. **Full rebuild from scratch** — discard current page, rebuild verbatim from this brief. Higher cost, mostly duplicative.
-4. **Something else** — tell me what's wrong with the current page.
+Props: `currentPath?: "home" | "how-it-works" | "templates" | "pricing" | "compare" | "sample-briefing" | "security-faq" | "apply"`.
 
-If you don't reply, I'll default to **option 1 (audit & polish)**: I'll read every existing part, compare against the brief line-by-line, and submit a follow-up plan listing only the concrete gaps to fix.
+Link set (left → right, after the wordmark):
+- How It Works → `#/` (anchors to HowItWorks section on home, or use `#how-it-works` hash)
+- Templates → `#/templates`
+- Compare → `#/compare`
+- Sample Briefing → `#/sample-briefing`
+- Pricing → `#/pricing`
+- Security & FAQ → `#/security-faq`
+- Apply (champagne pill CTA) → `#/apply`
+
+Mobile (<lg): condense to wordmark + hamburger that opens a full-screen sheet with the same links stacked. Keep the Apply pill always visible.
+
+Accessibility: `nav aria-label="Primary"`, focus-visible rings, current page marked with `aria-current="page"`.
+
+### 2. Wire it into every route in `src/App.tsx`
+
+Render `<GlobalTopBar currentPath={...} />` inside each route's `<main>`, above the page component, passing the matching `currentPath`. The hero/home route gets it too (with `currentPath="home"`).
+
+Add top padding (`pt-14`) on the home `<main>` and any page that doesn't already account for the fixed bar so the hero doesn't slide under it.
+
+### 3. Retire the per-page top bars
+
+Remove `TemplatesTopBar`, `CompareTopBar`, `SecurityFAQTopBar` usage from their respective pages so we don't end up with two stacked headers. Delete the now-unused components.
+
+### 4. Verify
+
+- `bunx tsc --noEmit`
+- Playwright smoke: load `#/`, screenshot, click each nav link, confirm the right page renders and `aria-current` flips.
+
+## Out of scope
+
+- No footer (can be a follow-up if you want one).
+- No copy/content changes inside the existing pages.
+- No new routes.
