@@ -28,10 +28,10 @@ export default function MobileStickyCTA({ status, onGenerate }: Props) {
         </p>
         {ready ? (
           <a
-            href="#/apply"
+            href="#/pricing#auto-fill"
             className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"
           >
-            Apply for GoldFin Desk
+            Auto-fill my reports — $99/mo
           </a>
         ) : (
           <button
