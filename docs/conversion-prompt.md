@@ -1,8 +1,6 @@
-# Master Conversion Prompt — GoldFin / Monthly Finance Desk
+# Master Conversion Prompt — Monthly Finance Desk (GoldFin)
 
-Below is the single, self-contained prompt you (or another agent) will paste in to drive a full section-by-section conversion rewrite of the site. It is engineered to be executed page-by-page, section-by-section, with no ambiguity about visual format, copy hierarchy, CTA, or the belief being sold at that exact scroll position.
-
-Treat everything below the `=== BEGIN PROMPT ===` line as the deliverable. Hand it to the build-mode agent unchanged.
+A single, self-contained prompt to drive a full section-by-section conversion rewrite of the site. Hand it to any agent (or paste into a new chat) unchanged. Treat everything below `=== BEGIN PROMPT ===` as the deliverable.
 
 ---
 
@@ -73,7 +71,7 @@ The homepage's job is **not** to sell $1,500. It is to make the visitor want the
 
 Sections (in order):
 
-1. **Hero — Bait Promise.** Headline = the Hook from the research: *"Your business finances are not unclear. They are just unorganized."* Sub = one-line promise of the template vault. Primary CTA: **Get the free templates** (gold). Secondary text link: *See a sample briefing*. Visual: layered preview of 3 template thumbnails (cash flow, expense leak, owner decision sheet) on ivory, soft gold hairline. No dashboard mockup. No video.
+1. **Hero — Bait Promise.** Headline: *"Your business finances are not unclear. They are just unorganized."* Sub = one-line promise of the template vault. Primary CTA: **Get the free templates** (gold). Secondary text link: *See a sample briefing*. Visual: layered preview of 3 template thumbnails (cash flow, expense leak, owner decision sheet) on ivory, soft gold hairline. No dashboard mockup. No video.
 2. **Manual Pain Reveal.** Three-column "before" — owner with bank tabs open, spreadsheet half-filled, sticky notes. Belief: "You have the data, you don't have the time." No CTA. Pure agitation.
 3. **What's In The Vault.** 7-template grid as actual document thumbnails (not icons). Each labeled with the decision it answers ("Where did the money go?" "What changed this month?"). CTA repeats: **Get the free templates**.
 4. **Epiphany Bridge to $99.** Headline: *"Use them free. Or have them filled for you every month."* This is the ONLY place the $99 appears on the homepage, and it is framed as the natural next step after they've imagined doing it manually. CTA: *See how auto-fill works* → routes to /pricing#auto-fill. Not a buy button.
@@ -210,7 +208,3 @@ Build in this order, one page per turn, top-section to bottom-section:
 Confirm the page and section you are about to build, output the pre-build block, then write the code. Move to the next section only when the current one passes Definition of Done.
 
 === END PROMPT ===
-
----
-
-If you approve this plan, I'll save the prompt to `docs/conversion-prompt.md` in the repo so you can hand it to any future agent (or paste it into a new chat) and start executing page-by-page. Want me to also queue up Page 1 (`/templates`) for immediate rebuild right after saving, or stop at saving the prompt?
