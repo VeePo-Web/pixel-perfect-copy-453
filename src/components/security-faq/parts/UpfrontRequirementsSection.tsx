@@ -5,7 +5,7 @@ export default function UpfrontRequirementsSection() {
   return (
     <section
       aria-labelledby="upfront-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
@@ -14,7 +14,7 @@ export default function UpfrontRequirementsSection() {
           </div>
           <h2
             id="upfront-heading"
-            className="mt-3 font-light text-bone text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
           >
             What you do not need to share to preview or apply.
           </h2>
@@ -23,7 +23,7 @@ export default function UpfrontRequirementsSection() {
           {noUpfrontCards.map((c) => (
             <li
               key={c.title}
-              className="group relative rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 transition-all duration-300 hover:border-white/[0.2] hover:bg-white/[0.04] motion-safe:hover:-translate-y-0.5"
+              className="group relative rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 transition-all duration-300 hover:border-ink/[0.2] hover:bg-ink/[0.04] motion-safe:hover:-translate-y-0.5"
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-400/25 bg-emerald-400/[0.07] text-emerald-200/90">
                 <svg
@@ -40,8 +40,8 @@ export default function UpfrontRequirementsSection() {
                   <path d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="mt-4 text-[15.5px] font-medium text-bone">{c.title}</h3>
-              <p className="mt-2 text-[13px] leading-relaxed text-bone/65">{c.body}</p>
+              <h3 className="mt-4 text-[15.5px] font-medium text-ink">{c.title}</h3>
+              <p className="mt-2 text-[13px] leading-relaxed text-ink/65">{c.body}</p>
             </li>
           ))}
         </ul>
@@ -49,7 +49,7 @@ export default function UpfrontRequirementsSection() {
           <a
             href="#/apply"
             onClick={() => trackCtaByHref("#/apply", "security_faq_upfront")}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-charcoal-950 transition-all hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
           >
             Apply Without Bank Connection
           </a>

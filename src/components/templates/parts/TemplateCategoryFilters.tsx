@@ -21,7 +21,7 @@ export default function TemplateCategoryFilters({ active, onChange }: Props) {
   };
 
   return (
-    <div className="sticky top-0 z-30 border-b border-white/[0.06] bg-charcoal-950/85 backdrop-blur-md">
+    <div className="sticky top-0 z-30 border-b border-ink/[0.06] bg-charcoal-950/85 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-6 py-3 lg:px-10">
         <div
           ref={listRef}
@@ -45,8 +45,8 @@ export default function TemplateCategoryFilters({ active, onChange }: Props) {
                 }}
                 className={`min-h-[36px] shrink-0 rounded-full border px-4 py-1.5 text-[12.5px] transition-all duration-300 ease-cinema ${
                   isActive
-                    ? "border-champagne-200/60 bg-champagne-200/[0.08] text-bone shadow-[0_0_24px_-10px_rgba(217,190,130,0.6)]"
-                    : "border-white/[0.08] bg-white/[0.02] text-bone/65 hover:border-white/20 hover:text-bone"
+                    ? "border-champagne-200/60 bg-champagne-200/[0.08] text-ink shadow-[0_0_24px_-10px_rgba(217,190,130,0.6)]"
+                    : "border-ink/[0.08] bg-ink/[0.02] text-ink/65 hover:border-ink/20 hover:text-ink"
                 }`}
               >
                 {c}

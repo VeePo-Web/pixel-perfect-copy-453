@@ -36,7 +36,7 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="relative isolate bg-charcoal-950 text-bone"
+      className="relative isolate bg-charcoal-950 text-ink"
       style={{
         backgroundImage:
           "radial-gradient(1100px 700px at 12% -10%, rgba(217,190,130,0.06), transparent 60%), radial-gradient(900px 600px at 88% 110%, rgba(63,122,94,0.07), transparent 60%)",
@@ -99,10 +99,10 @@ export default function HowItWorks() {
       >
         <a
           href={samplePassed ? "#/apply" : "#top"}
-          className="relative block overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3.5 text-center text-[13px] font-medium tracking-wide text-charcoal-950 shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
+          className="relative block overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3.5 text-center text-[13px] font-medium tracking-wide text-navy shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
         >
           <span className="relative z-10">{samplePassed ? "Apply for the Monthly Finance Desk" : "Generate Sample Briefing"}</span>
-          <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+          <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
         </a>
       </div>
     </section>

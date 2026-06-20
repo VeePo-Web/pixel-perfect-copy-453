@@ -25,23 +25,39 @@ export default {
           100: "#8e983f",
           300: "#edff66",
         },
+        // Light-theme aliases. Keys retained for backward compat — values flipped to paper/ink/gold.
         charcoal: {
-          950: "#0B0B0D",
-          900: "#111114",
-          800: "#1A1A1F",
-          700: "#24242B",
-          600: "#2E2E36",
+          950: "#FAF8F3", // page background — warm paper
+          900: "#F4F0E6", // raised surface
+          800: "#ECE6D6", // subtle band
+          700: "#DCD6C7", // hairline / divider
+          600: "#C7BFAB", // muted border
         },
         champagne: {
-          50: "#F5ECD7",
-          100: "#E9D9B0",
-          200: "#D9BE82",
-          300: "#C9A35A",
-          400: "#A8853F",
+          50: "#F7EFD8",   // soft gold tint (hover wash)
+          100: "#ECD8A3",  // light gold
+          200: "#C9A24B",  // decorative gold (rules, dots, borders)
+          300: "#A8842F",  // emphasis gold
+          400: "#7A5F1F",  // darkest gold for small text
         },
-        bone: "#EDE7DA",
+        bone: "#191C22", // ink — primary text
+        ink: {
+          DEFAULT: "#191C22",
+          muted: "#5A5F6A",
+        },
+        paper: {
+          DEFAULT: "#FAF8F3",
+          raised: "#FDFBF7",
+          white: "#FFFFFF",
+        },
+        gold: {
+          300: "#ECD8A3",
+          500: "#C9A24B",
+          700: "#997327",
+        },
+        navy: "#1B2A44",
         green: {
-          signal: "#3F7A5E",
+          signal: "#356B4F",
           deep: "#1F3B2D",
         },
       },

@@ -4,8 +4,8 @@ export default function FitSignalCard({ tone = "positive", children }: { tone?: 
     <div
       className={`relative rounded-xl border p-4 text-[13px] leading-[1.6] backdrop-blur-sm motion-safe:animate-section-in ${
         positive
-          ? "border-green-signal/40 bg-green-deep/20 text-bone/85"
-          : "border-champagne-200/20 bg-champagne-200/[0.04] text-bone/80"
+          ? "border-green-signal/40 bg-green-deep/20 text-ink/85"
+          : "border-champagne-200/20 bg-champagne-200/[0.04] text-ink/80"
       }`}
     >
       <span

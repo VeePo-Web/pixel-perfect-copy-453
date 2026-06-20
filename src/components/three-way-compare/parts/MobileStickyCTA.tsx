@@ -41,17 +41,17 @@ export default function MobileStickyCTA({ recommendation }: Props) {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-40 transform border-t border-white/[0.08] bg-charcoal-950/95 backdrop-blur-md transition-all duration-500 ease-cinema lg:hidden ${
+      className={`fixed inset-x-0 bottom-0 z-40 transform border-t border-ink/[0.08] bg-charcoal-950/95 backdrop-blur-md transition-all duration-500 ease-cinema lg:hidden ${
         visible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
       }`}
       style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
     >
       <div className="flex items-center justify-between gap-3 px-4 pt-3">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-bone/50">{eyebrow}</p>
+        <p className="text-[11px] uppercase tracking-[0.22em] text-ink/50">{eyebrow}</p>
         <a
           href={href}
           onClick={() => trackCtaByHref(href, "mobile-sticky")}
-          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-charcoal-950"
+          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"
         >
           {label}
         </a>

@@ -6,7 +6,7 @@ export default function ProductBoundariesSection() {
     <section
       id="boundaries"
       aria-labelledby="boundaries-heading"
-      className="relative scroll-mt-24 border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
@@ -15,7 +15,7 @@ export default function ProductBoundariesSection() {
           </div>
           <h2
             id="boundaries-heading"
-            className="mt-3 font-light text-bone text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
           >
             What Monthly Finance Desk does — and does not do.
           </h2>
@@ -29,7 +29,7 @@ export default function ProductBoundariesSection() {
               {productBoundaries.does.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 text-[14px] leading-relaxed text-bone/85"
+                  className="flex items-start gap-3 text-[14px] leading-relaxed text-ink/85"
                 >
                   <span
                     aria-hidden
@@ -52,7 +52,7 @@ export default function ProductBoundariesSection() {
               {productBoundaries.doesNot.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 text-[14px] leading-relaxed text-bone/80"
+                  className="flex items-start gap-3 text-[14px] leading-relaxed text-ink/80"
                 >
                   <span
                     aria-hidden
@@ -68,7 +68,7 @@ export default function ProductBoundariesSection() {
             </ul>
           </div>
         </div>
-        <p className="mt-8 max-w-3xl text-[12px] leading-relaxed text-bone/45">
+        <p className="mt-8 max-w-3xl text-[12px] leading-relaxed text-ink/45">
           Monthly Finance Desk does not replace tax, legal, accounting, bookkeeping
           cleanup, CFO services, or investment advice.
         </p>
@@ -76,7 +76,7 @@ export default function ProductBoundariesSection() {
           <a
             href="#/compare"
             onClick={() => trackCtaByHref("#/compare", "security_faq_boundaries")}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-5 text-[13px] text-bone transition-colors hover:border-white/30 hover:bg-white/[0.03]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-ink transition-colors hover:border-ink/30 hover:bg-ink/[0.03]"
           >
             Compare Your Options →
           </a>

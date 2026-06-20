@@ -15,10 +15,10 @@ export default function TemplateSuccessState({ template, onClose, headingId }: P
           <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/80">
             Sent
           </div>
-          <h2 id={headingId} className="mt-2 text-[22px] font-light leading-snug text-bone">
+          <h2 id={headingId} className="mt-2 text-[22px] font-light leading-snug text-ink">
             Your template is on its way.
           </h2>
-          <p className="mt-2 text-[13.5px] text-bone/65">
+          <p className="mt-2 text-[13.5px] text-ink/65">
             Check your inbox for the {template.shortName} download link. While you wait, preview what this becomes inside the Monthly Finance Desk.
           </p>
         </div>
@@ -26,7 +26,7 @@ export default function TemplateSuccessState({ template, onClose, headingId }: P
           type="button"
           aria-label="Close"
           onClick={onClose}
-          className="rounded-full border border-white/[0.08] px-2.5 py-1 text-[11px] text-bone/60 hover:text-bone"
+          className="rounded-full border border-ink/[0.08] px-2.5 py-1 text-[11px] text-ink/60 hover:text-ink"
         >
           ✕
         </button>
@@ -39,24 +39,24 @@ export default function TemplateSuccessState({ template, onClose, headingId }: P
           className="block rounded-2xl border border-champagne-200/30 bg-charcoal-900/70 p-4 transition-all duration-300 ease-cinema hover:border-champagne-200/55"
         >
           <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/85">Recommended next</div>
-          <div className="mt-1.5 text-[15px] text-bone">Generate Sample Finance Briefing</div>
-          <div className="mt-1 text-[12.5px] text-bone/60">See what this becomes when automated and interpreted monthly.</div>
+          <div className="mt-1.5 text-[15px] text-ink">Generate Sample Finance Briefing</div>
+          <div className="mt-1 text-[12.5px] text-ink/60">See what this becomes when automated and interpreted monthly.</div>
         </a>
         <a
           href="#/apply"
           onClick={() => track("apply_clicked_from_templates", { source: "success", templateId: template.id })}
-          className="block rounded-2xl border border-white/[0.08] bg-white/[0.02] p-4 transition-all duration-300 ease-cinema hover:border-white/20"
+          className="block rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-4 transition-all duration-300 ease-cinema hover:border-ink/20"
         >
-          <div className="text-[15px] text-bone">Apply for the Monthly Finance Desk</div>
-          <div className="mt-1 text-[12.5px] text-bone/55">$1,500/month. No bank connection required to apply.</div>
+          <div className="text-[15px] text-ink">Apply for the Monthly Finance Desk</div>
+          <div className="mt-1 text-[12.5px] text-ink/55">$1,500/month. No bank connection required to apply.</div>
         </a>
         <button
           type="button"
           onClick={onClose}
-          className="block w-full rounded-2xl border border-white/[0.06] bg-transparent p-4 text-left transition-colors hover:border-white/15"
+          className="block w-full rounded-2xl border border-ink/[0.06] bg-transparent p-4 text-left transition-colors hover:border-ink/15"
         >
-          <div className="text-[15px] text-bone/85">Browse more templates</div>
-          <div className="mt-1 text-[12.5px] text-bone/50">Keep exploring the library.</div>
+          <div className="text-[15px] text-ink/85">Browse more templates</div>
+          <div className="mt-1 text-[12.5px] text-ink/50">Keep exploring the library.</div>
         </button>
       </div>
     </div>

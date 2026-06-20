@@ -2,7 +2,7 @@ import { monthlyRhythm } from "../content";
 
 export default function RecommendedPlanSpotlight() {
   return (
-    <section aria-labelledby="spotlight-title" className="relative border-b border-white/[0.05] bg-charcoal-950">
+    <section aria-labelledby="spotlight-title" className="relative border-b border-ink/[0.05] bg-charcoal-950">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(60%_40%_at_50%_0%,rgba(201,163,90,0.08),transparent_65%)]" />
       </div>
@@ -11,10 +11,10 @@ export default function RecommendedPlanSpotlight() {
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
             Recommended
           </div>
-          <h2 id="spotlight-title" className="mt-4 font-light text-bone text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[46px]">
+          <h2 id="spotlight-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[46px]">
             Most owners should start with the Monthly Finance Desk.
           </h2>
-          <p className="mt-4 text-[15.5px] leading-[1.7] text-bone/70">
+          <p className="mt-4 text-[15.5px] leading-[1.7] text-ink/70">
             It is designed for the exact middle: more than bookkeeping, more personal than a dashboard, lighter than a full CFO.
           </p>
         </div>
@@ -27,27 +27,27 @@ export default function RecommendedPlanSpotlight() {
                 <span className="h-1.5 w-1.5 rounded-full bg-champagne-200 motion-safe:animate-soft-pulse" />
                 Most relevant for serious owner-led businesses
               </div>
-              <h3 className="mt-5 font-light text-bone text-[28px] leading-[1.1]">
+              <h3 className="mt-5 font-light text-ink text-[28px] leading-[1.1]">
                 The Monthly Finance Desk
               </h3>
               <div className="mt-6 flex items-baseline gap-2">
-                <span className="text-[56px] font-light tabular-nums text-bone">$1,500</span>
-                <span className="text-[14px] text-bone/55">/ month</span>
+                <span className="text-[56px] font-light tabular-nums text-ink">$1,500</span>
+                <span className="text-[14px] text-ink/55">/ month</span>
               </div>
-              <p className="mt-5 max-w-[44ch] text-[14.5px] leading-[1.7] text-bone/75">
+              <p className="mt-5 max-w-[44ch] text-[14.5px] leading-[1.7] text-ink/75">
                 A recurring system that keeps the financial side of the business from disappearing into the background.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href="#/apply"
-                  className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+                  className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
                 >
                   <span className="relative z-10">Apply for the Monthly Finance Desk</span>
-                  <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+                  <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
                 </a>
                 <a
                   href="#/sample-briefing"
-                  className="rounded-full border border-white/[0.12] px-5 py-3 text-[13px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+                  className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
                 >
                   Preview Sample Briefing
                 </a>
@@ -55,24 +55,24 @@ export default function RecommendedPlanSpotlight() {
             </div>
 
             <div>
-              <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/45">
+              <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/45">
                 Your monthly rhythm
               </div>
               <ol className="mt-5 space-y-3">
                 {monthlyRhythm.map((r, i) => (
                   <li
                     key={r.week}
-                    className="grid grid-cols-[80px_1fr] items-center gap-4 rounded-xl border border-white/[0.07] bg-white/[0.02] px-5 py-4 transition-all duration-400 hover:border-champagne-200/25 hover:bg-white/[0.04]"
+                    className="grid grid-cols-[80px_1fr] items-center gap-4 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-5 py-4 transition-all duration-400 hover:border-champagne-200/25 hover:bg-ink/[0.04]"
                     style={{ animationDelay: `${i * 80}ms` }}
                   >
                     <span className="text-[11px] uppercase tracking-[0.22em] text-champagne-200/80">
                       {r.week}
                     </span>
-                    <span className="text-[15px] text-bone/90">{r.title}</span>
+                    <span className="text-[15px] text-ink/90">{r.title}</span>
                   </li>
                 ))}
               </ol>
-              <p className="mt-6 text-[11.5px] uppercase tracking-[0.2em] text-bone/40">
+              <p className="mt-6 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
                 One repeating cycle. No surprises. No catching up at year-end.
               </p>
             </div>

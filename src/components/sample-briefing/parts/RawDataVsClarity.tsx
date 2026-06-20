@@ -26,23 +26,23 @@ export default function RawDataVsClarity() {
   }, []);
 
   return (
-    <section className="border-b border-white/[0.05] bg-charcoal-950">
+    <section className="border-b border-ink/[0.05] bg-charcoal-950">
       <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
             Data vs Clarity
           </div>
-          <h2 className="mt-4 font-light text-bone text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
+          <h2 className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
             Financial data is not the same as financial clarity.
           </h2>
-          <p className="mt-4 text-[15.5px] leading-[1.7] text-bone/70">
+          <p className="mt-4 text-[15.5px] leading-[1.7] text-ink/70">
             Most owners already have numbers. The missing layer is interpretation, rhythm, and a clear view of what deserves attention next.
           </p>
         </div>
 
         <div className="mt-14 grid gap-8 lg:grid-cols-2">
           <div>
-            <div className="mb-4 text-[10.5px] uppercase tracking-[0.22em] text-bone/45">
+            <div className="mb-4 text-[10.5px] uppercase tracking-[0.22em] text-ink/45">
               What owners usually have
             </div>
             <ul className="space-y-2.5">
@@ -51,7 +51,7 @@ export default function RawDataVsClarity() {
                 return (
                   <li
                     key={item}
-                    className="rounded-lg border border-white/[0.06] bg-white/[0.02] px-4 py-3 text-[14px] text-bone/80 transition-all duration-500 ease-cinema"
+                    className="rounded-lg border border-ink/[0.06] bg-ink/[0.02] px-4 py-3 text-[14px] text-ink/80 transition-all duration-500 ease-cinema"
                     style={{
                       transform: `translateX(${(-12 * localP).toFixed(1)}px)`,
                       opacity: 1 - localP * 0.55,
@@ -75,7 +75,7 @@ export default function RawDataVsClarity() {
                 return (
                   <li
                     key={item}
-                    className="rounded-lg border bg-charcoal-900/55 px-4 py-3 text-[14.5px] text-bone transition-all duration-500 ease-cinema"
+                    className="rounded-lg border bg-charcoal-900/55 px-4 py-3 text-[14.5px] text-ink transition-all duration-500 ease-cinema"
                     style={{
                       transform: `translateY(${(8 - 8 * localP).toFixed(1)}px)`,
                       opacity: 0.35 + 0.65 * localP,

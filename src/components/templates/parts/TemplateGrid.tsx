@@ -13,7 +13,7 @@ export default function TemplateGrid({ templates, highlightedIds, onGet, onPrevi
     <section
       id="template-grid"
       aria-labelledby="grid-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
         <div className="mb-8 flex items-end justify-between gap-6">
@@ -23,17 +23,17 @@ export default function TemplateGrid({ templates, highlightedIds, onGet, onPrevi
             </div>
             <h2
               id="grid-heading"
-              className="mt-3 max-w-[26ch] font-light text-bone text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
+              className="mt-3 max-w-[26ch] font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
             >
               Find the template that matches what you are trying to understand.
             </h2>
           </div>
-          <div className="hidden text-[11.5px] text-bone/45 sm:block">
+          <div className="hidden text-[11.5px] text-ink/45 sm:block">
             {templates.length} template{templates.length === 1 ? "" : "s"}
           </div>
         </div>
         {templates.length === 0 ? (
-          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] px-6 py-12 text-center text-[13px] text-bone/55">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] px-6 py-12 text-center text-[13px] text-ink/55">
             No templates in this category yet.
           </div>
         ) : (

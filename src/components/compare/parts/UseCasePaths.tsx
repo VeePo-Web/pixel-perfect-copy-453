@@ -7,7 +7,7 @@ export default function UseCasePaths() {
   return (
     <section
       aria-labelledby="use-cases-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[60ch]">
@@ -16,7 +16,7 @@ export default function UseCasePaths() {
           </div>
           <h2
             id="use-cases-heading"
-            className="mt-3 font-light text-bone text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
           >
             Choose the path that sounds most like your business.
           </h2>
@@ -31,7 +31,7 @@ export default function UseCasePaths() {
                 className={`rounded-2xl border p-5 transition-all duration-400 ease-cinema ${
                   open
                     ? "border-champagne-200/45 bg-charcoal-900/70 shadow-[0_30px_70px_-30px_rgba(217,190,130,0.35)]"
-                    : "border-white/[0.07] bg-white/[0.02] hover:border-champagne-200/25"
+                    : "border-ink/[0.07] bg-ink/[0.02] hover:border-champagne-200/25"
                 }`}
               >
                 <button
@@ -47,7 +47,7 @@ export default function UseCasePaths() {
                   <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/70">
                     Owner says
                   </div>
-                  <div className="mt-2 text-[16px] font-light leading-snug text-bone">
+                  <div className="mt-2 text-[16px] font-light leading-snug text-ink">
                     “{u.quote}”
                   </div>
                 </button>
@@ -57,7 +57,7 @@ export default function UseCasePaths() {
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <p className="text-[13px] leading-relaxed text-bone/70">{u.recommendation}</p>
+                    <p className="text-[13px] leading-relaxed text-ink/70">{u.recommendation}</p>
                     <div className="mt-4 flex flex-wrap items-center gap-3">
                       <a
                         href={u.primaryCTA.href}
@@ -69,13 +69,13 @@ export default function UseCasePaths() {
                           else if (h === "#/templates")
                             track("templates_clicked_from_compare", { source: `use-case:${u.id}` });
                         }}
-                        className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-2 text-[12px] font-medium text-charcoal-950 transition-all duration-300 ease-cinema hover:shadow-[0_10px_30px_-10px_rgba(217,190,130,0.55)]"
+                        className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-2 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_10px_30px_-10px_rgba(217,190,130,0.55)]"
                       >
                         {u.primaryCTA.label}
                       </a>
                       <a
                         href={u.secondaryCTA.href}
-                        className="text-[12px] text-bone/60 underline-offset-4 hover:text-bone hover:underline"
+                        className="text-[12px] text-ink/60 underline-offset-4 hover:text-ink hover:underline"
                       >
                         {u.secondaryCTA.label}
                       </a>

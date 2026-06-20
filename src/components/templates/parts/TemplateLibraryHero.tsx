@@ -7,11 +7,11 @@ export default function TemplateLibraryHero() {
   return (
     <section
       aria-labelledby="templates-hero-heading"
-      className="relative isolate overflow-hidden border-b border-white/[0.05] bg-charcoal-950"
+      className="relative isolate overflow-hidden border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(70%_50%_at_70%_0%,rgba(201,163,90,0.10),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(0,0,0,0.45))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(250,248,243,0))]" />
         <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:80px_80px]" />
       </div>
       <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-32 sm:pt-36 lg:px-10">
@@ -22,35 +22,35 @@ export default function TemplateLibraryHero() {
             </div>
             <h1
               id="templates-hero-heading"
-              className="mt-5 max-w-[22ch] font-light text-bone text-[42px] leading-[1.04] tracking-[-0.01em] sm:text-[56px] lg:text-[64px]"
+              className="mt-5 max-w-[22ch] font-light text-ink text-[42px] leading-[1.04] tracking-[-0.01em] sm:text-[56px] lg:text-[64px]"
             >
               Start organizing your numbers before they surprise you.
             </h1>
-            <p className="mt-5 max-w-[58ch] text-[15.5px] leading-[1.7] text-bone/70">
+            <p className="mt-5 max-w-[58ch] text-[15.5px] leading-[1.7] text-ink/70">
               Practical spreadsheet templates for cash flow, expenses, hiring decisions, monthly reviews, and tax reserves — built for small business owners who want a clearer financial view.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
                 href="#template-grid"
-                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
               >
                 <span className="relative z-10">Get Free Templates</span>
-                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </a>
               <a
                 href="#/sample-briefing"
-                className="rounded-full border border-white/[0.12] px-6 py-3.5 text-[13px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+                className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
               >
                 Generate Sample Finance Briefing
               </a>
               <a
                 href="#/apply"
-                className="text-[12.5px] text-bone/55 underline-offset-4 transition-colors hover:text-bone hover:underline"
+                className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
                 Apply for the Monthly Finance Desk
               </a>
             </div>
-            <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-bone/40">
+            <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
               Free to start. No bank connection required.
             </p>
           </div>

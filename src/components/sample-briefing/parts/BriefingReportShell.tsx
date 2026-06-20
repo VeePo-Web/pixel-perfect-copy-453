@@ -16,7 +16,7 @@ export default function BriefingReportShell({ business, visible }: Props) {
     <section
       id="briefing-report"
       aria-hidden={!visible}
-      className={`relative border-b border-white/[0.05] bg-charcoal-950 transition-opacity duration-700 ease-cinema ${
+      className={`relative border-b border-ink/[0.05] bg-charcoal-950 transition-opacity duration-700 ease-cinema ${
         visible ? "opacity-100" : "pointer-events-none h-0 overflow-hidden opacity-0"
       }`}
     >
@@ -24,19 +24,19 @@ export default function BriefingReportShell({ business, visible }: Props) {
         <div className="absolute inset-0 bg-[radial-gradient(60%_40%_at_30%_0%,rgba(63,122,94,0.08),transparent_60%)]" />
       </div>
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-white/[0.06] pb-8">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-ink/[0.06] pb-8">
           <div>
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
               Sample Bi-Weekly Finance Briefing
             </div>
-            <h2 className="mt-3 font-light text-bone text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[42px]">
+            <h2 className="mt-3 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[42px]">
               {business.reportTitle}
             </h2>
-            <p className="mt-2 text-[13px] text-bone/55">
+            <p className="mt-2 text-[13px] text-ink/55">
               {business.period} · Demo Data
             </p>
           </div>
-          <p className="max-w-[42ch] text-[12px] leading-[1.6] text-bone/45">
+          <p className="max-w-[42ch] text-[12px] leading-[1.6] text-ink/45">
             This is a sample briefing using demo numbers. Your real briefing would be based on your onboarded financial system. Not financial, tax, legal, or investment advice.
           </p>
         </div>

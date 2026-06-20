@@ -8,7 +8,7 @@ export default function ScenarioRecommendationCards() {
   return (
     <section
       aria-labelledby="scenario-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
@@ -17,7 +17,7 @@ export default function ScenarioRecommendationCards() {
           </div>
           <h2
             id="scenario-heading"
-            className="mt-3 font-light text-bone text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
           >
             Which situation sounds like you?
           </h2>
@@ -39,16 +39,16 @@ export default function ScenarioRecommendationCards() {
                   className={`group w-full text-left transition-all duration-400 ease-cinema rounded-2xl border p-5 ${
                     isOpen
                       ? "border-champagne-200/45 bg-charcoal-900/70 shadow-[0_20px_60px_-30px_rgba(217,190,130,0.45)]"
-                      : "border-white/[0.07] bg-white/[0.02] hover:-translate-y-0.5 hover:border-champagne-200/30"
+                      : "border-ink/[0.07] bg-ink/[0.02] hover:-translate-y-0.5 hover:border-champagne-200/30"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <p className="max-w-[28ch] text-[15.5px] italic leading-snug text-bone">
+                    <p className="max-w-[28ch] text-[15.5px] italic leading-snug text-ink">
                       “{s.quote.replace(/^["“]?|["”]?$/g, "")}”
                     </p>
                     <span
                       aria-hidden
-                      className={`text-[18px] leading-none text-bone/55 transition-transform duration-300 ${
+                      className={`text-[18px] leading-none text-ink/55 transition-transform duration-300 ${
                         isOpen ? "rotate-45" : ""
                       }`}
                     >
@@ -64,8 +64,8 @@ export default function ScenarioRecommendationCards() {
                       <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/80">
                         Recommendation
                       </div>
-                      <p className="mt-1 text-[14px] font-light text-bone">{s.recommendation}</p>
-                      <p className="mt-3 text-[13px] leading-relaxed text-bone/70">
+                      <p className="mt-1 text-[14px] font-light text-ink">{s.recommendation}</p>
+                      <p className="mt-3 text-[13px] leading-relaxed text-ink/70">
                         {s.explanation}
                       </p>
                       <a

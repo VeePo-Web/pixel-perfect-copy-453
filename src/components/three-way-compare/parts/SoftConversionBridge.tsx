@@ -25,7 +25,7 @@ export default function SoftConversionBridge() {
   return (
     <section
       aria-labelledby="soft-bridge-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[60ch]">
@@ -34,7 +34,7 @@ export default function SoftConversionBridge() {
           </div>
           <h2
             id="soft-bridge-heading"
-            className="mt-3 font-light text-bone text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
+            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
           >
             Three lighter ways to start.
           </h2>
@@ -44,17 +44,17 @@ export default function SoftConversionBridge() {
           {cards.map((c) => (
             <li
               key={c.title}
-              className="group flex h-full flex-col rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 transition-all duration-400 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/30"
+              className="group flex h-full flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 transition-all duration-400 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/30"
             >
               <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/70">
                 {c.eyebrow}
               </div>
-              <h3 className="mt-2 text-[17px] font-light leading-snug text-bone">{c.title}</h3>
-              <p className="mt-3 text-[13.5px] leading-relaxed text-bone/70">{c.body}</p>
+              <h3 className="mt-2 text-[17px] font-light leading-snug text-ink">{c.title}</h3>
+              <p className="mt-3 text-[13.5px] leading-relaxed text-ink/70">{c.body}</p>
               <a
                 href={c.cta.href}
                 onClick={() => trackCtaByHref(c.cta.href, "soft-bridge")}
-                className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[12.5px] text-bone/85 transition-colors group-hover:text-champagne-200"
+                className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[12.5px] text-ink/85 transition-colors group-hover:text-champagne-200"
               >
                 {c.cta.label} <span aria-hidden>→</span>
               </a>

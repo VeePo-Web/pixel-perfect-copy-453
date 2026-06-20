@@ -24,7 +24,7 @@ export default function MonthlyCycle() {
           {c.weeks.slice(0, 2).map((w) => (
             <li key={w.w}>
               <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">{w.w}</div>
-              <div className="mt-1 text-[15px] text-bone/85">{w.t}</div>
+              <div className="mt-1 text-[15px] text-ink/85">{w.t}</div>
             </li>
           ))}
         </ul>
@@ -56,7 +56,7 @@ export default function MonthlyCycle() {
           <div className="absolute inset-0 flex items-center justify-center px-10 text-center">
             <div>
               <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">End state</div>
-              <div className="mt-2 font-zentry text-[18px] leading-[1.25] tracking-tight text-bone">{c.end}</div>
+              <div className="mt-2 font-zentry text-[18px] leading-[1.25] tracking-tight text-ink">{c.end}</div>
             </div>
           </div>
         </div>
@@ -66,12 +66,12 @@ export default function MonthlyCycle() {
           {c.weeks.slice(2).map((w) => (
             <li key={w.w}>
               <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">{w.w}</div>
-              <div className="mt-1 text-[15px] text-bone/85">{w.t}</div>
+              <div className="mt-1 text-[15px] text-ink/85">{w.t}</div>
             </li>
           ))}
         </ul>
       </div>
-      <p className="mx-auto mt-12 max-w-2xl text-center text-[14px] leading-[1.7] text-bone/55">{c.line}</p>
+      <p className="mx-auto mt-12 max-w-2xl text-center text-[14px] leading-[1.7] text-ink/55">{c.line}</p>
     </div>
   );
 }

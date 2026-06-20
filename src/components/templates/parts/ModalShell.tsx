@@ -81,8 +81,8 @@ export default function ModalShell({ open, onClose, labelledBy, children, size =
         ref={containerRef}
         className={
           isPanel
-            ? "relative ml-auto flex h-full w-full max-w-xl flex-col overflow-y-auto border-l border-white/[0.08] bg-charcoal-950 shadow-[0_-20px_80px_-20px_rgba(0,0,0,0.6)]"
-            : "relative m-auto flex max-h-[92dvh] w-[92vw] max-w-md flex-col overflow-y-auto rounded-2xl border border-white/[0.08] bg-charcoal-950 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]"
+            ? "relative ml-auto flex h-full w-full max-w-xl flex-col overflow-y-auto border-l border-ink/[0.08] bg-charcoal-950 shadow-[0_-20px_80px_-20px_rgba(25,28,34,0.14)]"
+            : "relative m-auto flex max-h-[92dvh] w-[92vw] max-w-md flex-col overflow-y-auto rounded-2xl border border-ink/[0.08] bg-charcoal-950 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]"
         }
       >
         {children}

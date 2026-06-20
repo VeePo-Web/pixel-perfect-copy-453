@@ -6,7 +6,7 @@ export default function MissingMiddleSection() {
     <section
       id="missing-middle"
       aria-labelledby="missing-middle-heading"
-      className="relative scroll-mt-24 border-b border-white/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
@@ -15,11 +15,11 @@ export default function MissingMiddleSection() {
           </div>
           <h2
             id="missing-middle-heading"
-            className="mt-3 font-light text-bone text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
           >
             The missing middle between bookkeeping and a full CFO.
           </h2>
-          <p className="mt-4 text-[15px] leading-[1.7] text-bone/70">
+          <p className="mt-4 text-[15px] leading-[1.7] text-ink/70">
             Many owner-led businesses do not need a finance department yet. But they do need more than bank statements, basic reports, and spreadsheets that only work when someone updates them.
           </p>
         </div>
@@ -50,7 +50,7 @@ export default function MissingMiddleSection() {
           <a
             href="#/apply"
             onClick={() => track("apply_clicked_from_compare", { source: "missing-middle" })}
-            className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[12.5px] font-medium text-charcoal-950 transition-all duration-300 ease-cinema hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.55)]"
+            className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.55)]"
           >
             Apply for the Monthly Finance Desk
           </a>
@@ -74,20 +74,20 @@ function SideColumn({
   footer: string;
 }) {
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6">
-      <div className={`text-[10.5px] uppercase tracking-[0.28em] ${tone === "muted" ? "text-bone/45" : "text-champagne-200/85"}`}>
+    <div className="flex h-full flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6">
+      <div className={`text-[10.5px] uppercase tracking-[0.28em] ${tone === "muted" ? "text-ink/45" : "text-champagne-200/85"}`}>
         {label}
       </div>
       <ul className="mt-4 space-y-2.5">
         {items.map((x) => (
-          <li key={x} className="flex items-start gap-2.5 text-[13.5px] text-bone/70">
-            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white/20" />
+          <li key={x} className="flex items-start gap-2.5 text-[13.5px] text-ink/70">
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ink/20" />
             {x}
           </li>
         ))}
       </ul>
-      <div className="mt-auto border-t border-white/[0.06] pt-4 text-[12.5px] text-bone/55">
-        <span className="text-bone/40">{footerLabel} · </span>
+      <div className="mt-auto border-t border-ink/[0.06] pt-4 text-[12.5px] text-ink/55">
+        <span className="text-ink/40">{footerLabel} · </span>
         {footer}
       </div>
     </div>
@@ -101,14 +101,14 @@ function MfdColumn({ label, items, outcome }: { label: string; items: string[]; 
       <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/85">{label}</div>
       <ul className="mt-4 space-y-2.5">
         {items.map((x) => (
-          <li key={x} className="flex items-start gap-2.5 text-[13.5px] text-bone">
+          <li key={x} className="flex items-start gap-2.5 text-[13.5px] text-ink">
             <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-champagne-200" />
             {x}
           </li>
         ))}
       </ul>
-      <div className="mt-auto border-t border-white/[0.06] pt-4 text-[12.5px] text-bone/70">
-        <span className="text-bone/40">Outcome · </span>
+      <div className="mt-auto border-t border-ink/[0.06] pt-4 text-[12.5px] text-ink/70">
+        <span className="text-ink/40">Outcome · </span>
         {outcome}
       </div>
     </div>

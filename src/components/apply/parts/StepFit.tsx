@@ -33,7 +33,7 @@ export default function StepFit({ state, update, errors, onBack, onContinue }: P
       <TextField label="Business name" value={state.business_name} onChange={(v) => update("business_name", v)} placeholder="Acme Marketing Agency" autoComplete="organization" error={errors.business_name && APPLY.errors.required} />
 
       <div>
-        <div className="mb-3 text-[11.5px] uppercase tracking-[0.22em] text-bone/45">What kind of business do you run?</div>
+        <div className="mb-3 text-[11.5px] uppercase tracking-[0.22em] text-ink/45">What kind of business do you run?</div>
         <div role="radiogroup" className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
           {c.businessTypes.map((t) => (
             <SelectableCard
@@ -48,7 +48,7 @@ export default function StepFit({ state, update, errors, onBack, onContinue }: P
       </div>
 
       <div>
-        <div className="mb-3 text-[11.5px] uppercase tracking-[0.22em] text-bone/45">Approximate monthly revenue</div>
+        <div className="mb-3 text-[11.5px] uppercase tracking-[0.22em] text-ink/45">Approximate monthly revenue</div>
         <div role="radiogroup" className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {c.revenueRanges.map((r) => (
             <SelectableCard
@@ -66,7 +66,7 @@ export default function StepFit({ state, update, errors, onBack, onContinue }: P
               {c.lowFit}
               <div className="mt-3 flex flex-wrap gap-3">
                 <button onClick={onContinue} className="text-[12.5px] text-champagne-100 underline-offset-4 hover:underline">Continue Application →</button>
-                <a href="#/templates" className="text-[12.5px] text-bone/65 underline-offset-4 hover:underline hover:text-bone">Start with Free Templates</a>
+                <a href="#/templates" className="text-[12.5px] text-ink/65 underline-offset-4 hover:underline hover:text-ink">Start with Free Templates</a>
               </div>
             </FitSignalCard>
           </div>

@@ -24,11 +24,11 @@ export default function ThreeWayTopBar() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.05] bg-charcoal-950/85 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-ink/[0.05] bg-charcoal-950/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-3.5 lg:px-10">
         <a href="#/" className="group flex shrink-0 items-center gap-3">
           <span className="h-1.5 w-1.5 rounded-full bg-champagne-200 transition-transform duration-400 group-hover:scale-125" />
-          <span className="text-[12.5px] uppercase tracking-[0.28em] text-bone/85">
+          <span className="text-[12.5px] uppercase tracking-[0.28em] text-ink/85">
             Monthly Finance Desk
           </span>
         </a>
@@ -38,7 +38,7 @@ export default function ThreeWayTopBar() {
               <a
                 key={s.id}
                 href="#/apply"
-                className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-charcoal-950 transition-all duration-300 hover:shadow-[0_8px_28px_-10px_rgba(217,190,130,0.55)]"
+                className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 hover:shadow-[0_8px_28px_-10px_rgba(217,190,130,0.55)]"
               >
                 Apply
               </a>
@@ -47,7 +47,7 @@ export default function ThreeWayTopBar() {
                 key={s.id}
                 href={`#${s.id}`}
                 className={`relative text-[12px] transition-colors ${
-                  active === s.id ? "text-bone" : "text-bone/55 hover:text-bone"
+                  active === s.id ? "text-ink" : "text-ink/55 hover:text-ink"
                 }`}
               >
                 {s.label}
@@ -62,12 +62,12 @@ export default function ThreeWayTopBar() {
           )}
         </nav>
         <nav className="flex items-center gap-5 lg:hidden">
-          <a href="#/compare" className="text-[12px] text-bone/55 hover:text-bone">
+          <a href="#/compare" className="text-[12px] text-ink/55 hover:text-ink">
             Compare
           </a>
           <a
             href="#/apply"
-            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-charcoal-950"
+            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy"
           >
             Apply
           </a>

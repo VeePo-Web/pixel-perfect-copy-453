@@ -17,7 +17,7 @@ export default function MultiSelectCardGroup({ label, options, values, onChange,
   const gridCols = cols === 3 ? "sm:grid-cols-3" : "sm:grid-cols-2";
   return (
     <div role="group" aria-label={label}>
-      {label && <div className="mb-3 text-[12.5px] text-bone/65">{label}</div>}
+      {label && <div className="mb-3 text-[12.5px] text-ink/65">{label}</div>}
       <div className={`grid grid-cols-1 gap-2.5 ${gridCols}`}>
         {options.map((opt) => (
           <SelectableCard

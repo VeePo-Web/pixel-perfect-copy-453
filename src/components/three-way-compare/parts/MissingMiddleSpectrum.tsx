@@ -5,7 +5,7 @@ export default function MissingMiddleSpectrum() {
   return (
     <section
       aria-labelledby="missing-middle-heading"
-      className="relative border-b border-white/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
@@ -14,17 +14,17 @@ export default function MissingMiddleSpectrum() {
           </div>
           <h2
             id="missing-middle-heading"
-            className="mt-3 font-light text-bone text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
           >
             The missing middle between bookkeeping and a full CFO.
           </h2>
-          <p className="mt-4 text-[15px] leading-[1.7] text-bone/70">
+          <p className="mt-4 text-[15px] leading-[1.7] text-ink/70">
             Many owner-led businesses already have tools and reports. What they lack is a
             consistent way to understand what the numbers mean before decisions are made.
           </p>
         </div>
 
-        <div className="mt-12 rounded-3xl border border-white/[0.07] bg-white/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(0,0,0,0.6)] sm:p-10">
+        <div className="mt-12 rounded-3xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(25,28,34,0.14)] sm:p-10">
           {/* SVG rail */}
           <div className="relative">
             <svg
@@ -81,7 +81,7 @@ export default function MissingMiddleSpectrum() {
                 <div
                   key={s.id}
                   className={`text-center text-[10.5px] uppercase tracking-[0.18em] ${
-                    s.isCenter ? "text-champagne-200/90" : "text-bone/45"
+                    s.isCenter ? "text-champagne-200/90" : "text-ink/45"
                   }`}
                 >
                   {s.label}
@@ -95,14 +95,14 @@ export default function MissingMiddleSpectrum() {
               <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/85">
                 The recurring clarity layer
               </div>
-              <p className="mt-3 text-[16px] font-light leading-relaxed text-bone">
+              <p className="mt-3 text-[16px] font-light leading-relaxed text-ink">
                 The Monthly Finance Desk is for owners who have enough financial complexity to
                 need a rhythm, but not enough internal finance infrastructure to justify a full
                 finance department.
               </p>
             </div>
             <div className="flex flex-col justify-center">
-              <p className="text-[14px] leading-relaxed text-bone/70">
+              <p className="text-[14px] leading-relaxed text-ink/70">
                 Bi-weekly briefings, monthly strategy reviews, and an organized financial system
                 — without the cost or complexity of a CFO engagement.
               </p>
@@ -110,7 +110,7 @@ export default function MissingMiddleSpectrum() {
                 <a
                   href="#/sample-briefing"
                   onClick={() => trackCtaByHref("#/sample-briefing", "missing-middle")}
-                  className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-charcoal-950 transition-all duration-300 ease-cinema hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)]"
+                  className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)]"
                 >
                   Generate Sample Finance Briefing
                 </a>

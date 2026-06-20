@@ -6,7 +6,7 @@ export default function SecurityFAQHero() {
   return (
     <section
       id="trust-flow"
-      className="relative scroll-mt-24 overflow-hidden border-b border-white/[0.05] bg-charcoal-950 pt-28 lg:pt-32"
+      className="relative scroll-mt-24 overflow-hidden border-b border-ink/[0.05] bg-charcoal-950 pt-28 lg:pt-32"
     >
       <div
         aria-hidden
@@ -27,10 +27,10 @@ export default function SecurityFAQHero() {
         <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
           Security & FAQ
         </div>
-        <h1 className="mt-5 max-w-4xl font-light text-bone text-[34px] leading-[1.08] tracking-[-0.015em] sm:text-[48px] lg:text-[62px]">
+        <h1 className="mt-5 max-w-4xl font-light text-ink text-[34px] leading-[1.08] tracking-[-0.015em] sm:text-[48px] lg:text-[62px]">
           Preview safely. Apply without connecting your bank.
         </h1>
-        <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-bone/65 sm:text-[16.5px]">
+        <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-ink/65 sm:text-[16.5px]">
           You can preview the Monthly Finance Desk experience with demo data or
           rough non-sensitive numbers, then apply without payment, documents, or
           bank access. Bank connection only becomes relevant after onboarding.
@@ -41,26 +41,26 @@ export default function SecurityFAQHero() {
             onClick={() =>
               trackCtaByHref("#/sample-briefing", "security_faq_hero")
             }
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-charcoal-950 transition-all duration-300 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all duration-300 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
           >
             Generate Sample Finance Briefing
           </a>
           <a
             href="#/apply"
             onClick={() => trackCtaByHref("#/apply", "security_faq_hero")}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-6 text-[13.5px] text-bone transition-colors duration-300 hover:border-white/30 hover:bg-white/[0.03]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-6 text-[13.5px] text-ink transition-colors duration-300 hover:border-ink/30 hover:bg-ink/[0.03]"
           >
             Apply for the Monthly Finance Desk
           </a>
           <a
             href="#/templates"
             onClick={() => trackCtaByHref("#/templates", "security_faq_hero")}
-            className="inline-flex min-h-11 items-center text-[13px] text-bone/55 underline-offset-4 transition-colors hover:text-bone hover:underline"
+            className="inline-flex min-h-11 items-center text-[13px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
             Start with free templates →
           </a>
         </div>
-        <p className="mt-5 inline-flex items-center gap-2 text-[12px] text-bone/45">
+        <p className="mt-5 inline-flex items-center gap-2 text-[12px] text-ink/45">
           <span
             aria-hidden
             className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400/70"

@@ -69,10 +69,10 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
               <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/80">
                 Get the free template
               </div>
-              <h2 id={headingId} className="mt-2 text-[22px] font-light leading-snug text-bone">
+              <h2 id={headingId} className="mt-2 text-[22px] font-light leading-snug text-ink">
                 {template.name}
               </h2>
-              <p className="mt-2 text-[13px] text-bone/65">
+              <p className="mt-2 text-[13px] text-ink/65">
                 Enter your email and we’ll send the {template.shortName} so you can start organizing your numbers today.
               </p>
             </div>
@@ -80,7 +80,7 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
               type="button"
               aria-label="Close"
               onClick={onClose}
-              className="rounded-full border border-white/[0.08] px-2.5 py-1 text-[11px] text-bone/60 hover:text-bone"
+              className="rounded-full border border-ink/[0.08] px-2.5 py-1 text-[11px] text-ink/60 hover:text-ink"
             >
               ✕
             </button>
@@ -110,8 +110,8 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
               error={errors.businessType}
             />
             <div>
-              <div className="text-[11px] uppercase tracking-[0.22em] text-bone/45">
-                What are you trying to understand? <span className="lowercase text-bone/35">(optional)</span>
+              <div className="text-[11px] uppercase tracking-[0.22em] text-ink/45">
+                What are you trying to understand? <span className="lowercase text-ink/35">(optional)</span>
               </div>
               <div className="mt-2 flex flex-wrap gap-2">
                 {goalChips.map((g) => {
@@ -124,8 +124,8 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
                       onClick={() => toggleGoal(g.id)}
                       className={`min-h-[34px] rounded-full border px-3 py-1.5 text-[12px] transition-all duration-300 ease-cinema ${
                         on
-                          ? "border-champagne-200/60 bg-champagne-200/[0.08] text-bone"
-                          : "border-white/[0.08] bg-white/[0.02] text-bone/65 hover:border-white/20"
+                          ? "border-champagne-200/60 bg-champagne-200/[0.08] text-ink"
+                          : "border-ink/[0.08] bg-ink/[0.02] text-ink/65 hover:border-ink/20"
                       }`}
                     >
                       {g.label}
@@ -139,11 +139,11 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
           <button
             type="submit"
             disabled={state.kind === "sending"}
-            className="mt-6 w-full rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-charcoal-950 transition-all duration-300 ease-cinema hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.6)] disabled:opacity-70"
+            className="mt-6 w-full rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.6)] disabled:opacity-70"
           >
             {state.kind === "sending" ? "Sending…" : "Send My Template"}
           </button>
-          <p className="mt-3 text-center text-[11px] text-bone/45">
+          <p className="mt-3 text-center text-[11px] text-ink/45">
             No bank connection required. No spam. Start free.
           </p>
         </form>
@@ -170,7 +170,7 @@ function Field({
   const id = useId();
   return (
     <div>
-      <label htmlFor={id} className="text-[11px] uppercase tracking-[0.22em] text-bone/45">
+      <label htmlFor={id} className="text-[11px] uppercase tracking-[0.22em] text-ink/45">
         {label}
       </label>
       <input
@@ -181,7 +181,7 @@ function Field({
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-err` : undefined}
-        className="mt-1.5 w-full rounded-xl border border-white/[0.1] bg-white/[0.02] px-3.5 py-3 text-[14px] text-bone outline-none transition-colors focus:border-champagne-200/50"
+        className="mt-1.5 w-full rounded-xl border border-ink/[0.1] bg-ink/[0.02] px-3.5 py-3 text-[14px] text-ink outline-none transition-colors focus:border-champagne-200/50"
       />
       {error ? (
         <p id={`${id}-err`} role="alert" aria-live="polite" className="mt-1.5 text-[11.5px] text-champagne-300">
@@ -208,7 +208,7 @@ function SelectField({
   const id = useId();
   return (
     <div>
-      <label htmlFor={id} className="text-[11px] uppercase tracking-[0.22em] text-bone/45">
+      <label htmlFor={id} className="text-[11px] uppercase tracking-[0.22em] text-ink/45">
         {label}
       </label>
       <select
@@ -217,7 +217,7 @@ function SelectField({
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-err` : undefined}
-        className="mt-1.5 w-full appearance-none rounded-xl border border-white/[0.1] bg-white/[0.02] px-3.5 py-3 text-[14px] text-bone outline-none transition-colors focus:border-champagne-200/50"
+        className="mt-1.5 w-full appearance-none rounded-xl border border-ink/[0.1] bg-ink/[0.02] px-3.5 py-3 text-[14px] text-ink outline-none transition-colors focus:border-champagne-200/50"
       >
         <option value="" disabled>
           Select…

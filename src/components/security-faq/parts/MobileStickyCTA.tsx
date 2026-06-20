@@ -48,11 +48,11 @@ export default function MobileStickyCTA() {
     : "Generate Sample Briefing";
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/[0.06] bg-charcoal-950/95 px-4 py-3 backdrop-blur-md lg:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ink/[0.06] bg-charcoal-950/95 px-4 py-3 backdrop-blur-md lg:hidden">
       <a
         href={href}
         onClick={() => trackCtaByHref(href, "security_faq_mobile_sticky")}
-        className="flex min-h-12 w-full items-center justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 text-[14px] font-medium text-charcoal-950"
+        className="flex min-h-12 w-full items-center justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 text-[14px] font-medium text-navy"
       >
         {label}
       </a>

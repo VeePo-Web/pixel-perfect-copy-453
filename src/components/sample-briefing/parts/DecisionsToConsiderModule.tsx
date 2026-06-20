@@ -10,7 +10,7 @@ export default function DecisionsToConsiderModule({ business }: { business: Demo
       cta={
         <a
           href="#/apply"
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
         >
           Apply for the Monthly Finance Desk
           <span aria-hidden>→</span>
@@ -21,12 +21,12 @@ export default function DecisionsToConsiderModule({ business }: { business: Demo
         {business.decisions.map((d, i) => (
           <div
             key={d}
-            className="flex items-start gap-3 rounded-xl border border-white/[0.07] bg-white/[0.02] px-5 py-4 transition-all duration-300 ease-cinema hover:border-champagne-200/25 hover:bg-white/[0.04]"
+            className="flex items-start gap-3 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-5 py-4 transition-all duration-300 ease-cinema hover:border-champagne-200/25 hover:bg-ink/[0.04]"
           >
             <span className="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-champagne-200" aria-hidden />
             <div>
-              <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/45">Decision {i + 1}</div>
-              <div className="mt-1 text-[14.5px] leading-[1.55] text-bone/90">{d}</div>
+              <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Decision {i + 1}</div>
+              <div className="mt-1 text-[14.5px] leading-[1.55] text-ink/90">{d}</div>
             </div>
           </div>
         ))}
