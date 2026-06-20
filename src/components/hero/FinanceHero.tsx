@@ -194,7 +194,7 @@ const FinanceHero = () => {
 
             {/* Command-style composer */}
             <div className="mt-9 max-w-2xl">
-              <div className="group relative overflow-hidden rounded-2xl border border-champagne-300/20 bg-charcoal-900/70 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(237,231,218,0.04)] backdrop-blur-md transition-colors duration-300 focus-within:border-champagne-200/60">
+              <div className="group relative overflow-hidden rounded-2xl border border-ink/[0.09] bg-white shadow-[0_1px_0_rgba(15,23,42,0.04),0_12px_32px_-20px_rgba(15,23,42,0.18)] transition-colors duration-300 focus-within:border-gold-500/70">
                 <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-champagne-200/[0.08] blur-3xl transition-opacity duration-500 group-focus-within:opacity-100" />
                 <div className="flex flex-col sm:flex-row sm:items-stretch">
                   <textarea
