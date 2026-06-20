@@ -7,6 +7,7 @@ import BeforeAfter from "./parts/BeforeAfter";
 import SampleBriefingPreview from "./parts/SampleBriefingPreview";
 import DifferenceTable from "./parts/DifferenceTable";
 import WhoNotFor from "./parts/WhoNotFor";
+import FounderTrustStrip from "./parts/FounderTrustStrip";
 import TrustSection from "./parts/TrustSection";
 import FinalCTA from "./parts/FinalCTA";
 
@@ -73,6 +74,10 @@ export default function HowItWorks() {
 
       <Band>
         <WhoNotFor />
+      </Band>
+
+      <Band>
+        <FounderTrustStrip />
       </Band>
 
       <Band>
