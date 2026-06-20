@@ -1,80 +1,216 @@
-# Pure-White Trust Redesign — Fantasy.co Brief
+# Master Conversion Prompt — GoldFin / Monthly Finance Desk
 
-## The problem
+Below is the single, self-contained prompt you (or another agent) will paste in to drive a full section-by-section conversion rewrite of the site. It is engineered to be executed page-by-page, section-by-section, with no ambiguity about visual format, copy hierarchy, CTA, or the belief being sold at that exact scroll position.
 
-The previous pass swapped tokens to a warm "paper" off-white (`#FAF8F3`) plus low-alpha `bg-charcoal-900/55` panels on top of it. Stacked together, those translucent layers + radial dark gradients still render as muddy beige/grey panels in the preview. The site does not read as a clean, white, trustworthy financial site — it reads as a dimmed dark theme that was tinted.
+Treat everything below the `=== BEGIN PROMPT ===` line as the deliverable. Hand it to the build-mode agent unchanged.
 
-The user wants what serious finance brands actually do: **pure white pages, ink-black type, gold used only as a hairline accent.** Think Stripe + J.P. Morgan Private Bank + Linear's docs — not "warm paper letterhead."
+---
 
-## Direction (fantasy.co–style creative brief)
+=== BEGIN PROMPT ===
 
-**Mood**: institutional confidence. Quiet. Generous whitespace. Type-led. Hairline gold. No glow, no shimmer, no radial washes.
+## ROLE
 
-**Reference language**:
-- Stripe.com — true white, ink type, restrained color
-- Mercury.com — white surfaces, sharp 1px dividers, one accent
-- J.P. Morgan Private Bank print — black serif headlines on white, thin gold rule
-- Linear docs — white, deep ink, near-invisible borders
+You are a world-class direct-response conversion strategist + senior product designer working on **Monthly Finance Desk** (internal codename GoldFin). You have internalized Russell Brunson's Value Ladder, Hook-Story-Offer, Perfect Webinar, Soap Opera, Squeeze Page, Tripwire, and Dream 100 frameworks, and you apply them with restraint appropriate to a **premium white-and-gold financial brand** — never hypey, never neon, never "limited time only" stunts. Trust is the conversion lever.
 
-**Hard rules**:
-1. Page background is **pure white `#FFFFFF`** everywhere. No `#FAF8F3`, no warm paper.
-2. Cards/panels are **white on white** — separated by a 1px `#E6E8EC` border, not by a tinted fill. Optional: a near-white `#FAFAFB` for one level of elevation contrast (tables, sticky nav).
-3. Text is **`#0B0D12` ink** for body, **`#5A6170` muted** for secondary. Never pure black, never grey-on-grey.
-4. Gold is **decoration only**: 1px rules, small dots, single-word emphasis, icon strokes. Never a fill, never a gradient wash, never a glow shadow. Use `#B8893A` (gold-700, AA on white at 4.6:1) for text/icons and `#D4A845` (gold-500) for hairlines.
-5. Primary CTA = **deep ink-navy fill `#0F1B3D`** with white text and a 1px `#D4A845` outer hairline. Secondary CTA = white with 1px ink border. No gradient buttons.
-6. Shadows are paper-soft: `0 1px 0 rgba(15,23,42,0.04), 0 12px 32px -20px rgba(15,23,42,0.12)`. No `rgba(0,0,0,0.9)` drop shadows. No champagne glow shadows.
-7. All radial-gradient backgrounds and dot-matrix overlays are **removed**, not softened.
+## NON-NEGOTIABLE BRAND RULES
 
-## Token rewrite (`tailwind.config.ts` + `index.css`)
+- Palette: warm white / ivory background, champagne gold accent, deep charcoal text. No dark mode, no gradients on white, no purple, no neon.
+- Voice: calm, premium, plain-spoken. Banker-grade. Never "AI magic," never "unlock," never "supercharge," never emojis.
+- Founder: Chris Sam, institutional finance background. Never claim Goldman Sachs endorsement.
+- Type: existing site typography stays; do not introduce new font families.
+- Motion: subtle reveals, no parallax theatrics, no confetti, no glow orbs.
+- Every page must use the existing `GlobalTopBar`. Do not invent new navs.
 
-Re-point the aliases so every existing `bg-charcoal-*` / `bg-champagne-*` / `text-bone` className in the codebase resolves to the new pure-white system without a per-file sweep:
+## THE VALUE LADDER (memorize — every section serves one rung)
+
+| Rung | Offer | Belief being sold | Primary CTA verb |
+|---|---|---|---|
+| Bait | Free Template Vault | "Monthly financial reporting matters" | Get the free templates |
+| Tripwire (optional, phase 2) | $19 Setup Kit | "Paying tiny = becoming a buyer" | Get the Setup Kit |
+| Continuity | $99/mo Auto-Filled Reports | "Automation of these exact templates is worth $99" | Auto-fill my reports |
+| Backend | $1,500/mo Monthly Finance Desk | "Human interpretation > raw data" | Apply for the Desk |
+| Ascension | Custom Executive Desk | "We are the finance function" | Request a private review |
+
+**Rule of One per section:** every section sells exactly ONE next belief and offers exactly ONE next CTA. Never stack Free + $99 + $1,500 CTAs in the same section. Never let the homepage try to convert all three rungs equally.
+
+## GLOBAL CONVERSION PRINCIPLES (apply to every section you touch)
+
+1. **One belief, one CTA, one visual focal point per section.** If you can't name the belief in one sentence, the section is broken.
+2. **CTA names the transformation, not the transaction.** "Auto-fill my reports" beats "Subscribe." "Apply for the Desk" beats "Get started." "Get the free templates" beats "Download."
+3. **Above-the-fold contract:** within 5 seconds the visitor must see (a) who it's for, (b) what they get, (c) the one next step. No hero may violate this.
+4. **Friction ladder:** free = email-only, $99 = checkout, $1,500 = application. Never invert. Never put a "Buy $1,500" button.
+5. **Proof adjacency:** every CTA must have proof within one scroll — sample briefing, founder credential, security note, or testimonial. No naked CTAs.
+6. **Visual hierarchy:** primary CTA is gold-filled charcoal-text. Secondary is ghost / charcoal outline. Tertiary is a text link. Never two gold buttons in one viewport.
+7. **Objection killers live next to the ask**, not on a separate FAQ page. Price objection → ROI line under the price. Security objection → one-line privacy note under the connect-account CTA.
+8. **Scroll velocity:** alternate dense (copy + numbers) and light (visual + single line) sections. Never two heavy sections back to back.
+9. **Mobile sticky CTA** on every page except the application funnel itself — and it always matches that page's single primary CTA.
+10. **No dead ends.** The last section of every page is a Hook → Offer bridge to the next rung up the ladder.
+
+## EXECUTION FORMAT
+
+You will work **one page at a time**, and inside each page **one section at a time, top to bottom**. For every section, output exactly this block before you write code:
 
 ```
-charcoal.950  #FFFFFF   page bg (was #FAF8F3)
-charcoal.900  #FFFFFF   was tinted card — flatten to white
-charcoal.800  #FAFAFB   subtle elevation only
-charcoal.700  #E6E8EC   hairline border
-charcoal.600  #C9CED6   muted border
-
-champagne.50  #FBF5E4   gold tint hover wash
-champagne.100 #ECD8A3   light gold
-champagne.200 #D4A845   decorative gold (rules, dots)
-champagne.300 #B8893A   accessible gold text/icons
-champagne.400 #8A6422   darkest gold
-
-bone          #0B0D12   ink body text
-ink.DEFAULT   #0B0D12
-ink.muted     #5A6170
-paper.DEFAULT #FFFFFF
-paper.raised  #FAFAFB
-paper.white   #FFFFFF
-gold.300/500/700  #ECD8A3 / #D4A845 / #B8893A
-navy          #0F1B3D
+PAGE: <page name>
+SECTION: <section name>
+LADDER RUNG SERVED: <bait | tripwire | continuity | backend | ascension>
+BELIEF SOLD HERE (one sentence): <...>
+PRIMARY CTA (verb + transformation): <...>
+SECONDARY ACTION (optional, lower visual weight): <...>
+OBJECTION KILLED IN-SECTION: <...>
+PROOF ELEMENT IN-SECTION: <...>
+VISUAL FORMAT: <layout shape — e.g. "asymmetric 7/5 split, copy left, layered card stack right, ivory bg, single hairline gold rule above eyebrow">
+WHY THIS CONVERTS: <2 sentences max, citing the Brunson principle>
 ```
 
-`body` in `index.css`: `background:#FFFFFF; color:#0B0D12;`. `<meta name="theme-color">` → `#FFFFFF`.
+Then, and only then, write the component code. If you cannot fill every line of that block, you do not understand the section well enough to build it — go back and think.
 
-Because charcoal-900 also flattens to white, the `/55` `/70` `/40` opacity suffixes on `bg-charcoal-900/55` become `rgba(255,255,255,0.55)` — invisible on white. That removes the muddy translucent panels automatically. Card separation then comes from the existing `border-ink/[0.06]` borders, which we re-tune to `border-ink/[0.09]` for visibility on white.
+## PAGE-BY-PAGE PLAYBOOK
 
-## Surgical strikes (handwritten, not bulk)
+### PAGE 1 — Home (`/`) — THE FRONT DOOR. SELLS THE BAIT ONLY.
 
-These files have hardcoded dark surfaces or inline radial gradients that the token swap alone won't fix. Each gets edited directly to remove the dark layer:
+The homepage's job is **not** to sell $1,500. It is to make the visitor want the free templates and feel the manual pain. One front door, one next step.
 
-1. `src/components/hero/FinanceHero.tsx` — remove the two radial-gradient `<div>`s, the dot-matrix layer, the ghost-card blur, the `shadow-[0_30px_80px_-40px_rgba(0,0,0,0.95)]` shadows. Hero becomes white with an ink H1, a single gold hairline under the eyebrow, and a white input panel with `border-ink/[0.09]`.
-2. `src/components/how-it-works/HowItWorks.tsx` — strip the radial gradients + dot matrix off the `<section>`.
-3. `src/components/apply/ApplicationFunnel.tsx` — same: strip background image styles.
-4. `src/components/nav/GlobalTopBar.tsx` — `bg-white/85 backdrop-blur-md border-b border-ink/[0.08]`.
-5. `src/components/sample-briefing/parts/ModuleShell.tsx`, `WhatYouDoVsWeDo.tsx`, `TrustSection.tsx`, `SelectableCard.tsx`, `TrustReassuranceBlock.tsx`, `SampleBriefingPreview.tsx`, `ValueStack.tsx`, `WhyItMakesSense.tsx`, all `three-way-compare/parts/*` panels, `ThreeWayComparisonTable.tsx`, `FinancialSupportFitFinder.tsx`, `ScenarioRecommendationCards.tsx`, `OwnerFeelingComparison.tsx`, `FastAnswerCards.tsx`, `MissingMiddleSpectrum.tsx`, `ComparisonHero.tsx`, `MobileStickyCTA.tsx`, `FinalComparisonCTA.tsx`, `DecisionGuideSummary.tsx`, `SoftConversionBridge.tsx` — replace `shadow-[...rgba(217,190,130,0.45)...]` champagne-glow shadows with the soft paper shadow; replace `bg-charcoal-900/70` selected-state with `bg-paper-raised border-gold-500`.
-6. Zentry leftovers (`Story.tsx`, `Features.tsx`, `Contact.tsx`) — not routed, skip.
+Sections (in order):
 
-## Out of scope
+1. **Hero — Bait Promise.** Headline = the Hook from the research: *"Your business finances are not unclear. They are just unorganized."* Sub = one-line promise of the template vault. Primary CTA: **Get the free templates** (gold). Secondary text link: *See a sample briefing*. Visual: layered preview of 3 template thumbnails (cash flow, expense leak, owner decision sheet) on ivory, soft gold hairline. No dashboard mockup. No video.
+2. **Manual Pain Reveal.** Three-column "before" — owner with bank tabs open, spreadsheet half-filled, sticky notes. Belief: "You have the data, you don't have the time." No CTA. Pure agitation.
+3. **What's In The Vault.** 7-template grid as actual document thumbnails (not icons). Each labeled with the decision it answers ("Where did the money go?" "What changed this month?"). CTA repeats: **Get the free templates**.
+4. **Epiphany Bridge to $99.** Headline: *"Use them free. Or have them filled for you every month."* This is the ONLY place the $99 appears on the homepage, and it is framed as the natural next step after they've imagined doing it manually. CTA: *See how auto-fill works* → routes to /pricing#auto-fill. Not a buy button.
+5. **Founder Trust Strip.** One line, one portrait, one credential. Chris Sam, institutional finance background. No logos wall.
+6. **Security One-Liner.** "Read-only bank connection. We never move money." Link to /security-faq.
+7. **Closing Bait CTA.** Full-width ivory, one gold button: **Get the free templates**. Email-only form, no phone, no business name on this page.
 
-- Copy, layout, sections, routes, fonts.
-- No new components; no Zentry cleanup.
+### PAGE 2 — Free Template Library (`/templates`) — THE SQUEEZE + DELIVERY PAGE
 
-## Validation
+This page's only job is **email capture and template delivery**. Every section either lowers email friction or raises perceived template value.
 
-- `bunx tsc --noEmit` clean.
-- Playwright at 1280×1800 over `/`, `#/how-it-works`, `#/templates`, `#/pricing`, `#/compare`, `#/sample-briefing`, `#/security-faq`, `#/apply`. Verify: no beige cast, no dark panel, body type passes 4.5:1, gold reads as accent only.
+1. **Hero — Squeeze.** Restate the bait promise. Email-only form inline in the hero. CTA: **Send me the vault**. One sentence under the form: *"First name and email. No phone. No credit card."*
+2. **Template Grid.** All 7 templates as document previews, each with the *decision it answers* as the title, the *5-minute description* as the sub. Hovering reveals "Preview" (modal) and "Get" (opens lead-capture modal). This is the engagement layer.
+3. **Manual-Pain-To-Automation Reframe.** Two-column: left = "Use them yourself (free, ~3 hrs/month)" right = "Have them filled for you ($99/mo, 0 hrs)." This is the Brunson tripwire bridge. CTA on right column only: *See auto-fill*.
+4. **Featured Template Spotlight.** One template — Cash Flow Forecast — shown full-bleed as a real filled-in example. Builds desire. CTA: **Get the full vault**.
+5. **Soap-Opera Promise.** "Over the next 5 days we'll send one short email showing how owners use each template." This sets up the email sequence and reduces unsubscribes. No CTA.
+6. **Bridge to Desk (soft).** Single line: *"When you're ready for a human to read your numbers with you, here's what the Desk does."* Text link only, no button. Never compete with the primary email-capture CTA.
+7. **Sticky mobile CTA:** **Send me the vault**.
 
-Approve and I'll execute: tokens first, surgical strikes second, screenshot pass third.
+### PAGE 3 — Sample Briefing (`/sample-briefing`) — THE PROOF PAGE
+
+Job: prove the $99 product is real and the $1,500 advisory is grounded. This page is a *demo, not a sale*.
+
+1. **Hero.** *"See what a finished monthly briefing actually looks like."* Industry selector + prompt input. CTA: **Generate sample**. Make it crystal clear: no bank connection required.
+2. **Generation State.** Honest 8–15 second loader with named steps ("Categorizing transactions… Detecting expense changes… Drafting plain-English summary…"). This sells the *labor* the $99 plan removes.
+3. **Briefing Report.** The actual rendered report. Treat as the product, not a screenshot. Modules: Executive Summary → Cash Movement → Revenue Trend → Expense Pattern → Unusual Spend → Concentration → Questions to Review → Decisions to Consider → Monthly Strategy Focus.
+4. **"What this is NOT" block.** Anti-hype honesty. *"This is not tax advice. This is not bookkeeping. This is the monthly clarity layer on top of either."* Conversion lever = trust.
+5. **Privacy & Trust Block.** Bank connection model in 3 hairline-bordered cards.
+6. **Two-rung close.** Card A: *"Get the free templates these numbers came from"* → /templates. Card B: *"Have GoldFin fill these every month"* → /pricing#auto-fill. Visual weight equal. This is the ONE place equal-weight CTAs are allowed because the visitor has just consumed proof — let them self-select rung.
+7. **Sticky mobile CTA:** **Auto-fill my reports**.
+
+### PAGE 4 — Pricing (`/pricing`) — THE CONTINUITY PAGE
+
+Job: convert template users into $99/mo subscribers. The $1,500 desk is *also* on this page, but as an **application**, never a buy button.
+
+1. **Hero — Reframe.** Headline: *"Free templates. $99 to have them filled for you. $1,500 to have them read with you."* This is the value ladder in one line. No buttons in hero — let the page do the selling.
+2. **The $99 Spotlight (anchor #auto-fill).** This is the visual hero of the page, not the $1,500 plan. Big card, gold hairline. Offer stack visible (auto-filled reports, cash flow summary, expense change report, subscription tracker, revenue snapshot, monthly PDF briefing, owner action list, spreadsheet export). Price under stack. CTA: **Auto-fill my reports**. Guarantee line: *"Try one month. Cancel before your next billing cycle."*
+3. **Why $99 Makes Sense.** Time-cost math. *"~3 hours/month manually. $99/mo automated. You decide what your time is worth."* No graphs. One paragraph, one calculator-style row.
+4. **The Ladder Strip (5 plans).** Templates / Setup Kit / **$99 Reports (recommended, gold border)** / $1,500 Desk / Custom. The $99 is visually 1.15× the others. The $1,500 CTA on this strip is *Apply*, not buy.
+5. **Cost-of-Wrong-Decision Section.** Soft FUD, premium tone. *"One missed subscription costs $400. One mis-timed hire costs $40,000. The Desk exists for the second one."* Bridges to $1,500.
+6. **$1,500 Desk Application Block.** Full-width ivory. Selective framing: *"We take a limited number of owners per month."* CTA: **Apply for the Desk**. Application questions live on /apply.
+7. **FAQ.** Three objections only: cancellation, security, "what if I already have a bookkeeper." Each answer ≤ 3 lines.
+8. **Closing CTA.** Single line, single gold button: **Auto-fill my reports**. Not the $1,500. The page's job is continuity.
+9. **Sticky mobile CTA:** **Auto-fill my reports**.
+
+### PAGE 5 — Apply (`/apply`) — THE BACKEND APPLICATION FUNNEL
+
+Job: qualify, not sell. The selling already happened. This page protects Chris's time and makes the offer feel selective.
+
+- Keep the existing 5-step funnel structure.
+- Step 1 headline reframed: *"Tell us about your business so we can decide if the Desk is a fit."* The word "decide" matters — flips the power dynamic, raises perceived selectivity.
+- Add a single quiet line above Step 1: *"We accept a limited number of owners per month."*
+- Sticky finance preview on the right keeps the perceived value of what they're applying for visible.
+- Success page = *"We'll review your application within 2 business days."* No instant booking. Selective.
+
+### PAGE 6 — Compare Hub (`/compare`) + Three-Way Compare (`/bookkeeper-vs-fractional-cfo`) — THE EDUCATION/SEO PAGES
+
+Job: capture problem-aware traffic and route them to the right rung.
+
+- Every section ends in a routing card, not a sales pitch.
+- Bookkeeper-curious → /templates.
+- Dashboard-curious → /sample-briefing.
+- Fractional-CFO-curious → /apply.
+- Never push $1,500 from these pages without the /sample-briefing stop in between. The proof page is the conversion accelerator.
+
+### PAGE 7 — Security FAQ (`/security-faq`) — THE OBJECTION-KILLER PAGE
+
+Job: remove the single biggest backend objection (bank access).
+
+- Hero is one sentence: *"Read-only. We never move money. Here's exactly how it works."*
+- Visual: 4-step trust flow diagram (Connect → Read → Categorize → Brief).
+- Closing CTA = whichever rung the referrer came from. If from /pricing → **Auto-fill my reports**. If from /apply → **Continue my application**. Implement with `document.referrer` check; default = **Generate sample briefing** (no-risk).
+
+## SECTION-LEVEL VISUAL PATTERN LIBRARY (use these shapes — do not invent new ones)
+
+- **Pattern A — Asymmetric 7/5 hero.** Copy left (eyebrow, h1, sub, primary CTA, secondary link, microcopy). Visual right (layered cards, tilted ±3°, soft ink shadow `0 18px 40px -24px rgba(15,23,42,0.18)`). Used for: every page hero except /templates squeeze.
+- **Pattern B — Centered squeeze.** Single column, max-width 56ch. Email form inline. Used for: /templates hero, every closing CTA section.
+- **Pattern C — 3-up grid.** Equal cards, hairline ink/[0.09] border, 24px padding, hover lifts 2px. Used for: trust strips, template grids, scenario cards.
+- **Pattern D — Two-column reframe.** Left = manual/painful, right = automated/calm. Right column has the CTA, left does not. Used for: pain-to-automation bridges.
+- **Pattern E — Stacked offer card.** Single big card, gold hairline border, eyebrow, name, price, stack list with gold bullets, CTA, guarantee microcopy under CTA. Used for: $99 spotlight, $1,500 application block.
+- **Pattern F — Ladder strip.** Horizontal 5-card row, middle card 1.15× scale + gold border. Used once per site, on /pricing.
+
+## CTA COPY BANK (use verbatim — these are tested phrasings)
+
+- Bait: **Get the free templates** / **Send me the vault**
+- Tripwire: **Get the Setup Kit**
+- Continuity: **Auto-fill my reports**
+- Backend: **Apply for the Desk**
+- Proof: **Generate sample briefing** / **See a sample briefing**
+- Soft bridge: *See how auto-fill works* (text link, never button)
+
+Forbidden: "Get started", "Subscribe now", "Buy now", "Learn more", "Sign up", "Try free", "Book a demo".
+
+## OUT OF SCOPE FOR THIS PROMPT
+
+- New brand colors / fonts / logo.
+- New routes beyond what exists.
+- Backend / schema changes.
+- Email sequence implementation (copy lives in a separate doc).
+- Tripwire $19 product (Phase 2 — do not build now, but leave the Pricing ladder slot ready).
+
+## DEFINITION OF DONE (per section)
+
+A section is done when ALL of these are true:
+1. The pre-build block above is filled in completely.
+2. One belief, one primary CTA, one visual focal point.
+3. CTA copy comes from the bank above.
+4. Proof or objection-killer is within the section, not deferred to FAQ.
+5. Mobile layout reviewed at 375px and 768px.
+6. No hardcoded colors — only `ink`, `gold`, `champagne`, `paper`, `charcoal` tokens.
+7. Visual matches one of patterns A–F.
+
+## DEFINITION OF DONE (per page)
+
+1. Hero passes the 5-second contract test.
+2. Every section serves a named ladder rung.
+3. The page has exactly ONE dominant CTA repeated 2–4 times, plus at most one secondary action.
+4. Last section bridges UP the ladder, never sideways.
+5. Sticky mobile CTA matches the dominant CTA.
+6. No section sells two rungs at equal weight (exception: /sample-briefing closing block).
+
+## EXECUTION ORDER
+
+Build in this order, one page per turn, top-section to bottom-section:
+
+1. `/templates` (the bait machine — biggest conversion leverage)
+2. `/` (homepage — front door, routes to templates)
+3. `/sample-briefing` (proof engine that powers $99 and $1,500)
+4. `/pricing` (the continuity sale)
+5. `/apply` (selectivity polish, minimal changes)
+6. `/compare` + `/bookkeeper-vs-fractional-cfo` (routing/SEO)
+7. `/security-faq` (referrer-aware close)
+
+Confirm the page and section you are about to build, output the pre-build block, then write the code. Move to the next section only when the current one passes Definition of Done.
+
+=== END PROMPT ===
+
+---
+
+If you approve this plan, I'll save the prompt to `docs/conversion-prompt.md` in the repo so you can hand it to any future agent (or paste it into a new chat) and start executing page-by-page. Want me to also queue up Page 1 (`/templates`) for immediate rebuild right after saving, or stop at saving the prompt?
