@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TemplatesTopBar from "./parts/TemplatesTopBar";
 import TemplateLibraryHero from "./parts/TemplateLibraryHero";
 import PainToValueReframe from "./parts/PainToValueReframe";
@@ -16,17 +16,12 @@ import TemplatePreviewModal from "./parts/TemplatePreviewModal";
 import TemplateLeadCaptureModal from "./parts/TemplateLeadCaptureModal";
 import { useTemplateFilters } from "./hooks/useTemplateFilters";
 import { useLeadCaptureFlow } from "./hooks/useLeadCaptureFlow";
+import { useDocumentHead } from "./hooks/useDocumentHead";
 import type { TemplateItem } from "./content";
 import { templates as allTemplates } from "./content";
 
 export default function FreeTemplateLibraryPage() {
-  useEffect(() => {
-    const prev = document.title;
-    document.title = "Free Financial Templates · Monthly Finance Desk";
-    return () => {
-      document.title = prev;
-    };
-  }, []);
+  useDocumentHead();
 
   const { category, setCategory, highlightPathId, setHighlightPathId, highlightedTemplateIds, visible } =
     useTemplateFilters();
