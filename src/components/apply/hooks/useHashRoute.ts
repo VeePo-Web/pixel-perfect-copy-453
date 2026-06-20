@@ -8,7 +8,8 @@ export type ApplyRoute =
   | "pricing"
   | "templates"
   | "compare"
-  | "three-way-compare";
+  | "three-way-compare"
+  | "security-faq";
 
 function parse(): ApplyRoute {
   const h = window.location.hash || "";
@@ -20,6 +21,12 @@ function parse(): ApplyRoute {
   if (h.startsWith("#/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk"))
     return "three-way-compare";
   if (h.startsWith("#/compare")) return "compare";
+  if (
+    h.startsWith("#/security-faq") ||
+    h.startsWith("#/security") ||
+    h.startsWith("#/faq")
+  )
+    return "security-faq";
   return "home";
 }
 
