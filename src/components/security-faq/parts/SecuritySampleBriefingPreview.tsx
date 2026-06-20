@@ -1,0 +1,73 @@
+import { sampleBriefingPreview } from "../content";
+import { trackCtaByHref } from "../analytics";
+
+export default function SecuritySampleBriefingPreview() {
+  return (
+    <section
+      aria-labelledby="sample-briefing-heading"
+      className="relative border-b border-white/[0.05] bg-charcoal-950"
+    >
+      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="max-w-xl">
+            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+              Preview the product
+            </div>
+            <h2
+              id="sample-briefing-heading"
+              className="mt-3 font-light text-bone text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+            >
+              The safest way to understand the product is to preview it.
+            </h2>
+            <p className="mt-4 text-[14.5px] leading-relaxed text-bone/65">
+              Use demo data or rough non-sensitive numbers to see how the Monthly Finance
+              Desk turns financial activity into plain-English interpretation.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a
+                href="#/sample-briefing"
+                onClick={() =>
+                  trackCtaByHref("#/sample-briefing", "security_faq_sample")
+                }
+                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-charcoal-950 transition-all hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
+              >
+                Generate Sample Finance Briefing
+              </a>
+              <span className="text-[12px] text-bone/45">No bank connection required.</span>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6">
+            <div className="flex items-center justify-between border-b border-white/[0.06] pb-4">
+              <div className="text-[11px] uppercase tracking-[0.24em] text-bone/45">
+                Sample briefing · preview
+              </div>
+              <div className="text-[10.5px] text-bone/35">demo data</div>
+            </div>
+            <dl className="mt-4 divide-y divide-white/[0.05]">
+              {sampleBriefingPreview.rows.map((r) => (
+                <div
+                  key={r.label}
+                  className="flex items-baseline justify-between gap-4 py-3"
+                >
+                  <dt className="text-[12.5px] uppercase tracking-[0.18em] text-bone/55">
+                    {r.label}
+                  </dt>
+                  <dd className="text-right text-[13px] text-bone/85">{r.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="mt-4 rounded-xl border border-champagne-200/15 bg-champagne-200/[0.05] p-4">
+              <div className="text-[10.5px] uppercase tracking-[0.24em] text-champagne-200/80">
+                Insight
+              </div>
+              <p className="mt-2 text-[13.5px] leading-relaxed text-bone/85">
+                {sampleBriefingPreview.insight}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
