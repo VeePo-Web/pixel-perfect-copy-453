@@ -34,7 +34,7 @@ export default function SecurityFinalCTA() {
             }}
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
           >
-            Apply for the Monthly Finance Desk
+            Apply for the GoldFin Desk
           </a>
           <a
             href="#/sample-briefing"

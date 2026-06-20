@@ -16,7 +16,7 @@ export default function CategorySpectrum() {
             id="spectrum-heading"
             className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
           >
-            Where the Monthly Finance Desk fits.
+            Where the GoldFin Desk fits.
           </h2>
           <p className="mt-4 text-[15px] leading-[1.7] text-ink/70">
             For many owner-led businesses, the gap is not between free templates and a CFO. The gap is between having financial data and having a recurring way to understand it.

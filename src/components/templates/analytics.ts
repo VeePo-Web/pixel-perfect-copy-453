@@ -5,6 +5,7 @@ export type TemplateEvent =
   | "template_download_started"
   | "template_download_completed"
   | "sample_briefing_clicked_from_templates"
+  | "autofill_clicked_from_templates"
   | "apply_clicked_from_templates"
   | "recommended_path_selected"
   | "faq_opened";

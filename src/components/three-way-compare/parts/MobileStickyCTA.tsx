@@ -30,7 +30,7 @@ export default function MobileStickyCTA({ recommendation }: Props) {
   let eyebrow = "60-second diagnostic";
 
   if (pastBriefing) {
-    label = "Apply for Monthly Finance Desk";
+    label = "Apply for GoldFin Desk";
     href = "#/apply";
     eyebrow = "Your next step";
   } else if (recommendation) {

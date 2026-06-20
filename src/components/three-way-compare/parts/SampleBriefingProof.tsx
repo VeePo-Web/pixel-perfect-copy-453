@@ -46,7 +46,7 @@ export default function SampleBriefingProof() {
               The difference: plain-English financial interpretation.
             </h2>
             <p className="mt-4 max-w-[58ch] text-[15px] leading-[1.7] text-ink/70">
-              The Monthly Finance Desk turns financial activity into briefings that explain cash
+              The GoldFin Desk turns financial activity into briefings that explain cash
               movement, revenue trends, expense pressure, questions to review, and decisions to
               consider.
             </p>

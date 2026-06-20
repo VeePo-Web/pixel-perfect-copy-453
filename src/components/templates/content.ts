@@ -350,7 +350,7 @@ export const comparison = {
     bestFor: "Owners who want to begin organizing their numbers themselves.",
   },
   desk: {
-    label: "Monthly Finance Desk",
+    label: "GoldFin Desk",
     positioning: "Automated monthly financial clarity",
     items: [
       "Expert-built spreadsheet system",
@@ -378,7 +378,7 @@ export const bridgeSteps = [
   },
   {
     n: "03",
-    title: "Upgrade to the Monthly Finance Desk",
+    title: "Upgrade to the GoldFin Desk",
     copy: "After onboarding, the system can connect to real activity through Plaid and AI-assisted organization.",
   },
   {
@@ -414,7 +414,7 @@ export const faq = [
   },
   {
     q: "Do I need to connect my bank account?",
-    a: "No. The templates require no bank connection. The Monthly Finance Desk preview and application also require no bank connection.",
+    a: "No. The templates require no bank connection. The GoldFin Desk preview and application also require no bank connection.",
   },
   {
     q: "Are these templates a replacement for bookkeeping?",
@@ -425,16 +425,16 @@ export const faq = [
     a: "Owner-led businesses that want a clearer way to review cash flow, expenses, hiring decisions, taxes, and monthly financial patterns.",
   },
   {
-    q: "What is the difference between the templates and the Monthly Finance Desk?",
-    a: "Templates give you manual structure. The Monthly Finance Desk adds automation, plain-English briefings, and a monthly strategy review.",
+    q: "What is the difference between the templates and the GoldFin Desk?",
+    a: "Templates give you manual structure. The GoldFin Desk adds automation, plain-English briefings, and a monthly strategy review.",
   },
   {
     q: "What if I do not know which template I need?",
     a: "Use the “Not sure where to start?” section or start with the Monthly Financial Review Template.",
   },
   {
-    q: "Can I apply for the Monthly Finance Desk after downloading?",
-    a: "Yes. The templates are a starting point. If you want this system automated and reviewed monthly, apply for the Monthly Finance Desk.",
+    q: "Can I apply for the GoldFin Desk after downloading?",
+    a: "Yes. The templates are a starting point. If you want this system automated and reviewed monthly, apply for the GoldFin Desk.",
   },
   {
     q: "Will the templates give financial advice?",

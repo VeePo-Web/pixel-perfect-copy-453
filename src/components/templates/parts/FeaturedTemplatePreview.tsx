@@ -63,7 +63,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
                 onClick={() => track("sample_briefing_clicked_from_templates", { source: "featured" })}
                 className="rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-colors hover:border-champagne-200/40 hover:text-ink"
               >
-                See How This Becomes a Monthly Finance Desk Briefing
+                See How This Becomes a GoldFin Desk Briefing
               </a>
             </div>
           </div>

@@ -20,7 +20,7 @@ export default function TemplateFinalCTA() {
           Start free. Upgrade when you want the rhythm.
         </h2>
         <p className="mx-auto mt-5 max-w-[60ch] text-[15px] leading-relaxed text-ink/65">
-          Download the templates to begin organizing your financial view, or apply for the Monthly Finance Desk when you are ready for structure, automation, bi-weekly briefings, and a monthly strategy review.
+          Download the templates to begin organizing your financial view, or apply for the GoldFin Desk when you are ready for structure, automation, bi-weekly briefings, and a monthly strategy review.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
@@ -35,7 +35,7 @@ export default function TemplateFinalCTA() {
             onClick={() => track("apply_clicked_from_templates", { source: "final" })}
             className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
           >
-            Apply for Monthly Finance Desk
+            Apply for GoldFin Desk
           </a>
           <a
             href="#/sample-briefing"

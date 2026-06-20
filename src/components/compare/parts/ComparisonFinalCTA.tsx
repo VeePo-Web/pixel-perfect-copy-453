@@ -20,7 +20,7 @@ export default function ComparisonFinalCTA() {
           Start with the missing layer.
         </h2>
         <p className="mx-auto mt-5 max-w-[64ch] text-[15px] leading-relaxed text-ink/65">
-          If your books exist, your tools are active, and your business still feels financially unclear, the Monthly Finance Desk may be the monthly rhythm your business has been missing.
+          If your books exist, your tools are active, and your business still feels financially unclear, the GoldFin Desk may be the monthly rhythm your business has been missing.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
@@ -28,7 +28,7 @@ export default function ComparisonFinalCTA() {
             onClick={() => track("apply_clicked_from_compare", { source: "final" })}
             className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
           >
-            <span className="relative z-10">Apply for the Monthly Finance Desk</span>
+            <span className="relative z-10">Apply for the GoldFin Desk</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </a>
           <a

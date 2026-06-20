@@ -1,5 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "../../integrations/supabase/client";
+import GoldFinLogo from "../brand/GoldFinLogo";
+
+// Persona demo chips — each prefills a realistic, pain-language prompt so the
+// visitor self-identifies ("this is built for businesses like mine").
+const DEMO_CHIPS: { label: string; prompt: string }[] = [
+  { label: "Agency", prompt: "I run a 12-person agency doing about $90K/month. Revenue is growing, but cash still feels tight and contractor costs keep changing." },
+  { label: "Clinic", prompt: "I own a clinic with 8 employees. Payroll is the biggest expense, and I want to know if we can afford another hire." },
+  { label: "Restaurant", prompt: "I operate a restaurant. Sales are decent, but food costs, payroll, and cash timing make it hard to know what is actually profitable." },
+  { label: "Trades", prompt: "I run a trades business with seasonal revenue. I want to understand cash flow before the slower months." },
+  { label: "Consultant", prompt: "I'm a consultant with a small team. Revenue is lumpy and I want to know how much cash to keep in reserve." },
+  { label: "E-commerce", prompt: "I run an e-commerce business. Revenue moves up and down, ad spend is high, and I want to understand whether growth is actually producing cash." },
+  { label: "Local service", prompt: "I run a local service business. Sales are seasonal and I want to understand cash flow before the slow months." },
+  { label: "Professional firm", prompt: "I run a professional services firm. Revenue looks healthy but I'm not sure where the money is actually going." },
+];
 
 type BriefingSection = { label: string; body: string };
 
@@ -10,7 +24,7 @@ const COPY = {
   slogan: "Stop guessing. Know what your numbers mean.",
   headline: "Stop Running Your Business From Your Bank Balance",
   subheadline:
-    "Most owners have bank statements, bookkeeping reports, and spreadsheets. What they do not have is a recurring finance rhythm. The Monthly Finance Desk turns your financial activity into organized spreadsheets, bi-weekly plain-English briefings, and a monthly strategy review.",
+    "Most owners have bank statements, bookkeeping reports, and spreadsheets. What they do not have is a recurring finance rhythm. The GoldFin Desk turns your financial activity into organized spreadsheets, bi-weekly plain-English briefings, and a monthly strategy review.",
   placeholder:
     "Describe your business and what you want to understand about your numbers\u2026",
   example:
@@ -62,12 +76,16 @@ const COPY = {
     },
   ],
   postDemo: {
-    headline: "Want this kind of briefing for your real business?",
-    body: "Apply for the Monthly Finance Desk and get your financial activity organized, briefed in plain English every two weeks, and reviewed monthly with a strategy call.",
-    primary: "Apply for the Monthly Finance Desk",
-    secondary: "Get Free Templates",
+    headline: "Want this briefing for your real business every month?",
+    body: "GoldFin Reports fills your templates from your numbers and sends a plain-English briefing like this one — every month. No spreadsheet work. Cancel anytime.",
+    primary: "Auto-fill my reports — $99/mo",
+    primaryHref: "#/pricing#auto-fill",
+    secondary: "Apply for GoldFin Advisory",
+    secondaryHref: "#/apply",
+    tertiary: "Or get the free Template Vault",
+    tertiaryHref: "#/templates",
     micro:
-      "Start with the free templates, or apply to have your financial system automated and reviewed monthly.",
+      "$99/mo for done-for-you reports, or apply for human advisory at $1,500/mo. No bank connection required to start.",
   },
   mobile: {
     eyebrow: "For serious small business owners",
@@ -76,7 +94,7 @@ const COPY = {
     placeholder: "What do you want to understand about your numbers?",
     cta: "Generate Sample Briefing",
     trust: "No bank connection required.",
-    afterCta: "Apply for the Monthly Finance Desk",
+    afterCta: "Apply for the GoldFin Desk",
   },
 } as const;
 
@@ -228,11 +246,28 @@ const FinanceHero = () => {
                 {COPY.example}
               </p>
 
+              {/* Demo chips — self-identification + zero-effort prefill */}
               <div className="mt-4 pl-1">
+                <p className="font-general text-[0.62rem] uppercase tracking-[0.2em] text-ink/40">
+                  Or start from a business like yours
+                </p>
+                <div className="mt-2.5 flex flex-wrap gap-2">
+                  {DEMO_CHIPS.map((chip) => (
+                    <button
+                      key={chip.label}
+                      type="button"
+                      onClick={() => setPrompt(chip.prompt)}
+                      disabled={ctasDisabled}
+                      className="rounded-full border border-ink/[0.12] bg-white px-3 py-1.5 font-general text-[0.68rem] tracking-[0.04em] text-ink/70 transition-all duration-300 hover:border-champagne-300/70 hover:text-ink disabled:opacity-50"
+                    >
+                      {chip.label}
+                    </button>
+                  ))}
+                </div>
                 <button
                   onClick={useDemoData}
                   disabled={ctasDisabled}
-                  className="font-general text-[0.68rem] uppercase tracking-[0.2em] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-100 hover:underline disabled:opacity-50"
+                  className="mt-3 font-general text-[0.68rem] uppercase tracking-[0.2em] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-100 hover:underline disabled:opacity-50"
                 >
                   Try demo business data
                 </button>
@@ -281,11 +316,11 @@ const HeroNav = () => {
   return (
     <header className="relative z-20 border-b border-bone/5 bg-charcoal-950/60 backdrop-blur-md">
       <div className="mx-auto flex h-[72px] w-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
-        <a
-          href="#top"
-          className="font-general text-[0.78rem] uppercase tracking-[0.22em] text-ink"
-        >
-          Monthly Finance Desk
+        <a href="#top" className="flex items-center" aria-label="GoldFin Desk — Home">
+          <GoldFinLogo
+            markClassName="h-7 w-7"
+            wordmarkClassName="font-general text-[0.78rem] uppercase tracking-[0.22em] text-ink"
+          />
         </a>
         <nav className="hidden gap-9 md:flex">
           {NAV_LINKS.map((l) => (
@@ -369,7 +404,7 @@ const BriefingPanel = ({
       <div className="flex items-center justify-between border-b border-bone/10 pb-4">
         <div>
           <p className="font-general text-[0.62rem] uppercase tracking-[0.22em] text-champagne-200/80">
-            MFD &middot; Briefing 001
+            GFD &middot; Briefing 001
           </p>
           <p className="mt-1 font-circular-web text-base text-ink">
             {COPY.panelLabel}
@@ -526,18 +561,30 @@ const PostDemoCTA = () => (
       {COPY.postDemo.body}
     </p>
     <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-      <button className="group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-colors duration-[400ms] ease-cinema hover:bg-champagne-100">
+      <a
+        href={COPY.postDemo.primaryHref}
+        className="group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-colors duration-[400ms] ease-cinema hover:bg-champagne-100"
+      >
         <span
           aria-hidden
           className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow group-hover/cta:opacity-0"
         />
         <span className="relative">{COPY.postDemo.primary}</span>
         <span aria-hidden className="relative">&rarr;</span>
-      </button>
-      <button className="inline-flex items-center justify-center rounded-full border border-bone/20 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink/85 transition-colors duration-[400ms] ease-cinema hover:border-champagne-200/60 hover:text-champagne-100">
+      </a>
+      <a
+        href={COPY.postDemo.secondaryHref}
+        className="inline-flex items-center justify-center rounded-full border border-bone/20 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink/85 transition-colors duration-[400ms] ease-cinema hover:border-champagne-200/60 hover:text-champagne-100"
+      >
         {COPY.postDemo.secondary}
-      </button>
+      </a>
     </div>
+    <a
+      href={COPY.postDemo.tertiaryHref}
+      className="mt-4 inline-block font-general text-[0.68rem] uppercase tracking-[0.18em] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-100 hover:underline"
+    >
+      {COPY.postDemo.tertiary}
+    </a>
     <p className="mt-4 font-circular-web text-xs italic text-ink/50">
       {COPY.postDemo.micro}
     </p>

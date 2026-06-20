@@ -49,7 +49,7 @@ export default function ComparisonHero() {
                 onClick={() => track("apply_clicked_from_compare", { source: "hero" })}
                 className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
-                Apply for the Monthly Finance Desk
+                Apply for the GoldFin Desk
               </a>
             </div>
             <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">

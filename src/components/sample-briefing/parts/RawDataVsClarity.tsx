@@ -67,7 +67,7 @@ export default function RawDataVsClarity() {
 
           <div>
             <div className="mb-4 text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/80">
-              What the Monthly Finance Desk creates
+              What the GoldFin Desk creates
             </div>
             <ul className="space-y-2.5">
               {clarityItems.map((item, i) => {

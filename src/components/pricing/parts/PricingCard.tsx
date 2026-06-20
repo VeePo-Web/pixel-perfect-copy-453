@@ -24,7 +24,7 @@ export default function PricingCard({ plan, emphasis }: Props) {
         </div>
       )}
       <div className="text-[10.5px] uppercase tracking-[0.28em] text-ink/45">
-        {plan.tone === "entry" ? "Free" : plan.tone === "self" ? "Self-guided" : plan.tone === "flagship" ? "Flagship" : plan.tone === "plus" ? "Plus" : "Private"}
+        {plan.tone === "entry" ? "Free" : plan.tone === "self" ? "Self-guided" : plan.tone === "continuity" ? "Continuity" : plan.tone === "flagship" ? "Flagship" : plan.tone === "plus" ? "Plus" : "Private"}
       </div>
       <h3 className="mt-2 font-light text-ink text-[22px] leading-[1.15] tracking-[-0.005em]">
         {plan.name}

@@ -27,7 +27,7 @@ const cards = [
     id: "bridge-pricing",
     eyebrow: "What's included",
     title: "Read the Pricing Page",
-    copy: "See what is included in the $1,500/month Monthly Finance Desk.",
+    copy: "See what is included in the $1,500/month GoldFin Desk.",
     cta: "View Pricing",
     href: "#/pricing",
     event: null,

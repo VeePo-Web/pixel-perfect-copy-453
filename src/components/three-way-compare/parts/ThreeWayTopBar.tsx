@@ -29,7 +29,7 @@ export default function ThreeWayTopBar() {
         <a href="#/" className="group flex shrink-0 items-center gap-3">
           <span className="h-1.5 w-1.5 rounded-full bg-champagne-200 transition-transform duration-400 group-hover:scale-125" />
           <span className="text-[12.5px] uppercase tracking-[0.28em] text-ink/85">
-            Monthly Finance Desk
+            GoldFin Desk
           </span>
         </a>
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Section navigation">

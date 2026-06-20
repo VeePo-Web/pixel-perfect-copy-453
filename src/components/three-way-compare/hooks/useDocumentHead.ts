@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { faq } from "../content";
 
-const TITLE = "Bookkeeper vs Fractional CFO vs Monthly Finance Desk";
+const TITLE = "Bookkeeper vs Fractional CFO vs GoldFin Desk";
 const DESC =
-  "Compare bookkeepers, fractional CFOs, and Monthly Finance Desk to understand which financial support option fits your owner-led business.";
+  "Compare bookkeepers, fractional CFOs, and GoldFin Desk to understand which financial support option fits your owner-led business.";
 const CANONICAL =
   "https://pixel-perfect-copy-453.lovable.app/#/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk";
 
@@ -32,7 +32,7 @@ function ensureLink(rel: string): HTMLLinkElement {
 export function useDocumentHead() {
   useEffect(() => {
     const prevTitle = document.title;
-    document.title = `${TITLE} · Monthly Finance Desk`;
+    document.title = `${TITLE} · GoldFin Desk`;
 
     const desc = ensureMeta("name", "description");
     const prevDesc = desc.getAttribute("content") ?? "";

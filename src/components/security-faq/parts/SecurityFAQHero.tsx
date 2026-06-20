@@ -31,7 +31,7 @@ export default function SecurityFAQHero() {
           Preview safely. Apply without connecting your bank.
         </h1>
         <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-ink/65 sm:text-[16.5px]">
-          You can preview the Monthly Finance Desk experience with demo data or
+          You can preview the GoldFin Desk experience with demo data or
           rough non-sensitive numbers, then apply without payment, documents, or
           bank access. Bank connection only becomes relevant after onboarding.
         </p>
@@ -50,7 +50,7 @@ export default function SecurityFAQHero() {
             onClick={() => trackCtaByHref("#/apply", "security_faq_hero")}
             className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-6 text-[13.5px] text-ink transition-colors duration-300 hover:border-ink/30 hover:bg-ink/[0.03]"
           >
-            Apply for the Monthly Finance Desk
+            Apply for the GoldFin Desk
           </a>
           <a
             href="#/templates"

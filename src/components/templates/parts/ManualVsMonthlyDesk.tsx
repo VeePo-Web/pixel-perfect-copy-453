@@ -10,13 +10,13 @@ export default function ManualVsMonthlyDesk() {
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="max-w-[60ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
-            Manual vs Monthly Finance Desk
+            Manual vs GoldFin Desk
           </div>
           <h2
             id="manual-vs-desk-heading"
             className="mt-3 font-light text-ink text-[30px] leading-[1.12] tracking-[-0.01em] sm:text-[40px]"
           >
-            Templates are the starting point. The Monthly Finance Desk is the rhythm.
+            Templates are the starting point. The GoldFin Desk is the rhythm.
           </h2>
         </div>
 
@@ -35,13 +35,13 @@ export default function ManualVsMonthlyDesk() {
             items={comparison.desk.items}
             bestFor={comparison.desk.bestFor}
             tone="flagship"
-            cta={{ label: "Apply for the Monthly Finance Desk", href: "#/apply" }}
+            cta={{ label: "Apply for the GoldFin Desk", href: "#/apply" }}
             secondary={{ label: "Generate Sample Briefing", href: "#/sample-briefing" }}
           />
         </div>
 
         <p className="mt-8 max-w-[68ch] text-[14px] leading-relaxed text-ink/65">
-          If you use the templates and realize, “I do not want to keep doing this manually,” that is exactly what the Monthly Finance Desk is built for.
+          If you use the templates and realize, “I do not want to keep doing this manually,” that is exactly what the GoldFin Desk is built for.
         </p>
       </div>
     </section>

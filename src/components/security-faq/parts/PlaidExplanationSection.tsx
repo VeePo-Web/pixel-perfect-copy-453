@@ -49,7 +49,7 @@ export default function PlaidExplanationSection() {
           </h2>
           <p className="mt-4 text-[14.5px] leading-relaxed text-ink/65">
             Plaid connection is not part of the public preview or first application step.
-            It becomes relevant only after onboarding, when the Monthly Finance Desk needs
+            It becomes relevant only after onboarding, when the GoldFin Desk needs
             to work from real financial activity.
           </p>
         </div>

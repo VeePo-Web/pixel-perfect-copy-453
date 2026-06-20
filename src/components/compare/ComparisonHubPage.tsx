@@ -18,16 +18,16 @@ import { useFitFinder } from "./hooks/useFitFinder";
 import { faq } from "./content";
 
 const PAGE_TITLE =
-  "Compare Bookkeepers, Dashboards, CFOs & Monthly Finance Desk";
+  "Compare Bookkeepers, Dashboards, CFOs & GoldFin Desk";
 const PAGE_DESC =
-  "Not sure if your business needs a bookkeeper, dashboard, fractional CFO, or Monthly Finance Desk? Compare financial support options for owner-led businesses.";
+  "Not sure if your business needs a bookkeeper, dashboard, fractional CFO, or GoldFin Desk? Compare financial support options for owner-led businesses.";
 
 export default function ComparisonHubPage() {
   const finder = useFitFinder();
 
   useEffect(() => {
     const prevTitle = document.title;
-    document.title = `${PAGE_TITLE} · Monthly Finance Desk`;
+    document.title = `${PAGE_TITLE} · GoldFin Desk`;
 
     const meta = ensureMeta("description");
     const prevDesc = meta.getAttribute("content") ?? "";

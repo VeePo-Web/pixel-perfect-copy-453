@@ -4,7 +4,7 @@ const cards = [
   {
     eyebrow: "Preview",
     title: "Generate Sample Finance Briefing",
-    body: "Preview the kind of plain-English briefing the Monthly Finance Desk creates.",
+    body: "Preview the kind of plain-English briefing the GoldFin Desk creates.",
     cta: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
   },
   {
@@ -16,7 +16,7 @@ const cards = [
   {
     eyebrow: "Understand",
     title: "See Pricing",
-    body: "Understand what is included in the $1,500/month Monthly Finance Desk.",
+    body: "Understand what is included in the $1,500/month GoldFin Desk.",
     cta: { label: "View Pricing", href: "#/pricing" },
   },
 ];

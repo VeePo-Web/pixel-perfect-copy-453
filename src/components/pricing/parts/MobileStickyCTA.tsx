@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 
 export default function MobileStickyCTA() {
   const [visible, setVisible] = useState(false);
@@ -16,13 +17,14 @@ export default function MobileStickyCTA() {
       style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
     >
       <div className="flex items-center justify-between gap-3 px-4 pt-3">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-ink/50">$1,500 / month</p>
-        <a
-          href="#/apply"
+        <p className="text-[11px] uppercase tracking-[0.22em] text-ink/50">$99 / month</p>
+        <button
+          type="button"
+          onClick={startAutoFillCheckout}
           className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"
         >
-          Apply for Monthly Finance Desk
-        </a>
+          Auto-fill my reports
+        </button>
       </div>
     </div>
   );

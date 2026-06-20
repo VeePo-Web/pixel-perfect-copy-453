@@ -2,8 +2,8 @@ export const HIW_COPY = {
   intro: {
     eyebrow: "HOW IT WORKS",
     headline: "Your monthly finance rhythm, built for owner-led businesses.",
-    sub: "The Monthly Finance Desk turns scattered financial activity into organized spreadsheets, bi-weekly plain-English briefings, and a monthly strategy review — so you can stop guessing from your bank balance.",
-    primary: "Apply for the Monthly Finance Desk",
+    sub: "The GoldFin Desk turns scattered financial activity into organized spreadsheets, bi-weekly plain-English briefings, and a monthly strategy review — so you can stop guessing from your bank balance.",
+    primary: "Apply for the GoldFin Desk",
     secondary: "Generate Sample Finance Briefing",
     trust: "No bank connection required to preview the experience.",
     loop: ["Bank activity", "Spreadsheet structure", "Plain-English briefing", "Monthly review"],
@@ -42,7 +42,7 @@ export const HIW_COPY = {
   ],
   vs: {
     headline: "You do not need another finance project on your plate.",
-    sub: "The Monthly Finance Desk is designed to give owners a recurring finance rhythm without making them become the finance department.",
+    sub: "The GoldFin Desk is designed to give owners a recurring finance rhythm without making them become the finance department.",
     you: [
       "Describe your business and goals",
       "Apply for the premium desk",
@@ -86,7 +86,7 @@ export const HIW_COPY = {
     },
     after: {
       label: "After",
-      title: "Running with a Monthly Finance Desk",
+      title: "Running with a GoldFin Desk",
       bullets: [
         "Organized financial structure",
         "Bi-weekly plain-English briefings",
@@ -194,14 +194,14 @@ export const HIW_COPY = {
         fit: "Companies large enough to need a finance leader.",
       },
       {
-        name: "Monthly Finance Desk",
+        name: "GoldFin Desk",
         helps: "Recurring financial structure, plain-English interpretation, and monthly decision rhythm.",
         misses: "Not a replacement for tax, legal, or full bookkeeping cleanup.",
         fit: "Owner-led businesses that need more clarity than tools alone provide, but are not ready for a full finance department.",
         highlight: true,
       },
     ],
-    cta: "Apply for the Monthly Finance Desk",
+    cta: "Apply for the GoldFin Desk",
   },
   trust: {
     headline: "Preview safely. Connect only after trust is built.",
@@ -215,8 +215,8 @@ export const HIW_COPY = {
   },
   final: {
     headline: "Ready to stop guessing from your bank balance?",
-    sub: "Apply for the Monthly Finance Desk and build a recurring financial rhythm around your business: structured spreadsheets, bi-weekly briefings, and a monthly strategy review.",
-    primary: "Apply for the Monthly Finance Desk",
+    sub: "Apply for the GoldFin Desk and build a recurring financial rhythm around your business: structured spreadsheets, bi-weekly briefings, and a monthly strategy review.",
+    primary: "Apply for the GoldFin Desk",
     secondary: "Generate Sample Finance Briefing",
     tertiary: "Start with Free Templates",
     micro: "Application takes only a few minutes. No bank connection required to apply.",

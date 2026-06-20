@@ -103,7 +103,7 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
           className="text-[11.5px] text-ink/50 transition-colors hover:text-champagne-200"
           onClick={() => track("apply_clicked_from_templates", { source: "card", templateId: template.id })}
         >
-          Want this automated? <span className="underline-offset-4 hover:underline">Monthly Finance Desk →</span>
+          Want this automated? <span className="underline-offset-4 hover:underline">GoldFin Desk →</span>
         </a>
       </div>
     </article>

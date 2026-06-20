@@ -33,7 +33,7 @@ export default function PricingFAQ() {
         </div>
 
         <p className="mt-8 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
-          Monthly Finance Desk does not replace tax, legal, accounting, or investment advice.
+          GoldFin Desk does not replace tax, legal, accounting, or investment advice.
         </p>
       </div>
     </section>

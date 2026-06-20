@@ -44,7 +44,7 @@ export default function MobileStickyCTA() {
   const showApply = pastFAQ;
   const href = showApply ? "#/apply" : "#/sample-briefing";
   const label = showApply
-    ? "Apply for Monthly Finance Desk"
+    ? "Apply for GoldFin Desk"
     : "Generate Sample Briefing";
 
   return (

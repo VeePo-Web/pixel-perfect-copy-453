@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { TemplateItem } from "../content";
+import { captureLead, type LeadSubmitPayload } from "../../../lib/leads";
 
 export type LeadFlowState =
   | { kind: "closed" }
@@ -12,6 +13,12 @@ const DOWNLOAD_KEY = "mfd.templateDownloaded";
 export function useLeadCaptureFlow() {
   const [state, setState] = useState<LeadFlowState>({ kind: "closed" });
   const [hasDownloaded, setHasDownloaded] = useState(false);
+
+  // Keep a live ref so submit() reads the current template without stale closures.
+  const stateRef = useRef(state);
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
 
   useEffect(() => {
     try {
@@ -27,25 +34,28 @@ export function useLeadCaptureFlow() {
 
   const close = useCallback(() => setState({ kind: "closed" }), []);
 
-  const submit = useCallback(() => {
-    setState((s) => (s.kind === "form" ? { kind: "sending", template: s.template } : s));
-    return new Promise<void>((resolve) => {
-      window.setTimeout(() => {
-        setState((s) => {
-          if (s.kind === "sending") {
-            try {
-              sessionStorage.setItem(DOWNLOAD_KEY, "1");
-            } catch {
-              /* noop */
-            }
-            setHasDownloaded(true);
-            return { kind: "success", template: s.template };
-          }
-          return s;
-        });
-        resolve();
-      }, 750);
+  const submit = useCallback(async (payload: LeadSubmitPayload) => {
+    const current = stateRef.current;
+    if (current.kind !== "form") return;
+    const template = current.template;
+
+    setState({ kind: "sending", template });
+
+    // Real capture — owned source of truth. UX proceeds regardless so the
+    // visitor always reaches their template (no lost lead, no dead end).
+    await captureLead({
+      ...payload,
+      templateId: template.id,
+      templateName: template.shortName,
     });
+
+    try {
+      sessionStorage.setItem(DOWNLOAD_KEY, "1");
+    } catch {
+      /* noop */
+    }
+    setHasDownloaded(true);
+    setState({ kind: "success", template });
   }, []);
 
   return { state, open, close, submit, hasDownloaded };

@@ -12,7 +12,7 @@ export default function DecisionCostSection() {
             One unclear decision can cost more than the monthly desk.
           </h2>
           <p className="mt-4 text-[15px] leading-[1.7] text-ink/70">
-            The Monthly Finance Desk does not promise guaranteed savings or outcomes. It creates the structure to review decisions before they become expensive.
+            The GoldFin Desk does not promise guaranteed savings or outcomes. It creates the structure to review decisions before they become expensive.
           </p>
         </div>
 

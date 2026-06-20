@@ -15,7 +15,7 @@ export default function SampleBriefingPage() {
 
   useEffect(() => {
     const prev = document.title;
-    document.title = "Sample Bi-Weekly Finance Briefing · Monthly Finance Desk";
+    document.title = "Sample Bi-Weekly Finance Briefing · GoldFin Desk";
     return () => {
       document.title = prev;
     };

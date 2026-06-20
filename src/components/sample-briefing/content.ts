@@ -430,7 +430,7 @@ export const whatThisIsNot = [
   },
   {
     title: "Not bookkeeping",
-    body: "Bookkeeping records what happened. The Monthly Finance Desk helps turn financial activity into a review rhythm.",
+    body: "Bookkeeping records what happened. The GoldFin Desk helps turn financial activity into a review rhythm.",
   },
   {
     title: "Not a spreadsheet template",

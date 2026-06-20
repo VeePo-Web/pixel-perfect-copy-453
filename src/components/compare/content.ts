@@ -86,15 +86,15 @@ export const options: SupportOption[] = [
   },
   {
     id: "mfd",
-    label: "Monthly Finance Desk",
-    shortLabel: "Monthly Finance Desk",
+    label: "GoldFin Desk",
+    shortLabel: "GoldFin Desk",
     bestWhen:
       "You need structure, plain-English interpretation, and a monthly review rhythm.",
     usuallyMisses:
       "Not a replacement for tax, legal, bookkeeping cleanup, or full CFO leadership.",
     chooseIf:
       "You have financial data but need recurring clarity before decisions.",
-    ctaText: "Apply for the Monthly Finance Desk",
+    ctaText: "Apply for the GoldFin Desk",
     ctaHref: "#/apply",
     anchorId: "row-mfd",
     position: 0.66,
@@ -138,61 +138,61 @@ export type ComparisonCard = {
 export const comparisonCards: ComparisonCard[] = [
   {
     id: "vs-bookkeeper",
-    title: "Monthly Finance Desk vs Bookkeeper",
+    title: "GoldFin Desk vs Bookkeeper",
     bestFor: "Owners who have clean books but still feel unclear.",
     coreInsight:
-      "A bookkeeper records what happened. The Monthly Finance Desk creates a recurring rhythm for understanding what it means.",
+      "A bookkeeper records what happened. The GoldFin Desk creates a recurring rhythm for understanding what it means.",
     ctaText: "Compare Bookkeeper",
     anchorId: "row-bookkeeper",
   },
   {
     id: "vs-cfo",
-    title: "Monthly Finance Desk vs Fractional CFO",
+    title: "GoldFin Desk vs Fractional CFO",
     bestFor: "Owners who need more than bookkeeping but not full CFO support.",
     coreInsight:
-      "A fractional CFO provides deeper strategic leadership. The Monthly Finance Desk is the lighter recurring clarity layer before that.",
+      "A fractional CFO provides deeper strategic leadership. The GoldFin Desk is the lighter recurring clarity layer before that.",
     ctaText: "Compare Fractional CFO",
     anchorId: "row-cfo",
   },
   {
     id: "vs-quickbooks",
-    title: "Monthly Finance Desk vs QuickBooks",
+    title: "GoldFin Desk vs QuickBooks",
     bestFor: "Owners using accounting software but still deciding from instinct.",
     coreInsight:
-      "QuickBooks shows financial records. The Monthly Finance Desk turns financial activity into plain-English briefings and monthly review.",
+      "QuickBooks shows financial records. The GoldFin Desk turns financial activity into plain-English briefings and monthly review.",
     ctaText: "Compare QuickBooks",
     anchorId: "row-accounting",
   },
   {
     id: "vs-dashboard",
-    title: "Monthly Finance Desk vs Financial Dashboard",
+    title: "GoldFin Desk vs Financial Dashboard",
     bestFor: "Owners with dashboards who still do not know what to do next.",
     coreInsight:
-      "Dashboards show charts. The Monthly Finance Desk helps surface questions and decisions worth your attention.",
+      "Dashboards show charts. The GoldFin Desk helps surface questions and decisions worth your attention.",
     ctaText: "Compare Dashboards",
     anchorId: "row-dashboard",
   },
   {
     id: "vs-diy",
-    title: "Monthly Finance Desk vs DIY Spreadsheets",
+    title: "GoldFin Desk vs DIY Spreadsheets",
     bestFor: "Owners tired of rebuilding or ignoring their own spreadsheets.",
     coreInsight:
-      "Templates create manual structure. The Monthly Finance Desk adds automation, interpretation, and rhythm.",
+      "Templates create manual structure. The GoldFin Desk adds automation, interpretation, and rhythm.",
     ctaText: "Compare Spreadsheets",
     anchorId: "row-diy",
   },
   {
     id: "vs-spend",
-    title: "Monthly Finance Desk vs Ramp / Spend Tools",
+    title: "GoldFin Desk vs Ramp / Spend Tools",
     bestFor: "Owners who control expenses but still lack financial clarity.",
     coreInsight:
-      "Spend tools manage cards and approvals. The Monthly Finance Desk helps explain the business picture around them.",
+      "Spend tools manage cards and approvals. The GoldFin Desk helps explain the business picture around them.",
     ctaText: "Compare Spend Tools",
     anchorId: "row-spend",
   },
   {
     id: "three-way",
-    title: "Bookkeeper vs Fractional CFO vs Monthly Finance Desk",
+    title: "Bookkeeper vs Fractional CFO vs GoldFin Desk",
     bestFor: "Owners not sure what level of support they actually need.",
     coreInsight:
       "The right choice depends on whether your main gap is records, interpretation, or strategic leadership.",
@@ -223,9 +223,9 @@ export const useCases: UseCase[] = [
     id: "bookkeeper-but-unclear",
     quote: "I have a bookkeeper, but I still feel like I’m guessing.",
     recommendation:
-      "Bookkeeping keeps records clean, but does not interpret them. The Monthly Finance Desk adds a recurring layer of plain-English review on top of your existing bookkeeper.",
+      "Bookkeeping keeps records clean, but does not interpret them. The GoldFin Desk adds a recurring layer of plain-English review on top of your existing bookkeeper.",
     primaryCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Apply for Monthly Finance Desk", href: "#/apply" },
+    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
   },
   {
     id: "cash-still-tight",
@@ -239,9 +239,9 @@ export const useCases: UseCase[] = [
     id: "hiring-decision",
     quote: "I am deciding whether to hire.",
     recommendation:
-      "Pair the Hiring Affordability template with a Monthly Finance Desk briefing to see whether current cash flow can support another fixed payroll cost.",
+      "Pair the Hiring Affordability template with a GoldFin Desk briefing to see whether current cash flow can support another fixed payroll cost.",
     primaryCTA: { label: "Review Hiring Readiness", href: "#/templates" },
-    secondaryCTA: { label: "Apply for Monthly Finance Desk", href: "#/apply" },
+    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
   },
   {
     id: "considering-cfo",
@@ -249,7 +249,7 @@ export const useCases: UseCase[] = [
     recommendation:
       "Many owner-led businesses get most of the value from a recurring clarity rhythm before they ever need full CFO leadership.",
     primaryCTA: { label: "Compare CFO Options", href: "#row-cfo" },
-    secondaryCTA: { label: "Apply for Monthly Finance Desk", href: "#/apply" },
+    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
   },
   {
     id: "structure-first",
@@ -263,9 +263,9 @@ export const useCases: UseCase[] = [
     id: "dashboards-no-decisions",
     quote: "I have dashboards but no decisions.",
     recommendation:
-      "Dashboards visualize data. The Monthly Finance Desk turns that data into questions to review and decisions to consider every two weeks.",
+      "Dashboards visualize data. The GoldFin Desk turns that data into questions to review and decisions to consider every two weeks.",
     primaryCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Apply for Monthly Finance Desk", href: "#/apply" },
+    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
   },
 ];
 
@@ -329,30 +329,30 @@ export const recommendations: Record<RecommendationKey, Recommendation> = {
     eyebrow: "Start here",
     title: "Bookkeeping cleanup first.",
     summary:
-      "The Monthly Finance Desk works best on financial activity that is already organized. Start with bookkeeping cleanup through your current accountant or bookkeeper, then come back when records are caught up.",
+      "The GoldFin Desk works best on financial activity that is already organized. Start with bookkeeping cleanup through your current accountant or bookkeeper, then come back when records are caught up.",
     primaryCTA: { label: "Start With Free Templates", href: "#/templates" },
-    secondaryCTA: { label: "See how Monthly Finance Desk works", href: "#/pricing" },
+    secondaryCTA: { label: "See how GoldFin Desk works", href: "#/pricing" },
     mobileCTA: { label: "Get Free Templates", href: "#/templates" },
   },
   mfdFit: {
     key: "mfdFit",
     eyebrow: "Likely fit",
-    title: "The Monthly Finance Desk is likely the missing layer.",
+    title: "The GoldFin Desk is likely the missing layer.",
     summary:
-      "You already have financial data — bookkeeper, software, dashboards, or spreadsheets — but lack a recurring way to understand what it means. The Monthly Finance Desk adds structure, plain-English bi-weekly briefings, and a monthly strategy review.",
+      "You already have financial data — bookkeeper, software, dashboards, or spreadsheets — but lack a recurring way to understand what it means. The GoldFin Desk adds structure, plain-English bi-weekly briefings, and a monthly strategy review.",
     primaryCTA: { label: "Generate Sample Finance Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Apply for Monthly Finance Desk", href: "#/apply" },
+    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
     mobileCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
   },
   cfoCompare: {
     key: "cfoCompare",
     eyebrow: "Compare carefully",
-    title: "Compare Monthly Finance Desk against a fractional CFO.",
+    title: "Compare GoldFin Desk against a fractional CFO.",
     summary:
-      "A fractional CFO provides deeper strategic leadership. The Monthly Finance Desk is the lighter recurring clarity layer many owners find sufficient before that step. Compare both before committing.",
+      "A fractional CFO provides deeper strategic leadership. The GoldFin Desk is the lighter recurring clarity layer many owners find sufficient before that step. Compare both before committing.",
     primaryCTA: { label: "Compare Fractional CFO", href: "#row-cfo" },
-    secondaryCTA: { label: "Apply for Monthly Finance Desk", href: "#/apply" },
-    mobileCTA: { label: "Apply for Monthly Finance Desk", href: "#/apply" },
+    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
+    mobileCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
   },
   templatesFirst: {
     key: "templatesFirst",
@@ -391,7 +391,7 @@ export function recommend(
 export const faq: { q: string; a: string }[] = [
   {
     q: "Do I still need a bookkeeper?",
-    a: "Usually, yes. A bookkeeper keeps records clean. The Monthly Finance Desk adds structure, interpretation, briefings, and monthly review rhythm around the business.",
+    a: "Usually, yes. A bookkeeper keeps records clean. The GoldFin Desk adds structure, interpretation, briefings, and monthly review rhythm around the business.",
   },
   {
     q: "Is this a fractional CFO replacement?",
@@ -399,11 +399,11 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "Why not just use QuickBooks?",
-    a: "QuickBooks shows accounting records and reports. The Monthly Finance Desk helps turn financial activity into plain-English briefings and decisions to review.",
+    a: "QuickBooks shows accounting records and reports. The GoldFin Desk helps turn financial activity into plain-English briefings and decisions to review.",
   },
   {
     q: "Why not just use a dashboard?",
-    a: "Dashboards are useful if you already know what to look for. The Monthly Finance Desk helps surface what changed, what looks risky, and what deserves attention.",
+    a: "Dashboards are useful if you already know what to look for. The GoldFin Desk helps surface what changed, what looks risky, and what deserves attention.",
   },
   {
     q: "Is this just spreadsheet templates?",
@@ -411,7 +411,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "What if my books are messy?",
-    a: "You may need bookkeeping cleanup first. The Monthly Finance Desk works best when there is enough organized financial activity to review.",
+    a: "You may need bookkeeping cleanup first. The GoldFin Desk works best when there is enough organized financial activity to review.",
   },
   {
     q: "Do I need to connect my bank account to compare or apply?",
@@ -428,49 +428,49 @@ export const faq: { q: string; a: string }[] = [
 export const pageIndex: { id: string; title: string; who: string; diff: string; href: string }[] = [
   {
     id: "idx-bookkeeper",
-    title: "Monthly Finance Desk vs Bookkeeper",
+    title: "GoldFin Desk vs Bookkeeper",
     who: "Owners with clean books who still feel unclear.",
     diff: "Records vs recurring interpretation.",
     href: "#row-bookkeeper",
   },
   {
     id: "idx-cfo",
-    title: "Monthly Finance Desk vs Fractional CFO",
+    title: "GoldFin Desk vs Fractional CFO",
     who: "Owners between bookkeeping and full finance leadership.",
     diff: "Recurring clarity rhythm vs strategic finance leadership.",
     href: "#row-cfo",
   },
   {
     id: "idx-quickbooks",
-    title: "Monthly Finance Desk vs QuickBooks",
+    title: "GoldFin Desk vs QuickBooks",
     who: "Owners using accounting software but still guessing.",
     diff: "Accounting records vs plain-English briefings.",
     href: "#row-accounting",
   },
   {
     id: "idx-dashboard",
-    title: "Monthly Finance Desk vs Financial Dashboard",
+    title: "GoldFin Desk vs Financial Dashboard",
     who: "Owners with charts but no decisions.",
     diff: "Visualization vs questions and decisions.",
     href: "#row-dashboard",
   },
   {
     id: "idx-diy",
-    title: "Monthly Finance Desk vs DIY Spreadsheets",
+    title: "GoldFin Desk vs DIY Spreadsheets",
     who: "Owners maintaining their own templates manually.",
     diff: "Manual structure vs automated structure plus review.",
     href: "#row-diy",
   },
   {
     id: "idx-spend",
-    title: "Monthly Finance Desk vs Ramp / Spend Tools",
+    title: "GoldFin Desk vs Ramp / Spend Tools",
     who: "Owners controlling spend but missing the wider picture.",
     diff: "Spend operations vs whole-business interpretation.",
     href: "#row-spend",
   },
   {
     id: "idx-three",
-    title: "Bookkeeper vs Fractional CFO vs Monthly Finance Desk",
+    title: "Bookkeeper vs Fractional CFO vs GoldFin Desk",
     who: "Owners unsure what level of support they actually need.",
     diff: "Records vs recurring clarity vs strategic leadership.",
     href: "#/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk",
@@ -493,7 +493,7 @@ export const missingMiddle = {
     problem: "Not enough interpretation or rhythm.",
   },
   mfd: {
-    label: "Monthly Finance Desk",
+    label: "GoldFin Desk",
     items: [
       "Structured spreadsheet system",
       "AI-assisted organization",

@@ -9,7 +9,7 @@ export type HeroColumn = {
 
 export const heroColumns: HeroColumn[] = [
   { id: "bookkeeper", label: "Bookkeeper", role: "Clean records" },
-  { id: "mfd", label: "Monthly Finance Desk", role: "Recurring clarity rhythm", isMfd: true },
+  { id: "mfd", label: "GoldFin Desk", role: "Recurring clarity rhythm", isMfd: true },
   { id: "cfo", label: "Fractional CFO", role: "Strategic finance leadership" },
 ];
 
@@ -36,7 +36,7 @@ export const fastAnswerCards: FastAnswerCard[] = [
   },
   {
     id: "mfd",
-    title: "Choose Monthly Finance Desk if…",
+    title: "Choose GoldFin Desk if…",
     body: "Your books and tools exist, but you still feel unclear about cash flow, expenses, hiring, revenue quality, and what deserves attention each month.",
     bestFor: "Recurring financial clarity, plain-English briefings, and monthly review.",
     caveatLabel: "Usually not enough when",
@@ -74,7 +74,7 @@ export const jobMap: JobMap[] = [
   },
   {
     id: "mfd",
-    label: "Monthly Finance Desk",
+    label: "GoldFin Desk",
     job: "Explain what deserves attention.",
     output: "Organized spreadsheet system, bi-weekly plain-English briefing, questions to review, monthly strategy rhythm.",
     question: "“What is happening in my business, and what should I review next?”",
@@ -174,27 +174,27 @@ export const recommendations: Record<RecommendationKey, Recommendation> = {
     key: "bookkeepingFirst",
     eyebrow: "Start here",
     title: "Start with bookkeeping cleanup first.",
-    body: "Monthly Finance Desk works best when your financial activity can be reviewed consistently. If the books are unusable or far behind, cleanup may be the first step.",
+    body: "GoldFin Desk works best when your financial activity can be reviewed consistently. If the books are unusable or far behind, cleanup may be the first step.",
     primaryCTA: { label: "Start With Free Templates", href: "#/templates" },
-    secondaryCTA: { label: "See how Monthly Finance Desk works", href: "#/pricing" },
+    secondaryCTA: { label: "See how GoldFin Desk works", href: "#/pricing" },
     mobileCTA: { label: "Get Free Templates", href: "#/templates" },
   },
   mfdLikely: {
     key: "mfdLikely",
     eyebrow: "Likely fit",
-    title: "Monthly Finance Desk may be the right next layer.",
+    title: "GoldFin Desk may be the right next layer.",
     body: "You may already have records. The missing piece is recurring interpretation and monthly decision rhythm.",
     primaryCTA: { label: "Generate Sample Finance Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Apply for Monthly Finance Desk", href: "#/apply" },
+    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
     mobileCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
   },
   mfdBuiltFor: {
     key: "mfdBuiltFor",
     eyebrow: "Built for this",
-    title: "Monthly Finance Desk is built for this.",
+    title: "GoldFin Desk is built for this.",
     body: "If the bank balance has become your decision dashboard, you likely need a clearer recurring financial view.",
     primaryCTA: { label: "Generate Sample Finance Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Apply for Monthly Finance Desk", href: "#/apply" },
+    secondaryCTA: { label: "Apply for GoldFin Desk", href: "#/apply" },
     mobileCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
   },
   cfo: {
@@ -203,7 +203,7 @@ export const recommendations: Record<RecommendationKey, Recommendation> = {
     title: "Consider fractional CFO support.",
     body: "If you need advanced forecasting, investor reporting, board support, or complex strategic finance leadership, a fractional CFO may be the better fit.",
     primaryCTA: { label: "Compare CFO Options", href: "#/compare" },
-    secondaryCTA: { label: "See Monthly Finance Desk Pricing", href: "#/pricing" },
+    secondaryCTA: { label: "See GoldFin Desk Pricing", href: "#/pricing" },
     mobileCTA: { label: "Compare CFO Options", href: "#/compare" },
   },
   templatesFirst: {
@@ -307,7 +307,7 @@ export const tableRows: TableRow[] = [
 
 export const tableCTAs = {
   bookkeeper: { label: "Clean up records", href: "#/templates" },
-  mfd: { label: "Apply for Monthly Finance Desk", href: "#/apply" },
+  mfd: { label: "Apply for GoldFin Desk", href: "#/apply" },
   cfo: { label: "Consider CFO support", href: "#/compare" },
 };
 
@@ -323,7 +323,7 @@ export type SpectrumStop = {
 export const spectrumStops: SpectrumStop[] = [
   { id: "records", label: "Basic records", position: 0.05 },
   { id: "bookkeeping", label: "Bookkeeping", position: 0.27 },
-  { id: "mfd", label: "Monthly Finance Desk", position: 0.5, isCenter: true },
+  { id: "mfd", label: "GoldFin Desk", position: 0.5, isCenter: true },
   { id: "cfo", label: "Fractional CFO", position: 0.73 },
   { id: "team", label: "Internal finance team", position: 0.95 },
 ];
@@ -349,16 +349,16 @@ export const scenarios: Scenario[] = [
   {
     id: "clean-but-unclear",
     quote: "I have clean reports but still feel unclear.",
-    recommendation: "Monthly Finance Desk.",
+    recommendation: "GoldFin Desk.",
     explanation: "This is the exact gap: you have data, but not plain-English interpretation and monthly review.",
     cta: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
   },
   {
     id: "can-i-hire",
     quote: "I need to know if I can hire.",
-    recommendation: "Monthly Finance Desk.",
+    recommendation: "GoldFin Desk.",
     explanation: "Hiring decisions require cash flow, expense pressure, and recurring cost review — not just a bank balance.",
-    cta: { label: "Apply for Monthly Finance Desk", href: "#/apply" },
+    cta: { label: "Apply for GoldFin Desk", href: "#/apply" },
   },
   {
     id: "fundraising",
@@ -377,9 +377,9 @@ export const scenarios: Scenario[] = [
   {
     id: "serious-monthly",
     quote: "I want someone serious looking at my numbers monthly.",
-    recommendation: "Monthly Finance Desk.",
+    recommendation: "GoldFin Desk.",
     explanation: "That is what the monthly strategy review and bi-weekly briefings are built for.",
-    cta: { label: "Apply for Monthly Finance Desk", href: "#/apply" },
+    cta: { label: "Apply for GoldFin Desk", href: "#/apply" },
   },
 ];
 
@@ -402,7 +402,7 @@ export const feelingCards: FeelingCard[] = [
   },
   {
     id: "mfd",
-    label: "Monthly Finance Desk",
+    label: "GoldFin Desk",
     before: "“I have numbers, but I still feel blind.”",
     after: "“I know what changed, what looks risky, and what to review next.”",
     isMfd: true,
@@ -455,10 +455,10 @@ export const priceFraming: string[] = [
 export const faq: { q: string; a: string }[] = [
   {
     q: "Do I still need a bookkeeper?",
-    a: "Usually, yes. A bookkeeper helps keep your records clean. The Monthly Finance Desk adds a recurring layer of structure, plain-English interpretation, and monthly review around your financial activity.",
+    a: "Usually, yes. A bookkeeper helps keep your records clean. The GoldFin Desk adds a recurring layer of structure, plain-English interpretation, and monthly review around your financial activity.",
   },
   {
-    q: "Is Monthly Finance Desk a fractional CFO replacement?",
+    q: "Is GoldFin Desk a fractional CFO replacement?",
     a: "No. It is the missing layer before a full CFO. It is designed for owners who need more clarity than bookkeeping or dashboards provide, but who are not ready for full CFO-level finance leadership.",
   },
   {
@@ -470,8 +470,8 @@ export const faq: { q: string; a: string }[] = [
     a: "Choose a fractional CFO if you need advanced forecasting, complex strategic planning, investor or board reporting, fundraising support, or CFO-level leadership.",
   },
   {
-    q: "When should I choose Monthly Finance Desk?",
-    a: "Choose Monthly Finance Desk if your business has active financial movement, tools or reports already exist, but you still feel unclear about cash flow, expenses, hiring, revenue quality, or what decisions deserve attention.",
+    q: "When should I choose GoldFin Desk?",
+    a: "Choose GoldFin Desk if your business has active financial movement, tools or reports already exist, but you still feel unclear about cash flow, expenses, hiring, revenue quality, or what decisions deserve attention.",
   },
   {
     q: "Do I need to connect my bank account to apply?",
@@ -479,7 +479,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "Is this financial, tax, legal, or investment advice?",
-    a: "No. Monthly Finance Desk does not replace tax, legal, accounting, bookkeeping cleanup, or investment advice.",
+    a: "No. GoldFin Desk does not replace tax, legal, accounting, bookkeeping cleanup, or investment advice.",
   },
   {
     q: "What if I am not ready for $1,500/month?",
@@ -494,7 +494,7 @@ export const decisionSummary = [
   { need: "Need senior finance strategy?", answer: "Consider a fractional CFO.", href: "#/compare" },
   {
     need: "Need recurring clarity between the two?",
-    answer: "Apply for the Monthly Finance Desk.",
+    answer: "Apply for the GoldFin Desk.",
     href: "#/apply",
   },
 ];

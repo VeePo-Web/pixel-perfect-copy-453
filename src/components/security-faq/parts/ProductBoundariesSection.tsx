@@ -17,7 +17,7 @@ export default function ProductBoundariesSection() {
             id="boundaries-heading"
             className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
           >
-            What Monthly Finance Desk does — and does not do.
+            What GoldFin Desk does — and does not do.
           </h2>
         </div>
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
@@ -69,7 +69,7 @@ export default function ProductBoundariesSection() {
           </div>
         </div>
         <p className="mt-8 max-w-3xl text-[12px] leading-relaxed text-ink/45">
-          Monthly Finance Desk does not replace tax, legal, accounting, bookkeeping
+          GoldFin Desk does not replace tax, legal, accounting, bookkeeping
           cleanup, CFO services, or investment advice.
         </p>
         <div className="mt-8">

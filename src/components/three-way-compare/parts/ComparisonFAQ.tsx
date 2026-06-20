@@ -45,7 +45,7 @@ export default function ComparisonFAQ() {
           ))}
         </div>
         <p className="mt-6 text-[11.5px] leading-relaxed text-ink/40">
-          Monthly Finance Desk does not replace tax, legal, accounting, bookkeeping cleanup, or
+          GoldFin Desk does not replace tax, legal, accounting, bookkeeping cleanup, or
           investment advice.
         </p>
       </div>

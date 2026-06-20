@@ -33,6 +33,15 @@ export default function FinalCTA() {
           </a>
         </div>
         <p className="mt-6 text-[11.5px] uppercase tracking-[0.22em] text-ink/35">{c.micro}</p>
+        <p className="mt-5 text-[13px] text-ink/55">
+          Or have the templates filled for you every month.{" "}
+          <a
+            href="#/pricing#auto-fill"
+            className="text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline"
+          >
+            See how $99/mo auto-fill works →
+          </a>
+        </p>
       </div>
     </div>
   );

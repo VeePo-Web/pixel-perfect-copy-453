@@ -10,7 +10,7 @@ export default function MissingMiddleSpectrum() {
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
-            Where Monthly Finance Desk fits
+            Where GoldFin Desk fits
           </div>
           <h2
             id="missing-middle-heading"
@@ -96,7 +96,7 @@ export default function MissingMiddleSpectrum() {
                 The recurring clarity layer
               </div>
               <p className="mt-3 text-[16px] font-light leading-relaxed text-ink">
-                The Monthly Finance Desk is for owners who have enough financial complexity to
+                The GoldFin Desk is for owners who have enough financial complexity to
                 need a rhythm, but not enough internal finance infrastructure to justify a full
                 finance department.
               </p>

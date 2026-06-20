@@ -15,7 +15,7 @@ export default function SampleBriefingPricingPreview() {
               Proof
             </div>
             <h2 id="proof-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
-              See what the Monthly Finance Desk actually produces.
+              See what the GoldFin Desk actually produces.
             </h2>
             <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-ink/70">
               Before you apply, preview the kind of plain-English briefing designed to help owners understand what changed, what looks risky, and what decisions deserve attention.
@@ -32,7 +32,7 @@ export default function SampleBriefingPricingPreview() {
                 href="#/apply"
                 className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-ink/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-ink"
               >
-                Apply for the Monthly Finance Desk
+                Apply for the GoldFin Desk
               </a>
             </div>
           </div>

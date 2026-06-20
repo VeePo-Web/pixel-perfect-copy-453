@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { faq } from "../content";
 
-const TITLE = "Free Financial Templates · Monthly Finance Desk";
+const TITLE = "Free Financial Templates · GoldFin Desk";
 const DESC =
   "Free spreadsheet templates for cash flow, expenses, hiring decisions, monthly reviews, and tax reserves — built for owner-led businesses ready to stop guessing from their bank balance.";
 const CANONICAL = "https://pixel-perfect-copy-453.lovable.app/#/templates";

@@ -63,7 +63,7 @@ export default function RealDifferenceSection() {
 
         <p className="mt-10 max-w-[68ch] border-l border-champagne-200/40 pl-5 text-[15px] leading-[1.7] text-ink/75">
           If your records are messy, start with bookkeeping. If your decisions are getting bigger
-          but a CFO feels too heavy, the Monthly Finance Desk may be the missing layer.
+          but a CFO feels too heavy, the GoldFin Desk may be the missing layer.
         </p>
       </div>
     </section>

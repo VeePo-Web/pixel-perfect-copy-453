@@ -31,7 +31,7 @@ export default function MobileStickyCTA({ status, onGenerate }: Props) {
             href="#/apply"
             className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"
           >
-            Apply for Monthly Finance Desk
+            Apply for GoldFin Desk
           </a>
         ) : (
           <button

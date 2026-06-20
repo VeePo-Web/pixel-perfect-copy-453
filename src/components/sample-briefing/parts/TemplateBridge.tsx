@@ -10,7 +10,7 @@ export default function TemplateBridge() {
               Lower-intent path
             </div>
             <h2 className="mt-4 font-light text-ink text-[32px] leading-[1.1] tracking-[-0.005em] sm:text-[40px]">
-              Not ready for the Monthly Finance Desk yet?
+              Not ready for the GoldFin Desk yet?
             </h2>
             <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-ink/70">
               Start with free financial templates designed to help you organize cash flow, expenses, hiring decisions, and monthly review.

@@ -20,7 +20,7 @@ export default function SampleBriefingProofBlock() {
               The difference is the plain-English briefing.
             </h2>
             <p className="mt-4 max-w-[58ch] text-[15px] leading-[1.7] text-ink/70">
-              Most tools show numbers. The Monthly Finance Desk turns financial activity into cash movement, revenue trend, expense pattern, questions to review, and decisions to consider.
+              Most tools show numbers. The GoldFin Desk turns financial activity into cash movement, revenue trend, expense pattern, questions to review, and decisions to consider.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <a

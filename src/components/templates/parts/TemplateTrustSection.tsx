@@ -36,7 +36,7 @@ export default function TemplateTrustSection() {
             "Designed around real owner questions",
             "No bank connection required to start",
             "Plain-English financial review logic",
-            "Entry point into the Monthly Finance Desk",
+            "Entry point into the GoldFin Desk",
           ].map((x) => (
             <li key={x} className="flex items-center gap-2">
               <span className="h-1 w-1 rounded-full bg-champagne-200/70" />

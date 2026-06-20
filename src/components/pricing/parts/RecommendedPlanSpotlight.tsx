@@ -9,13 +9,13 @@ export default function RecommendedPlanSpotlight() {
       <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="mb-12 max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
-            Recommended
+            The next step up · by application
           </div>
           <h2 id="spotlight-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[46px]">
-            Most owners should start with the Monthly Finance Desk.
+            When you want a human reading the numbers with you.
           </h2>
           <p className="mt-4 text-[15.5px] leading-[1.7] text-ink/70">
-            It is designed for the exact middle: more than bookkeeping, more personal than a dashboard, lighter than a full CFO.
+            Auto-fill keeps your reports current. The GoldFin Desk adds a person who interprets them and meets with you every month. Most owners start with $99 auto-fill and move here when the decisions get bigger.
           </p>
         </div>
 
@@ -28,7 +28,7 @@ export default function RecommendedPlanSpotlight() {
                 Most relevant for serious owner-led businesses
               </div>
               <h3 className="mt-5 font-light text-ink text-[28px] leading-[1.1]">
-                The Monthly Finance Desk
+                The GoldFin Desk
               </h3>
               <div className="mt-6 flex items-baseline gap-2">
                 <span className="text-[56px] font-light tabular-nums text-ink">$1,500</span>
@@ -42,7 +42,7 @@ export default function RecommendedPlanSpotlight() {
                   href="#/apply"
                   className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
                 >
-                  <span className="relative z-10">Apply for the Monthly Finance Desk</span>
+                  <span className="relative z-10">Apply for the GoldFin Desk</span>
                   <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
                 </a>
                 <a

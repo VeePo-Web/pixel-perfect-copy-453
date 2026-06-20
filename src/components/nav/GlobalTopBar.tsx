@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import GoldFinLogo from "../brand/GoldFinLogo";
 
 export type NavKey =
   | "home"
@@ -39,11 +40,11 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
     <>
       <header className="fixed inset-x-0 top-0 z-40 border-b border-ink/[0.05] bg-charcoal-950/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 lg:px-10">
-          <a href="#/" className="group flex items-center gap-3" aria-label="Monthly Finance Desk — Home">
-            <span className="h-1.5 w-1.5 rounded-full bg-champagne-200 transition-transform duration-400 group-hover:scale-125" />
-            <span className="text-[12.5px] uppercase tracking-[0.28em] text-ink/85">
-              Monthly Finance Desk
-            </span>
+          <a href="#/" className="group flex items-center" aria-label="GoldFin Desk — Home">
+            <GoldFinLogo
+              markClassName="h-7 w-7 transition-transform duration-400 group-hover:scale-105"
+              wordmarkClassName="text-[12.5px] uppercase tracking-[0.26em] text-ink/85"
+            />
           </a>
 
           <nav aria-label="Primary" className="hidden lg:flex items-center gap-5">

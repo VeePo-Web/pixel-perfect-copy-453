@@ -1,4 +1,4 @@
-export type PlanTone = "entry" | "self" | "flagship" | "plus" | "private";
+export type PlanTone = "entry" | "self" | "continuity" | "flagship" | "plus" | "private";
 
 export type PricingPlan = {
   id: string;
@@ -17,7 +17,7 @@ export type PricingPlan = {
 export const plans: PricingPlan[] = [
   {
     id: "templates",
-    name: "Free Templates",
+    name: "GoldFin Template Vault",
     price: "Free",
     positioning: "Start organizing your numbers manually.",
     bestFor:
@@ -34,27 +34,31 @@ export const plans: PricingPlan[] = [
     tone: "entry",
   },
   {
-    id: "toolkit",
-    name: "Financial Clarity Toolkit",
-    price: "$99–$299",
-    priceSuffix: "one-time",
-    positioning: "A stronger self-guided starting point.",
-    bestFor: "Owners who want to organize manually before upgrading.",
+    id: "autofill",
+    name: "GoldFin Reports",
+    price: "$99",
+    priceSuffix: "/month",
+    badge: "Recommended starting point",
+    positioning: "The same templates — filled for you every month.",
+    bestFor:
+      "Owners who want monthly financial clarity without doing the spreadsheet work themselves.",
     includes: [
-      "Enhanced financial templates",
-      "Video walkthroughs",
-      "Monthly review checklist",
-      "Cash-flow planning guide",
-      "Hiring affordability worksheet",
-      "Expense cleanup workflow",
+      "Every template auto-filled from your numbers",
+      "Monthly cash-flow summary",
+      "Expense-change report",
+      "Subscription & recurring-cost tracker",
+      "Revenue snapshot",
+      "Monthly PDF briefing",
+      "Owner action list",
+      "Spreadsheet export, always yours",
     ],
-    cta: { label: "Start With Toolkit", href: "#/templates" },
-    tone: "self",
-    note: "Optional self-guided layer",
+    cta: { label: "Auto-fill my reports", href: "#/pricing#auto-fill" },
+    tone: "continuity",
+    note: "Cancel anytime",
   },
   {
     id: "desk",
-    name: "Monthly Finance Desk",
+    name: "GoldFin Advisory",
     price: "$1,500",
     priceSuffix: "/month",
     badge: "Most relevant for serious owner-led businesses",
@@ -72,7 +76,7 @@ export const plans: PricingPlan[] = [
       "Decisions to consider",
       "Recurring financial rhythm",
     ],
-    cta: { label: "Apply for the Monthly Finance Desk", href: "#/apply" },
+    cta: { label: "Apply for GoldFin Advisory", href: "#/apply" },
     tone: "flagship",
   },
   {
@@ -84,7 +88,7 @@ export const plans: PricingPlan[] = [
     bestFor:
       "Owners who need additional advisory time, deeper reporting, or more frequent planning support.",
     includes: [
-      "Everything in Monthly Finance Desk",
+      "Everything in GoldFin Advisory",
       "Expanded monthly review",
       "Deeper KPI tracking",
       "Quarterly planning support",
@@ -117,6 +121,34 @@ export const plans: PricingPlan[] = [
   },
 ];
 
+// $99/mo continuity rung — value-stacked offer (Pattern E).
+// Per-item values are deliberately realistic so the stack stays credible
+// (premium finance brand: no inflated anchoring).
+export const autoFillOffer = {
+  eyebrow: "GoldFin Reports · $99 / month",
+  name: "GoldFin Reports",
+  headline: "Use the templates free. Or have them filled for you every month.",
+  sub: "The same financial templates you can download free — except we keep them filled from your numbers, every month, and hand you a plain-English briefing. No spreadsheet work. No catching up at year-end.",
+  price: "$99",
+  priceSuffix: "/ month",
+  stack: [
+    { item: "Every template auto-filled from your numbers", value: "$120/mo" },
+    { item: "Monthly cash-flow summary", value: "$60/mo" },
+    { item: "Expense-change report", value: "$45/mo" },
+    { item: "Subscription & recurring-cost tracker", value: "$30/mo" },
+    { item: "Revenue snapshot", value: "$30/mo" },
+    { item: "Monthly PDF briefing", value: "$75/mo" },
+    { item: "Owner action list", value: "$40/mo" },
+    { item: "Spreadsheet export — always yours", value: "Included" },
+  ] as const,
+  totalValueLabel: "Total value",
+  totalValue: "$400+/mo",
+  cta: "Auto-fill my reports",
+  guarantee: "Try one month. Cancel anytime before your next billing cycle.",
+  trust: "No bank connection required to start. When you connect, it is read-only — we never move money.",
+  microbridge: "Not ready for done-for-you? The same templates are free →",
+};
+
 export const monthlyRhythm = [
   { week: "Week 1", title: "Financial activity organized" },
   { week: "Week 2", title: "Plain-English briefing delivered" },
@@ -127,15 +159,15 @@ export const monthlyRhythm = [
 export const whyCards = [
   {
     title: "Less than hiring a CFO",
-    body: "A full-time finance leader can be out of reach for many owner-led businesses. The Monthly Finance Desk gives you a lighter recurring rhythm before you need a full internal team.",
+    body: "A full-time finance leader can be out of reach for many owner-led businesses. The GoldFin Desk gives you a lighter recurring rhythm before you need a full internal team.",
   },
   {
     title: "More strategic than a template",
-    body: "Templates create structure. The Monthly Finance Desk adds automation, interpretation, and a monthly review process.",
+    body: "Templates create structure. The GoldFin Desk adds automation, interpretation, and a monthly review process.",
   },
   {
     title: "More personal than a dashboard",
-    body: "Dashboards show charts. The Monthly Finance Desk helps translate financial activity into plain-English questions and decisions.",
+    body: "Dashboards show charts. The GoldFin Desk helps translate financial activity into plain-English questions and decisions.",
   },
   {
     title: "More consistent than tax-season advice",
@@ -229,7 +261,7 @@ export const comparisonRows: ComparisonRow[] = [
     bestFit: "Businesses ready to build a department",
   },
   {
-    alternative: "Monthly Finance Desk",
+    alternative: "GoldFin Desk",
     role: "Recurring financial clarity system",
     helps: "Structure, automation, plain-English briefings, monthly strategy rhythm",
     misses: "Not a replacement for tax, legal, or full bookkeeping cleanup",
@@ -262,11 +294,11 @@ export const decisionCards = [
 export const faq = [
   {
     q: "Why does this cost $1,500/month?",
-    a: "Because it is not just a spreadsheet or software dashboard. The Monthly Finance Desk combines structure, automation, plain-English written briefings, and a monthly strategy review.",
+    a: "Because it is not just a spreadsheet or software dashboard. The GoldFin Desk combines structure, automation, plain-English written briefings, and a monthly strategy review.",
   },
   {
     q: "Is this a bookkeeping service?",
-    a: "No. It is designed to work alongside your existing financial setup. A bookkeeper helps keep records clean. The Monthly Finance Desk helps create a recurring rhythm for understanding what the numbers mean.",
+    a: "No. It is designed to work alongside your existing financial setup. A bookkeeper helps keep records clean. The GoldFin Desk helps create a recurring rhythm for understanding what the numbers mean.",
   },
   {
     q: "Do I still need my bookkeeper or CPA?",
@@ -282,7 +314,7 @@ export const faq = [
   },
   {
     q: "What if I am not ready for $1,500/month?",
-    a: "Start with the free templates or self-guided toolkit. The premium desk is best for owners ready to build a recurring financial rhythm.",
+    a: "Start with the free templates, or have them filled for you every month with the $99/mo Auto-Filled Reports plan. The premium desk is best for owners ready for a human to interpret the numbers with them.",
   },
   {
     q: "Who is this best for?",
@@ -307,7 +339,7 @@ export const planFit = [
     tone: "entry" as PlanTone,
   },
   {
-    title: "Apply for Monthly Finance Desk if:",
+    title: "Apply for GoldFin Desk if:",
     bullets: [
       "Your business has real monthly revenue",
       "You feel unclear even with tools or a bookkeeper",
@@ -315,7 +347,7 @@ export const planFit = [
       "You have hiring, cash flow, or expense decisions",
       "You want a monthly financial rhythm",
     ],
-    cta: { label: "Apply for the Monthly Finance Desk", href: "#/apply" },
+    cta: { label: "Apply for the GoldFin Desk", href: "#/apply" },
     tone: "flagship" as PlanTone,
   },
   {
@@ -416,16 +448,16 @@ export function recommend(a: SelectorAnswers): Recommendation {
   }
   if (lowRev) {
     return {
-      planId: "toolkit",
-      headline: "Start with the Financial Clarity Toolkit.",
-      body: "A self-guided layer between free templates and a monthly subscription.",
-      cta: { label: "Start With Toolkit", href: "#/templates" },
+      planId: "autofill",
+      headline: "Start with Auto-Filled Monthly Reports.",
+      body: "The bridge between free templates and the full Desk — your templates filled for you every month, at $99.",
+      cta: { label: "Auto-fill my reports", href: "#/pricing#auto-fill" },
     };
   }
   return {
     planId: "desk",
-    headline: "Apply for the Monthly Finance Desk.",
+    headline: "Apply for the GoldFin Desk.",
     body: "Your stage suggests the recurring rhythm is exactly what is missing — more than a tool, lighter than a full finance team.",
-    cta: { label: "Apply for the Monthly Finance Desk", href: "#/apply" },
+    cta: { label: "Apply for the GoldFin Desk", href: "#/apply" },
   };
 }

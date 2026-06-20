@@ -56,7 +56,7 @@ export default function OwnerFeelingComparison() {
 
         <p className="mt-10 max-w-[68ch] border-l border-champagne-200/40 pl-5 text-[15px] leading-[1.7] text-ink/75">
           If your pain is not recordkeeping or full finance leadership, but financial clarity,
-          the Monthly Finance Desk was designed for that middle.
+          the GoldFin Desk was designed for that middle.
         </p>
       </div>
     </section>

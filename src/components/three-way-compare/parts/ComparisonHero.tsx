@@ -23,11 +23,11 @@ export default function ComparisonHero() {
               id="three-way-hero-heading"
               className="mt-5 max-w-[22ch] font-light text-ink text-[38px] leading-[1.04] tracking-[-0.01em] sm:text-[52px] lg:text-[60px]"
             >
-              Bookkeeper vs Fractional CFO vs Monthly Finance Desk.
+              Bookkeeper vs Fractional CFO vs GoldFin Desk.
             </h1>
             <p className="mt-5 max-w-[60ch] text-[15.5px] leading-[1.7] text-ink/70">
               A bookkeeper helps keep records clean. A fractional CFO helps with deeper
-              financial strategy. The Monthly Finance Desk gives owner-led businesses the
+              financial strategy. The GoldFin Desk gives owner-led businesses the
               missing middle: structured financial clarity, bi-weekly plain-English briefings,
               and a monthly strategy review.
             </p>
@@ -51,7 +51,7 @@ export default function ComparisonHero() {
                 onClick={() => trackCtaByHref("#/apply", "hero")}
                 className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
-                Apply for the Monthly Finance Desk
+                Apply for the GoldFin Desk
               </a>
             </div>
             <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">

@@ -88,7 +88,7 @@ export default function HowItWorks() {
           href={samplePassed ? "#/apply" : "#top"}
           className="relative block overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3.5 text-center text-[13px] font-medium tracking-wide text-navy shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
         >
-          <span className="relative z-10">{samplePassed ? "Apply for the Monthly Finance Desk" : "Generate Sample Briefing"}</span>
+          <span className="relative z-10">{samplePassed ? "Apply for the GoldFin Desk" : "Generate Sample Briefing"}</span>
           <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
         </a>
       </div>

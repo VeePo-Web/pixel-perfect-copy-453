@@ -44,7 +44,7 @@ export default function BusinessPromptInput({ value, onChange, onGenerate, onUse
           href="#/apply"
           className="ml-auto text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
         >
-          Apply for the Monthly Finance Desk →
+          Apply for the GoldFin Desk →
         </a>
       </div>
     </div>

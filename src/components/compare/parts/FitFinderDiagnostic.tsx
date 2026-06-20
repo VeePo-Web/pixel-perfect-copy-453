@@ -174,7 +174,7 @@ function EmptyPanel({ state }: { state: { setup: string | null; problem: string 
         Your recommendation
       </div>
       <p className="mt-3 text-[16px] font-light leading-snug text-ink/75">
-        Answer the three questions to see whether you most likely need bookkeeping cleanup, free templates, the Monthly Finance Desk, or a fractional CFO comparison.
+        Answer the three questions to see whether you most likely need bookkeeping cleanup, free templates, the GoldFin Desk, or a fractional CFO comparison.
       </p>
       <div className="mt-6 h-1.5 w-full overflow-hidden rounded-full bg-ink/[0.06]">
         <div

@@ -34,7 +34,7 @@ export const accessSequence: AccessStep[] = [
   {
     n: 2,
     title: "Apply for fit",
-    body: "Submit basic business context so we can understand whether the Monthly Finance Desk is likely to help.",
+    body: "Submit basic business context so we can understand whether the GoldFin Desk is likely to help.",
     trust: "No payment. No documents. No bank login.",
   },
   {
@@ -68,7 +68,7 @@ export const noUpfrontCards: NoUpfrontCard[] = [
   },
   {
     title: "No payment required to apply",
-    body: "Applying is not checkout. It is a fit review for the Monthly Finance Desk.",
+    body: "Applying is not checkout. It is a fit review for the GoldFin Desk.",
   },
   {
     title: "No tax returns required upfront",
@@ -99,7 +99,7 @@ export const afterApplySteps: { n: number; title: string; body: string }[] = [
   {
     n: 2,
     title: "Fit review",
-    body: "We review whether the Monthly Finance Desk is likely to be useful for your stage and needs.",
+    body: "We review whether the GoldFin Desk is likely to be useful for your stage and needs.",
   },
   {
     n: 3,
@@ -144,7 +144,7 @@ export const featuredFAQ: { q: string; a: string }[] = [
   },
   {
     q: "Do I need to pay to apply?",
-    a: "No. The application is not checkout. It is a fit review for the Monthly Finance Desk.",
+    a: "No. The application is not checkout. It is a fit review for the GoldFin Desk.",
   },
   {
     q: "Do I need to upload financial documents?",
@@ -152,7 +152,7 @@ export const featuredFAQ: { q: string; a: string }[] = [
   },
   {
     q: "Is this financial, tax, legal, or investment advice?",
-    a: "No. Monthly Finance Desk does not replace tax, legal, accounting, bookkeeping cleanup, or investment advice.",
+    a: "No. GoldFin Desk does not replace tax, legal, accounting, bookkeeping cleanup, or investment advice.",
   },
 ];
 
@@ -247,7 +247,7 @@ export const faqItems: FAQItem[] = [
     id: "faq-10",
     category: "application",
     q: "Can I apply if my books are messy?",
-    a: "You can apply, but Monthly Finance Desk works best when your financial activity can be reviewed consistently. If books are far behind or unusable, bookkeeping cleanup may be the first step.",
+    a: "You can apply, but GoldFin Desk works best when your financial activity can be reviewed consistently. If books are far behind or unusable, bookkeeping cleanup may be the first step.",
   },
   {
     id: "faq-11",
@@ -259,8 +259,8 @@ export const faqItems: FAQItem[] = [
   {
     id: "faq-12",
     category: "product",
-    q: "What is Monthly Finance Desk?",
-    a: "Monthly Finance Desk is a premium financial clarity system for owner-led businesses. It combines structured spreadsheets, bank-data connection after onboarding, AI-assisted organization, bi-weekly plain-English briefings, and a monthly strategy review.",
+    q: "What is GoldFin Desk?",
+    a: "GoldFin Desk is a premium financial clarity system for owner-led businesses. It combines structured spreadsheets, bank-data connection after onboarding, AI-assisted organization, bi-weekly plain-English briefings, and a monthly strategy review.",
   },
   {
     id: "faq-13",
@@ -290,8 +290,8 @@ export const faqItems: FAQItem[] = [
   {
     id: "faq-17",
     category: "pricing",
-    q: "How much does Monthly Finance Desk cost?",
-    a: "The core Monthly Finance Desk offer is $1,500/month.",
+    q: "How much does GoldFin Desk cost?",
+    a: "The core GoldFin Desk offer is $1,500/month.",
   },
   {
     id: "faq-18",
@@ -341,13 +341,13 @@ export const faqItems: FAQItem[] = [
     id: "faq-25",
     category: "bookkeeping-cfo",
     q: "Is this bookkeeping?",
-    a: "No. Bookkeeping helps keep records clean. Monthly Finance Desk adds a recurring clarity layer around structure, briefings, and monthly review.",
+    a: "No. Bookkeeping helps keep records clean. GoldFin Desk adds a recurring clarity layer around structure, briefings, and monthly review.",
   },
   {
     id: "faq-26",
     category: "bookkeeping-cfo",
     q: "Do I still need my bookkeeper?",
-    a: "Usually, yes. Monthly Finance Desk does not replace bookkeeping responsibilities.",
+    a: "Usually, yes. GoldFin Desk does not replace bookkeeping responsibilities.",
   },
   {
     id: "faq-27",
@@ -371,8 +371,8 @@ export const faqItems: FAQItem[] = [
   {
     id: "faq-30",
     category: "templates",
-    q: "What is the difference between templates and Monthly Finance Desk?",
-    a: "Templates give manual structure. Monthly Finance Desk adds automation, plain-English briefings, and a monthly review rhythm.",
+    q: "What is the difference between templates and GoldFin Desk?",
+    a: "Templates give manual structure. GoldFin Desk adds automation, plain-English briefings, and a monthly review rhythm.",
   },
   {
     id: "faq-31",

@@ -17,7 +17,7 @@ export default function PricingValueContext() {
               id="pricing-context-heading"
               className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
             >
-              Why the Monthly Finance Desk is $1,500/month.
+              Why the GoldFin Desk is $1,500/month.
             </h2>
             <p className="mt-4 max-w-[58ch] text-[15px] leading-[1.7] text-ink/70">
               You are not paying for bookkeeping. You are not paying for a spreadsheet. You are
@@ -52,7 +52,7 @@ export default function PricingValueContext() {
                 onClick={() => trackCtaByHref("#/apply", "pricing-context")}
                 className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)]"
               >
-                Apply for Monthly Finance Desk
+                Apply for GoldFin Desk
               </a>
             </div>
           </div>

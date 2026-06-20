@@ -1,8 +1,8 @@
 export default function PricingHero() {
   const tiers = [
-    { name: "Free Templates", price: "Free", muted: true },
-    { name: "Monthly Finance Desk", price: "$1,500/mo", flagship: true },
-    { name: "Private Finance Room", price: "$5K–$7.5K/mo", muted: true },
+    { name: "GoldFin Template Vault", price: "Free", muted: true },
+    { name: "GoldFin Reports", price: "$99/mo", flagship: true },
+    { name: "GoldFin Advisory", price: "$1,500/mo", muted: true },
   ];
   return (
     <section className="relative isolate overflow-hidden border-b border-ink/[0.05] bg-charcoal-950">
@@ -17,35 +17,35 @@ export default function PricingHero() {
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
               Pricing
             </div>
-            <h1 className="mt-5 max-w-[20ch] font-light text-ink text-[42px] leading-[1.04] tracking-[-0.01em] sm:text-[56px] lg:text-[64px]">
-              Choose the level of financial rhythm your business needs.
+            <h1 className="mt-5 max-w-[24ch] font-light text-ink text-[38px] leading-[1.08] tracking-[-0.01em] sm:text-[50px] lg:text-[58px]">
+              Free templates. <span className="text-champagne-300">$99 to have them filled for you.</span> $1,500 to have them read with you.
             </h1>
-            <p className="mt-5 max-w-[58ch] text-[15.5px] leading-[1.7] text-ink/70">
-              Start with free templates, upgrade to structured financial clarity, or apply for the Monthly Finance Desk — a premium monthly system combining organized spreadsheets, bi-weekly plain-English briefings, and a monthly strategy review.
+            <p className="mt-6 max-w-[56ch] text-[15.5px] leading-[1.7] text-ink/70">
+              Most owners don’t need a full finance team — they need their numbers organized and explained every month. That’s the $99 Auto-Fill plan. Start there.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
-                href="#/apply"
+                href="#/pricing#auto-fill"
                 className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
               >
-                <span className="relative z-10">Apply for the Monthly Finance Desk</span>
+                <span className="relative z-10">Auto-fill my reports</span>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </a>
               <a
                 href="#/sample-briefing"
                 className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
               >
-                Generate Sample Finance Briefing
+                See a sample briefing
               </a>
               <a
                 href="#/templates"
                 className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
-                Start With Free Templates
+                Or start with free templates
               </a>
             </div>
             <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
-              No bank connection required to preview or apply.
+              No bank connection required to start. Cancel anytime.
             </p>
           </div>
 

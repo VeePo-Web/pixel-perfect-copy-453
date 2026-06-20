@@ -71,6 +71,45 @@ export type Database = {
         }
         Relationships: []
       }
+      leads: {
+        Row: {
+          business_type: string | null
+          consent: boolean
+          created_at: string
+          email: string | null
+          first_name: string | null
+          goals: string[] | null
+          id: string
+          source: string | null
+          template_id: string | null
+          template_name: string | null
+        }
+        Insert: {
+          business_type?: string | null
+          consent?: boolean
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          goals?: string[] | null
+          id?: string
+          source?: string | null
+          template_id?: string | null
+          template_name?: string | null
+        }
+        Update: {
+          business_type?: string | null
+          consent?: boolean
+          created_at?: string
+          email?: string | null
+          first_name?: string | null
+          goals?: string[] | null
+          id?: string
+          source?: string | null
+          template_id?: string | null
+          template_name?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

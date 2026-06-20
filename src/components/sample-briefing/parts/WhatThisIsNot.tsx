@@ -30,7 +30,7 @@ export default function WhatThisIsNot() {
             href="#/apply"
             className="inline-flex items-center gap-2 rounded-full border border-champagne-200/40 px-6 py-3 text-[13px] tracking-wide text-ink transition-all duration-400 ease-cinema hover:bg-champagne-300/[0.06]"
           >
-            See If the Monthly Finance Desk Is a Fit
+            See If the GoldFin Desk Is a Fit
             <span aria-hidden>→</span>
           </a>
         </div>

@@ -116,7 +116,7 @@ export default function CostComparisonTable() {
           ))}
         </div>
         <p className="mt-6 text-[11.5px] text-ink/45">
-          Monthly Finance Desk does not replace tax, legal, accounting, or investment advice.
+          GoldFin Desk does not replace tax, legal, accounting, or investment advice.
         </p>
       </div>
     </section>

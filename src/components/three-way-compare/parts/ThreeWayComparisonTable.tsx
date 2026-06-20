@@ -41,7 +41,7 @@ export default function ThreeWayComparisonTable() {
         <div className="mt-10 hidden overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.02] lg:block">
           <table className="w-full border-collapse text-left text-[13px]">
             <caption className="sr-only">
-              Comparison of Bookkeeper, Monthly Finance Desk, and Fractional CFO.
+              Comparison of Bookkeeper, GoldFin Desk, and Fractional CFO.
             </caption>
             <thead>
               <tr className="border-b border-ink/[0.07] text-[11px] uppercase tracking-[0.24em] text-ink/55">
@@ -72,7 +72,7 @@ export default function ThreeWayComparisonTable() {
                       aria-hidden
                       className="h-1.5 w-1.5 rounded-full bg-champagne-200"
                     />
-                    <span className="text-ink">Monthly Finance Desk</span>
+                    <span className="text-ink">GoldFin Desk</span>
                   </div>
                   <div className="mt-1 text-[10px] tracking-[0.22em] text-champagne-200/80">
                     Recurring clarity
@@ -149,7 +149,7 @@ export default function ThreeWayComparisonTable() {
               id === "bookkeeper"
                 ? "Bookkeeper"
                 : id === "mfd"
-                ? "Monthly Finance Desk"
+                ? "GoldFin Desk"
                 : "Fractional CFO";
             const role =
               id === "bookkeeper"

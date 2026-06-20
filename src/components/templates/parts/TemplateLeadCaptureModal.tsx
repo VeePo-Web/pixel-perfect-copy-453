@@ -5,6 +5,7 @@ import { businessTypes, goalChips, type TemplateItem } from "../content";
 import { track } from "../analytics";
 import TemplateSuccessState from "./TemplateSuccessState";
 import type { LeadFlowState } from "../hooks/useLeadCaptureFlow";
+import type { LeadSubmitPayload } from "../../../lib/leads";
 
 const schema = z.object({
   firstName: z.string().trim().min(1, "First name required").max(60, "Too long"),
@@ -15,7 +16,7 @@ const schema = z.object({
 type Props = {
   state: LeadFlowState;
   onClose: () => void;
-  onSubmit: () => Promise<void> | void;
+  onSubmit: (payload: LeadSubmitPayload) => Promise<void> | void;
 };
 
 export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: Props) {
@@ -52,7 +53,7 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
       businessType,
       goals,
     });
-    await onSubmit();
+    await onSubmit({ firstName, email, businessType, goals });
   };
 
   const toggleGoal = (id: string) =>

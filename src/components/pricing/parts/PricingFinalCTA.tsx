@@ -1,3 +1,5 @@
+import { startAutoFillCheckout } from "../../../lib/checkout";
+
 export default function PricingFinalCTA() {
   return (
     <section aria-labelledby="final-title" className="relative overflow-hidden bg-charcoal-950">
@@ -37,37 +39,38 @@ export default function PricingFinalCTA() {
         </div>
 
         <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
-          Apply for the Monthly Finance Desk
+          $99 / month · Auto-Filled Reports
         </div>
         <h2 id="final-title" className="mx-auto mt-5 max-w-[24ch] font-light text-ink text-[42px] leading-[1.05] tracking-[-0.01em] sm:text-[60px]">
           Ready to stop guessing from your bank balance?
         </h2>
         <p className="mx-auto mt-5 max-w-[62ch] text-[15.5px] leading-[1.7] text-ink/70">
-          Apply for the Monthly Finance Desk and build a recurring financial rhythm around your business: structured spreadsheets, bi-weekly plain-English briefings, and a monthly strategy review.
+          Have your templates filled from your numbers every month and get a plain-English briefing that tells you what changed and what to do next. No spreadsheet work. Cancel anytime.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="#/apply"
+          <button
+            type="button"
+            onClick={startAutoFillCheckout}
             className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13.5px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
           >
-            <span className="relative z-10">Apply for the Monthly Finance Desk</span>
+            <span className="relative z-10">Auto-fill my reports</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-          </a>
+          </button>
           <a
             href="#/sample-briefing"
             className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13.5px] text-ink/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-ink"
           >
-            Generate Sample Finance Briefing
+            See a sample briefing
           </a>
           <a
-            href="#/templates"
+            href="#/apply"
             className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
-            Start With Free Templates
+            Want a human reading your numbers? Apply for the $1,500 Desk
           </a>
         </div>
         <p className="mt-5 text-[11.5px] uppercase tracking-[0.22em] text-ink/40">
-          Application takes a few minutes. No payment or bank connection required to apply.
+          $99 / month. No bank connection required to start. Cancel anytime.
         </p>
       </div>
     </section>
