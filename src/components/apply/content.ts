@@ -1,13 +1,13 @@
 export const APPLY = {
   header: {
-    brand: "GoldFin Desk",
+    brand: "GoldFin Advisory",
     label: "Application",
     secondary: "Not ready? Generate Sample Briefing",
   },
   steps: ["Fit", "Business", "Numbers", "Readiness", "Review"],
   landing: {
     eyebrow: "PRIVATE APPLICATION",
-    headline: "Apply for the GoldFin Desk",
+    headline: "Apply for the GoldFin Advisory",
     sub: "Tell us a little about your business, your current financial setup, and what you want to understand better. No bank connection, documents, or payment required to apply.",
     micro: "Application takes about 3 minutes. No bank connection required.",
     primary: "Start Application",
@@ -24,11 +24,11 @@ export const APPLY = {
       price: "$1,500 / month",
       sub: "Built for owner-led businesses.",
     },
-    welcomeBack: "Welcome back. Continue your GoldFin Desk application.",
+    welcomeBack: "Welcome back. Continue your GoldFin Advisory application.",
   },
   step1: {
     headline: "First, let's see if this is the right level of support.",
-    sub: "The GoldFin Desk is designed for owner-led businesses with real financial movement, recurring expenses, and decisions that need clearer numbers.",
+    sub: "The GoldFin Advisory is designed for owner-led businesses with real financial movement, recurring expenses, and decisions that need clearer numbers.",
     businessTypes: [
       "Agency",
       "Clinic",
@@ -49,7 +49,7 @@ export const APPLY = {
       "$150K–$250K/month",
       "$250K+/month",
     ],
-    lowFit: "The premium GoldFin Desk may be more useful once your business has more recurring financial complexity. You can still apply, or start with the free templates.",
+    lowFit: "The premium GoldFin Advisory may be more useful once your business has more recurring financial complexity. You can still apply, or start with the free templates.",
     goodFit: "This is usually where owners begin needing a recurring financial rhythm beyond basic bookkeeping.",
   },
   step2: {
@@ -107,7 +107,7 @@ export const APPLY = {
       label: "Are you currently willing to review your numbers at least once per month?",
       options: ["Yes, that is what I need", "I want to, but I have not had a system", "Not sure yet"],
       reassureValue: "I want to, but I have not had a system",
-      reassureText: "That is exactly the gap the GoldFin Desk is designed to solve.",
+      reassureText: "That is exactly the gap the GoldFin Advisory is designed to solve.",
     },
     budget: {
       label: "Are you comfortable with a $1,500/month premium finance subscription if it is a fit?",
@@ -137,7 +137,7 @@ export const APPLY = {
         "We review your business context.",
         "If there is a potential fit, you receive next steps.",
         "Bank connection only happens after onboarding.",
-        "The goal is to determine whether the GoldFin Desk can create a useful monthly finance rhythm for your business.",
+        "The goal is to determine whether the GoldFin Advisory can create a useful monthly finance rhythm for your business.",
       ],
     },
     loading: [
@@ -148,7 +148,7 @@ export const APPLY = {
   },
   success: {
     headline: "Your application has been received.",
-    sub: "Thank you for applying to the GoldFin Desk. If your business appears to be a fit, you will receive next steps for the premium finance desk review process.",
+    sub: "Thank you for applying to the GoldFin Advisory. If your business appears to be a fit, you will receive next steps for the premium finance desk review process.",
     confirm: [
       "Application received",
       "No bank connection completed",
