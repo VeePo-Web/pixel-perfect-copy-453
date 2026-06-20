@@ -67,7 +67,7 @@ export default function SampleBriefingProof() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(0,0,0,0.6)]">
+          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(25,28,34,0.14)]">
             <div className="flex items-center justify-between text-[10.5px] uppercase tracking-[0.26em] text-ink/45">
               <span>{briefing.title}</span>
               <span className="text-champagne-200/80">Plain English</span>

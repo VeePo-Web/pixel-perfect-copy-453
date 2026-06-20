@@ -24,7 +24,7 @@ export default function MissingMiddleSpectrum() {
           </p>
         </div>
 
-        <div className="mt-12 rounded-3xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(0,0,0,0.6)] sm:p-10">
+        <div className="mt-12 rounded-3xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(25,28,34,0.14)] sm:p-10">
           {/* SVG rail */}
           <div className="relative">
             <svg
