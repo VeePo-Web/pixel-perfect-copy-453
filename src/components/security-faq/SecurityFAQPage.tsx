@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import SecurityFAQTopBar from "./parts/SecurityFAQTopBar";
+
 import SecurityFAQHero from "./parts/SecurityFAQHero";
 import AccessSequence from "./parts/AccessSequence";
 import UpfrontRequirementsSection from "./parts/UpfrontRequirementsSection";
@@ -24,7 +24,7 @@ export default function SecurityFAQPage() {
 
   return (
     <div className="relative pb-28 lg:pb-0">
-      <SecurityFAQTopBar />
+      
       <SecurityFAQHero />
       <AccessSequence />
       <UpfrontRequirementsSection />

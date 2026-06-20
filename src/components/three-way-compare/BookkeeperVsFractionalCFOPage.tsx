@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import ThreeWayTopBar from "./parts/ThreeWayTopBar";
+
 import ComparisonHero from "./parts/ComparisonHero";
 import FastAnswerCards from "./parts/FastAnswerCards";
 import RealDifferenceSection from "./parts/RealDifferenceSection";
@@ -29,7 +29,7 @@ export default function BookkeeperVsFractionalCFOPage() {
 
   return (
     <div className="relative pb-24 lg:pb-0">
-      <ThreeWayTopBar />
+      
       <ComparisonHero />
       <FastAnswerCards />
       <RealDifferenceSection />

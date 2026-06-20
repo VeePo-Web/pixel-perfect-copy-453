@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TemplatesTopBar from "./parts/TemplatesTopBar";
+
 import TemplateLibraryHero from "./parts/TemplateLibraryHero";
 import PainToValueReframe from "./parts/PainToValueReframe";
 import TemplateCategoryFilters from "./parts/TemplateCategoryFilters";
@@ -43,7 +43,7 @@ export default function FreeTemplateLibraryPage() {
 
   return (
     <div className="relative pb-24 lg:pb-0">
-      <TemplatesTopBar currentPath="templates" />
+      
       <TemplateLibraryHero />
       <PainToValueReframe />
       <TemplateCategoryFilters active={category} onChange={setCategory} />

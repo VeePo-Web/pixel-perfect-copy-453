@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import CompareTopBar from "./parts/CompareTopBar";
+
 import ComparisonHero from "./parts/ComparisonHero";
 import CoreQuestionSection from "./parts/CoreQuestionSection";
 import FitFinderDiagnostic from "./parts/FitFinderDiagnostic";
@@ -56,7 +56,7 @@ export default function ComparisonHubPage() {
 
   return (
     <div className="relative pb-24 lg:pb-0">
-      <CompareTopBar currentPath="compare" />
+      
       <ComparisonHero />
       <CoreQuestionSection />
       <FitFinderDiagnostic finder={finder} />

@@ -28,7 +28,7 @@ export default function SampleBriefingPage() {
 
   return (
     <div className="relative pb-24 lg:pb-0">
-      <TopBar />
+      
       <SampleBriefingHero
         prompt={s.prompt}
         setPrompt={s.setPrompt}

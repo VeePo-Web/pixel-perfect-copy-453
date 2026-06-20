@@ -7,72 +7,48 @@ import FreeTemplateLibraryPage from "./components/templates/FreeTemplateLibraryP
 import ComparisonHubPage from "./components/compare/ComparisonHubPage";
 import BookkeeperVsFractionalCFOPage from "./components/three-way-compare/BookkeeperVsFractionalCFOPage";
 import SecurityFAQPage from "./components/security-faq/SecurityFAQPage";
+import GlobalTopBar, { type NavKey } from "./components/nav/GlobalTopBar";
 import { useHashRoute } from "./components/apply/hooks/useHashRoute";
 
 const App = () => {
   const route = useHashRoute();
 
-  if (route === "apply" || route === "thank-you") {
-    return (
-      <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
-        <ApplicationFunnel />
-      </main>
-    );
-  }
-
-  if (route === "sample-briefing") {
-    return (
-      <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
-        <SampleBriefingPage />
-      </main>
-    );
-  }
-
-  if (route === "pricing") {
-    return (
-      <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
-        <PricingPage />
-      </main>
-    );
-  }
-
-  if (route === "templates") {
-    return (
-      <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
-        <FreeTemplateLibraryPage />
-      </main>
-    );
-  }
-
-  if (route === "three-way-compare") {
-    return (
-      <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
-        <BookkeeperVsFractionalCFOPage />
-      </main>
-    );
-  }
-
-  if (route === "compare") {
-    return (
-      <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
-        <ComparisonHubPage />
-      </main>
-    );
-  }
-
-  if (route === "security-faq") {
-    return (
-      <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
-        <SecurityFAQPage />
-      </main>
-    );
-  }
-
-  return (
+  const wrap = (key: NavKey, children: React.ReactNode, extraTopPad = false) => (
     <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
+      <GlobalTopBar currentPath={key} />
+      <div className={extraTopPad ? "pt-14" : undefined}>{children}</div>
+    </main>
+  );
+
+  if (route === "apply" || route === "thank-you") {
+    return wrap("apply", <ApplicationFunnel />, true);
+  }
+  if (route === "sample-briefing") {
+    return wrap("sample-briefing", <SampleBriefingPage />);
+  }
+  if (route === "pricing") {
+    return wrap("pricing", <PricingPage />);
+  }
+  if (route === "templates") {
+    return wrap("templates", <FreeTemplateLibraryPage />);
+  }
+  if (route === "three-way-compare") {
+    return wrap("compare", <BookkeeperVsFractionalCFOPage />);
+  }
+  if (route === "compare") {
+    return wrap("compare", <ComparisonHubPage />);
+  }
+  if (route === "security-faq") {
+    return wrap("security-faq", <SecurityFAQPage />);
+  }
+
+  return wrap(
+    "home",
+    <>
       <FinanceHero />
       <HowItWorks />
-    </main>
+    </>,
+    true,
   );
 };
 
