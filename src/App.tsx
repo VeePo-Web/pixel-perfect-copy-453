@@ -1,4 +1,5 @@
 import FinanceHero from "./components/hero/FinanceHero";
+import PainClarity from "./components/home/PainClarity";
 import HowItWorks from "./components/how-it-works/HowItWorks";
 import ApplicationFunnel from "./components/apply/ApplicationFunnel";
 import SampleBriefingPage from "./components/sample-briefing/SampleBriefingPage";
@@ -46,6 +47,7 @@ const App = () => {
     "home",
     <>
       <FinanceHero />
+      <PainClarity />
       <HowItWorks />
     </>,
     true,

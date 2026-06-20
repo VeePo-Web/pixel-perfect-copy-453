@@ -26,14 +26,14 @@ export default function HowItWorksIntro() {
           <span className="mr-3 inline-block h-px w-8 bg-champagne-200/40" />
           {c.eyebrow}
         </div>
-        <h1
+        <h2
           className={`font-zentry text-[clamp(2.25rem,5.2vw,4.25rem)] leading-[1.02] tracking-tight text-ink transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
           }`}
           style={{ transitionDelay: "80ms" }}
         >
           {c.headline}
-        </h1>
+        </h2>
         <p
           className={`mt-6 max-w-xl text-[15px] leading-[1.75] text-ink/65 transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
