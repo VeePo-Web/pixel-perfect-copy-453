@@ -8,7 +8,7 @@ export default function PlanFitSection() {
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
             Self-select
           </div>
-          <h2 id="fit-title" className="mt-4 font-light text-bone text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
+          <h2 id="fit-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
             Choose based on your current financial maturity.
           </h2>
         </div>
@@ -25,10 +25,10 @@ export default function PlanFitSection() {
                     : "border-ink/[0.07] bg-charcoal-900/55 hover:border-champagne-200/25"
                 }`}
               >
-                <h3 className={`text-[18px] font-light ${flagship ? "text-bone" : "text-bone/90"}`}>{col.title}</h3>
+                <h3 className={`text-[18px] font-light ${flagship ? "text-ink" : "text-ink/90"}`}>{col.title}</h3>
                 <ul className="mt-5 flex-1 space-y-2.5">
                   {col.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-2.5 text-[14px] leading-[1.55] text-bone/80">
+                    <li key={b} className="flex items-start gap-2.5 text-[14px] leading-[1.55] text-ink/80">
                       <span
                         aria-hidden
                         className={`mt-1.5 inline-block h-1.5 w-1.5 shrink-0 rounded-full ${
@@ -43,8 +43,8 @@ export default function PlanFitSection() {
                   href={col.cta.href}
                   className={`mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-[13px] font-medium tracking-wide transition-all duration-400 ease-cinema ${
                     flagship
-                      ? "bg-gradient-to-b from-champagne-100 to-champagne-300 text-charcoal-950 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
-                      : "border border-ink/[0.12] text-bone/90 hover:border-champagne-200/40 hover:text-bone"
+                      ? "bg-gradient-to-b from-champagne-100 to-champagne-300 text-navy hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+                      : "border border-ink/[0.12] text-ink/90 hover:border-champagne-200/40 hover:text-ink"
                   }`}
                 >
                   {col.cta.label}

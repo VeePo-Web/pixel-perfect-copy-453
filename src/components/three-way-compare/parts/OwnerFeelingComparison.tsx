@@ -13,7 +13,7 @@ export default function OwnerFeelingComparison() {
           </div>
           <h2
             id="feeling-heading"
-            className="mt-3 font-light text-bone text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
           >
             The real difference is what the owner feels.
           </h2>
@@ -31,30 +31,30 @@ export default function OwnerFeelingComparison() {
             >
               <div
                 className={`text-[10.5px] uppercase tracking-[0.26em] ${
-                  c.isMfd ? "text-champagne-200/85" : "text-bone/45"
+                  c.isMfd ? "text-champagne-200/85" : "text-ink/45"
                 }`}
               >
                 {c.label}
               </div>
               <div className="mt-5">
-                <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">
+                <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">
                   Before
                 </div>
-                <p className="mt-1.5 text-[14.5px] italic leading-relaxed text-bone/70">
+                <p className="mt-1.5 text-[14.5px] italic leading-relaxed text-ink/70">
                   {c.before}
                 </p>
               </div>
               <div className="mt-5 border-t border-ink/[0.06] pt-4">
-                <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">
+                <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">
                   After
                 </div>
-                <p className="mt-1.5 text-[15px] italic leading-relaxed text-bone">{c.after}</p>
+                <p className="mt-1.5 text-[15px] italic leading-relaxed text-ink">{c.after}</p>
               </div>
             </li>
           ))}
         </ul>
 
-        <p className="mt-10 max-w-[68ch] border-l border-champagne-200/40 pl-5 text-[15px] leading-[1.7] text-bone/75">
+        <p className="mt-10 max-w-[68ch] border-l border-champagne-200/40 pl-5 text-[15px] leading-[1.7] text-ink/75">
           If your pain is not recordkeeping or full finance leadership, but financial clarity,
           the Monthly Finance Desk was designed for that middle.
         </p>

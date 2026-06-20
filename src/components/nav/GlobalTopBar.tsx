@@ -41,7 +41,7 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 lg:px-10">
           <a href="#/" className="group flex items-center gap-3" aria-label="Monthly Finance Desk — Home">
             <span className="h-1.5 w-1.5 rounded-full bg-champagne-200 transition-transform duration-400 group-hover:scale-125" />
-            <span className="text-[12.5px] uppercase tracking-[0.28em] text-bone/85">
+            <span className="text-[12.5px] uppercase tracking-[0.28em] text-ink/85">
               Monthly Finance Desk
             </span>
           </a>
@@ -55,7 +55,7 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
                   href={l.href}
                   aria-current={active ? "page" : undefined}
                   className={`text-[12px] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-200/60 rounded-sm ${
-                    active ? "text-bone" : "text-bone/55 hover:text-bone"
+                    active ? "text-ink" : "text-ink/55 hover:text-ink"
                   }`}
                 >
                   {l.label}
@@ -65,7 +65,7 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
             <a
               href="#/apply"
               aria-current={currentPath === "apply" ? "page" : undefined}
-              className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-charcoal-950 transition-all duration-300 hover:shadow-[0_8px_28px_-10px_rgba(217,190,130,0.55)]"
+              className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 hover:shadow-[0_8px_28px_-10px_rgba(217,190,130,0.55)]"
             >
               Apply
             </a>
@@ -75,7 +75,7 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
             <a
               href="#/apply"
               aria-current={currentPath === "apply" ? "page" : undefined}
-              className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-3.5 py-1.5 text-[11.5px] font-medium text-charcoal-950"
+              className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-3.5 py-1.5 text-[11.5px] font-medium text-navy"
             >
               Apply
             </a>
@@ -85,7 +85,7 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
               aria-expanded={open}
               aria-controls="global-nav-sheet"
               onClick={() => setOpen((v) => !v)}
-              className="flex h-9 w-9 items-center justify-center rounded-md border border-ink/10 text-bone/80 hover:text-bone hover:border-ink/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-200/60"
+              className="flex h-9 w-9 items-center justify-center rounded-md border border-ink/10 text-ink/80 hover:text-ink hover:border-ink/20 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-200/60"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 {open ? (
@@ -121,18 +121,18 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
                   aria-current={active ? "page" : undefined}
                   onClick={() => setOpen(false)}
                   className={`flex items-center justify-between border-b border-ink/[0.06] py-4 text-[15px] ${
-                    active ? "text-bone" : "text-bone/70"
+                    active ? "text-ink" : "text-ink/70"
                   }`}
                 >
                   <span>{l.label}</span>
-                  <span aria-hidden="true" className="text-bone/30">→</span>
+                  <span aria-hidden="true" className="text-ink/30">→</span>
                 </a>
               );
             })}
             <a
               href="#/apply"
               onClick={() => setOpen(false)}
-              className="mt-8 inline-flex items-center justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-3 text-[13px] font-medium text-charcoal-950"
+              className="mt-8 inline-flex items-center justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-3 text-[13px] font-medium text-navy"
             >
               Apply
             </a>

@@ -8,7 +8,7 @@ export default function TrustReassuranceBlock() {
       <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">{c.title}</div>
       <ol className="mt-4 space-y-3">
         {c.items.map((it, i) => (
-          <li key={it} className="flex items-start gap-3 text-[13.5px] leading-[1.6] text-bone/80">
+          <li key={it} className="flex items-start gap-3 text-[13.5px] leading-[1.6] text-ink/80">
             <span className="mt-[2px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-champagne-200/30 text-[10.5px] text-champagne-200/80">
               {i + 1}
             </span>

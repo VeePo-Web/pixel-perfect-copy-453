@@ -19,7 +19,7 @@ export default function TrustSection() {
           >
             <span className="absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/30 to-transparent" />
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/60">0{i + 1}</div>
-            <p className="mt-3 text-[13.5px] leading-[1.55] text-bone/80">{card}</p>
+            <p className="mt-3 text-[13.5px] leading-[1.55] text-ink/80">{card}</p>
           </div>
         ))}
       </div>

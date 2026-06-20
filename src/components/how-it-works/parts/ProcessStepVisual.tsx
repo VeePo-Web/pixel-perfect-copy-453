@@ -5,7 +5,7 @@ function Frame({ children, label }: { children: React.ReactNode; label: string }
     <div className="relative h-full w-full rounded-2xl border border-champagne-200/10 bg-charcoal-900/50 p-6 backdrop-blur-sm overflow-hidden">
       <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/30 to-transparent" />
       <div className="mb-5 flex items-center justify-between">
-        <span className="text-[10.5px] uppercase tracking-[0.28em] text-bone/40">{label}</span>
+        <span className="text-[10.5px] uppercase tracking-[0.28em] text-ink/40">{label}</span>
         <span className="flex gap-1.5">
           <span className="h-1.5 w-1.5 rounded-full bg-bone/15" />
           <span className="h-1.5 w-1.5 rounded-full bg-bone/15" />
@@ -24,13 +24,13 @@ function StepSpreadsheet() {
     <div ref={ref}>
       <Frame label="Spreadsheet system">
         <div className="grid grid-cols-[1.4fr_1fr_1fr] gap-px overflow-hidden rounded-md bg-champagne-200/[0.06]">
-          <div className="bg-charcoal-800/80 px-3 py-2 text-[10.5px] uppercase tracking-[0.22em] text-bone/45">Category</div>
-          <div className="bg-charcoal-800/80 px-3 py-2 text-[10.5px] uppercase tracking-[0.22em] text-bone/45">Period</div>
-          <div className="bg-charcoal-800/80 px-3 py-2 text-right text-[10.5px] uppercase tracking-[0.22em] text-bone/45">Amount</div>
+          <div className="bg-charcoal-800/80 px-3 py-2 text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Category</div>
+          <div className="bg-charcoal-800/80 px-3 py-2 text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Period</div>
+          <div className="bg-charcoal-800/80 px-3 py-2 text-right text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Amount</div>
           {rows.map((r, i) => (
             <div key={r} className="contents">
               <div
-                className={`bg-charcoal-900/60 px-3 py-2.5 text-[13px] text-bone/80 transition-all duration-500 ease-cinema ${
+                className={`bg-charcoal-900/60 px-3 py-2.5 text-[13px] text-ink/80 transition-all duration-500 ease-cinema ${
                   inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
                 }`}
                 style={{ transitionDelay: `${120 + i * 70}ms` }}
@@ -38,7 +38,7 @@ function StepSpreadsheet() {
                 {r}
               </div>
               <div
-                className={`bg-charcoal-900/60 px-3 py-2.5 text-[13px] text-bone/45 transition-all duration-500 ease-cinema ${
+                className={`bg-charcoal-900/60 px-3 py-2.5 text-[13px] text-ink/45 transition-all duration-500 ease-cinema ${
                   inView ? "opacity-100" : "opacity-0"
                 }`}
                 style={{ transitionDelay: `${160 + i * 70}ms` }}
@@ -68,9 +68,9 @@ function StepPlaid() {
       <Frame label="Secure data connection">
         <div className="relative grid grid-cols-3 items-center gap-4 py-6">
           <div className="rounded-xl border border-ink/[0.06] bg-charcoal-800/60 p-4">
-            <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">Bank</div>
-            <div className="mt-3 text-[15px] text-bone/85">Operating Account</div>
-            <div className="mt-1 text-[11.5px] text-bone/40">•••• 4821</div>
+            <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Bank</div>
+            <div className="mt-3 text-[15px] text-ink/85">Operating Account</div>
+            <div className="mt-1 text-[11.5px] text-ink/40">•••• 4821</div>
           </div>
           <div className="relative h-[2px] w-full overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-bone/15 to-transparent" />
@@ -82,11 +82,11 @@ function StepPlaid() {
           </div>
           <div className="rounded-xl border border-champagne-200/15 bg-charcoal-800/60 p-4">
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/60">Desk</div>
-            <div className="mt-3 text-[15px] text-bone/85">Finance system</div>
-            <div className="mt-1 text-[11.5px] text-bone/40">Encrypted</div>
+            <div className="mt-3 text-[15px] text-ink/85">Finance system</div>
+            <div className="mt-1 text-[11.5px] text-ink/40">Encrypted</div>
           </div>
         </div>
-        <div className="mt-2 text-[11.5px] text-bone/40">
+        <div className="mt-2 text-[11.5px] text-ink/40">
           Connection happens after onboarding via Plaid. No bank link is required for the public preview.
         </div>
       </Frame>
@@ -115,8 +115,8 @@ function StepOrganize() {
               }`}
               style={{ transitionDelay: `${120 + i * 90}ms` }}
             >
-              <span className="text-[13px] text-bone/55">{it.from}</span>
-              <span className="text-bone/30">→</span>
+              <span className="text-[13px] text-ink/55">{it.from}</span>
+              <span className="text-ink/30">→</span>
               <span className="text-[13px] text-champagne-100/90">{it.to}</span>
             </li>
           ))}
@@ -147,7 +147,7 @@ function StepBriefing() {
               style={{ transitionDelay: `${160 + i * 130}ms` }}
             >
               <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/60">{ln.l}</div>
-              <div className="mt-1.5 text-[13.5px] leading-[1.55] text-bone/80">{ln.b}</div>
+              <div className="mt-1.5 text-[13.5px] leading-[1.55] text-ink/80">{ln.b}</div>
             </div>
           ))}
         </div>
@@ -164,17 +164,17 @@ function StepReview() {
       <Frame label="Monthly strategy review">
         <div className="grid grid-cols-[auto_1fr] gap-4">
           <div className="rounded-xl border border-champagne-200/15 bg-charcoal-800/60 p-4 text-center">
-            <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">Apr</div>
-            <div className="mt-1 font-zentry text-3xl leading-none text-bone">28</div>
+            <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Apr</div>
+            <div className="mt-1 font-zentry text-3xl leading-none text-ink">28</div>
             <div className="mt-1 text-[10.5px] text-champagne-200/70">1:00 PM</div>
           </div>
           <div className="rounded-xl border border-ink/[0.06] bg-charcoal-900/50 p-4">
-            <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">Agenda</div>
+            <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Agenda</div>
             <ul className="mt-2 space-y-1.5">
               {agenda.map((a, i) => (
                 <li
                   key={a}
-                  className={`flex items-center gap-2 text-[13px] text-bone/75 transition-all duration-500 ease-cinema ${
+                  className={`flex items-center gap-2 text-[13px] text-ink/75 transition-all duration-500 ease-cinema ${
                     inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
                   }`}
                   style={{ transitionDelay: `${140 + i * 80}ms` }}

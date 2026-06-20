@@ -14,11 +14,11 @@ export default function CategorySpectrum() {
           </div>
           <h2
             id="spectrum-heading"
-            className="mt-3 font-light text-bone text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
           >
             Where the Monthly Finance Desk fits.
           </h2>
-          <p className="mt-4 text-[15px] leading-[1.7] text-bone/70">
+          <p className="mt-4 text-[15px] leading-[1.7] text-ink/70">
             For many owner-led businesses, the gap is not between free templates and a CFO. The gap is between having financial data and having a recurring way to understand it.
           </p>
         </div>
@@ -27,7 +27,7 @@ export default function CategorySpectrum() {
         <div className="mt-12 hidden lg:block">
           <div className="relative h-[200px] rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6">
             <div className="flex h-full flex-col justify-between">
-              <div className="flex items-center justify-between text-[10.5px] uppercase tracking-[0.26em] text-bone/45">
+              <div className="flex items-center justify-between text-[10.5px] uppercase tracking-[0.26em] text-ink/45">
                 <span>DIY / Low support</span>
                 <span className="text-champagne-200/80">Structure + Interpretation</span>
                 <span>High-touch finance leadership</span>
@@ -54,11 +54,11 @@ export default function CategorySpectrum() {
               }`}
             >
               <div>
-                <div className={`text-[10.5px] uppercase tracking-[0.24em] ${o.isMfd ? "text-champagne-200/85" : "text-bone/45"}`}>
+                <div className={`text-[10.5px] uppercase tracking-[0.24em] ${o.isMfd ? "text-champagne-200/85" : "text-ink/45"}`}>
                   {o.isMfd ? "Missing middle" : `Position ${Math.round(o.position * 100)}`}
                 </div>
-                <div className="mt-1 text-[14.5px] font-light text-bone">{o.label}</div>
-                <p className="mt-1 text-[12.5px] leading-relaxed text-bone/60">{o.bestWhen}</p>
+                <div className="mt-1 text-[14.5px] font-light text-ink">{o.label}</div>
+                <p className="mt-1 text-[12.5px] leading-relaxed text-ink/60">{o.bestWhen}</p>
               </div>
             </li>
           ))}
@@ -85,7 +85,7 @@ function SpectrumNode({ option }: { option: import("../content").SupportOption }
       />
       <div
         className={`mt-3 max-w-[140px] text-[11.5px] leading-tight ${
-          flagship ? "text-bone" : "text-bone/65"
+          flagship ? "text-ink" : "text-ink/65"
         }`}
       >
         {option.shortLabel}

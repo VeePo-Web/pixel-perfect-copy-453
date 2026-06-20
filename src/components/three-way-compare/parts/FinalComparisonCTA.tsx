@@ -13,11 +13,11 @@ export default function FinalComparisonCTA() {
         </div>
         <h2
           id="final-cta-heading"
-          className="mx-auto mt-4 max-w-[24ch] font-light text-bone text-[34px] leading-[1.08] tracking-[-0.01em] sm:text-[46px]"
+          className="mx-auto mt-4 max-w-[24ch] font-light text-ink text-[34px] leading-[1.08] tracking-[-0.01em] sm:text-[46px]"
         >
           If you already have numbers but still feel unclear, this is the layer you are missing.
         </h2>
-        <p className="mx-auto mt-5 max-w-[64ch] text-[15px] leading-[1.7] text-bone/70">
+        <p className="mx-auto mt-5 max-w-[64ch] text-[15px] leading-[1.7] text-ink/70">
           Apply for the Monthly Finance Desk and build a recurring financial rhythm around
           structured spreadsheets, bi-weekly plain-English briefings, and a monthly strategy
           review.
@@ -30,7 +30,7 @@ export default function FinalComparisonCTA() {
               track("final_cta_clicked", { target: "apply" });
               trackCtaByHref("#/apply", "final-cta");
             }}
-            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
           >
             <span className="relative z-10">Apply for the Monthly Finance Desk</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -41,7 +41,7 @@ export default function FinalComparisonCTA() {
               track("final_cta_clicked", { target: "sample-briefing" });
               trackCtaByHref("#/sample-briefing", "final-cta");
             }}
-            className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+            className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
           >
             Generate Sample Finance Briefing
           </a>
@@ -51,17 +51,17 @@ export default function FinalComparisonCTA() {
               track("final_cta_clicked", { target: "templates" });
               trackCtaByHref("#/templates", "final-cta");
             }}
-            className="text-[12.5px] text-bone/55 underline-offset-4 transition-colors hover:text-bone hover:underline"
+            className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
             Start With Free Templates
           </a>
         </div>
 
-        <p className="mt-7 text-[11.5px] uppercase tracking-[0.2em] text-bone/40">
+        <p className="mt-7 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
           Application takes a few minutes. No payment or bank connection required to apply.
         </p>
 
-        <p className="mx-auto mt-10 max-w-[64ch] text-[11.5px] leading-relaxed text-bone/40">
+        <p className="mx-auto mt-10 max-w-[64ch] text-[11.5px] leading-relaxed text-ink/40">
           Monthly Finance Desk does not replace tax, legal, accounting, bookkeeping cleanup, or
           investment advice.
         </p>

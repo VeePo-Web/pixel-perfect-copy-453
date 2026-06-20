@@ -27,7 +27,7 @@ export default function HowItWorksIntro() {
           {c.eyebrow}
         </div>
         <h1
-          className={`font-zentry text-[clamp(2.25rem,5.2vw,4.25rem)] leading-[1.02] tracking-tight text-bone transition-all duration-700 ease-cinema ${
+          className={`font-zentry text-[clamp(2.25rem,5.2vw,4.25rem)] leading-[1.02] tracking-tight text-ink transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
           }`}
           style={{ transitionDelay: "80ms" }}
@@ -35,7 +35,7 @@ export default function HowItWorksIntro() {
           {c.headline}
         </h1>
         <p
-          className={`mt-6 max-w-xl text-[15px] leading-[1.75] text-bone/65 transition-all duration-700 ease-cinema ${
+          className={`mt-6 max-w-xl text-[15px] leading-[1.75] text-ink/65 transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
           }`}
           style={{ transitionDelay: "160ms" }}
@@ -50,27 +50,27 @@ export default function HowItWorksIntro() {
         >
           <a
             href="#/apply"
-            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
+            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
           >
             <span className="relative z-10">{c.primary}</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </a>
           <a
             href="#top"
-            className="group inline-flex items-center text-[13px] text-bone/70 transition-colors duration-300 hover:text-champagne-100"
+            className="group inline-flex items-center text-[13px] text-ink/70 transition-colors duration-300 hover:text-champagne-100"
           >
             <span className="border-b border-bone/20 pb-0.5 group-hover:border-champagne-200/60">{c.secondary}</span>
             <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
           </a>
         </div>
-        <p className="mt-5 text-[11.5px] uppercase tracking-[0.22em] text-bone/35">{c.trust}</p>
+        <p className="mt-5 text-[11.5px] uppercase tracking-[0.22em] text-ink/35">{c.trust}</p>
       </div>
 
       <div className="lg:col-span-5">
         <div className="relative rounded-2xl border border-champagne-200/10 bg-charcoal-900/60 p-6 backdrop-blur-sm">
           <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent" />
           <div className="mb-5 flex items-center justify-between">
-            <span className="text-[10.5px] uppercase tracking-[0.28em] text-bone/40">Monthly rhythm</span>
+            <span className="text-[10.5px] uppercase tracking-[0.28em] text-ink/40">Monthly rhythm</span>
             <span className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">Live loop</span>
           </div>
           <ol className="space-y-3">
@@ -94,10 +94,10 @@ export default function HowItWorksIntro() {
                       <span className="absolute inset-0 -m-1 rounded-full bg-champagne-200/40 motion-safe:animate-soft-pulse" />
                     )}
                   </span>
-                  <span className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-bone/40 w-6">0{i + 1}</span>
+                  <span className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-ink/40 w-6">0{i + 1}</span>
                   <span
                     className={`text-[14px] tracking-tight transition-colors duration-500 ${
-                      isActive ? "text-bone" : "text-bone/55"
+                      isActive ? "text-ink" : "text-ink/55"
                     }`}
                   >
                     {label}
@@ -107,7 +107,7 @@ export default function HowItWorksIntro() {
             })}
           </ol>
           <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-ink/10 to-transparent" />
-          <p className="mt-4 text-[11.5px] leading-[1.6] text-bone/40">
+          <p className="mt-4 text-[11.5px] leading-[1.6] text-ink/40">
             A recurring operating loop — not a one-time report.
           </p>
         </div>

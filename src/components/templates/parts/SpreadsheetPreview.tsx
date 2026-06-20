@@ -8,10 +8,10 @@ type Props = {
 };
 
 const toneClass = {
-  neutral: "text-bone/80",
+  neutral: "text-ink/80",
   positive: "text-green-signal",
   caution: "text-champagne-300",
-  data: "text-bone",
+  data: "text-ink",
 } as const;
 
 const toneDot = {
@@ -40,7 +40,7 @@ export default function SpreadsheetPreview({
           <span className="h-1.5 w-1.5 rounded-full bg-ink/10" />
           <span className="h-1.5 w-1.5 rounded-full bg-ink/10" />
         </div>
-        <span className="text-[9.5px] uppercase tracking-[0.24em] text-bone/40">{title}</span>
+        <span className="text-[9.5px] uppercase tracking-[0.24em] text-ink/40">{title}</span>
         <span className="h-px w-8 bg-ink/10" />
       </div>
       {/* faint grid */}
@@ -60,7 +60,7 @@ export default function SpreadsheetPreview({
             >
               <div className="flex min-w-0 items-center gap-2">
                 <span className={`h-1.5 w-1.5 shrink-0 rounded-full ${toneDot[t]}`} />
-                <span className={`truncate text-[12px] text-bone/65 ${dense ? "" : "tracking-tight"}`}>
+                <span className={`truncate text-[12px] text-ink/65 ${dense ? "" : "tracking-tight"}`}>
                   {row.label}
                 </span>
               </div>

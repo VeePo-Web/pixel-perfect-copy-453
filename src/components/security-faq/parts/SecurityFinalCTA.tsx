@@ -17,11 +17,11 @@ export default function SecurityFinalCTA() {
         </div>
         <h2
           id="final-cta-heading"
-          className="mt-4 font-light text-bone text-[30px] leading-[1.1] tracking-[-0.015em] sm:text-[48px]"
+          className="mt-4 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.015em] sm:text-[48px]"
         >
           Ready to take the first safe step?
         </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-bone/65">
+        <p className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-ink/65">
           Preview the experience, apply without bank connection, or start with free
           templates. The first step should feel clear before it asks for trust.
         </p>
@@ -32,7 +32,7 @@ export default function SecurityFinalCTA() {
               track("final_security_cta_clicked", { target: "apply" });
               trackCtaByHref("#/apply", "security_faq_final");
             }}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-charcoal-950 transition-all hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
           >
             Apply for the Monthly Finance Desk
           </a>
@@ -42,7 +42,7 @@ export default function SecurityFinalCTA() {
               track("final_security_cta_clicked", { target: "sample-briefing" });
               trackCtaByHref("#/sample-briefing", "security_faq_final");
             }}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-6 text-[13.5px] text-bone transition-colors hover:border-ink/30 hover:bg-ink/[0.03]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-6 text-[13.5px] text-ink transition-colors hover:border-ink/30 hover:bg-ink/[0.03]"
           >
             Generate Sample Finance Briefing
           </a>
@@ -52,12 +52,12 @@ export default function SecurityFinalCTA() {
               track("final_security_cta_clicked", { target: "templates" });
               trackCtaByHref("#/templates", "security_faq_final");
             }}
-            className="inline-flex min-h-11 items-center text-[13px] text-bone/55 underline-offset-4 transition-colors hover:text-bone hover:underline"
+            className="inline-flex min-h-11 items-center text-[13px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
             Start with free templates →
           </a>
         </div>
-        <p className="mt-6 text-[12px] text-bone/45">
+        <p className="mt-6 text-[12px] text-ink/45">
           No payment or bank connection required to apply.
         </p>
       </div>

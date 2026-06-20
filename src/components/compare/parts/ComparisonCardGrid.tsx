@@ -15,11 +15,11 @@ export default function ComparisonCardGrid() {
           </div>
           <h2
             id="comparisons-heading"
-            className="mt-3 font-light text-bone text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
           >
             Compare your options.
           </h2>
-          <p className="mt-4 text-[15px] leading-[1.7] text-bone/70">
+          <p className="mt-4 text-[15px] leading-[1.7] text-ink/70">
             Each option solves a different problem. Choose the comparison closest to your decision.
           </p>
         </div>
@@ -35,17 +35,17 @@ export default function ComparisonCardGrid() {
                 <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/70">
                   Comparison
                 </div>
-                <div className="mt-2 text-[17px] font-light leading-snug text-bone">
+                <div className="mt-2 text-[17px] font-light leading-snug text-ink">
                   {c.title}
                 </div>
-                <p className="mt-3 text-[12.5px] leading-relaxed text-bone/55">
-                  <span className="text-bone/40">Best for · </span>
+                <p className="mt-3 text-[12.5px] leading-relaxed text-ink/55">
+                  <span className="text-ink/40">Best for · </span>
                   {c.bestFor}
                 </p>
-                <p className="mt-3 text-[13px] leading-relaxed text-bone/70 opacity-90 transition-opacity duration-400 group-hover:opacity-100">
+                <p className="mt-3 text-[13px] leading-relaxed text-ink/70 opacity-90 transition-opacity duration-400 group-hover:opacity-100">
                   {c.coreInsight}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-1.5 text-[12.5px] text-bone/85 transition-colors group-hover:text-champagne-200">
+                <span className="mt-5 inline-flex items-center gap-1.5 text-[12.5px] text-ink/85 transition-colors group-hover:text-champagne-200">
                   {c.ctaText}
                   <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                 </span>

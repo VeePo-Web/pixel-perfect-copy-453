@@ -14,7 +14,7 @@ export default function TemplateToFinanceDeskBridge() {
           </div>
           <h2
             id="bridge-heading"
-            className="mt-3 font-light text-bone text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
+            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
           >
             From spreadsheet structure to monthly financial clarity.
           </h2>
@@ -28,8 +28,8 @@ export default function TemplateToFinanceDeskBridge() {
               <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/70">
                 Step {s.n}
               </div>
-              <div className="mt-2 text-[16px] font-light leading-snug text-bone">{s.title}</div>
-              <p className="mt-2 text-[13px] leading-relaxed text-bone/60">{s.copy}</p>
+              <div className="mt-2 text-[16px] font-light leading-snug text-ink">{s.title}</div>
+              <p className="mt-2 text-[13px] leading-relaxed text-ink/60">{s.copy}</p>
               {i < bridgeSteps.length - 1 ? (
                 <span aria-hidden className="pointer-events-none absolute right-[-8px] top-1/2 hidden h-px w-4 bg-ink/15 lg:block" />
               ) : null}
@@ -40,7 +40,7 @@ export default function TemplateToFinanceDeskBridge() {
           <a
             href="#/sample-briefing"
             onClick={() => track("sample_briefing_clicked_from_templates", { source: "bridge" })}
-            className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[12.5px] font-medium text-charcoal-950 transition-all duration-300 ease-cinema hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.55)]"
+            className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.55)]"
           >
             Generate Sample Finance Briefing
           </a>

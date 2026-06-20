@@ -11,7 +11,7 @@ export default function TemplateFAQ() {
         <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">FAQ</div>
         <h2
           id="faq-heading"
-          className="mt-3 font-light text-bone text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
+          className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
         >
           Questions before you download.
         </h2>
@@ -26,22 +26,22 @@ export default function TemplateFAQ() {
                 }
               }}
             >
-              <summary className="flex cursor-pointer items-start justify-between gap-4 text-[14.5px] text-bone">
+              <summary className="flex cursor-pointer items-start justify-between gap-4 text-[14.5px] text-ink">
                 <span>{item.q}</span>
                 <span
                   aria-hidden
-                  className="mt-1 inline-block h-4 w-4 shrink-0 text-bone/55 transition-transform duration-300 group-open:rotate-45"
+                  className="mt-1 inline-block h-4 w-4 shrink-0 text-ink/55 transition-transform duration-300 group-open:rotate-45"
                 >
                   +
                 </span>
               </summary>
-              <p className="mt-3 max-w-[68ch] text-[13.5px] leading-relaxed text-bone/65">
+              <p className="mt-3 max-w-[68ch] text-[13.5px] leading-relaxed text-ink/65">
                 {item.a}
               </p>
             </details>
           ))}
         </div>
-        <p className="mt-6 text-[11.5px] leading-relaxed text-bone/40">
+        <p className="mt-6 text-[11.5px] leading-relaxed text-ink/40">
           Templates are for organizational and educational purposes only. They do not replace tax, legal, accounting, investment, or bookkeeping advice.
         </p>
       </div>

@@ -17,7 +17,7 @@ export default function ScenarioRecommendationCards() {
           </div>
           <h2
             id="scenario-heading"
-            className="mt-3 font-light text-bone text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
           >
             Which situation sounds like you?
           </h2>
@@ -43,12 +43,12 @@ export default function ScenarioRecommendationCards() {
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
-                    <p className="max-w-[28ch] text-[15.5px] italic leading-snug text-bone">
+                    <p className="max-w-[28ch] text-[15.5px] italic leading-snug text-ink">
                       “{s.quote.replace(/^["“]?|["”]?$/g, "")}”
                     </p>
                     <span
                       aria-hidden
-                      className={`text-[18px] leading-none text-bone/55 transition-transform duration-300 ${
+                      className={`text-[18px] leading-none text-ink/55 transition-transform duration-300 ${
                         isOpen ? "rotate-45" : ""
                       }`}
                     >
@@ -64,8 +64,8 @@ export default function ScenarioRecommendationCards() {
                       <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/80">
                         Recommendation
                       </div>
-                      <p className="mt-1 text-[14px] font-light text-bone">{s.recommendation}</p>
-                      <p className="mt-3 text-[13px] leading-relaxed text-bone/70">
+                      <p className="mt-1 text-[14px] font-light text-ink">{s.recommendation}</p>
+                      <p className="mt-3 text-[13px] leading-relaxed text-ink/70">
                         {s.explanation}
                       </p>
                       <a

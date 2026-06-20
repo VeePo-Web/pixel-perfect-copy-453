@@ -9,7 +9,7 @@ export default function ValueStack() {
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
             Value stack
           </div>
-          <h2 id="value-title" className="mt-4 font-light text-bone text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
+          <h2 id="value-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
             What is included in the Monthly Finance Desk.
           </h2>
         </div>
@@ -23,7 +23,7 @@ export default function ValueStack() {
         <div className="mt-10">
           <a
             href="#/apply"
-            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+            className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
           >
             <span className="relative z-10">Apply for the Monthly Finance Desk</span>
             <span aria-hidden className="relative z-10">→</span>
@@ -49,15 +49,15 @@ function ValueRow({ index, item }: { index: number; item: (typeof valueStack)[nu
         0{index + 1}
       </div>
       <div>
-        <h3 className="text-[18px] font-light text-bone">{item.title}</h3>
-        <p className="mt-3 text-[14px] leading-[1.65] text-bone/80">{item.value}</p>
+        <h3 className="text-[18px] font-light text-ink">{item.title}</h3>
+        <p className="mt-3 text-[14px] leading-[1.65] text-ink/80">{item.value}</p>
         {item.trust && (
-          <p className="mt-3 text-[12px] uppercase tracking-[0.18em] text-bone/45">{item.trust}</p>
+          <p className="mt-3 text-[12px] uppercase tracking-[0.18em] text-ink/45">{item.trust}</p>
         )}
       </div>
       <div className="rounded-xl border border-ink/[0.05] bg-ink/[0.02] p-5">
-        <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/50">Why it matters</div>
-        <p className="mt-2 text-[14px] leading-[1.65] text-bone/80">{item.why}</p>
+        <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/50">Why it matters</div>
+        <p className="mt-2 text-[14px] leading-[1.65] text-ink/80">{item.why}</p>
       </div>
     </li>
   );

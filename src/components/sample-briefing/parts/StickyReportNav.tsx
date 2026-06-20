@@ -9,7 +9,7 @@ export default function StickyReportNav({ active }: Props) {
   return (
     <nav aria-label="Briefing sections" className="hidden lg:block">
       <div className="sticky top-28">
-        <div className="text-[10px] uppercase tracking-[0.28em] text-bone/45">In this briefing</div>
+        <div className="text-[10px] uppercase tracking-[0.28em] text-ink/45">In this briefing</div>
         <ul className="mt-4 space-y-1.5">
           {reportSections.map((s) => {
             const isActive = current === s.id;
@@ -18,7 +18,7 @@ export default function StickyReportNav({ active }: Props) {
                 <a
                   href={`#${s.id}`}
                   className={`group flex items-center gap-3 py-1.5 text-[12.5px] transition-colors duration-300 ${
-                    isActive ? "text-bone" : "text-bone/45 hover:text-bone/80"
+                    isActive ? "text-ink" : "text-ink/45 hover:text-ink/80"
                   }`}
                 >
                   <span

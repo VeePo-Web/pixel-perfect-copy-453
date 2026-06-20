@@ -13,11 +13,11 @@ export default function RealDifferenceSection() {
           </div>
           <h2
             id="real-difference-heading"
-            className="mt-3 font-light text-bone text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
           >
             They do different jobs.
           </h2>
-          <p className="mt-4 text-[15px] leading-[1.7] text-bone/70">
+          <p className="mt-4 text-[15px] leading-[1.7] text-ink/70">
             The mistake is comparing them as if they are the same kind of support. They are not.
           </p>
         </div>
@@ -34,26 +34,26 @@ export default function RealDifferenceSection() {
             >
               <div
                 className={`text-[10.5px] uppercase tracking-[0.26em] ${
-                  j.isMfd ? "text-champagne-200/85" : "text-bone/45"
+                  j.isMfd ? "text-champagne-200/85" : "text-ink/45"
                 }`}
               >
                 {j.label}
               </div>
               <div className="mt-4">
-                <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">Job</div>
-                <p className="mt-1.5 text-[16px] font-light text-bone">{j.job}</p>
+                <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Job</div>
+                <p className="mt-1.5 text-[16px] font-light text-ink">{j.job}</p>
               </div>
               <div className="mt-5">
-                <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">
+                <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">
                   Core output
                 </div>
-                <p className="mt-1.5 text-[13.5px] leading-relaxed text-bone/70">{j.output}</p>
+                <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink/70">{j.output}</p>
               </div>
               <div className="mt-5 border-t border-ink/[0.06] pt-4">
-                <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">
+                <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">
                   Owner question
                 </div>
-                <p className="mt-1.5 text-[13.5px] italic leading-relaxed text-bone/80">
+                <p className="mt-1.5 text-[13.5px] italic leading-relaxed text-ink/80">
                   {j.question}
                 </p>
               </div>
@@ -61,7 +61,7 @@ export default function RealDifferenceSection() {
           ))}
         </ul>
 
-        <p className="mt-10 max-w-[68ch] border-l border-champagne-200/40 pl-5 text-[15px] leading-[1.7] text-bone/75">
+        <p className="mt-10 max-w-[68ch] border-l border-champagne-200/40 pl-5 text-[15px] leading-[1.7] text-ink/75">
           If your records are messy, start with bookkeeping. If your decisions are getting bigger
           but a CFO feels too heavy, the Monthly Finance Desk may be the missing layer.
         </p>

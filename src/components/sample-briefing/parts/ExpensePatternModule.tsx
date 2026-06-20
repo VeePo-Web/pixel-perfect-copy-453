@@ -12,8 +12,8 @@ export default function ExpensePatternModule({ business }: { business: DemoBusin
         <div className="flex flex-col items-center justify-center rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-6">
           <Donut slices={business.expenseMix} size={210} />
           <div className="mt-4 text-center">
-            <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/55">Total expenses</div>
-            <div className="mt-1 text-[22px] font-light tabular-nums text-bone">{fmt(business.expenses)}</div>
+            <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/55">Total expenses</div>
+            <div className="mt-1 text-[22px] font-light tabular-nums text-ink">{fmt(business.expenses)}</div>
             <div className={`mt-1 text-[12px] ${up ? "text-champagne-200" : "text-green-signal"}`}>
               {up ? "+" : ""}{business.expensesDelta}% vs prior 2 weeks
             </div>
@@ -28,15 +28,15 @@ export default function ExpensePatternModule({ business }: { business: DemoBusin
                   style={{ background: DONUT_PALETTE[i % DONUT_PALETTE.length] }}
                   aria-hidden
                 />
-                <span className="text-[14px] text-bone/85">{s.label}</span>
-                <span className="text-[12.5px] tabular-nums text-bone/55">{s.pct}%</span>
-                <span className="text-[13px] tabular-nums text-bone">{fmt(s.amount)}</span>
+                <span className="text-[14px] text-ink/85">{s.label}</span>
+                <span className="text-[12.5px] tabular-nums text-ink/55">{s.pct}%</span>
+                <span className="text-[13px] tabular-nums text-ink">{fmt(s.amount)}</span>
               </li>
             ))}
           </ul>
           <div className="mt-5 rounded-lg border border-champagne-200/20 bg-champagne-300/[0.04] p-4">
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/80">Review before hiring</div>
-            <p className="mt-1.5 text-[14px] leading-[1.65] text-bone/85">{business.insights.expenses}</p>
+            <p className="mt-1.5 text-[14px] leading-[1.65] text-ink/85">{business.insights.expenses}</p>
           </div>
         </div>
       </div>

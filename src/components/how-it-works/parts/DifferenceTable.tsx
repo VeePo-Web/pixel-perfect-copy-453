@@ -16,7 +16,7 @@ export default function DifferenceTable() {
       >
         <table className="w-full min-w-[760px] border-collapse">
           <thead>
-            <tr className="text-left text-[10.5px] uppercase tracking-[0.22em] text-bone/40">
+            <tr className="text-left text-[10.5px] uppercase tracking-[0.22em] text-ink/40">
               <th className="px-5 py-4 font-normal sticky left-0 bg-charcoal-900/80 backdrop-blur-sm">Approach</th>
               {c.cols.map((col) => (
                 <th key={col} className="px-5 py-4 font-normal">{col}</th>
@@ -33,11 +33,11 @@ export default function DifferenceTable() {
               >
                 <td className={`relative px-5 py-5 align-top sticky left-0 ${r.highlight ? "bg-charcoal-900/80" : "bg-charcoal-900/60"} backdrop-blur-sm`}>
                   {r.highlight && <span className="absolute inset-y-3 left-0 w-[2px] bg-champagne-200" />}
-                  <div className={`text-[15px] tracking-tight ${r.highlight ? "text-bone" : "text-bone/75"}`}>{r.name}</div>
+                  <div className={`text-[15px] tracking-tight ${r.highlight ? "text-ink" : "text-ink/75"}`}>{r.name}</div>
                 </td>
-                <td className="px-5 py-5 align-top text-[13.5px] leading-[1.55] text-bone/70">{r.helps}</td>
-                <td className="px-5 py-5 align-top text-[13.5px] leading-[1.55] text-bone/55">{r.misses}</td>
-                <td className="px-5 py-5 align-top text-[13.5px] leading-[1.55] text-bone/70">{r.fit}</td>
+                <td className="px-5 py-5 align-top text-[13.5px] leading-[1.55] text-ink/70">{r.helps}</td>
+                <td className="px-5 py-5 align-top text-[13.5px] leading-[1.55] text-ink/55">{r.misses}</td>
+                <td className="px-5 py-5 align-top text-[13.5px] leading-[1.55] text-ink/70">{r.fit}</td>
               </tr>
             ))}
           </tbody>
@@ -46,7 +46,7 @@ export default function DifferenceTable() {
       <div className="mt-8">
         <a
           href="#/apply"
-          className="group relative overflow-hidden inline-block rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
+          className="group relative overflow-hidden inline-block rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
         >
           <span className="relative z-10">{c.cta}</span>
           <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />

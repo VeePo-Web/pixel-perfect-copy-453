@@ -28,7 +28,7 @@ function RadioGroup({
 }) {
   return (
     <div>
-      <div className="mb-3 text-[12.5px] text-bone/70">{label}</div>
+      <div className="mb-3 text-[12.5px] text-ink/70">{label}</div>
       <div role="radiogroup" className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
         {options.map((o) => (
           <SelectableCard key={o} label={o} selected={value === o} onSelect={() => onChange(o)} />

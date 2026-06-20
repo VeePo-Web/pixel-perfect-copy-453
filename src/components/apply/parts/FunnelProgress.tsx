@@ -19,17 +19,17 @@ export default function FunnelProgress({ step }: { step: number }) {
               <span
                 className={`flex h-[22px] w-[22px] items-center justify-center rounded-full border transition-all duration-500 ${
                   isActive
-                    ? "border-champagne-200 bg-champagne-200 text-charcoal-950 shadow-[0_0_0_4px_rgba(217,190,130,0.12)]"
+                    ? "border-champagne-200 bg-champagne-200 text-navy shadow-[0_0_0_4px_rgba(217,190,130,0.12)]"
                     : isDone
-                    ? "border-champagne-200/60 bg-champagne-200/80 text-charcoal-950"
-                    : "border-ink/15 bg-charcoal-900 text-bone/40"
+                    ? "border-champagne-200/60 bg-champagne-200/80 text-navy"
+                    : "border-ink/15 bg-charcoal-900 text-ink/40"
                 }`}
               >
                 <span className="text-[10px] font-medium tabular-nums">0{n}</span>
               </span>
               <span
                 className={`hidden text-[10.5px] uppercase tracking-[0.22em] transition-colors duration-500 md:block ${
-                  isActive ? "text-champagne-200/80" : isDone ? "text-bone/55" : "text-bone/30"
+                  isActive ? "text-champagne-200/80" : isDone ? "text-ink/55" : "text-ink/30"
                 }`}
               >
                 {label}

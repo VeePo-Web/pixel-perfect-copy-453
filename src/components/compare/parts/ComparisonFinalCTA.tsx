@@ -15,18 +15,18 @@ export default function ComparisonFinalCTA() {
         </div>
         <h2
           id="final-cta-heading"
-          className="mt-4 mx-auto max-w-[22ch] font-light text-bone text-[36px] leading-[1.08] tracking-[-0.01em] sm:text-[52px]"
+          className="mt-4 mx-auto max-w-[22ch] font-light text-ink text-[36px] leading-[1.08] tracking-[-0.01em] sm:text-[52px]"
         >
           Start with the missing layer.
         </h2>
-        <p className="mx-auto mt-5 max-w-[64ch] text-[15px] leading-relaxed text-bone/65">
+        <p className="mx-auto mt-5 max-w-[64ch] text-[15px] leading-relaxed text-ink/65">
           If your books exist, your tools are active, and your business still feels financially unclear, the Monthly Finance Desk may be the monthly rhythm your business has been missing.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
             href="#/apply"
             onClick={() => track("apply_clicked_from_compare", { source: "final" })}
-            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
           >
             <span className="relative z-10">Apply for the Monthly Finance Desk</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -34,19 +34,19 @@ export default function ComparisonFinalCTA() {
           <a
             href="#/sample-briefing"
             onClick={() => track("sample_briefing_clicked_from_compare", { source: "final" })}
-            className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+            className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
           >
             Generate Sample Finance Briefing
           </a>
           <a
             href="#/templates"
             onClick={() => track("templates_clicked_from_compare", { source: "final" })}
-            className="text-[12.5px] text-bone/55 underline-offset-4 hover:text-bone hover:underline"
+            className="text-[12.5px] text-ink/55 underline-offset-4 hover:text-ink hover:underline"
           >
             Start With Free Templates
           </a>
         </div>
-        <p className="mt-6 text-[11.5px] uppercase tracking-[0.22em] text-bone/40">
+        <p className="mt-6 text-[11.5px] uppercase tracking-[0.22em] text-ink/40">
           No payment or bank connection required to apply.
         </p>
       </div>

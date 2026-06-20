@@ -43,7 +43,7 @@ export default function BriefingTabs({ business }: { business: DemoBusiness }) {
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
             Explore the briefing
           </div>
-          <h2 className="mt-4 font-light text-bone text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
+          <h2 className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
             Move through the briefing the way an owner would read it.
           </h2>
         </div>
@@ -69,8 +69,8 @@ export default function BriefingTabs({ business }: { business: DemoBusiness }) {
                   onClick={() => setActive(t.id)}
                   className={`whitespace-nowrap rounded-full border px-5 py-2.5 text-[13px] tracking-wide transition-all duration-300 ease-cinema ${
                     isActive
-                      ? "border-champagne-200/50 bg-charcoal-800/80 text-bone shadow-[0_0_0_1px_rgba(217,190,130,0.18)]"
-                      : "border-ink/[0.08] text-bone/55 hover:border-ink/20 hover:text-bone/85"
+                      ? "border-champagne-200/50 bg-charcoal-800/80 text-ink shadow-[0_0_0_1px_rgba(217,190,130,0.18)]"
+                      : "border-ink/[0.08] text-ink/55 hover:border-ink/20 hover:text-ink/85"
                   }`}
                 >
                   {t.label}
@@ -118,8 +118,8 @@ function Panel({
     <div
       className={`rounded-2xl border ${accentClass} p-6 transition-all duration-300 ease-cinema hover:-translate-y-0.5`}
     >
-      <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/55">{label}</div>
-      <p className="mt-3 text-[15px] leading-[1.7] text-bone/90">{body}</p>
+      <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/55">{label}</div>
+      <p className="mt-3 text-[15px] leading-[1.7] text-ink/90">{body}</p>
     </div>
   );
 }

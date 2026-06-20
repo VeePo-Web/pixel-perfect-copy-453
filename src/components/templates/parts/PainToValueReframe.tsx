@@ -26,16 +26,16 @@ export default function PainToValueReframe() {
             </div>
             <h2
               id="reframe-heading"
-              className="mt-4 max-w-[22ch] font-light text-bone text-[32px] leading-[1.1] tracking-[-0.01em] sm:text-[44px]"
+              className="mt-4 max-w-[22ch] font-light text-ink text-[32px] leading-[1.1] tracking-[-0.01em] sm:text-[44px]"
             >
               Most owners do not need more numbers. They need a clearer way to review them.
             </h2>
-            <p className="mt-5 max-w-[58ch] text-[15px] leading-[1.7] text-bone/70">
+            <p className="mt-5 max-w-[58ch] text-[15px] leading-[1.7] text-ink/70">
               Your bank balance tells you what is left. Your bookkeeping tells you what happened. Your spreadsheets only help when someone has time to update them. These templates give you a better starting structure — so you can review cash flow, expenses, hiring, and monthly decisions with more clarity.
             </p>
             <a
               href="#template-grid"
-              className="mt-7 inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+              className="mt-7 inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
             >
               Browse the Template Library <span aria-hidden>→</span>
             </a>
@@ -70,7 +70,7 @@ function Column({
     >
       <div
         className={`text-[10.5px] uppercase tracking-[0.28em] ${
-          isLit ? "text-champagne-200/85" : "text-bone/45"
+          isLit ? "text-champagne-200/85" : "text-ink/45"
         }`}
       >
         {title}
@@ -83,7 +83,7 @@ function Column({
                 isLit ? "bg-champagne-200" : "bg-ink/15"
               }`}
             />
-            <span className={`text-[14px] ${isLit ? "text-bone" : "text-bone/55"}`}>{x}</span>
+            <span className={`text-[14px] ${isLit ? "text-ink" : "text-ink/55"}`}>{x}</span>
           </li>
         ))}
       </ul>

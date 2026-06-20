@@ -32,10 +32,10 @@ export default function ApplicationStepShell({
       <div className="mb-6 text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">
         {eyebrow ?? `Application · 0${step} / 0${total}`}
       </div>
-      <h1 className="font-zentry text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] tracking-tight text-bone">
+      <h1 className="font-zentry text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] tracking-tight text-ink">
         {headline}
       </h1>
-      {sub && <p className="mt-4 max-w-xl text-[14.5px] leading-[1.7] text-bone/65">{sub}</p>}
+      {sub && <p className="mt-4 max-w-xl text-[14.5px] leading-[1.7] text-ink/65">{sub}</p>}
       <div className="mt-10 space-y-8">{children}</div>
 
       {/* Footer nav (desktop) */}
@@ -45,7 +45,7 @@ export default function ApplicationStepShell({
             <button
               type="button"
               onClick={onBack}
-              className="text-[13px] text-bone/55 transition-colors hover:text-bone"
+              className="text-[13px] text-ink/55 transition-colors hover:text-ink"
             >
               ← Back
             </button>
@@ -58,7 +58,7 @@ export default function ApplicationStepShell({
               type="button"
               onClick={onContinue}
               disabled={continueDisabled}
-              className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema enabled:hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] disabled:opacity-40 disabled:cursor-not-allowed"
+              className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema enabled:hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <span className="relative z-10">{continueLabel}</span>
               <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -78,7 +78,7 @@ export default function ApplicationStepShell({
               <button
                 type="button"
                 onClick={onBack}
-                className="rounded-full border border-ink/15 px-4 py-3 text-[13px] text-bone/75"
+                className="rounded-full border border-ink/15 px-4 py-3 text-[13px] text-ink/75"
               >
                 Back
               </button>
@@ -87,7 +87,7 @@ export default function ApplicationStepShell({
               type="button"
               onClick={onContinue}
               disabled={continueDisabled}
-              className="flex-1 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-charcoal-950 disabled:opacity-40"
+              className="flex-1 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy disabled:opacity-40"
             >
               {continueLabel}
             </button>

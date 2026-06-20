@@ -19,7 +19,7 @@ export default function RecommendedStartingPaths({ activeId, onSelect }: Props) 
           </div>
           <h2
             id="paths-heading"
-            className="mt-3 font-light text-bone text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
+            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
           >
             Choose the question that sounds closest to what you are trying to understand.
           </h2>
@@ -50,11 +50,11 @@ export default function RecommendedStartingPaths({ activeId, onSelect }: Props) 
                 <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/70">
                   {active ? "Highlighted in library" : "Owner question"}
                 </div>
-                <div className="mt-2 text-[18px] font-light leading-snug text-bone">“{p.question}”</div>
-                <div className="mt-4 text-[12px] text-bone/55">
+                <div className="mt-2 text-[18px] font-light leading-snug text-ink">“{p.question}”</div>
+                <div className="mt-4 text-[12px] text-ink/55">
                   Highlights {p.templateIds.length} templates in the library
                 </div>
-                <div className="mt-5 inline-flex items-center gap-2 text-[12.5px] text-bone/85 transition-colors group-hover:text-champagne-200">
+                <div className="mt-5 inline-flex items-center gap-2 text-[12.5px] text-ink/85 transition-colors group-hover:text-champagne-200">
                   {p.cta} <span aria-hidden>→</span>
                 </div>
               </button>

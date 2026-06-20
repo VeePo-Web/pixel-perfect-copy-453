@@ -23,7 +23,7 @@ export default function MobileStickyTemplateCTA({ downloaded }: Props) {
       style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
     >
       <div className="flex items-center justify-between gap-3 px-4 pt-3">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-bone/50">
+        <p className="text-[11px] uppercase tracking-[0.22em] text-ink/50">
           {downloaded ? "Next step" : "Free · no bank required"}
         </p>
         <a
@@ -31,7 +31,7 @@ export default function MobileStickyTemplateCTA({ downloaded }: Props) {
           onClick={() => {
             if (downloaded) track("sample_briefing_clicked_from_templates", { source: "mobile-sticky" });
           }}
-          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-charcoal-950"
+          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"
         >
           {label}
         </a>

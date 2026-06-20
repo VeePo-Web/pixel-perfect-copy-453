@@ -15,17 +15,17 @@ export default function TemplateFinalCTA() {
         </div>
         <h2
           id="final-cta-heading"
-          className="mt-4 mx-auto max-w-[20ch] font-light text-bone text-[36px] leading-[1.08] tracking-[-0.01em] sm:text-[52px]"
+          className="mt-4 mx-auto max-w-[20ch] font-light text-ink text-[36px] leading-[1.08] tracking-[-0.01em] sm:text-[52px]"
         >
           Start free. Upgrade when you want the rhythm.
         </h2>
-        <p className="mx-auto mt-5 max-w-[60ch] text-[15px] leading-relaxed text-bone/65">
+        <p className="mx-auto mt-5 max-w-[60ch] text-[15px] leading-relaxed text-ink/65">
           Download the templates to begin organizing your financial view, or apply for the Monthly Finance Desk when you are ready for structure, automation, bi-weekly briefings, and a monthly strategy review.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
             href="#template-grid"
-            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
           >
             <span className="relative z-10">Get Free Templates</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -33,19 +33,19 @@ export default function TemplateFinalCTA() {
           <a
             href="#/apply"
             onClick={() => track("apply_clicked_from_templates", { source: "final" })}
-            className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+            className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
           >
             Apply for Monthly Finance Desk
           </a>
           <a
             href="#/sample-briefing"
             onClick={() => track("sample_briefing_clicked_from_templates", { source: "final" })}
-            className="text-[12.5px] text-bone/55 underline-offset-4 hover:text-bone hover:underline"
+            className="text-[12.5px] text-ink/55 underline-offset-4 hover:text-ink hover:underline"
           >
             Generate Sample Finance Briefing
           </a>
         </div>
-        <p className="mt-6 text-[11.5px] uppercase tracking-[0.22em] text-bone/40">
+        <p className="mt-6 text-[11.5px] uppercase tracking-[0.22em] text-ink/40">
           No bank connection required to start.
         </p>
       </div>

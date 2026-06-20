@@ -8,7 +8,7 @@ export default function PricingFAQ() {
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
             FAQ
           </div>
-          <h2 id="faq-title" className="mt-4 font-light text-bone text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
+          <h2 id="faq-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
             Questions owners usually ask before applying.
           </h2>
         </div>
@@ -17,22 +17,22 @@ export default function PricingFAQ() {
           {faq.map((item, i) => (
             <details key={item.q} open={i === 0} className="group">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 px-6 py-5 transition-colors hover:bg-ink/[0.02]">
-                <span className="text-[15.5px] text-bone group-open:text-bone">{item.q}</span>
+                <span className="text-[15.5px] text-ink group-open:text-ink">{item.q}</span>
                 <span
                   aria-hidden
-                  className="text-[20px] leading-none text-bone/45 transition-transform duration-300 group-open:rotate-45"
+                  className="text-[20px] leading-none text-ink/45 transition-transform duration-300 group-open:rotate-45"
                 >
                   +
                 </span>
               </summary>
-              <div className="px-6 pb-6 pt-1 text-[14.5px] leading-[1.7] text-bone/75">
+              <div className="px-6 pb-6 pt-1 text-[14.5px] leading-[1.7] text-ink/75">
                 {item.a}
               </div>
             </details>
           ))}
         </div>
 
-        <p className="mt-8 text-[11.5px] uppercase tracking-[0.2em] text-bone/40">
+        <p className="mt-8 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
           Monthly Finance Desk does not replace tax, legal, accounting, or investment advice.
         </p>
       </div>

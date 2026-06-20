@@ -20,8 +20,8 @@ export default function SelectableCard({ label, selected, onSelect, role = "radi
       }}
       className={`group relative flex items-center justify-between rounded-xl border px-4 py-3.5 text-left text-[14px] transition-all duration-300 ease-cinema focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/50 ${
         selected
-          ? "border-champagne-200/40 bg-champagne-200/[0.05] text-bone shadow-[0_8px_30px_-10px_rgba(217,190,130,0.25)]"
-          : "border-ink/[0.07] bg-charcoal-900/40 text-bone/75 hover:-translate-y-0.5 hover:border-champagne-200/25 hover:text-bone"
+          ? "border-champagne-200/40 bg-champagne-200/[0.05] text-ink shadow-[0_8px_30px_-10px_rgba(217,190,130,0.25)]"
+          : "border-ink/[0.07] bg-charcoal-900/40 text-ink/75 hover:-translate-y-0.5 hover:border-champagne-200/25 hover:text-ink"
       }`}
     >
       <span className="leading-snug">{label}</span>

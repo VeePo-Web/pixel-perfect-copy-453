@@ -23,7 +23,7 @@ export default function BriefingGenerationState({ activeIndex }: Props) {
                   : "bg-bone/20"
               }`}
             />
-            <span className={state === "done" ? "text-bone/60" : "text-bone/90"}>{line}</span>
+            <span className={state === "done" ? "text-ink/60" : "text-ink/90"}>{line}</span>
           </div>
         );
       })}

@@ -29,14 +29,14 @@ export default function BriefingReportShell({ business, visible }: Props) {
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
               Sample Bi-Weekly Finance Briefing
             </div>
-            <h2 className="mt-3 font-light text-bone text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[42px]">
+            <h2 className="mt-3 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[42px]">
               {business.reportTitle}
             </h2>
-            <p className="mt-2 text-[13px] text-bone/55">
+            <p className="mt-2 text-[13px] text-ink/55">
               {business.period} · Demo Data
             </p>
           </div>
-          <p className="max-w-[42ch] text-[12px] leading-[1.6] text-bone/45">
+          <p className="max-w-[42ch] text-[12px] leading-[1.6] text-ink/45">
             This is a sample briefing using demo numbers. Your real briefing would be based on your onboarded financial system. Not financial, tax, legal, or investment advice.
           </p>
         </div>

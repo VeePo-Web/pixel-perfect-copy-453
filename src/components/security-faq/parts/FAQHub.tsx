@@ -18,7 +18,7 @@ export default function FAQHub() {
           </div>
           <h2
             id="faq-hub-heading"
-            className="mt-3 font-light text-bone text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
           >
             Every question, organized.
           </h2>
@@ -36,11 +36,11 @@ export default function FAQHub() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search security, pricing, application, or process questions…"
-              className="h-12 w-full rounded-full border border-ink/[0.08] bg-ink/[0.02] pl-12 pr-5 text-[13.5px] text-bone placeholder:text-bone/35 focus:border-champagne-200/40 focus:outline-none focus:ring-2 focus:ring-champagne-200/20"
+              className="h-12 w-full rounded-full border border-ink/[0.08] bg-ink/[0.02] pl-12 pr-5 text-[13.5px] text-ink placeholder:text-ink/35 focus:border-champagne-200/40 focus:outline-none focus:ring-2 focus:ring-champagne-200/20"
             />
             <svg
               aria-hidden
-              className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-bone/45"
+              className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink/45"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -57,7 +57,7 @@ export default function FAQHub() {
         <div className="mt-8 grid gap-8 lg:grid-cols-[220px_1fr]">
           {/* Category nav */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
-            <div className="hidden text-[10.5px] uppercase tracking-[0.28em] text-bone/40 lg:block">
+            <div className="hidden text-[10.5px] uppercase tracking-[0.28em] text-ink/40 lg:block">
               Categories
             </div>
             <nav
@@ -83,7 +83,7 @@ export default function FAQHub() {
           {/* Accordions */}
           <div>
             {filtered.length === 0 ? (
-              <p className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 text-[13.5px] text-bone/55">
+              <p className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 text-[13.5px] text-ink/55">
                 No questions match that search. Try a different word, or pick a category.
               </p>
             ) : (
@@ -97,12 +97,12 @@ export default function FAQHub() {
                         onClick={() => toggle(f.id, f.q)}
                         aria-expanded={open}
                         aria-controls={`${f.id}-panel`}
-                        className="flex w-full cursor-pointer items-start justify-between gap-4 text-left text-[14.5px] text-bone focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/40"
+                        className="flex w-full cursor-pointer items-start justify-between gap-4 text-left text-[14.5px] text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/40"
                       >
                         <span>{f.q}</span>
                         <span
                           aria-hidden
-                          className={`mt-1 inline-block h-4 w-4 shrink-0 text-bone/55 transition-transform duration-300 ${
+                          className={`mt-1 inline-block h-4 w-4 shrink-0 text-ink/55 transition-transform duration-300 ${
                             open ? "rotate-45" : ""
                           }`}
                         >
@@ -114,7 +114,7 @@ export default function FAQHub() {
                           id={`${f.id}-panel`}
                           role="region"
                           aria-labelledby={f.id}
-                          className="mt-3 max-w-[68ch] text-[13.5px] leading-relaxed text-bone/70"
+                          className="mt-3 max-w-[68ch] text-[13.5px] leading-relaxed text-ink/70"
                         >
                           {f.a}
                         </div>
@@ -124,7 +124,7 @@ export default function FAQHub() {
                 })}
               </div>
             )}
-            <p className="mt-6 text-[11.5px] leading-relaxed text-bone/40">
+            <p className="mt-6 text-[11.5px] leading-relaxed text-ink/40">
               Monthly Finance Desk does not replace tax, legal, accounting, bookkeeping
               cleanup, CFO services, or investment advice.
             </p>
@@ -151,8 +151,8 @@ function CategoryChip({
       aria-pressed={active}
       className={`shrink-0 rounded-full border px-3 py-1.5 text-[12.5px] transition-colors lg:w-full lg:rounded-lg lg:text-left lg:px-3 ${
         active
-          ? "border-champagne-200/40 bg-champagne-200/[0.08] text-bone"
-          : "border-ink/[0.08] bg-transparent text-bone/55 hover:border-ink/[0.18] hover:text-bone"
+          ? "border-champagne-200/40 bg-champagne-200/[0.08] text-ink"
+          : "border-ink/[0.08] bg-transparent text-ink/55 hover:border-ink/[0.18] hover:text-ink"
       }`}
     >
       {label}

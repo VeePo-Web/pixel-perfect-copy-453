@@ -13,8 +13,8 @@ export default function RevenueTrendModule({ business }: { business: DemoBusines
         <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
           <div className="flex items-end justify-between">
             <div>
-              <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/55">Total revenue</div>
-              <div className="mt-2 text-[30px] font-light tabular-nums text-bone">{fmt(business.revenue)}</div>
+              <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/55">Total revenue</div>
+              <div className="mt-2 text-[30px] font-light tabular-nums text-ink">{fmt(business.revenue)}</div>
               <div className={`mt-1 text-[12.5px] ${positive ? "text-green-signal" : "text-champagne-200"}`}>
                 {positive ? "+" : ""}{business.revenueDelta}% vs prior 2 weeks
               </div>
@@ -27,11 +27,11 @@ export default function RevenueTrendModule({ business }: { business: DemoBusines
         <div className="space-y-4">
           <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
             <ConcentrationMeter value={business.topClientConcentration} />
-            <p className="mt-4 text-[14px] leading-[1.65] text-bone/80">{business.insights.revenue}</p>
+            <p className="mt-4 text-[14px] leading-[1.65] text-ink/80">{business.insights.revenue}</p>
           </div>
           <div className="rounded-lg border border-champagne-200/20 bg-champagne-300/[0.04] p-4">
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/80">Watch</div>
-            <p className="mt-1.5 text-[13px] text-bone/85">
+            <p className="mt-1.5 text-[13px] text-ink/85">
               Concentration risk worth raising on the monthly call before committing to new fixed costs.
             </p>
           </div>

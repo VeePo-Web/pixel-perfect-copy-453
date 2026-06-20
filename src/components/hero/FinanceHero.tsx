@@ -157,7 +157,7 @@ const FinanceHero = () => {
   const ctasDisabled = state === "loading";
 
   return (
-    <section id="top" className="relative w-full overflow-hidden bg-charcoal-950 text-bone">
+    <section id="top" className="relative w-full overflow-hidden bg-charcoal-950 text-ink">
       {/* Cinematic background */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {/* Base radial wash */}
@@ -194,17 +194,17 @@ const FinanceHero = () => {
             </div>
 
             {/* Slogan */}
-            <p className="mt-6 font-circular-web text-sm text-bone/70 sm:text-base">
+            <p className="mt-6 font-circular-web text-sm text-ink/70 sm:text-base">
               {COPY.slogan}
             </p>
 
             {/* Headline */}
-            <h1 className="mt-3 font-zentry text-[2.4rem] font-black uppercase leading-[0.95] text-bone sm:text-6xl lg:text-7xl">
+            <h1 className="mt-3 font-zentry text-[2.4rem] font-black uppercase leading-[0.95] text-ink sm:text-6xl lg:text-7xl">
               {COPY.headline}
             </h1>
 
             {/* Subheadline */}
-            <p className="mt-7 max-w-2xl font-circular-web text-base leading-relaxed text-bone/75 sm:text-lg">
+            <p className="mt-7 max-w-2xl font-circular-web text-base leading-relaxed text-ink/75 sm:text-lg">
               <span className="hidden md:inline">{COPY.subheadline}</span>
               <span className="md:hidden">{COPY.mobile.sub}</span>
             </p>
@@ -220,13 +220,13 @@ const FinanceHero = () => {
                     placeholder={COPY.placeholder}
                     aria-label="Describe your business"
                     rows={3}
-                    className="relative flex-1 resize-none bg-transparent px-5 py-4 font-circular-web text-base text-bone placeholder:text-bone/40 focus:outline-none sm:py-5"
+                    className="relative flex-1 resize-none bg-transparent px-5 py-4 font-circular-web text-base text-ink placeholder:text-ink/40 focus:outline-none sm:py-5"
                   />
                   <div className="relative flex items-stretch border-t border-champagne-300/10 p-2 sm:border-l sm:border-t-0">
                     <button
                       onClick={startDemo}
                       disabled={ctasDisabled}
-                      className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-charcoal-950 transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.6)] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:rounded-lg"
+                      className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.6)] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:rounded-lg"
                     >
                       <span className="hidden md:inline">{COPY.primaryCta}</span>
                       <span className="md:hidden">{COPY.mobile.cta}</span>
@@ -241,7 +241,7 @@ const FinanceHero = () => {
                 </div>
               </div>
 
-              <p className="mt-3 pl-1 font-circular-web text-sm italic text-bone/50">
+              <p className="mt-3 pl-1 font-circular-web text-sm italic text-ink/50">
                 {COPY.example}
               </p>
 
@@ -249,13 +249,13 @@ const FinanceHero = () => {
                 <button
                   onClick={useDemoData}
                   disabled={ctasDisabled}
-                  className="font-general text-[0.68rem] uppercase tracking-[0.2em] text-bone/45 underline-offset-4 transition-colors hover:text-champagne-100 hover:underline disabled:opacity-50"
+                  className="font-general text-[0.68rem] uppercase tracking-[0.2em] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-100 hover:underline disabled:opacity-50"
                 >
                   Try demo business data
                 </button>
               </div>
 
-              <p className="mt-5 max-w-md font-circular-web text-xs leading-relaxed text-bone/45">
+              <p className="mt-5 max-w-md font-circular-web text-xs leading-relaxed text-ink/45">
                 <span className="hidden md:inline">{COPY.trust}</span>
                 <span className="md:hidden">{COPY.mobile.trust}</span>
               </p>
@@ -271,7 +271,7 @@ const FinanceHero = () => {
               {COPY.badges.map((b) => (
                 <span
                   key={b}
-                  className="rounded-full border border-champagne-300/20 bg-charcoal-800/70 px-3 py-1.5 font-general text-[0.66rem] uppercase tracking-[0.16em] text-bone/70"
+                  className="rounded-full border border-champagne-300/20 bg-charcoal-800/70 px-3 py-1.5 font-general text-[0.66rem] uppercase tracking-[0.16em] text-ink/70"
                 >
                   {b}
                 </span>
@@ -300,7 +300,7 @@ const HeroNav = () => {
       <div className="mx-auto flex h-[72px] w-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
         <a
           href="#top"
-          className="font-general text-[0.78rem] uppercase tracking-[0.22em] text-bone"
+          className="font-general text-[0.78rem] uppercase tracking-[0.22em] text-ink"
         >
           Monthly Finance Desk
         </a>
@@ -309,7 +309,7 @@ const HeroNav = () => {
             <a
               key={l.href}
               href={l.href}
-              className="font-general text-[0.7rem] uppercase tracking-[0.2em] text-bone/65 transition-colors hover:text-champagne-100"
+              className="font-general text-[0.7rem] uppercase tracking-[0.2em] text-ink/65 transition-colors hover:text-champagne-100"
             >
               {l.label}
             </a>
@@ -320,7 +320,7 @@ const HeroNav = () => {
           aria-label="Open menu"
           aria-expanded={open}
           onClick={() => setOpen((o) => !o)}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-bone/15 text-bone/80 md:hidden"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-bone/15 text-ink/80 md:hidden"
         >
           <span className="relative block h-2.5 w-4">
             <span
@@ -340,7 +340,7 @@ const HeroNav = () => {
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="border-b border-bone/5 py-3 font-general text-[0.78rem] uppercase tracking-[0.2em] text-bone/75 last:border-b-0 hover:text-champagne-100"
+                className="border-b border-bone/5 py-3 font-general text-[0.78rem] uppercase tracking-[0.2em] text-ink/75 last:border-b-0 hover:text-champagne-100"
               >
                 {l.label}
               </a>
@@ -388,7 +388,7 @@ const BriefingPanel = ({
           <p className="font-general text-[0.62rem] uppercase tracking-[0.22em] text-champagne-200/80">
             MFD &middot; Briefing 001
           </p>
-          <p className="mt-1 font-circular-web text-base text-bone">
+          <p className="mt-1 font-circular-web text-base text-ink">
             {COPY.panelLabel}
           </p>
         </div>
@@ -396,7 +396,7 @@ const BriefingPanel = ({
           className={`inline-flex items-center gap-2 rounded-full border px-2.5 py-1 font-general text-[0.6rem] uppercase tracking-[0.18em] transition-colors duration-[400ms] ease-cinema ${
             state === "briefing"
               ? "border-champagne-200/40 text-champagne-100"
-              : "border-bone/15 text-bone/55"
+              : "border-bone/15 text-ink/55"
           }`}
         >
           <span
@@ -430,10 +430,10 @@ const BriefingPanel = ({
                   className="relative flex items-center justify-between overflow-hidden rounded-lg border border-bone/5 bg-charcoal-900/40 px-4 py-3 motion-safe:animate-section-in"
                 >
                   <span className="flex items-center gap-3">
-                    <span className="font-general text-[0.62rem] tracking-[0.18em] text-bone/35">
+                    <span className="font-general text-[0.62rem] tracking-[0.18em] text-ink/35">
                       0{i + 1}
                     </span>
-                    <span className="font-circular-web text-sm text-bone/80">{label}</span>
+                    <span className="font-circular-web text-sm text-ink/80">{label}</span>
                   </span>
                   <span className="relative h-px w-16 overflow-hidden bg-bone/10">
                     <span className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent motion-safe:animate-shimmer" />
@@ -452,7 +452,7 @@ const BriefingPanel = ({
                   <div
                     key={line}
                     className={`flex items-center gap-3 font-circular-web text-sm transition-[color,opacity] duration-[240ms] ease-cinema ${
-                      active ? "text-bone" : done ? "text-bone/55" : "text-bone/25"
+                      active ? "text-ink" : done ? "text-ink/55" : "text-ink/25"
                     }`}
                   >
                     {done ? (
@@ -505,7 +505,7 @@ const BriefingPanel = ({
                       className="h-px flex-1 origin-left bg-gradient-to-r from-champagne-200/30 to-transparent motion-safe:animate-rim-in"
                     />
                   </div>
-                  <p className="mt-1.5 font-circular-web text-[0.95rem] leading-relaxed text-bone/85">
+                  <p className="mt-1.5 font-circular-web text-[0.95rem] leading-relaxed text-ink/85">
                     {highlightFigures(s.body)}
                   </p>
                 </div>
@@ -536,14 +536,14 @@ const PostDemoCTA = () => (
     className="relative mt-6 overflow-hidden rounded-2xl border border-champagne-300/20 bg-charcoal-800/60 p-6 motion-safe:animate-panel-rise"
     style={{ animationDelay: "250ms" }}
   >
-    <h3 className="font-zentry text-2xl font-black uppercase leading-tight text-bone sm:text-3xl">
+    <h3 className="font-zentry text-2xl font-black uppercase leading-tight text-ink sm:text-3xl">
       {COPY.postDemo.headline}
     </h3>
-    <p className="mt-3 font-circular-web text-sm leading-relaxed text-bone/75">
+    <p className="mt-3 font-circular-web text-sm leading-relaxed text-ink/75">
       {COPY.postDemo.body}
     </p>
     <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-      <button className="group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-charcoal-950 transition-colors duration-[400ms] ease-cinema hover:bg-champagne-100">
+      <button className="group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-colors duration-[400ms] ease-cinema hover:bg-champagne-100">
         <span
           aria-hidden
           className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow group-hover/cta:opacity-0"
@@ -551,11 +551,11 @@ const PostDemoCTA = () => (
         <span className="relative">{COPY.postDemo.primary}</span>
         <span aria-hidden className="relative">&rarr;</span>
       </button>
-      <button className="inline-flex items-center justify-center rounded-full border border-bone/20 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-bone/85 transition-colors duration-[400ms] ease-cinema hover:border-champagne-200/60 hover:text-champagne-100">
+      <button className="inline-flex items-center justify-center rounded-full border border-bone/20 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink/85 transition-colors duration-[400ms] ease-cinema hover:border-champagne-200/60 hover:text-champagne-100">
         {COPY.postDemo.secondary}
       </button>
     </div>
-    <p className="mt-4 font-circular-web text-xs italic text-bone/50">
+    <p className="mt-4 font-circular-web text-xs italic text-ink/50">
       {COPY.postDemo.micro}
     </p>
   </div>

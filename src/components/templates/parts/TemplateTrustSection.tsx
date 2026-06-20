@@ -13,7 +13,7 @@ export default function TemplateTrustSection() {
           </div>
           <h2
             id="trust-heading"
-            className="mt-3 font-light text-bone text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
+            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
           >
             Built for owners who want decisions, not just data.
           </h2>
@@ -25,12 +25,12 @@ export default function TemplateTrustSection() {
               className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5 transition-colors hover:border-champagne-200/25"
             >
               <div className="h-px w-8 bg-champagne-200/60" />
-              <div className="mt-4 text-[15px] font-light leading-snug text-bone">{c.title}</div>
-              <p className="mt-2 text-[12.5px] leading-relaxed text-bone/60">{c.copy}</p>
+              <div className="mt-4 text-[15px] font-light leading-snug text-ink">{c.title}</div>
+              <p className="mt-2 text-[12.5px] leading-relaxed text-ink/60">{c.copy}</p>
             </div>
           ))}
         </div>
-        <ul className="mt-10 grid gap-2 text-[12.5px] text-bone/55 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-10 grid gap-2 text-[12.5px] text-ink/55 sm:grid-cols-2 lg:grid-cols-3">
           {[
             "Built for serious owner-led businesses",
             "Designed around real owner questions",

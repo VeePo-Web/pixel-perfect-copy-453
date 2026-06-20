@@ -31,15 +31,15 @@ export default function SampleBriefingHero(props: Props) {
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
               Sample bi-weekly finance briefing
             </div>
-            <h1 className="mt-5 max-w-[18ch] font-light text-bone text-[40px] leading-[1.05] tracking-[-0.01em] sm:text-[52px] lg:text-[60px]">
+            <h1 className="mt-5 max-w-[18ch] font-light text-ink text-[40px] leading-[1.05] tracking-[-0.01em] sm:text-[52px] lg:text-[60px]">
               See what financial clarity feels like before you apply.
             </h1>
-            <p className="mt-5 max-w-[52ch] text-[15.5px] leading-[1.7] text-bone/70">
+            <p className="mt-5 max-w-[52ch] text-[15.5px] leading-[1.7] text-ink/70">
               Choose a demo business or describe your own situation to preview a plain-English finance briefing — no bank connection required.
             </p>
 
             <div className="mt-8">
-              <div className="mb-3 text-[10.5px] uppercase tracking-[0.22em] text-bone/45">
+              <div className="mb-3 text-[10.5px] uppercase tracking-[0.22em] text-ink/45">
                 Pick an industry
               </div>
               <DemoBusinessSelector selectedId={props.businessId} onSelect={props.selectBusiness} />
@@ -54,7 +54,7 @@ export default function SampleBriefingHero(props: Props) {
               />
             </div>
 
-            <p className="mt-4 max-w-[60ch] text-[11.5px] uppercase tracking-[0.2em] text-bone/40">
+            <p className="mt-4 max-w-[60ch] text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
               Use demo data or rough non-sensitive numbers. No bank connection required for this preview.
             </p>
           </div>

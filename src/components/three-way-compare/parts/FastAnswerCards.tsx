@@ -14,7 +14,7 @@ export default function FastAnswerCards() {
           </div>
           <h2
             id="fast-answer-heading"
-            className="mt-3 font-light text-bone text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
           >
             The fast answer.
           </h2>
@@ -38,24 +38,24 @@ export default function FastAnswerCards() {
               ) : null}
               <div
                 className={`text-[10.5px] uppercase tracking-[0.26em] ${
-                  c.isMfd ? "text-champagne-200/85" : "text-bone/45"
+                  c.isMfd ? "text-champagne-200/85" : "text-ink/45"
                 }`}
               >
                 {c.isMfd ? "Likely fit" : "Option"}
               </div>
-              <h3 className="mt-2 text-[18px] font-light leading-snug text-bone">{c.title}</h3>
-              <p className="mt-3 text-[14px] leading-relaxed text-bone/75">{c.body}</p>
+              <h3 className="mt-2 text-[18px] font-light leading-snug text-ink">{c.title}</h3>
+              <p className="mt-3 text-[14px] leading-relaxed text-ink/75">{c.body}</p>
               <div className="mt-5 border-t border-ink/[0.06] pt-4">
-                <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">
+                <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">
                   Best for
                 </div>
-                <p className="mt-1 text-[13px] text-bone/80">{c.bestFor}</p>
+                <p className="mt-1 text-[13px] text-ink/80">{c.bestFor}</p>
               </div>
               <div className="mt-4">
-                <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/40">
+                <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">
                   {c.caveatLabel}
                 </div>
-                <p className="mt-1 text-[12.5px] text-bone/55">{c.caveat}</p>
+                <p className="mt-1 text-[12.5px] text-ink/55">{c.caveat}</p>
               </div>
             </li>
           ))}
@@ -64,7 +64,7 @@ export default function FastAnswerCards() {
         <div className="mt-10">
           <a
             href="#fit-finder"
-            className="inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-6 py-3 text-[13px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+            className="inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-6 py-3 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
           >
             Find My Best Fit
             <span aria-hidden>→</span>

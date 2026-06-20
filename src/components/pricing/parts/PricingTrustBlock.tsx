@@ -9,10 +9,10 @@ export default function PricingTrustBlock() {
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
               Trust & privacy
             </div>
-            <h2 id="trust-title" className="mt-4 font-light text-bone text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[42px]">
+            <h2 id="trust-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[42px]">
               Preview and apply without connecting your bank.
             </h2>
-            <p className="mt-5 max-w-[46ch] text-[15px] leading-[1.7] text-bone/70">
+            <p className="mt-5 max-w-[46ch] text-[15px] leading-[1.7] text-ink/70">
               You can experience the briefing and complete the application before any financial connection. Plaid happens after onboarding, not before.
             </p>
           </div>
@@ -23,7 +23,7 @@ export default function PricingTrustBlock() {
                 className="flex items-start gap-3 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-5 py-4 transition-all duration-300 hover:border-green-signal/40 hover:bg-green-deep/15"
               >
                 <span aria-hidden className="mt-1.5 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-green-signal" />
-                <span className="text-[14px] leading-[1.55] text-bone/85">{t}</span>
+                <span className="text-[14px] leading-[1.55] text-ink/85">{t}</span>
               </li>
             ))}
           </ul>

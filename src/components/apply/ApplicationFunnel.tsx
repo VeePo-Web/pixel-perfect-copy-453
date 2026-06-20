@@ -88,7 +88,7 @@ export default function ApplicationFunnel() {
 
   return (
     <div
-      className="min-h-screen bg-charcoal-950 text-bone"
+      className="min-h-screen bg-charcoal-950 text-ink"
       style={{
         backgroundImage:
           "radial-gradient(1100px 700px at 12% -10%, rgba(217,190,130,0.06), transparent 60%), radial-gradient(900px 600px at 88% 110%, rgba(63,122,94,0.06), transparent 60%)",

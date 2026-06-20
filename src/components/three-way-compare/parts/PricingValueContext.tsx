@@ -15,11 +15,11 @@ export default function PricingValueContext() {
             </div>
             <h2
               id="pricing-context-heading"
-              className="mt-3 font-light text-bone text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
+              className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
             >
               Why the Monthly Finance Desk is $1,500/month.
             </h2>
-            <p className="mt-4 max-w-[58ch] text-[15px] leading-[1.7] text-bone/70">
+            <p className="mt-4 max-w-[58ch] text-[15px] leading-[1.7] text-ink/70">
               You are not paying for bookkeeping. You are not paying for a spreadsheet. You are
               paying for a recurring financial clarity rhythm.
             </p>
@@ -28,7 +28,7 @@ export default function PricingValueContext() {
               {priceFraming.map((line) => (
                 <li
                   key={line}
-                  className="flex items-start gap-3 text-[14px] leading-relaxed text-bone/80"
+                  className="flex items-start gap-3 text-[14px] leading-relaxed text-ink/80"
                 >
                   <span
                     aria-hidden
@@ -43,14 +43,14 @@ export default function PricingValueContext() {
               <a
                 href="#/pricing"
                 onClick={() => trackCtaByHref("#/pricing", "pricing-context")}
-                className="rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+                className="rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
               >
                 View Pricing
               </a>
               <a
                 href="#/apply"
                 onClick={() => trackCtaByHref("#/apply", "pricing-context")}
-                className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-charcoal-950 transition-all duration-300 ease-cinema hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)]"
+                className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)]"
               >
                 Apply for Monthly Finance Desk
               </a>
@@ -66,7 +66,7 @@ export default function PricingValueContext() {
               <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/85">
                 Included monthly
               </div>
-              <div className="text-[12px] uppercase tracking-[0.22em] text-bone/45">
+              <div className="text-[12px] uppercase tracking-[0.22em] text-ink/45">
                 $1,500 / mo
               </div>
             </div>
@@ -74,7 +74,7 @@ export default function PricingValueContext() {
               {valueStack.map((item) => (
                 <li
                   key={item}
-                  className="flex items-center gap-3 py-3 text-[13.5px] text-bone/85"
+                  className="flex items-center gap-3 py-3 text-[13.5px] text-ink/85"
                 >
                   <span
                     aria-hidden

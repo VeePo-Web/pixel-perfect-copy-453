@@ -14,7 +14,7 @@ export default function AccessSequence() {
         </div>
         <h2
           id="sequence-heading"
-          className="mt-3 max-w-3xl font-light text-bone text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+          className="mt-3 max-w-3xl font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
         >
           How access works, step by step.
         </h2>
@@ -28,10 +28,10 @@ export default function AccessSequence() {
                 <span className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">
                   Step {s.n}
                 </span>
-                <span className="text-[11px] text-bone/35">0{s.n}</span>
+                <span className="text-[11px] text-ink/35">0{s.n}</span>
               </div>
-              <h3 className="mt-3 text-[15.5px] font-medium text-bone">{s.title}</h3>
-              <p className="mt-2 text-[13px] leading-relaxed text-bone/65">{s.body}</p>
+              <h3 className="mt-3 text-[15.5px] font-medium text-ink">{s.title}</h3>
+              <p className="mt-2 text-[13px] leading-relaxed text-ink/65">{s.body}</p>
               <div className="mt-4 inline-flex w-fit items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/[0.06] px-2.5 py-1 text-[11px] text-emerald-200/85">
                 <span aria-hidden className="h-1 w-1 rounded-full bg-emerald-300/80" />
                 {s.trust}
@@ -45,7 +45,7 @@ export default function AccessSequence() {
             onClick={() =>
               trackCtaByHref("#/sample-briefing", "security_faq_sequence")
             }
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-bone transition-colors hover:border-ink/30 hover:bg-ink/[0.03]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-ink transition-colors hover:border-ink/30 hover:bg-ink/[0.03]"
           >
             Start With a Safe Preview →
           </a>

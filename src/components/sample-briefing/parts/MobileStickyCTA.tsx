@@ -23,13 +23,13 @@ export default function MobileStickyCTA({ status, onGenerate }: Props) {
       style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
     >
       <div className="flex items-center justify-between gap-3 px-4 pt-3">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-bone/50">
+        <p className="text-[11px] uppercase tracking-[0.22em] text-ink/50">
           {ready ? "Make it real" : "Try the briefing"}
         </p>
         {ready ? (
           <a
             href="#/apply"
-            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-charcoal-950"
+            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"
           >
             Apply for Monthly Finance Desk
           </a>
@@ -37,7 +37,7 @@ export default function MobileStickyCTA({ status, onGenerate }: Props) {
           <button
             type="button"
             onClick={onGenerate}
-            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-charcoal-950"
+            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"
           >
             Generate Sample Briefing
           </button>

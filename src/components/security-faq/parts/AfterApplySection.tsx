@@ -14,11 +14,11 @@ export default function AfterApplySection() {
           </div>
           <h2
             id="after-apply-heading"
-            className="mt-3 font-light text-bone text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
           >
             What happens after you apply?
           </h2>
-          <p className="mt-4 max-w-2xl text-[14.5px] leading-relaxed text-bone/65">
+          <p className="mt-4 max-w-2xl text-[14.5px] leading-relaxed text-ink/65">
             The application is designed to understand fit, not collect sensitive access.
           </p>
         </div>
@@ -31,8 +31,8 @@ export default function AfterApplySection() {
               <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">
                 Step {s.n}
               </div>
-              <h3 className="mt-3 text-[15px] font-medium text-bone">{s.title}</h3>
-              <p className="mt-2 text-[13px] leading-relaxed text-bone/65">{s.body}</p>
+              <h3 className="mt-3 text-[15px] font-medium text-ink">{s.title}</h3>
+              <p className="mt-2 text-[13px] leading-relaxed text-ink/65">{s.body}</p>
             </li>
           ))}
         </ol>
@@ -41,7 +41,7 @@ export default function AfterApplySection() {
             aria-hidden
             className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-300"
           />
-          <p className="text-[13px] text-bone/80">
+          <p className="text-[13px] text-ink/80">
             Applying does not require payment, bank connection, or document upload.
           </p>
         </div>
@@ -49,7 +49,7 @@ export default function AfterApplySection() {
           <a
             href="#/apply"
             onClick={() => trackCtaByHref("#/apply", "security_faq_after_apply")}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-charcoal-950 transition-all hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
           >
             Start Application
           </a>

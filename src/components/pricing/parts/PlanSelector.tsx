@@ -13,10 +13,10 @@ export default function PlanSelector() {
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
               Plan selector
             </div>
-            <h2 id="selector-title" className="mt-4 font-light text-bone text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
+            <h2 id="selector-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
               Not sure where to start?
             </h2>
-            <p className="mt-4 max-w-[44ch] text-[15px] leading-[1.7] text-bone/70">
+            <p className="mt-4 max-w-[44ch] text-[15px] leading-[1.7] text-ink/70">
               Three quick questions. Honest recommendation. No bank connection, no email required.
             </p>
             <div className="mt-8 flex items-center gap-2">
@@ -31,7 +31,7 @@ export default function PlanSelector() {
                   />
                 );
               })}
-              <span className="ml-3 text-[11px] uppercase tracking-[0.22em] text-bone/45">
+              <span className="ml-3 text-[11px] uppercase tracking-[0.22em] text-ink/45">
                 {Math.min(s.step + 1, s.total)} / {s.total}
               </span>
             </div>
@@ -40,10 +40,10 @@ export default function PlanSelector() {
           <div className="rounded-3xl border border-ink/[0.08] bg-charcoal-900/65 p-6 backdrop-blur-sm sm:p-8">
             {q && (
               <div key={q.key} className="motion-safe:animate-section-in">
-                <div className="text-[10.5px] uppercase tracking-[0.22em] text-bone/45">
+                <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/45">
                   Question {s.step + 1}
                 </div>
-                <h3 className="mt-2 text-[20px] font-light text-bone">{q.label}</h3>
+                <h3 className="mt-2 text-[20px] font-light text-ink">{q.label}</h3>
                 <div role="radiogroup" aria-label={q.label} className="mt-6 grid gap-2">
                   {q.options.map((opt) => {
                     const selected = s.answers[q.key] === opt.id;
@@ -56,12 +56,12 @@ export default function PlanSelector() {
                         onClick={() => s.setAnswer(q.key, opt.id)}
                         className={`flex items-center justify-between gap-3 rounded-xl border px-5 py-3.5 text-left text-[14px] transition-all duration-300 ease-cinema ${
                           selected
-                            ? "border-champagne-200/50 bg-charcoal-800/80 text-bone"
-                            : "border-ink/[0.08] bg-ink/[0.02] text-bone/80 hover:border-ink/20 hover:text-bone"
+                            ? "border-champagne-200/50 bg-charcoal-800/80 text-ink"
+                            : "border-ink/[0.08] bg-ink/[0.02] text-ink/80 hover:border-ink/20 hover:text-ink"
                         }`}
                       >
                         <span>{opt.label}</span>
-                        <span aria-hidden className={`text-[11px] ${selected ? "text-champagne-200" : "text-bone/30"}`}>→</span>
+                        <span aria-hidden className={`text-[11px] ${selected ? "text-champagne-200" : "text-ink/30"}`}>→</span>
                       </button>
                     );
                   })}
@@ -71,14 +71,14 @@ export default function PlanSelector() {
                     type="button"
                     onClick={s.back}
                     disabled={s.step === 0}
-                    className="text-[12px] text-bone/55 transition-colors hover:text-bone disabled:opacity-40"
+                    className="text-[12px] text-ink/55 transition-colors hover:text-ink disabled:opacity-40"
                   >
                     ← Back
                   </button>
                   <button
                     type="button"
                     onClick={s.reset}
-                    className="text-[12px] text-bone/45 transition-colors hover:text-bone/80"
+                    className="text-[12px] text-ink/45 transition-colors hover:text-ink/80"
                   >
                     Reset
                   </button>
@@ -91,14 +91,14 @@ export default function PlanSelector() {
                 <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/80">
                   Recommendation
                 </div>
-                <h3 className="mt-3 font-light text-bone text-[26px] leading-[1.15] sm:text-[30px]">
+                <h3 className="mt-3 font-light text-ink text-[26px] leading-[1.15] sm:text-[30px]">
                   {s.recommendation.headline}
                 </h3>
-                <p className="mt-4 text-[15px] leading-[1.7] text-bone/80">{s.recommendation.body}</p>
+                <p className="mt-4 text-[15px] leading-[1.7] text-ink/80">{s.recommendation.body}</p>
                 <div className="mt-7 flex flex-wrap items-center gap-3">
                   <a
                     href={s.recommendation.cta.href}
-                    className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+                    className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
                   >
                     <span className="relative z-10">{s.recommendation.cta.label}</span>
                     <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -106,7 +106,7 @@ export default function PlanSelector() {
                   <button
                     type="button"
                     onClick={s.reset}
-                    className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-bone/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-bone"
+                    className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-ink/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-ink"
                   >
                     Start over
                   </button>

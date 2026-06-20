@@ -17,34 +17,34 @@ export default function PricingHero() {
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
               Pricing
             </div>
-            <h1 className="mt-5 max-w-[20ch] font-light text-bone text-[42px] leading-[1.04] tracking-[-0.01em] sm:text-[56px] lg:text-[64px]">
+            <h1 className="mt-5 max-w-[20ch] font-light text-ink text-[42px] leading-[1.04] tracking-[-0.01em] sm:text-[56px] lg:text-[64px]">
               Choose the level of financial rhythm your business needs.
             </h1>
-            <p className="mt-5 max-w-[58ch] text-[15.5px] leading-[1.7] text-bone/70">
+            <p className="mt-5 max-w-[58ch] text-[15.5px] leading-[1.7] text-ink/70">
               Start with free templates, upgrade to structured financial clarity, or apply for the Monthly Finance Desk — a premium monthly system combining organized spreadsheets, bi-weekly plain-English briefings, and a monthly strategy review.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
                 href="#/apply"
-                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-charcoal-950 transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
               >
                 <span className="relative z-10">Apply for the Monthly Finance Desk</span>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </a>
               <a
                 href="#/sample-briefing"
-                className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-bone/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone"
+                className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
               >
                 Generate Sample Finance Briefing
               </a>
               <a
                 href="#/templates"
-                className="text-[12.5px] text-bone/55 underline-offset-4 transition-colors hover:text-bone hover:underline"
+                className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
                 Start With Free Templates
               </a>
             </div>
-            <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-bone/40">
+            <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
               No bank connection required to preview or apply.
             </p>
           </div>
@@ -75,8 +75,8 @@ export default function PricingHero() {
                       <div className="text-[10px] uppercase tracking-[0.28em] text-champagne-200/70">
                         {t.flagship ? "Recommended" : "Tier"}
                       </div>
-                      <div className="mt-2 text-[15px] text-bone">{t.name}</div>
-                      <div className={`mt-4 font-light tabular-nums ${t.flagship ? "text-[36px] text-bone" : "text-[26px] text-bone/80"}`}>
+                      <div className="mt-2 text-[15px] text-ink">{t.name}</div>
+                      <div className={`mt-4 font-light tabular-nums ${t.flagship ? "text-[36px] text-ink" : "text-[26px] text-ink/80"}`}>
                         {t.price}
                       </div>
                       <div className="mt-5 space-y-2">

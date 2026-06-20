@@ -17,11 +17,11 @@ export default function QuestionsToReviewModule({ business }: { business: DemoBu
             <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-champagne-200/30 text-[11px] tabular-nums text-champagne-100">
               {i + 1}
             </span>
-            <span className="text-[15px] leading-[1.6] text-bone/90">{q}</span>
+            <span className="text-[15px] leading-[1.6] text-ink/90">{q}</span>
           </li>
         ))}
       </ol>
-      <p className="mt-6 text-[13px] text-bone/55">
+      <p className="mt-6 text-[13px] text-ink/55">
         A good briefing should not just report numbers. It should surface the questions an owner needs to ask.
       </p>
     </ModuleShell>

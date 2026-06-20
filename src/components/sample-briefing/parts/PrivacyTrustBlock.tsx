@@ -9,10 +9,10 @@ export default function PrivacyTrustBlock() {
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
               Preview safely
             </div>
-            <h2 className="mt-4 font-light text-bone text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[42px]">
+            <h2 className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[42px]">
               Preview safely. Connect only after onboarding.
             </h2>
-            <p className="mt-5 max-w-[46ch] text-[15px] leading-[1.7] text-bone/70">
+            <p className="mt-5 max-w-[46ch] text-[15px] leading-[1.7] text-ink/70">
               You can experience the full briefing rhythm before committing. No bank login, no payment, no pressure.
             </p>
           </div>
@@ -26,7 +26,7 @@ export default function PrivacyTrustBlock() {
                   aria-hidden
                   className="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-green-signal"
                 />
-                <span className="text-[14px] leading-[1.55] text-bone/85">{p}</span>
+                <span className="text-[14px] leading-[1.55] text-ink/85">{p}</span>
               </li>
             ))}
           </ul>
