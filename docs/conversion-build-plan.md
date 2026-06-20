@@ -101,11 +101,16 @@ motion (transform/opacity, reduced-motion) · 5 interactive states · mobile 375
 2. ✅ Template Vault squeeze + reframe + close — **done**
 3. ✅ $99 GoldFin Reports core (/pricing) — **done**
 4. ✅ Email sequence (Vault → $99) — **done**
-5. 🔶 **/sample-briefing** (proof that makes $99 believable; close → $99) ← NEXT
-6. 🔶 Finish remaining /templates + /pricing visual polish
-7. ⬜ /compare + /compare/3-way (route to $99)
-8. ⬜ /security-faq (referrer-aware close)
-9. 🔶 /apply (GoldFin Advisory rename + selectivity)
+5. ✅ /sample-briefing — two-rung proof close → $99 — **done**
+6. ✅ /compare + /compare/3-way — routed to $99 — **done**
+7. ✅ /security-faq — objection-killer close → $99 — **done**
+8. ✅ /apply — renamed to GoldFin Advisory — **done**
+9. 🔶 **VISUAL ELEVATION PASS** ← NEXT — mid-page sections to the Apple/Stripe
+   bar (templates grid cards, pricing tables, hover/press states, spacing,
+   posture variation). Structural CTA routing is complete site-wide.
+
+**Site-wide CTA routing: COMPLETE.** Every page's dominant CTA = $99 GoldFin
+Reports; free Vault = bait; $1,500 Advisory = demoted/application-only.
 
 ## Visual bar (every section, every page)
 Apple/Stripe restraint on the white/gold/ink tokens: 8px grid · distinct posture between
