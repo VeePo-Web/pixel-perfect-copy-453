@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TemplatesTopBar from "./parts/TemplatesTopBar";
 import TemplateLibraryHero from "./parts/TemplateLibraryHero";
 import PainToValueReframe from "./parts/PainToValueReframe";
