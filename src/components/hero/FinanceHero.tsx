@@ -353,7 +353,7 @@ const BriefingPanel = ({
       : 0;
 
   return (
-    <div className="group/panel relative overflow-hidden rounded-2xl border border-champagne-300/20 bg-gradient-to-b from-charcoal-800/80 to-charcoal-900/80 p-6 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)] backdrop-blur-sm motion-safe:animate-panel-rise sm:p-7">
+    <div className="group/panel relative overflow-hidden rounded-2xl border border-ink/[0.09] bg-white p-6 shadow-[0_1px_0_rgba(15,23,42,0.04),0_18px_40px_-24px_rgba(15,23,42,0.18)] motion-safe:animate-panel-rise sm:p-7">
       {/* top rim */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px origin-left bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent motion-safe:animate-rim-in" />
 
