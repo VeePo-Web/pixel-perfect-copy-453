@@ -14,10 +14,17 @@ export default function SampleBriefingPage() {
   const s = useBriefingState();
 
   useEffect(() => {
-    const prev = document.title;
-    document.title = "Sample Bi-Weekly Finance Briefing · GoldFin Desk";
+    const prevTitle = document.title;
+    document.title = "Plain-English Finance Briefing (Sample) | GoldFin Desk";
+    const meta = document.querySelector('meta[name="description"]');
+    const prevDesc = meta?.getAttribute("content") ?? "";
+    meta?.setAttribute(
+      "content",
+      "See what a plain-English monthly finance briefing looks like for your business — cash movement, revenue, expenses, and decisions. No bank connection required.",
+    );
     return () => {
-      document.title = prev;
+      document.title = prevTitle;
+      if (meta && prevDesc) meta.setAttribute("content", prevDesc);
     };
   }, []);
 

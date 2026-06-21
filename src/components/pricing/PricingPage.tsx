@@ -19,10 +19,17 @@ import MobileStickyCTA from "./parts/MobileStickyCTA";
 
 export default function PricingPage() {
   useEffect(() => {
-    const prev = document.title;
-    document.title = "Pricing · GoldFin Desk";
+    const prevTitle = document.title;
+    document.title = "Monthly Financial Reports — $99/mo | GoldFin Desk";
+    const meta = document.querySelector('meta[name="description"]');
+    const prevDesc = meta?.getAttribute("content") ?? "";
+    meta?.setAttribute(
+      "content",
+      "GoldFin Reports fills your financial templates from your numbers and sends a plain-English monthly briefing — $99/mo, no spreadsheet work, cancel anytime. GoldFin Advisory ($1,500/mo) available by application.",
+    );
     return () => {
-      document.title = prev;
+      document.title = prevTitle;
+      if (meta && prevDesc) meta.setAttribute("content", prevDesc);
     };
   }, []);
 
