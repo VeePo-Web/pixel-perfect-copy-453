@@ -17,6 +17,10 @@ Read these in order before changing code:
 3. `reports for claude/01-pricing-99-continuity-audit.md`
 4. `reports for claude/08-99-checkout-readiness-audit.md`
 
+Before implementing Plaid, checkout, onboarding, or report automation, also read:
+
+5. `reports for claude/09-plaid-biweekly-auto-fill-deep-research-prompt.md`
+
 ## First Execution Target
 
 Start with `#/pricing`.
@@ -71,6 +75,7 @@ Claude must not move to the next section until the current section passes its re
 - `06-apply-backend-application-audit.md` - selective `$1,500` backend.
 - `07-compare-routing-seo-audit.md` - education and routing pages.
 - `08-99-checkout-readiness-audit.md` - blocker report for real `$99` checkout.
+- `09-plaid-biweekly-auto-fill-deep-research-prompt.md` - deep research prompt for Plaid, biweekly spreadsheet auto-fill, and `$99` product value.
 
 ## Verification After Claude Changes Code
 

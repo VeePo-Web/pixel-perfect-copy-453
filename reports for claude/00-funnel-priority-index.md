@@ -113,3 +113,4 @@ Then browser-check:
 - `06-apply-backend-application-audit.md`: selective `$1,500` backend.
 - `07-compare-routing-seo-audit.md`: education and SEO routing pages.
 - `08-99-checkout-readiness-audit.md`: post-pricing blocker report for turning `Auto-fill my reports` into a real `$99/mo` subscription path.
+- `09-plaid-biweekly-auto-fill-deep-research-prompt.md`: deep research prompt for Plaid, biweekly spreadsheet auto-fill, competitor benchmarks, and making the `$99/mo` product materially valuable.
