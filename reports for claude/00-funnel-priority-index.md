@@ -114,3 +114,4 @@ Then browser-check:
 - `07-compare-routing-seo-audit.md`: education and SEO routing pages.
 - `08-99-checkout-readiness-audit.md`: post-pricing blocker report for turning `Auto-fill my reports` into a real `$99/mo` subscription path.
 - `09-plaid-biweekly-auto-fill-deep-research-prompt.md`: deep research prompt for Plaid, biweekly spreadsheet auto-fill, competitor benchmarks, and making the `$99/mo` product materially valuable.
+- `09b-profit-driving-report-features-deep-research-prompt.md`: companion prompt for finding report features that help owners protect cash, improve margins, catch leakage, and make higher-value decisions.
