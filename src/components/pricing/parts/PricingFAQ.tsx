@@ -1,8 +1,24 @@
 import { faq } from "../content";
 
+// FAQPage schema — eligible for Google rich results + AI Overview citations
+// (personas/seo-faq.md). Questions answer real $99 objections at the ask.
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function PricingFAQ() {
   return (
     <section aria-labelledby="faq-title" className="border-b border-ink/[0.05] bg-charcoal-950">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="mx-auto max-w-5xl px-6 py-24 lg:px-10">
         <div className="max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
