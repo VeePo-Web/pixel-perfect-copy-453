@@ -9,14 +9,14 @@ export default function PricingFAQ() {
             FAQ
           </div>
           <h2 id="faq-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
-            Questions owners usually ask before applying.
+            Questions owners ask before starting.
           </h2>
         </div>
 
         <div className="mt-12 divide-y divide-ink/[0.07] overflow-hidden rounded-2xl border border-ink/[0.07] bg-charcoal-900/55">
           {faq.map((item, i) => (
             <details key={item.q} open={i === 0} className="group">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 px-6 py-5 transition-colors hover:bg-ink/[0.02]">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 px-6 py-5 transition-colors hover:bg-ink/[0.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-champagne-300/60">
                 <span className="text-[15.5px] text-ink group-open:text-ink">{item.q}</span>
                 <span
                   aria-hidden

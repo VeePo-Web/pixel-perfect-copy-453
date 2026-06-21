@@ -293,36 +293,36 @@ export const decisionCards = [
 
 export const faq = [
   {
-    q: "Why does this cost $1,500/month?",
-    a: "Because it is not just a spreadsheet or software dashboard. The GoldFin Desk combines structure, automation, plain-English written briefings, and a monthly strategy review.",
+    q: "Can I cancel GoldFin Reports anytime?",
+    a: "Yes. The $99/mo plan is month-to-month. Try one month — if it isn't clearer, cancel before your next billing cycle. No friction, no lock-in.",
   },
   {
-    q: "Is this a bookkeeping service?",
-    a: "No. It is designed to work alongside your existing financial setup. A bookkeeper helps keep records clean. The GoldFin Desk helps create a recurring rhythm for understanding what the numbers mean.",
+    q: "Do I need to connect my bank for the $99 plan?",
+    a: "No bank connection is required to start. When you do connect, it is read-only through a secure connection — we never move money. You can also start with rough, non-sensitive numbers.",
   },
   {
-    q: "Do I still need my bookkeeper or CPA?",
-    a: "Usually, yes. This does not replace tax, legal, accounting, or bookkeeping responsibilities. It adds a financial clarity layer around the business.",
+    q: "What if I already have a bookkeeper?",
+    a: "Keep them. A bookkeeper keeps your records clean. GoldFin Reports turns those records into a monthly plain-English briefing on what changed, what's risky, and what to decide next. They work together.",
   },
   {
-    q: "Is this a fractional CFO replacement?",
-    a: "No. It is the missing layer before a full CFO: more than templates or bookkeeping, lighter than a full finance department.",
+    q: "What's the difference between $99 Reports and $1,500 Advisory?",
+    a: "GoldFin Reports ($99/mo) fills your reports and briefs you every month — fully automated. GoldFin Advisory ($1,500/mo) adds a person who interprets them with you on a monthly strategy call. Most owners start with $99 and move up when the decisions get bigger.",
   },
   {
-    q: "Do I need to connect my bank account to apply?",
-    a: "No. You can apply without connecting a bank account. Data connection happens only after onboarding.",
+    q: "Is this a bookkeeping or CFO replacement?",
+    a: "Neither. It does not replace tax, legal, accounting, or bookkeeping. It is the missing clarity layer — more than templates or a dashboard, lighter than a full finance hire.",
   },
   {
-    q: "What if I am not ready for $1,500/month?",
-    a: "Start with the free templates, or have them filled for you every month with the $99/mo Auto-Filled Reports plan. The premium desk is best for owners ready for a human to interpret the numbers with them.",
+    q: "Why does GoldFin Advisory cost $1,500/month?",
+    a: "Because it is not just software. Advisory combines structure, automation, plain-English briefings, and a monthly one-hour strategy review with a finance professional. It is by application.",
   },
   {
     q: "Who is this best for?",
-    a: "Owner-led businesses with real financial movement, recurring expenses, cash-flow questions, and no full-time finance leader.",
+    a: "Owner-led businesses with real financial movement, recurring expenses, and cash-flow questions — but no full-time finance leader.",
   },
   {
-    q: "What happens after I apply?",
-    a: "Your application is reviewed for fit. If there is a potential match, you receive next steps. No payment or bank connection is required to apply.",
+    q: "What happens after I apply for Advisory?",
+    a: "Your application is reviewed for fit. If there's a potential match, you receive next steps. No payment or bank connection is required to apply.",
   },
 ];
 
