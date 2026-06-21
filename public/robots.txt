@@ -1,0 +1,31 @@
+# GoldFin Desk — allow all crawlers, including AI search crawlers
+# (citation visibility per the SEO research). Update the Sitemap host to the
+# production domain at launch.
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+Sitemap: https://pixel-perfect-copy-453.lovable.app/sitemap.xml

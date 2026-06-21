@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hash-routed SPA. Update the host to the production domain at launch. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://pixel-perfect-copy-453.lovable.app/</loc><priority>1.0</priority></url>
+  <url><loc>https://pixel-perfect-copy-453.lovable.app/#/pricing</loc><priority>0.9</priority></url>
+  <url><loc>https://pixel-perfect-copy-453.lovable.app/#/templates</loc><priority>0.9</priority></url>
+  <url><loc>https://pixel-perfect-copy-453.lovable.app/#/sample-briefing</loc><priority>0.8</priority></url>
+  <url><loc>https://pixel-perfect-copy-453.lovable.app/#/compare</loc><priority>0.7</priority></url>
+  <url><loc>https://pixel-perfect-copy-453.lovable.app/#/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk</loc><priority>0.7</priority></url>
+  <url><loc>https://pixel-perfect-copy-453.lovable.app/#/security-faq</loc><priority>0.6</priority></url>
+  <url><loc>https://pixel-perfect-copy-453.lovable.app/#/apply</loc><priority>0.6</priority></url>
+</urlset>

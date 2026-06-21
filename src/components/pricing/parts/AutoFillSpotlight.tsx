@@ -99,9 +99,15 @@ export default function AutoFillSpotlight() {
               </button>
 
               <p className="mt-3 text-[12px] leading-[1.5] text-ink/55">{o.guarantee}</p>
-              <p className="mt-4 border-t border-ink/[0.06] pt-4 text-[11.5px] leading-[1.6] text-ink/45">
-                {o.trust}
-              </p>
+              <div className="mt-4 flex items-center gap-2.5 border-t border-ink/[0.06] pt-4">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-champagne-300/45 text-[10px] font-light tracking-tight text-champagne-300">
+                  CS
+                </span>
+                <span className="text-[11px] uppercase tracking-[0.16em] text-ink/45">
+                  Built by Chris Sam · institutional finance background
+                </span>
+              </div>
+              <p className="mt-3 text-[11.5px] leading-[1.6] text-ink/45">{o.trust}</p>
 
               <a
                 href="#/templates"
