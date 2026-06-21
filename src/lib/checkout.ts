@@ -1,29 +1,69 @@
+/**
+ * Centralised checkout helpers for the GoldFin funnel. One source of truth
+ * for plan keys, returned URLs, and invocation — every CTA on the site
+ * routes through here so adding/renaming a plan is a one-file change.
+ */
 import { supabase } from "../integrations/supabase/client";
+import { getStripeEnvironment, hasPaymentsConfigured } from "./stripe";
+
+export type PlanKey = "auto-fill-monthly" | "finance-desk-monthly" | "clarity-report";
+
+const RETURN_PATH = "/checkout/return";
+
+function buildReturnUrl(): string {
+  // Stripe substitutes {CHECKOUT_SESSION_ID} server-side.
+  return `${window.location.origin}${RETURN_PATH}?session_id={CHECKOUT_SESSION_ID}`;
+}
 
 /**
- * Single integration point for the $99/mo Auto-Fill continuity checkout.
+ * Open the embedded checkout for a given plan. The actual <EmbeddedCheckout/>
+ * mount is owned by `CheckoutOverlay` — this helper just stores the plan in
+ * a query param and triggers the overlay via a custom event.
  *
- * The Lovable Stripe integration generates a Supabase edge function named
- * `create-checkout` that creates a Stripe Checkout Session (subscription mode)
- * and returns `{ url }`. This helper invokes it and redirects the buyer there.
- *
- * Until that function is live, the call fails gracefully and the CTA scrolls
- * back to the offer instead of dead-ending. Once Lovable wires Stripe, no UI
- * code changes — this is the only place the checkout call lives.
+ * Falls back to the pricing page when Stripe isn't configured in this build.
  */
-export type CheckoutPlan = "auto-fill-monthly";
-
-export async function startAutoFillCheckout(): Promise<void> {
-  try {
-    const { data, error } = await supabase.functions.invoke("create-checkout", {
-      body: { plan: "auto-fill-monthly" satisfies CheckoutPlan },
-    });
-    if (error) throw error;
-    const url = (data as { url?: string } | null)?.url;
-    if (!url) throw new Error("No checkout URL returned");
-    window.location.href = url;
-  } catch {
-    // Stripe not wired yet (or offline) — never leave the buyer on a dead click.
+export function openCheckout(plan: PlanKey, customerEmail?: string): void {
+  if (!hasPaymentsConfigured()) {
     window.location.hash = "#/pricing#auto-fill";
+    return;
   }
+  window.dispatchEvent(
+    new CustomEvent<CheckoutOpenDetail>("goldfin:open-checkout", {
+      detail: { plan, customerEmail },
+    }),
+  );
+}
+
+export type CheckoutOpenDetail = { plan: PlanKey; customerEmail?: string };
+
+/** Back-compat: existing CTAs call this name. */
+export function startAutoFillCheckout(): void {
+  openCheckout("auto-fill-monthly");
+}
+
+export function startClarityReportCheckout(email?: string): void {
+  openCheckout("clarity-report", email);
+}
+
+export function startFinanceDeskCheckout(email?: string): void {
+  openCheckout("finance-desk-monthly", email);
+}
+
+/** Server call used by <CheckoutOverlay/> — kept here so all Stripe wiring lives in one module. */
+export async function fetchCheckoutClientSecret(
+  plan: PlanKey,
+  customerEmail?: string,
+): Promise<string> {
+  const { data, error } = await supabase.functions.invoke("create-checkout", {
+    body: {
+      plan,
+      customerEmail,
+      environment: getStripeEnvironment(),
+      returnUrl: buildReturnUrl(),
+    },
+  });
+  if (error) throw new Error(error.message);
+  const clientSecret = (data as { clientSecret?: string } | null)?.clientSecret;
+  if (!clientSecret) throw new Error("No clientSecret returned");
+  return clientSecret;
 }
