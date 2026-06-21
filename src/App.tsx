@@ -1,4 +1,5 @@
 import FinanceHero from "./components/hero/FinanceHero";
+import HomeSchema from "./components/home/HomeSchema";
 import PainClarity from "./components/home/PainClarity";
 import HowItWorks from "./components/how-it-works/HowItWorks";
 import ApplicationFunnel from "./components/apply/ApplicationFunnel";
@@ -46,6 +47,7 @@ const App = () => {
   return wrap(
     "home",
     <>
+      <HomeSchema />
       <FinanceHero />
       <PainClarity />
       <HowItWorks />
