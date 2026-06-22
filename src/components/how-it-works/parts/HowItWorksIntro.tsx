@@ -16,14 +16,14 @@ export default function HowItWorksIntro() {
   }, [reduced, c.loop.length]);
 
   return (
-    <div ref={ref} className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 items-center">
+    <div ref={ref} className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
       <div className="lg:col-span-7">
         <div
-          className={`mb-5 inline-flex items-center text-[11px] uppercase tracking-[0.28em] text-champagne-200/70 transition-all duration-700 ease-cinema ${
+          className={`mb-5 inline-flex items-center text-[11px] uppercase tracking-[0.28em] text-champagne-300/70 transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
           }`}
         >
-          <span className="mr-3 inline-block h-px w-8 bg-champagne-200/40" />
+          <span className="mr-3 inline-block h-px w-8 bg-champagne-200/50" />
           {c.eyebrow}
         </div>
         <h2
@@ -50,28 +50,31 @@ export default function HowItWorksIntro() {
         >
           <a
             href="#/templates"
-            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
+            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(212,168,69,0.45)] active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
           >
             <span className="relative z-10">{c.primary}</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </a>
           <a
-            href="#top"
-            className="group inline-flex items-center text-[13px] text-ink/70 transition-colors duration-300 hover:text-champagne-100"
+            href="#/sample-briefing"
+            className="group inline-flex items-center text-[13px] text-ink/70 transition-colors duration-300 hover:text-champagne-300"
           >
-            <span className="border-b border-bone/20 pb-0.5 group-hover:border-champagne-200/60">{c.secondary}</span>
+            <span className="border-b border-ink/15 pb-0.5 group-hover:border-champagne-200/60">
+              {c.secondary}
+            </span>
             <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
           </a>
         </div>
         <p className="mt-5 text-[11.5px] uppercase tracking-[0.22em] text-ink/35">{c.trust}</p>
       </div>
 
+      {/* Loop card — Band 03 is white, so card uses bg-paper-raised */}
       <div className="lg:col-span-5">
-        <div className="relative rounded-2xl border border-champagne-200/10 bg-charcoal-900/60 p-6 backdrop-blur-sm">
+        <div className="relative rounded-2xl border border-charcoal-700 bg-paper-raised p-6 shadow-[0_1px_3px_0_rgba(11,13,18,0.07),_0_2px_8px_-2px_rgba(11,13,18,0.05)]">
           <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent" />
           <div className="mb-5 flex items-center justify-between">
             <span className="text-[10.5px] uppercase tracking-[0.28em] text-ink/40">Monthly rhythm</span>
-            <span className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">Live loop</span>
+            <span className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">Live loop</span>
           </div>
           <ol className="space-y-3">
             {c.loop.map((label, i) => {
@@ -81,20 +84,22 @@ export default function HowItWorksIntro() {
                   key={label}
                   className={`flex items-center gap-4 rounded-lg border px-4 py-3 transition-all duration-500 ease-cinema ${
                     isActive
-                      ? "border-champagne-200/30 bg-charcoal-800/60"
-                      : "border-ink/[0.04] bg-transparent"
+                      ? "border-champagne-200/40 bg-white shadow-sm"
+                      : "border-charcoal-700 bg-transparent"
                   }`}
                 >
                   <span
                     className={`relative flex h-2 w-2 items-center justify-center rounded-full transition-colors duration-500 ${
-                      isActive ? "bg-champagne-200" : "bg-bone/15"
+                      isActive ? "bg-champagne-200" : "bg-ink/10"
                     }`}
                   >
                     {isActive && !reduced && (
                       <span className="absolute inset-0 -m-1 rounded-full bg-champagne-200/40 motion-safe:animate-soft-pulse" />
                     )}
                   </span>
-                  <span className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-ink/40 w-6">0{i + 1}</span>
+                  <span className="w-6 text-[10.5px] font-medium uppercase tracking-[0.22em] text-ink/40">
+                    0{i + 1}
+                  </span>
                   <span
                     className={`text-[14px] tracking-tight transition-colors duration-500 ${
                       isActive ? "text-ink" : "text-ink/55"
