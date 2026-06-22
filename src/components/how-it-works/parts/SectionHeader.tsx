@@ -9,7 +9,7 @@ export default function SectionHeader({ eyebrow, headline, sub, align = "left" }
     <div ref={ref} className={`max-w-3xl ${a}`}>
       {eyebrow && (
         <div
-          className={`mb-5 inline-block text-[11px] uppercase tracking-[0.28em] text-champagne-200/70 transition-all duration-700 ease-cinema ${
+          className={`mb-5 inline-block text-[11px] uppercase tracking-[0.28em] text-champagne-300/70 transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
           }`}
         >

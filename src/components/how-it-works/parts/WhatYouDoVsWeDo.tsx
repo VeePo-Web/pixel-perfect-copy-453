@@ -14,7 +14,7 @@ function Column({ label, title, items, accent }: { label: string; title: string;
       } ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
     >
       {accent && <div className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/50 to-transparent" />}
-      <div className={`text-[10.5px] uppercase tracking-[0.28em] ${accent ? "text-champagne-200/70" : "text-ink/40"}`}>
+      <div className={`text-[10.5px] uppercase tracking-[0.28em] ${accent ? "text-champagne-300/70" : "text-ink/40"}`}>
         {label}
       </div>
       <h3 className="mt-3 font-robert-medium text-2xl leading-tight tracking-tight text-ink">{title}</h3>

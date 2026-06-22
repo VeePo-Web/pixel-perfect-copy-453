@@ -28,7 +28,7 @@ export default function ProcessTimeline() {
       {/* Sticky left rail (desktop) */}
       <aside className="hidden lg:col-span-5 lg:block">
         <div className="sticky top-24">
-          <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">The 5-step rhythm</div>
+          <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">The 5-step rhythm</div>
           <h3 className="mt-4 font-robert-medium text-[clamp(1.8rem,3.4vw,2.6rem)] leading-[1.05] tracking-tight text-ink">
             A repeatable monthly operating rhythm.
           </h3>

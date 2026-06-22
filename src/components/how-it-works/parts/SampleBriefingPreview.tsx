@@ -21,7 +21,7 @@ export default function SampleBriefingPreview() {
         <div className="relative">
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent" />
           <div className="flex items-center justify-between border-b border-charcoal-700/60 px-6 py-4">
-            <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">
+            <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
               Sample bi-weekly briefing
             </div>
             <div className="text-[10.5px] uppercase tracking-[0.28em] text-ink/35">Demo data</div>
