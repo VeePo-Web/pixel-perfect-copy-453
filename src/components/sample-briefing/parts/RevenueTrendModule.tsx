@@ -30,7 +30,7 @@ export default function RevenueTrendModule({ business }: { business: DemoBusines
             <p className="mt-4 text-[14px] leading-[1.65] text-ink/80">{business.insights.revenue}</p>
           </div>
           <div className="rounded-lg border border-champagne-200/20 bg-champagne-300/[0.04] p-4">
-            <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/80">Watch</div>
+            <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-300/70">Watch</div>
             <p className="mt-1.5 text-[13px] text-ink/85">
               Concentration risk worth raising on the monthly call before committing to new fixed costs.
             </p>

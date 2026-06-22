@@ -26,7 +26,7 @@ export default function FinancialSupportFitFinder({ finder }: Props) {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Fit Finder · 60 seconds
           </div>
           <h2
@@ -124,7 +124,7 @@ function Step({
   return (
     <div className={last ? "" : "mb-7 border-b border-ink/[0.05] pb-7"}>
       <div className="flex items-baseline justify-between gap-3">
-        <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/75">
+        <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300/70">
           Step {index} / {total}
         </div>
         <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/35">
@@ -203,7 +203,7 @@ function RecommendationPanel({
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/60 to-transparent"
       />
-      <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/85">
+      <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
         {rec.eyebrow}
       </div>
       <h3 className="mt-2 max-w-[26ch] font-light text-ink text-[24px] leading-[1.15] tracking-[-0.01em]">

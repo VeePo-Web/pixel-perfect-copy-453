@@ -9,7 +9,7 @@ export default function AfterApplySection() {
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             After you apply
           </div>
           <h2
@@ -28,7 +28,7 @@ export default function AfterApplySection() {
               key={s.n}
               className="relative bg-charcoal-950/40 p-6 transition-colors hover:bg-ink/[0.025]"
             >
-              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">
+              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
                 Step {s.n}
               </div>
               <h3 className="mt-3 text-[15px] font-medium text-ink">{s.title}</h3>

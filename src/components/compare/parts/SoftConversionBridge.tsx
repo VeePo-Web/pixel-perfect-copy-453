@@ -44,7 +44,7 @@ export default function SoftConversionBridge() {
     >
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="max-w-[60ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Not ready to apply yet?
           </div>
           <h2
@@ -68,7 +68,7 @@ export default function SoftConversionBridge() {
                     : "border-ink/[0.07] bg-ink/[0.02] hover:border-champagne-200/25"
                 }`}
               >
-                <div className={`text-[10.5px] uppercase tracking-[0.28em] ${c.tone === "flagship" ? "text-champagne-200/85" : "text-ink/45"}`}>
+                <div className={`text-[10.5px] uppercase tracking-[0.28em] ${c.tone === "flagship" ? "text-champagne-300/70" : "text-ink/45"}`}>
                   {c.eyebrow}
                 </div>
                 <div className="mt-2 text-[18px] font-light leading-snug text-ink">{c.title}</div>

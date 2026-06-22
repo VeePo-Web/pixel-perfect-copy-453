@@ -11,7 +11,7 @@ export default function UseCasePaths() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[60ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             See yourself in the page
           </div>
           <h2
@@ -44,7 +44,7 @@ export default function UseCasePaths() {
                   aria-expanded={open}
                   className="w-full text-left"
                 >
-                  <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/70">
+                  <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300/70">
                     Owner says
                   </div>
                   <div className="mt-2 text-[16px] font-light leading-snug text-ink">

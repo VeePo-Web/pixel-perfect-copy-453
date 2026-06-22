@@ -23,7 +23,7 @@ export default function MonthlyStrategyFocus({ business }: { business: DemoBusin
       <div className="mt-6 overflow-hidden rounded-2xl border border-ink/[0.08] bg-charcoal-900/60">
         <div className="flex items-center justify-between border-b border-ink/[0.06] px-5 py-4">
           <div>
-            <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">
+            <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
               Monthly Strategy Review Agenda
             </div>
             <div className="mt-1 text-[13px] text-ink/80">{business.reportTitle}</div>

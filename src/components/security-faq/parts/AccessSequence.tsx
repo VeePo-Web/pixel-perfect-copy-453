@@ -9,7 +9,7 @@ export default function AccessSequence() {
       className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
-        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
           Access sequence
         </div>
         <h2
@@ -25,7 +25,7 @@ export default function AccessSequence() {
               className="group relative flex flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5 transition-all duration-300 hover:border-ink/[0.18] hover:bg-ink/[0.035] motion-safe:hover:-translate-y-0.5"
             >
               <div className="flex items-center justify-between">
-                <span className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">
+                <span className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
                   Step {s.n}
                 </span>
                 <span className="text-[11px] text-ink/35">0{s.n}</span>

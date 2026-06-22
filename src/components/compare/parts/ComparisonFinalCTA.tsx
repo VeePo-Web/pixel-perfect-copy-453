@@ -10,7 +10,7 @@ export default function ComparisonFinalCTA() {
         <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_100%,rgba(201,163,90,0.12),transparent_60%)]" />
       </div>
       <div className="relative mx-auto max-w-5xl px-6 py-24 text-center lg:px-10 lg:py-32">
-        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
           Still comparing?
         </div>
         <h2

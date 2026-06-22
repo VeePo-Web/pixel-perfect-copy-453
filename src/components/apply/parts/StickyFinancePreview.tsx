@@ -6,7 +6,7 @@ function Card({ children, title, label }: { children: React.ReactNode; title?: s
   return (
     <div className="relative rounded-2xl border border-champagne-200/15 bg-charcoal-900/60 p-6 backdrop-blur-sm">
       <span className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent" />
-      {label && <div className="mb-3 text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">{label}</div>}
+      {label && <div className="mb-3 text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">{label}</div>}
       {title && <div className="mb-4 font-robert-medium text-[20px] leading-tight tracking-tight text-ink">{title}</div>}
       {children}
     </div>
@@ -148,7 +148,7 @@ export default function StickyFinancePreview({ step, state }: { step: number; st
           className="flex w-full items-center justify-between rounded-xl border border-ink/[0.07] bg-charcoal-900/40 px-4 py-3 text-left"
           aria-expanded={open}
         >
-          <span className="text-[12px] uppercase tracking-[0.22em] text-champagne-200/70">What happens next?</span>
+          <span className="text-[12px] uppercase tracking-[0.22em] text-champagne-300/70">What happens next?</span>
           <span className={`text-ink/60 transition-transform duration-300 ${open ? "rotate-180" : ""}`}>⌄</span>
         </button>
         {open && (

@@ -29,7 +29,7 @@ export default function ApplicationStepShell({
 }: Props) {
   return (
     <div className="motion-safe:animate-section-in">
-      <div className="mb-6 text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">
+      <div className="mb-6 text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
         {eyebrow ?? `Application · 0${step} / 0${total}`}
       </div>
       <h1 className="font-robert-medium text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] tracking-tight text-ink">

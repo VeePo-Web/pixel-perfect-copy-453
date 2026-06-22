@@ -38,7 +38,7 @@ export default function PricingFinalCTA() {
           ))}
         </div>
 
-        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
           $99 / month · Auto-Filled Reports
         </div>
         <h2 id="final-title" className="mx-auto mt-5 max-w-[24ch] font-light text-ink text-[42px] leading-[1.05] tracking-[-0.01em] sm:text-[60px]">

@@ -28,7 +28,7 @@ export default function TrustFlowDiagram({ steps }: { steps: TrustFlowStep[] }) 
           key={s.id}
           className="group relative rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-4 backdrop-blur-sm transition-all duration-300 motion-safe:hover:-translate-y-0.5 hover:border-ink/[0.18] hover:bg-ink/[0.035]"
         >
-          <div className="text-[10px] uppercase tracking-[0.24em] text-champagne-200/60">
+          <div className="text-[10px] uppercase tracking-[0.24em] text-champagne-300/70">
             Step {i + 1}
           </div>
           <div className="mt-2 text-[14px] font-medium text-ink">{s.label}</div>

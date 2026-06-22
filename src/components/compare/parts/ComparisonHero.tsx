@@ -15,7 +15,7 @@ export default function ComparisonHero() {
       <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-32 sm:pt-36 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1.05fr_1.05fr] lg:gap-16">
           <div className="motion-safe:animate-section-in">
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Compare Financial Support Options
             </div>
             <h1
@@ -86,7 +86,7 @@ function DecisionMap() {
       </div>
       <div aria-hidden className="mt-5 grid grid-cols-3 items-center text-center text-[10px] uppercase tracking-[0.24em] text-ink/35">
         <span>DIY / Low</span>
-        <span className="text-champagne-200/70">Missing middle</span>
+        <span className="text-champagne-300/70">Missing middle</span>
         <span>High-touch</span>
       </div>
       <div aria-hidden className="pointer-events-none absolute inset-x-8 bottom-[78px] h-px bg-gradient-to-r from-transparent via-champagne-200/30 to-transparent" />
@@ -115,14 +115,14 @@ function FlagshipColumn({ item }: { item: { shortLabel: string } }) {
   return (
     <div className="relative flex h-full flex-col rounded-2xl border border-champagne-200/40 bg-charcoal-900/70 p-4 shadow-[0_25px_70px_-30px_rgba(217,190,130,0.5)]">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/70 to-transparent" />
-      <div className="text-[9.5px] uppercase tracking-[0.26em] text-champagne-200/85">The middle</div>
+      <div className="text-[9.5px] uppercase tracking-[0.26em] text-champagne-300/70">The middle</div>
       <div className="mt-3 text-[14px] font-light leading-snug text-ink">{item.shortLabel}</div>
       <ul className="mt-3 space-y-1.5 text-[11.5px] text-ink/70">
         <li>· Structure</li>
         <li>· Bi-weekly briefings</li>
         <li>· Monthly review</li>
       </ul>
-      <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-[10.5px] uppercase tracking-[0.24em] text-champagne-200/80">
+      <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-[10.5px] uppercase tracking-[0.24em] text-champagne-300/70">
         Most owner-led businesses
       </span>
     </div>

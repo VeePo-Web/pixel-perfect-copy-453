@@ -9,7 +9,7 @@ export default function MissingMiddleSpectrum() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Where GoldFin Desk fits
           </div>
           <h2
@@ -92,7 +92,7 @@ export default function MissingMiddleSpectrum() {
 
           <div className="mt-10 grid items-start gap-8 lg:grid-cols-[1fr_1fr]">
             <div className="rounded-2xl border border-champagne-200/40 bg-charcoal-900/70 p-6 shadow-[0_25px_70px_-30px_rgba(217,190,130,0.45)]">
-              <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/85">
+              <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300/70">
                 The recurring clarity layer
               </div>
               <p className="mt-3 text-[16px] font-light leading-relaxed text-ink">

@@ -35,7 +35,7 @@ export default function ExpensePatternModule({ business }: { business: DemoBusin
             ))}
           </ul>
           <div className="mt-5 rounded-lg border border-champagne-200/20 bg-champagne-300/[0.04] p-4">
-            <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/80">Review before hiring</div>
+            <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-300/70">Review before hiring</div>
             <p className="mt-1.5 text-[14px] leading-[1.65] text-ink/85">{business.insights.expenses}</p>
           </div>
         </div>

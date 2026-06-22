@@ -29,7 +29,7 @@ export default function SoftConversionBridge() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[60ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Not ready to apply yet?
           </div>
           <h2
@@ -46,7 +46,7 @@ export default function SoftConversionBridge() {
               key={c.title}
               className="group flex h-full flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 transition-all duration-400 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/30"
             >
-              <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/70">
+              <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300/70">
                 {c.eyebrow}
               </div>
               <h3 className="mt-2 text-[17px] font-light leading-snug text-ink">{c.title}</h3>

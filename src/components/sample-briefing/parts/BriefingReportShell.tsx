@@ -26,7 +26,7 @@ export default function BriefingReportShell({ business, visible }: Props) {
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-ink/[0.06] pb-8">
           <div>
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Sample Bi-Weekly Finance Briefing
             </div>
             <h2 className="mt-3 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[42px]">

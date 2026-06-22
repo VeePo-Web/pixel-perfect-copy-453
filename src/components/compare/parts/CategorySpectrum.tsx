@@ -9,7 +9,7 @@ export default function CategorySpectrum() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[60ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Where it fits
           </div>
           <h2
@@ -29,7 +29,7 @@ export default function CategorySpectrum() {
             <div className="flex h-full flex-col justify-between">
               <div className="flex items-center justify-between text-[10.5px] uppercase tracking-[0.26em] text-ink/45">
                 <span>DIY / Low support</span>
-                <span className="text-champagne-200/80">Structure + Interpretation</span>
+                <span className="text-champagne-300/70">Structure + Interpretation</span>
                 <span>High-touch finance leadership</span>
               </div>
               <div className="relative h-px w-full bg-gradient-to-r from-ink/15 via-champagne-200/40 to-ink/15" />
@@ -54,7 +54,7 @@ export default function CategorySpectrum() {
               }`}
             >
               <div>
-                <div className={`text-[10.5px] uppercase tracking-[0.24em] ${o.isMfd ? "text-champagne-200/85" : "text-ink/45"}`}>
+                <div className={`text-[10.5px] uppercase tracking-[0.24em] ${o.isMfd ? "text-champagne-300/70" : "text-ink/45"}`}>
                   {o.isMfd ? "Missing middle" : `Position ${Math.round(o.position * 100)}`}
                 </div>
                 <div className="mt-1 text-[14.5px] font-light text-ink">{o.label}</div>
@@ -91,7 +91,7 @@ function SpectrumNode({ option }: { option: import("../content").SupportOption }
         {option.shortLabel}
       </div>
       {flagship ? (
-        <div className="mt-1 text-[9.5px] uppercase tracking-[0.22em] text-champagne-200/80">
+        <div className="mt-1 text-[9.5px] uppercase tracking-[0.22em] text-champagne-300/70">
           The middle
         </div>
       ) : null}

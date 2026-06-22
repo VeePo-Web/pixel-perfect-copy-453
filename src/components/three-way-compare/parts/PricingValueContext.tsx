@@ -10,7 +10,7 @@ export default function PricingValueContext() {
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1fr]">
           <div>
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Pricing context
             </div>
             <h2
@@ -63,7 +63,7 @@ export default function PricingValueContext() {
               className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/60 to-transparent"
             />
             <div className="flex items-baseline justify-between">
-              <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/85">
+              <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300/70">
                 Included monthly
               </div>
               <div className="text-[12px] uppercase tracking-[0.22em] text-ink/45">

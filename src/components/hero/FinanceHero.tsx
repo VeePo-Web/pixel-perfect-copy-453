@@ -333,7 +333,7 @@ const BriefingPanel = ({
       {/* panel header */}
       <div className="flex items-center justify-between border-b border-bone/10 pb-4">
         <div>
-          <p className="font-general text-[0.62rem] uppercase tracking-[0.22em] text-champagne-200/80">
+          <p className="font-general text-[0.62rem] uppercase tracking-[0.22em] text-champagne-300/70">
             GFD &middot; Briefing 001
           </p>
           <p className="mt-1 font-general text-base text-ink">

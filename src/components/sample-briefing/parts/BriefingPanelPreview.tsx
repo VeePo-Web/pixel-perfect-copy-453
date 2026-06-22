@@ -18,7 +18,7 @@ export default function BriefingPanelPreview({ business, status, loaderIndex }: 
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/50 to-transparent" />
       <div className="flex items-center justify-between border-b border-ink/[0.06] px-5 py-4">
         <div>
-          <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">
+          <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
             Sample bi-weekly briefing
           </div>
           <div className="mt-1 text-[13px] text-ink/85">{business.reportTitle}</div>

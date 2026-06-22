@@ -26,7 +26,7 @@ export default function ThreeWayComparisonTable() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Side by side
           </div>
           <h2
@@ -74,7 +74,7 @@ export default function ThreeWayComparisonTable() {
                     />
                     <span className="text-ink">GoldFin Desk</span>
                   </div>
-                  <div className="mt-1 text-[10px] tracking-[0.22em] text-champagne-200/80">
+                  <div className="mt-1 text-[10px] tracking-[0.22em] text-champagne-300/70">
                     Recurring clarity
                   </div>
                 </th>
@@ -173,7 +173,7 @@ export default function ThreeWayComparisonTable() {
                     <div className="text-[14.5px] text-ink">{label}</div>
                     <div
                       className={`mt-0.5 text-[10.5px] uppercase tracking-[0.22em] ${
-                        isMfd ? "text-champagne-200/80" : "text-ink/45"
+                        isMfd ? "text-champagne-300/70" : "text-ink/45"
                       }`}
                     >
                       {role}

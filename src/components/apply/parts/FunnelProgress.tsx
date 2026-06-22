@@ -29,7 +29,7 @@ export default function FunnelProgress({ step }: { step: number }) {
               </span>
               <span
                 className={`hidden text-[10.5px] uppercase tracking-[0.22em] transition-colors duration-500 md:block ${
-                  isActive ? "text-champagne-200/80" : isDone ? "text-ink/55" : "text-ink/30"
+                  isActive ? "text-champagne-300/70" : isDone ? "text-ink/55" : "text-ink/30"
                 }`}
               >
                 {label}

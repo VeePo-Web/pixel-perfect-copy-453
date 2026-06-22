@@ -12,7 +12,7 @@ export default function SampleBriefingCTA({ onAnother }: Props) {
       </div>
       <div className="relative mx-auto max-w-5xl px-6 py-28 lg:px-10">
         <div className="text-center">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Two ways to make this yours
           </div>
           <h2 className="mx-auto mt-5 max-w-[24ch] font-light text-ink text-[36px] leading-[1.05] tracking-[-0.01em] sm:text-[52px]">

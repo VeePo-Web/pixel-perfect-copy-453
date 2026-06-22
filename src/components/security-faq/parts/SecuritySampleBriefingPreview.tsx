@@ -10,7 +10,7 @@ export default function SecuritySampleBriefingPreview() {
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           <div className="max-w-xl">
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Preview the product
             </div>
             <h2
@@ -58,7 +58,7 @@ export default function SecuritySampleBriefingPreview() {
               ))}
             </dl>
             <div className="mt-4 rounded-xl border border-champagne-200/15 bg-champagne-200/[0.05] p-4">
-              <div className="text-[10.5px] uppercase tracking-[0.24em] text-champagne-200/80">
+              <div className="text-[10.5px] uppercase tracking-[0.24em] text-champagne-300/70">
                 Insight
               </div>
               <p className="mt-2 text-[13.5px] leading-relaxed text-ink/85">

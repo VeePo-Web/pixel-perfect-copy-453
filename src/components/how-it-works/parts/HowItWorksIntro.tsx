@@ -19,7 +19,7 @@ export default function HowItWorksIntro() {
     <div ref={ref} className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 items-center">
       <div className="lg:col-span-7">
         <div
-          className={`mb-5 inline-flex items-center text-[11px] uppercase tracking-[0.28em] text-champagne-200/70 transition-all duration-700 ease-cinema ${
+          className={`mb-5 inline-flex items-center text-[11px] uppercase tracking-[0.28em] text-champagne-300/70 transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
           }`}
         >
@@ -71,7 +71,7 @@ export default function HowItWorksIntro() {
           <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent" />
           <div className="mb-5 flex items-center justify-between">
             <span className="text-[10.5px] uppercase tracking-[0.28em] text-ink/40">Monthly rhythm</span>
-            <span className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">Live loop</span>
+            <span className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">Live loop</span>
           </div>
           <ol className="space-y-3">
             {c.loop.map((label, i) => {

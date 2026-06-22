@@ -9,7 +9,7 @@ export default function UpfrontRequirementsSection() {
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             What we do not ask for upfront
           </div>
           <h2

@@ -9,7 +9,7 @@ export default function ComparisonPageIndex() {
     >
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="max-w-[60ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Detailed comparisons
           </div>
           <h2

@@ -14,7 +14,7 @@ export default function PricingHero() {
       <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-32 sm:pt-36 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1.05fr_1.1fr] lg:gap-16">
           <div className="motion-safe:animate-section-in">
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Pricing
             </div>
             <h1 className="mt-5 max-w-[24ch] font-light text-ink text-[38px] leading-[1.08] tracking-[-0.01em] sm:text-[50px] lg:text-[58px]">
@@ -72,7 +72,7 @@ export default function PricingHero() {
                   >
                     <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent" />
                     <div className="px-5 pb-6 pt-5">
-                      <div className="text-[10px] uppercase tracking-[0.28em] text-champagne-200/70">
+                      <div className="text-[10px] uppercase tracking-[0.28em] text-champagne-300/70">
                         {t.flagship ? "Recommended" : "Tier"}
                       </div>
                       <div className="mt-2 text-[15px] text-ink">{t.name}</div>

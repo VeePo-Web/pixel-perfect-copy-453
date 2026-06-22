@@ -10,7 +10,7 @@ export default function PlanSelector() {
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
           <div>
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Plan selector
             </div>
             <h2 id="selector-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
@@ -88,7 +88,7 @@ export default function PlanSelector() {
 
             {s.done && s.recommendation && (
               <div className="motion-safe:animate-panel-rise">
-                <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/80">
+                <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
                   Recommendation
                 </div>
                 <h3 className="mt-3 font-light text-ink text-[26px] leading-[1.15] sm:text-[30px]">

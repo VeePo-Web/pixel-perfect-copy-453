@@ -18,7 +18,7 @@ export default function AutoFillSpotlight() {
 
       <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-10">
         <div className="mb-10 max-w-[60ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             {o.eyebrow}
           </div>
           <h2
@@ -79,7 +79,7 @@ export default function AutoFillSpotlight() {
 
             {/* Right — the price + ask */}
             <div className="flex flex-col justify-center rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-7 sm:p-8">
-              <div className="text-[10.5px] uppercase tracking-[0.24em] text-champagne-200/80">
+              <div className="text-[10.5px] uppercase tracking-[0.24em] text-champagne-300/70">
                 Your price today
               </div>
               <div className="mt-3 flex items-baseline gap-2">

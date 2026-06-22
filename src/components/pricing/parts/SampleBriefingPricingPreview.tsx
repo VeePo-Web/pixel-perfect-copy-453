@@ -11,7 +11,7 @@ export default function SampleBriefingPricingPreview() {
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Proof
             </div>
             <h2 id="proof-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
@@ -40,7 +40,7 @@ export default function SampleBriefingPricingPreview() {
           <div className="overflow-hidden rounded-2xl border border-champagne-200/20 bg-charcoal-900/65 backdrop-blur-sm">
             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/50 to-transparent" />
             <div className="flex items-center justify-between border-b border-ink/[0.06] px-5 py-4">
-              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">
+              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
                 Sample bi-weekly briefing
               </div>
               <div className="rounded-full border border-ink/[0.08] px-2.5 py-1 text-[10px] uppercase tracking-[0.22em] text-ink/55">

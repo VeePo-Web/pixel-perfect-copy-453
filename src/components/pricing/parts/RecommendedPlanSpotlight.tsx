@@ -8,7 +8,7 @@ export default function RecommendedPlanSpotlight() {
       </div>
       <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="mb-12 max-w-[58ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             The next step up · by application
           </div>
           <h2 id="spotlight-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[46px]">
@@ -65,7 +65,7 @@ export default function RecommendedPlanSpotlight() {
                     className="grid grid-cols-[80px_1fr] items-center gap-4 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-5 py-4 transition-all duration-400 hover:border-champagne-200/25 hover:bg-ink/[0.04]"
                     style={{ animationDelay: `${i * 80}ms` }}
                   >
-                    <span className="text-[11px] uppercase tracking-[0.22em] text-champagne-200/80">
+                    <span className="text-[11px] uppercase tracking-[0.22em] text-champagne-300/70">
                       {r.week}
                     </span>
                     <span className="text-[15px] text-ink/90">{r.title}</span>

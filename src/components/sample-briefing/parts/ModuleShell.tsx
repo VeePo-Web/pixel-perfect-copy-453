@@ -17,7 +17,7 @@ export default function ModuleShell({ id, eyebrow, title, children, cta, classNa
     >
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       {eyebrow && (
-        <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">{eyebrow}</div>
+        <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">{eyebrow}</div>
       )}
       <h3 className="mt-2 font-light text-ink text-[26px] leading-[1.15] tracking-[-0.005em] sm:text-[30px]">
         {title}

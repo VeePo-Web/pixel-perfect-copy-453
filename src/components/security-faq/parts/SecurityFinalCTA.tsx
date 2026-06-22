@@ -12,7 +12,7 @@ export default function SecurityFinalCTA() {
         className="pointer-events-none absolute left-1/2 top-0 h-[360px] w-[720px] -translate-x-1/2 rounded-full bg-champagne-200/[0.07] blur-3xl"
       />
       <div className="relative mx-auto max-w-4xl px-6 py-24 text-center lg:px-10 lg:py-28">
-        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
           The first safe step
         </div>
         <h2

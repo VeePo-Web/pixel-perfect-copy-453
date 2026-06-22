@@ -16,7 +16,7 @@ export default function ComparisonHero() {
       <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-32 sm:pt-36 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1.05fr_1.05fr] lg:gap-16">
           <div className="motion-safe:animate-section-in">
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Compare your financial support options
             </div>
             <h1
@@ -92,7 +92,7 @@ function ThreeColumnDecision() {
             ) : null}
             <div
               className={`text-[9.5px] uppercase tracking-[0.26em] ${
-                c.isMfd ? "text-champagne-200/85" : "text-ink/40"
+                c.isMfd ? "text-champagne-300/70" : "text-ink/40"
               }`}
             >
               {c.isMfd ? "The missing middle" : "Option"}
@@ -115,7 +115,7 @@ function ThreeColumnDecision() {
         className="mt-5 grid grid-cols-3 items-center text-center text-[10px] uppercase tracking-[0.24em] text-ink/35"
       >
         <span>Records</span>
-        <span className="text-champagne-200/70">Recurring clarity</span>
+        <span className="text-champagne-300/70">Recurring clarity</span>
         <span>Leadership</span>
       </div>
     </div>

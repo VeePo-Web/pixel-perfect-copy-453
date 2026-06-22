@@ -10,7 +10,7 @@ export default function SampleBriefingProofBlock() {
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr]">
           <div>
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               The difference
             </div>
             <h2
@@ -42,7 +42,7 @@ export default function SampleBriefingProofBlock() {
           <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(25,28,34,0.14)]">
             <div className="flex items-center justify-between text-[10.5px] uppercase tracking-[0.26em] text-ink/45">
               <span>Bi-weekly briefing · preview</span>
-              <span className="text-champagne-200/80">Plain English</span>
+              <span className="text-champagne-300/70">Plain English</span>
             </div>
             <ul className="mt-5 grid gap-2 sm:grid-cols-2">
               {sampleBriefingProof.modules.map((m) => (
@@ -50,7 +50,7 @@ export default function SampleBriefingProofBlock() {
                   key={m.title}
                   className="rounded-xl border border-ink/[0.06] bg-charcoal-900/40 p-4"
                 >
-                  <div className="text-[10.5px] uppercase tracking-[0.24em] text-champagne-200/70">
+                  <div className="text-[10.5px] uppercase tracking-[0.24em] text-champagne-300/70">
                     Module
                   </div>
                   <div className="mt-1.5 text-[14px] font-light text-ink">{m.title}</div>
@@ -59,7 +59,7 @@ export default function SampleBriefingProofBlock() {
               ))}
             </ul>
             <div className="mt-6 rounded-xl border border-champagne-200/30 bg-champagne-200/[0.05] p-4">
-              <div className="text-[10.5px] uppercase tracking-[0.24em] text-champagne-200/85">
+              <div className="text-[10.5px] uppercase tracking-[0.24em] text-champagne-300/70">
                 Sample insight
               </div>
               <p className="mt-2 text-[13.5px] leading-relaxed text-ink/85">

@@ -13,7 +13,7 @@ export default function SubmissionLoading() {
         <span className="relative flex h-2 w-2">
           <span className="absolute inset-0 rounded-full bg-champagne-200 motion-safe:animate-soft-pulse" />
         </span>
-        <span className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">Submitting</span>
+        <span className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">Submitting</span>
       </div>
       <div key={i} className="text-[14.5px] text-ink/85 motion-safe:animate-section-in">
         {APPLY.step5.loading[i]}

@@ -11,7 +11,7 @@ export default function WhyAutoFill() {
     <section aria-labelledby="why99-title" className="border-b border-ink/[0.05] bg-charcoal-950">
       <div className="mx-auto max-w-5xl px-6 py-24 lg:px-10">
         <div className="max-w-[58ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Why $99 makes sense
           </div>
           <h2 id="why99-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[46px]">

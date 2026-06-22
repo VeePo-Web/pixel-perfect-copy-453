@@ -12,7 +12,7 @@ export default function ScenarioRecommendationCards() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Self-identify
           </div>
           <h2
@@ -61,7 +61,7 @@ export default function ScenarioRecommendationCards() {
                     }`}
                   >
                     <div className="overflow-hidden">
-                      <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/80">
+                      <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-300/70">
                         Recommendation
                       </div>
                       <p className="mt-1 text-[14px] font-light text-ink">{s.recommendation}</p>

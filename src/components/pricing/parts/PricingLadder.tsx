@@ -7,7 +7,7 @@ export default function PricingLadder() {
     <section id="plans" aria-labelledby="ladder-title" className="border-b border-ink/[0.05] bg-charcoal-950">
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="mb-12 max-w-[58ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             The offer ladder
           </div>
           <h2 id="ladder-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">

@@ -8,7 +8,7 @@ export default function RealDifferenceSection() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             The real difference
           </div>
           <h2
@@ -34,7 +34,7 @@ export default function RealDifferenceSection() {
             >
               <div
                 className={`text-[10.5px] uppercase tracking-[0.26em] ${
-                  j.isMfd ? "text-champagne-200/85" : "text-ink/45"
+                  j.isMfd ? "text-champagne-300/70" : "text-ink/45"
                 }`}
               >
                 {j.label}

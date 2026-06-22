@@ -8,7 +8,7 @@ export default function OwnerFeelingComparison() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             What the owner feels
           </div>
           <h2
@@ -31,7 +31,7 @@ export default function OwnerFeelingComparison() {
             >
               <div
                 className={`text-[10.5px] uppercase tracking-[0.26em] ${
-                  c.isMfd ? "text-champagne-200/85" : "text-ink/45"
+                  c.isMfd ? "text-champagne-300/70" : "text-ink/45"
                 }`}
               >
                 {c.label}

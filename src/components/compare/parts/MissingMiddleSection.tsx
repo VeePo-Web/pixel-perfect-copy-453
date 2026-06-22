@@ -10,7 +10,7 @@ export default function MissingMiddleSection() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             The missing middle
           </div>
           <h2
@@ -75,7 +75,7 @@ function SideColumn({
 }) {
   return (
     <div className="flex h-full flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6">
-      <div className={`text-[10.5px] uppercase tracking-[0.28em] ${tone === "muted" ? "text-ink/45" : "text-champagne-200/85"}`}>
+      <div className={`text-[10.5px] uppercase tracking-[0.28em] ${tone === "muted" ? "text-ink/45" : "text-champagne-300/70"}`}>
         {label}
       </div>
       <ul className="mt-4 space-y-2.5">
@@ -98,7 +98,7 @@ function MfdColumn({ label, items, outcome }: { label: string; items: string[]; 
   return (
     <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-champagne-200/40 bg-charcoal-900/70 p-6 shadow-[0_40px_100px_-40px_rgba(217,190,130,0.4)]">
       <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/60 to-transparent" />
-      <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/85">{label}</div>
+      <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">{label}</div>
       <ul className="mt-4 space-y-2.5">
         {items.map((x) => (
           <li key={x} className="flex items-start gap-2.5 text-[13.5px] text-ink">

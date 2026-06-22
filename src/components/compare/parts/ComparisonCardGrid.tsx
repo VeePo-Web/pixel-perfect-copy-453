@@ -10,7 +10,7 @@ export default function ComparisonCardGrid() {
     >
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[60ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Compare your options
           </div>
           <h2
@@ -32,7 +32,7 @@ export default function ComparisonCardGrid() {
                 onClick={() => track("comparison_card_clicked", { id: c.id })}
                 className="group flex h-full flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5 transition-all duration-400 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/35 hover:bg-ink/[0.035]"
               >
-                <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/70">
+                <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300/70">
                   Comparison
                 </div>
                 <div className="mt-2 text-[17px] font-light leading-snug text-ink">

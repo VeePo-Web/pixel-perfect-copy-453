@@ -6,7 +6,7 @@ export default function TemplateBridge() {
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-end gap-6 lg:grid-cols-[1.2fr_1fr]">
           <div>
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Lower-intent path
             </div>
             <h2 className="mt-4 font-light text-ink text-[32px] leading-[1.1] tracking-[-0.005em] sm:text-[40px]">

@@ -8,7 +8,7 @@ export default function PrivacyPrinciplesSection() {
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="max-w-3xl">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Data minimization
           </div>
           <h2
@@ -30,7 +30,7 @@ export default function PrivacyPrinciplesSection() {
               key={p.title}
               className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 transition-all duration-300 hover:border-ink/[0.18] motion-safe:hover:-translate-y-0.5"
             >
-              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">
+              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
                 Principle {i + 1}
               </div>
               <h3 className="mt-3 text-[16px] font-medium text-ink">{p.title}</h3>

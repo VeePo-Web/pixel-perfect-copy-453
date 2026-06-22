@@ -9,7 +9,7 @@ export default function ComparisonFAQ() {
       className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-4xl px-6 py-20 lg:px-10">
-        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
           Objection handling · FAQ
         </div>
         <h2

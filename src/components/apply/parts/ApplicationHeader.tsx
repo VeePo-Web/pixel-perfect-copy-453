@@ -11,7 +11,7 @@ export default function ApplicationHeader() {
         >
           {APPLY.header.brand}
         </button>
-        <span className="hidden text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60 md:block">
+        <span className="hidden text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70 md:block">
           {APPLY.header.label}
         </span>
         <a

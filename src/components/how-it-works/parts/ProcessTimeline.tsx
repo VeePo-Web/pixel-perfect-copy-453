@@ -51,7 +51,7 @@ export default function ProcessTimeline() {
                   />
                   <div
                     className={`text-[10.5px] uppercase tracking-[0.22em] transition-colors duration-500 ${
-                      isActive ? "text-champagne-200/80" : "text-ink/30"
+                      isActive ? "text-champagne-300/70" : "text-ink/30"
                     }`}
                   >
                     {s.n}
@@ -82,7 +82,7 @@ export default function ProcessTimeline() {
             {/* Mobile rail */}
             <div className="lg:hidden mb-5 flex items-center gap-3">
               <span className="h-2 w-2 rounded-full bg-champagne-200" />
-              <span className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/70">{s.n}</span>
+              <span className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-300/70">{s.n}</span>
               <span className="text-[15px] tracking-tight text-ink">{s.title}</span>
             </div>
             <div className="grid gap-5">
