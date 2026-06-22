@@ -1,16 +1,22 @@
 import { useState } from "react";
+import { useInView } from "../../how-it-works/hooks/useInView";
 import { useCases } from "../content";
 import { track } from "../analytics";
 
 export default function UseCasePaths() {
   const [openId, setOpenId] = useState<string | null>(useCases[0]?.id ?? null);
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       aria-labelledby="use-cases-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
-        <div className="max-w-[60ch]">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+        <div
+          className={`max-w-[60ch] transition-all duration-700 ease-cinema ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             See yourself in the page
           </div>
@@ -22,7 +28,11 @@ export default function UseCasePaths() {
           </h2>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          className={`mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 transition-all duration-700 ease-cinema delay-150 ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           {useCases.map((u) => {
             const open = openId === u.id;
             return (
@@ -69,7 +79,7 @@ export default function UseCasePaths() {
                           else if (h === "#/templates")
                             track("templates_clicked_from_compare", { source: `use-case:${u.id}` });
                         }}
-                        className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-2 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_10px_30px_-10px_rgba(217,190,130,0.55)]"
+                        className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-2 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
                       >
                         {u.primaryCTA.label}
                       </a>

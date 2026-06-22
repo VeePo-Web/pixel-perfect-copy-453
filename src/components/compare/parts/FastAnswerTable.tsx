@@ -1,14 +1,20 @@
+import { useInView } from "../../how-it-works/hooks/useInView";
 import { options } from "../content";
 
 export default function FastAnswerTable() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       id="fast-answer"
       aria-labelledby="fast-answer-heading"
       className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
-        <div className="max-w-[62ch]">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+        <div
+          className={`max-w-[62ch] transition-all duration-700 ease-cinema ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Fast answer
           </div>
@@ -21,7 +27,11 @@ export default function FastAnswerTable() {
         </div>
 
         {/* Desktop table */}
-        <div className="mt-10 hidden overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.02] lg:block">
+        <div
+          className={`mt-10 hidden overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.02] lg:block transition-all duration-700 ease-cinema delay-150 ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <table className="w-full border-collapse text-left text-[13px]">
             <caption className="sr-only">Comparison of financial support options.</caption>
             <thead>
@@ -59,7 +69,11 @@ export default function FastAnswerTable() {
         </div>
 
         {/* Mobile cards */}
-        <ol className="mt-8 grid gap-3 lg:hidden">
+        <ol
+          className={`mt-8 grid gap-3 lg:hidden transition-all duration-700 ease-cinema delay-150 ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           {options.map((o) => (
             <li
               key={o.id}

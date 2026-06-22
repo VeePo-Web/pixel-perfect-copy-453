@@ -1,15 +1,21 @@
+import { useInView } from "../../how-it-works/hooks/useInView";
 import { missingMiddle } from "../content";
 import { track } from "../analytics";
 
 export default function MissingMiddleSection() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       id="missing-middle"
       aria-labelledby="missing-middle-heading"
       className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
-        <div className="max-w-[62ch]">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+        <div
+          className={`max-w-[62ch] transition-all duration-700 ease-cinema ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             The missing middle
           </div>
@@ -24,7 +30,11 @@ export default function MissingMiddleSection() {
           </p>
         </div>
 
-        <div className="mt-10 grid items-stretch gap-4 lg:grid-cols-3">
+        <div
+          className={`mt-10 grid items-stretch gap-4 lg:grid-cols-3 transition-all duration-700 ease-cinema delay-150 ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <SideColumn
             label={missingMiddle.tooLight.label}
             tone="muted"
@@ -50,7 +60,7 @@ export default function MissingMiddleSection() {
           <a
             href="#/pricing#auto-fill"
             onClick={() => track("autofill_clicked_from_compare", { source: "missing-middle" })}
-            className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.55)]"
+            className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
           >
             Auto-fill my reports — $99/mo
           </a>

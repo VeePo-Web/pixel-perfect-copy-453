@@ -1,4 +1,7 @@
+import { useInView } from "../../how-it-works/hooks/useInView";
+
 export default function CoreQuestionSection() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   const rows = [
     {
       n: "01",
@@ -21,9 +24,13 @@ export default function CoreQuestionSection() {
       aria-labelledby="core-question-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.1fr]">
-          <div>
+          <div
+            className={`transition-all duration-700 ease-cinema ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               The core question
             </div>
@@ -38,12 +45,16 @@ export default function CoreQuestionSection() {
             </p>
             <a
               href="#fit-finder"
-              className="mt-7 inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
+              className="mt-7 inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
             >
               Find the right fit <span aria-hidden>→</span>
             </a>
           </div>
-          <ol className="grid gap-4">
+          <ol
+            className={`grid gap-4 transition-all duration-700 ease-cinema delay-150 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
             {rows.map((r) => (
               <li
                 key={r.n}
