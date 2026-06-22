@@ -1,6 +1,8 @@
 import { track } from "../analytics";
+import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function TemplateFinalCTA() {
+  const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.15 });
   return (
     <section
       aria-labelledby="final-cta-heading"
@@ -9,7 +11,7 @@ export default function TemplateFinalCTA() {
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_100%,rgba(201,163,90,0.12),transparent_60%)]" />
       </div>
-      <div className="relative mx-auto max-w-5xl px-6 py-24 text-center lg:px-10 lg:py-32">
+      <div ref={ref} className={`relative mx-auto max-w-5xl px-6 py-24 text-center lg:px-10 lg:py-32 transition-all duration-700 ease-cinema ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
         <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
           Start free
         </div>

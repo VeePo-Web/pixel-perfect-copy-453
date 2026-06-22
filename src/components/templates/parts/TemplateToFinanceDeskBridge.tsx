@@ -1,14 +1,16 @@
 import { bridgeSteps } from "../content";
 import { track } from "../analytics";
+import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function TemplateToFinanceDeskBridge() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       aria-labelledby="bridge-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
-        <div className="max-w-[60ch]">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
+        <div className={`max-w-[60ch] transition-all duration-700 ease-cinema ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             From templates to rhythm
           </div>
@@ -19,7 +21,7 @@ export default function TemplateToFinanceDeskBridge() {
             From spreadsheet structure to monthly financial clarity.
           </h2>
         </div>
-        <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className={`mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 transition-all duration-700 ease-cinema delay-150 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           {bridgeSteps.map((s, i) => (
             <li
               key={s.n}

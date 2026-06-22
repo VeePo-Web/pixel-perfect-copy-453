@@ -1,21 +1,25 @@
 import { faq } from "../content";
 import { track } from "../analytics";
+import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function TemplateFAQ() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       aria-labelledby="faq-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-4xl px-6 py-20 lg:px-10">
-        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">FAQ</div>
-        <h2
-          id="faq-heading"
-          className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
-        >
-          Questions before you download.
-        </h2>
-        <div className="mt-8 divide-y divide-ink/[0.06] rounded-2xl border border-ink/[0.07] bg-ink/[0.02]">
+      <div ref={ref} className="mx-auto max-w-4xl px-6 py-20 lg:px-10">
+        <div className={`transition-all duration-700 ease-cinema ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">FAQ</div>
+          <h2
+            id="faq-heading"
+            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"
+          >
+            Questions before you download.
+          </h2>
+        </div>
+        <div className={`mt-8 divide-y divide-ink/[0.06] rounded-2xl border border-ink/[0.07] bg-ink/[0.02] transition-all duration-700 ease-cinema delay-150 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           {faq.map((item, i) => (
             <details
               key={item.q}
