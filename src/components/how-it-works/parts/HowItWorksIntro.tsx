@@ -27,7 +27,7 @@ export default function HowItWorksIntro() {
           {c.eyebrow}
         </div>
         <h2
-          className={`font-zentry text-[clamp(2.25rem,5.2vw,4.25rem)] leading-[1.02] tracking-tight text-ink transition-all duration-700 ease-cinema ${
+          className={`font-robert-medium text-[clamp(2.25rem,5.2vw,4.25rem)] leading-[1.02] tracking-tight text-ink transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
           }`}
           style={{ transitionDelay: "80ms" }}

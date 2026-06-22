@@ -43,7 +43,7 @@ function Band({
       {ghost && (
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute right-4 top-2 select-none font-zentry text-[clamp(7rem,17vw,15rem)] leading-none text-ink/[0.025] md:right-8 lg:right-12"
+          className="pointer-events-none absolute right-4 top-2 select-none font-robert-medium text-[clamp(7rem,17vw,15rem)] uppercase leading-none text-ink/[0.025] md:right-8 lg:right-12"
         >
           {ghost}
         </span>
