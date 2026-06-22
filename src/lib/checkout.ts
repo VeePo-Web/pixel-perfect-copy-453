@@ -12,6 +12,8 @@ export type PlanKey = "auto-fill-monthly" | "finance-desk-monthly" | "clarity-re
 /** Display/analytics value per plan (USD). Source of truth for price = Stripe. */
 const PLAN_PRICE_USD: Partial<Record<PlanKey, number>> = {
   "auto-fill-monthly": 99,
+  "finance-desk-monthly": 149,
+  "clarity-report": 49,
 };
 
 const RETURN_PATH = "/checkout/return";
@@ -35,6 +37,11 @@ export function openCheckout(plan: PlanKey, customerEmail?: string): void {
     window.location.hash = "#/pricing#auto-fill";
     return;
   }
+
+  // Store the plan key in sessionStorage so handleCheckoutReturn() can
+  // correctly identify the plan when Stripe redirects back with ?session_id=.
+  sessionStorage.setItem("goldfin:checkout:plan", plan);
+
   window.dispatchEvent(
     new CustomEvent<CheckoutOpenDetail>("goldfin:open-checkout", {
       detail: { plan, customerEmail },
@@ -79,32 +86,40 @@ export async function fetchCheckoutClientSecret(
 export type CheckoutReturn = "success" | "cancel" | null;
 
 /**
- * Detects a return from Stripe Checkout via the `?checkout=` query param, fires
- * the matching conversion event exactly once, then strips the param so a refresh
- * never double-counts. Returns the status so a UI surface can show a
- * confirmation (that screen is owned by the conversion build, not this module).
+ * Detects a return from Stripe's embedded checkout.
  *
- * Call once on app boot. Idempotent: removing the param means a second call is a
- * no-op.
+ * Stripe's embedded-checkout flow redirects to `returnUrl` with
+ * `?session_id=cs_xxx` appended (not `?checkout=success` — that was the
+ * old redirect-checkout pattern). The plan key may optionally be stored in
+ * sessionStorage by <CheckoutOverlay> so the analytics event is accurate.
+ *
+ * Returns "success" when a session_id is present (Stripe only redirects here
+ * on completion — there is no "cancel" redirect in embedded mode; the customer
+ * simply closes the overlay), or null if we're not on the return path.
+ *
+ * Call once on app boot or when the return route mounts. Idempotent: stripping
+ * the session_id param means a second call is a no-op.
  */
 export function handleCheckoutReturn(): CheckoutReturn {
   if (typeof window === "undefined") return null;
 
   const params = new URLSearchParams(window.location.search);
-  const status = params.get("checkout");
-  if (status !== "success" && status !== "cancel") return null;
+  const sessionId = params.get("session_id");
+  if (!sessionId) return null;
 
-  if (status === "success") {
-    analytics.purchaseCompleted("auto-fill-monthly", PLAN_PRICE_USD["auto-fill-monthly"]);
-  } else {
-    analytics.checkoutCancelled("auto-fill-monthly");
-  }
+  // Recover the plan key the overlay stored before launching checkout.
+  const plan =
+    (sessionStorage.getItem("goldfin:checkout:plan") as PlanKey | null) ??
+    "auto-fill-monthly";
+  sessionStorage.removeItem("goldfin:checkout:plan");
 
-  // Strip ?checkout= but preserve any other query params and the hash route.
-  params.delete("checkout");
+  analytics.purchaseCompleted(plan, PLAN_PRICE_USD[plan]);
+
+  // Strip ?session_id= but preserve any other query params and the hash route.
+  params.delete("session_id");
   const qs = params.toString();
   const url = `${window.location.pathname}${qs ? `?${qs}` : ""}${window.location.hash}`;
   window.history.replaceState(null, "", url);
 
-  return status;
+  return "success";
 }
