@@ -17,7 +17,7 @@ function Column({ label, title, items, accent }: { label: string; title: string;
       <div className={`text-[10.5px] uppercase tracking-[0.28em] ${accent ? "text-champagne-200/70" : "text-ink/40"}`}>
         {label}
       </div>
-      <h3 className="mt-3 font-zentry text-2xl leading-tight tracking-tight text-ink">{title}</h3>
+      <h3 className="mt-3 font-robert-medium text-2xl leading-tight tracking-tight text-ink">{title}</h3>
       <ul className="mt-6 space-y-3">
         {items.map((it, i) => (
           <li

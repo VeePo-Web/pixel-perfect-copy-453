@@ -22,7 +22,7 @@ export default function BeforeAfter() {
           {/* Before */}
           <div className="relative bg-paper-raised p-8 md:p-10">
             <div className="text-[10.5px] uppercase tracking-[0.28em] text-ink/35">{c.before.label}</div>
-            <h3 className="mt-2 font-zentry text-2xl leading-tight tracking-tight text-ink/70">{c.before.title}</h3>
+            <h3 className="mt-2 font-robert-medium text-2xl leading-tight tracking-tight text-ink/70">{c.before.title}</h3>
             <ul className="mt-6 space-y-3">
               {c.before.bullets.map((b) => (
                 <li key={b} className="flex items-start gap-3 text-[14px] leading-[1.55] text-ink/45">
@@ -36,7 +36,7 @@ export default function BeforeAfter() {
           <div className="relative bg-white p-8 md:p-10">
             <div className="absolute inset-y-0 left-0 hidden w-px bg-gradient-to-b from-transparent via-champagne-200/40 to-transparent md:block" />
             <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">{c.after.label}</div>
-            <h3 className="mt-2 font-zentry text-2xl leading-tight tracking-tight text-ink">{c.after.title}</h3>
+            <h3 className="mt-2 font-robert-medium text-2xl leading-tight tracking-tight text-ink">{c.after.title}</h3>
             <ul className="mt-6 space-y-3">
               {c.after.bullets.map((b, i) => (
                 <li

@@ -20,7 +20,7 @@ export default function SuccessPage({ onClear }: { onClear: () => void }) {
         }}
       >
         <div className="text-[10.5px] uppercase tracking-[0.28em] text-green-signal/90">Confirmed</div>
-        <h1 className="mt-4 font-zentry text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.05] tracking-tight text-ink motion-safe:animate-section-in">
+        <h1 className="mt-4 font-robert-medium text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.05] tracking-tight text-ink motion-safe:animate-section-in">
           {c.headline}
         </h1>
         <p className="mt-5 max-w-xl text-[15px] leading-[1.7] text-ink/65">{c.sub}</p>

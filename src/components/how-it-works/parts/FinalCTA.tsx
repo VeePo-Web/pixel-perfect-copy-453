@@ -23,7 +23,7 @@ export default function FinalCTA() {
           inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
         }`}
       >
-        <h2 className="font-zentry text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.05] tracking-tight text-bone">
+        <h2 className="font-robert-medium text-[clamp(2rem,4.6vw,3.4rem)] leading-[1.05] tracking-tight text-bone">
           {c.headline}
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-[15px] leading-[1.7] text-bone/65">{c.sub}</p>

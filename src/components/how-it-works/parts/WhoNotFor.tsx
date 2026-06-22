@@ -22,7 +22,7 @@ export default function WhoNotFor() {
         A quiet standard
       </div>
       <h2
-        className={`mt-4 font-zentry text-[clamp(1.9rem,4.2vw,3rem)] font-black uppercase leading-[1] tracking-tight text-ink transition-all duration-700 ease-cinema ${
+        className={`mt-4 font-robert-medium text-[clamp(1.9rem,4.2vw,3rem)] font-black uppercase leading-[1] tracking-tight text-ink transition-all duration-700 ease-cinema ${
           inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
         }`}
         style={{ transitionDelay: "80ms" }}

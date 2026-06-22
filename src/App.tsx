@@ -15,6 +15,7 @@ import CheckoutReturnPage from "./components/payments/CheckoutReturnPage";
 import BillingPage from "./components/payments/BillingPage";
 import PaymentTestModeBanner from "./components/payments/PaymentTestModeBanner";
 import GlobalTopBar, { type NavKey } from "./components/nav/GlobalTopBar";
+import GoldFinFooter from "./components/footer/GoldFinFooter";
 import { useHashRoute } from "./components/apply/hooks/useHashRoute";
 
 function usePathname(): string {
@@ -41,6 +42,7 @@ const App = () => {
         <PaymentTestModeBanner />
         <GlobalTopBar currentPath="home" />
         <BillingPage />
+        <GoldFinFooter />
         <CheckoutOverlay />
       </main>
     );
@@ -51,6 +53,7 @@ const App = () => {
       <PaymentTestModeBanner />
       <GlobalTopBar currentPath={key} />
       <div className={extraTopPad ? "pt-14" : undefined}>{children}</div>
+      <GoldFinFooter />
       <CheckoutOverlay />
     </main>
   );

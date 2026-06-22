@@ -32,7 +32,7 @@ export default function ApplicationStepShell({
       <div className="mb-6 text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">
         {eyebrow ?? `Application · 0${step} / 0${total}`}
       </div>
-      <h1 className="font-zentry text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] tracking-tight text-ink">
+      <h1 className="font-robert-medium text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] tracking-tight text-ink">
         {headline}
       </h1>
       {sub && <p className="mt-4 max-w-xl text-[14.5px] leading-[1.7] text-ink/65">{sub}</p>}

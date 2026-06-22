@@ -7,7 +7,7 @@ function Card({ children, title, label }: { children: React.ReactNode; title?: s
     <div className="relative rounded-2xl border border-champagne-200/15 bg-charcoal-900/60 p-6 backdrop-blur-sm">
       <span className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent" />
       {label && <div className="mb-3 text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/70">{label}</div>}
-      {title && <div className="mb-4 font-zentry text-[20px] leading-tight tracking-tight text-ink">{title}</div>}
+      {title && <div className="mb-4 font-robert-medium text-[20px] leading-tight tracking-tight text-ink">{title}</div>}
       {children}
     </div>
   );
@@ -28,7 +28,7 @@ function StepContent({ step, state }: { step: number; state: ApplicationState })
         </ul>
         <div className="mt-5 flex items-end justify-between border-t border-ink/[0.06] pt-4">
           <span className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Investment</span>
-          <span className="font-zentry text-[22px] tracking-tight text-champagne-100">{r.price}</span>
+          <span className="font-robert-medium text-[22px] tracking-tight text-champagne-100">{r.price}</span>
         </div>
         <p className="mt-3 text-[12px] text-ink/45">{r.sub}</p>
         <p className="mt-5 text-[11.5px] leading-[1.55] text-ink/40">{APPLY.landing.fitNote}</p>

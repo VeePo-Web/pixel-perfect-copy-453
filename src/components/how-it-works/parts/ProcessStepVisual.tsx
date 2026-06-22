@@ -165,7 +165,7 @@ function StepReview() {
         <div className="grid grid-cols-[auto_1fr] gap-4">
           <div className="rounded-xl border border-champagne-200/30 bg-paper-raised p-4 text-center shadow-sm">
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Apr</div>
-            <div className="mt-1 font-zentry text-3xl leading-none text-ink">28</div>
+            <div className="mt-1 font-robert-medium text-3xl leading-none text-ink">28</div>
             <div className="mt-1 text-[10.5px] text-champagne-300/70">1:00 PM</div>
           </div>
           <div className="rounded-xl border border-charcoal-700 bg-paper-raised p-4 shadow-sm">

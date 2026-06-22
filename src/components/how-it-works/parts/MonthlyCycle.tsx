@@ -56,7 +56,7 @@ export default function MonthlyCycle() {
           <div className="absolute inset-0 flex items-center justify-center px-10 text-center">
             <div>
               <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">End state</div>
-              <div className="mt-2 font-zentry text-[18px] leading-[1.25] tracking-tight text-ink">{c.end}</div>
+              <div className="mt-2 font-robert-medium text-[18px] leading-[1.25] tracking-tight text-ink">{c.end}</div>
             </div>
           </div>
         </div>

@@ -30,7 +30,7 @@ export default function PainClarity() {
 
         <h2
           id="pain-clarity-title"
-          className={`mt-5 max-w-[20ch] font-zentry text-[clamp(2rem,4.6vw,3.5rem)] font-black uppercase leading-[0.98] tracking-tight text-ink transition-all duration-700 ease-cinema ${
+          className={`mt-5 max-w-[20ch] font-robert-medium text-[clamp(2rem,4.6vw,3.5rem)] font-black uppercase leading-[0.98] tracking-tight text-ink transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
           }`}
           style={{ transitionDelay: "80ms" }}

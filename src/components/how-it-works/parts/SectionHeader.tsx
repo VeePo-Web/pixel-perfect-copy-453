@@ -18,7 +18,7 @@ export default function SectionHeader({ eyebrow, headline, sub, align = "left" }
         </div>
       )}
       <h2
-        className={`font-zentry text-[clamp(2rem,4.6vw,3.6rem)] leading-[1.05] tracking-tight text-ink transition-all duration-700 ease-cinema ${
+        className={`font-robert-medium text-[clamp(2rem,4.6vw,3.6rem)] leading-[1.05] tracking-tight text-ink transition-all duration-700 ease-cinema ${
           inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
         }`}
         style={{ transitionDelay: "80ms" }}
