@@ -1,73 +1,99 @@
-# Plan: Hook Stripe into GoldFin Desk
 
-Use **Lovable's built-in Stripe payments** (seamless, no API key to paste). Test mode is live immediately so you can start collecting payments today; live mode unlocks after you claim/verify the Stripe account. Everything lands in this repo so you (and Claude Code) can keep iterating.
+# Goldfin Portal — Auth, Plaid, Aggressive ToS
 
-## 1. Eligibility check + enable
-- Run `recommend_payment_provider` to confirm Stripe is the right fit for GoldFin (digital/services, US seller, full-compliance handling eligible).
-- Enable via `enable_stripe_payments`. This provisions Stripe in test mode, injects the managed Stripe secret, and adds knowledge files for product/checkout/webhook patterns.
-- Default tax handling: **full compliance handling (`managed_payments`)** — Stripe handles tax, fraud, disputes, transaction support for buyers in ~80 countries (+3.5%). Toggleable per session later.
+Lift VeePo's portal login / MFA / email pattern, restyle it in the Goldfin champagne-on-charcoal system, and bolt a Plaid sandbox connector on top. New routes live behind `/portal/*` and do not touch the existing marketing site.
 
-## 2. Create the product catalog
-Use `batch_create_product` to seed the three SKUs the funnel sells, each with a Stripe Tax code:
+## 1. Database (one migration)
 
-| Product | Price | Mode | Tax code |
-|---|---|---|---|
-| Auto-Fill Monthly (continuity) | $99 / month | subscription | `txcd_10103001` (SaaS) |
-| Monthly Finance Desk | $1,500 / month | subscription | `txcd_20030000` (professional services) |
-| One-off Clarity Report | $99 | one-time | `txcd_10103001` |
+New public tables, all RLS-locked, all with `GRANT ... TO authenticated` + `service_role`:
 
-(Names/prices easy to change later — these match the funnel copy.)
+- `profiles` — `id` (= `auth.users.id`), `email`, `first_name`, `last_name`, `phone`. Auto-created by trigger on `auth.users` insert.
+- `user_roles` — `user_id`, `role` (`admin` | `member`). Separate table + `has_role()` security-definer function (per Lovable user-roles rule).
+- `mfa_factors` — `user_id`, `totp_secret` (encrypted via pgsodium), `enabled_at`, `last_used_at`.
+- `mfa_backup_codes` — `user_id`, `code_hash`, `used_at`.
+- `plaid_items` — `user_id`, `item_id`, `access_token` (encrypted), `institution_name`, `institution_logo`, `status` (`active` | `reauth_required` | `disconnected`), `last_synced_at`, `cursor`.
+- `plaid_accounts` — `plaid_item_id`, `account_id`, `name`, `mask`, `type`, `subtype`, `currency`, `current_balance`, `available_balance`.
+- `tos_acceptances` — `user_id`, `tos_version`, `plaid_consent_version`, `accepted_at`, `ip`, `user_agent`. Required before Plaid Link can open.
 
-## 3. Edge functions (live in the repo, editable in Claude Code)
-Create under `supabase/functions/`:
+RLS: every row scoped by `user_id = auth.uid()`. Service role does all writes from edge functions.
 
-- **`create-checkout/index.ts`** — already referenced by `src/lib/checkout.ts`. Accepts `{ plan: "auto-fill-monthly" | "finance-desk-monthly" | "clarity-report" }`, looks up the price ID from a typed map, creates a Stripe Checkout Session (subscription or payment mode), returns `{ url }`. CORS + Zod validation. Uses `managed_payments: { enabled: true }`.
-- **`stripe-webhook/index.ts`** — verifies signature, handles `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`, `invoice.payment_failed`. Writes to a new `subscriptions` table (see §4) and fires the existing `send-email` function for receipts/dunning.
-- **`customer-portal/index.ts`** — returns a Stripe Billing Portal URL for the signed-in customer so subscribers can manage card / cancel without contacting you.
+## 2. Auth + Email
 
-All three: `verify_jwt = false` in `supabase/config.toml`, CORS headers, structured errors. No secrets hardcoded.
+- Enable email/password auth. Leaked-password (HIBP) ON. Auto-confirm email OFF (real verification flow).
+- Scaffold auth email templates via the managed Lovable flow (domain `goldfindesk.com` is already verified) — signup confirm, magic link, recovery, invite, email-change, reauthentication — restyled in the Goldfin palette (champagne `#E8D9B8` CTA on `#0B0D10`, light serif headings).
+- Sender: `Goldfin Desk <noreply@goldfindesk.com>`.
 
-## 4. Database (one migration)
-```text
-public.subscriptions
-  id uuid pk
-  email text not null
-  stripe_customer_id text unique
-  stripe_subscription_id text unique
-  plan text                  -- 'auto-fill-monthly' | 'finance-desk-monthly' | 'clarity-report'
-  status text                -- 'active' | 'past_due' | 'canceled' | 'paid'
-  current_period_end timestamptz
-  created_at / updated_at
-```
-- GRANTs: `service_role` ALL; `authenticated` SELECT (own rows by email).
-- RLS on; policy = `email = auth.jwt() ->> 'email'`.
-- No anon access.
+## 3. Frontend routes (all new, under `/portal/*`)
 
-## 5. Frontend wiring (minimal, all existing components)
-- `src/lib/checkout.ts` — extend `startAutoFillCheckout` and add `startFinanceDeskCheckout`, `startClarityReportCheckout`. Same try/catch fallback.
-- Pricing CTAs (`PricingFinalCTA`, `MobileStickyCTA`, `AutoFillSpotlight`, `RecommendedPlanSpotlight`) — already call `startAutoFillCheckout`, no changes needed. The $1,500 Desk CTA on `/apply` stays as an application (not a direct checkout) per the funnel doc.
-- Add `/billing` route → calls `customer-portal` and redirects. Linked from the post-checkout success page.
-- Add `/checkout/success` and `/checkout/cancel` thin pages (success reads `session_id`, shows confirmation + "Manage billing" link).
+| Route | Purpose |
+|---|---|
+| `/portal/login` | Email + password. Link to forgot password. |
+| `/portal/signup` | Email + password + ToS checkbox (links to `/terms` + `/plaid-consent`). |
+| `/portal/forgot-password` | Sends Supabase recovery email. |
+| `/portal/reset-password` | Handles `type=recovery` hash, updates password. |
+| `/portal/mfa-setup` | Forced after first login. TOTP QR + 8 backup codes (shown once). |
+| `/portal/mfa-verify` | 6-digit TOTP entry on every subsequent login. |
+| `/portal` (dashboard) | Greeting, net cash tile, "Connect a bank" CTA when no accounts. |
+| `/portal/accounts` | Connected-accounts UI: each Plaid item is a card with institution logo, account list, status badge, "Re-authenticate" + "Disconnect" buttons. "Add another account" opens Plaid Link again. |
+| `/portal/settings` | Profile, change password, MFA management, sign out everywhere. |
+| `/terms` | Aggressive financial-data ToS (see §5). |
+| `/plaid-consent` | Separate Plaid end-user data consent page. |
+| `/privacy` | Companion privacy policy. |
 
-## 6. Email hooks (uses existing Resend `send-email` function)
-Webhook handlers fire transactional emails:
-- `checkout.session.completed` → "Welcome to Auto-Fill" + how-to-upload-statements walkthrough
-- `invoice.payment_failed` → dunning notice with portal link
-- `customer.subscription.deleted` → cancellation confirmation
+Shared `PortalLayout` with sidebar (Dashboard, Accounts, Settings, Sign out) + `ProtectedRoute` wrapper that:
+1. Requires session.
+2. Requires `mfa_factors.enabled_at IS NOT NULL` — else redirect to `/portal/mfa-setup`.
+3. Requires latest `tos_acceptances` row matches current `TOS_VERSION` — else show acceptance modal.
 
-## 7. Repo hygiene for Claude Code parity
-- Add `docs/payments.md` documenting: which function does what, env vars used (`STRIPE_SECRET_KEY` managed by Lovable, `STRIPE_WEBHOOK_SECRET`), how to test with Stripe CLI (`stripe listen --forward-to <fn-url>`), and the price-ID map location.
-- Centralize price IDs in `supabase/functions/_shared/stripe-catalog.ts` (imported by `create-checkout` and `stripe-webhook`) so adding a SKU is one file.
-- No `.env` edits — all secrets remain Lovable-managed and resolved at runtime.
+`AuthContext` mirrors VeePo's pattern: `onAuthStateChange` listener registered first, then `getUser()` for trusted reads.
 
-## What you'll do (out of build scope)
-- **Claim the Stripe account** from the Lovable dashboard when you're ready to switch from test → live.
-- **Add the webhook endpoint** in Stripe Dashboard pointing to the deployed `stripe-webhook` URL, then paste the signing secret via the add-secret prompt I'll trigger.
+## 4. Plaid (sandbox)
 
-## Technical notes
-- Stripe SDK via `npm:stripe@17` in Deno edge functions.
-- Webhook signature uses `stripe.webhooks.constructEventAsync` (Deno-compatible).
-- Idempotency keys on subscription creation to survive retries.
-- All amounts in cents in the catalog file; never reconstruct prices in the frontend.
+Per-account re-auth, exactly like Wave's pattern. No data leaves edge functions.
 
-Approve and I'll build it in this order: enable → catalog → DB migration → edge functions → frontend wiring → docs.
+Edge functions:
+- `plaid-create-link-token` — mints a Link token for new connection or for `update` mode (re-auth of a specific item).
+- `plaid-exchange-public-token` — public→access token, stores encrypted in `plaid_items`, pulls initial accounts.
+- `plaid-sync-accounts` — refreshes balances + account list for one item.
+- `plaid-remove-item` — calls `/item/remove`, deletes row.
+- `plaid-webhook` — handles `ITEM_LOGIN_REQUIRED` → sets `status = 'reauth_required'`; handles transactions updates.
+
+Secrets requested via `add_secret`: `PLAID_CLIENT_ID`, `PLAID_SANDBOX_SECRET`, `PLAID_ENV` (`sandbox`), `PLAID_WEBHOOK_SECRET`.
+
+Frontend uses `react-plaid-link`. Link only opens after the user has accepted ToS + Plaid consent in this session.
+
+## 5. Aggressive ToS (`/terms`) + Plaid consent (`/plaid-consent`)
+
+Drafted as long-form legal copy, displayed in the Goldfin editorial style. Key clauses, in plain English headers with formal body:
+
+- **Read-only access.** Goldfin Desk never initiates transactions, transfers, or trades.
+- **Plaid is the data conduit.** Credentials are entered on Plaid's interface; Goldfin never sees or stores bank passwords. Plaid's privacy policy governs that exchange.
+- **No fiduciary, no advice.** Information shown is for organizational purposes only; not investment, tax, or legal advice.
+- **No warranty.** Service provided "AS IS." No warranty of accuracy, completeness, fitness, or availability.
+- **Limitation of liability.** Maximum aggregate liability capped at fees paid in the prior 3 months. No liability for indirect, incidental, consequential, special, exemplary, or punitive damages.
+- **Third-party breach disclaimer.** Goldfin is not liable for any breach, hack, outage, data loss, or unauthorized access affecting Plaid, the user's financial institution, Lovable Cloud (Supabase), Stripe, Resend, or any other subprocessor.
+- **Account compromise.** User is solely responsible for credentials, devices, and MFA enrollment. Losses from compromised user accounts are not Goldfin's responsibility.
+- **No guarantee of data accuracy.** Balances and categorizations may lag, error, or be wrong; user must verify against source-of-truth bank statements before any decision.
+- **Indemnification.** User indemnifies Goldfin for misuse, illegal activity, or breach of these terms.
+- **Termination.** Goldfin may suspend or terminate at any time, with or without notice.
+- **Mandatory arbitration + class-action waiver.** Disputes resolved in binding arbitration; jury trial waived; class actions waived.
+- **Governing law.** Placeholder (you fill the jurisdiction).
+- **Versioning.** Material changes bump `TOS_VERSION`; user must re-accept before next portal use.
+
+Separate Plaid consent screen lists exactly what Plaid pulls (account, balance, transactions, account/routing for one product if enabled) and requires an explicit checkbox before Link opens. Acceptance written to `tos_acceptances`.
+
+## Technical details
+
+- File map: `src/pages/portal/*`, `src/components/portal/*` (Layout, Sidebar, AccountCard, PlaidLinkButton, ReauthBanner), `src/components/auth/*` (ProtectedRoute, MfaSetup, MfaVerify, BackupCodes), `src/contexts/AuthContext.tsx`, `src/lib/plaid.ts`, `src/lib/tos.ts` (TOS_VERSION constant + helpers).
+- Edge functions in `supabase/functions/` named above + `_shared/plaid.ts` client + `_shared/crypto.ts` for token encryption.
+- `react-plaid-link`, `otpauth`, `qrcode` added via `bun add`. TOTP secrets encrypted server-side with pgsodium.
+- Routing: extend `src/App.tsx` with a `/portal/*` subtree using react-router; marketing routes untouched.
+- Brand styling: champagne `#E8D9B8` primary, charcoal `#0B0D10` bg, ink `#F4EFE6`; reuse existing tokens from `src/index.css`. No purple, no orbs, no SaaS gradients — same restraint as the marketing site.
+- Security memory updated to note the read-only fintech posture, Plaid as conduit, RLS-locked per-user data, and that hack-liability disclaimer is intentional and legally surfaced.
+
+## Out of scope (call out before building)
+
+- Transactions ledger UI, categorization, reporting — Plaid items + balances only this round.
+- Admin dashboard / multi-user orgs.
+- Stripe linkage to portal accounts (kept on marketing site for now).
+- Live Plaid (production) keys — sandbox only until you say go.
