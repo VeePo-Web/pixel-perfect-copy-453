@@ -58,7 +58,7 @@ export default function ApplicationStepShell({
               type="button"
               onClick={onContinue}
               disabled={continueDisabled}
-              className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema enabled:hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] disabled:opacity-40 disabled:cursor-not-allowed"
+              className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema enabled:hover:-translate-y-0.5 enabled:hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
             >
               <span className="relative z-10">{continueLabel}</span>
               <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -78,7 +78,7 @@ export default function ApplicationStepShell({
               <button
                 type="button"
                 onClick={onBack}
-                className="rounded-full border border-ink/15 px-4 py-3 text-[13px] text-ink/75"
+                className="rounded-full border border-ink/15 px-4 py-3 text-[13px] text-ink/75 transition-all duration-300 ease-cinema hover:border-ink/30 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
               >
                 Back
               </button>
@@ -87,7 +87,7 @@ export default function ApplicationStepShell({
               type="button"
               onClick={onContinue}
               disabled={continueDisabled}
-              className="flex-1 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy disabled:opacity-40"
+              className="flex-1 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema active:scale-[0.97] disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
             >
               {continueLabel}
             </button>
