@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "../../integrations/supabase/client";
-import GoldFinLogo from "../brand/GoldFinLogo";
 
 // Persona demo chips — each prefills a realistic, pain-language prompt so the
 // visitor self-identifies ("this is built for businesses like mine").
@@ -179,10 +178,7 @@ const FinanceHero = () => {
       {/* Quiet hairline accents — no dark washes */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
 
-
-      <HeroNav />
-
-      <div className="relative mx-auto flex min-h-[calc(100dvh-72px)] w-full max-w-7xl flex-col px-5 pb-24 pt-10 sm:px-8 lg:px-12 lg:pt-14">
+      <div className="relative mx-auto flex min-h-[calc(100dvh-56px)] w-full max-w-7xl flex-col px-5 pb-24 pt-10 sm:px-8 lg:px-12 lg:pt-14">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-10">
           {/* LEFT: copy + composer */}
           <div className="lg:col-span-7">
@@ -200,7 +196,7 @@ const FinanceHero = () => {
             </p>
 
             {/* Headline */}
-            <h1 className="mt-3 font-zentry text-[2.4rem] font-black uppercase leading-[0.95] text-ink sm:text-6xl lg:text-7xl">
+            <h1 className="mt-3 font-robert-medium text-[2.4rem] font-black uppercase leading-[0.95] text-ink sm:text-6xl lg:text-7xl">
               {COPY.headline}
             </h1>
 
@@ -289,7 +285,7 @@ const FinanceHero = () => {
               {COPY.badges.map((b) => (
                 <span
                   key={b}
-                  className="rounded-full border border-champagne-300/20 bg-charcoal-800/70 px-3 py-1.5 font-general text-[0.66rem] uppercase tracking-[0.16em] text-ink/70"
+                  className="rounded-full border border-charcoal-700 bg-paper-raised px-3 py-1.5 font-general text-[0.66rem] uppercase tracking-[0.16em] text-ink/70"
                 >
                   {b}
                 </span>
@@ -301,72 +297,6 @@ const FinanceHero = () => {
         </div>
       </div>
     </section>
-  );
-};
-
-const NAV_LINKS = [
-  { label: "How It Works", href: "#how" },
-  { label: "Sample Briefing", href: "#sample" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
-] as const;
-
-const HeroNav = () => {
-  const [open, setOpen] = useState(false);
-  return (
-    <header className="relative z-20 border-b border-bone/5 bg-charcoal-950/60 backdrop-blur-md">
-      <div className="mx-auto flex h-[72px] w-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
-        <a href="#top" className="flex items-center" aria-label="GoldFin Desk — Home">
-          <GoldFinLogo
-            markClassName="h-7 w-7"
-            wordmarkClassName="font-general text-[0.78rem] uppercase tracking-[0.22em] text-ink"
-          />
-        </a>
-        <nav className="hidden gap-9 md:flex">
-          {NAV_LINKS.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="font-general text-[0.7rem] uppercase tracking-[0.2em] text-ink/65 transition-colors hover:text-champagne-100"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
-        <button
-          type="button"
-          aria-label="Open menu"
-          aria-expanded={open}
-          onClick={() => setOpen((o) => !o)}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-bone/15 text-ink/80 md:hidden"
-        >
-          <span className="relative block h-2.5 w-4">
-            <span
-              className={`absolute left-0 top-0 h-px w-full bg-current transition-transform ${open ? "translate-y-[5px] rotate-45" : ""}`}
-            />
-            <span
-              className={`absolute bottom-0 left-0 h-px w-full bg-current transition-transform ${open ? "-translate-y-[5px] -rotate-45" : ""}`}
-            />
-          </span>
-        </button>
-      </div>
-      {open && (
-        <div className="border-t border-bone/5 bg-charcoal-950/95 md:hidden">
-          <nav className="mx-auto flex w-full max-w-7xl flex-col px-5 py-4 sm:px-8">
-            {NAV_LINKS.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="border-b border-bone/5 py-3 font-general text-[0.78rem] uppercase tracking-[0.2em] text-ink/75 last:border-b-0 hover:text-champagne-100"
-              >
-                {l.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-      )}
-    </header>
   );
 };
 
@@ -445,7 +375,7 @@ const BriefingPanel = ({
                 <li
                   key={label}
                   style={{ animationDelay: `${i * 70}ms` }}
-                  className="relative flex items-center justify-between overflow-hidden rounded-lg border border-bone/5 bg-charcoal-900/40 px-4 py-3 motion-safe:animate-section-in"
+                  className="relative flex items-center justify-between overflow-hidden rounded-lg border border-charcoal-700 bg-paper-raised px-4 py-3 motion-safe:animate-section-in"
                 >
                   <span className="flex items-center gap-3">
                     <span className="font-general text-[0.62rem] tracking-[0.18em] text-ink/35">
@@ -551,10 +481,10 @@ const highlightFigures = (text: string) => {
 
 const PostDemoCTA = () => (
   <div
-    className="relative mt-6 overflow-hidden rounded-2xl border border-champagne-300/20 bg-charcoal-800/60 p-6 motion-safe:animate-panel-rise"
+    className="relative mt-6 overflow-hidden rounded-2xl border border-charcoal-700 bg-paper-raised p-6 shadow-[0_1px_3px_0_rgba(11,13,18,0.07)] motion-safe:animate-panel-rise"
     style={{ animationDelay: "250ms" }}
   >
-    <h3 className="font-zentry text-2xl font-black uppercase leading-tight text-ink sm:text-3xl">
+    <h3 className="font-robert-medium text-2xl font-black uppercase leading-tight text-ink sm:text-3xl">
       {COPY.postDemo.headline}
     </h3>
     <p className="mt-3 font-circular-web text-sm leading-relaxed text-ink/75">
