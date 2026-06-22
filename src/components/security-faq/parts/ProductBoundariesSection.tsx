@@ -1,15 +1,21 @@
+import { useInView } from "../../how-it-works/hooks/useInView";
 import { productBoundaries } from "../content";
 import { trackCtaByHref } from "../analytics";
 
 export default function ProductBoundariesSection() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       id="boundaries"
       aria-labelledby="boundaries-heading"
       className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
-        <div className="max-w-3xl">
+      <div ref={ref} className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
+        <div
+          className={`max-w-3xl transition-all duration-700 ease-cinema ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Scope
           </div>
@@ -20,7 +26,11 @@ export default function ProductBoundariesSection() {
             What GoldFin Desk does — and does not do.
           </h2>
         </div>
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+        <div
+          className={`mt-12 grid gap-6 lg:grid-cols-2 transition-all duration-700 ease-cinema delay-150 ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div className="rounded-2xl border border-emerald-400/15 bg-emerald-400/[0.03] p-6">
             <div className="text-[10.5px] uppercase tracking-[0.28em] text-emerald-300/80">
               What it does

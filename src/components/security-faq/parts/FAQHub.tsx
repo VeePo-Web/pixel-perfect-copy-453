@@ -1,9 +1,11 @@
+import { useInView } from "../../how-it-works/hooks/useInView";
 import { faqCategories } from "../content";
 import { useFAQState } from "../hooks/useFAQState";
 
 export default function FAQHub() {
   const { query, setQuery, category, selectCategory, openId, toggle, filtered } =
     useFAQState();
+  const { ref, inView } = useInView<HTMLDivElement>();
 
   return (
     <section
@@ -11,8 +13,12 @@ export default function FAQHub() {
       aria-labelledby="faq-hub-heading"
       className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
-        <div className="max-w-3xl">
+      <div ref={ref} className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
+        <div
+          className={`max-w-3xl transition-all duration-700 ease-cinema ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             FAQ
           </div>
@@ -54,7 +60,11 @@ export default function FAQHub() {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-8 lg:grid-cols-[220px_1fr]">
+        <div
+          className={`mt-8 grid gap-8 lg:grid-cols-[220px_1fr] transition-all duration-700 ease-cinema delay-150 ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           {/* Category nav */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="hidden text-[10.5px] uppercase tracking-[0.28em] text-ink/40 lg:block">

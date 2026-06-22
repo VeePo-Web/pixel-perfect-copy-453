@@ -1,15 +1,21 @@
+import { useInView } from "../../how-it-works/hooks/useInView";
 import { sampleBriefingPreview } from "../content";
 import { trackCtaByHref } from "../analytics";
 
 export default function SecuritySampleBriefingPreview() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       aria-labelledby="sample-briefing-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
+      <div ref={ref} className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="max-w-xl">
+          <div
+            className={`max-w-xl transition-all duration-700 ease-cinema ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Preview the product
             </div>
@@ -37,7 +43,11 @@ export default function SecuritySampleBriefingPreview() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6">
+          <div
+            className={`rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 transition-all duration-700 ease-cinema delay-150 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
             <div className="flex items-center justify-between border-b border-ink/[0.06] pb-4">
               <div className="text-[11px] uppercase tracking-[0.24em] text-ink/45">
                 Sample briefing · preview

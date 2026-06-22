@@ -1,23 +1,35 @@
+import { useInView } from "../../how-it-works/hooks/useInView";
 import { featuredFAQ } from "../content";
 import { track } from "../analytics";
 
 export default function FeaturedFAQPreview() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       aria-labelledby="featured-faq-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-5xl px-6 py-20 lg:px-10 lg:py-24">
-        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
-          Top questions
-        </div>
-        <h2
-          id="featured-faq-heading"
-          className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+      <div ref={ref} className="mx-auto max-w-5xl px-6 py-20 lg:px-10 lg:py-24">
+        <div
+          className={`transition-all duration-700 ease-cinema ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
         >
-          The questions most owners ask first.
-        </h2>
-        <div className="mt-10 grid gap-3 lg:grid-cols-2">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+            Top questions
+          </div>
+          <h2
+            id="featured-faq-heading"
+            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+          >
+            The questions most owners ask first.
+          </h2>
+        </div>
+        <div
+          className={`mt-10 grid gap-3 lg:grid-cols-2 transition-all duration-700 ease-cinema delay-150 ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           {featuredFAQ.map((f, i) => (
             <details
               key={f.q}

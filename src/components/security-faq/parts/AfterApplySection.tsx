@@ -1,14 +1,20 @@
+import { useInView } from "../../how-it-works/hooks/useInView";
 import { afterApplySteps } from "../content";
 import { trackCtaByHref } from "../analytics";
 
 export default function AfterApplySection() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       aria-labelledby="after-apply-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
-        <div className="max-w-3xl">
+      <div ref={ref} className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
+        <div
+          className={`max-w-3xl transition-all duration-700 ease-cinema ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             After you apply
           </div>
@@ -22,7 +28,11 @@ export default function AfterApplySection() {
             The application is designed to understand fit, not collect sensitive access.
           </p>
         </div>
-        <ol className="mt-12 grid gap-px overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.02] sm:grid-cols-2 lg:grid-cols-5">
+        <ol
+          className={`mt-12 grid gap-px overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.02] sm:grid-cols-2 lg:grid-cols-5 transition-all duration-700 ease-cinema delay-150 ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           {afterApplySteps.map((s) => (
             <li
               key={s.n}
