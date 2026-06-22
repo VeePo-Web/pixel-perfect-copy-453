@@ -47,31 +47,33 @@ export default function PricingFinalCTA() {
         <p className="mx-auto mt-5 max-w-[62ch] text-[15.5px] leading-[1.7] text-ink/70">
           Have your templates filled from your numbers every month and get a plain-English briefing that tells you what changed and what to do next. No spreadsheet work. Cancel anytime.
         </p>
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <button
-            type="button"
-            onClick={startAutoFillCheckout}
-            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13.5px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
-          >
-            <span className="relative z-10">Auto-fill my reports</span>
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-          </button>
-          <a
-            href="#/sample-briefing"
-            className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13.5px] text-ink/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-ink"
-          >
-            See a sample briefing
-          </a>
+        <div className="mt-9 flex flex-col items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={startAutoFillCheckout}
+              className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13.5px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+            >
+              <span className="relative z-10">Auto-fill my reports</span>
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+            </button>
+            <a
+              href="#/sample-briefing"
+              className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13.5px] text-ink/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
+            >
+              See a sample briefing
+            </a>
+          </div>
+          <p className="text-[11.5px] uppercase tracking-[0.22em] text-ink/50">
+            No contracts · Cancel anytime · No bank connection required
+          </p>
           <a
             href="#/apply"
-            className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
+            className="mt-1 rounded text-[12.5px] text-ink/45 underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 focus-visible:ring-offset-2"
           >
             Want a human reading your numbers? Apply for the $1,500 Desk
           </a>
         </div>
-        <p className="mt-5 text-[11.5px] uppercase tracking-[0.22em] text-ink/40">
-          $99 / month. No bank connection required to start. Cancel anytime.
-        </p>
       </div>
     </section>
   );
