@@ -9,7 +9,7 @@ export default function ThreeWayComparisonTable() {
 
   const colClass = (id: ColumnId, isMfd?: boolean) => {
     const isHover = hovered === id;
-    return `transition-all duration-400 ease-cinema ${
+    return `transition-all duration-300 ease-cinema ${
       isHover
         ? "bg-champagne-200/[0.06]"
         : isMfd
@@ -113,7 +113,7 @@ export default function ThreeWayComparisonTable() {
                   <a
                     href={tableCTAs.bookkeeper.href}
                     onClick={() => trackCtaByHref(tableCTAs.bookkeeper.href, "table-bookkeeper")}
-                    className="inline-flex rounded-full border border-ink/[0.12] px-4 py-2 text-[12px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
+                    className="inline-flex rounded-full border border-ink/[0.12] px-4 py-2 text-[12px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
                   >
                     {tableCTAs.bookkeeper.label}
                   </a>
@@ -122,7 +122,7 @@ export default function ThreeWayComparisonTable() {
                   <a
                     href={tableCTAs.mfd.href}
                     onClick={() => trackCtaByHref(tableCTAs.mfd.href, "table-mfd")}
-                    className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-2 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)]"
+                    className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-2 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
                   >
                     {tableCTAs.mfd.label}
                   </a>
@@ -131,7 +131,7 @@ export default function ThreeWayComparisonTable() {
                   <a
                     href={tableCTAs.cfo.href}
                     onClick={() => trackCtaByHref(tableCTAs.cfo.href, "table-cfo")}
-                    className="inline-flex rounded-full border border-ink/[0.12] px-4 py-2 text-[12px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
+                    className="inline-flex rounded-full border border-ink/[0.12] px-4 py-2 text-[12px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
                   >
                     {tableCTAs.cfo.label}
                   </a>
@@ -200,10 +200,10 @@ export default function ThreeWayComparisonTable() {
                   <a
                     href={cta.href}
                     onClick={() => trackCtaByHref(cta.href, `mobile-table-${id}`)}
-                    className={`mt-2 inline-flex w-fit rounded-full px-4 py-2 text-[12px] transition-all duration-300 ease-cinema ${
+                    className={`mt-2 inline-flex w-fit rounded-full px-4 py-2 text-[12px] transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                       isMfd
-                        ? "bg-gradient-to-b from-champagne-100 to-champagne-300 font-medium text-navy"
-                        : "border border-ink/[0.12] text-ink/85 hover:border-champagne-200/40 hover:text-ink"
+                        ? "bg-gradient-to-b from-champagne-100 to-champagne-300 font-medium text-navy hover:-translate-y-0.5 active:translate-y-0 focus-visible:ring-champagne-300/70"
+                        : "border border-ink/[0.12] text-ink/85 hover:border-champagne-200/40 hover:text-ink focus-visible:ring-ink/25"
                     }`}
                   >
                     {cta.label}

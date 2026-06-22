@@ -23,7 +23,7 @@ export default function OwnerFeelingComparison() {
           {feelingCards.map((c) => (
             <li
               key={c.id}
-              className={`relative rounded-2xl border p-6 transition-all duration-400 ease-cinema ${
+              className={`relative rounded-2xl border p-6 transition-all duration-300 ease-cinema ${
                 c.isMfd
                   ? "border-champagne-200/40 bg-charcoal-900/70 shadow-[0_25px_70px_-30px_rgba(217,190,130,0.45)]"
                   : "border-ink/[0.07] bg-ink/[0.02]"

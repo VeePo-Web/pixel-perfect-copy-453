@@ -24,7 +24,7 @@ export default function FastAnswerCards() {
           {fastAnswerCards.map((c) => (
             <li
               key={c.id}
-              className={`group relative flex h-full flex-col rounded-2xl border p-6 transition-all duration-400 ease-cinema ${
+              className={`group relative flex h-full flex-col rounded-2xl border p-6 transition-all duration-300 ease-cinema ${
                 c.isMfd
                   ? "border-champagne-200/40 bg-charcoal-900/70 shadow-[0_25px_70px_-30px_rgba(217,190,130,0.5)]"
                   : "border-ink/[0.07] bg-ink/[0.02] hover:-translate-y-0.5 hover:border-champagne-200/30"
