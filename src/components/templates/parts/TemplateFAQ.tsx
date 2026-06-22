@@ -8,7 +8,7 @@ export default function TemplateFAQ() {
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
       <div className="mx-auto max-w-4xl px-6 py-20 lg:px-10">
-        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">FAQ</div>
+        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">FAQ</div>
         <h2
           id="faq-heading"
           className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[36px]"

@@ -9,7 +9,7 @@ export default function TemplateToFinanceDeskBridge() {
     >
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="max-w-[60ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             From templates to rhythm
           </div>
           <h2
@@ -25,7 +25,7 @@ export default function TemplateToFinanceDeskBridge() {
               key={s.n}
               className="relative rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5"
             >
-              <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/70">
+              <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300/70">
                 Step {s.n}
               </div>
               <div className="mt-2 text-[16px] font-light leading-snug text-ink">{s.title}</div>

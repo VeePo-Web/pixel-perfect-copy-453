@@ -42,7 +42,7 @@ export default function AutoFillSpotlight() {
           <div className="grid gap-10 p-8 sm:p-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14 lg:p-12">
             {/* Left — the stack */}
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-champagne-200/40 bg-champagne-300/[0.06] px-3 py-1 text-[10.5px] uppercase tracking-[0.22em] text-champagne-100">
+              <div className="inline-flex items-center gap-2 rounded-full border border-champagne-200/40 bg-champagne-300/[0.06] px-3 py-1 text-[10.5px] uppercase tracking-[0.22em] text-champagne-300">
                 <span className="h-1.5 w-1.5 rounded-full bg-champagne-200 motion-safe:animate-soft-pulse" />
                 {o.name}
               </div>

@@ -29,7 +29,7 @@ export default function ApplicationSummary({
           <div className="text-[14px] leading-[1.55] text-ink/85 break-words">{r.value}</div>
           <button
             onClick={() => onEdit(r.step)}
-            className="text-[12px] text-champagne-100/80 hover:text-champagne-100 underline-offset-4 hover:underline"
+            className="text-[12px] text-champagne-300/80 hover:text-champagne-300 underline-offset-4 hover:underline"
           >
             Edit
           </button>

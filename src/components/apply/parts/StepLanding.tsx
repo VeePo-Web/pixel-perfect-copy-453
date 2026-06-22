@@ -21,7 +21,7 @@ export default function StepLanding({ onStart, showWelcomeBack, onResume }: Prop
         <div className="mt-6 inline-flex items-center gap-3 rounded-full border border-champagne-200/25 bg-champagne-200/[0.04] px-4 py-2 text-[12.5px] text-ink/80">
           <span className="h-1.5 w-1.5 rounded-full bg-champagne-200" />
           {c.welcomeBack}
-          <button onClick={onResume} className="ml-2 text-champagne-100 underline-offset-4 hover:underline">
+          <button onClick={onResume} className="ml-2 text-champagne-300 underline-offset-4 hover:underline">
             Resume →
           </button>
         </div>
@@ -39,12 +39,12 @@ export default function StepLanding({ onStart, showWelcomeBack, onResume }: Prop
         <button
           type="button"
           onClick={() => navigate("#top")}
-          className="group inline-flex items-center text-[13px] text-ink/70 hover:text-champagne-100 transition-colors"
+          className="group inline-flex items-center text-[13px] text-ink/70 hover:text-champagne-300 transition-colors"
         >
           <span className="border-b border-bone/20 pb-0.5 group-hover:border-champagne-200/60">{c.secondary}</span>
           <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
         </button>
-        <a href="#/templates" className="text-[13px] text-ink/55 hover:text-champagne-100 underline-offset-4 hover:underline">
+        <a href="#/templates" className="text-[13px] text-ink/55 hover:text-champagne-300 underline-offset-4 hover:underline">
           {c.tertiary}
         </a>
       </div>

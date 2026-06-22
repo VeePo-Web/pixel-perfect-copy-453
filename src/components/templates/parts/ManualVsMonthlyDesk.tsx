@@ -9,7 +9,7 @@ export default function ManualVsMonthlyDesk() {
     >
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="max-w-[60ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Two ways to use the Vault
           </div>
           <h2
@@ -74,7 +74,7 @@ function Card({
     <div
       className={`relative overflow-hidden rounded-2xl border p-7 ${
         flag
-          ? "border-champagne-200/40 bg-charcoal-900/70 shadow-[0_40px_100px_-40px_rgba(217,190,130,0.4)]"
+          ? "border-champagne-200/40 bg-paper-raised shadow-[0_40px_100px_-40px_rgba(217,190,130,0.4)]"
           : "border-ink/[0.07] bg-ink/[0.02]"
       }`}
     >
@@ -82,10 +82,10 @@ function Card({
         <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/60 to-transparent" />
       ) : null}
       <div className="flex items-center justify-between gap-3">
-        <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/80">
+        <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
           {label}
         </div>
-        <div className={`shrink-0 text-[11px] font-medium tabular-nums ${flag ? "text-champagne-100" : "text-ink/45"}`}>
+        <div className={`shrink-0 text-[11px] font-medium tabular-nums ${flag ? "text-champagne-300" : "text-ink/45"}`}>
           {time}
         </div>
       </div>

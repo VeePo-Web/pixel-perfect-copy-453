@@ -14,7 +14,7 @@ export default function RecommendedStartingPaths({ activeId, onSelect }: Props) 
     >
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10">
         <div className="max-w-[60ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Not sure where to start?
           </div>
           <h2
@@ -43,11 +43,11 @@ export default function RecommendedStartingPaths({ activeId, onSelect }: Props) 
                 }}
                 className={`group flex flex-col rounded-2xl border p-5 text-left transition-all duration-400 ease-cinema hover:-translate-y-0.5 ${
                   active
-                    ? "border-champagne-200/55 bg-charcoal-900/70 shadow-[0_30px_70px_-30px_rgba(217,190,130,0.4)]"
+                    ? "border-champagne-200/55 bg-paper-raised shadow-[0_30px_70px_-30px_rgba(217,190,130,0.4)]"
                     : "border-ink/[0.07] bg-ink/[0.02] hover:border-champagne-200/30"
                 }`}
               >
-                <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-200/70">
+                <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300/70">
                   {active ? "Highlighted in library" : "Owner question"}
                 </div>
                 <div className="mt-2 text-[18px] font-light leading-snug text-ink">“{p.question}”</div>

@@ -31,7 +31,7 @@ export default function SpreadsheetPreview({
     <div
       role="img"
       aria-label={`${title} — illustrative preview`}
-      className={`relative overflow-hidden rounded-xl border border-ink/[0.07] bg-charcoal-900/60 ${className}`}
+      className={`relative overflow-hidden rounded-xl border border-ink/[0.07] bg-paper-raised ${className}`}
     >
       {/* sheet header chrome */}
       <div className="flex items-center justify-between border-b border-ink/[0.05] px-4 py-2.5">

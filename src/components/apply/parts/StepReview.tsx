@@ -66,7 +66,7 @@ export default function StepReview({ state, update, onBack, onEdit, onSubmit, su
       </label>
       <p className="text-[11.5px] uppercase tracking-[0.22em] text-ink/35">{c.micro}</p>
       {submitError && (
-        <p role="alert" className="rounded-xl border border-champagne-300/40 bg-champagne-200/[0.05] px-4 py-3 text-[13px] text-champagne-100">
+        <p role="alert" className="rounded-xl border border-champagne-300/40 bg-champagne-200/[0.05] px-4 py-3 text-[13px] text-champagne-300">
           {submitError}
         </p>
       )}

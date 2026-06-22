@@ -67,7 +67,7 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
         <form onSubmit={handleSubmit} className="p-6 sm:p-7" noValidate>
           <div className="flex items-start justify-between gap-4">
             <div>
-              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/80">
+              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
                 Get the free template
               </div>
               <h2 id={headingId} className="mt-2 text-[22px] font-light leading-snug text-ink">

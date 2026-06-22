@@ -2,7 +2,7 @@ import type { DemoBusiness } from "../content";
 import ModuleShell from "./ModuleShell";
 
 const TAG_TONE: Record<string, string> = {
-  Review: "border-champagne-200/30 text-champagne-100",
+  Review: "border-champagne-200/30 text-champagne-300",
   Recurring: "border-ink/15 text-ink/75",
   Timing: "border-blue-300/30 text-blue-300",
   "Ask on call": "border-green-signal/40 text-green-signal",

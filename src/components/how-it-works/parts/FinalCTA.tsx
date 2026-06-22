@@ -43,7 +43,7 @@ export default function FinalCTA() {
           </a>
           <a
             href="#/apply"
-            className="text-[13px] text-bone/50 underline-offset-4 transition-colors duration-300 hover:text-champagne-100 hover:underline"
+            className="text-[13px] text-bone/50 underline-offset-4 transition-colors duration-300 hover:text-champagne-300 hover:underline"
           >
             {c.tertiary}
           </a>

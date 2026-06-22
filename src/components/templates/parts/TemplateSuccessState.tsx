@@ -12,7 +12,7 @@ export default function TemplateSuccessState({ template, onClose, headingId }: P
     <div className="p-6 sm:p-7">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/80">
+          <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
             Sent
           </div>
           <h2 id={headingId} className="mt-2 text-[22px] font-light leading-snug text-ink">

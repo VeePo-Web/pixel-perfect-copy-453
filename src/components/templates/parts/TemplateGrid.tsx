@@ -18,7 +18,7 @@ export default function TemplateGrid({ templates, highlightedIds, onGet, onPrevi
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
         <div className="mb-8 flex items-end justify-between gap-6">
           <div>
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-200/80">
+            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               GoldFin Template Vault
             </div>
             <h2

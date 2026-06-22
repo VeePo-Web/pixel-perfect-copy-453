@@ -35,7 +35,7 @@ export default function TemplateBridge() {
               <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Template</div>
               <h3 className="mt-2 text-[17px] font-light text-ink">{t.title}</h3>
               <p className="mt-3 text-[13px] leading-[1.6] text-ink/65">{t.body}</p>
-              <div className="mt-5 text-[12px] text-champagne-100/80 opacity-70 transition-opacity duration-300 group-hover:opacity-100">
+              <div className="mt-5 text-[12px] text-champagne-300/80 opacity-70 transition-opacity duration-300 group-hover:opacity-100">
                 Download →
               </div>
             </div>

@@ -185,13 +185,13 @@ const FinanceHero = () => {
             {/* Eyebrow */}
             <div className="flex items-center gap-3">
               <span className="h-px w-8 bg-champagne-300/70" />
-              <p className="font-general text-[0.72rem] uppercase tracking-[0.28em] text-champagne-100">
+              <p className="font-general text-[0.72rem] uppercase tracking-[0.28em] text-champagne-300">
                 {COPY.eyebrow}
               </p>
             </div>
 
             {/* Slogan */}
-            <p className="mt-6 font-circular-web text-sm text-ink/70 sm:text-base">
+            <p className="mt-6 font-general text-sm text-ink/70 sm:text-base">
               {COPY.slogan}
             </p>
 
@@ -201,7 +201,7 @@ const FinanceHero = () => {
             </h1>
 
             {/* Subheadline */}
-            <p className="mt-7 max-w-2xl font-circular-web text-base leading-relaxed text-ink/75 sm:text-lg">
+            <p className="mt-7 max-w-2xl font-general text-base leading-relaxed text-ink/75 sm:text-lg">
               <span className="hidden md:inline">{COPY.subheadline}</span>
               <span className="md:hidden">{COPY.mobile.sub}</span>
             </p>
@@ -217,7 +217,7 @@ const FinanceHero = () => {
                     placeholder={COPY.placeholder}
                     aria-label="Describe your business"
                     rows={3}
-                    className="relative flex-1 resize-none bg-transparent px-5 py-4 font-circular-web text-base text-ink placeholder:text-ink/40 focus:outline-none sm:py-5"
+                    className="relative flex-1 resize-none bg-transparent px-5 py-4 font-general text-base text-ink placeholder:text-ink/40 focus:outline-none sm:py-5"
                   />
                   <div className="relative flex items-stretch border-t border-champagne-300/10 p-2 sm:border-l sm:border-t-0">
                     <button
@@ -238,7 +238,7 @@ const FinanceHero = () => {
                 </div>
               </div>
 
-              <p className="mt-3 pl-1 font-circular-web text-sm italic text-ink/50">
+              <p className="mt-3 pl-1 font-general text-sm italic text-ink/50">
                 {COPY.example}
               </p>
 
@@ -263,13 +263,13 @@ const FinanceHero = () => {
                 <button
                   onClick={useDemoData}
                   disabled={ctasDisabled}
-                  className="mt-3 font-general text-[0.68rem] uppercase tracking-[0.2em] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-100 hover:underline disabled:opacity-50"
+                  className="mt-3 font-general text-[0.68rem] uppercase tracking-[0.2em] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-200 hover:underline disabled:opacity-50"
                 >
                   Try demo business data
                 </button>
               </div>
 
-              <p className="mt-5 max-w-md font-circular-web text-xs leading-relaxed text-ink/45">
+              <p className="mt-5 max-w-md font-general text-xs leading-relaxed text-ink/45">
                 <span className="hidden md:inline">{COPY.trust}</span>
                 <span className="md:hidden">{COPY.mobile.trust}</span>
               </p>
@@ -336,14 +336,14 @@ const BriefingPanel = ({
           <p className="font-general text-[0.62rem] uppercase tracking-[0.22em] text-champagne-200/80">
             GFD &middot; Briefing 001
           </p>
-          <p className="mt-1 font-circular-web text-base text-ink">
+          <p className="mt-1 font-general text-base text-ink">
             {COPY.panelLabel}
           </p>
         </div>
         <span
           className={`inline-flex items-center gap-2 rounded-full border px-2.5 py-1 font-general text-[0.6rem] uppercase tracking-[0.18em] transition-colors duration-[400ms] ease-cinema ${
             state === "briefing"
-              ? "border-champagne-200/40 text-champagne-100"
+              ? "border-champagne-200/40 text-champagne-300"
               : "border-bone/15 text-ink/55"
           }`}
         >
@@ -381,7 +381,7 @@ const BriefingPanel = ({
                     <span className="font-general text-[0.62rem] tracking-[0.18em] text-ink/35">
                       0{i + 1}
                     </span>
-                    <span className="font-circular-web text-sm text-ink/80">{label}</span>
+                    <span className="font-general text-sm text-ink/80">{label}</span>
                   </span>
                   <span className="relative h-px w-16 overflow-hidden bg-bone/10">
                     <span className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent motion-safe:animate-shimmer" />
@@ -399,7 +399,7 @@ const BriefingPanel = ({
                 return (
                   <div
                     key={line}
-                    className={`flex items-center gap-3 font-circular-web text-sm transition-[color,opacity] duration-[240ms] ease-cinema ${
+                    className={`flex items-center gap-3 font-general text-sm transition-[color,opacity] duration-[240ms] ease-cinema ${
                       active ? "text-ink" : done ? "text-ink/55" : "text-ink/25"
                     }`}
                   >
@@ -453,7 +453,7 @@ const BriefingPanel = ({
                       className="h-px flex-1 origin-left bg-gradient-to-r from-champagne-200/30 to-transparent motion-safe:animate-rim-in"
                     />
                   </div>
-                  <p className="mt-1.5 font-circular-web text-[0.95rem] leading-relaxed text-ink/85">
+                  <p className="mt-1.5 font-general text-[0.95rem] leading-relaxed text-ink/85">
                     {highlightFigures(s.body)}
                   </p>
                 </div>
@@ -470,7 +470,7 @@ const highlightFigures = (text: string) => {
   const parts = text.split(/(\$[\d,]+(?:\.\d+)?|\d+%)/g);
   return parts.map((part, i) =>
     /^(\$[\d,]+(?:\.\d+)?|\d+%)$/.test(part) ? (
-      <span key={i} className="font-medium text-champagne-100">
+      <span key={i} className="font-medium text-champagne-200">
         {part}
       </span>
     ) : (
@@ -487,7 +487,7 @@ const PostDemoCTA = () => (
     <h3 className="font-robert-medium text-2xl font-black uppercase leading-tight text-ink sm:text-3xl">
       {COPY.postDemo.headline}
     </h3>
-    <p className="mt-3 font-circular-web text-sm leading-relaxed text-ink/75">
+    <p className="mt-3 font-general text-sm leading-relaxed text-ink/75">
       {COPY.postDemo.body}
     </p>
     <div className="mt-5 flex flex-col gap-3 sm:flex-row">
@@ -504,18 +504,18 @@ const PostDemoCTA = () => (
       </a>
       <a
         href={COPY.postDemo.secondaryHref}
-        className="inline-flex items-center justify-center rounded-full border border-bone/20 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink/85 transition-colors duration-[400ms] ease-cinema hover:border-champagne-200/60 hover:text-champagne-100"
+        className="inline-flex items-center justify-center rounded-full border border-bone/20 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink/85 transition-colors duration-[400ms] ease-cinema hover:border-champagne-200/60 hover:text-champagne-200"
       >
         {COPY.postDemo.secondary}
       </a>
     </div>
     <a
       href={COPY.postDemo.tertiaryHref}
-      className="mt-4 inline-block font-general text-[0.68rem] uppercase tracking-[0.18em] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-100 hover:underline"
+      className="mt-4 inline-block font-general text-[0.68rem] uppercase tracking-[0.18em] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-200 hover:underline"
     >
       {COPY.postDemo.tertiary}
     </a>
-    <p className="mt-4 font-circular-web text-xs italic text-ink/50">
+    <p className="mt-4 font-general text-xs italic text-ink/50">
       {COPY.postDemo.micro}
     </p>
   </div>

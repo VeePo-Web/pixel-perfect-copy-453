@@ -42,7 +42,7 @@ export default function SampleBriefingCTA({ onAnother }: Props) {
           {/* Card B — $99 GoldFin Reports (recommended) */}
           <div className="relative flex flex-col overflow-hidden rounded-2xl border border-champagne-200/45 bg-charcoal-900/70 p-7 shadow-[0_30px_80px_-30px_rgba(217,190,130,0.4)]">
             <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/60 to-transparent" />
-            <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-100">
+            <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300">
               Recommended · $99/mo
             </div>
             <h3 className="mt-2 text-[20px] font-light text-ink">Have GoldFin fill these every month</h3>

@@ -23,7 +23,7 @@ export default function RecommendedPlanSpotlight() {
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/60 to-transparent" />
           <div className="grid gap-10 p-8 sm:p-10 lg:grid-cols-[1fr_1.3fr] lg:gap-14 lg:p-14">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-champagne-200/40 bg-champagne-300/[0.06] px-3 py-1 text-[10.5px] uppercase tracking-[0.22em] text-champagne-100">
+              <div className="inline-flex items-center gap-2 rounded-full border border-champagne-200/40 bg-champagne-300/[0.06] px-3 py-1 text-[10.5px] uppercase tracking-[0.22em] text-champagne-300">
                 <span className="h-1.5 w-1.5 rounded-full bg-champagne-200 motion-safe:animate-soft-pulse" />
                 Most relevant for serious owner-led businesses
               </div>

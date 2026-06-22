@@ -162,8 +162,8 @@ export const HIW_COPY = {
         ],
       },
     ],
-    cta: "Generate My Sample Finance Briefing",
-    micro: "Use demo data or rough non-sensitive numbers. No bank connection required.",
+    cta: "Auto-fill my reports — $99/mo",
+    micro: "No bank connection required to preview the experience.",
   },
   diff: {
     headline: "More than bookkeeping. Lighter than a full CFO.",

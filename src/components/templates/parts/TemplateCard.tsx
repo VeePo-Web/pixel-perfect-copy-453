@@ -49,7 +49,7 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/50 to-transparent opacity-0 transition-opacity duration-500 ease-cinema group-hover:opacity-100"
       />
       <div className="flex items-start justify-between gap-3">
-        <div className="text-[10px] uppercase tracking-[0.26em] text-champagne-200/70">
+        <div className="text-[10px] uppercase tracking-[0.26em] text-champagne-300/70">
           {template.category}
         </div>
         <div className="flex items-center gap-1.5 text-[10.5px] text-ink/55">
@@ -75,7 +75,7 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
         </div>
       </div>
 
-      <p className="mt-3 max-h-0 overflow-hidden text-[12px] text-champagne-200/80 opacity-0 transition-all duration-500 ease-cinema group-hover:max-h-12 group-hover:opacity-100">
+      <p className="mt-3 max-h-0 overflow-hidden text-[12px] text-champagne-300/70 opacity-0 transition-all duration-500 ease-cinema group-hover:max-h-12 group-hover:opacity-100">
         {template.decisionLine}
       </p>
 
