@@ -1,13 +1,19 @@
 import { privacyPrinciples } from "../content";
+import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function PrivacyPrinciplesSection() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       aria-labelledby="principles-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
-        <div className="max-w-3xl">
+      <div ref={ref} className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
+        <div
+          className={`max-w-3xl transition-all duration-700 ease-cinema ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Data minimization
           </div>
@@ -24,7 +30,9 @@ export default function PrivacyPrinciplesSection() {
             established.
           </p>
         </div>
-        <div className="mt-12 grid gap-4 lg:grid-cols-3">
+        <div className={`mt-12 grid gap-4 lg:grid-cols-3 transition-all duration-700 ease-cinema delay-150 ${
+          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        }`}>
           {privacyPrinciples.map((p, i) => (
             <article
               key={p.title}
