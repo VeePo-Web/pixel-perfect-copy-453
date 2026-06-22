@@ -17,7 +17,7 @@ import PaymentTestModeBanner from "./components/payments/PaymentTestModeBanner";
 import GlobalTopBar, { type NavKey } from "./components/nav/GlobalTopBar";
 import GoldFinFooter from "./components/footer/GoldFinFooter";
 import { useHashRoute } from "./components/apply/hooks/useHashRoute";
-import PortalRouter, { usePortalRoute } from "./portal/PortalRouter";
+import PortalRouter, { isPortalRoute } from "./portal/PortalRouter";
 
 function usePathname(): string {
   const [path, setPath] = useState(
@@ -36,7 +36,7 @@ const App = () => {
   const pathname = usePathname();
 
   // Portal + legal pages live entirely outside the marketing chrome.
-  if (usePortalRoute(pathname)) return <PortalRouter pathname={pathname} />;
+  if (isPortalRoute(pathname)) return <PortalRouter pathname={pathname} />;
 
   // Path-based routes (Stripe's return URL is a real path, not a hash).
   if (pathname === "/checkout/return") return <CheckoutReturnPage />;

@@ -24,7 +24,7 @@ const Fallback = () => (
  * Minimal path-based router for portal + legal routes. Returns null if the
  * current pathname is not portal/legal — the existing marketing App takes over.
  */
-export function usePortalRoute(pathname: string) {
+export function isPortalRoute(pathname: string) {
   return (
     pathname.startsWith("/portal") ||
     pathname === "/terms" ||
