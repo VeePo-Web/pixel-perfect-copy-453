@@ -12,9 +12,9 @@
 //   SUPABASE_URL                    — auto-set
 //   SUPABASE_SERVICE_ROLE_KEY       — auto-set
 //   RESEND_API_KEY                  — transactional email (omit to disable email)
-//   RESEND_FROM                     — "GoldFin Desk <hello@yourdomain.com>"
+//   RESEND_FROM                     — "GoldFin Desk <hello@goldfindesk.com>"
 //   OPERATOR_EMAIL                  — receives new-subscriber alerts
-//   APP_URL                         — used in dunning email portal CTA
+//   APP_URL                         — https://goldfindesk.com
 //
 // EVENTS HANDLED:
 //   checkout.session.completed       → upsert row, send welcome + operator alert
@@ -419,7 +419,7 @@ async function sendCustomerWelcome(email: string, plan: string): Promise<void> {
 }
 
 async function sendDunningEmail(email: string): Promise<void> {
-  const appUrl = Deno.env.get("APP_URL") ?? "https://golfindesk.com";
+  const appUrl = Deno.env.get("APP_URL") ?? "https://goldfindesk.com";
   await sendEmail(
     email,
     "Your GoldFin Desk payment didn't go through",
