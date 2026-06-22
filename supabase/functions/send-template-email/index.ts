@@ -43,16 +43,24 @@ Deno.serve(async (req) => {
       return json({ error: 'valid email required' }, 400);
     }
 
-    const apiKey = Deno.env.get('RESEND_API_KEY');
+    const lovableKey = Deno.env.get('LOVABLE_API_KEY');
+    const resendKey = Deno.env.get('RESEND_API_KEY');
     // Resend not wired yet — succeed quietly so lead capture is never blocked.
-    if (!apiKey) return json({ ok: true, sent: false, reason: 'no_api_key' });
+    if (!lovableKey || !resendKey) {
+      return json({ ok: true, sent: false, reason: 'no_api_key' });
+    }
 
-    const from = Deno.env.get('RESEND_FROM') ?? 'Monthly Finance Desk <onboarding@resend.dev>';
+    const from = Deno.env.get('RESEND_FROM') ?? 'Goldfin Desk <noreply@goldfindesk.com>';
     const siteUrl = (Deno.env.get('SITE_URL') ?? '').replace(/\/$/, '');
+    const GATEWAY_URL = 'https://connector-gateway.lovable.dev/resend';
 
-    const res = await fetch('https://api.resend.com/emails', {
+    const res = await fetch(`${GATEWAY_URL}/emails`, {
       method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${lovableKey}`,
+        'X-Connection-Api-Key': resendKey,
+      },
       body: JSON.stringify({
         from,
         to: [email],
@@ -63,18 +71,9 @@ Deno.serve(async (req) => {
 
     if (!res.ok) {
       const text = await res.text();
-      console.error('resend send error', res.status, text);
-      return json({ ok: false, sent: false }, 502);
-    }
-
-    // Optional: enroll in the upgrade-sequence audience.
-    const audienceId = Deno.env.get('RESEND_AUDIENCE_ID');
-    if (audienceId) {
-      await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, first_name: firstName, unsubscribed: false }),
-      }).catch((e) => console.error('resend audience error', e));
+      console.error('resend gateway error', res.status, text);
+      // Return 200 with fallback flag so lead capture UX is never blocked.
+      return json({ ok: true, sent: false, reason: 'send_failed' });
     }
 
     return json({ ok: true, sent: true });
