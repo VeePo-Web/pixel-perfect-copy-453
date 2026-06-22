@@ -5,8 +5,14 @@
  */
 import { supabase } from "../integrations/supabase/client";
 import { getStripeEnvironment, hasPaymentsConfigured } from "./stripe";
+import { analytics } from "./analytics";
 
 export type PlanKey = "auto-fill-monthly" | "finance-desk-monthly" | "clarity-report";
+
+/** Display/analytics value per plan (USD). Source of truth for price = Stripe. */
+const PLAN_PRICE_USD: Partial<Record<PlanKey, number>> = {
+  "auto-fill-monthly": 99,
+};
 
 const RETURN_PATH = "/checkout/return";
 
@@ -23,6 +29,8 @@ function buildReturnUrl(): string {
  * Falls back to the pricing page when Stripe isn't configured in this build.
  */
 export function openCheckout(plan: PlanKey, customerEmail?: string): void {
+  analytics.checkoutStarted(plan, PLAN_PRICE_USD[plan]);
+
   if (!hasPaymentsConfigured()) {
     window.location.hash = "#/pricing#auto-fill";
     return;
@@ -66,4 +74,37 @@ export async function fetchCheckoutClientSecret(
   const clientSecret = (data as { clientSecret?: string } | null)?.clientSecret;
   if (!clientSecret) throw new Error("No clientSecret returned");
   return clientSecret;
+}
+
+export type CheckoutReturn = "success" | "cancel" | null;
+
+/**
+ * Detects a return from Stripe Checkout via the `?checkout=` query param, fires
+ * the matching conversion event exactly once, then strips the param so a refresh
+ * never double-counts. Returns the status so a UI surface can show a
+ * confirmation (that screen is owned by the conversion build, not this module).
+ *
+ * Call once on app boot. Idempotent: removing the param means a second call is a
+ * no-op.
+ */
+export function handleCheckoutReturn(): CheckoutReturn {
+  if (typeof window === "undefined") return null;
+
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get("checkout");
+  if (status !== "success" && status !== "cancel") return null;
+
+  if (status === "success") {
+    analytics.purchaseCompleted("auto-fill-monthly", PLAN_PRICE_USD["auto-fill-monthly"]);
+  } else {
+    analytics.checkoutCancelled("auto-fill-monthly");
+  }
+
+  // Strip ?checkout= but preserve any other query params and the hash route.
+  params.delete("checkout");
+  const qs = params.toString();
+  const url = `${window.location.pathname}${qs ? `?${qs}` : ""}${window.location.hash}`;
+  window.history.replaceState(null, "", url);
+
+  return status;
 }

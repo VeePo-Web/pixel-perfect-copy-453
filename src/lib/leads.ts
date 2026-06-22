@@ -1,4 +1,5 @@
 import { supabase } from "../integrations/supabase/client";
+import { analytics } from "./analytics";
 
 /**
  * Single integration point for free-template lead capture.
@@ -39,6 +40,8 @@ export async function captureLead(p: LeadPayload): Promise<{ ok: boolean }> {
       body: { email: p.email, firstName: p.firstName, templateName: p.templateName },
     })
     .catch(() => {});
+
+  if (!error) analytics.leadCaptured(p.templateId);
 
   return { ok: !error };
 }
