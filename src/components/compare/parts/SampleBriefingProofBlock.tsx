@@ -1,15 +1,21 @@
+import { useInView } from "../../how-it-works/hooks/useInView";
 import { sampleBriefingProof } from "../content";
 import { track } from "../analytics";
 
 export default function SampleBriefingProofBlock() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       aria-labelledby="proof-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr]">
-          <div>
+          <div
+            className={`transition-all duration-700 ease-cinema ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               The difference
             </div>
@@ -39,7 +45,11 @@ export default function SampleBriefingProofBlock() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(25,28,34,0.14)]">
+          <div
+            className={`rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(25,28,34,0.14)] transition-all duration-700 ease-cinema delay-150 ${
+              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
             <div className="flex items-center justify-between text-[10.5px] uppercase tracking-[0.26em] text-ink/45">
               <span>Bi-weekly briefing · preview</span>
               <span className="text-champagne-300/70">Plain English</span>

@@ -36,7 +36,7 @@ export default function ScenarioRecommendationCards() {
                     setOpen(next);
                     if (next) track("scenario_selected", { id: s.id });
                   }}
-                  className={`group w-full text-left transition-all duration-400 ease-cinema rounded-2xl border p-5 ${
+                  className={`group w-full text-left transition-all duration-300 ease-cinema rounded-2xl border p-5 ${
                     isOpen
                       ? "border-champagne-200/45 bg-charcoal-900/70 shadow-[0_20px_60px_-30px_rgba(217,190,130,0.45)]"
                       : "border-ink/[0.07] bg-ink/[0.02] hover:-translate-y-0.5 hover:border-champagne-200/30"
@@ -56,7 +56,7 @@ export default function ScenarioRecommendationCards() {
                     </span>
                   </div>
                   <div
-                    className={`grid transition-[grid-template-rows,opacity] duration-400 ease-cinema ${
+                    className={`grid transition-[grid-template-rows,opacity] duration-300 ease-cinema ${
                       isOpen ? "mt-4 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                     }`}
                   >

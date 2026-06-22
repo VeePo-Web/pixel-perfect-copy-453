@@ -34,7 +34,7 @@ export default function ComparisonHero() {
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
                 href="#fit-finder"
-                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
               >
                 <span className="relative z-10">Find My Best Fit</span>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -42,7 +42,7 @@ export default function ComparisonHero() {
               <a
                 href="#/sample-briefing"
                 onClick={() => trackCtaByHref("#/sample-briefing", "hero")}
-                className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
+                className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
               >
                 Generate Sample Finance Briefing
               </a>
@@ -78,7 +78,7 @@ function ThreeColumnDecision() {
         {heroColumns.map((c) => (
           <div
             key={c.id}
-            className={`group relative flex h-full flex-col rounded-2xl border p-4 transition-all duration-400 ease-cinema ${
+            className={`group relative flex h-full flex-col rounded-2xl border p-4 transition-all duration-300 ease-cinema ${
               c.isMfd
                 ? "border-champagne-200/45 bg-charcoal-900/70 shadow-[0_25px_70px_-30px_rgba(217,190,130,0.5)]"
                 : "border-ink/[0.07] bg-charcoal-900/40 hover:border-champagne-200/25"

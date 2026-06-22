@@ -44,7 +44,7 @@ export default function SoftConversionBridge() {
           {cards.map((c) => (
             <li
               key={c.title}
-              className="group flex h-full flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 transition-all duration-400 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/30"
+              className="group flex h-full flex-col rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/30"
             >
               <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300/70">
                 {c.eyebrow}
