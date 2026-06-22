@@ -19,7 +19,7 @@ export default function TemplateBridge() {
           <div className="flex lg:justify-end">
             <a
               href="#templates-signup"
-              className="inline-flex items-center gap-2 rounded-full border border-champagne-200/40 px-6 py-3 text-[13px] tracking-wide text-ink transition-all duration-400 ease-cinema hover:bg-champagne-300/[0.06]"
+              className="inline-flex items-center gap-2 rounded-full border border-champagne-200/40 px-6 py-3 text-[13px] tracking-wide text-ink transition-all duration-300 ease-cinema hover:bg-champagne-300/[0.06] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/40 focus-visible:ring-offset-2"
             >
               Get Free Financial Templates
               <span aria-hidden>→</span>
@@ -30,7 +30,7 @@ export default function TemplateBridge() {
           {templateBridgeItems.map((t) => (
             <div
               key={t.title}
-              className="group rounded-2xl border border-ink/[0.07] bg-charcoal-900/50 p-6 transition-all duration-400 ease-cinema hover:-translate-y-1 hover:border-champagne-200/30"
+              className="group rounded-2xl border border-ink/[0.07] bg-charcoal-900/50 p-6 transition-all duration-300 ease-cinema hover:-translate-y-1 hover:border-champagne-200/30"
             >
               <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Template</div>
               <h3 className="mt-2 text-[17px] font-light text-ink">{t.title}</h3>

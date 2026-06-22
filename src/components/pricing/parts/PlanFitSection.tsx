@@ -19,7 +19,7 @@ export default function PlanFitSection() {
             return (
               <div
                 key={col.title}
-                className={`flex h-full flex-col rounded-2xl border p-7 transition-all duration-400 ease-cinema hover:-translate-y-0.5 ${
+                className={`flex h-full flex-col rounded-2xl border p-7 transition-all duration-300 ease-cinema hover:-translate-y-0.5 ${
                   flagship
                     ? "border-champagne-200/40 bg-charcoal-900/75 shadow-[0_30px_80px_-30px_rgba(217,190,130,0.3)]"
                     : "border-ink/[0.07] bg-charcoal-900/55 hover:border-champagne-200/25"

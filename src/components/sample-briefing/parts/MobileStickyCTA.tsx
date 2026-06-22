@@ -29,7 +29,7 @@ export default function MobileStickyCTA({ status, onGenerate }: Props) {
         {ready ? (
           <a
             href="#/pricing#auto-fill"
-            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"
+            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
           >
             Auto-fill my reports — $99/mo
           </a>
@@ -37,7 +37,7 @@ export default function MobileStickyCTA({ status, onGenerate }: Props) {
           <button
             type="button"
             onClick={onGenerate}
-            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"
+            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
           >
             Generate Sample Briefing
           </button>
