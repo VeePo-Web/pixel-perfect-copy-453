@@ -2,13 +2,13 @@ import { useInView } from "../hooks/useInView";
 
 function Frame({ children, label }: { children: React.ReactNode; label: string }) {
   return (
-    <div className="relative h-full w-full rounded-2xl border border-champagne-200/10 bg-charcoal-900/50 p-6 backdrop-blur-sm overflow-hidden">
-      <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/30 to-transparent" />
+    <div className="relative h-full w-full overflow-hidden rounded-2xl border border-charcoal-700 bg-white p-6 shadow-[0_1px_3px_0_rgba(11,13,18,0.07),_0_1px_2px_-1px_rgba(11,13,18,0.05)]">
+      <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/35 to-transparent" />
       <div className="mb-5 flex items-center justify-between">
         <span className="text-[10.5px] uppercase tracking-[0.28em] text-ink/40">{label}</span>
         <span className="flex gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-bone/15" />
-          <span className="h-1.5 w-1.5 rounded-full bg-bone/15" />
+          <span className="h-1.5 w-1.5 rounded-full bg-ink/10" />
+          <span className="h-1.5 w-1.5 rounded-full bg-ink/10" />
           <span className="h-1.5 w-1.5 rounded-full bg-champagne-200/60" />
         </span>
       </div>
@@ -23,14 +23,14 @@ function StepSpreadsheet() {
   return (
     <div ref={ref}>
       <Frame label="Spreadsheet system">
-        <div className="grid grid-cols-[1.4fr_1fr_1fr] gap-px overflow-hidden rounded-md bg-champagne-200/[0.06]">
-          <div className="bg-charcoal-800/80 px-3 py-2 text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Category</div>
-          <div className="bg-charcoal-800/80 px-3 py-2 text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Period</div>
-          <div className="bg-charcoal-800/80 px-3 py-2 text-right text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Amount</div>
+        <div className="grid grid-cols-[1.4fr_1fr_1fr] gap-px overflow-hidden rounded-md border border-charcoal-700 bg-charcoal-700">
+          <div className="bg-paper-raised px-3 py-2 text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Category</div>
+          <div className="bg-paper-raised px-3 py-2 text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Period</div>
+          <div className="bg-paper-raised px-3 py-2 text-right text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Amount</div>
           {rows.map((r, i) => (
             <div key={r} className="contents">
               <div
-                className={`bg-charcoal-900/60 px-3 py-2.5 text-[13px] text-ink/80 transition-all duration-500 ease-cinema ${
+                className={`bg-white px-3 py-2.5 text-[13px] text-ink/80 transition-all duration-500 ease-cinema ${
                   inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
                 }`}
                 style={{ transitionDelay: `${120 + i * 70}ms` }}
@@ -38,7 +38,7 @@ function StepSpreadsheet() {
                 {r}
               </div>
               <div
-                className={`bg-charcoal-900/60 px-3 py-2.5 text-[13px] text-ink/45 transition-all duration-500 ease-cinema ${
+                className={`bg-white px-3 py-2.5 text-[13px] text-ink/45 transition-all duration-500 ease-cinema ${
                   inView ? "opacity-100" : "opacity-0"
                 }`}
                 style={{ transitionDelay: `${160 + i * 70}ms` }}
@@ -46,7 +46,7 @@ function StepSpreadsheet() {
                 Apr 01–14
               </div>
               <div
-                className={`bg-charcoal-900/60 px-3 py-2.5 text-right text-[13px] tabular-nums text-champagne-100/90 transition-all duration-500 ease-cinema ${
+                className={`bg-white px-3 py-2.5 text-right text-[13px] tabular-nums text-champagne-300 transition-all duration-500 ease-cinema ${
                   inView ? "opacity-100" : "opacity-0"
                 }`}
                 style={{ transitionDelay: `${200 + i * 70}ms` }}
@@ -67,21 +67,21 @@ function StepPlaid() {
     <div ref={ref}>
       <Frame label="Secure data connection">
         <div className="relative grid grid-cols-3 items-center gap-4 py-6">
-          <div className="rounded-xl border border-ink/[0.06] bg-charcoal-800/60 p-4">
+          <div className="rounded-xl border border-charcoal-700 bg-paper-raised p-4 shadow-sm">
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Bank</div>
             <div className="mt-3 text-[15px] text-ink/85">Operating Account</div>
             <div className="mt-1 text-[11.5px] text-ink/40">•••• 4821</div>
           </div>
           <div className="relative h-[2px] w-full overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-bone/15 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-ink/08 to-transparent" />
             <div
               className={`absolute inset-y-0 left-0 bg-gradient-to-r from-champagne-200/0 via-champagne-200 to-champagne-200/0 transition-all duration-[1400ms] ease-cinema ${
                 inView ? "w-full" : "w-0"
               }`}
             />
           </div>
-          <div className="rounded-xl border border-champagne-200/15 bg-charcoal-800/60 p-4">
-            <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/60">Desk</div>
+          <div className="rounded-xl border border-champagne-200/30 bg-paper-raised p-4 shadow-sm">
+            <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-300/70">Desk</div>
             <div className="mt-3 text-[15px] text-ink/85">Finance system</div>
             <div className="mt-1 text-[11.5px] text-ink/40">Encrypted</div>
           </div>
@@ -110,14 +110,14 @@ function StepOrganize() {
           {items.map((it, i) => (
             <li
               key={it.from}
-              className={`grid grid-cols-[1.2fr_auto_1fr] items-center gap-3 rounded-md border border-ink/[0.04] bg-charcoal-900/50 px-3 py-2.5 transition-all duration-500 ease-cinema ${
+              className={`grid grid-cols-[1.2fr_auto_1fr] items-center gap-3 rounded-md border border-charcoal-700 bg-paper-raised px-3 py-2.5 transition-all duration-500 ease-cinema ${
                 inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-3"
               }`}
               style={{ transitionDelay: `${120 + i * 90}ms` }}
             >
               <span className="text-[13px] text-ink/55">{it.from}</span>
               <span className="text-ink/30">→</span>
-              <span className="text-[13px] text-champagne-100/90">{it.to}</span>
+              <span className="text-[13px] text-champagne-300">{it.to}</span>
             </li>
           ))}
         </ul>
@@ -141,12 +141,12 @@ function StepBriefing() {
           {lines.map((ln, i) => (
             <div
               key={ln.l}
-              className={`rounded-md border border-ink/[0.04] bg-charcoal-900/50 p-3 transition-all duration-500 ease-cinema ${
+              className={`rounded-md border border-charcoal-700 bg-paper-raised p-3 transition-all duration-500 ease-cinema ${
                 inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
               }`}
               style={{ transitionDelay: `${160 + i * 130}ms` }}
             >
-              <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-200/60">{ln.l}</div>
+              <div className="text-[10.5px] uppercase tracking-[0.22em] text-champagne-300/70">{ln.l}</div>
               <div className="mt-1.5 text-[13.5px] leading-[1.55] text-ink/80">{ln.b}</div>
             </div>
           ))}
@@ -163,12 +163,12 @@ function StepReview() {
     <div ref={ref}>
       <Frame label="Monthly strategy review">
         <div className="grid grid-cols-[auto_1fr] gap-4">
-          <div className="rounded-xl border border-champagne-200/15 bg-charcoal-800/60 p-4 text-center">
+          <div className="rounded-xl border border-champagne-200/30 bg-paper-raised p-4 text-center shadow-sm">
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Apr</div>
             <div className="mt-1 font-zentry text-3xl leading-none text-ink">28</div>
-            <div className="mt-1 text-[10.5px] text-champagne-200/70">1:00 PM</div>
+            <div className="mt-1 text-[10.5px] text-champagne-300/70">1:00 PM</div>
           </div>
-          <div className="rounded-xl border border-ink/[0.06] bg-charcoal-900/50 p-4">
+          <div className="rounded-xl border border-charcoal-700 bg-paper-raised p-4 shadow-sm">
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Agenda</div>
             <ul className="mt-2 space-y-1.5">
               {agenda.map((a, i) => (

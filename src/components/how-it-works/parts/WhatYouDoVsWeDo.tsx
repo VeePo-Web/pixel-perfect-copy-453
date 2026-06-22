@@ -7,8 +7,10 @@ function Column({ label, title, items, accent }: { label: string; title: string;
   return (
     <div
       ref={ref}
-      className={`relative rounded-2xl border p-7 backdrop-blur-sm transition-all duration-700 ease-cinema ${
-        accent ? "border-champagne-200/20 bg-charcoal-900/60" : "border-ink/[0.06] bg-charcoal-900/40"
+      className={`relative rounded-2xl border p-7 transition-all duration-700 ease-cinema ${
+        accent
+          ? "border-champagne-200/25 bg-white shadow-[0_2px_8px_-2px_rgba(11,13,18,0.08),_0_1px_2px_-1px_rgba(11,13,18,0.04)]"
+          : "border-charcoal-700 bg-paper-raised shadow-[0_1px_2px_0_rgba(11,13,18,0.05)]"
       } ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}
     >
       {accent && <div className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/50 to-transparent" />}

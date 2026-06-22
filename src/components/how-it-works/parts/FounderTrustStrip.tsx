@@ -23,7 +23,7 @@ export default function FounderTrustStrip() {
           }`}
           style={{ transitionDelay: "80ms" }}
         >
-          <div className="flex h-20 w-20 items-center justify-center rounded-full border border-champagne-300/50 bg-ink/[0.02] text-[24px] font-light tracking-tight text-champagne-300">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full border border-charcoal-700 bg-white text-[24px] font-light tracking-tight text-champagne-300 shadow-[0_0_0_1px_rgba(180,137,58,0.18),_0_2px_8px_0_rgba(11,13,18,0.07)]">
             CS
           </div>
           <div className="mt-4 text-[16px] text-ink">Chris Sam</div>

@@ -20,11 +20,11 @@ export default function MonthlyCycle() {
       <SectionHeader headline={c.headline} align="center" />
       <div ref={ref} className="mt-14 grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_auto_1fr]">
         {/* Left intro list */}
-        <ul className="space-y-4 lg:text-right">
+        <ul className="space-y-5 lg:text-right">
           {c.weeks.slice(0, 2).map((w) => (
-            <li key={w.w}>
-              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">{w.w}</div>
-              <div className="mt-1 text-[15px] text-ink/85">{w.t}</div>
+            <li key={w.w} className="rounded-xl border border-charcoal-700 bg-white px-5 py-4 shadow-sm lg:ml-auto">
+              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">{w.w}</div>
+              <div className="mt-1.5 text-[14.5px] text-ink/85">{w.t}</div>
             </li>
           ))}
         </ul>
@@ -32,13 +32,13 @@ export default function MonthlyCycle() {
         {/* Ring */}
         <div className="relative mx-auto h-[320px] w-[320px]">
           <svg viewBox="-160 -160 320 320" className="absolute inset-0 h-full w-full">
-            <circle cx="0" cy="0" r={R} fill="none" stroke="rgba(237,231,218,0.08)" strokeWidth="1" />
+            <circle cx="0" cy="0" r={R} fill="none" stroke="rgba(11,13,18,0.06)" strokeWidth="1" />
             <circle
               cx="0"
               cy="0"
               r={R}
               fill="none"
-              stroke="rgba(217,190,130,0.65)"
+              stroke="rgba(212,168,69,0.7)"
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeDasharray={C}
@@ -48,25 +48,25 @@ export default function MonthlyCycle() {
             />
             {positions.map((p, i) => (
               <g key={i}>
-                <circle cx={p.x} cy={p.y} r="5" fill="#D9BE82" />
-                <circle cx={p.x} cy={p.y} r="11" fill="none" stroke="rgba(217,190,130,0.2)" />
+                <circle cx={p.x} cy={p.y} r="5" fill="#D4A845" />
+                <circle cx={p.x} cy={p.y} r="11" fill="none" stroke="rgba(212,168,69,0.2)" />
               </g>
             ))}
           </svg>
           <div className="absolute inset-0 flex items-center justify-center px-10 text-center">
             <div>
-              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">End state</div>
+              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">End state</div>
               <div className="mt-2 font-zentry text-[18px] leading-[1.25] tracking-tight text-ink">{c.end}</div>
             </div>
           </div>
         </div>
 
         {/* Right list */}
-        <ul className="space-y-4">
+        <ul className="space-y-5">
           {c.weeks.slice(2).map((w) => (
-            <li key={w.w}>
-              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-200/60">{w.w}</div>
-              <div className="mt-1 text-[15px] text-ink/85">{w.t}</div>
+            <li key={w.w} className="rounded-xl border border-charcoal-700 bg-white px-5 py-4 shadow-sm">
+              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">{w.w}</div>
+              <div className="mt-1.5 text-[14.5px] text-ink/85">{w.t}</div>
             </li>
           ))}
         </ul>
