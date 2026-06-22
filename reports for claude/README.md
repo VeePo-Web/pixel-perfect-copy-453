@@ -21,6 +21,8 @@ Before implementing Plaid, checkout, onboarding, or report automation, also read
 
 5. `reports for claude/09-plaid-biweekly-auto-fill-deep-research-prompt.md`
 6. `reports for claude/09b-profit-driving-report-features-deep-research-prompt.md`
+7. `reports for claude/12-profit-driving-report-feature-research.md`
+8. `reports for claude/13-biweekly-money-making-report-blueprint.md`
 
 ## First Execution Target
 
@@ -78,6 +80,8 @@ Claude must not move to the next section until the current section passes its re
 - `08-99-checkout-readiness-audit.md` - blocker report for real `$99` checkout.
 - `09-plaid-biweekly-auto-fill-deep-research-prompt.md` - deep research prompt for Plaid, biweekly spreadsheet auto-fill, and `$99` product value.
 - `09b-profit-driving-report-features-deep-research-prompt.md` - companion prompt for business-value report features that help owners protect cash, profit, and decisions.
+- `12-profit-driving-report-feature-research.md` - executed research output ranking the report features most likely to create business value.
+- `13-biweekly-money-making-report-blueprint.md` - executed blueprint for the biweekly `$99/mo` report bundle and conversion translation.
 
 ## Verification After Claude Changes Code
 

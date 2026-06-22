@@ -115,3 +115,5 @@ Then browser-check:
 - `08-99-checkout-readiness-audit.md`: post-pricing blocker report for turning `Auto-fill my reports` into a real `$99/mo` subscription path.
 - `09-plaid-biweekly-auto-fill-deep-research-prompt.md`: deep research prompt for Plaid, biweekly spreadsheet auto-fill, competitor benchmarks, and making the `$99/mo` product materially valuable.
 - `09b-profit-driving-report-features-deep-research-prompt.md`: companion prompt for finding report features that help owners protect cash, improve margins, catch leakage, and make higher-value decisions.
+- `12-profit-driving-report-feature-research.md`: executed research output ranking MVP and phase 2 features by business cash lever, data reliability, actionability, and conversion proof value.
+- `13-biweekly-money-making-report-blueprint.md`: executed blueprint for the `$99/mo` biweekly Owner Pulse, spreadsheet tabs, flags, decision prompts, and conversion translation.
