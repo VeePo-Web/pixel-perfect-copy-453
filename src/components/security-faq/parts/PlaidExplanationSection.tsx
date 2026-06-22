@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { track, trackCtaByHref } from "../analytics";
+import { useInView } from "../../how-it-works/hooks/useInView";
 
 const flow = [
   "Business bank activity",
@@ -11,6 +12,7 @@ const flow = [
 
 export default function PlaidExplanationSection() {
   const ref = useRef<HTMLDivElement | null>(null);
+  const { ref: revealRef, inView } = useInView<HTMLDivElement>();
   useEffect(() => {
     if (!ref.current) return;
     const io = new IntersectionObserver(
@@ -36,8 +38,12 @@ export default function PlaidExplanationSection() {
       aria-labelledby="plaid-heading"
       className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
-        <div className="max-w-3xl">
+      <div ref={revealRef} className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
+        <div
+          className={`max-w-3xl transition-all duration-700 ease-cinema ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-sky-300/70">
             Data connection
           </div>
@@ -54,7 +60,9 @@ export default function PlaidExplanationSection() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+        <div className={`mt-10 grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-center transition-all duration-700 ease-cinema delay-150 ${
+          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        }`}>
           <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6">
             <p className="text-[14px] leading-relaxed text-ink/75">
               Plaid is used to help connect financial data from business bank accounts
@@ -101,7 +109,7 @@ export default function PlaidExplanationSection() {
             onClick={() =>
               trackCtaByHref("#/sample-briefing", "security_faq_plaid")
             }
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-ink transition-colors hover:border-ink/30 hover:bg-ink/[0.03]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-ink transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
           >
             Generate a Sample Briefing Without Plaid →
           </a>

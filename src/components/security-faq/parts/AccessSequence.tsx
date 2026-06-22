@@ -1,24 +1,34 @@
 import { accessSequence } from "../content";
 import { trackCtaByHref } from "../analytics";
+import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function AccessSequence() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       id="sequence"
       aria-labelledby="sequence-heading"
       className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
-        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
-          Access sequence
-        </div>
-        <h2
-          id="sequence-heading"
-          className="mt-3 max-w-3xl font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+      <div ref={ref} className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
+        <div
+          className={`max-w-3xl transition-all duration-700 ease-cinema ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
         >
-          How access works, step by step.
-        </h2>
-        <ol className="mt-12 grid gap-4 lg:grid-cols-5">
+          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+            Access sequence
+          </div>
+          <h2
+            id="sequence-heading"
+            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+          >
+            How access works, step by step.
+          </h2>
+        </div>
+        <ol className={`mt-12 grid gap-4 lg:grid-cols-5 transition-all duration-700 ease-cinema delay-150 ${
+          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        }`}>
           {accessSequence.map((s) => (
             <li
               key={s.n}
@@ -45,7 +55,7 @@ export default function AccessSequence() {
             onClick={() =>
               trackCtaByHref("#/sample-briefing", "security_faq_sequence")
             }
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-ink transition-colors hover:border-ink/30 hover:bg-ink/[0.03]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-ink transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
           >
             Start With a Safe Preview →
           </a>

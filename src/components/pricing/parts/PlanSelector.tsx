@@ -25,7 +25,7 @@ export default function PlanSelector() {
                 return (
                   <span
                     key={i}
-                    className={`h-1 flex-1 max-w-[60px] rounded-full transition-colors duration-400 ${
+                    className={`h-1 flex-1 max-w-[60px] rounded-full transition-colors duration-300 ${
                       reached ? "bg-champagne-200" : "bg-ink/[0.08]"
                     }`}
                   />

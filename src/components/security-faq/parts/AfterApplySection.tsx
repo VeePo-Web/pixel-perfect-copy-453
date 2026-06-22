@@ -59,7 +59,7 @@ export default function AfterApplySection() {
           <a
             href="#/apply"
             onClick={() => trackCtaByHref("#/apply", "security_faq_after_apply")}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
           >
             Start Application
           </a>

@@ -1,14 +1,20 @@
 import { noUpfrontCards } from "../content";
 import { trackCtaByHref } from "../analytics";
+import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function UpfrontRequirementsSection() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       aria-labelledby="upfront-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
-        <div className="max-w-3xl">
+      <div ref={ref} className="mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24">
+        <div
+          className={`max-w-3xl transition-all duration-700 ease-cinema ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}
+        >
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             What we do not ask for upfront
           </div>
@@ -19,7 +25,9 @@ export default function UpfrontRequirementsSection() {
             What you do not need to share to preview or apply.
           </h2>
         </div>
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className={`mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 transition-all duration-700 ease-cinema delay-150 ${
+          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        }`}>
           {noUpfrontCards.map((c) => (
             <li
               key={c.title}
@@ -49,7 +57,7 @@ export default function UpfrontRequirementsSection() {
           <a
             href="#/apply"
             onClick={() => trackCtaByHref("#/apply", "security_faq_upfront")}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)]"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
           >
             Apply Without Bank Connection
           </a>

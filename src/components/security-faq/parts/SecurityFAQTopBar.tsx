@@ -26,7 +26,7 @@ export default function SecurityFAQTopBar() {
     <header className="fixed inset-x-0 top-0 z-40 border-b border-ink/[0.05] bg-charcoal-950/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-3.5 lg:px-10">
         <a href="#/" className="group flex shrink-0 items-center gap-3">
-          <span className="h-1.5 w-1.5 rounded-full bg-champagne-200 transition-transform duration-400 group-hover:scale-125" />
+          <span className="h-1.5 w-1.5 rounded-full bg-champagne-200 transition-transform duration-300 group-hover:scale-125" />
           <span className="text-[12.5px] uppercase tracking-[0.28em] text-ink/85">
             GoldFin Desk
           </span>
@@ -37,7 +37,7 @@ export default function SecurityFAQTopBar() {
               <a
                 key={s.id}
                 href="#/apply"
-                className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 hover:shadow-[0_8px_28px_-10px_rgba(217,190,130,0.55)]"
+                className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_8px_28px_-10px_rgba(217,190,130,0.55)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
               >
                 Apply
               </a>
@@ -52,7 +52,7 @@ export default function SecurityFAQTopBar() {
                 {s.label}
                 <span
                   aria-hidden
-                  className={`absolute -bottom-1.5 left-0 h-px w-full origin-left bg-champagne-200/70 transition-transform duration-400 ease-cinema ${
+                  className={`absolute -bottom-1.5 left-0 h-px w-full origin-left bg-champagne-200/70 transition-transform duration-300 ease-cinema ${
                     active === s.id ? "scale-x-100" : "scale-x-0"
                   }`}
                 />
@@ -66,7 +66,7 @@ export default function SecurityFAQTopBar() {
           </a>
           <a
             href="#/apply"
-            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy"
+            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
           >
             Apply
           </a>
