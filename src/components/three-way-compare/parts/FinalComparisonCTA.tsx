@@ -1,4 +1,4 @@
-import { track, trackCtaByHref } from "../analytics";
+﻿import { track, trackCtaByHref } from "../analytics";
 
 export default function FinalComparisonCTA() {
   return (
@@ -18,7 +18,7 @@ export default function FinalComparisonCTA() {
           If you already have numbers but still feel unclear, this is the layer you are missing.
         </h2>
         <p className="mx-auto mt-5 max-w-[64ch] text-[15px] leading-[1.7] text-ink/70">
-          GoldFin Reports is that layer — your numbers filled from your activity and briefed
+          GoldFin Reports is that layer â€” your numbers filled from your activity and briefed
           in plain English every month, for $99. No spreadsheet work. Cancel anytime.
         </p>
 
@@ -29,9 +29,8 @@ export default function FinalComparisonCTA() {
               track("final_cta_clicked", { target: "reports" });
               trackCtaByHref("#/pricing#auto-fill", "final-cta");
             }}
-            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
-          >
-            <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
+            <span className="relative z-10">Auto-fill my reports â€” $99/mo</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </a>
           <a
@@ -40,8 +39,7 @@ export default function FinalComparisonCTA() {
               track("final_cta_clicked", { target: "sample-briefing" });
               trackCtaByHref("#/sample-briefing", "final-cta");
             }}
-            className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
-          >
+            className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
             See a sample briefing
           </a>
           <a
@@ -50,7 +48,7 @@ export default function FinalComparisonCTA() {
               track("final_cta_clicked", { target: "templates" });
               trackCtaByHref("#/templates", "final-cta");
             }}
-            className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
+            className="text-[12.5px] text-ink/55 underline-offset-4 transition-all duration-300 ease-cinema hover:text-ink hover:underline"
           >
             Or get the free Template Vault
           </a>

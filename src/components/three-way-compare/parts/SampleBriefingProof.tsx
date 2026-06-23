@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { briefing } from "../content";
 import { trackCtaByHref } from "../analytics";
 import { useInView } from "../../how-it-works/hooks/useInView";
@@ -6,6 +6,7 @@ import { useInView } from "../../how-it-works/hooks/useInView";
 export default function SampleBriefingProof() {
   const ref = useRef<HTMLUListElement | null>(null);
   const [visible, setVisible] = useState(false);
+  const { ref: revealRef, inView } = useInView<HTMLDivElement>();
 
   useEffect(() => {
     const node = ref.current;
@@ -55,7 +56,7 @@ export default function SampleBriefingProof() {
               <a
                 href="#/sample-briefing"
                 onClick={() => trackCtaByHref("#/sample-briefing", "briefing-proof")}
-                className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+                className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 Generate My Sample Finance Briefing
               </a>
@@ -63,7 +64,7 @@ export default function SampleBriefingProof() {
                 href="#/sample-briefing"
                 className="text-[12.5px] text-ink/60 underline-offset-4 hover:text-ink hover:underline"
               >
-                See Full Sample Briefing →
+                See Full Sample Briefing â†’
               </a>
             </div>
           </div>

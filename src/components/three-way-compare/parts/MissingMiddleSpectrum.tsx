@@ -1,4 +1,4 @@
-import { spectrumStops } from "../content";
+﻿import { spectrumStops } from "../content";
 import { trackCtaByHref } from "../analytics";
 import { useInView } from "../../how-it-works/hooks/useInView";
 
@@ -106,14 +106,13 @@ export default function MissingMiddleSpectrum() {
             <div className="flex flex-col justify-center">
               <p className="text-[14px] leading-relaxed text-ink/70">
                 Bi-weekly briefings, monthly strategy reviews, and an organized financial system
-                — without the cost or complexity of a CFO engagement.
+                â€” without the cost or complexity of a CFO engagement.
               </p>
               <div className="mt-6">
                 <a
                   href="#/sample-briefing"
                   onClick={() => trackCtaByHref("#/sample-briefing", "missing-middle")}
-                  className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
-                >
+                  className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
                   Generate Sample Finance Briefing
                 </a>
               </div>

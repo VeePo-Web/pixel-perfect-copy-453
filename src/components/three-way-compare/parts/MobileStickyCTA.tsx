@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import type { Recommendation } from "../content";
 import { trackCtaByHref } from "../analytics";
 
@@ -22,15 +22,15 @@ export default function MobileStickyCTA({ recommendation }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // After Sample Briefing section → apply
-  // After fit finder if MFD recommendation → sample briefing
-  // Default → Find My Best Fit
+  // After Sample Briefing section â†’ apply
+  // After fit finder if MFD recommendation â†’ sample briefing
+  // Default â†’ Find My Best Fit
   let label = "Find My Best Fit";
   let href = "#fit-finder";
   let eyebrow = "60-second diagnostic";
 
   if (pastBriefing) {
-    label = "Auto-fill my reports — $99/mo";
+    label = "Auto-fill my reports â€” $99/mo";
     href = "#/pricing#auto-fill";
     eyebrow = "Your next step";
   } else if (recommendation) {
@@ -51,7 +51,7 @@ export default function MobileStickyCTA({ recommendation }: Props) {
         <a
           href={href}
           onClick={() => trackCtaByHref(href, "mobile-sticky")}
-          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
           {label}
         </a>

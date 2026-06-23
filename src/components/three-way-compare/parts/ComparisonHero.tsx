@@ -1,4 +1,4 @@
-import { heroColumns } from "../content";
+﻿import { heroColumns } from "../content";
 import { trackCtaByHref } from "../analytics";
 
 export default function ComparisonHero() {
@@ -34,24 +34,22 @@ export default function ComparisonHero() {
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
                 href="#fit-finder"
-                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
-              >
-                <span className="relative z-10">Find My Best Fit</span>
+                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
+              <span className="relative z-10">Find My Best Fit</span>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </a>
               <a
                 href="#/sample-briefing"
                 onClick={() => trackCtaByHref("#/sample-briefing", "hero")}
-                className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
-              >
-                Generate Sample Finance Briefing
+                className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
+              Generate Sample Finance Briefing
               </a>
               <a
                 href="#/pricing#auto-fill"
                 onClick={() => trackCtaByHref("#/pricing#auto-fill", "hero")}
-                className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
+                className="text-[12.5px] text-ink/55 underline-offset-4 transition-all duration-300 ease-cinema hover:text-ink hover:underline"
               >
-                Or have it done for you — $99/mo
+                Or have it done for you â€” $99/mo
               </a>
             </div>
             <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
@@ -72,7 +70,7 @@ function ThreeColumnDecision() {
   return (
     <div className="relative rounded-3xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_120px_-40px_rgba(25,28,34,0.14)] sm:p-8">
       <div className="text-[10.5px] uppercase tracking-[0.28em] text-ink/45">
-        Three options · one decision
+        Three options Â· one decision
       </div>
       <div className="mt-5 grid grid-cols-3 items-stretch gap-3">
         {heroColumns.map((c) => (

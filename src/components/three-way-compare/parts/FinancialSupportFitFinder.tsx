@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 import { fitProblem, fitSetup, fitStage, type FitChoice } from "../content";
 import type { useFitFinder } from "../hooks/useFitFinder";
 import { track, trackCtaByHref } from "../analytics";
@@ -27,7 +27,7 @@ export default function FinancialSupportFitFinder({ finder }: Props) {
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
-            Fit Finder · 60 seconds
+            Fit Finder Â· 60 seconds
           </div>
           <h2
             id="fit-finder-heading"
@@ -77,7 +77,7 @@ export default function FinancialSupportFitFinder({ finder }: Props) {
               <button
                 type="button"
                 onClick={finder.reset}
-                className="text-[12px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
+                className="text-[12px] text-ink/55 underline-offset-4 transition-all duration-300 ease-cinema hover:text-ink hover:underline"
               >
                 Reset
               </button>
@@ -214,14 +214,13 @@ function RecommendationPanel({
         <a
           href={rec.primaryCTA.href}
           onClick={() => trackCtaByHref(rec.primaryCTA.href, "fit-finder")}
-          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
-        >
+          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
           {rec.primaryCTA.label}
         </a>
         <a
           href={rec.secondaryCTA.href}
           onClick={() => trackCtaByHref(rec.secondaryCTA.href, "fit-finder-secondary")}
-          className="text-[12.5px] text-ink/70 underline-offset-4 hover:text-ink hover:underline"
+          className="text-[12.5px] text-ink/70 underline-offset-4 transition-all duration-300 ease-cinema hover:text-ink hover:underline active:scale-[0.97]"
         >
           {rec.secondaryCTA.label}
         </a>

@@ -1,4 +1,4 @@
-import { trackCtaByHref } from "../analytics";
+﻿import { trackCtaByHref } from "../analytics";
 
 const cards = [
   {
@@ -54,9 +54,9 @@ export default function SoftConversionBridge() {
               <a
                 href={c.cta.href}
                 onClick={() => trackCtaByHref(c.cta.href, "soft-bridge")}
-                className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[12.5px] text-ink/85 transition-colors group-hover:text-champagne-200"
+                className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema group-hover:text-champagne-200"
               >
-                {c.cta.label} <span aria-hidden>→</span>
+                {c.cta.label} <span aria-hidden>â†’</span>
               </a>
             </li>
           ))}

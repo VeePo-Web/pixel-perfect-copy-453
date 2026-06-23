@@ -1,4 +1,4 @@
-import { priceFraming, valueStack } from "../content";
+﻿import { priceFraming, valueStack } from "../content";
 import { trackCtaByHref } from "../analytics";
 import { useInView } from "../../how-it-works/hooks/useInView";
 
@@ -9,9 +9,9 @@ export default function PricingValueContext() {
       aria-labelledby="pricing-context-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1fr]">
-          <div>
+          <div className={`transition-all duration-700 ease-cinema ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Pricing context
             </div>
@@ -45,16 +45,15 @@ export default function PricingValueContext() {
               <a
                 href="#/pricing"
                 onClick={() => trackCtaByHref("#/pricing", "pricing-context")}
-                className="rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
+                className="rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 View Pricing
               </a>
               <a
                 href="#/pricing#auto-fill"
                 onClick={() => trackCtaByHref("#/pricing#auto-fill", "pricing-context")}
-                className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
-              >
-                Auto-fill my reports — $99/mo
+                className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
+              Auto-fill my reports â€” $99/mo
               </a>
             </div>
           </div>
@@ -82,7 +81,7 @@ export default function PricingValueContext() {
                     aria-hidden
                     className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-champagne-200/45 text-[10px] text-champagne-200"
                   >
-                    ·
+                    Â·
                   </span>
                   <span>{item}</span>
                 </li>
