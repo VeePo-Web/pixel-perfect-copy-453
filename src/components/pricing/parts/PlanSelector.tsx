@@ -106,7 +106,7 @@ export default function PlanSelector() {
                   <button
                     type="button"
                     onClick={s.reset}
-                    className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-ink/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                    className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-ink/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                   >
                     Start over
                   </button>

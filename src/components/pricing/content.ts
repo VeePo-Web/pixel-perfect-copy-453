@@ -52,7 +52,7 @@ export const plans: PricingPlan[] = [
       "Owner action list",
       "Spreadsheet export, always yours",
     ],
-    cta: { label: "Auto-fill my reports", href: "#/pricing#auto-fill" },
+    cta: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
     tone: "continuity",
     note: "Cancel anytime",
   },
@@ -143,7 +143,7 @@ export const autoFillOffer = {
   ] as const,
   totalValueLabel: "Total value",
   totalValue: "$400+/mo",
-  cta: "Auto-fill my reports",
+  cta: "Auto-fill my reports — $99/mo",
   guarantee: "Try one month. Cancel anytime before your next billing cycle.",
   trust: "No bank connection required to start. When you connect, it is read-only — we never move money.",
   microbridge: "Not ready for done-for-you? The same templates are free →",
@@ -451,7 +451,7 @@ export function recommend(a: SelectorAnswers): Recommendation {
       planId: "autofill",
       headline: "Start with Auto-Filled Monthly Reports.",
       body: "The bridge between free templates and the full Desk — your templates filled for you every month, at $99.",
-      cta: { label: "Auto-fill my reports", href: "#/pricing#auto-fill" },
+      cta: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
     };
   }
   return {
