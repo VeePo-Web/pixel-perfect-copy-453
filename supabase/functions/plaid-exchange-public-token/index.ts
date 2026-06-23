@@ -2,7 +2,7 @@
 // and pulls the initial account list.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
-import { plaid } from "../_shared/plaid.ts";
+import { plaid, syncAccountsForItem } from "../_shared/plaid.ts";
 
 const Body = z.object({
   publicToken: z.string().min(1),
@@ -12,22 +12,7 @@ const Body = z.object({
 });
 
 type ExchangeResp = { access_token: string; item_id: string };
-type AccountsResp = {
-  accounts: Array<{
-    account_id: string;
-    name: string;
-    official_name: string | null;
-    mask: string | null;
-    type: string;
-    subtype: string | null;
-    balances: {
-      current: number | null;
-      available: number | null;
-      iso_currency_code: string | null;
-    };
-  }>;
-  item: { institution_id: string | null };
-};
+type ItemGetResp = { item: { institution_id: string | null } };
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
@@ -41,9 +26,15 @@ Deno.serve(async (req) => {
       public_token: publicToken,
     });
 
-    const accounts = await plaid<AccountsResp>("/accounts/get", {
-      access_token: exch.access_token,
-    });
+    let institutionId = institution?.id ?? null;
+    if (!institutionId) {
+      try {
+        const info = await plaid<ItemGetResp>("/item/get", { access_token: exch.access_token });
+        institutionId = info.item.institution_id;
+      } catch (e) {
+        console.warn("item/get failed", e);
+      }
+    }
 
     const admin = adminClient();
     const { data: itemRow, error: itemErr } = await admin
@@ -52,36 +43,16 @@ Deno.serve(async (req) => {
         user_id: user.id,
         plaid_item_id: exch.item_id,
         access_token: exch.access_token,
-        institution_id: institution?.id ?? accounts.item.institution_id,
+        institution_id: institutionId,
         institution_name: institution?.name ?? null,
         status: "active",
-        last_synced_at: new Date().toISOString(),
       })
-      .select("id")
+      .select("id, user_id, access_token")
       .single();
     if (itemErr || !itemRow) throw new Error(itemErr?.message || "Insert failed");
 
-    if (accounts.accounts.length) {
-      const rows = accounts.accounts.map((a) => ({
-        plaid_item_id: itemRow.id,
-        user_id: user.id,
-        account_id: a.account_id,
-        name: a.name,
-        official_name: a.official_name,
-        mask: a.mask,
-        type: a.type,
-        subtype: a.subtype,
-        iso_currency_code: a.balances.iso_currency_code,
-        current_balance: a.balances.current,
-        available_balance: a.balances.available,
-      }));
-      const { error: accErr } = await admin
-        .from("plaid_accounts")
-        .upsert(rows, { onConflict: "account_id" });
-      if (accErr) throw new Error(accErr.message);
-    }
-
-    return json({ itemId: itemRow.id, accountCount: accounts.accounts.length });
+    const sync = await syncAccountsForItem(admin, itemRow);
+    return json({ itemId: itemRow.id, accountCount: sync.updated });
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : "Unknown error" }, 500);
   }
