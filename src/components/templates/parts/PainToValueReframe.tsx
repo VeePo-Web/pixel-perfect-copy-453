@@ -38,9 +38,10 @@ export default function PainToValueReframe() {
             </p>
             <a
               href="#vault-capture"
-              className="mt-7 inline-flex min-h-[44px] items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+              className="group mt-7 inline-flex items-center text-[13px] text-champagne-300/80 underline-offset-4 transition-colors duration-300 hover:text-champagne-300 hover:underline"
             >
-              Send me the Vault <span aria-hidden>→</span>
+              <span>Send me the Vault</span>
+              <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden>→</span>
             </a>
           </div>
 

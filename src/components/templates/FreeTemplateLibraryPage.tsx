@@ -10,7 +10,6 @@ import FeaturedTemplatePreview from "./parts/FeaturedTemplatePreview";
 import SoapOperaPromise from "./parts/SoapOperaPromise";
 import TemplateToFinanceDeskBridge from "./parts/TemplateToFinanceDeskBridge";
 import TemplateTrustSection from "./parts/TemplateTrustSection";
-import TemplateFAQ from "./parts/TemplateFAQ";
 import TemplateFinalCTA from "./parts/TemplateFinalCTA";
 import MobileStickyTemplateCTA from "./parts/MobileStickyTemplateCTA";
 import TemplatePreviewModal from "./parts/TemplatePreviewModal";
@@ -60,7 +59,6 @@ export default function FreeTemplateLibraryPage() {
       <SoapOperaPromise />
       <TemplateToFinanceDeskBridge />
       <TemplateTrustSection />
-      <TemplateFAQ />
       <TemplateFinalCTA />
 
       <TemplatePreviewModal

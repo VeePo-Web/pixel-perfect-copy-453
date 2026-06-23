@@ -276,6 +276,30 @@ const FinanceHero = () => {
                 <span className="hidden md:inline">{COPY.trust}</span>
                 <span className="md:hidden">{COPY.mobile.trust}</span>
               </p>
+
+              {/* Desktop money CTA. Pairs with the demo above the fold so the
+                  $99/mo path is unmistakable on large screens with zero scroll.
+                  Subordinate (outline) to the filled demo primary -> one dominant
+                  primary + one clear money CTA. Below lg, the sticky bottom bar
+                  carries it, so there is exactly one $99 CTA per breakpoint. */}
+              <div className="mt-7 hidden items-center gap-4 lg:flex">
+                <button
+                  type="button"
+                  onClick={startAutoFillCheckout}
+                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-champagne-300/60 bg-white px-6 py-3.5 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:border-champagne-300 hover:bg-champagne-50 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                >
+                  <span>Auto-fill my reports &mdash; $99/mo</span>
+                  <span
+                    aria-hidden
+                    className="transition-transform duration-300 group-hover:translate-x-0.5"
+                  >
+                    &rarr;
+                  </span>
+                </button>
+                <span className="font-general text-[11px] uppercase tracking-[0.16em] text-ink/40">
+                  No bank connection &middot; Cancel anytime
+                </span>
+              </div>
             </div>
           </div>
 
