@@ -57,6 +57,15 @@ export default function SampleBriefingHero(props: Props) {
             <p className="mt-4 max-w-[60ch] text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
               Use demo data or rough non-sensitive numbers. No bank connection required for this preview.
             </p>
+            <a
+              href="#/pricing#auto-fill"
+              className="group mt-5 inline-flex items-center text-[12.5px] text-champagne-300/70 transition-colors duration-300 hover:text-champagne-300"
+            >
+              <span className="border-b border-champagne-200/20 pb-0.5 group-hover:border-champagne-300/60">
+                Already convinced? Auto-fill my reports — $99/mo
+              </span>
+              <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+            </a>
           </div>
 
           <div className="lg:sticky lg:top-24">

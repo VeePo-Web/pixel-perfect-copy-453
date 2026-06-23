@@ -7,7 +7,7 @@ export default function TemplateBridge() {
         <div className="grid items-end gap-6 lg:grid-cols-[1.2fr_1fr]">
           <div>
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
-              Lower-intent path
+              Start free instead
             </div>
             <h2 className="mt-4 font-light text-ink text-[32px] leading-[1.1] tracking-[-0.005em] sm:text-[40px]">
               Not ready for the GoldFin Desk yet?
@@ -18,7 +18,7 @@ export default function TemplateBridge() {
           </div>
           <div className="flex lg:justify-end">
             <a
-              href="#templates-signup"
+              href="#/templates"
               className="inline-flex items-center gap-2 rounded-full border border-champagne-200/40 px-6 py-3 text-[13px] tracking-wide text-ink transition-all duration-300 ease-cinema hover:bg-champagne-300/[0.06] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/40 focus-visible:ring-offset-2"
             >
               Get Free Financial Templates
@@ -28,17 +28,18 @@ export default function TemplateBridge() {
         </div>
         <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {templateBridgeItems.map((t) => (
-            <div
+            <a
               key={t.title}
+              href="#/templates"
               className="group rounded-2xl border border-ink/[0.07] bg-charcoal-900/50 p-6 transition-all duration-300 ease-cinema hover:-translate-y-1 hover:border-champagne-200/30"
             >
               <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Template</div>
               <h3 className="mt-2 text-[17px] font-light text-ink">{t.title}</h3>
               <p className="mt-3 text-[13px] leading-[1.6] text-ink/65">{t.body}</p>
               <div className="mt-5 text-[12px] text-champagne-300/80 opacity-70 transition-opacity duration-300 group-hover:opacity-100">
-                Download →
+                Get it free →
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

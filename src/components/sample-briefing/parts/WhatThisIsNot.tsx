@@ -25,13 +25,19 @@ export default function WhatThisIsNot() {
             </div>
           ))}
         </div>
-        <div className="mt-10">
+        <div className="mt-10 flex flex-wrap items-center gap-4">
+          <a
+            href="#/pricing#auto-fill"
+            className="group relative inline-flex overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(217,190,130,0.45)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          >
+            <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+          </a>
           <a
             href="#/apply"
-            className="inline-flex items-center gap-2 rounded-full border border-champagne-200/40 px-6 py-3 text-[13px] tracking-wide text-ink transition-all duration-300 ease-cinema hover:bg-champagne-300/[0.06]"
+            className="text-[13px] text-ink/55 underline-offset-4 transition-colors duration-300 hover:text-ink hover:underline"
           >
-            See If the GoldFin Desk Is a Fit
-            <span aria-hidden>â†’</span>
+            Running something larger? Apply for GoldFin Advisory →
           </a>
         </div>
       </div>
