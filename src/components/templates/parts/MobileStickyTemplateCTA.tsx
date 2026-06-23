@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { track } from "../analytics";
 
 type Props = { downloaded: boolean };
@@ -13,7 +13,7 @@ export default function MobileStickyTemplateCTA({ downloaded }: Props) {
   }, []);
 
   const href = downloaded ? "#/pricing#auto-fill" : "#vault-capture";
-  const label = downloaded ? "Auto-fill my reports — $99/mo" : "Send me the Vault";
+  const label = downloaded ? "Auto-fill my reports â€” $99/mo" : "Send me the Vault";
 
   return (
     <div
@@ -24,14 +24,14 @@ export default function MobileStickyTemplateCTA({ downloaded }: Props) {
     >
       <div className="flex items-center justify-between gap-3 px-4 pt-3">
         <p className="text-[11px] uppercase tracking-[0.22em] text-ink/50">
-          {downloaded ? "Next step" : "Free · no bank required"}
+          {downloaded ? "Next step" : "Free Â· no bank required"}
         </p>
         <a
           href={href}
           onClick={() => {
             if (downloaded) track("autofill_clicked_from_templates", { source: "mobile-sticky" });
           }}
-          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
           {label}
         </a>

@@ -1,4 +1,4 @@
-type Props = {
+﻿type Props = {
   value: string;
   onChange: (v: string) => void;
   onGenerate: () => void;
@@ -17,7 +17,7 @@ export default function BusinessPromptInput({ value, onChange, onGenerate, onUse
         value={value}
         onChange={(e) => onChange(e.target.value)}
         rows={4}
-        placeholder="Describe your business and what you want to understand about your numbers…"
+        placeholder="Describe your business and what you want to understand about your numbersâ€¦"
         className="w-full resize-none bg-transparent text-[15px] leading-[1.6] text-ink placeholder:text-ink/35 focus:outline-none"
       />
       <p className="mt-2 text-[12px] text-ink/40">
@@ -28,7 +28,7 @@ export default function BusinessPromptInput({ value, onChange, onGenerate, onUse
           type="button"
           onClick={onGenerate}
           disabled={disabled}
-          className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 disabled:opacity-60"
+          className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 disabled:opacity-60"
         >
           <span className="relative z-10">Generate My Sample Briefing</span>
           <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -44,7 +44,7 @@ export default function BusinessPromptInput({ value, onChange, onGenerate, onUse
           href="#/apply"
           className="ml-auto text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
         >
-          Apply for the GoldFin Desk →
+          Apply for the GoldFin Desk â†’
         </a>
       </div>
     </div>

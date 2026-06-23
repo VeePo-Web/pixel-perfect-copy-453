@@ -1,4 +1,4 @@
-import type { DemoBusiness } from "../content";
+﻿import type { DemoBusiness } from "../content";
 import ModuleShell from "./ModuleShell";
 
 export default function DecisionsToConsiderModule({ business }: { business: DemoBusiness }) {
@@ -10,10 +10,10 @@ export default function DecisionsToConsiderModule({ business }: { business: Demo
       cta={
         <a
           href="#/apply"
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
+          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
         >
           Apply for the GoldFin Desk
-          <span aria-hidden>→</span>
+          <span aria-hidden>â†’</span>
         </a>
       }
     >

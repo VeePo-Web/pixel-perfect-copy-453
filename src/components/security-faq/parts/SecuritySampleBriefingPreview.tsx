@@ -1,4 +1,4 @@
-import { useInView } from "../../how-it-works/hooks/useInView";
+﻿import { useInView } from "../../how-it-works/hooks/useInView";
 import { sampleBriefingPreview } from "../content";
 import { trackCtaByHref } from "../analytics";
 
@@ -35,7 +35,7 @@ export default function SecuritySampleBriefingPreview() {
                 onClick={() =>
                   trackCtaByHref("#/sample-briefing", "security_faq_sample")
                 }
-                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 Generate Sample Finance Briefing
               </a>
@@ -50,7 +50,7 @@ export default function SecuritySampleBriefingPreview() {
           >
             <div className="flex items-center justify-between border-b border-ink/[0.06] pb-4">
               <div className="text-[11px] uppercase tracking-[0.24em] text-ink/45">
-                Sample briefing · preview
+                Sample briefing Â· preview
               </div>
               <div className="text-[10.5px] text-ink/35">demo data</div>
             </div>

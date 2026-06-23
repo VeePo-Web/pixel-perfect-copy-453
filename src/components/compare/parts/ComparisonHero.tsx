@@ -1,4 +1,4 @@
-import { options } from "../content";
+﻿import { options } from "../content";
 import { track } from "../analytics";
 
 export default function ComparisonHero() {
@@ -32,7 +32,7 @@ export default function ComparisonHero() {
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
                 href="#fit-finder"
-                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
               >
                 <span className="relative z-10">Find My Best Fit</span>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -49,7 +49,7 @@ export default function ComparisonHero() {
                 onClick={() => track("autofill_clicked_from_compare", { source: "hero" })}
                 className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
-                Or have it done for you — $99/mo
+                Or have it done for you â€” $99/mo
               </a>
             </div>
             <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
@@ -118,9 +118,9 @@ function FlagshipColumn({ item }: { item: { shortLabel: string } }) {
       <div className="text-[9.5px] uppercase tracking-[0.26em] text-champagne-300/70">The middle</div>
       <div className="mt-3 text-[14px] font-light leading-snug text-ink">{item.shortLabel}</div>
       <ul className="mt-3 space-y-1.5 text-[11.5px] text-ink/70">
-        <li>· Structure</li>
-        <li>· Bi-weekly briefings</li>
-        <li>· Monthly review</li>
+        <li>Â· Structure</li>
+        <li>Â· Bi-weekly briefings</li>
+        <li>Â· Monthly review</li>
       </ul>
       <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-[10.5px] uppercase tracking-[0.24em] text-champagne-300/70">
         Most owner-led businesses

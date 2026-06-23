@@ -1,4 +1,4 @@
-import { track } from "../analytics";
+﻿import { track } from "../analytics";
 
 export default function ComparisonFinalCTA() {
   return (
@@ -20,15 +20,15 @@ export default function ComparisonFinalCTA() {
           Start with the missing layer.
         </h2>
         <p className="mx-auto mt-5 max-w-[64ch] text-[15px] leading-relaxed text-ink/65">
-          If your books exist, your tools are active, and your business still feels financially unclear, GoldFin Reports is the missing layer — your numbers filled and briefed in plain English every month, for $99.
+          If your books exist, your tools are active, and your business still feels financially unclear, GoldFin Reports is the missing layer â€” your numbers filled and briefed in plain English every month, for $99.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
           <a
             href="#/pricing#auto-fill"
             onClick={() => track("autofill_clicked_from_compare", { source: "final" })}
-            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
           >
-            <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+            <span className="relative z-10">Auto-fill my reports â€” $99/mo</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </a>
           <a

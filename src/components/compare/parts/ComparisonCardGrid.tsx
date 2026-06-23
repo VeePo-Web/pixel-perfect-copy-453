@@ -1,4 +1,4 @@
-import { useInView } from "../../how-it-works/hooks/useInView";
+﻿import { useInView } from "../../how-it-works/hooks/useInView";
 import { comparisonCards } from "../content";
 import { track } from "../analytics";
 
@@ -49,15 +49,15 @@ export default function ComparisonCardGrid() {
                   {c.title}
                 </div>
                 <p className="mt-3 text-[12.5px] leading-relaxed text-ink/55">
-                  <span className="text-ink/40">Best for · </span>
+                  <span className="text-ink/40">Best for Â· </span>
                   {c.bestFor}
                 </p>
-                <p className="mt-3 text-[13px] leading-relaxed text-ink/70 opacity-90 transition-opacity duration-400 group-hover:opacity-100">
+                <p className="mt-3 text-[13px] leading-relaxed text-ink/70 opacity-90 transition-opacity duration-300 group-hover:opacity-100">
                   {c.coreInsight}
                 </p>
                 <span className="mt-5 inline-flex items-center gap-1.5 text-[12.5px] text-ink/85 transition-colors group-hover:text-champagne-200">
                   {c.ctaText}
-                  <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+                  <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">â†’</span>
                 </span>
               </a>
             </li>

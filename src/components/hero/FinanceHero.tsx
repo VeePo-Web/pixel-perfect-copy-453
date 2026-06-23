@@ -1,7 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { supabase } from "../../integrations/supabase/client";
+// Conversion -> money seam (COORDINATION.md): A's button calls B's helper.
+// Opens the embedded CheckoutOverlay directly (no page hop to the money).
+import { startAutoFillCheckout } from "../../lib/checkout";
 
-// Persona demo chips — each prefills a realistic, pain-language prompt so the
+// Persona demo chips â€” each prefills a realistic, pain-language prompt so the
 // visitor self-identifies ("this is built for businesses like mine").
 const DEMO_CHIPS: { label: string; prompt: string }[] = [
   { label: "Agency", prompt: "I run a 12-person agency doing about $90K/month. Revenue is growing, but cash still feels tight and contractor costs keep changing." },
@@ -28,7 +31,7 @@ const COPY = {
     "Describe your business and what you want to understand about your numbers\u2026",
   example:
     "Example: \u201CI run a 12-person agency doing $90K/month. Revenue is growing, but cash still feels tight.\u201D",
-  primaryCta: "Generate Sample Finance Briefing",
+  primaryCta: "Generate my sample briefing",
   secondaryCta: "Use Demo Business Data",
   trust:
     "No bank connection required for this preview. Use demo data or rough non-sensitive numbers.",
@@ -76,8 +79,8 @@ const COPY = {
   ],
   postDemo: {
     headline: "Want this briefing for your real business every month?",
-    body: "GoldFin Reports fills your templates from your numbers and sends a plain-English briefing like this one — every month. No spreadsheet work. Cancel anytime.",
-    primary: "Auto-fill my reports — $99/mo",
+    body: "GoldFin Reports fills your templates from your numbers and sends a plain-English briefing like this one â€” every month. No spreadsheet work. Cancel anytime.",
+    primary: "Auto-fill my reports â€” $99/mo",
     primaryHref: "#/pricing#auto-fill",
     secondary: "Apply for GoldFin Advisory",
     secondaryHref: "#/apply",
@@ -91,7 +94,7 @@ const COPY = {
     headline: "Stop Running Your Business From Your Bank Balance",
     sub: "Get a plain-English sample briefing that shows what changed, what looks risky, and what decisions deserve your attention.",
     placeholder: "What do you want to understand about your numbers?",
-    cta: "Generate Sample Briefing",
+    cta: "Generate my briefing",
     trust: "No bank connection required.",
     afterCta: "Apply for the GoldFin Desk",
   },
@@ -175,7 +178,7 @@ const FinanceHero = () => {
 
   return (
     <section id="top" className="relative w-full overflow-hidden bg-white text-ink">
-      {/* Quiet hairline accents — no dark washes */}
+      {/* Quiet hairline accents â€” no dark washes */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
 
       <div className="relative mx-auto flex min-h-[calc(100dvh-56px)] w-full max-w-7xl flex-col px-5 pb-24 pt-10 sm:px-8 lg:px-12 lg:pt-14">
@@ -223,7 +226,7 @@ const FinanceHero = () => {
                     <button
                       onClick={startDemo}
                       disabled={ctasDisabled}
-                      className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:rounded-lg"
+                      className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:rounded-lg"
                     >
                       <span className="hidden md:inline">{COPY.primaryCta}</span>
                       <span className="md:hidden">{COPY.mobile.cta}</span>
@@ -242,7 +245,7 @@ const FinanceHero = () => {
                 {COPY.example}
               </p>
 
-              {/* Demo chips — self-identification + zero-effort prefill */}
+              {/* Demo chips â€” self-identification + zero-effort prefill */}
               <div className="mt-4 pl-1">
                 <p className="font-general text-[0.62rem] uppercase tracking-[0.2em] text-ink/40">
                   Or start from a business like yours
@@ -292,20 +295,31 @@ const FinanceHero = () => {
               ))}
             </div>
 
-            {/* Persistent $99/mo path for solution-aware visitors who skip the demo */}
+            {/* Frictionless $99/mo path for the already-ready buyer who skips the
+                demo. A real, visible button (not a faint link) that opens the
+                embedded checkout directly. Subordinate to the demo, so the hero
+                keeps one dominant primary + one clear money CTA. */}
             {state !== "briefing" && (
               <div className="mt-5">
-                <a
-                  href="#/pricing#auto-fill"
-                  className="group inline-flex items-center font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink/50 transition-colors duration-300 hover:text-champagne-300"
+                <p className="font-general text-[0.62rem] uppercase tracking-[0.2em] text-ink/40">
+                  Already know you want this?
+                </p>
+                <button
+                  type="button"
+                  onClick={startAutoFillCheckout}
+                  className="group mt-2.5 inline-flex w-full items-center justify-center gap-2 rounded-full border border-champagne-300/60 bg-white px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:border-champagne-300 hover:bg-champagne-50 hover:shadow-[0_10px_36px_-12px_rgba(217,190,130,0.5)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:w-auto"
                 >
-                  <span className="border-b border-ink/15 pb-0.5 group-hover:border-champagne-300/60">
-                    Already ready? Auto-fill my reports — $99/mo
+                  <span>Auto-fill my reports &mdash; $99/mo</span>
+                  <span
+                    aria-hidden
+                    className="transition-transform duration-300 group-hover:translate-x-0.5"
+                  >
+                    &rarr;
                   </span>
-                  <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">
-                    →
-                  </span>
-                </a>
+                </button>
+                <p className="mt-2 font-general text-[11px] uppercase tracking-[0.18em] text-ink/40">
+                  No bank connection to start &middot; Cancel anytime
+                </p>
               </div>
             )}
 
@@ -313,7 +327,50 @@ const FinanceHero = () => {
           </div>
         </div>
       </div>
+      <MobileStickyHeroCTA />
     </section>
+  );
+};
+
+// Mobile-only persistent money CTA. Guarantees one clear, thumb-reachable
+// $99/mo action on every phone viewport (Contentsquare: sticky bottom-bar
+// CTAs ~+31% conversions). Appears after the in-hero demo button scrolls out
+// of the thumb zone, so it never competes with the demo for the same screen.
+const MobileStickyHeroCTA = () => {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 340);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <div
+      className={`fixed inset-x-0 bottom-0 z-40 transform border-t border-ink/[0.08] bg-white/95 backdrop-blur-md transition-all duration-500 ease-cinema lg:hidden ${
+        visible
+          ? "translate-y-0 opacity-100"
+          : "pointer-events-none translate-y-full opacity-0"
+      }`}
+      style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
+    >
+      <div className="flex items-center justify-between gap-3 px-4 pt-3">
+        <div className="leading-tight">
+          <p className="font-general text-[13px] font-medium text-ink">
+            Done-for-you reports
+          </p>
+          <p className="font-general text-[11px] uppercase tracking-[0.16em] text-ink/45">
+            $99/mo &middot; cancel anytime
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={startAutoFillCheckout}
+          className="shrink-0 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 font-general text-[13px] font-medium text-navy shadow-[0_8px_28px_-10px_rgba(217,190,130,0.6)] transition-all duration-300 ease-cinema active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+        >
+          Start &mdash; $99/mo
+        </button>
+      </div>
+    </div>
   );
 };
 
@@ -508,9 +565,10 @@ const PostDemoCTA = () => (
       {COPY.postDemo.body}
     </p>
     <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-      <a
-        href={COPY.postDemo.primaryHref}
-        className="group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+      <button
+        type="button"
+        onClick={startAutoFillCheckout}
+        className="group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
       >
         <span
           aria-hidden
@@ -518,7 +576,7 @@ const PostDemoCTA = () => (
         />
         <span className="relative">{COPY.postDemo.primary}</span>
         <span aria-hidden className="relative">&rarr;</span>
-      </a>
+      </button>
       <a
         href={COPY.postDemo.secondaryHref}
         className="inline-flex items-center justify-center rounded-full border border-ink/15 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink/85 transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
@@ -526,7 +584,7 @@ const PostDemoCTA = () => (
         {COPY.postDemo.secondary}
       </a>
     </div>
-    <p className="mt-3 font-general text-[11px] uppercase tracking-[0.22em] text-ink/40">No contracts · Cancel anytime</p>
+    <p className="mt-3 font-general text-[11px] uppercase tracking-[0.22em] text-ink/40">No contracts Â· Cancel anytime</p>
     <a
       href={COPY.postDemo.tertiaryHref}
       className="mt-3 inline-block font-general text-[0.68rem] uppercase tracking-[0.18em] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-200 hover:underline"

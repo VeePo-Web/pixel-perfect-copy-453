@@ -1,4 +1,4 @@
-import { useInView } from "../../how-it-works/hooks/useInView";
+﻿import { useInView } from "../../how-it-works/hooks/useInView";
 import { missingMiddle } from "../content";
 import { track } from "../analytics";
 
@@ -60,9 +60,9 @@ export default function MissingMiddleSection() {
           <a
             href="#/pricing#auto-fill"
             onClick={() => track("autofill_clicked_from_compare", { source: "missing-middle" })}
-            className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+            className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            Auto-fill my reports — $99/mo
+            Auto-fill my reports â€” $99/mo
           </a>
         </div>
       </div>
@@ -97,7 +97,7 @@ function SideColumn({
         ))}
       </ul>
       <div className="mt-auto border-t border-ink/[0.06] pt-4 text-[12.5px] text-ink/55">
-        <span className="text-ink/40">{footerLabel} · </span>
+        <span className="text-ink/40">{footerLabel} Â· </span>
         {footer}
       </div>
     </div>
@@ -118,7 +118,7 @@ function MfdColumn({ label, items, outcome }: { label: string; items: string[]; 
         ))}
       </ul>
       <div className="mt-auto border-t border-ink/[0.06] pt-4 text-[12.5px] text-ink/70">
-        <span className="text-ink/40">Outcome · </span>
+        <span className="text-ink/40">Outcome Â· </span>
         {outcome}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useInView } from "../../how-it-works/hooks/useInView";
 import { useCases } from "../content";
 import { track } from "../analytics";
@@ -38,7 +38,7 @@ export default function UseCasePaths() {
             return (
               <article
                 key={u.id}
-                className={`rounded-2xl border p-5 transition-all duration-400 ease-cinema ${
+                className={`rounded-2xl border p-5 transition-all duration-300 ease-cinema ${
                   open
                     ? "border-champagne-200/45 bg-charcoal-900/70 shadow-[0_30px_70px_-30px_rgba(217,190,130,0.35)]"
                     : "border-ink/[0.07] bg-ink/[0.02] hover:border-champagne-200/25"
@@ -58,11 +58,11 @@ export default function UseCasePaths() {
                     Owner says
                   </div>
                   <div className="mt-2 text-[16px] font-light leading-snug text-ink">
-                    “{u.quote}”
+                    â€œ{u.quote}â€
                   </div>
                 </button>
                 <div
-                  className={`grid transition-all duration-400 ease-cinema ${
+                  className={`grid transition-all duration-300 ease-cinema ${
                     open ? "mt-4 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                   }`}
                 >
@@ -79,7 +79,7 @@ export default function UseCasePaths() {
                           else if (h === "#/templates")
                             track("templates_clicked_from_compare", { source: `use-case:${u.id}` });
                         }}
-                        className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-2 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+                        className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-2 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                       >
                         {u.primaryCTA.label}
                       </a>

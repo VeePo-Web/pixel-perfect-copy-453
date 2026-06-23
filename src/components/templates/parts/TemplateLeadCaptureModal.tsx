@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+﻿import { useId, useState } from "react";
 import { z } from "zod";
 import ModalShell from "./ModalShell";
 import { businessTypes, goalChips, type TemplateItem } from "../content";
@@ -74,7 +74,7 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
                 {template.name}
               </h2>
               <p className="mt-2 text-[13px] text-ink/65">
-                Enter your email and we’ll send the {template.shortName} so you can start organizing your numbers today.
+                Enter your email and weâ€™ll send the {template.shortName} so you can start organizing your numbers today.
               </p>
             </div>
             <button
@@ -83,7 +83,7 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
               onClick={onClose}
               className="rounded-full border border-ink/[0.08] px-2.5 py-1 text-[11px] text-ink/60 hover:text-ink"
             >
-              ✕
+              âœ•
             </button>
           </div>
 
@@ -140,9 +140,9 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
           <button
             type="submit"
             disabled={state.kind === "sending"}
-            className="mt-6 w-full rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 disabled:opacity-70"
+            className="mt-6 w-full rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 disabled:opacity-70"
           >
-            {state.kind === "sending" ? "Sending…" : "Send My Template"}
+            {state.kind === "sending" ? "Sendingâ€¦" : "Send My Template"}
           </button>
           <p className="mt-3 text-center text-[11px] text-ink/45">
             No bank connection required. No spam. Start free.
@@ -221,7 +221,7 @@ function SelectField({
         className="mt-1.5 w-full appearance-none rounded-xl border border-ink/[0.1] bg-ink/[0.02] px-3.5 py-3 text-[14px] text-ink outline-none transition-colors focus:border-champagne-200/50"
       >
         <option value="" disabled>
-          Select…
+          Selectâ€¦
         </option>
         {options.map((o) => (
           <option key={o} value={o} className="bg-charcoal-950">
