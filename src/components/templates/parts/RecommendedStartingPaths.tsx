@@ -43,7 +43,7 @@ export default function RecommendedStartingPaths({ activeId, onSelect }: Props) 
                     el?.scrollIntoView({ behavior: "smooth", block: "start" });
                   }
                 }}
-                className={`group flex flex-col rounded-2xl border p-5 text-left transition-all duration-400 ease-cinema hover:-translate-y-0.5 ${
+                className={`group flex flex-col rounded-2xl border p-5 text-left transition-all duration-300 ease-cinema hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink ${
                   active
                     ? "border-champagne-200/55 bg-paper-raised shadow-[0_30px_70px_-30px_rgba(217,190,130,0.4)]"
                     : "border-ink/[0.07] bg-ink/[0.02] hover:border-champagne-200/30"

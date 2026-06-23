@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+﻿import { useEffect, useRef } from "react";
 import type { TemplateItem } from "../content";
 import SpreadsheetPreview from "./SpreadsheetPreview";
 import { track } from "../analytics";
@@ -66,11 +66,11 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
 
       <div className="mt-4 space-y-1 text-[11.5px] text-ink/55">
         <div>
-          <span className="text-ink/40">Best for · </span>
+          <span className="text-ink/40">Best for Â· </span>
           {template.bestFor}
         </div>
         <div>
-          <span className="text-ink/40">Time · </span>
+          <span className="text-ink/40">Time Â· </span>
           {template.timeToUse}
         </div>
       </div>
@@ -86,7 +86,7 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
             onGet();
             track("template_download_started", { templateId: template.id });
           }}
-          className="min-h-[44px] rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_10px_32px_-12px_rgba(217,190,130,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-[0.98]"
+          className="min-h-[44px] rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_32px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
           {template.ctaText}
         </button>
@@ -96,7 +96,7 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
             onPreview();
             track("template_preview_opened", { templateId: template.id });
           }}
-          className="min-h-[44px] rounded-md px-1 text-[12px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/60"
+          className="min-h-[44px] rounded-md px-1 text-[12px] text-ink/55 underline-offset-4 transition-all duration-300 ease-cinema hover:text-ink hover:underline active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/60 focus-visible:ring-offset-ink"
         >
           Preview
         </button>
@@ -108,7 +108,7 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
           className="text-[11.5px] text-ink/50 transition-colors hover:text-champagne-300"
           onClick={() => track("autofill_clicked_from_templates", { source: "card", templateId: template.id })}
         >
-          Want this filled for you every month? <span className="underline-offset-4 hover:underline">GoldFin Reports · $99/mo →</span>
+          Want this filled for you every month? <span className="underline-offset-4 hover:underline">GoldFin Reports Â· $99/mo â†’</span>
         </a>
       </div>
     </article>

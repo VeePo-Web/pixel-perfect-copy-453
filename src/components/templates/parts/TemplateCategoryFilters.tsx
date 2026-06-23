@@ -1,4 +1,4 @@
-import { useRef } from "react";
+﻿import { useRef } from "react";
 import { categories } from "../content";
 import { track } from "../analytics";
 
@@ -43,7 +43,7 @@ export default function TemplateCategoryFilters({ active, onChange }: Props) {
                   onChange(c);
                   track("template_filter_clicked", { category: c });
                 }}
-                className={`min-h-[36px] shrink-0 rounded-full border px-4 py-1.5 text-[12.5px] transition-all duration-300 ease-cinema ${
+                className={`min-h-[36px] shrink-0 rounded-full border px-4 py-1.5 text-[12.5px] transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-1 focus-visible:ring-offset-ink ${
                   isActive
                     ? "border-champagne-200/60 bg-champagne-200/[0.08] text-ink shadow-[0_0_24px_-10px_rgba(217,190,130,0.6)]"
                     : "border-ink/[0.08] bg-ink/[0.02] text-ink/65 hover:border-ink/20 hover:text-ink"

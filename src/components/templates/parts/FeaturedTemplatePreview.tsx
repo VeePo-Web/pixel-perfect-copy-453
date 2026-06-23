@@ -1,4 +1,4 @@
-import SpreadsheetPreview from "./SpreadsheetPreview";
+﻿import SpreadsheetPreview from "./SpreadsheetPreview";
 import { templates } from "../content";
 import { track } from "../analytics";
 import { useInView } from "../../how-it-works/hooks/useInView";
@@ -6,7 +6,7 @@ import { useInView } from "../../how-it-works/hooks/useInView";
 const featured = templates.find((t) => t.id === "cash-flow-forecast")!;
 
 const notes = [
-  { tag: "What changed?", body: "Software spend climbed by $640 vs last month — driven by two new tools added in the last 30 days." },
+  { tag: "What changed?", body: "Software spend climbed by $640 vs last month â€” driven by two new tools added in the last 30 days." },
   { tag: "What looks risky?", body: "Payroll plus contractor costs now consume 55% of expected revenue. A 10% revenue dip would compress the reserve buffer." },
   { tag: "What decision does this affect?", body: "Hiring conversation likely worth phasing. Subscription audit recommended before next month." },
 ];
@@ -34,14 +34,14 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
             Built to help owners make decisions, not just fill cells.
           </h2>
           <p className="mt-4 max-w-[58ch] text-[14.5px] leading-relaxed text-ink/65">
-            A look at the {featured.name} — including the plain-English side notes that turn
+            A look at the {featured.name} â€” including the plain-English side notes that turn
             data into a decision. This is exactly what GoldFin Reports fills in and sends you
             every month.
           </p>
         </div>
 
         <div className="mt-10 grid items-start gap-8 lg:grid-cols-[1.1fr_1fr]">
-          <SpreadsheetPreview rows={featured.previewRows} title="Cash Flow Forecast — next 30 days" />
+          <SpreadsheetPreview rows={featured.previewRows} title="Cash Flow Forecast â€” next 30 days" />
           <div className="space-y-4">
             {notes.map((n, i) => (
               <div
@@ -66,20 +66,20 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
               <button
                 type="button"
                 onClick={onGet}
-                className="min-h-[44px] rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-[0.98]"
+                className="min-h-[44px] rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 Get this template free
               </button>
               <a
                 href="#/sample-briefing"
                 onClick={() => track("sample_briefing_clicked_from_templates", { source: "featured" })}
-                className="inline-flex min-h-[44px] items-center rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-colors hover:border-champagne-200/40 hover:text-ink"
+                className="inline-flex min-h-[44px] items-center rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/40 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 See a full sample briefing
               </a>
             </div>
 
-            {/* $99 bridge — this filled example IS the monthly product */}
+            {/* $99 bridge â€” this filled example IS the monthly product */}
             <p className="mt-1 text-[13px] leading-[1.6] text-ink/60">
               Don't want to fill it in yourself every month?{" "}
               <a
@@ -87,7 +87,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
                 onClick={() => track("autofill_clicked_from_templates", { source: "featured" })}
                 className="text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
-                GoldFin Reports does it for you — $99/mo →
+                GoldFin Reports does it for you â€” $99/mo â†’
               </a>
             </p>
           </div>
