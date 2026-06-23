@@ -1,14 +1,16 @@
 import { spectrumStops } from "../content";
 import { trackCtaByHref } from "../analytics";
+import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function MissingMiddleSpectrum() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       aria-labelledby="missing-middle-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
-        <div className="max-w-[62ch]">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+        <div className={`max-w-[62ch] transition-all duration-700 ease-cinema ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Where GoldFin Desk fits
           </div>
@@ -24,7 +26,7 @@ export default function MissingMiddleSpectrum() {
           </p>
         </div>
 
-        <div className="mt-12 rounded-3xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(25,28,34,0.14)] sm:p-10">
+        <div className={`mt-12 rounded-3xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_100px_-40px_rgba(25,28,34,0.14)] sm:p-10 transition-all duration-700 ease-cinema delay-150 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           {/* SVG rail */}
           <div className="relative">
             <svg

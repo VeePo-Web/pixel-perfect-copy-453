@@ -38,13 +38,21 @@ export default function TemplateToFinanceDeskBridge() {
             </li>
           ))}
         </ol>
-        <div className="mt-8">
+        <div className="mt-8 flex flex-wrap items-center gap-4">
           <a
             href="#/sample-briefing"
             onClick={() => track("sample_briefing_clicked_from_templates", { source: "bridge" })}
-            className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.55)]"
+            className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             Generate Sample Finance Briefing
+          </a>
+          <a
+            href="#/pricing#auto-fill"
+            onClick={() => track("autofill_clicked_from_templates", { source: "bridge" })}
+            className="group inline-flex items-center text-[12px] uppercase tracking-[0.18em] text-ink/40 transition-colors duration-300 hover:text-champagne-300"
+          >
+            <span className="border-b border-ink/10 pb-0.5 group-hover:border-champagne-300/60">Already ready? $99/mo</span>
+            <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
           </a>
         </div>
       </div>

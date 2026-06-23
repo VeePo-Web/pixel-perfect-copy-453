@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { tableCTAs, tableRows } from "../content";
 import { trackCtaByHref } from "../analytics";
+import { useInView } from "../../how-it-works/hooks/useInView";
 
 type ColumnId = "bookkeeper" | "mfd" | "cfo";
 
 export default function ThreeWayComparisonTable() {
   const [hovered, setHovered] = useState<ColumnId | null>(null);
+  const { ref, inView } = useInView<HTMLDivElement>();
 
   const colClass = (id: ColumnId, isMfd?: boolean) => {
     const isHover = hovered === id;

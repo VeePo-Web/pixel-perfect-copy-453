@@ -140,7 +140,7 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
           <button
             type="submit"
             disabled={state.kind === "sending"}
-            className="mt-6 w-full rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.6)] disabled:opacity-70"
+            className="mt-6 w-full rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 disabled:opacity-70"
           >
             {state.kind === "sending" ? "Sending…" : "Send My Template"}
           </button>

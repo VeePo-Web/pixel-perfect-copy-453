@@ -1,13 +1,15 @@
 import { jobMap } from "../content";
+import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function RealDifferenceSection() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       aria-labelledby="real-difference-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
-        <div className="max-w-[62ch]">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+        <div className={`max-w-[62ch] transition-all duration-700 ease-cinema ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             The real difference
           </div>
@@ -22,7 +24,7 @@ export default function RealDifferenceSection() {
           </p>
         </div>
 
-        <ul className="mt-10 grid gap-4 lg:grid-cols-3">
+        <ul className={`mt-10 grid gap-4 lg:grid-cols-3 transition-all duration-700 ease-cinema delay-150 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           {jobMap.map((j) => (
             <li
               key={j.id}

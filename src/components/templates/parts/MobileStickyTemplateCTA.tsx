@@ -31,7 +31,7 @@ export default function MobileStickyTemplateCTA({ downloaded }: Props) {
           onClick={() => {
             if (downloaded) track("autofill_clicked_from_templates", { source: "mobile-sticky" });
           }}
-          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"
+          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
           {label}
         </a>

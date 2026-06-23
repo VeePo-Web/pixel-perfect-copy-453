@@ -1,7 +1,9 @@
 import { priceFraming, valueStack } from "../content";
 import { trackCtaByHref } from "../analytics";
+import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function PricingValueContext() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       aria-labelledby="pricing-context-heading"
