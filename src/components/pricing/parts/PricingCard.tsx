@@ -1,10 +1,10 @@
-import type { PricingPlan } from "../content";
+﻿import type { PricingPlan } from "../content";
 
 type Props = { plan: PricingPlan; emphasis?: boolean };
 
 export default function PricingCard({ plan, emphasis }: Props) {
   const flagship = plan.tone === "flagship" || emphasis;
-  // The $99 continuity rung is the recommended pick — give it gold weight
+  // The $99 continuity rung is the recommended pick â€” give it gold weight
   // (border + filled CTA) without the flagship's scale.
   const recommended = plan.tone === "continuity";
   const gold = flagship || recommended;
@@ -48,7 +48,7 @@ export default function PricingCard({ plan, emphasis }: Props) {
       )}
       <p className="mt-5 text-[14px] leading-[1.6] text-ink/75">{plan.positioning}</p>
       <p className="mt-3 text-[12.5px] leading-[1.6] text-ink/50">
-        <span className="uppercase tracking-[0.18em] text-ink/40">Best for · </span>
+        <span className="uppercase tracking-[0.18em] text-ink/40">Best for Â· </span>
         {plan.bestFor}
       </p>
       <ul className="mt-6 space-y-2.5">
@@ -67,14 +67,14 @@ export default function PricingCard({ plan, emphasis }: Props) {
       <div className="mt-7 pt-2">
         <a
           href={plan.cta.href}
-          className={`inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-[13px] font-medium tracking-wide transition-all duration-400 ease-cinema focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-[0.98] ${
+          className={`inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-full px-5 py-3 text-[13px] font-medium tracking-wide transition-all duration-300 ease-cinema focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink active:scale-[0.97] ${
             gold
               ? "bg-gradient-to-b from-champagne-100 to-champagne-300 text-navy hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
               : "border border-ink/[0.12] text-ink/90 hover:border-champagne-200/40 hover:text-ink"
           }`}
         >
           {plan.cta.label}
-          <span aria-hidden>→</span>
+          <span aria-hidden>â†’</span>
         </a>
       </div>
     </article>

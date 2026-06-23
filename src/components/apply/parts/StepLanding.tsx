@@ -1,4 +1,4 @@
-import { APPLY } from "../content";
+﻿import { APPLY } from "../content";
 import { navigate } from "../hooks/useHashRoute";
 
 type Props = {
@@ -22,7 +22,7 @@ export default function StepLanding({ onStart, showWelcomeBack, onResume }: Prop
           <span className="h-1.5 w-1.5 rounded-full bg-champagne-200" />
           {c.welcomeBack}
           <button onClick={onResume} className="ml-2 text-champagne-300 underline-offset-4 hover:underline">
-            Resume →
+            Resume â†’
           </button>
         </div>
       )}
@@ -31,7 +31,7 @@ export default function StepLanding({ onStart, showWelcomeBack, onResume }: Prop
         <button
           type="button"
           onClick={onStart}
-          className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+          className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
           <span className="relative z-10">{c.primary}</span>
           <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -39,10 +39,10 @@ export default function StepLanding({ onStart, showWelcomeBack, onResume }: Prop
         <button
           type="button"
           onClick={() => navigate("#top")}
-          className="group inline-flex items-center text-[13px] text-ink/70 hover:text-champagne-300 transition-colors"
+          className="group inline-flex items-center text-[13px] text-ink/70 hover:text-champagne-300 transition-all duration-300 ease-cinema"
         >
           <span className="border-b border-bone/20 pb-0.5 group-hover:border-champagne-200/60">{c.secondary}</span>
-          <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+          <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">â†’</span>
         </button>
         <a href="#/templates" className="text-[13px] text-ink/55 hover:text-champagne-300 underline-offset-4 hover:underline">
           {c.tertiary}

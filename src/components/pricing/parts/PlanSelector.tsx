@@ -1,4 +1,4 @@
-import { selectorQuestions } from "../content";
+﻿import { selectorQuestions } from "../content";
 import { usePlanSelector } from "../hooks/usePlanSelector";
 
 export default function PlanSelector() {
@@ -61,7 +61,7 @@ export default function PlanSelector() {
                         }`}
                       >
                         <span>{opt.label}</span>
-                        <span aria-hidden className={`text-[11px] ${selected ? "text-champagne-200" : "text-ink/30"}`}>→</span>
+                        <span aria-hidden className={`text-[11px] ${selected ? "text-champagne-200" : "text-ink/30"}`}>â†’</span>
                       </button>
                     );
                   })}
@@ -73,7 +73,7 @@ export default function PlanSelector() {
                     disabled={s.step === 0}
                     className="text-[12px] text-ink/55 transition-colors hover:text-ink disabled:opacity-40"
                   >
-                    ← Back
+                    â† Back
                   </button>
                   <button
                     type="button"
@@ -98,7 +98,7 @@ export default function PlanSelector() {
                 <div className="mt-7 flex flex-wrap items-center gap-3">
                   <a
                     href={s.recommendation.cta.href}
-                    className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+                    className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                   >
                     <span className="relative z-10">{s.recommendation.cta.label}</span>
                     <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -106,13 +106,13 @@ export default function PlanSelector() {
                   <button
                     type="button"
                     onClick={s.reset}
-                    className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-ink/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
+                    className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-ink/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                   >
                     Start over
                   </button>
                 </div>
                 <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-ink/45">
-                  No contracts · Cancel anytime
+                  No contracts Â· Cancel anytime
                 </p>
               </div>
             )}

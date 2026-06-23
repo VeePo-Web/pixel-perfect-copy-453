@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 import { APPLY } from "../content";
 import { navigate } from "../hooks/useHashRoute";
 import ApplicationHeader from "./ApplicationHeader";
@@ -59,12 +59,12 @@ export default function SuccessPage({ onClear }: { onClear: () => void }) {
         <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
           <button
             onClick={() => navigate("#top")}
-            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             <span className="relative z-10">{c.primary}</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </button>
-          <a href="#/templates" className="rounded-full border border-ink/15 px-6 py-3.5 text-[13px] text-ink/80 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2">
+          <a href="#/templates" className="rounded-full border border-ink/15 px-6 py-3.5 text-[13px] text-ink/80 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
             {c.secondary}
           </a>
         </div>
@@ -79,7 +79,7 @@ export default function SuccessPage({ onClear }: { onClear: () => void }) {
                 className="group rounded-xl border border-ink/[0.06] bg-charcoal-900/40 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-champagne-200/30"
               >
                 <div className="text-[13.5px] leading-[1.5] text-ink/85 group-hover:text-ink">{w.t}</div>
-                <div className="mt-3 text-[11px] uppercase tracking-[0.22em] text-champagne-300/70">Open →</div>
+                <div className="mt-3 text-[11px] uppercase tracking-[0.22em] text-champagne-300/70">Open â†’</div>
               </a>
             ))}
           </div>

@@ -1,4 +1,4 @@
-import { monthlyRhythm } from "../content";
+﻿import { monthlyRhythm } from "../content";
 
 export default function RecommendedPlanSpotlight() {
   return (
@@ -9,7 +9,7 @@ export default function RecommendedPlanSpotlight() {
       <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="mb-12 max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
-            The next step up · by application
+            The next step up Â· by application
           </div>
           <h2 id="spotlight-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[46px]">
             When you want a human reading the numbers with you.
@@ -40,20 +40,20 @@ export default function RecommendedPlanSpotlight() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
                   href="#/apply"
-                  className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+                  className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 >
                   <span className="relative z-10">Apply for the GoldFin Desk</span>
                   <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
                 </a>
                 <a
                   href="#/sample-briefing"
-                  className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
+                  className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 >
                   Preview Sample Briefing
                 </a>
               </div>
               <p className="mt-4 text-[11px] uppercase tracking-[0.22em] text-ink/45">
-                Application-only · Fewer than 12 spots
+                Application-only Â· Fewer than 12 spots
               </p>
             </div>
 
@@ -65,7 +65,7 @@ export default function RecommendedPlanSpotlight() {
                 {monthlyRhythm.map((r, i) => (
                   <li
                     key={r.week}
-                    className="grid grid-cols-[80px_1fr] items-center gap-4 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-5 py-4 transition-all duration-400 hover:border-champagne-200/25 hover:bg-ink/[0.04]"
+                    className="grid grid-cols-[80px_1fr] items-center gap-4 rounded-xl border border-ink/[0.07] bg-ink/[0.02] px-5 py-4 transition-all duration-300 hover:border-champagne-200/25 hover:bg-ink/[0.04]"
                     style={{ animationDelay: `${i * 80}ms` }}
                   >
                     <span className="text-[11px] uppercase tracking-[0.22em] text-champagne-300/70">

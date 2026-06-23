@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 
 type Props = {
   step: number;
@@ -30,7 +30,7 @@ export default function ApplicationStepShell({
   return (
     <div className="motion-safe:animate-section-in">
       <div className="mb-6 text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
-        {eyebrow ?? `Application · 0${step} / 0${total}`}
+        {eyebrow ?? `Application Â· 0${step} / 0${total}`}
       </div>
       <h1 className="font-robert-medium text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] tracking-tight text-ink">
         {headline}
@@ -47,7 +47,7 @@ export default function ApplicationStepShell({
               onClick={onBack}
               className="text-[13px] text-ink/55 transition-colors hover:text-ink"
             >
-              ← Back
+              â† Back
             </button>
           )}
         </div>
@@ -58,7 +58,7 @@ export default function ApplicationStepShell({
               type="button"
               onClick={onContinue}
               disabled={continueDisabled}
-              className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema enabled:hover:-translate-y-0.5 enabled:hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+              className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema enabled:hover:-translate-y-0.5 enabled:hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
             >
               <span className="relative z-10">{continueLabel}</span>
               <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -87,7 +87,7 @@ export default function ApplicationStepShell({
               type="button"
               onClick={onContinue}
               disabled={continueDisabled}
-              className="flex-1 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema active:scale-[0.97] disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
+              className="flex-1 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema active:scale-[0.97] disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
             >
               {continueLabel}
             </button>

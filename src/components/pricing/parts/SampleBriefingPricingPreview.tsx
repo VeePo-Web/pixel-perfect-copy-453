@@ -1,4 +1,4 @@
-export default function SampleBriefingPricingPreview() {
+﻿export default function SampleBriefingPricingPreview() {
   const items = [
     { label: "Cash Movement", body: "+12% vs prior 2 weeks. Driven mostly by delayed vendor payments." },
     { label: "Revenue Trend", body: "+8% growth, concentrated in a small number of accounts." },
@@ -23,7 +23,7 @@ export default function SampleBriefingPricingPreview() {
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <a
                 href="#/sample-briefing"
-                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-400 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
+                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)]"
               >
                 <span className="relative z-10">Generate Sample Finance Briefing</span>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />

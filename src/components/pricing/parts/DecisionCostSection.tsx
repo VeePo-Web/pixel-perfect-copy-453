@@ -1,4 +1,4 @@
-import { decisionCards } from "../content";
+﻿import { decisionCards } from "../content";
 
 export default function DecisionCostSection() {
   return (
@@ -20,7 +20,7 @@ export default function DecisionCostSection() {
           {decisionCards.map((c) => (
             <div
               key={c.title}
-              className="group rounded-2xl border border-champagne-200/15 bg-charcoal-900/55 p-6 transition-all duration-400 hover:-translate-y-0.5 hover:border-champagne-200/35 hover:shadow-[0_24px_60px_-30px_rgba(217,190,130,0.25)]"
+              className="group rounded-2xl border border-champagne-200/15 bg-charcoal-900/55 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-champagne-200/35 hover:shadow-[0_24px_60px_-30px_rgba(217,190,130,0.25)]"
             >
               <div className="inline-flex items-center gap-2 rounded-full border border-champagne-200/30 bg-champagne-300/[0.04] px-2.5 py-1 text-[10px] uppercase tracking-[0.22em] text-champagne-300">
                 Caution
@@ -37,7 +37,7 @@ export default function DecisionCostSection() {
             className="inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-6 py-3 text-[13px] text-ink/85 transition-all duration-300 hover:border-champagne-200/40 hover:text-ink"
           >
             See a Sample Briefing
-            <span aria-hidden>→</span>
+            <span aria-hidden>â†’</span>
           </a>
         </div>
       </div>
