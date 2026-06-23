@@ -3,9 +3,9 @@ export const HIW_COPY = {
     eyebrow: "HOW IT WORKS",
     headline: "Your monthly finance rhythm, built for owner-led businesses.",
     sub: "GoldFin Desk turns scattered financial activity into organized spreadsheets, plain-English briefings, and a monthly review — so you can stop guessing from your bank balance. Start free, or have it done for you for $99/mo.",
-    primary: "Get the free Template Vault",
-    secondary: "Generate Sample Finance Briefing",
-    trust: "No bank connection required to preview the experience.",
+    primary: "Auto-fill my reports — $99/mo",
+    secondary: "Get the free templates",
+    trust: "No contracts · Cancel anytime",
     loop: ["Bank activity", "Spreadsheet structure", "Plain-English briefing", "Monthly review"],
   },
   steps: [

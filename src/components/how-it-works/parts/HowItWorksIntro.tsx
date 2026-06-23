@@ -49,18 +49,24 @@ export default function HowItWorksIntro() {
           style={{ transitionDelay: "240ms" }}
         >
           <a
-            href="#/templates"
+            href="#/pricing#auto-fill"
             className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(212,168,69,0.45)] active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
           >
             <span className="relative z-10">{c.primary}</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </a>
           <a
-            href="#top"
-            className="group inline-flex items-center text-[13px] text-ink/70 transition-colors duration-300 hover:text-champagne-300"
+            href="#/templates"
+            className="rounded-full border border-ink/20 px-6 py-3.5 text-[13px] text-ink/75 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
           >
-            <span className="border-b border-bone/20 pb-0.5 group-hover:border-champagne-200/60">{c.secondary}</span>
-            <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+            {c.secondary}
+          </a>
+          <a
+            href="#/sample-briefing"
+            className="group inline-flex items-center text-[13px] text-ink/50 transition-colors duration-300 hover:text-champagne-300"
+          >
+            <span className="border-b border-ink/10 pb-0.5 group-hover:border-champagne-200/60">See a sample briefing</span>
+            <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
           </a>
         </div>
         <p className="mt-5 text-[11.5px] uppercase tracking-[0.22em] text-ink/35">{c.trust}</p>
