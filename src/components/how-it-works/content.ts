@@ -215,10 +215,10 @@ export const HIW_COPY = {
   },
   final: {
     headline: "Ready to stop guessing from your bank balance?",
-    sub: "Start with the free GoldFin Template Vault and organize your numbers today — or have them filled for you every month with GoldFin Reports at $99/mo.",
-    primary: "Get the free Template Vault",
-    secondary: "Auto-fill my reports — $99/mo",
+    sub: "Have your reports auto-filled every month for $99/mo — or start free with the GoldFin Template Vault and upgrade anytime.",
+    primary: "Auto-fill my reports — $99/mo",
+    secondary: "Get the free Template Vault",
     tertiary: "Or apply for GoldFin Advisory",
-    micro: "Free, email-only. No bank connection. Upgrade anytime.",
+    micro: "No contracts · Cancel anytime · Start free with the Template Vault",
   },
 };

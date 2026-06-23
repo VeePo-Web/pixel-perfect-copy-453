@@ -1,7 +1,9 @@
 import { faq } from "../content";
 import { track } from "../analytics";
+import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function ComparisonFAQ() {
+  const { ref, inView } = useInView<HTMLDivElement>();
   return (
     <section
       id="faq"

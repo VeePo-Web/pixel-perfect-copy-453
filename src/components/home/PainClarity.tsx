@@ -95,6 +95,17 @@ export default function PainClarity() {
               →
             </span>
           </a>
+          <a
+            href="#/templates"
+            className="group inline-flex items-center text-[13px] uppercase tracking-[0.18em] text-ink/50 transition-colors duration-300 hover:text-champagne-300"
+          >
+            <span className="border-b border-ink/10 pb-0.5 group-hover:border-champagne-300/60">
+              Or get the free Template Vault
+            </span>
+            <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">
+              →
+            </span>
+          </a>
         </div>
       </div>
     </section>

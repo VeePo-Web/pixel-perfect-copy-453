@@ -292,6 +292,23 @@ const FinanceHero = () => {
               ))}
             </div>
 
+            {/* Persistent $99/mo path for solution-aware visitors who skip the demo */}
+            {state !== "briefing" && (
+              <div className="mt-5">
+                <a
+                  href="#/pricing#auto-fill"
+                  className="group inline-flex items-center font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink/50 transition-colors duration-300 hover:text-champagne-300"
+                >
+                  <span className="border-b border-ink/15 pb-0.5 group-hover:border-champagne-300/60">
+                    Already ready? Auto-fill my reports — $99/mo
+                  </span>
+                  <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">
+                    →
+                  </span>
+                </a>
+              </div>
+            )}
+
             {state === "briefing" && <PostDemoCTA />}
           </div>
         </div>
@@ -493,25 +510,26 @@ const PostDemoCTA = () => (
     <div className="mt-5 flex flex-col gap-3 sm:flex-row">
       <a
         href={COPY.postDemo.primaryHref}
-        className="group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-colors duration-[400ms] ease-cinema hover:bg-champagne-100"
+        className="group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2"
       >
         <span
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow group-hover/cta:opacity-0"
+          className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow"
         />
         <span className="relative">{COPY.postDemo.primary}</span>
         <span aria-hidden className="relative">&rarr;</span>
       </a>
       <a
         href={COPY.postDemo.secondaryHref}
-        className="inline-flex items-center justify-center rounded-full border border-bone/20 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink/85 transition-colors duration-[400ms] ease-cinema hover:border-champagne-200/60 hover:text-champagne-200"
+        className="inline-flex items-center justify-center rounded-full border border-ink/15 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink/85 transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
       >
         {COPY.postDemo.secondary}
       </a>
     </div>
+    <p className="mt-3 font-general text-[11px] uppercase tracking-[0.22em] text-ink/40">No contracts · Cancel anytime</p>
     <a
       href={COPY.postDemo.tertiaryHref}
-      className="mt-4 inline-block font-general text-[0.68rem] uppercase tracking-[0.18em] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-200 hover:underline"
+      className="mt-3 inline-block font-general text-[0.68rem] uppercase tracking-[0.18em] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-200 hover:underline"
     >
       {COPY.postDemo.tertiary}
     </a>
