@@ -5,7 +5,7 @@ import { defineConfig } from "vitest/config";
 // (metrics math + the anti-hallucination verification layer).
 export default defineConfig({
   test: {
-    include: ["supabase/functions/_shared/*.test.ts"],
+    include: ["supabase/functions/_shared/*.test.ts", "src/lib/finance/*.test.ts"],
     environment: "node",
   },
 });

@@ -2,8 +2,7 @@
 // node --test (Node 24 native TS). The gate tests prove a faithful narrative passes and a
 // fabricated figure is blocked before it can reach a customer.
 
-import { test } from "node:test";
-import assert from "node:assert/strict";
+import { test, assert } from "vitest";
 
 import { computePeriodMetrics } from "./metrics.ts";
 import { buildReportFacts, verifyNarrative } from "./report.ts";

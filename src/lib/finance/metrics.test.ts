@@ -4,8 +4,7 @@
 // internal transfers and owner-equity never touch P&L totals, that the cash-flow identity
 // holds, and that every template cell traces back to a metrics field.
 
-import { test } from "node:test";
-import assert from "node:assert/strict";
+import { test, assert } from "vitest";
 
 import { computePeriodMetrics } from "./metrics.ts";
 import { fillCashFlow, fillProfitAndLoss, traceableValues } from "./templates.ts";

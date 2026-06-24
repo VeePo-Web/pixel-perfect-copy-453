@@ -3,8 +3,7 @@
 // a production-metrics field — the verification-gate property that keeps the spreadsheet
 // grounded, identical to the report's contract.
 
-import { test } from "node:test";
-import assert from "node:assert/strict";
+import { test, assert } from "vitest";
 
 import {
   fillAllTemplates,
