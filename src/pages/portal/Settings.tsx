@@ -10,9 +10,6 @@ export default function Settings() {
   const [last, setLast] = useState("");
   const [phone, setPhone] = useState("");
   const [savedAt, setSavedAt] = useState<string | null>(null);
-  const [mfaStatus, setMfaStatus] = useState<{ enabled: boolean; unused_backup_codes: number } | null>(
-    null,
-  );
 
   useEffect(() => {
     if (!user) return;
@@ -27,8 +24,6 @@ export default function Settings() {
         setLast(data.last_name ?? "");
         setPhone(data.phone ?? "");
       }
-      const { data: mfa } = await supabase.rpc("mfa_status", { _user_id: user.id });
-      if (Array.isArray(mfa) && mfa[0]) setMfaStatus(mfa[0]);
     })();
   }, [user]);
 
@@ -77,21 +72,11 @@ export default function Settings() {
         </section>
 
         <section className="mt-6 rounded-2xl border border-ink/10 bg-paper p-6">
-          <h2 className="text-[16px] font-medium text-ink">Two-factor authentication</h2>
-          {mfaStatus ? (
-            <p className="mt-2 text-[13px] text-ink/65">
-              Status: <strong>{mfaStatus.enabled ? "Enabled" : "Not enabled"}</strong> · Unused
-              backup codes: {mfaStatus.unused_backup_codes}
-            </p>
-          ) : (
-            <p className="mt-2 text-[13px] text-ink/55">Loading…</p>
-          )}
-          <a
-            href="/portal/mfa-setup"
-            className="mt-3 inline-block text-[12.5px] text-ink underline underline-offset-4"
-          >
-            Regenerate authenticator & backup codes →
-          </a>
+          <h2 className="text-[16px] font-medium text-ink">Sign-in security</h2>
+          <p className="mt-2 text-[13px] text-ink/65">
+            Every sign-in requires a 6-digit code sent to your email. Codes expire in 10 minutes.
+            If you didn't request a code, change your password immediately.
+          </p>
         </section>
 
         <section className="mt-6 rounded-2xl border border-ink/10 bg-paper p-6">
