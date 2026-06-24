@@ -1,0 +1,117 @@
+// Presentational building blocks for the advisory report surface.
+// Token-driven (ink / paper / gold / champagne / charcoal). Renders the
+// server-computed snapshot — never recomputes financials.
+import type { MetricsSnapshot, Recommendation } from "@/lib/report/types";
+import { BUCKET_LABEL } from "@/lib/report/types";
+import { fmtUSD, fmtDate } from "@/lib/report/format";
+
+export function ReportSectionBlock({
+  heading,
+  body,
+  emphasis = false,
+}: {
+  heading: string;
+  body: string;
+  emphasis?: boolean;
+}) {
+  return (
+    <section
+      className={`animate-[section-in_0.5s_ease-cinema_both] rounded-xl border border-charcoal-700 bg-paper-raised px-6 py-6 ${
+        emphasis ? "ring-1 ring-gold-500/30" : ""
+      }`}
+    >
+      <h3
+        className={`font-light tracking-[-0.005em] text-ink ${
+          emphasis ? "text-[24px] leading-[1.15] sm:text-[28px]" : "text-[18px]"
+        }`}
+      >
+        {heading}
+      </h3>
+      <p className="mt-3 whitespace-pre-line text-[14.5px] leading-[1.7] text-ink/75">{body}</p>
+    </section>
+  );
+}
+
+export function MoneyRecoveryStrip({ m }: { m: MetricsSnapshot }) {
+  const hasAny = m.waste.length > 0 || m.duplicates.length > 0 || m.costCreep.length > 0;
+  if (!hasAny) return null;
+  return (
+    <div className="mt-4 space-y-3 rounded-lg border border-gold-500/30 bg-gold-300/[0.06] px-5 py-4">
+      <div className="text-[10.5px] uppercase tracking-[0.28em] text-gold-700">
+        Money to recover · {fmtUSD(m.wasteAnnualTotal)}/yr identified
+      </div>
+      <ul className="space-y-2 text-[13.5px] text-ink/80">
+        {m.waste.map((w, i) => (
+          <li key={`w${i}`} className="flex items-baseline justify-between gap-4">
+            <span>Dormant: <span className="text-ink">{w.merchant}</span> — no activity since {fmtDate(w.lastDate)}</span>
+            <span className="shrink-0 font-[robert-medium] text-green-signal">{fmtUSD(w.annual)}/yr</span>
+          </li>
+        ))}
+        {m.duplicates.map((d, i) => (
+          <li key={`d${i}`} className="flex items-baseline justify-between gap-4">
+            <span>Duplicate charge: <span className="text-ink">{d.merchant}</span> — dispute by <span className="text-ink">{fmtDate(d.disputeBy)}</span></span>
+            <span className="shrink-0 font-[robert-medium] text-green-signal">{fmtUSD(d.amount)} back</span>
+          </li>
+        ))}
+        {m.costCreep.map((c, i) => (
+          <li key={`c${i}`} className="flex items-baseline justify-between gap-4">
+            <span>Cost creep: <span className="text-ink">{c.merchant}</span> rose {fmtUSD(c.from)} → {fmtUSD(c.to)}</span>
+            <span className="shrink-0 text-ink/50">verify</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+const BUCKET_STYLE: Record<string, string> = {
+  find_cash: "border-green-signal/40 text-green-signal",
+  keep_more: "border-gold-700/40 text-gold-700",
+  earn_new: "border-ink/25 text-ink/60",
+};
+
+export function DecisionMemo({ recs }: { recs: Recommendation[] }) {
+  if (!recs.length) return null;
+  return (
+    <section className="animate-[section-in_0.5s_ease-cinema_both] rounded-xl border border-charcoal-700 bg-paper-raised px-6 py-6">
+      <h3 className="text-[18px] font-light tracking-[-0.005em] text-ink">What to do now</h3>
+      <ol className="mt-4 space-y-4">
+        {recs.map((r, i) => (
+          <li key={i} className="flex gap-4">
+            <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-gold-500/40 text-[12px] text-gold-700">
+              {i + 1}
+            </span>
+            <div className="min-w-0">
+              <p className="text-[14.5px] leading-[1.6] text-ink/85">{r.text}</p>
+              <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[11.5px]">
+                <span className={`rounded-full border px-2 py-0.5 uppercase tracking-[0.12em] ${BUCKET_STYLE[r.bucket] ?? BUCKET_STYLE.earn_new}`}>
+                  {BUCKET_LABEL[r.bucket] ?? r.bucket}
+                </span>
+                {r.dollar != null && <span className="text-green-signal">{fmtUSD(r.dollar)}</span>}
+                {r.deadline && <span className="text-ink/45">by {fmtDate(r.deadline)}</span>}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+export function TrustStamp({
+  coverage,
+  periodEnd,
+  model,
+}: {
+  coverage: number | null;
+  periodEnd: string | null;
+  model: string | null;
+}) {
+  return (
+    <footer className="mt-2 rounded-lg border border-charcoal-700 bg-charcoal-800 px-5 py-4 text-[11.5px] leading-[1.6] text-ink/50">
+      Based on {coverage != null ? `${coverage}% of transactions categorized` : "your connected accounts"},
+      reconciled as of {fmtDate(periodEnd)}. No figures were invented — every number comes from your bank, card,
+      and connected data. Generated by GoldFin Desk{model ? ` · ${model}` : ""}. Standard terms available for your accountant.
+    </footer>
+  );
+}
