@@ -104,6 +104,16 @@ const DEMO_PROMPT =
   "I run a 12-person agency doing $90K/month. Revenue is growing, but cash still feels tight.";
 const EXAMPLE_FALLBACK_PROMPT = DEMO_PROMPT;
 
+// Rotating placeholder prompts (Lovable-style) — they cycle when the field is
+// empty so the visitor instantly sees "this is where I just type my situation".
+const HERO_PLACEHOLDERS = [
+  "Describe your business and what you want to understand about your numbers...",
+  "I run a 12-person agency at $90K/month. Cash still feels tight.",
+  "I own a clinic with 8 staff. Can we afford another hire?",
+  "Seasonal trades business. Will cash hold through the slow months?",
+  "E-commerce, high ad spend. Is growth actually producing cash?",
+];
+
 const FALLBACK_SECTIONS: BriefingSection[] = COPY.briefing.map((s) => ({ ...s }));
 
 const FinanceHero = () => {
@@ -112,6 +122,7 @@ const FinanceHero = () => {
   const [prompt, setPrompt] = useState("");
   const [briefingData, setBriefingData] =
     useState<BriefingSection[]>(FALLBACK_SECTIONS);
+  const [phIdx, setPhIdx] = useState(0);
   const timeouts = useRef<number[]>([]);
 
   const clearTimers = () => {
@@ -120,6 +131,21 @@ const FinanceHero = () => {
   };
 
   useEffect(() => () => clearTimers(), []);
+
+  // Rotating placeholder (Lovable-style): cycles only while the field is empty
+  // and motion is allowed. Stops the moment the visitor starts typing.
+  useEffect(() => {
+    if (prompt.trim()) return;
+    const reduced =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    const id = window.setInterval(
+      () => setPhIdx((i) => (i + 1) % HERO_PLACEHOLDERS.length),
+      3400,
+    );
+    return () => window.clearInterval(id);
+  }, [prompt]);
 
   const runBriefing = async (sourcePrompt: string) => {
     clearTimers();
@@ -217,7 +243,14 @@ const FinanceHero = () => {
                   <textarea
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
-                    placeholder={COPY.placeholder}
+                    onKeyDown={(e) => {
+                      // Chat-style: Enter sends, Shift+Enter makes a new line.
+                      if (e.key === "Enter" && !e.shiftKey && !ctasDisabled) {
+                        e.preventDefault();
+                        startDemo();
+                      }
+                    }}
+                    placeholder={prompt ? "" : HERO_PLACEHOLDERS[phIdx]}
                     aria-label="Describe your business"
                     rows={3}
                     className="relative flex-1 resize-none bg-transparent px-5 py-4 font-general text-base text-ink placeholder:text-ink/40 focus:outline-none sm:py-5"
@@ -226,13 +259,29 @@ const FinanceHero = () => {
                     <button
                       onClick={startDemo}
                       disabled={ctasDisabled}
-                      className="group/btn inline-flex w-full items-center justify-center gap-2 rounded-xl bg-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 hover:bg-champagne-100 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.6)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:rounded-lg"
+                      className="group/btn relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-3.5 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy shadow-[0_10px_30px_-12px_rgba(217,190,130,0.7)] transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_16px_46px_-12px_rgba(217,190,130,0.85)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:translate-y-0 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:rounded-lg"
                     >
-                      <span className="hidden md:inline">{COPY.primaryCta}</span>
-                      <span className="md:hidden">{COPY.mobile.cta}</span>
                       <span
                         aria-hidden
-                        className="transition-transform duration-300 group-hover/btn:translate-x-0.5"
+                        className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/55 to-transparent motion-safe:animate-shimmer-slow"
+                      />
+                      <svg
+                        aria-hidden
+                        viewBox="0 0 24 24"
+                        className="relative h-3.5 w-3.5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.75"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.7L12 3Z" />
+                      </svg>
+                      <span className="relative hidden md:inline">{COPY.primaryCta}</span>
+                      <span className="relative md:hidden">{COPY.mobile.cta}</span>
+                      <span
+                        aria-hidden
+                        className="relative transition-transform duration-300 group-hover/btn:translate-x-0.5"
                       >
                         &rarr;
                       </span>
@@ -241,9 +290,19 @@ const FinanceHero = () => {
                 </div>
               </div>
 
-              <p className="mt-3 pl-1 font-general text-sm italic text-ink/50">
-                {COPY.example}
-              </p>
+              {/* Friction-free promise — the rotating placeholder now carries the
+                  example, so this line reassures "test it out" with zero risk. */}
+              <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 pl-1">
+                <span className="hidden items-center gap-1.5 font-general text-xs text-ink/45 sm:inline-flex">
+                  <kbd className="rounded border border-ink/15 bg-paper-raised px-1.5 py-0.5 font-general text-[10px] not-italic text-ink/55">
+                    Enter
+                  </kbd>
+                  to test it instantly
+                </span>
+                <span className="font-general text-xs text-ink/50">
+                  Free preview in seconds &middot; no signup &middot; no bank data
+                </span>
+              </div>
 
               {/* Demo chips â€” self-identification + zero-effort prefill */}
               <div className="mt-4 pl-1">
