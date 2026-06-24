@@ -45,7 +45,7 @@ export default function CoreQuestionSection() {
             </p>
             <a
               href="#fit-finder"
-              className="mt-7 inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
+              className="mt-7 inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
             >
               Find the right fit <span aria-hidden>→</span>
             </a>
