@@ -319,34 +319,9 @@ const FinanceHero = () => {
               ))}
             </div>
 
-            {/* Frictionless $99/mo path for the already-ready buyer who skips the
-                demo. A real, visible button (not a faint link) that opens the
-                embedded checkout directly. Subordinate to the demo, so the hero
-                keeps one dominant primary + one clear money CTA. */}
-            {state !== "briefing" && (
-              <div className="mt-5">
-                <p className="font-general text-[0.62rem] uppercase tracking-[0.2em] text-ink/40">
-                  Already know you want this?
-                </p>
-                <button
-                  type="button"
-                  onClick={startAutoFillCheckout}
-                  className="group mt-2.5 inline-flex w-full items-center justify-center gap-2 rounded-full border border-champagne-300/60 bg-white px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:border-champagne-300 hover:bg-champagne-50 hover:shadow-[0_10px_36px_-12px_rgba(217,190,130,0.5)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:w-auto"
-                >
-                  <span>Auto-fill my reports &mdash; $99/mo</span>
-                  <span
-                    aria-hidden
-                    className="transition-transform duration-300 group-hover:translate-x-0.5"
-                  >
-                    &rarr;
-                  </span>
-                </button>
-                <p className="mt-2 font-general text-[11px] uppercase tracking-[0.18em] text-ink/40">
-                  No bank connection to start &middot; Cancel anytime
-                </p>
-              </div>
-            )}
-
+            {/* $99/mo CTA placement by breakpoint: desktop = the left-column
+                pair beside the demo (above fold); mobile/tablet = the sticky
+                bottom bar. Exactly one money CTA per breakpoint, no duplication. */}
             {state === "briefing" && <PostDemoCTA />}
           </div>
         </div>
