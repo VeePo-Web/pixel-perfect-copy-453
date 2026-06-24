@@ -110,50 +110,41 @@ export type Database = {
         }
         Relationships: []
       }
-      mfa_backup_codes: {
+      login_otps: {
         Row: {
+          attempts: number
           code_hash: string
-          id: string
-          used_at: string | null
-          user_id: string
-        }
-        Insert: {
-          code_hash: string
-          id?: string
-          used_at?: string | null
-          user_id: string
-        }
-        Update: {
-          code_hash?: string
-          id?: string
-          used_at?: string | null
-          user_id?: string
-        }
-        Relationships: []
-      }
-      mfa_factors: {
-        Row: {
+          consumed_at: string | null
           created_at: string
-          enabled_at: string | null
-          last_used_at: string | null
-          totp_secret: string
-          updated_at: string
+          email: string
+          expires_at: string
+          id: string
+          ip: string | null
+          user_agent: string | null
           user_id: string
         }
         Insert: {
+          attempts?: number
+          code_hash: string
+          consumed_at?: string | null
           created_at?: string
-          enabled_at?: string | null
-          last_used_at?: string | null
-          totp_secret: string
-          updated_at?: string
+          email: string
+          expires_at: string
+          id?: string
+          ip?: string | null
+          user_agent?: string | null
           user_id: string
         }
         Update: {
+          attempts?: number
+          code_hash?: string
+          consumed_at?: string | null
           created_at?: string
-          enabled_at?: string | null
-          last_used_at?: string | null
-          totp_secret?: string
-          updated_at?: string
+          email?: string
+          expires_at?: string
+          id?: string
+          ip?: string | null
+          user_agent?: string | null
           user_id?: string
         }
         Relationships: []
@@ -405,13 +396,6 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
-      }
-      mfa_status: {
-        Args: { _user_id: string }
-        Returns: {
-          enabled: boolean
-          unused_backup_codes: number
-        }[]
       }
     }
     Enums: {
