@@ -10,7 +10,7 @@ export const APPLY = {
     headline: "Apply for the GoldFin Advisory",
     sub: "Tell us a little about your business, your current financial setup, and what you want to understand better. No bank connection, documents, or payment required to apply.",
     micro: "Application takes about 3 minutes. No bank connection required.",
-    primary: "Start Application",
+    primary: "Start My Application",
     secondary: "Generate Sample Finance Briefing",
     tertiary: "Start with Free Templates",
     fitNote: "Best for businesses that have outgrown bank-balance guessing but are not ready for a full finance team.",
@@ -128,7 +128,7 @@ export const APPLY = {
     headline: "Review your application",
     sub: "No payment, bank connection, or document upload is required at this stage.",
     consent: "I understand this application does not require payment or bank connection.",
-    submit: "Submit Application",
+    submit: "Submit My Application",
     save: "Save and Finish Later",
     micro: "Application takes only a few minutes. No bank connection required.",
     trust: {
@@ -162,8 +162,8 @@ export const APPLY = {
       "Onboarding if accepted",
       "First finance rhythm begins",
     ],
-    primary: "Generate a Sample Finance Briefing",
-    secondary: "Explore Free Templates",
+    primary: "Generate My Sample Briefing",
+    secondary: "Get the Free Templates",
     wait: [
       { t: "Download Cash Flow Forecast Template", href: "#/templates" },
       { t: "Preview Full Sample Briefing", href: "#top" },
