@@ -1,7 +1,8 @@
-import BusinessPromptInput from "./BusinessPromptInput";
+﻿import BusinessPromptInput from "./BusinessPromptInput";
 import DemoBusinessSelector from "./DemoBusinessSelector";
 import BriefingPanelPreview from "./BriefingPanelPreview";
 import type { DemoBusiness } from "../content";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 
 type Props = {
   prompt: string;
@@ -35,7 +36,7 @@ export default function SampleBriefingHero(props: Props) {
               See what financial clarity feels like before you apply.
             </h1>
             <p className="mt-5 max-w-[52ch] text-[15.5px] leading-[1.7] text-ink/70">
-              Choose a demo business or describe your own situation to preview a plain-English finance briefing — no bank connection required.
+              Choose a demo business or describe your own situation to preview a plain-English finance briefing â€” no bank connection required.
             </p>
 
             <div className="mt-8">
@@ -57,15 +58,16 @@ export default function SampleBriefingHero(props: Props) {
             <p className="mt-4 max-w-[60ch] text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
               Use demo data or rough non-sensitive numbers. No bank connection required for this preview.
             </p>
-            <a
-              href="#/pricing#auto-fill"
-              className="group mt-5 inline-flex items-center text-[12.5px] text-champagne-300/70 transition-colors duration-300 hover:text-champagne-300"
+            <button
+              type="button"
+              onClick={startAutoFillCheckout}
+              className="group mt-5 inline-flex items-center text-[12.5px] text-champagne-300/70 transition-colors duration-300 hover:text-champagne-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-950"
             >
               <span className="border-b border-champagne-200/20 pb-0.5 group-hover:border-champagne-300/60">
-                Already convinced? Auto-fill my reports — $99/mo
+                Already convinced? Auto-fill my reports &#x2014; $99/mo
               </span>
-              <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-            </a>
+              <span aria-hidden className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">&#x2192;</span>
+            </button>
           </div>
 
           <div className="lg:sticky lg:top-24">

@@ -1,4 +1,5 @@
 ﻿import { useInView } from "../../how-it-works/hooks/useInView";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 import { track, trackCtaByHref } from "../analytics";
 
 export default function SecurityFinalCTA() {
@@ -34,16 +35,17 @@ export default function SecurityFinalCTA() {
           briefing first.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="#/pricing#auto-fill"
+          <button
+            type="button"
             onClick={() => {
+              startAutoFillCheckout();
               track("final_security_cta_clicked", { target: "reports" });
               trackCtaByHref("#/pricing#auto-fill", "security_faq_final");
             }}
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             Auto-fill my reports â€” $99/mo
-          </a>
+          </button>
           <a
             href="#/sample-briefing"
             onClick={() => {

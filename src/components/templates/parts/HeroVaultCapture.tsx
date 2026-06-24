@@ -1,4 +1,5 @@
 ﻿import { useId, useState } from "react";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 import { z } from "zod";
 import { captureLead } from "../../../lib/leads";
 import { track } from "../analytics";
@@ -60,12 +61,12 @@ export default function HeroVaultCapture() {
         <p className="mt-2 text-[13.5px] leading-[1.6] text-ink/60">
           Over the next few days we'll show you how owners actually use each template to make hiring, pricing, and cash-flow calls.
         </p>
-        <a
-          href="#/pricing#auto-fill"
+        <button
+          type="button" onClick={startAutoFillCheckout}
           className="mt-5 inline-flex items-center gap-2 text-[13px] text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline"
         >
           Prefer it filled for you every month? See GoldFin Reports â€” $99/mo â†’
-        </a>
+        </button>
       </div>
     );
   }

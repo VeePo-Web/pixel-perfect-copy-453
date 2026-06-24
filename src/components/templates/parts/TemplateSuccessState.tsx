@@ -1,4 +1,5 @@
-import type { TemplateItem } from "../content";
+﻿import type { TemplateItem } from "../content";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 import { track } from "../analytics";
 
 type Props = {
@@ -33,15 +34,15 @@ export default function TemplateSuccessState({ template, onClose, headingId }: P
       </div>
 
       <div className="mt-6 space-y-3">
-        <a
-          href="#/pricing#auto-fill"
-          onClick={() => track("autofill_clicked_from_templates", { source: "success", templateId: template.id })}
+        <button
+          type="button"
+          onClick={() => { startAutoFillCheckout(); track("autofill_clicked_from_templates", { source: "success", templateId: template.id }); }}
           className="block rounded-2xl border border-champagne-200/30 bg-charcoal-900/70 p-4 transition-all duration-300 ease-cinema hover:border-champagne-200/55"
         >
           <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300/70">Recommended next · $99/mo</div>
           <div className="mt-1.5 text-[15px] text-ink">Have it filled for you every month</div>
           <div className="mt-1 text-[12.5px] text-ink/60">Same template, auto-filled from your numbers, with a plain-English briefing. Cancel anytime.</div>
-        </a>
+        </button>
         <a
           href="#/sample-briefing"
           onClick={() => track("sample_briefing_clicked_from_templates", { source: "success", templateId: template.id })}

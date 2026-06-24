@@ -1,5 +1,5 @@
-import { track } from "../analytics";
-
+﻿import { track } from "../analytics";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 export default function TemplateToFinanceDeskBridge() {
   return (
     <section
@@ -22,9 +22,9 @@ export default function TemplateToFinanceDeskBridge() {
           .
         </p>
         <p className="mt-4">
-          <a
-            href="#/pricing#auto-fill"
-            onClick={() => track("autofill_clicked_from_templates", { source: "bridge" })}
+          <button
+            type="button"
+            onClick={() => { startAutoFillCheckout(); track("autofill_clicked_from_templates", { source: "bridge" }); }}
             className="group inline-flex items-center text-[12px] uppercase tracking-[0.18em] text-ink/40 transition-colors duration-300 hover:text-champagne-300"
           >
             <span className="border-b border-ink/10 pb-0.5 group-hover:border-champagne-300/60">
@@ -33,7 +33,7 @@ export default function TemplateToFinanceDeskBridge() {
             <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">
               →
             </span>
-          </a>
+          </button>
         </p>
       </div>
     </section>

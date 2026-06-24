@@ -1,4 +1,5 @@
 ﻿import { priceFraming, valueStack } from "../content";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 import { trackCtaByHref } from "../analytics";
 import { useInView } from "../../how-it-works/hooks/useInView";
 
@@ -51,12 +52,12 @@ export default function PricingValueContext() {
               >
                 View Pricing
               </a>
-              <a
-                href="#/pricing#auto-fill"
-                onClick={() => trackCtaByHref("#/pricing#auto-fill", "pricing-context")}
+              <button
+                type="button"
+                onClick={() => { startAutoFillCheckout(); trackCtaByHref("#/pricing#auto-fill", "pricing-context"); }}
                 className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
               Auto-fill my reports â€” $99/mo
-              </a>
+              </button>
             </div>
           </div>
 

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
+import { startAutoFillCheckout } from "../../lib/checkout";
 import GoldFinLogo from "../brand/GoldFinLogo";
 
 export type NavKey =
@@ -81,14 +82,17 @@ function MobileSheet({
         style={{ transitionDelay: show ? `${LINKS.length * 60 + 40}ms` : "0ms" }}
       >
         {/* Primary: gold gradient — $99/mo bread-and-butter */}
-        <a
-          href="#/pricing#auto-fill"
-          onClick={onClose}
+        <button
+          type="button"
+          onClick={() => {
+            startAutoFillCheckout();
+            onClose();
+          }}
           className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-3.5 text-[14px] font-medium text-navy shadow-[0_4px_24px_-6px_rgba(201,162,74,0.45)] transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-950"
         >
           <span className="relative z-10">Auto-fill my reports — $99/mo</span>
           <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-        </a>
+        </button>
 
         {/* Secondary: border — free Template Vault (lead-magnet, Rung 1) */}
         <a
@@ -211,24 +215,24 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
             })}
 
             {/* Primary CTA — gold gradient + shimmer, routes to $99/mo */}
-            <a
-              href="#/pricing#auto-fill"
+            <button
+              type="button" onClick={startAutoFillCheckout}
               className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-px hover:shadow-[0_8px_28px_-8px_rgba(201,162,74,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-950"
             >
               <span className="relative z-10">Auto-fill my reports — $99/mo</span>
               <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-            </a>
+            </button>
           </nav>
 
           {/* Mobile controls — compact gold pill + hamburger */}
           <div className="flex items-center gap-3 lg:hidden">
-            <a
-              href="#/pricing#auto-fill"
+            <button
+              type="button" onClick={startAutoFillCheckout}
               className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-3.5 py-1.5 text-[11.5px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-950"
             >
               <span className="relative z-10">Auto-fill — $99/mo</span>
               <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-            </a>
+            </button>
 
             <button
               type="button"

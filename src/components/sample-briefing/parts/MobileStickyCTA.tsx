@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from "react";
-
+import { startAutoFillCheckout } from "../../../lib/checkout";
 type Props = {
   status: "idle" | "loading" | "ready";
   onGenerate: () => void;
@@ -27,12 +27,12 @@ export default function MobileStickyCTA({ status, onGenerate }: Props) {
           {ready ? "Make it real" : "Try the briefing"}
         </p>
         {ready ? (
-          <a
-            href="#/pricing#auto-fill"
+          <button
+            type="button" onClick={startAutoFillCheckout}
             className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             Auto-fill my reports â€” $99/mo
-          </a>
+          </button>
         ) : (
           <button
             type="button"

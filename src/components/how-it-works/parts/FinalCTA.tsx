@@ -1,4 +1,5 @@
-import { HIW_COPY } from "../content";
+﻿import { HIW_COPY } from "../content";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 import { useInView } from "../hooks/useInView";
 
 export default function FinalCTA() {
@@ -28,13 +29,13 @@ export default function FinalCTA() {
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-[15px] leading-[1.7] text-bone/65">{c.sub}</p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-x-5 gap-y-3">
-          <a
-            href="#/pricing#auto-fill"
+          <button
+            type="button" onClick={startAutoFillCheckout}
             className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(212,168,69,0.45)] active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             <span className="relative z-10">{c.primary}</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-          </a>
+          </button>
           <a
             href="#/templates"
             className="rounded-full border border-bone/20 px-6 py-3.5 text-[13px] text-bone/80 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-bone active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"

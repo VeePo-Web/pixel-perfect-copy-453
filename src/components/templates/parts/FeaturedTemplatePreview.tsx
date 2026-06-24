@@ -1,4 +1,5 @@
 ﻿import SpreadsheetPreview from "./SpreadsheetPreview";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 import { templates } from "../content";
 import { track } from "../analytics";
 import { useInView } from "../../how-it-works/hooks/useInView";
@@ -82,13 +83,13 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
             {/* $99 bridge â€” this filled example IS the monthly product */}
             <p className="mt-1 text-[13px] leading-[1.6] text-ink/60">
               Don't want to fill it in yourself every month?{" "}
-              <a
-                href="#/pricing#auto-fill"
-                onClick={() => track("autofill_clicked_from_templates", { source: "featured" })}
+              <button
+                type="button"
+                onClick={() => { startAutoFillCheckout(); track("autofill_clicked_from_templates", { source: "featured" }); }}
                 className="text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
                 GoldFin Reports does it for you â€” $99/mo â†’
-              </a>
+              </button>
             </p>
           </div>
         </div>

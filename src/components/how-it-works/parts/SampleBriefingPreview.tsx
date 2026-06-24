@@ -1,4 +1,5 @@
-import { useState } from "react";
+﻿import { useState } from "react";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 import { HIW_COPY } from "../content";
 import SectionHeader from "./SectionHeader";
 import { useInView } from "../hooks/useInView";
@@ -69,13 +70,13 @@ export default function SampleBriefingPreview() {
 
             <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
               <p className="text-[11.5px] uppercase tracking-[0.22em] text-ink/35">{c.micro}</p>
-              <a
-                href="#/pricing#auto-fill"
+              <button
+                type="button" onClick={startAutoFillCheckout}
                 className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(212,168,69,0.45)] active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
               >
                 <span className="relative z-10">{c.cta}</span>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-              </a>
+              </button>
             </div>
           </div>
         </div>

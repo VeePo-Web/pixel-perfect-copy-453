@@ -1,5 +1,5 @@
-import { useInView } from "../../how-it-works/hooks/useInView";
-
+﻿import { useInView } from "../../how-it-works/hooks/useInView";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 const rows = [
   { label: "Doing it yourself", value: "~3 hrs / month", sub: "Pulling transactions, categorizing, updating every template, then trying to read it." },
   { label: "Auto-filled for you", value: "0 hrs / month", sub: "Filled from your numbers and explained in a monthly briefing. You just read it." },
@@ -48,9 +48,9 @@ export default function WhyAutoFill() {
 
         <p className="mt-8 text-[13px] text-ink/50">
           You decide what your time is worth.{" "}
-          <a href="#/pricing#auto-fill" className="text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline">
+          <button type="button" onClick={startAutoFillCheckout} className="text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline">
             See what’s included for $99/mo →
-          </a>
+          </button>
         </p>
       </div>
     </section>

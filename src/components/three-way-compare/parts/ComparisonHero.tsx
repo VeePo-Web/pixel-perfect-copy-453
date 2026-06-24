@@ -1,4 +1,5 @@
 ﻿import { heroColumns } from "../content";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 import { trackCtaByHref } from "../analytics";
 
 export default function ComparisonHero() {
@@ -44,13 +45,13 @@ export default function ComparisonHero() {
                 className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
               Generate Sample Finance Briefing
               </a>
-              <a
-                href="#/pricing#auto-fill"
-                onClick={() => trackCtaByHref("#/pricing#auto-fill", "hero")}
+              <button
+                type="button"
+                onClick={() => { startAutoFillCheckout(); trackCtaByHref("#/pricing#auto-fill", "hero"); }}
                 className="text-[12.5px] text-ink/55 underline-offset-4 transition-all duration-300 ease-cinema hover:text-ink hover:underline"
               >
                 Or have it done for you â€” $99/mo
-              </a>
+              </button>
             </div>
             <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
               No bank connection required to preview or apply.

@@ -1,4 +1,5 @@
 ﻿import { useEffect, useRef } from "react";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 import type { TemplateItem } from "../content";
 import SpreadsheetPreview from "./SpreadsheetPreview";
 import { track } from "../analytics";
@@ -103,13 +104,13 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
       </div>
 
       <div className="mt-4 border-t border-ink/[0.06] pt-3">
-        <a
-          href="#/pricing#auto-fill"
+        <button
+          type="button"
           className="text-[11.5px] text-ink/50 transition-colors hover:text-champagne-300"
-          onClick={() => track("autofill_clicked_from_templates", { source: "card", templateId: template.id })}
+          onClick={() => { startAutoFillCheckout(); track("autofill_clicked_from_templates", { source: "card", templateId: template.id }); }}
         >
           Want this filled for you every month? <span className="underline-offset-4 hover:underline">GoldFin Reports Â· $99/mo â†’</span>
-        </a>
+        </button>
       </div>
     </article>
   );

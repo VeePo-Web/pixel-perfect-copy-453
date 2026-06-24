@@ -1,4 +1,5 @@
 ﻿import { options } from "../content";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 import { track } from "../analytics";
 
 export default function ComparisonHero() {
@@ -44,13 +45,13 @@ export default function ComparisonHero() {
               >
                 Generate Sample Finance Briefing
               </a>
-              <a
-                href="#/pricing#auto-fill"
-                onClick={() => track("autofill_clicked_from_compare", { source: "hero" })}
+              <button
+                type="button"
+                onClick={() => { startAutoFillCheckout(); track("autofill_clicked_from_compare", { source: "hero" }); }}
                 className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
                 Or have it done for you â€” $99/mo
-              </a>
+              </button>
             </div>
             <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
               No bank connection required to preview or apply.
