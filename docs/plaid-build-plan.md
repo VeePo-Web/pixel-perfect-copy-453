@@ -24,7 +24,7 @@
 - [ ] Migration: `plaid_items`, `plaid_accounts`, `transactions` tables (per spec §3), RLS deny-by-default, `service_role`-only writes; `access_token_encrypted` column (pgsodium/Vault).
 - [ ] Edge fn `plaid-link-token`: `POST /link/token/create` (products: `transactions`, pass a test `user.phone_number`) → return `link_token`.
 - [ ] Edge fn `plaid-exchange-token`: `public_token` → `access_token` → **encrypt + store** → create `plaid_items` row → kick first sync → write `audit_log`.
-- [ ] Edge fn `plaid-sync`: `/transactions/sync` loop with stored cursor; upsert `added`/`modified` on `plaid_transaction_id`, delete `removed`; **flip amount sign on ingest**; resolve pending→posted.
+- [ ] Edge fn `plaid-sync`: `/transactions/sync` loop with stored cursor; **request PFCv2** (`personal_finance_category_version: v2` — +10% primary/+20% detailed accuracy, Dec 2025); upsert `added`/`modified` on `plaid_transaction_id`, delete `removed`; **flip amount sign on ingest**; resolve pending→posted. (Must call `/transactions/sync` once before `SYNC_UPDATES_AVAILABLE` ever fires.)
 - [ ] Edge fn `plaid-webhook`: verify Plaid JWT; on `SYNC_UPDATES_AVAILABLE` run sync; on `ITEM_LOGIN_REQUIRED`/`PENDING_EXPIRATION` flag the item; fail loud (500) on transient error.
 - [ ] Minimal throwaway test page: open Link with a Sandbox institution, complete connect, watch transactions land in Supabase.
 - [ ] **Validate the gap:** eyeball the synced data — confirm `personal_finance_category` quality, and find the self-transfers / owner-draw / business-vs-personal cases that need the AI layer.
@@ -86,7 +86,7 @@
 ## CROSS-CUTTING (every phase)
 
 - **Security:** access_token encrypted server-side only; PII minimized to the LLM (merchant/amount/date/direction/token-ID only); RLS deny-by-default; audit row on every privileged action; webhook signature verified.
-- **Cost control:** minimal product set; webhook-driven sync (not `/transactions/refresh`); update-mode (no duplicate Items); Batch API + prompt caching for AI.
+- **Cost control:** minimal product set; webhook-driven sync (not `/transactions/refresh` — the one metered call); update-mode (no duplicate Items); **`/item/remove` dead Items on cancel/inactivity** (Transactions is a per-Item monthly subscription); Batch API + prompt caching for AI. (Plaid publishes no list price — get a sales quote. See `reports for claude/14-plaid-competitor-and-pattern-research.md`.)
 - **Tokens:** frontend strictly on white/ink/gold (`paper`/`ink`/`gold`); no foreign hex; components < ~250 lines.
 - **Verification:** `npm run build` (or `tsc -b`) green + relevant tests + top-2 failure paths confirmed before any "done"; name what couldn't be verified (Sandbox/live) + the exact user test.
 
