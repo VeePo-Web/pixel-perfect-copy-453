@@ -213,9 +213,9 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
             {/* Primary CTA — gold gradient + shimmer, routes to $99/mo */}
             <a
               href="#/pricing#auto-fill"
-              className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-px hover:shadow-[0_8px_28px_-8px_rgba(201,162,74,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-950"
+              className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-px hover:shadow-[0_8px_28px_-8px_rgba(201,162,74,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-950"
             >
-              <span className="relative z-10">Start at $99/mo</span>
+              <span className="relative z-10">Auto-fill my reports — $99/mo</span>
               <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
             </a>
           </nav>
@@ -226,7 +226,7 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
               href="#/pricing#auto-fill"
               className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-3.5 py-1.5 text-[11.5px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-950"
             >
-              <span className="relative z-10">Start $99/mo</span>
+              <span className="relative z-10">Auto-fill — $99/mo</span>
               <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
             </a>
 
