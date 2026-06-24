@@ -26,20 +26,20 @@ export default function TemplateFinalCTA() {
           Get the free GoldFin Template Vault to start organizing your numbers today — or have them filled for you every month with GoldFin Reports at $99/mo. No spreadsheet work, cancel anytime.
         </p>
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="#vault-capture"
-            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
-          >
-            <span className="relative z-10">Send me the Vault</span>
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-          </a>
           <button
             type="button"
             onClick={() => { startAutoFillCheckout(); track("autofill_clicked_from_templates", { source: "final" }); }}
+            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          >
+            <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+          </button>
+          <a
+            href="#vault-capture"
             className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/40 hover:text-ink active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            Auto-fill my reports — $99/mo
-          </button>
+            Send me the Vault
+          </a>
           <a
             href="#/sample-briefing"
             onClick={() => track("sample_briefing_clicked_from_templates", { source: "final" })}

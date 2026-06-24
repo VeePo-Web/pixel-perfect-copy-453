@@ -21,7 +21,9 @@ export default function TemplateCategoryFilters({ active, onChange }: Props) {
   };
 
   return (
-    <div className="sticky top-0 z-30 border-b border-ink/[0.06] bg-charcoal-950/85 backdrop-blur-md">
+    <div className="sticky top-14 z-30 border-b border-ink/[0.06] bg-charcoal-950/85 backdrop-blur-md">
+      {/* Sticks BELOW the fixed GlobalTopBar (z-40, ~56px tall), never overlapping
+          it — a category sub-filter under the nav, not a second nav bar. */}
       <div className="mx-auto max-w-7xl px-6 py-3 lg:px-10">
         <div
           ref={listRef}
