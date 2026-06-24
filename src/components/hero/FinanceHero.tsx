@@ -45,9 +45,9 @@ const COPY = {
     "Decisions to Consider",
   ],
   badges: [
-    "Plain-English briefing",
+    "Bi-weekly plain-English briefing",
     "Monthly strategy review",
-    "Built for owner-led businesses",
+    "No spreadsheet work",
   ],
   loading: [
     "Reading sample financial activity\u2026",
@@ -82,12 +82,12 @@ const COPY = {
     body: "GoldFin Reports fills your templates from your numbers and sends a plain-English briefing like this one â€” every month. No spreadsheet work. Cancel anytime.",
     primary: "Auto-fill my reports â€” $99/mo",
     primaryHref: "#/pricing#auto-fill",
-    secondary: "Apply for GoldFin Advisory",
-    secondaryHref: "#/apply",
-    tertiary: "Or get the free Template Vault",
-    tertiaryHref: "#/templates",
+    secondary: "Get the free Template Vault",
+    secondaryHref: "#/templates",
+    tertiary: "Running something larger? Apply for GoldFin Advisory →",
+    tertiaryHref: "#/apply",
     micro:
-      "$99/mo for done-for-you reports, or apply for human advisory at $1,500/mo. No bank connection required to start.",
+      "$99/mo · No contracts · Cancel anytime · No bank connection required.",
   },
   mobile: {
     eyebrow: "For serious small business owners",
@@ -637,7 +637,7 @@ const PostDemoCTA = () => (
       </button>
       <a
         href={COPY.postDemo.secondaryHref}
-        className="inline-flex items-center justify-center rounded-full border border-ink/15 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink/85 transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
+        className="inline-flex items-center justify-center rounded-full border border-ink/15 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink/85 transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
       >
         {COPY.postDemo.secondary}
       </a>
