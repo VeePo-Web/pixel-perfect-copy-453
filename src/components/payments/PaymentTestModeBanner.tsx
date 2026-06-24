@@ -1,6 +1,11 @@
 const clientToken = import.meta.env.VITE_PAYMENTS_CLIENT_TOKEN as string | undefined;
 
 export default function PaymentTestModeBanner() {
+  // Developer/ops notice only. It must never reach customers in production —
+  // a config/test strip above the nav reads as a confusing second nav bar and
+  // erodes trust. In production builds this renders nothing (one clean nav).
+  if (!import.meta.env.DEV) return null;
+
   if (!clientToken) {
     return (
       <div className="w-full bg-red-100 border-b border-red-300 px-4 py-2 text-center text-sm text-red-800">
