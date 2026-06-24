@@ -3,6 +3,7 @@ import { useAuth } from "../../contexts/AuthContext";
 
 const NAV = [
   { href: "/portal", label: "Dashboard" },
+  { href: "/portal/report", label: "Advisory report" },
   { href: "/portal/accounts", label: "Connected accounts" },
   { href: "/portal/settings", label: "Settings" },
 ];

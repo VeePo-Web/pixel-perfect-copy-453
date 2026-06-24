@@ -7,6 +7,7 @@ const ResetPassword = lazy(() => import("../pages/portal/ResetPassword"));
 const AcceptTerms = lazy(() => import("../pages/portal/AcceptTerms"));
 const Dashboard = lazy(() => import("../pages/portal/Dashboard"));
 const Accounts = lazy(() => import("../pages/portal/Accounts"));
+const Report = lazy(() => import("../pages/portal/Report"));
 const Settings = lazy(() => import("../pages/portal/Settings"));
 const Terms = lazy(() => import("../pages/legal/Terms"));
 const PlaidConsent = lazy(() => import("../pages/legal/PlaidConsent"));
@@ -62,6 +63,9 @@ export default function PortalRouter({ pathname }: { pathname: string }) {
       break;
     case "/portal/accounts":
       node = <Accounts />;
+      break;
+    case "/portal/report":
+      node = <Report />;
       break;
     case "/portal/settings":
       node = <Settings />;
