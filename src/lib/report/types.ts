@@ -37,6 +37,13 @@ export interface WasteItem { merchant: string; monthly: number; annual: number; 
 export interface DuplicateItem { merchant: string; amount: number; date: string; disputeBy: string }
 export interface CostCreepItem { merchant: string; from: number; to: number }
 export interface MoverItem { category: string; from: number; to: number; delta: number }
+export interface ContributionLine {
+  line: string;
+  revenue: number;
+  variableCost: number;
+  contribution: number;
+  marginPct: number | null;
+}
 
 /** The grounded numbers a report is built from (advisory_reports.metrics_snapshot). */
 export interface MetricsSnapshot {
@@ -56,6 +63,9 @@ export interface MetricsSnapshot {
   costCreep: CostCreepItem[];
   biggestMover: MoverItem | null;
   ownerPay: { profit: number; ownerPay: number; tax: number; opex: number };
+  contributionByLine: ContributionLine[];
+  bestLine: ContributionLine | null;
+  worstLine: ContributionLine | null;
   coveragePct: number;
   transactionsCount: number;
   figures: Record<string, number>;

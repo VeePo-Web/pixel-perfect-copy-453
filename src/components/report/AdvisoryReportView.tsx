@@ -2,7 +2,7 @@
 // the Cycle-6 Reference Report. Server-authoritative: it renders the stored
 // snapshot and never recomputes financials.
 import { useAdvisoryReport } from "@/lib/report/useAdvisoryReport";
-import { ReportSectionBlock, MoneyRecoveryStrip, DecisionMemo, TrustStamp } from "./ReportBlocks";
+import { ReportSectionBlock, MoneyRecoveryStrip, ContributionByLine, DecisionMemo, TrustStamp } from "./ReportBlocks";
 import { fmtDate } from "@/lib/report/format";
 
 export default function AdvisoryReportView() {
@@ -47,6 +47,7 @@ export default function AdvisoryReportView() {
         {sections.map((s, i) => (
           <div key={s.key + i}>
             <ReportSectionBlock heading={s.heading} body={s.body} emphasis={s.key === "verdict"} />
+            {s.key === "making_money" && m && <ContributionByLine m={m} />}
             {s.key === "leaking" && m && <MoneyRecoveryStrip m={m} />}
           </div>
         ))}

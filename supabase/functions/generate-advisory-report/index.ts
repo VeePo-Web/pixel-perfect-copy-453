@@ -70,11 +70,12 @@ Deno.serve(async (req) => {
     const prior = periodRange(cur.start, 14);
 
     // ---- load grounding data ----
-    const [profileRes, acctRes, txRes, streamRes, priorReportRes] = await Promise.all([
+    const [profileRes, acctRes, txRes, streamRes, ledgerRes, priorReportRes] = await Promise.all([
       admin.from("business_profiles").select("business_name, industry, entity_type, reserve_floor_months").eq("user_id", user.id).maybeSingle(),
       admin.from("plaid_accounts").select("current_balance, type").eq("user_id", user.id),
       admin.from("plaid_transactions").select("posted_date, name, merchant_name_norm, amount, category, confidence").eq("user_id", user.id).gte("posted_date", prior.start).lte("posted_date", cur.end),
       admin.from("recurring_streams").select("direction, description, merchant_name, category, frequency, last_amount, first_amount, last_date, is_active").eq("user_id", user.id),
+      admin.from("ledger_entries").select("entry_date, kind, amount, revenue_line, is_variable").eq("user_id", user.id).gte("entry_date", cur.start).lte("entry_date", cur.end),
       admin.from("advisory_reports").select("metrics_snapshot, recommendations, period_end").eq("user_id", user.id).eq("status", "generated").order("created_at", { ascending: false }).limit(1).maybeSingle(),
     ]);
 
@@ -92,6 +93,7 @@ Deno.serve(async (req) => {
       accounts: acctRes.data ?? [],
       transactions, priorTransactions,
       recurringStreams: streamRes.data ?? [],
+      ledger: ledgerRes.data ?? [],
       profile, periodStart: cur.start, periodEnd: cur.end, today,
     });
 

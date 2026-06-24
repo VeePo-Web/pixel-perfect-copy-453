@@ -3,7 +3,49 @@
 // server-computed snapshot — never recomputes financials.
 import type { MetricsSnapshot, Recommendation } from "@/lib/report/types";
 import { BUCKET_LABEL } from "@/lib/report/types";
-import { fmtUSD, fmtDate } from "@/lib/report/format";
+import { fmtUSD, fmtPct, fmtDate } from "@/lib/report/format";
+
+export function ContributionByLine({ m }: { m: MetricsSnapshot }) {
+  const lines = m.contributionByLine ?? [];
+  if (lines.length === 0) return null;
+  return (
+    <div className="mt-4 overflow-hidden rounded-lg border border-charcoal-700">
+      <div className="bg-charcoal-800 px-5 py-2.5 text-[10.5px] uppercase tracking-[0.28em] text-ink/55">
+        What's actually profitable · contribution margin by line
+      </div>
+      <table className="w-full text-[13px]">
+        <thead>
+          <tr className="text-left text-ink/45">
+            <th className="px-5 py-2 font-normal">Line</th>
+            <th className="px-5 py-2 text-right font-normal">Revenue</th>
+            <th className="px-5 py-2 text-right font-normal">Contribution</th>
+            <th className="px-5 py-2 text-right font-normal">Margin</th>
+          </tr>
+        </thead>
+        <tbody>
+          {lines.map((c, i) => {
+            const top = i === 0;
+            const bottom = i === lines.length - 1 && lines.length > 1;
+            return (
+              <tr key={c.line} className="border-t border-charcoal-700">
+                <td className="px-5 py-2.5 text-ink">
+                  {c.line}
+                  {top && <span className="ml-2 text-[10px] text-green-signal">best</span>}
+                  {bottom && <span className="ml-2 text-[10px] text-ink/40">lowest</span>}
+                </td>
+                <td className="px-5 py-2.5 text-right tabular-nums text-ink/70">{fmtUSD(c.revenue)}</td>
+                <td className="px-5 py-2.5 text-right tabular-nums text-ink/70">{fmtUSD(c.contribution)}</td>
+                <td className={`px-5 py-2.5 text-right tabular-nums ${top ? "text-green-signal" : "text-ink"}`}>
+                  {c.marginPct != null ? fmtPct(c.marginPct).replace("+", "") : "—"}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 export function ReportSectionBlock({
   heading,

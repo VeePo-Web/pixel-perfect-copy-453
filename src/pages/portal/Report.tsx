@@ -2,6 +2,7 @@ import { useState } from "react";
 import PortalLayout from "../../components/portal/PortalLayout";
 import ProtectedRoute from "../../components/portal/ProtectedRoute";
 import BusinessProfileCard from "../../components/report/BusinessProfileCard";
+import TemplateImportCard from "../../components/report/TemplateImportCard";
 import AdvisoryReportView from "../../components/report/AdvisoryReportView";
 import { supabase } from "../../integrations/supabase/client";
 
@@ -53,7 +54,10 @@ export default function Report() {
         {syncMsg && <p className="mt-2 text-[12.5px] text-ink/50">{syncMsg}</p>}
 
         <div className="mt-8 space-y-8">
-          <BusinessProfileCard />
+          <div className="grid gap-6 lg:grid-cols-2">
+            <BusinessProfileCard />
+            <TemplateImportCard />
+          </div>
           <AdvisoryReportView />
         </div>
       </PortalLayout>

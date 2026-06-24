@@ -39,11 +39,28 @@ export type Profile = {
   reserve_floor_months: number;
 };
 
+export type LedgerEntry = {
+  entry_date: string;
+  kind: string;            // revenue | cost
+  amount: number;          // positive magnitude
+  revenue_line: string | null;
+  is_variable: boolean;
+};
+
+export type ContributionLine = {
+  line: string;
+  revenue: number;
+  variableCost: number;
+  contribution: number;
+  marginPct: number | null;
+};
+
 export type MetricsInput = {
   accounts: Account[];
   transactions: Txn[];            // current period
   priorTransactions: Txn[];       // prior period (for deltas)
   recurringStreams: RecurringStream[];
+  ledger?: LedgerEntry[];         // spreadsheet-template intake (optional)
   profile: Profile;
   periodStart: string;
   periodEnd: string;
@@ -77,6 +94,10 @@ export type MetricsPayload = {
   biggestMover: MoverItem | null;
   // owner pay (Profit First)
   ownerPay: { profit: number; ownerPay: number; tax: number; opex: number };
+  // profit by line (from spreadsheet-template intake, when present)
+  contributionByLine: ContributionLine[];
+  bestLine: ContributionLine | null;
+  worstLine: ContributionLine | null;
   // trust
   coveragePct: number;
   transactionsCount: number;
@@ -219,6 +240,31 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
     opex: r2(inflow * PROFIT_FIRST.opex),
   };
 
+  // --- CONTRIBUTION MARGIN BY LINE (spreadsheet-template intake) ---
+  const lineMap = new Map<string, { rev: number; varCost: number }>();
+  for (const e of input.ledger ?? []) {
+    const line = e.revenue_line ?? "Unassigned";
+    const cur = lineMap.get(line) ?? { rev: 0, varCost: 0 };
+    if (e.kind === "revenue") cur.rev += Math.abs(e.amount);
+    else if (e.is_variable) cur.varCost += Math.abs(e.amount);
+    lineMap.set(line, cur);
+  }
+  const contributionByLine: ContributionLine[] = [...lineMap.entries()]
+    .filter(([, v]) => v.rev > 0)
+    .map(([line, v]) => {
+      const contribution = r2(v.rev - v.varCost);
+      return {
+        line,
+        revenue: r2(v.rev),
+        variableCost: r2(v.varCost),
+        contribution,
+        marginPct: v.rev > 0 ? r2((contribution / v.rev) * 100) : null,
+      };
+    })
+    .sort((a, b) => (b.marginPct ?? -Infinity) - (a.marginPct ?? -Infinity));
+  const bestLine = contributionByLine[0] ?? null;
+  const worstLine = contributionByLine.length > 1 ? contributionByLine[contributionByLine.length - 1] : null;
+
   // --- COVERAGE ---
   const transactionsCount = input.transactions.length;
   const categorized = input.transactions.filter((t) => t.confidence >= conf && t.category).length;
@@ -238,13 +284,19 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
   duplicates.forEach((d, i) => { figures[`dup_${i}_amount`] = d.amount; });
   costCreep.forEach((c, i) => { figures[`creep_${i}_from`] = c.from; figures[`creep_${i}_to`] = c.to; });
   if (biggestMover) { figures.mover_from = biggestMover.from; figures.mover_to = biggestMover.to; figures.mover_delta = biggestMover.delta; }
+  contributionByLine.forEach((c, i) => {
+    figures[`line_${i}_revenue`] = c.revenue;
+    figures[`line_${i}_contribution`] = c.contribution;
+    if (c.marginPct != null) figures[`line_${i}_margin`] = c.marginPct;
+  });
 
   return {
     period: { start: input.periodStart, end: input.periodEnd },
     cashOnHand, inflow, outflow: outflowSum, netCash, monthlyBurn, runwayMonths,
     revenueVsPriorPct, profitProxy, profitVsPriorPct,
     waste, wasteAnnualTotal, duplicates, costCreep, biggestMover,
-    ownerPay, coveragePct, transactionsCount,
+    ownerPay, contributionByLine, bestLine, worstLine,
+    coveragePct, transactionsCount,
     figures, profile: input.profile,
   };
 }
