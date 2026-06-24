@@ -10,6 +10,8 @@ export type SecurityFAQEvent =
   | "autofill_clicked_from_security_faq"
   | "templates_clicked_from_security_faq"
   | "compare_clicked_from_security_faq"
+  | "privacy_principles_cta_gold"
+  | "privacy_principles_cta_apply"
   | "final_security_cta_clicked";
 
 export function track(event: SecurityFAQEvent, payload?: Record<string, unknown>) {
