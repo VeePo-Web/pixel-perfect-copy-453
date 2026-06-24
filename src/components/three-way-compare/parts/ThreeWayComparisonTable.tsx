@@ -7,7 +7,9 @@ type ColumnId = "bookkeeper" | "mfd" | "cfo";
 
 export default function ThreeWayComparisonTable() {
   const [hovered, setHovered] = useState<ColumnId | null>(null);
-  const { ref, inView } = useInView<HTMLDivElement>();
+  const reveal = useInView<HTMLDivElement>();
+  const ref = reveal.ref;
+  const inView = reveal.inView;
 
   const colClass = (id: ColumnId, isMfd?: boolean) => {
     const isHover = hovered === id;

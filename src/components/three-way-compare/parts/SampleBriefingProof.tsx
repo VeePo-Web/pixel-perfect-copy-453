@@ -1,12 +1,10 @@
 ﻿import { useEffect, useRef, useState } from "react";
 import { briefing } from "../content";
 import { trackCtaByHref } from "../analytics";
-import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function SampleBriefingProof() {
   const ref = useRef<HTMLUListElement | null>(null);
   const [visible, setVisible] = useState(false);
-  const { ref: revealRef, inView } = useInView<HTMLDivElement>();
 
   useEffect(() => {
     const node = ref.current;

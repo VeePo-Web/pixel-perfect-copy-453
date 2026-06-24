@@ -3,7 +3,9 @@ import { trackCtaByHref } from "../analytics";
 import { useInView } from "../../how-it-works/hooks/useInView";
 
 export default function PricingValueContext() {
-  const { ref, inView } = useInView<HTMLDivElement>();
+  const reveal = useInView<HTMLDivElement>();
+  const ref = reveal.ref;
+  const inView = reveal.inView;
   return (
     <section
       aria-labelledby="pricing-context-heading"
