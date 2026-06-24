@@ -4,8 +4,6 @@ const Login = lazy(() => import("../pages/portal/Login"));
 const Signup = lazy(() => import("../pages/portal/Signup"));
 const ForgotPassword = lazy(() => import("../pages/portal/ForgotPassword"));
 const ResetPassword = lazy(() => import("../pages/portal/ResetPassword"));
-const MfaSetup = lazy(() => import("../pages/portal/MfaSetup"));
-const MfaVerify = lazy(() => import("../pages/portal/MfaVerify"));
 const AcceptTerms = lazy(() => import("../pages/portal/AcceptTerms"));
 const Dashboard = lazy(() => import("../pages/portal/Dashboard"));
 const Accounts = lazy(() => import("../pages/portal/Accounts"));
@@ -59,12 +57,6 @@ export default function PortalRouter({ pathname }: { pathname: string }) {
     case "/portal/reset-password":
       node = <ResetPassword />;
       break;
-    case "/portal/mfa-setup":
-      node = <MfaSetup />;
-      break;
-    case "/portal/mfa-verify":
-      node = <MfaVerify />;
-      break;
     case "/portal/accept-terms":
       node = <AcceptTerms />;
       break;
@@ -97,3 +89,4 @@ export default function PortalRouter({ pathname }: { pathname: string }) {
   }
   return <Suspense fallback={<Fallback />}>{node}</Suspense>;
 }
+
