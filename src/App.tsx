@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import FinanceHero from "./components/hero/FinanceHero";
 import HomeSchema from "./components/home/HomeSchema";
+import HomeHero from "./components/home/HomeHero";
 import PainClarity from "./components/home/PainClarity";
-import HowItWorks from "./components/how-it-works/HowItWorks";
+import VaultPreview from "./components/home/VaultPreview";
+import EpiphanyBridge from "./components/home/EpiphanyBridge";
+import FounderTrustStrip from "./components/home/FounderTrustStrip";
+import ClosingBaitCTA from "./components/home/ClosingBaitCTA";
 import ApplicationFunnel from "./components/apply/ApplicationFunnel";
 import SampleBriefingPage from "./components/sample-briefing/SampleBriefingPage";
 import PricingPage from "./components/pricing/PricingPage";
@@ -98,9 +101,12 @@ const App = () => {
     "home",
     <>
       <HomeSchema />
-      <FinanceHero />
+      <HomeHero />
       <PainClarity />
-      <HowItWorks />
+      <VaultPreview />
+      <EpiphanyBridge />
+      <FounderTrustStrip />
+      <ClosingBaitCTA />
     </>,
     true,
   );

@@ -1,4 +1,3 @@
-﻿import { startAutoFillCheckout } from "../../../lib/checkout";
 import { whatThisIsNot } from "../content";
 
 export default function WhatThisIsNot() {
@@ -25,20 +24,6 @@ export default function WhatThisIsNot() {
               <p className="mt-3 text-[13.5px] leading-[1.65] text-ink/70">{c.body}</p>
             </div>
           ))}
-        </div>
-        <div className="mt-10 flex flex-wrap items-center gap-4">
-          <button type="button" onClick={startAutoFillCheckout}
-            className="group relative inline-flex overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(217,190,130,0.45)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
-          >
-            <span className="relative z-10">Auto-fill my reports — $99/mo</span>
-            <span aria-hidden className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-          </button>
-          <a
-            href="#/apply"
-            className="text-[13px] text-ink/55 underline-offset-4 transition-colors duration-300 hover:text-ink hover:underline"
-          >
-            Running something larger? Apply for GoldFin Advisory →
-          </a>
         </div>
       </div>
     </section>

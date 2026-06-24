@@ -1,4 +1,3 @@
-import { startAutoFillCheckout } from "../../lib/checkout";
 import { useInView } from "../how-it-works/hooks/useInView";
 
 // Homepage Section 2 — Pain Clarification (belief-chain step 1).
@@ -78,43 +77,6 @@ export default function PainClarity() {
           </em>{" "}
           That's the gap GoldFin Desk fills.
         </p>
-
-        <div
-          className={`mt-9 transition-all duration-700 ease-cinema ${
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
-          }`}
-          style={{ transitionDelay: `${200 + LINES.length * 90 + 240}ms` }}
-        >
-          {/* Gold primary → border secondary — Brunson pain→offer chain */}
-          <div className="flex flex-col items-start gap-3 sm:flex-row">
-            <button
-              type="button"
-              onClick={startAutoFillCheckout}
-              className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(217,190,130,0.45)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
-            >
-              <span aria-hidden className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-              <span className="relative z-10">Auto-fill my reports — $99/mo</span>
-            </button>
-            <a
-              href="#/templates"
-              className="inline-flex items-center justify-center rounded-full border border-ink/15 px-6 py-3 text-[13px] text-ink/80 transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
-            >
-              Get the free Template Vault
-            </a>
-          </div>
-          <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-ink/40">
-            No contracts · Cancel anytime
-          </p>
-          <a
-            href="#how-it-works"
-            className="group mt-5 inline-flex items-center text-[12.5px] uppercase tracking-[0.18em] text-ink/50 transition-colors duration-300 hover:text-champagne-300"
-          >
-            <span className="border-b border-ink/15 pb-0.5 group-hover:border-champagne-300/60">
-              See how GoldFin Desk works
-            </span>
-            <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-          </a>
-        </div>
       </div>
     </section>
   );

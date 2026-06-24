@@ -1,4 +1,3 @@
-﻿import { startAutoFillCheckout } from "../../../lib/checkout";
 import { privacyCards } from "../content";
 
 export default function PrivacyTrustBlock() {
@@ -32,22 +31,6 @@ export default function PrivacyTrustBlock() {
             ))}
           </ul>
         </div>
-
-        <div className="mt-12 flex flex-wrap items-center gap-4">
-          <button type="button" onClick={startAutoFillCheckout}
-            className="group relative inline-flex overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(217,190,130,0.45)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
-          >
-            <span className="relative z-10">Auto-fill my reports â€” $99/mo</span>
-            <span aria-hidden className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-          </button>
-          <a
-            href="#/templates"
-            className="rounded-full border border-ink/[0.14] px-5 py-3 text-[13px] text-ink/90 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
-          >
-            Get the free templates
-          </a>
-        </div>
-        <p className="mt-3 text-[11.5px] uppercase tracking-[0.22em] text-ink/40">No contracts Â· Cancel anytime</p>
       </div>
     </section>
   );

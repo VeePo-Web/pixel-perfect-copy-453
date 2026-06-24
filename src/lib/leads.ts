@@ -1,4 +1,4 @@
-import { supabase } from "../integrations/supabase/client";
+﻿import { supabase } from "../integrations/supabase/client";
 import { analytics } from "./analytics";
 
 /**
@@ -42,6 +42,33 @@ export async function captureLead(p: LeadPayload): Promise<{ ok: boolean }> {
     .catch(() => {});
 
   if (!error) analytics.leadCaptured(p.templateId);
+
+  return { ok: !error };
+}
+
+/**
+ * Lightweight homepage form capture — email-only entry point.
+ * Stores with source: "homepage" so we can segment later.
+ */
+export async function captureHomepageLead(email: string): Promise<{ ok: boolean }> {
+  const { error } = await supabase.from("leads").insert({
+    first_name: "Friend",
+    email,
+    business_type: "unknown",
+    goals: ["templates"],
+    template_id: "vault",
+    template_name: "Template Vault",
+    source: "homepage",
+    consent: true,
+  });
+
+  void supabase.functions
+    .invoke("send-template-email", {
+      body: { email, firstName: "Friend", templateName: "Template Vault" },
+    })
+    .catch(() => {});
+
+  if (!error) analytics.leadCaptured("vault");
 
   return { ok: !error };
 }
