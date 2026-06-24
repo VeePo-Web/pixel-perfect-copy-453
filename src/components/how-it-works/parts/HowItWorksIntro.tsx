@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 import { HIW_COPY } from "../content";
 import { useReducedMotion } from "../hooks/useReducedMotion";
 import { useInView } from "../hooks/useInView";
@@ -48,13 +49,14 @@ export default function HowItWorksIntro() {
           }`}
           style={{ transitionDelay: "240ms" }}
         >
-          <a
-            href="#/pricing#auto-fill"
+          <button
+            type="button"
+            onClick={startAutoFillCheckout}
             className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(212,168,69,0.45)] active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
           >
             <span className="relative z-10">{c.primary}</span>
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-          </a>
+            <span aria-hidden className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+          </button>
           <a
             href="#/templates"
             className="rounded-full border border-ink/20 px-6 py-3.5 text-[13px] text-ink/75 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
@@ -66,7 +68,7 @@ export default function HowItWorksIntro() {
             className="group inline-flex items-center text-[13px] text-ink/50 transition-colors duration-300 hover:text-champagne-300"
           >
             <span className="border-b border-ink/10 pb-0.5 group-hover:border-champagne-200/60">See a sample briefing</span>
-            <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+            <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">â†’</span>
           </a>
         </div>
         <p className="mt-5 text-[11.5px] uppercase tracking-[0.22em] text-ink/35">{c.trust}</p>
@@ -114,7 +116,7 @@ export default function HowItWorksIntro() {
           </ol>
           <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-ink/10 to-transparent" />
           <p className="mt-4 text-[11.5px] leading-[1.6] text-ink/40">
-            A recurring operating loop — not a one-time report.
+            A recurring operating loop â€” not a one-time report.
           </p>
         </div>
       </div>

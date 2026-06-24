@@ -1,4 +1,5 @@
-﻿type Props = { onAnother: () => void };
+﻿import { startAutoFillCheckout } from "../../../lib/checkout";
+type Props = { onAnother: () => void };
 
 // Proof-page close (conversion-prompt PAGE 3 Â§6). The ONE place equal-weight
 // CTAs are allowed: the visitor just consumed proof, so let them self-select
@@ -49,13 +50,12 @@ export default function SampleBriefingCTA({ onAnother }: Props) {
             <p className="mt-2 flex-1 text-[13.5px] leading-[1.6] text-ink/70">
               Your numbers, filled and briefed in plain English â€” every month. No spreadsheet work. Cancel anytime.
             </p>
-            <a
-              href="#/pricing#auto-fill"
+            <button type="button" onClick={startAutoFillCheckout}
               className="group relative mt-6 inline-flex w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
             >
-              <span className="relative z-10">Auto-fill my reports — $99/mo</span>
-              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-            </a>
+              <span aria-hidden className="relative z-10">Auto-fill my reports — $99/mo</span>
+              <span aria-hidden className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+            </button>
           </div>
         </div>
 
