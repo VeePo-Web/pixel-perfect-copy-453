@@ -115,7 +115,7 @@ export default function ThreeWayComparisonTable() {
                   <a
                     href={tableCTAs.bookkeeper.href}
                     onClick={() => trackCtaByHref(tableCTAs.bookkeeper.href, "table-bookkeeper")}
-                    className="inline-flex rounded-full border border-ink/[0.12] px-4 py-2 text-[12px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
+                    className="inline-flex rounded-full border border-ink/[0.12] px-4 py-2 text-[12px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                   >
                     {tableCTAs.bookkeeper.label}
                   </a>
@@ -133,7 +133,7 @@ export default function ThreeWayComparisonTable() {
                   <a
                     href={tableCTAs.cfo.href}
                     onClick={() => trackCtaByHref(tableCTAs.cfo.href, "table-cfo")}
-                    className="inline-flex rounded-full border border-ink/[0.12] px-4 py-2 text-[12px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
+                    className="inline-flex rounded-full border border-ink/[0.12] px-4 py-2 text-[12px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                   >
                     {tableCTAs.cfo.label}
                   </a>
@@ -205,7 +205,7 @@ export default function ThreeWayComparisonTable() {
                     className={`mt-2 inline-flex w-fit rounded-full px-4 py-2 text-[12px] transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                       isMfd
                         ? "bg-gradient-to-b from-champagne-100 to-champagne-300 font-medium text-navy hover:-translate-y-0.5 active:translate-y-0 focus-visible:ring-champagne-200 focus-visible:ring-offset-ink"
-                        : "border border-ink/[0.12] text-ink/85 hover:border-champagne-200/40 hover:text-ink focus-visible:ring-ink/25"
+                        : "border border-ink/[0.12] text-ink/85 hover:border-champagne-200/40 hover:text-ink focus-visible:ring-champagne-200 focus-visible:ring-offset-ink"
                     }`}
                   >
                     {cta.label}
