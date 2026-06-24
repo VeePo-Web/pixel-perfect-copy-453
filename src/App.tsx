@@ -56,14 +56,24 @@ const App = () => {
     <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
       <PaymentTestModeBanner />
       <GlobalTopBar currentPath={key} />
-      <div className={extraTopPad ? "pt-14" : undefined}>{children}</div>
+      <div
+        id="main-content"
+        tabIndex={-1}
+        className={`focus:outline-none${extraTopPad ? " pt-14" : ""}`}
+      >
+        {children}
+      </div>
       <GoldFinFooter />
       <CheckoutOverlay />
     </main>
   );
 
+  // Apply is a focused conversion funnel. It ships its own minimal header
+  // (ApplicationHeader), so it must NOT also render the marketing GlobalTopBar —
+  // that produced two stacked nav bars. Dropping the marketing nav + footer also
+  // removes escape links that leak funnel conversions (CXL / Brunson).
   if (route === "apply" || route === "thank-you") {
-    return wrap("apply", <ApplicationFunnel />, true);
+    return <ApplicationFunnel />;
   }
   if (route === "sample-briefing") {
     return wrap("sample-briefing", <SampleBriefingPage />);

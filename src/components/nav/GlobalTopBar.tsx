@@ -119,6 +119,17 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Keep in-page anchor jumps (#auto-fill, section ids, #top) clear of the
+  // fixed header instead of landing hidden beneath it.
+  useEffect(() => {
+    const root = document.documentElement;
+    const prev = root.style.scrollPaddingTop;
+    root.style.scrollPaddingTop = "84px";
+    return () => {
+      root.style.scrollPaddingTop = prev;
+    };
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -132,6 +143,13 @@ export default function GlobalTopBar({ currentPath = "home" }: Props) {
 
   return (
     <>
+      {/* Skip to content — keyboard/screen-reader first stop (NN/g a11y) */}
+      <a
+        href="#main-content"
+        className="sr-only rounded-full focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-champagne-200 focus:px-4 focus:py-2 focus:text-[13px] focus:font-medium focus:text-navy focus:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300"
+      >
+        Skip to content
+      </a>
       <header
         className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ease-cinema ${
           scrolled
