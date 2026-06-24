@@ -1,50 +1,115 @@
-# Plaid Sandbox E2E Verification Plan
+# Goldfin Desk portal — port VeePo's auth flow + harden Terms
 
-All `/portal/*` pages and Plaid edge functions already exist on disk. This plan **verifies** the full flow end-to-end — no code changes unless a real defect surfaces.
+## 1. Research synthesis (informs the build, not delivered as a doc)
 
-## What gets verified
+I'll align the auth UX and the legal text with what serious read-only finance tools actually ship:
 
-1. Marketing route still loads; `/portal/login` and `/portal/signup` render the AuthShell.
-2. New user can sign up, confirm (auto-confirm in sandbox), and sign in.
-3. MFA enrollment: `mfa-enroll` returns otpauth + 8 backup codes; TOTP verifies via `mfa-verify`; `mfa_status` flips to enabled.
-4. Terms acceptance writes `tos_acceptances` row at the current `TOS_VERSION`.
-5. Dashboard renders; `plaid-create-link-token` returns a `link_token`.
-6. Plaid Link sandbox flow: open Link, pick "First Platypus Bank", credentials `user_good` / `pass_good`, complete handoff, receive `public_token`.
-7. `plaid-exchange-public-token` swaps it, inserts `plaid_items` row, and `syncAccountsForItem()` populates `plaid_accounts`.
-8. Dashboard / Accounts page shows the freshly synced accounts with balances.
-9. `plaid-webhook` driven by a simulated `TRANSACTIONS / DEFAULT_UPDATE` (with `x-plaid-webhook-secret`) re-runs sync; `last_synced_at` advances.
-10. `ITEM / ITEM_LOGIN_REQUIRED` webhook marks the item `reauth_required`.
-11. `plaid-remove-item` calls `/item/remove`; row + cascaded accounts disappear; UI reflects it.
+- **Plaid (the data conduit itself):** their End User Privacy Policy and Acceptable Use Policy disclaim warranty, cap aggregator liability, and make the financial institution the source of truth. Every downstream app inherits this framing.
+- **Wave Accounting:** password + email-OTP second factor for portal sign-in; per-bank reconnect only when the bank's token breaks. No periodic forced reauth.
+- **Mercury / Ramp / Brex:** password + TOTP (we're going email-OTP per your choice), Plaid Link reauth is event-driven on `ITEM_LOGIN_REQUIRED` / `PENDING_EXPIRATION`. Status badges per account: Connected / Action needed / Disconnected.
+- **Copilot Money, Monarch, Rocket Money:** identical Plaid event-driven reauth model; "Fix connection" CTA on each account card.
+- **ToS patterns common to all of the above:** read-only disclaimer, "we are not your fiduciary," third-party-breach disclaimer (Plaid, FI, cloud, subprocessors), no warranty of data accuracy, limitation of liability capped at fees paid in the last 3 months or $100, mandatory arbitration + class-action waiver, indemnification, user-responsibility-for-credentials clause.
 
-## How (technical)
+The current `src/pages/legal/Terms.tsx` already covers most of this — I'll tighten it with the missing patterns (force-majeure, aggregator-specific carve-outs, data-export-on-termination, no-SLA, beta/sandbox disclaimer, AI-generated-content disclaimer for the briefings).
 
-- **Preflight (read-only):**
-  - `supabase--read_query` on `plaid_items`, `plaid_accounts`, `mfa_factors`, `tos_acceptances` to confirm schemas.
-  - `supabase--curl_edge_functions` unauthenticated smoke: `plaid-create-link-token` → expect 401; `plaid-webhook` with bad secret → expect 401.
-  - Confirm `supabase/config.toml` has `verify_jwt = false` for `plaid-webhook` only.
-- **Browser drive (Playwright via shell):**
-  - Launch Chromium against `http://localhost:8080`, viewport 1280×1800, headless.
-  - Scripts under `/tmp/browser/plaid-e2e/`, screenshots per step.
-  - Sign up a fresh `e2e+<ts>@example.com` user, then sign in.
-  - Enroll MFA: read otpauth secret from the page, generate the TOTP in Python with `pyotp`, submit. Save backup codes from DOM.
-  - Accept Terms.
-  - Click "Connect bank" → wait for Plaid Link iframe → drive sandbox flow → confirm redirect back to `/portal/accounts`.
-  - Read DOM for account names/balances; cross-check with `supabase--read_query` on `plaid_accounts`.
-- **Webhook simulation:** `supabase--curl_edge_functions` to `plaid-webhook` with the real `PLAID_WEBHOOK_SECRET` header and a synthetic `{webhook_type, webhook_code, item_id}` body for each branch; re-query `plaid_items.last_synced_at` and `status`.
-- **Teardown:** click "Disconnect" in UI, confirm row removal via SQL.
-- **Logs:** `supabase--edge_function_logs` after each step for `plaid-create-link-token`, `plaid-exchange-public-token`, `plaid-sync-accounts`, `plaid-webhook`, `mfa-enroll`, `mfa-verify`.
+## 2. What gets replaced
 
-## Defect handling
+**Removed:**
+- `src/pages/portal/MfaSetup.tsx`, `MfaVerify.tsx`
+- `supabase/functions/mfa-enroll/`, `mfa-verify/`
+- `mfa_factors`, `mfa_backup_codes` tables + `mfa_status()` RPC (kept only if you want them archived — default: drop)
 
-If a step fails, I'll stop, surface the error + screenshot + relevant log, and propose a minimal fix as a new plan rather than patching mid-run.
+**Ported from VeePo (rebranded Goldfin Desk, light "paper" theme not VeePo's dark — unless you say otherwise):**
+- `PortalLogin` — email + password, caps-lock detection, 5-attempt lockout w/ 30s cooldown, then transitions to OTP screen
+- `PortalOtpVerify` — 6-digit InputOTP, masked email, resend cooldown, remaining-attempts counter
+- `useLoginOtp` hook — calls `send-login-otp` edge function
+- `PortalProtectedRoute` — checks session + OTP-verified flag, redirects with `from` location
+- `AuthLoadingScreen` — branded spinner while session resolves
+- `PortalLayout` shell adapted to Goldfin's `bg-paper / text-ink` tokens
+- `ForgotPassword` + `ResetPassword` pages
+
+## 3. New backend
+
+**Edge functions:**
+- `send-login-otp` — generates 6-digit code, hashes (bcrypt), stores in `login_otps` with 10-min TTL + attempts counter, enqueues branded email
+- `verify-login-otp` — checks hash, increments attempts, on success sets a `portal_sessions.otp_verified_at`, returns OK; locks after 5 wrong codes
+
+**DB migration:**
+- `login_otps(user_id, code_hash, expires_at, attempts, consumed_at)` + RLS (service-role only)
+- `portal_sessions(user_id, session_id, otp_verified_at, ip, user_agent)` + RLS (user reads own)
+- Drop `mfa_factors`, `mfa_backup_codes`, `mfa_status()`
+
+**Branded email template (one new transactional template):**
+- `login-otp.tsx` in `_shared/transactional-email-templates/` — Goldfin-branded, plain, the 6-digit code prominently, "expires in 10 minutes," "didn't request this? change your password" footer
+- Registered in `registry.ts`; sent via existing `send-transactional-email` infra (will scaffold email infra if not yet present)
+
+## 4. Plaid behavior (unchanged from current sandbox flow)
+
+- Initial connect: existing `PlaidLinkButton` create-mode
+- Reauth: only when webhook delivers `ITEM_LOGIN_REQUIRED` (sets `status='reauth_required'`); Accounts page shows "Reconnect" CTA that opens Plaid Link in update mode for that specific item
+- No periodic force-reauth, no per-session reauth — matches Mercury/Ramp/Copilot/Wave
+
+## 5. Terms rewrite (`src/pages/legal/Terms.tsx`)
+
+Keep current 16 sections, harden with:
+- New §6a force majeure (acts of God, cyberattacks, cloud-provider failure, regulatory action)
+- Tightened §6 third-party clause to enumerate Plaid, Lovable Cloud, Supabase, Stripe, Resend, OpenAI/Anthropic
+- New §11a beta/sandbox disclaimer (Plaid sandbox produces synthetic data; not real)
+- New §3a AI-generated content disclaimer (briefings are LLM output, may hallucinate, must be verified)
+- Tightened §8 cap: greater of (a) 3 months' fees or (b) $100, plus exclusion of consequential damages even for gross negligence where law allows
+- New §7a no-SLA clause
+- New §11b data export on termination (30-day window to export, then purged)
+- Bump `TOS_VERSION` in `src/lib/portal/tos.ts` → forces all existing users to re-accept
+
+## 6. Files changed
+
+```text
+DELETE
+  src/pages/portal/MfaSetup.tsx
+  src/pages/portal/MfaVerify.tsx
+  supabase/functions/mfa-enroll/
+  supabase/functions/mfa-verify/
+
+REPLACE
+  src/pages/portal/Login.tsx
+  src/pages/portal/ForgotPassword.tsx
+  src/pages/portal/ResetPassword.tsx
+  src/components/portal/ProtectedRoute.tsx
+  src/components/portal/PortalLayout.tsx
+  src/components/portal/AuthShell.tsx
+  src/portal/PortalRouter.tsx
+  src/pages/legal/Terms.tsx
+  src/lib/portal/tos.ts  (version bump)
+
+CREATE
+  src/components/portal/PortalOtpVerify.tsx
+  src/components/portal/AuthLoadingScreen.tsx
+  src/hooks/useLoginOtp.ts
+  supabase/functions/send-login-otp/index.ts
+  supabase/functions/verify-login-otp/index.ts
+  supabase/functions/_shared/transactional-email-templates/login-otp.tsx
+  (migration: login_otps, portal_sessions, drop mfa_*)
+```
+
+## 7. Verification
+
+Reuse the existing Playwright harness under `/tmp/browser/plaid-e2e/`:
+1. Signup → confirmation
+2. Login with password → email OTP screen
+3. Read OTP from `email_send_log` (sandbox shortcut) → submit → land on `/portal`
+4. Wrong OTP 5× → locked
+5. Accept new ToS version → `tos_acceptances` row at bumped version
+6. Plaid Link → connect → accounts visible
+7. Fire `ITEM_LOGIN_REQUIRED` webhook → "Reconnect" CTA appears on that item only
+8. Remove item → cascade clean
 
 ## Out of scope
 
-- Stripe / payments
-- Production Plaid environment
-- Transactions sync beyond the accounts-level upsert that `syncAccountsForItem()` performs
-- Visual / design changes
+- Periodic forced reauth (you chose event-driven)
+- TOTP / authenticator app support (dropped per your choice)
+- Marketing emails, password complexity meters, social login (Google) — say the word and I'll add Google after this lands
+- Visual/design overhaul of marketing site
 
-## Deliverable
+## Open assumption — say if wrong
 
-A summary report with: pass/fail per numbered step, screenshots from key states (login, MFA, Link handoff, populated dashboard, post-disconnect empty state), and any SQL evidence.
+Goldfin Desk's portal stays on the current **light "paper" theme**, not VeePo's dark `portal-theme`. The structure, lockout, OTP screen, and protected-route logic are ported; the visual tokens stay Goldfin. If you want the literal VeePo dark look in the portal too, tell me and I'll port the `portal-theme` CSS variables as well.
