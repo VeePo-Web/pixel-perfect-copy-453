@@ -1,5 +1,6 @@
 import { privacyPrinciples } from "../content";
 import { useInView } from "../../how-it-works/hooks/useInView";
+import { track } from "../analytics";
 
 export default function PrivacyPrinciplesSection() {
   const { ref, inView } = useInView<HTMLDivElement>();
@@ -46,6 +47,28 @@ export default function PrivacyPrinciplesSection() {
             </article>
           ))}
         </div>
+
+        {/* CTA band — post-trust conversion gate (Brunson: trust → offer, never dead-end) */}
+        <div className={`mt-14 flex flex-wrap items-center gap-4 transition-all duration-700 ease-cinema delay-200 ${
+          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        }`}>
+          <a
+            href="#/pricing#auto-fill"
+            onClick={() => track("privacy_principles_cta_gold")}
+            className="group relative overflow-hidden inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          >
+            <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+          </a>
+          <a
+            href="#/apply"
+            onClick={() => track("privacy_principles_cta_apply")}
+            className="inline-flex min-h-11 items-center rounded-full border border-ink/[0.14] px-5 text-[13.5px] text-ink/90 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          >
+            Start My Application
+          </a>
+        </div>
+        <p className="mt-3 text-[11.5px] uppercase tracking-[0.22em] text-ink/40">No bank connection required · Cancel anytime</p>
       </div>
     </section>
   );

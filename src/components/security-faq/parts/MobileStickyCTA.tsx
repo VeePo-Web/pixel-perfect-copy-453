@@ -52,9 +52,10 @@ export default function MobileStickyCTA() {
       <a
         href={href}
         onClick={() => trackCtaByHref(href, "security_faq_mobile_sticky")}
-        className="flex min-h-12 w-full items-center justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 text-[14px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+        className="group relative overflow-hidden flex min-h-12 w-full items-center justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 text-[14px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
       >
-        {label}
+        <span className="relative z-10">{label}</span>
+        <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
       </a>
     </div>
   );

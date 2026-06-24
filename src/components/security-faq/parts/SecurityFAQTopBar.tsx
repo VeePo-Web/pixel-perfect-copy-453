@@ -37,9 +37,10 @@ export default function SecurityFAQTopBar() {
               <a
                 key={s.id}
                 href="#/apply"
-                className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_8px_28px_-10px_rgba(217,190,130,0.55)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_8px_28px_-10px_rgba(217,190,130,0.55)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
-                Apply
+                <span className="relative z-10">Apply</span>
+                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </a>
             ) : (
               <a
@@ -66,9 +67,10 @@ export default function SecurityFAQTopBar() {
           </a>
           <a
             href="#/apply"
-            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            Apply
+            <span className="relative z-10">Apply</span>
+            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </a>
         </nav>
       </div>
