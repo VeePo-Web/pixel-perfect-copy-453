@@ -10,9 +10,10 @@
     ],
     "module": "ESNext",
     "skipLibCheck": true,
+    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "src/*"
+        "./src/*"
       ]
     },
     "moduleResolution": "bundler",
