@@ -10,7 +10,9 @@
 // =========================================================================
 
 import { computeIndustryPack, type IndustryInputs, type IndustryPack } from "./report-industry.ts";
+import { computeGrowthBlock, type GrowthBlock } from "./report-growth.ts";
 export type { IndustryInputs, IndustryPack } from "./report-industry.ts";
+export type { GrowthBlock } from "./report-growth.ts";
 
 export type Txn = {
   posted_date: string;            // YYYY-MM-DD
@@ -104,6 +106,8 @@ export type MetricsPayload = {
   worstLine: ContributionLine | null;
   // industry pack — the vertical lead metric (prime cost / CM-per-order / WIP / GMROI / utilization)
   industry: IndustryPack | null;
+  // growth gate — reinvestment budget, only when reserve is secured AND LTV:CAC >= 3:1
+  growth: GrowthBlock;
   // trust
   coveragePct: number;
   transactionsCount: number;
@@ -280,6 +284,15 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
     input.profile,
   );
 
+  // --- GROWTH GATE: reinvestment budget, only when affordable (Layer 1) ---
+  const growth = computeGrowthBlock({
+    netProfit: profitProxy,
+    runwayMonths,
+    reserveFloorMonths: input.profile.reserve_floor_months,
+    ltv: input.industryInputs?.ltv ?? null,
+    cac: input.industryInputs?.cac ?? null,
+  });
+
   // --- COVERAGE ---
   const transactionsCount = input.transactions.length;
   const categorized = input.transactions.filter((t) => t.confidence >= conf && t.category).length;
@@ -305,6 +318,7 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
     if (c.marginPct != null) figures[`line_${i}_margin`] = c.marginPct;
   });
   if (industry) Object.assign(figures, industry.figures);
+  Object.assign(figures, growth.figures);
 
   return {
     period: { start: input.periodStart, end: input.periodEnd },
@@ -312,7 +326,7 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
     revenueVsPriorPct, profitProxy, profitVsPriorPct,
     waste, wasteAnnualTotal, duplicates, costCreep, biggestMover,
     ownerPay, contributionByLine, bestLine, worstLine,
-    industry,
+    industry, growth,
     coveragePct, transactionsCount,
     figures, profile: input.profile,
   };

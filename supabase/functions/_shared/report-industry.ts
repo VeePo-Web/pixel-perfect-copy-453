@@ -28,6 +28,8 @@ export type IndustryInputs = {
   availableHours?: number | null;    // agency: hours available
   avgInventory?: number | null;      // retail: average inventory value at cost
   jobs?: { name: string; pctComplete: number; contract: number; billed: number }[]; // contractor WIP
+  ltv?: number | null;               // growth gate: customer lifetime value
+  cac?: number | null;               // growth gate: customer acquisition cost
 };
 
 export type IndustryMetricStatus = "good" | "watch" | "danger" | "info";

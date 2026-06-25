@@ -2,7 +2,7 @@
 // the Cycle-6 Reference Report. Server-authoritative: it renders the stored
 // snapshot and never recomputes financials.
 import { useAdvisoryReport } from "@/lib/report/useAdvisoryReport";
-import { ReportSectionBlock, MoneyRecoveryStrip, ContributionByLine, DecisionMemo, TrustStamp, IndustryKpi } from "./ReportBlocks";
+import { ReportSectionBlock, MoneyRecoveryStrip, ContributionByLine, DecisionMemo, TrustStamp, IndustryKpi, GrowthGate } from "./ReportBlocks";
 import TemplateDownloadCard from "./TemplateDownloadCard";
 import { fmtDate } from "@/lib/report/format";
 
@@ -52,6 +52,7 @@ export default function AdvisoryReportView() {
             {s.key === "verdict" && m && <IndustryKpi pack={m.industry} />}
             {s.key === "making_money" && m && <ContributionByLine m={m} />}
             {s.key === "leaking" && m && <MoneyRecoveryStrip m={m} />}
+            {s.key === "grow" && m && <GrowthGate growth={m.growth} />}
           </div>
         ))}
 

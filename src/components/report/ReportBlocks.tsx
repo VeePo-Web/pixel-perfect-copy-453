@@ -1,9 +1,57 @@
 // Presentational building blocks for the advisory report surface.
 // Token-driven (ink / paper / gold / champagne / charcoal). Renders the
 // server-computed snapshot — never recomputes financials.
-import type { MetricsSnapshot, Recommendation, IndustryMetric, IndustryPack } from "@/lib/report/types";
+import type { MetricsSnapshot, Recommendation, IndustryMetric, IndustryPack, GrowthBlock } from "@/lib/report/types";
 import { BUCKET_LABEL } from "@/lib/report/types";
 import { fmtUSD, fmtPct, fmtDate } from "@/lib/report/format";
+
+// ---------------------------------------------------------------------------
+// GROWTH GATE — the "now make MORE money" move, shown only as earned. Growth is
+// the least-certain bucket: the budget appears ONLY when the cash reserve is
+// secured AND unit economics clear 3:1. Otherwise it shows exactly what to fix
+// first. Renders the server-computed gate; never recomputes.
+// ---------------------------------------------------------------------------
+function GateCheck({ label, state }: { label: string; state: boolean | null }) {
+  const style = state === true
+    ? { text: "text-green-signal", mark: "✓" }
+    : state === false
+      ? { text: "text-red-signal", mark: "✕" }
+      : { text: "text-ink/45", mark: "•" };
+  return (
+    <span className={`inline-flex items-center gap-1.5 text-[12.5px] ${style.text}`}>
+      <span aria-hidden className="font-[robert-medium]">{style.mark}</span>
+      {label}
+    </span>
+  );
+}
+
+export function GrowthGate({ growth }: { growth: GrowthBlock | null }) {
+  if (!growth) return null;
+  const open = growth.status === "ready";
+  return (
+    <div className={`mt-4 rounded-xl border px-6 py-5 ${open ? "border-green-signal/30 bg-green-signal/[0.05]" : "border-charcoal-700 bg-paper-raised"}`}>
+      <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/80">
+        Where to grow · the least-certain money move
+      </div>
+      <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+        <GateCheck label={`Cash reserve secured (${growth.reserveFloorMonths}-mo floor)`} state={growth.reserveSecured} />
+        <GateCheck
+          label={growth.ltvCacRatio != null ? `Unit economics ${growth.ltvCacRatio}:1 (need 3:1)` : "Unit economics (LTV:CAC) — add to assess"}
+          state={growth.unitEconomicsOk}
+        />
+      </div>
+      <p className="mt-3 text-[14px] leading-[1.65] text-ink/75">{growth.headline}</p>
+      {open && growth.reinvestLow != null && growth.reinvestHigh != null && (
+        <div className="mt-3 inline-flex items-baseline gap-2 rounded-lg bg-paper px-4 py-2 ring-1 ring-green-signal/25">
+          <span className="text-[11px] uppercase tracking-[0.12em] text-ink/45">Reinvest budget</span>
+          <span className="font-light tabular-nums text-green-signal text-[20px]">
+            {fmtUSD(growth.reinvestLow)} – {fmtUSD(growth.reinvestHigh)}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ---------------------------------------------------------------------------
 // INDUSTRY KPI SURFACE — the vertical lead metric (prime cost / CM-per-order /

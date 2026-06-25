@@ -66,6 +66,27 @@ export interface IndustryPack {
   figures: Record<string, number>;
 }
 
+/** The growth/reinvestment gate (mirrors supabase/functions/_shared/report-growth.ts). */
+export type GrowthStatus =
+  | "ready"
+  | "secure_reserve_first"
+  | "fix_unit_economics"
+  | "need_unit_economics"
+  | "not_profitable";
+export interface GrowthBlock {
+  status: GrowthStatus;
+  reserveSecured: boolean;
+  runwayMonths: number | null;
+  reserveFloorMonths: number;
+  ltvCacRatio: number | null;
+  unitEconomicsOk: boolean | null;
+  netProfit: number;
+  reinvestLow: number | null;
+  reinvestHigh: number | null;
+  headline: string;
+  figures: Record<string, number>;
+}
+
 /** The grounded numbers a report is built from (advisory_reports.metrics_snapshot). */
 export interface MetricsSnapshot {
   period: { start: string; end: string };
@@ -88,6 +109,7 @@ export interface MetricsSnapshot {
   bestLine: ContributionLine | null;
   worstLine: ContributionLine | null;
   industry: IndustryPack | null;
+  growth: GrowthBlock | null;
   coveragePct: number;
   transactionsCount: number;
   figures: Record<string, number>;
