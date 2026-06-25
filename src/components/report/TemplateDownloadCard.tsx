@@ -57,6 +57,7 @@ export default function TemplateDownloadCard({
   const pm = useMemo(() => toProductMetrics(m), [m]);
   const allowed = useMemo(() => traceableValues(pm), [pm]);
   const templates = useMemo(() => fillAllTemplates(pm), [pm]);
+  const hasData = pm.transactionsCount > 0;
 
   function downloadAll() {
     try {
@@ -85,23 +86,35 @@ export default function TemplateDownloadCard({
             Five spreadsheets, filled from your numbers
           </h2>
         </div>
-        <button
-          type="button"
-          onClick={downloadAll}
-          className="shrink-0 rounded-full bg-ink px-4 py-2 text-[12.5px] text-paper transition-transform duration-200 ease-cinema hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/40"
-        >
-          Download all (CSV)
-        </button>
+        {hasData && (
+          <button
+            type="button"
+            onClick={downloadAll}
+            className="shrink-0 rounded-full bg-ink px-4 py-2 text-[12.5px] text-paper transition-transform duration-200 ease-cinema hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/40"
+          >
+            Download all (CSV)
+          </button>
+        )}
       </div>
-      <p className="mt-2 max-w-[52ch] text-[13px] leading-[1.7] text-ink/55">
-        Every cell traces to your real data — read them here, or open any in Excel, Google Sheets, or Numbers.
-      </p>
 
-      <div className="mt-5 grid gap-4 sm:grid-cols-2">
-        {templates.map((t) => (
-          <FilledTemplateTable key={t.title} t={t} onDownload={() => downloadOne(t)} />
-        ))}
-      </div>
+      {hasData ? (
+        <>
+          <p className="mt-2 max-w-[52ch] text-[13px] leading-[1.7] text-ink/55">
+            Every cell traces to your real data — read them here, or open any in Excel, Google Sheets, or Numbers.
+          </p>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            {templates.map((t) => (
+              <FilledTemplateTable key={t.title} t={t} onDownload={() => downloadOne(t)} />
+            ))}
+          </div>
+        </>
+      ) : (
+        <p className="mt-3 max-w-[54ch] text-[13px] leading-[1.7] text-ink/55">
+          These fill in automatically once we see activity on your connected accounts. Sync a bank or card with a
+          few transactions and your Monthly Review, Cash Flow Forecast, Owner Pay, Subscription Audit, and Tax
+          Reserve appear here — every number tied to your real data.
+        </p>
+      )}
 
       {error && <p className="mt-3 text-[12px] text-ink/45">{error}</p>}
     </section>
