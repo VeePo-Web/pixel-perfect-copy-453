@@ -140,7 +140,7 @@ export default function ClosingBaitCTA() {
 
             {/* Microcopy */}
             <p className="mt-3 text-[11px] uppercase tracking-[0.2em] text-ink/40">
-              We send the templates once. No drip. No pitch. Unsubscribe anytime.
+              Free. We&apos;ll also send a short email series on how other owners use these to make better calls. Unsubscribe anytime.
             </p>
           </form>
         )}

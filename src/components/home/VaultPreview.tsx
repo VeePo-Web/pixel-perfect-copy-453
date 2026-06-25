@@ -22,17 +22,81 @@ interface VaultItem {
   icon: IconKey;
   label: string;
   decision: string;
+  rows: { key: string; value: string }[];
 }
 
 const VAULT: VaultItem[] = [
-  { icon: "cashflow", label: "Cash Flow Forecast", decision: "Will cash feel tight next month?" },
-  { icon: "review", label: "Monthly Financial Review", decision: "What happened to my numbers this month?" },
-  { icon: "expense", label: "Expense Audit", decision: "Where did my money actually go?" },
-  { icon: "hiring", label: "Hiring Affordability Calculator", decision: "Can I afford to hire right now?" },
-  { icon: "tax", label: "Tax Reserve Tracker", decision: "Am I setting enough aside for tax?" },
-  { icon: "subscription", label: "Subscription Expense Tracker", decision: "What am I paying for that I don't use?" },
-  { icon: "trend", label: "Revenue & Expense Trend Tracker", decision: "Revenue is up — so why does cash feel tight?" },
-] as const;
+  {
+    icon: "cashflow",
+    label: "Cash Flow Forecast",
+    decision: "Will cash feel tight next month?",
+    rows: [
+      { key: "Starting cash", value: "$84,200" },
+      { key: "Expected revenue", value: "+$132,400" },
+      { key: "Projected end cash", value: "$129,060" },
+    ],
+  },
+  {
+    icon: "review",
+    label: "Monthly Financial Review",
+    decision: "What happened to my numbers this month?",
+    rows: [
+      { key: "Total revenue", value: "$132,400" },
+      { key: "Gross margin", value: "61%" },
+      { key: "Net change", value: "+$6,200" },
+    ],
+  },
+  {
+    icon: "expense",
+    label: "Expense Audit",
+    decision: "Where did my money actually go?",
+    rows: [
+      { key: "Total expenses", value: "$87,540" },
+      { key: "Unusual spikes", value: "2 found" },
+      { key: "Review items", value: "12" },
+    ],
+  },
+  {
+    icon: "hiring",
+    label: "Hiring Affordability Calculator",
+    decision: "Can I afford to hire right now?",
+    rows: [
+      { key: "Monthly payroll", value: "$72,400" },
+      { key: "Revenue per head", value: "$26,480" },
+      { key: "Safe to hire?", value: "Review first" },
+    ],
+  },
+  {
+    icon: "tax",
+    label: "Tax Reserve Tracker",
+    decision: "Am I setting enough aside for tax?",
+    rows: [
+      { key: "Revenue YTD", value: "$396,000" },
+      { key: "Est. tax owed", value: "$88,000" },
+      { key: "Set aside today", value: "$8,200" },
+    ],
+  },
+  {
+    icon: "subscription",
+    label: "Subscription Expense Tracker",
+    decision: "What am I paying for that I don't use?",
+    rows: [
+      { key: "Active subs", value: "14" },
+      { key: "Monthly cost", value: "$2,840" },
+      { key: "Unused / at risk", value: "3" },
+    ],
+  },
+  {
+    icon: "trend",
+    label: "Revenue & Expense Trend Tracker",
+    decision: "Revenue is up — so why does cash feel tight?",
+    rows: [
+      { key: "Revenue growth", value: "+8.4%" },
+      { key: "Expense growth", value: "+12.1%" },
+      { key: "Margin delta", value: "−3.7%" },
+    ],
+  },
+];
 
 export default function VaultPreview() {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.15 });
@@ -115,6 +179,19 @@ export default function VaultPreview() {
               <p className="mt-2 text-[13px] leading-relaxed text-ink/60">
                 {item.decision}
               </p>
+
+              {/* Mini document preview — makes templates feel real, not abstract */}
+              <div className="mt-4 rounded-lg border border-ink/[0.07] bg-white/60 px-3 py-2">
+                {item.rows.map((row) => (
+                  <div
+                    key={row.key}
+                    className="flex items-baseline justify-between border-b border-ink/[0.05] py-1 last:border-b-0"
+                  >
+                    <span className="text-[10px] text-ink/50">{row.key}</span>
+                    <span className="font-mono text-[10.5px] text-ink/75">{row.value}</span>
+                  </div>
+                ))}
+              </div>
             </li>
           ))}
         </ul>
