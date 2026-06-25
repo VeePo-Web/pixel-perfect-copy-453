@@ -37,7 +37,7 @@ export default function DecisionCostSection() {
             className="inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-6 py-3 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             See a Sample Briefing
-            <span aria-hidden>â†’</span>
+            <span aria-hidden>→</span>
           </a>
         </div>
       </div>

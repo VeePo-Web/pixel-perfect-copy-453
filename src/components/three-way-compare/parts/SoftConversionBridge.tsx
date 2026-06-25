@@ -56,7 +56,7 @@ export default function SoftConversionBridge() {
                 onClick={() => trackCtaByHref(c.cta.href, "soft-bridge")}
                 className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema group-hover:text-champagne-200"
               >
-                {c.cta.label} <span aria-hidden>â†’</span>
+                {c.cta.label} <span aria-hidden>→</span>
               </a>
             </li>
           ))}

@@ -13,7 +13,7 @@ export default function MobileStickyTemplateCTA({ downloaded }: Props) {
   }, []);
 
   const href = downloaded ? "#/pricing#auto-fill" : "#vault-capture";
-  const label = downloaded ? "Auto-fill my reports â€” $99/mo" : "Send me the Vault";
+  const label = downloaded ? "Auto-fill my reports — $99/mo" : "Send me the Vault";
 
   return (
     <div
@@ -24,7 +24,7 @@ export default function MobileStickyTemplateCTA({ downloaded }: Props) {
     >
       <div className="flex items-center justify-between gap-3 px-4 pt-3">
         <p className="text-[11px] uppercase tracking-[0.22em] text-ink/50">
-          {downloaded ? "Next step" : "Free Â· no bank required"}
+          {downloaded ? "Next step" : "Free · no bank required"}
         </p>
         <a
           href={href}

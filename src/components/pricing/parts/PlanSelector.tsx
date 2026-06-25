@@ -62,7 +62,7 @@ export default function PlanSelector() {
                         }`}
                       >
                         <span>{opt.label}</span>
-                        <span aria-hidden className={`text-[11px] ${selected ? "text-champagne-200" : "text-ink/30"}`}>â†’</span>
+                        <span aria-hidden className={`text-[11px] ${selected ? "text-champagne-200" : "text-ink/30"}`}>→</span>
                       </button>
                     );
                   })}
@@ -124,7 +124,7 @@ export default function PlanSelector() {
                   </button>
                 </div>
                 <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-ink/45">
-                  No contracts Â· Cancel anytime
+                  No contracts · Cancel anytime
                 </p>
               </div>
             )}

@@ -22,15 +22,15 @@ export default function MobileStickyCTA({ recommendation }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // After Sample Briefing section â†’ apply
-  // After fit finder if MFD recommendation â†’ sample briefing
-  // Default â†’ Find My Best Fit
+  // After Sample Briefing section → apply
+  // After fit finder if MFD recommendation → sample briefing
+  // Default → Find My Best Fit
   let label = "Find My Best Fit";
   let href = "#fit-finder";
   let eyebrow = "60-second diagnostic";
 
   if (pastBriefing) {
-    label = "Auto-fill my reports â€” $99/mo";
+    label = "Auto-fill my reports — $99/mo";
     href = "#/pricing#auto-fill";
     eyebrow = "Your next step";
   } else if (recommendation) {

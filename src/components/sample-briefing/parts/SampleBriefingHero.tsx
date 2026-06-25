@@ -36,7 +36,7 @@ export default function SampleBriefingHero(props: Props) {
               See what financial clarity feels like before you apply.
             </h1>
             <p className="mt-5 max-w-[52ch] text-[15.5px] leading-[1.7] text-ink/70">
-              Choose a demo business or describe your own situation to preview a plain-English finance briefing â€” no bank connection required.
+              Choose a demo business or describe your own situation to preview a plain-English finance briefing — no bank connection required.
             </p>
 
             <div className="mt-8">

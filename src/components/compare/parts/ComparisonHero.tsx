@@ -50,7 +50,7 @@ export default function ComparisonHero() {
                 onClick={() => { startAutoFillCheckout(); track("autofill_clicked_from_compare", { source: "hero" }); }}
                 className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
-                Or have it done for you â€” $99/mo
+                Or have it done for you — $99/mo
               </button>
             </div>
             <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
@@ -119,9 +119,9 @@ function FlagshipColumn({ item }: { item: { shortLabel: string } }) {
       <div className="text-[9.5px] uppercase tracking-[0.26em] text-champagne-300/70">The middle</div>
       <div className="mt-3 text-[14px] font-light leading-snug text-ink">{item.shortLabel}</div>
       <ul className="mt-3 space-y-1.5 text-[11.5px] text-ink/70">
-        <li>Â· Structure</li>
-        <li>Â· Bi-weekly briefings</li>
-        <li>Â· Monthly review</li>
+        <li>· Structure</li>
+        <li>· Bi-weekly briefings</li>
+        <li>· Monthly review</li>
       </ul>
       <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-[10.5px] uppercase tracking-[0.24em] text-champagne-300/70">
         Most owner-led businesses

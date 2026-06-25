@@ -43,7 +43,7 @@ export default function AutoFillSpotlight() {
           <p className="mt-4 text-[15.5px] leading-[1.7] text-ink/70">{o.sub}</p>
         </div>
 
-        {/* Pattern E â€” stacked offer card */}
+        {/* Pattern E — stacked offer card */}
         <div
           ref={ref}
           className={`relative overflow-hidden rounded-3xl border border-champagne-200/35 bg-charcoal-900/70 backdrop-blur-sm shadow-[0_40px_120px_-40px_rgba(217,190,130,0.35)] transition-all duration-700 ease-cinema ${
@@ -53,7 +53,7 @@ export default function AutoFillSpotlight() {
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/60 to-transparent" />
 
           <div className="grid gap-10 p-8 sm:p-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14 lg:p-12">
-            {/* Left â€” the stack */}
+            {/* Left — the stack */}
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-champagne-200/40 bg-champagne-300/[0.06] px-3 py-1 text-[10.5px] uppercase tracking-[0.22em] text-champagne-300">
                 <span className="h-1.5 w-1.5 rounded-full bg-champagne-200 motion-safe:animate-soft-pulse" />
@@ -90,7 +90,7 @@ export default function AutoFillSpotlight() {
               </div>
             </div>
 
-            {/* Right â€” the price + ask */}
+            {/* Right — the price + ask */}
             <div className="flex flex-col justify-center rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-7 sm:p-8">
               <div className="text-[10.5px] uppercase tracking-[0.24em] text-champagne-300/70">
                 Your price today
@@ -117,7 +117,7 @@ export default function AutoFillSpotlight() {
                   CS
                 </span>
                 <span className="text-[11px] uppercase tracking-[0.16em] text-ink/45">
-                  Built by Chris Sam Â· institutional finance background
+                  Built by Chris Sam · institutional finance background
                 </span>
               </div>
               <p className="mt-3 text-[11.5px] leading-[1.6] text-ink/45">{o.trust}</p>

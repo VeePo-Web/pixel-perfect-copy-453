@@ -48,7 +48,7 @@ export default function PricingCard({ plan, emphasis }: Props) {
       )}
       <p className="mt-5 text-[14px] leading-[1.6] text-ink/75">{plan.positioning}</p>
       <p className="mt-3 text-[12.5px] leading-[1.6] text-ink/65">
-        <span className="uppercase tracking-[0.18em] text-ink/40">Best for Â· </span>
+        <span className="uppercase tracking-[0.18em] text-ink/40">Best for · </span>
         {plan.bestFor}
       </p>
       <ul className="mt-6 space-y-2.5">
@@ -74,7 +74,7 @@ export default function PricingCard({ plan, emphasis }: Props) {
           }`}
         >
           {plan.cta.label}
-          <span aria-hidden>â†’</span>
+          <span aria-hidden>→</span>
         </a>
       </div>
     </article>

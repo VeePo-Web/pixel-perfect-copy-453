@@ -51,14 +51,14 @@ export default function SecurityFAQHero() {
             onClick={() => { startAutoFillCheckout(); trackCtaByHref("#/pricing#auto-fill", "security_faq_hero"); }}
             className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-6 text-[13.5px] text-ink transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
           >
-            Auto-fill my reports â€” $99/mo
+            Auto-fill my reports — $99/mo
           </button>
           <a
             href="#/templates"
             onClick={() => trackCtaByHref("#/templates", "security_faq_hero")}
             className="inline-flex min-h-11 items-center text-[13px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
-            Start with free templates â†’
+            Start with free templates →
           </a>
         </div>
         <p className="mt-5 inline-flex items-center gap-2 text-[12px] text-ink/45">

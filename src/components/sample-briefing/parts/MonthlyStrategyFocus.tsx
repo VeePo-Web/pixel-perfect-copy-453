@@ -13,7 +13,7 @@ export default function MonthlyStrategyFocus({ business }: { business: DemoBusin
           className="inline-flex items-center gap-2 rounded-full border border-champagne-200/40 px-6 py-3 text-[13px] tracking-wide text-ink transition-all duration-300 ease-cinema hover:border-champagne-200 hover:bg-champagne-300/[0.06]"
         >
           Apply to Build Your Monthly Finance Rhythm
-          <span aria-hidden>â†’</span>
+          <span aria-hidden>→</span>
         </a>
       }
     >

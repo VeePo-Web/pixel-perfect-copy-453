@@ -63,7 +63,7 @@ export default function SampleBriefingProof() {
                 href="#/sample-briefing"
                 className="text-[12.5px] text-ink/60 underline-offset-4 hover:text-ink hover:underline"
               >
-                See Full Sample Briefing â†’
+                See Full Sample Briefing →
               </a>
             </div>
           </div>

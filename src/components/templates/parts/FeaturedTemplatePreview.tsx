@@ -7,7 +7,7 @@ import { useInView } from "../../how-it-works/hooks/useInView";
 const featured = templates.find((t) => t.id === "cash-flow-forecast")!;
 
 const notes = [
-  { tag: "What changed?", body: "Software spend climbed by $640 vs last month â€” driven by two new tools added in the last 30 days." },
+  { tag: "What changed?", body: "Software spend climbed by $640 vs last month — driven by two new tools added in the last 30 days." },
   { tag: "What looks risky?", body: "Payroll plus contractor costs now consume 55% of expected revenue. A 10% revenue dip would compress the reserve buffer." },
   { tag: "What decision does this affect?", body: "Hiring conversation likely worth phasing. Subscription audit recommended before next month." },
 ];
@@ -35,14 +35,14 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
             Built to help owners make decisions, not just fill cells.
           </h2>
           <p className="mt-4 max-w-[58ch] text-[14.5px] leading-relaxed text-ink/65">
-            A look at the {featured.name} â€” including the plain-English side notes that turn
+            A look at the {featured.name} — including the plain-English side notes that turn
             data into a decision. This is exactly what GoldFin Reports fills in and sends you
             every month.
           </p>
         </div>
 
         <div className="mt-10 grid items-start gap-8 lg:grid-cols-[1.1fr_1fr]">
-          <SpreadsheetPreview rows={featured.previewRows} title="Cash Flow Forecast â€” next 30 days" />
+          <SpreadsheetPreview rows={featured.previewRows} title="Cash Flow Forecast — next 30 days" />
           <div className="space-y-4">
             {notes.map((n, i) => (
               <div
@@ -80,7 +80,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
               </a>
             </div>
 
-            {/* $99 bridge â€” this filled example IS the monthly product */}
+            {/* $99 bridge — this filled example IS the monthly product */}
             <p className="mt-1 text-[13px] leading-[1.6] text-ink/60">
               Don't want to fill it in yourself every month?{" "}
               <button
@@ -88,7 +88,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
                 onClick={() => { startAutoFillCheckout(); track("autofill_clicked_from_templates", { source: "featured" }); }}
                 className="text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
-                GoldFin Reports does it for you â€” $99/mo â†’
+                GoldFin Reports does it for you — $99/mo →
               </button>
             </p>
           </div>

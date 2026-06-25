@@ -39,7 +39,7 @@ export default function PricingFinalCTA() {
         </div>
 
         <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
-          $99 / month Â· Auto-Filled Reports
+          $99 / month · Auto-Filled Reports
         </div>
         <h2 id="final-title" className="mx-auto mt-5 max-w-[24ch] font-light text-ink text-[42px] leading-[1.05] tracking-[-0.01em] sm:text-[60px]">
           Ready to stop guessing from your bank balance?
@@ -65,7 +65,7 @@ export default function PricingFinalCTA() {
             </a>
           </div>
           <p className="text-[11.5px] uppercase tracking-[0.22em] text-ink/50">
-            No contracts Â· Cancel anytime Â· No bank connection required
+            No contracts · Cancel anytime · No bank connection required
           </p>
           <a
             href="#/apply"

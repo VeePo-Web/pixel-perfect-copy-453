@@ -4,7 +4,7 @@ import { supabase } from "../../integrations/supabase/client";
 // Opens the embedded CheckoutOverlay directly (no page hop to the money).
 import { startAutoFillCheckout } from "../../lib/checkout";
 
-// Persona demo chips â€” each prefills a realistic, pain-language prompt so the
+// Persona demo chips — each prefills a realistic, pain-language prompt so the
 // visitor self-identifies ("this is built for businesses like mine").
 const DEMO_CHIPS: { label: string; prompt: string }[] = [
   { label: "Agency", prompt: "I run a 12-person agency doing about $90K/month. Revenue is growing, but cash still feels tight and contractor costs keep changing." },
@@ -79,8 +79,8 @@ const COPY = {
   ],
   postDemo: {
     headline: "Want this briefing for your real business every month?",
-    body: "GoldFin Reports fills your templates from your numbers and sends a plain-English briefing like this one â€” every month. No spreadsheet work. Cancel anytime.",
-    primary: "Auto-fill my reports â€” $99/mo",
+    body: "GoldFin Reports fills your templates from your numbers and sends a plain-English briefing like this one — every month. No spreadsheet work. Cancel anytime.",
+    primary: "Auto-fill my reports — $99/mo",
     primaryHref: "#/pricing#auto-fill",
     secondary: "Get the free Template Vault",
     secondaryHref: "#/templates",
@@ -204,7 +204,7 @@ const FinanceHero = () => {
 
   return (
     <section id="top" className="relative w-full overflow-hidden bg-white text-ink">
-      {/* Quiet hairline accents â€” no dark washes */}
+      {/* Quiet hairline accents — no dark washes */}
       <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold-500/40 to-transparent" />
 
       <div className="relative mx-auto flex min-h-[calc(100dvh-56px)] w-full max-w-7xl flex-col px-5 pb-24 pt-10 sm:px-8 lg:px-12 lg:pt-14">
@@ -304,7 +304,7 @@ const FinanceHero = () => {
                 </span>
               </div>
 
-              {/* Demo chips â€” self-identification + zero-effort prefill */}
+              {/* Demo chips — self-identification + zero-effort prefill */}
               <div className="mt-4 pl-1">
                 <p className="font-general text-[0.62rem] uppercase tracking-[0.2em] text-ink/40">
                   Or start from a business like yours
@@ -642,7 +642,7 @@ const PostDemoCTA = () => (
         {COPY.postDemo.secondary}
       </a>
     </div>
-    <p className="mt-3 font-general text-[11px] uppercase tracking-[0.22em] text-ink/40">No contracts Â· Cancel anytime</p>
+    <p className="mt-3 font-general text-[11px] uppercase tracking-[0.22em] text-ink/40">No contracts · Cancel anytime</p>
     <a
       href={COPY.postDemo.tertiaryHref}
       className="mt-3 inline-block font-general text-[0.68rem] uppercase tracking-[0.18em] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-200 hover:underline"

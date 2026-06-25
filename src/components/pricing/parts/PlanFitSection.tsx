@@ -49,7 +49,7 @@ export default function PlanFitSection() {
                     className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                   >
                     {col.cta.label}
-                    <span aria-hidden>â†’</span>
+                    <span aria-hidden>→</span>
                   </button>
                 ) : (
                   <a
@@ -57,7 +57,7 @@ export default function PlanFitSection() {
                     className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] font-medium tracking-wide text-ink/90 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-ink"
                   >
                     {col.cta.label}
-                    <span aria-hidden>â†’</span>
+                    <span aria-hidden>→</span>
                   </a>
                 )}
               </div>

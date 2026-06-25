@@ -56,7 +56,7 @@ export default function HeroVaultCapture() {
       >
         <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300">On its way</div>
         <p className="mt-2 text-[18px] font-light text-ink">
-          Check your inbox{firstName ? `, ${firstName}` : ""} â€” the Vault is on its way.
+          Check your inbox{firstName ? `, ${firstName}` : ""} — the Vault is on its way.
         </p>
         <p className="mt-2 text-[13.5px] leading-[1.6] text-ink/60">
           Over the next few days we'll show you how owners actually use each template to make hiring, pricing, and cash-flow calls.
@@ -65,7 +65,7 @@ export default function HeroVaultCapture() {
           type="button" onClick={startAutoFillCheckout}
           className="mt-5 inline-flex items-center gap-2 text-[13px] text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline"
         >
-          Prefer it filled for you every month? See GoldFin Reports â€” $99/mo â†’
+          Prefer it filled for you every month? See GoldFin Reports — $99/mo →
         </button>
       </div>
     );
@@ -110,7 +110,7 @@ export default function HeroVaultCapture() {
         disabled={status === "sending"}
         className="group relative mt-3 w-full overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13.5px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:opacity-70 sm:w-auto"
       >
-        <span className="relative z-10">{status === "sending" ? "Sendingâ€¦" : "Send me the Vault"}</span>
+        <span className="relative z-10">{status === "sending" ? "Sending…" : "Send me the Vault"}</span>
         <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
       </button>
       <p className="mt-3 text-[12px] text-ink/50">

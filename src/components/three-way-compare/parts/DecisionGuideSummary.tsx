@@ -38,7 +38,7 @@ export default function DecisionGuideSummary() {
                 onClick={() => trackCtaByHref(row.href, `decision-${i}`)}
                 className="justify-self-start rounded-full border border-ink/[0.12] px-4 py-2 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink sm:justify-self-end"
               >
-                Go â†’
+                Go →
               </a>
             </li>
           ))}

@@ -27,7 +27,7 @@ export default function FinancialSupportFitFinder({ finder }: Props) {
       <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="max-w-[62ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
-            Fit Finder Â· 60 seconds
+            Fit Finder · 60 seconds
           </div>
           <h2
             id="fit-finder-heading"

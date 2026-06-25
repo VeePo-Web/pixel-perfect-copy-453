@@ -17,7 +17,7 @@ export default function BusinessPromptInput({ value, onChange, onGenerate, onUse
         value={value}
         onChange={(e) => onChange(e.target.value)}
         rows={4}
-        placeholder="Describe your business and what you want to understand about your numbersâ€¦"
+        placeholder="Describe your business and what you want to understand about your numbers…"
         className="w-full resize-none bg-transparent text-[15px] leading-[1.6] text-ink placeholder:text-ink/35 focus:outline-none"
       />
       <p className="mt-2 text-[12px] text-ink/40">
@@ -44,7 +44,7 @@ export default function BusinessPromptInput({ value, onChange, onGenerate, onUse
           href="#/apply"
           className="ml-auto text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
         >
-          Apply for the GoldFin Desk â†’
+          Apply for the GoldFin Desk →
         </a>
       </div>
     </div>

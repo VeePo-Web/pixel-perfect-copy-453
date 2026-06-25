@@ -51,7 +51,7 @@ export default function SecuritySampleBriefingPreview() {
           >
             <div className="flex items-center justify-between border-b border-ink/[0.06] pb-4">
               <div className="text-[11px] uppercase tracking-[0.24em] text-ink/45">
-                Sample briefing Â· preview
+                Sample briefing · preview
               </div>
               <div className="text-[10.5px] text-ink/35">demo data</div>
             </div>

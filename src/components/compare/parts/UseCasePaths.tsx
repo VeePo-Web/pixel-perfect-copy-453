@@ -58,7 +58,7 @@ export default function UseCasePaths() {
                     Owner says
                   </div>
                   <div className="mt-2 text-[16px] font-light leading-snug text-ink">
-                    â€œ{u.quote}â€
+                    “{u.quote}”
                   </div>
                 </button>
                 <div

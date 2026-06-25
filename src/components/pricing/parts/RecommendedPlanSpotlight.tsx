@@ -10,7 +10,7 @@ export default function RecommendedPlanSpotlight() {
       <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="mb-12 max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
-            The next step up Â· by application
+            The next step up · by application
           </div>
           <h2 id="spotlight-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[46px]">
             When you want a human reading the numbers with you.
@@ -63,7 +63,7 @@ export default function RecommendedPlanSpotlight() {
                 </a>
               </div>
               <p className="mt-4 text-[11px] uppercase tracking-[0.22em] text-ink/45">
-                Most owners start at $99 Â· Advisory is application-only
+                Most owners start at $99 · Advisory is application-only
               </p>
             </div>
 

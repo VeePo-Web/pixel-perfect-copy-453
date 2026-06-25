@@ -50,7 +50,7 @@ export default function ComparisonHero() {
                 onClick={() => { startAutoFillCheckout(); trackCtaByHref("#/pricing#auto-fill", "hero"); }}
                 className="text-[12.5px] text-ink/55 underline-offset-4 transition-all duration-300 ease-cinema hover:text-ink hover:underline"
               >
-                Or have it done for you â€” $99/mo
+                Or have it done for you — $99/mo
               </button>
             </div>
             <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
@@ -71,7 +71,7 @@ function ThreeColumnDecision() {
   return (
     <div className="relative rounded-3xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_120px_-40px_rgba(25,28,34,0.14)] sm:p-8">
       <div className="text-[10.5px] uppercase tracking-[0.28em] text-ink/45">
-        Three options Â· one decision
+        Three options · one decision
       </div>
       <div className="mt-5 grid grid-cols-3 items-stretch gap-3">
         {heroColumns.map((c) => (

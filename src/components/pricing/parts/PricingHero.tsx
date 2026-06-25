@@ -22,7 +22,7 @@ export default function PricingHero() {
               Free templates. <span className="text-champagne-300">$99 to have them filled for you.</span> $1,500 to have them read with you.
             </h1>
             <p className="mt-6 max-w-[56ch] text-[15.5px] leading-[1.7] text-ink/70">
-              Most owners donâ€™t need a full finance team â€” they need their numbers organized and explained every month. Thatâ€™s the $99 Auto-Fill plan. Start there.
+              Most owners don’t need a full finance team — they need their numbers organized and explained every month. That’s the $99 Auto-Fill plan. Start there.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <button
@@ -46,7 +46,7 @@ export default function PricingHero() {
               </a>
             </div>
             <p className="mt-4 text-[11.5px] uppercase tracking-[0.2em] text-ink/50">
-              No contracts Â· Cancel anytime Â· No bank connection required to start
+              No contracts · Cancel anytime · No bank connection required to start
             </p>
           </div>
 

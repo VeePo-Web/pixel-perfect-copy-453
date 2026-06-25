@@ -79,7 +79,7 @@ export default function SuccessPage({ onClear }: { onClear: () => void }) {
                 className="group rounded-xl border border-ink/[0.06] bg-charcoal-900/40 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-champagne-200/30"
               >
                 <div className="text-[13.5px] leading-[1.5] text-ink/85 group-hover:text-ink">{w.t}</div>
-                <div className="mt-3 text-[11px] uppercase tracking-[0.22em] text-champagne-300/70">Open â†’</div>
+                <div className="mt-3 text-[11px] uppercase tracking-[0.22em] text-champagne-300/70">Open →</div>
               </a>
             ))}
           </div>

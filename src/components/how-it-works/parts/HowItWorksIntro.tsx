@@ -68,7 +68,7 @@ export default function HowItWorksIntro() {
             className="group inline-flex items-center text-[13px] text-ink/50 transition-colors duration-300 hover:text-champagne-300"
           >
             <span className="border-b border-ink/10 pb-0.5 group-hover:border-champagne-200/60">See a sample briefing</span>
-            <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">â†’</span>
+            <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
           </a>
         </div>
         <p className="mt-5 text-[11.5px] uppercase tracking-[0.22em] text-ink/35">{c.trust}</p>
@@ -116,7 +116,7 @@ export default function HowItWorksIntro() {
           </ol>
           <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-ink/10 to-transparent" />
           <p className="mt-4 text-[11.5px] leading-[1.6] text-ink/40">
-            A recurring operating loop â€” not a one-time report.
+            A recurring operating loop — not a one-time report.
           </p>
         </div>
       </div>

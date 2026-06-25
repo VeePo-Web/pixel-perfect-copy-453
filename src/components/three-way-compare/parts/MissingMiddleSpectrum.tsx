@@ -106,7 +106,7 @@ export default function MissingMiddleSpectrum() {
             <div className="flex flex-col justify-center">
               <p className="text-[14px] leading-relaxed text-ink/70">
                 Bi-weekly briefings, monthly strategy reviews, and an organized financial system
-                â€” without the cost or complexity of a CFO engagement.
+                — without the cost or complexity of a CFO engagement.
               </p>
               <div className="mt-6">
                 <a
