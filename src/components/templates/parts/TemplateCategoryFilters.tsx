@@ -1,4 +1,4 @@
-﻿import { useRef } from "react";
+import { useRef } from "react";
 import { categories } from "../content";
 import { track } from "../analytics";
 
@@ -21,15 +21,31 @@ export default function TemplateCategoryFilters({ active, onChange }: Props) {
   };
 
   return (
-    <div className="sticky top-14 z-30 border-b border-ink/[0.06] bg-charcoal-950/85 backdrop-blur-md">
-      {/* Sticks BELOW the fixed GlobalTopBar (z-40, ~56px tall), never overlapping
-          it — a category sub-filter under the nav, not a second nav bar. */}
-      <div className="mx-auto max-w-7xl px-6 py-3 lg:px-10">
+    // Sticks BELOW the fixed GlobalTopBar (~64px tall). Deliberately NOT a
+    // full-bleed bordered bar — that read as a second nav. Instead it is a
+    // frosted, content-width filter toolbar that floats over the grid: a soft
+    // translucent panel + a "Filter" label, no full-width hairline.
+    <div className="sticky top-16 z-30 px-4 pt-3 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center gap-3 rounded-full border border-ink/[0.06] bg-paper/70 px-3 py-2 shadow-[0_10px_30px_-18px_rgba(11,13,18,0.35)] backdrop-blur-md sm:px-4">
+
+        {/* Filter affordance — makes it unmistakably a control, not navigation */}
+        <span
+          aria-hidden
+          className="hidden shrink-0 items-center gap-1.5 pl-1 text-[10px] uppercase tracking-[0.2em] text-ink/35 sm:flex"
+        >
+          <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
+            <path d="M2 4h12M4.5 8h7M6.5 12h3" />
+          </svg>
+          Filter
+        </span>
+
+        <span aria-hidden className="hidden h-4 w-px shrink-0 rounded-full bg-ink/[0.10] sm:block" />
+
         <div
           ref={listRef}
           role="radiogroup"
-          aria-label="Template categories"
-          className="flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          aria-label="Filter templates by category"
+          className="flex gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {categories.map((c, i) => {
             const isActive = c === active;
@@ -45,9 +61,9 @@ export default function TemplateCategoryFilters({ active, onChange }: Props) {
                   onChange(c);
                   track("template_filter_clicked", { category: c });
                 }}
-                className={`min-h-[36px] shrink-0 rounded-full border px-4 py-1.5 text-[12.5px] transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-1 focus-visible:ring-offset-ink ${
+                className={`min-h-[34px] shrink-0 rounded-full border px-4 py-1.5 text-[12.5px] transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-1 focus-visible:ring-offset-paper ${
                   isActive
-                    ? "border-champagne-200/60 bg-champagne-200/[0.08] text-ink shadow-[0_0_24px_-10px_rgba(217,190,130,0.6)]"
+                    ? "border-champagne-200/60 bg-champagne-200/[0.10] text-ink shadow-[0_0_24px_-10px_rgba(217,190,130,0.6)]"
                     : "border-ink/[0.08] bg-ink/[0.02] text-ink/65 hover:border-ink/20 hover:text-ink"
                 }`}
               >
