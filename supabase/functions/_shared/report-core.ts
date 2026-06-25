@@ -104,14 +104,15 @@ export async function generateReportForUser(
   const cur = periodRange(periodEnd, 14);
   const prior = periodRange(cur.start, 14);
 
-  const [profileRes, acctRes, txRes, streamRes, ledgerRes, priorReportRes, profEmailRes] = await Promise.all([
+  const [profileRes, acctRes, txRes, streamRes, ledgerRes, priorReportRes, profEmailRes, inputsRes] = await Promise.all([
     admin.from("business_profiles").select("business_name, industry, entity_type, reserve_floor_months").eq("user_id", userId).maybeSingle(),
     admin.from("plaid_accounts").select("current_balance, type").eq("user_id", userId),
     admin.from("plaid_transactions").select("posted_date, name, merchant_name_norm, amount, category, confidence").eq("user_id", userId).gte("posted_date", prior.start).lte("posted_date", cur.end),
     admin.from("recurring_streams").select("direction, description, merchant_name, category, frequency, last_amount, first_amount, last_date, is_active").eq("user_id", userId),
-    admin.from("ledger_entries").select("entry_date, kind, amount, revenue_line, is_variable").eq("user_id", userId).gte("entry_date", cur.start).lte("entry_date", cur.end),
+    admin.from("ledger_entries").select("entry_date, kind, amount, revenue_line, category, is_variable").eq("user_id", userId).gte("entry_date", cur.start).lte("entry_date", cur.end),
     admin.from("advisory_reports").select("metrics_snapshot, recommendations, period_end").eq("user_id", userId).eq("status", "generated").order("created_at", { ascending: false }).limit(1).maybeSingle(),
     admin.from("profiles").select("email, first_name").eq("id", userId).maybeSingle(),
+    admin.from("business_metric_inputs").select("inputs").eq("user_id", userId).gte("period_end", cur.start).order("period_end", { ascending: false }).limit(1).maybeSingle(),
   ]);
 
   const profile = profileRes.data ?? { business_name: null, industry: "other", entity_type: "unknown", reserve_floor_months: 3 };
@@ -123,6 +124,7 @@ export async function generateReportForUser(
   const metrics: MetricsPayload = computeMetrics({
     accounts: acctRes.data ?? [], transactions, priorTransactions,
     recurringStreams: streamRes.data ?? [], ledger: ledgerRes.data ?? [],
+    industryInputs: (inputsRes.data?.inputs as Record<string, unknown> | undefined) ?? undefined,
     profile, periodStart: cur.start, periodEnd: cur.end, today: opts.today,
   });
 

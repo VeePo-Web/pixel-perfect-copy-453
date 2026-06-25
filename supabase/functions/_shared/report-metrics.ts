@@ -9,6 +9,9 @@
 // Plaid amount convention: POSITIVE = money OUT (spend), NEGATIVE = money IN.
 // =========================================================================
 
+import { computeIndustryPack, type IndustryInputs, type IndustryPack } from "./report-industry.ts";
+export type { IndustryInputs, IndustryPack } from "./report-industry.ts";
+
 export type Txn = {
   posted_date: string;            // YYYY-MM-DD
   name: string | null;
@@ -61,6 +64,7 @@ export type MetricsInput = {
   priorTransactions: Txn[];       // prior period (for deltas)
   recurringStreams: RecurringStream[];
   ledger?: LedgerEntry[];         // spreadsheet-template intake (optional)
+  industryInputs?: IndustryInputs; // period-scoped vertical inputs (optional)
   profile: Profile;
   periodStart: string;
   periodEnd: string;
@@ -98,6 +102,8 @@ export type MetricsPayload = {
   contributionByLine: ContributionLine[];
   bestLine: ContributionLine | null;
   worstLine: ContributionLine | null;
+  // industry pack — the vertical lead metric (prime cost / CM-per-order / WIP / GMROI / utilization)
+  industry: IndustryPack | null;
   // trust
   coveragePct: number;
   transactionsCount: number;
@@ -265,6 +271,15 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
   const bestLine = contributionByLine[0] ?? null;
   const worstLine = contributionByLine.length > 1 ? contributionByLine[contributionByLine.length - 1] : null;
 
+  // --- INDUSTRY PACK: the vertical lead metric (Layer 1, deterministic) ---
+  const industry = computeIndustryPack(
+    input.profile.industry,
+    input.ledger ?? [],
+    input.industryInputs,
+    contributionByLine,
+    input.profile,
+  );
+
   // --- COVERAGE ---
   const transactionsCount = input.transactions.length;
   const categorized = input.transactions.filter((t) => t.confidence >= conf && t.category).length;
@@ -289,6 +304,7 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
     figures[`line_${i}_contribution`] = c.contribution;
     if (c.marginPct != null) figures[`line_${i}_margin`] = c.marginPct;
   });
+  if (industry) Object.assign(figures, industry.figures);
 
   return {
     period: { start: input.periodStart, end: input.periodEnd },
@@ -296,6 +312,7 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
     revenueVsPriorPct, profitProxy, profitVsPriorPct,
     waste, wasteAnnualTotal, duplicates, costCreep, biggestMover,
     ownerPay, contributionByLine, bestLine, worstLine,
+    industry,
     coveragePct, transactionsCount,
     figures, profile: input.profile,
   };

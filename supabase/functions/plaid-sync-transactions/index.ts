@@ -7,12 +7,9 @@
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
 import { plaid } from "../_shared/plaid.ts";
+import { buildCorrectionMap, enrichTransaction } from "../_shared/report-enrich.ts";
 
 const Body = z.object({ itemId: z.string().uuid() });
-
-const CONFIDENCE: Record<string, number> = {
-  VERY_HIGH: 0.95, HIGH: 0.8, MEDIUM: 0.6, LOW: 0.3, UNKNOWN: 0.1,
-};
 
 /** Collapse messy bank descriptors to a clean, stable merchant key. */
 function normalizeMerchant(merchant: string | null, name: string | null): string | null {
@@ -68,6 +65,13 @@ Deno.serve(async (req) => {
       .single();
     if (error || !item || item.user_id !== user.id) return json({ error: "Item not found" }, 404);
 
+    // ---- Layer 0: load the owner's correction memory (self-training categorizer) ----
+    const correctionsRes = await admin
+      .from("transaction_corrections")
+      .select("merchant_name_norm, category")
+      .eq("user_id", item.user_id);
+    const corrections = buildCorrectionMap(correctionsRes.data ?? []);
+
     // ---- /transactions/sync (cursor-paged) ----
     let cursor: string | undefined = item.cursor ?? undefined;
     let added = 0, modified = 0, removed = 0;
@@ -80,6 +84,15 @@ Deno.serve(async (req) => {
 
       const upserts = [...resp.added, ...resp.modified].map((t) => {
         const pf = t.personal_finance_category ?? null;
+        const merchantNorm = normalizeMerchant(t.merchant_name, t.name);
+        // Layer 0 enrichment: owner correction > deterministic rule > Plaid PFC > legacy.
+        const enriched = enrichTransaction({
+          merchantNorm,
+          pfcDetailed: pf?.detailed ?? null,
+          pfcPrimary: pf?.primary ?? null,
+          confidenceLevel: pf?.confidence_level ?? null,
+          legacyFirst: t.category?.[0] ?? null,
+        }, corrections);
         return {
           user_id: item.user_id,
           plaid_item_id: item.id,
@@ -88,13 +101,14 @@ Deno.serve(async (req) => {
           posted_date: t.date,
           name: t.name,
           merchant_name_raw: t.merchant_name,
-          merchant_name_norm: normalizeMerchant(t.merchant_name, t.name),
+          merchant_name_norm: merchantNorm,
           amount: t.amount,
           iso_currency_code: t.iso_currency_code,
           pending: t.pending,
           category_raw: pf ?? (t.category ? { legacy: t.category } : null),
-          category: pf?.detailed ?? pf?.primary ?? (t.category?.[0] ?? null),
-          confidence: CONFIDENCE[pf?.confidence_level ?? "UNKNOWN"] ?? 0.1,
+          category: enriched.category,
+          confidence: enriched.confidence,
+          owner_corrected: enriched.ownerCorrected,
         };
       });
 
