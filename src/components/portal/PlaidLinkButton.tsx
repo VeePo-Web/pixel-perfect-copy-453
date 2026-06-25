@@ -153,7 +153,7 @@ export default function PlaidLinkButton({
       <button
         type="button"
         disabled={disabled || loading || !ready || !linkToken || status !== "idle"}
-        onClick={() => open()}
+        onClick={handleOpen}
         className="rounded-full bg-ink px-6 py-2.5 text-[13px] font-medium text-paper disabled:opacity-40 hover:bg-ink/90"
       >
         {buttonLabel}
