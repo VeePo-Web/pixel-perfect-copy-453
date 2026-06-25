@@ -21,6 +21,7 @@ export default function StepFit({ state, update, errors, onBack, onContinue }: P
   return (
     <ApplicationStepShell
       step={1}
+      note={APPLY.landing.selectiveNote}
       headline={c.headline}
       sub={c.sub}
       onBack={onBack}

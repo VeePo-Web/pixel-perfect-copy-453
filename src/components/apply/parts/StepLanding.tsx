@@ -11,7 +11,8 @@ export default function StepLanding({ onStart, showWelcomeBack, onResume }: Prop
   const c = APPLY.landing;
   return (
     <div className="motion-safe:animate-section-in">
-      <div className="mb-6 text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">{c.eyebrow}</div>
+      <div className="mb-3 text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">{c.eyebrow}</div>
+      <p className="mb-5 text-[11px] uppercase tracking-[0.22em] text-ink/35">{c.selectiveNote}</p>
       <h1 className="font-robert-medium text-[clamp(2.25rem,5vw,4rem)] leading-[1.02] tracking-tight text-ink">
         {c.headline}
       </h1>

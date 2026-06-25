@@ -4,6 +4,7 @@ type Props = {
   step: number;
   total?: number;
   eyebrow?: string;
+  note?: string;
   headline: string;
   sub?: string;
   children: React.ReactNode;
@@ -18,6 +19,7 @@ export default function ApplicationStepShell({
   step,
   total = 5,
   eyebrow,
+  note,
   headline,
   sub,
   children,
@@ -29,9 +31,12 @@ export default function ApplicationStepShell({
 }: Props) {
   return (
     <div className="motion-safe:animate-section-in">
-      <div className="mb-6 text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
-        {eyebrow ?? `Application Â· 0${step} / 0${total}`}
+      <div className="mb-3 text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
+        {eyebrow ?? `Application · 0${step} / 0${total}`}
       </div>
+      {note && (
+        <p className="mb-5 text-[11px] uppercase tracking-[0.22em] text-ink/35">{note}</p>
+      )}
       <h1 className="font-robert-medium text-[clamp(1.8rem,3.6vw,2.8rem)] leading-[1.05] tracking-tight text-ink">
         {headline}
       </h1>

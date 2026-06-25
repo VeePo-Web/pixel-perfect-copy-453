@@ -7,12 +7,13 @@ export const APPLY = {
   steps: ["Fit", "Business", "Numbers", "Readiness", "Review"],
   landing: {
     eyebrow: "PRIVATE APPLICATION",
+    selectiveNote: "We accept a limited number of owners per month.",
     headline: "Apply for the GoldFin Advisory",
-    sub: "Tell us a little about your business, your current financial setup, and what you want to understand better. No bank connection, documents, or payment required to apply.",
+    sub: "Tell us about your business so we can decide if the Desk is a fit. No bank connection, documents, or payment required.",
     micro: "Application takes about 3 minutes. No bank connection required.",
     primary: "Start My Application",
-    secondary: "Generate Sample Finance Briefing",
-    tertiary: "Start with Free Templates",
+    secondary: "See a sample briefing first",
+    tertiary: "Start with free templates",
     fitNote: "Best for businesses that have outgrown bank-balance guessing but are not ready for a full finance team.",
     rhythmCard: {
       title: "Your Monthly Finance Rhythm",
@@ -27,8 +28,8 @@ export const APPLY = {
     welcomeBack: "Welcome back. Continue your GoldFin Advisory application.",
   },
   step1: {
-    headline: "First, let's see if this is the right level of support.",
-    sub: "The GoldFin Advisory is designed for owner-led businesses with real financial movement, recurring expenses, and decisions that need clearer numbers.",
+    headline: "Tell us about your business so we can decide if the Desk is a fit.",
+    sub: "The GoldFin Advisory works best for owner-led businesses with real financial movement, recurring expenses, and decisions that need clearer numbers.",
     businessTypes: [
       "Agency",
       "Clinic",
@@ -148,7 +149,7 @@ export const APPLY = {
   },
   success: {
     headline: "Your application has been received.",
-    sub: "Thank you for applying to the GoldFin Advisory. If your business appears to be a fit, you will receive next steps for the premium finance desk review process.",
+    sub: "We'll review your application within 2 business days. If your business is a fit, you'll receive next steps for the GoldFin Advisory.",
     confirm: [
       "Application received",
       "No bank connection completed",
