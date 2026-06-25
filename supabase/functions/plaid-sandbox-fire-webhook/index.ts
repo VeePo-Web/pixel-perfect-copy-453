@@ -7,8 +7,10 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   try {
     if ((Deno.env.get("PLAID_ENV") || "sandbox").toLowerCase() !== "sandbox") {
+      console.warn("plaid-sandbox-fire-webhook called outside sandbox; rejecting");
       return json({ error: "sandbox only" }, 403);
     }
+
     const user = await getUserFromRequest(req);
     const { itemLocalId, webhook_type, webhook_code, error } = await req.json();
 
