@@ -45,6 +45,27 @@ export interface ContributionLine {
   marginPct: number | null;
 }
 
+/** The vertical lead metric pack (mirrors supabase/functions/_shared/report-industry.ts). */
+export type IndustryMetricStatus = "good" | "watch" | "danger" | "info";
+export type IndustryMetricUnit = "pct" | "usd" | "ratio" | "x";
+export interface IndustryMetric {
+  key: string;
+  label: string;
+  value: number;
+  unit: IndustryMetricUnit;
+  benchmarkLabel: string | null;
+  status: IndustryMetricStatus;
+  note: string | null;
+}
+export interface IndustryPack {
+  industry: string;
+  leadLabel: string;
+  headline: string;
+  metrics: IndustryMetric[];
+  unlockNote: string | null;
+  figures: Record<string, number>;
+}
+
 /** The grounded numbers a report is built from (advisory_reports.metrics_snapshot). */
 export interface MetricsSnapshot {
   period: { start: string; end: string };
@@ -66,6 +87,7 @@ export interface MetricsSnapshot {
   contributionByLine: ContributionLine[];
   bestLine: ContributionLine | null;
   worstLine: ContributionLine | null;
+  industry: IndustryPack | null;
   coveragePct: number;
   transactionsCount: number;
   figures: Record<string, number>;

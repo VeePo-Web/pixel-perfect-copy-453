@@ -60,6 +60,11 @@ export default {
           signal: "#2E6B4A",
           deep: "#1F3B2D",
         },
+        // Single restrained semantic-danger token (AA on white) — used only for
+        // "past the line" financial warnings (e.g. prime cost > 65%).
+        red: {
+          signal: "#A8362F",
+        },
       },
       transitionTimingFunction: {
         cinema: "cubic-bezier(0.22, 1, 0.36, 1)",

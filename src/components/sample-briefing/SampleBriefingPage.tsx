@@ -3,6 +3,7 @@ import SampleBriefingHero from "./parts/SampleBriefingHero";
 import BriefingReportShell from "./parts/BriefingReportShell";
 import RawDataVsClarity from "./parts/RawDataVsClarity";
 import BriefingTabs from "./parts/BriefingTabs";
+import VerticalReferenceReports from "./parts/VerticalReferenceReports";
 import WhatThisIsNot from "./parts/WhatThisIsNot";
 import PrivacyTrustBlock from "./parts/PrivacyTrustBlock";
 import SampleBriefingCTA from "./parts/SampleBriefingCTA";
@@ -50,6 +51,7 @@ export default function SampleBriefingPage() {
       <BriefingReportShell business={s.business} visible={s.status === "ready"} />
       <RawDataVsClarity />
       <BriefingTabs business={s.business} />
+      <VerticalReferenceReports />
       <WhatThisIsNot />
       <PrivacyTrustBlock />
       <SampleBriefingCTA

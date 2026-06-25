@@ -1,9 +1,73 @@
 // Presentational building blocks for the advisory report surface.
 // Token-driven (ink / paper / gold / champagne / charcoal). Renders the
 // server-computed snapshot — never recomputes financials.
-import type { MetricsSnapshot, Recommendation } from "@/lib/report/types";
+import type { MetricsSnapshot, Recommendation, IndustryMetric, IndustryPack } from "@/lib/report/types";
 import { BUCKET_LABEL } from "@/lib/report/types";
 import { fmtUSD, fmtPct, fmtDate } from "@/lib/report/format";
+
+// ---------------------------------------------------------------------------
+// INDUSTRY KPI SURFACE — the vertical lead metric (prime cost / CM-per-order /
+// WIP underbilling / GMROI / utilization). Cycle-7: every report leads with
+// the owner's make-or-break number. Renders the server-computed pack only.
+// ---------------------------------------------------------------------------
+const STATUS_STYLE: Record<string, { text: string; ring: string; dot: string; word: string }> = {
+  good:   { text: "text-green-signal", ring: "ring-green-signal/25", dot: "bg-green-signal", word: "On target" },
+  watch:  { text: "text-gold-700",     ring: "ring-gold-500/30",     dot: "bg-gold-500",    word: "Watch" },
+  danger: { text: "text-red-signal",   ring: "ring-red-signal/30",   dot: "bg-red-signal",  word: "Past the line" },
+  info:   { text: "text-ink/60",       ring: "ring-charcoal-700",    dot: "bg-ink/30",      word: "" },
+};
+
+function fmtMetricValue(m: IndustryMetric): string {
+  switch (m.unit) {
+    case "pct": return fmtPct(m.value).replace("+", "");
+    case "usd": return fmtUSD(m.value);
+    case "x": return `${m.value}x`;
+    case "ratio": return `${m.value}`;
+  }
+}
+
+export function IndustryKpi({ pack }: { pack: IndustryPack | null }) {
+  if (!pack || (pack.metrics.length === 0 && !pack.unlockNote)) return null;
+  return (
+    <div className="mt-2 rounded-xl border border-charcoal-700 bg-paper-raised px-6 py-5">
+      <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/80">
+        Your make-or-break number · {pack.leadLabel}
+      </div>
+      {pack.metrics.length > 0 && (
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          {pack.metrics.map((m) => {
+            const s = STATUS_STYLE[m.status] ?? STATUS_STYLE.info;
+            return (
+              <div key={m.key} className={`rounded-lg bg-paper px-4 py-3 ring-1 ${s.ring}`}>
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="text-[12px] text-ink/55">{m.label}</span>
+                  {s.word && (
+                    <span className={`inline-flex items-center gap-1.5 text-[10.5px] uppercase tracking-[0.12em] ${s.text}`}>
+                      <span className={`h-1.5 w-1.5 rounded-full ${s.dot}`} aria-hidden />
+                      {s.word}
+                    </span>
+                  )}
+                </div>
+                <div className={`mt-1 font-light tabular-nums ${s.text} text-[26px] leading-none`}>
+                  {fmtMetricValue(m)}
+                </div>
+                {m.benchmarkLabel && (
+                  <div className="mt-1.5 text-[11.5px] text-ink/45">Target: {m.benchmarkLabel}</div>
+                )}
+                {m.note && <div className="mt-1.5 text-[12px] leading-[1.5] text-ink/65">{m.note}</div>}
+              </div>
+            );
+          })}
+        </div>
+      )}
+      {pack.unlockNote && (
+        <p className="mt-3 text-[12.5px] leading-[1.6] text-ink/55">
+          <span className="text-gold-700">Unlock:</span> {pack.unlockNote}
+        </p>
+      )}
+    </div>
+  );
+}
 
 export function ContributionByLine({ m }: { m: MetricsSnapshot }) {
   const lines = m.contributionByLine ?? [];
