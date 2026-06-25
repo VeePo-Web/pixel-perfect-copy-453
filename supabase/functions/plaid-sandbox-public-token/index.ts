@@ -7,8 +7,10 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   try {
     if ((Deno.env.get("PLAID_ENV") || "sandbox").toLowerCase() !== "sandbox") {
+      console.warn("plaid-sandbox-public-token called outside sandbox; rejecting");
       return json({ error: "sandbox only" }, 403);
     }
+
     await getUserFromRequest(req);
     const data = await plaid<{ public_token: string }>(
       "/sandbox/public_token/create",
