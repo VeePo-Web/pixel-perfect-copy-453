@@ -335,32 +335,34 @@ export const planFit = [
       "You want to organize manually",
       "You are not ready for a premium subscription",
     ],
-    cta: { label: "Get Free Templates", href: "#/templates" },
+    cta: { label: "Send me the Vault", href: "#/templates" },
     tone: "entry" as PlanTone,
   },
   {
-    title: "Apply for GoldFin Desk if:",
+    // continuity = gold CTA in PlanFitSection — bread & butter $99/mo
+    title: "Choose GoldFin Reports if:",
     bullets: [
-      "Your business has real monthly revenue",
+      "You want your reports filled for you monthly",
+      "You have recurring revenue and real expenses",
+      "You want a monthly plain-English briefing",
+      "You are ready to stop doing spreadsheet work",
+      "You want to cancel anytime with no lock-in",
+    ],
+    cta: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
+    tone: "continuity" as PlanTone,
+  },
+  {
+    // advisory — border/secondary per value ladder (not gold)
+    title: "Apply for GoldFin Advisory if:",
+    bullets: [
+      "Your business has real monthly financial movement",
       "You feel unclear even with tools or a bookkeeper",
-      "You want plain-English interpretation",
-      "You have hiring, cash flow, or expense decisions",
-      "You want a monthly financial rhythm",
+      "You want plain-English interpretation plus a strategy call",
+      "You have hiring, cash flow, or expense decisions to make",
+      "You want a recurring monthly financial rhythm",
     ],
     cta: { label: "Apply for the GoldFin Desk", href: "#/apply" },
     tone: "flagship" as PlanTone,
-  },
-  {
-    title: "Request Private Finance Room if:",
-    bullets: [
-      "Your business has higher complexity",
-      "You need deeper planning",
-      "You want more strategic support",
-      "You are considering larger financial decisions",
-      "You want a more private, high-touch process",
-    ],
-    cta: { label: "Request Private Review", href: "#/apply" },
-    tone: "private" as PlanTone,
   },
 ];
 

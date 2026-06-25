@@ -4,10 +4,10 @@ type Props = { plan: PricingPlan; emphasis?: boolean };
 
 export default function PricingCard({ plan, emphasis }: Props) {
   const flagship = plan.tone === "flagship" || emphasis;
-  // The $99 continuity rung is the recommended pick â€” give it gold weight
-  // (border + filled CTA) without the flagship's scale.
+  // The $99 continuity rung is the ONLY plan that earns the gold CTA.
+  // Advisory (flagship) is text/tertiary — never gold.
   const recommended = plan.tone === "continuity";
-  const gold = flagship || recommended;
+  const gold = recommended; // advisory does NOT get gold
   return (
     <article
       className={`group relative flex h-full flex-col rounded-2xl border p-6 backdrop-blur-sm transition-all duration-500 ease-cinema sm:p-7 ${
@@ -56,7 +56,7 @@ export default function PricingCard({ plan, emphasis }: Props) {
           <li key={line} className="flex items-start gap-2.5 text-[13.5px] leading-[1.55] text-ink/85">
             <span
               className={`mt-1.5 inline-block h-1.5 w-1.5 shrink-0 rounded-full ${
-                gold ? "bg-champagne-200" : "bg-bone/30"
+                flagship || gold ? "bg-champagne-200" : "bg-bone/30"
               }`}
               aria-hidden
             />

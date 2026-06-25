@@ -1,4 +1,5 @@
 ﻿import { monthlyRhythm } from "../content";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 
 export default function RecommendedPlanSpotlight() {
   return (
@@ -38,12 +39,21 @@ export default function RecommendedPlanSpotlight() {
                 A recurring system that keeps the financial side of the business from disappearing into the background.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
+                {/* $99/mo — gold, the bread-and-butter rung; Advisory is never gold */}
+                <button
+                  type="button"
+                  onClick={startAutoFillCheckout}
+                  className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                >
+                  <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+                  <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+                </button>
+                {/* Advisory — border/secondary */}
                 <a
                   href="#/apply"
-                  className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                  className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 >
-                  <span className="relative z-10">Apply for the GoldFin Desk</span>
-                  <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+                  Apply for the GoldFin Desk
                 </a>
                 <a
                   href="#/sample-briefing"
@@ -53,7 +63,7 @@ export default function RecommendedPlanSpotlight() {
                 </a>
               </div>
               <p className="mt-4 text-[11px] uppercase tracking-[0.22em] text-ink/45">
-                Application-only Â· Fewer than 12 spots
+                Most owners start at $99 Â· Advisory is application-only
               </p>
             </div>
 

@@ -28,11 +28,12 @@
                 <span className="relative z-10">Generate Sample Finance Briefing</span>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </a>
+              {/* Advisory — text/tertiary; never border or gold per value ladder */}
               <a
                 href="#/apply"
-                className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors duration-300 hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-950"
               >
-                Apply for the GoldFin Desk
+                Apply for the GoldFin Desk →
               </a>
             </div>
           </div>

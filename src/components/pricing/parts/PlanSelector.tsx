@@ -1,5 +1,6 @@
 ﻿import { selectorQuestions } from "../content";
 import { usePlanSelector } from "../hooks/usePlanSelector";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 
 export default function PlanSelector() {
   const s = usePlanSelector();
@@ -96,13 +97,24 @@ export default function PlanSelector() {
                 </h3>
                 <p className="mt-4 text-[15px] leading-[1.7] text-ink/80">{s.recommendation.body}</p>
                 <div className="mt-7 flex flex-wrap items-center gap-3">
-                  <a
-                    href={s.recommendation.cta.href}
-                    className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
-                  >
-                    <span className="relative z-10">{s.recommendation.cta.label}</span>
-                    <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
-                  </a>
+                  {/* Gold CTA only for $99/mo autofill — all other plans use border */}
+                  {s.recommendation.planId === "autofill" ? (
+                    <button
+                      type="button"
+                      onClick={startAutoFillCheckout}
+                      className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                    >
+                      <span className="relative z-10">{s.recommendation.cta.label}</span>
+                      <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+                    </button>
+                  ) : (
+                    <a
+                      href={s.recommendation.cta.href}
+                      className="rounded-full border border-ink/[0.12] px-6 py-3 text-[13px] font-medium text-ink/90 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                    >
+                      {s.recommendation.cta.label}
+                    </a>
+                  )}
                   <button
                     type="button"
                     onClick={s.reset}
