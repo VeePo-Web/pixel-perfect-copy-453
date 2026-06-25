@@ -51,7 +51,7 @@ export default function PainClarity() {
               <span className="w-[15ch] shrink-0 text-[15px] font-medium text-ink">
                 {l.tool}
               </span>
-              <span className="text-[15px] leading-[1.6] text-ink/55">{l.says}</span>
+              <span className="text-[15px] leading-[1.6] text-ink/70">{l.says}</span>
             </li>
           ))}
         </ul>

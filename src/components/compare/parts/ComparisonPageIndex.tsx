@@ -25,7 +25,7 @@ export default function ComparisonPageIndex() {
               <a
                 href={p.href}
                 onClick={() => track("comparison_page_link_clicked", { id: p.id })}
-                className="group flex h-full flex-col rounded-xl border border-ink/[0.06] bg-ink/[0.015] p-4 transition-colors duration-300 hover:border-champagne-200/25 hover:bg-ink/[0.03]"
+                className="group flex h-full flex-col rounded-xl border border-ink/[0.06] bg-ink/[0.015] p-4 transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:border-champagne-300/40 hover:bg-ink/[0.04] hover:shadow-[0_14px_34px_-20px_rgba(11,13,18,0.3)]"
               >
                 <div className="text-[10.5px] uppercase tracking-[0.24em] text-ink/40">
                   Compare

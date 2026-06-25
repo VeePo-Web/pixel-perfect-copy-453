@@ -4,14 +4,23 @@ import { fetchCheckoutClientSecret, type CheckoutOpenDetail, type PlanKey } from
 import { getStripe } from "../../lib/stripe";
 
 /**
- * Listens for the global "goldfin:open-checkout" event and mounts Stripe's
- * Embedded Checkout in a modal. Sits at the App root so any CTA on any page
- * can fire `openCheckout(plan)` without prop drilling.
+ * Mounts Stripe's Embedded Checkout in a modal. This module statically imports
+ * the (heavy) Stripe React SDK, so it is loaded LAZILY by CheckoutMount only
+ * after the first "goldfin:open-checkout" event — keeping the SDK out of the
+ * initial marketing bundle. `initialDetail` carries that first event's plan so
+ * the modal opens immediately on the click that armed it; subsequent opens are
+ * handled by this component's own listener.
  */
-export default function CheckoutOverlay() {
-  const [open, setOpen] = useState(false);
-  const [plan, setPlan] = useState<PlanKey | null>(null);
-  const [customerEmail, setCustomerEmail] = useState<string | undefined>(undefined);
+export default function CheckoutOverlay({
+  initialDetail = null,
+}: {
+  initialDetail?: CheckoutOpenDetail | null;
+}) {
+  const [open, setOpen] = useState(Boolean(initialDetail?.plan));
+  const [plan, setPlan] = useState<PlanKey | null>(initialDetail?.plan ?? null);
+  const [customerEmail, setCustomerEmail] = useState<string | undefined>(
+    initialDetail?.customerEmail,
+  );
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
+// Homepage is the LCP-critical landing route — keep it eager (no Suspense flash).
 import HomeSchema from "./components/home/HomeSchema";
 import HomeHero from "./components/home/HomeHero";
 import PainClarity from "./components/home/PainClarity";
@@ -6,21 +7,31 @@ import VaultPreview from "./components/home/VaultPreview";
 import EpiphanyBridge from "./components/home/EpiphanyBridge";
 import FounderTrustStrip from "./components/home/FounderTrustStrip";
 import ClosingBaitCTA from "./components/home/ClosingBaitCTA";
-import ApplicationFunnel from "./components/apply/ApplicationFunnel";
-import SampleBriefingPage from "./components/sample-briefing/SampleBriefingPage";
-import PricingPage from "./components/pricing/PricingPage";
-import FreeTemplateLibraryPage from "./components/templates/FreeTemplateLibraryPage";
-import ComparisonHubPage from "./components/compare/ComparisonHubPage";
-import BookkeeperVsFractionalCFOPage from "./components/three-way-compare/BookkeeperVsFractionalCFOPage";
-import SecurityFAQPage from "./components/security-faq/SecurityFAQPage";
-import CheckoutOverlay from "./components/payments/CheckoutOverlay";
-import CheckoutReturnPage from "./components/payments/CheckoutReturnPage";
-import BillingPage from "./components/payments/BillingPage";
-import PaymentTestModeBanner from "./components/payments/PaymentTestModeBanner";
+// Chrome is shared by every marketing route — keep eager so it paints instantly.
 import GlobalTopBar, { type NavKey } from "./components/nav/GlobalTopBar";
 import GoldFinFooter from "./components/footer/GoldFinFooter";
+import PaymentTestModeBanner from "./components/payments/PaymentTestModeBanner";
+import CheckoutMount from "./components/payments/CheckoutMount";
 import { useHashRoute } from "./components/apply/hooks/useHashRoute";
 import PortalRouter, { isPortalRoute } from "./portal/PortalRouter";
+
+// Interior routes are code-split: the homepage no longer ships their JS, which
+// keeps initial bundle / LCP small (the #1 SEO signal). Each loads on demand.
+const ApplicationFunnel = lazy(() => import("./components/apply/ApplicationFunnel"));
+const SampleBriefingPage = lazy(() => import("./components/sample-briefing/SampleBriefingPage"));
+const PricingPage = lazy(() => import("./components/pricing/PricingPage"));
+const FreeTemplateLibraryPage = lazy(() => import("./components/templates/FreeTemplateLibraryPage"));
+const ComparisonHubPage = lazy(() => import("./components/compare/ComparisonHubPage"));
+const BookkeeperVsFractionalCFOPage = lazy(() => import("./components/three-way-compare/BookkeeperVsFractionalCFOPage"));
+const SecurityFAQPage = lazy(() => import("./components/security-faq/SecurityFAQPage"));
+const CheckoutReturnPage = lazy(() => import("./components/payments/CheckoutReturnPage"));
+const BillingPage = lazy(() => import("./components/payments/BillingPage"));
+
+// Min-height spacer holds the viewport while a route chunk loads, so the footer
+// never jumps up (zero CLS) and there is no blank flash.
+function RouteFallback() {
+  return <div className="min-h-screen" aria-hidden />;
+}
 
 function usePathname(): string {
   const [path, setPath] = useState(
@@ -42,15 +53,23 @@ const App = () => {
   if (isPortalRoute(pathname)) return <PortalRouter pathname={pathname} />;
 
   // Path-based routes (Stripe's return URL is a real path, not a hash).
-  if (pathname === "/checkout/return") return <CheckoutReturnPage />;
+  if (pathname === "/checkout/return") {
+    return (
+      <Suspense fallback={<RouteFallback />}>
+        <CheckoutReturnPage />
+      </Suspense>
+    );
+  }
   if (pathname === "/billing") {
     return (
       <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
         <PaymentTestModeBanner />
         <GlobalTopBar currentPath="home" onDarkHero={false} />
-        <BillingPage />
+        <Suspense fallback={<RouteFallback />}>
+          <BillingPage />
+        </Suspense>
         <GoldFinFooter />
-        <CheckoutOverlay />
+        <CheckoutMount />
       </main>
     );
   }
@@ -60,15 +79,17 @@ const App = () => {
   //    it (its own padding clears the bar), so the page must NOT add top pad.
   //  • Interior pages are white and ship their own pt-32 heroes that clear the
   //    bar, so no wrapper padding is needed there either.
+  // Suspense is universal here; eager home content never suspends, lazy interior
+  // routes show the spacer fallback while their chunk loads.
   const wrap = (key: NavKey, children: React.ReactNode) => (
     <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
       <PaymentTestModeBanner />
       <GlobalTopBar currentPath={key} />
       <div id="main-content" tabIndex={-1} className="focus:outline-none">
-        {children}
+        <Suspense fallback={<RouteFallback />}>{children}</Suspense>
       </div>
       <GoldFinFooter />
-      <CheckoutOverlay />
+      <CheckoutMount />
     </main>
   );
 
@@ -77,7 +98,11 @@ const App = () => {
   // that produced two stacked nav bars. Dropping the marketing nav + footer also
   // removes escape links that leak funnel conversions (CXL / Brunson).
   if (route === "apply" || route === "thank-you") {
-    return <ApplicationFunnel />;
+    return (
+      <Suspense fallback={<RouteFallback />}>
+        <ApplicationFunnel />
+      </Suspense>
+    );
   }
   if (route === "sample-briefing") {
     return wrap("sample-briefing", <SampleBriefingPage />);

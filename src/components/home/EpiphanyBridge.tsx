@@ -130,7 +130,7 @@ export default function EpiphanyBridge() {
             <div className="mt-8">
               <a
                 href="#/pricing"
-                className="group inline-flex items-center border-b border-ink/15 pb-0.5 text-[13px] text-ink/50 transition-colors duration-300 hover:border-champagne-300/60 hover:text-champagne-300"
+                className="group inline-flex items-center border-b border-ink/20 pb-0.5 text-[13px] text-ink/65 transition-colors duration-300 hover:border-champagne-300/60 hover:text-champagne-300"
               >
                 See how auto-fill works
                 <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">
