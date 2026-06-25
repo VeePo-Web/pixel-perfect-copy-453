@@ -3,6 +3,7 @@ import PortalLayout from "../../components/portal/PortalLayout";
 import ProtectedRoute from "../../components/portal/ProtectedRoute";
 import BusinessProfileCard from "../../components/report/BusinessProfileCard";
 import TemplateImportCard from "../../components/report/TemplateImportCard";
+import MetricInputsCard from "../../components/report/MetricInputsCard";
 import AdvisoryReportView from "../../components/report/AdvisoryReportView";
 import { supabase } from "../../integrations/supabase/client";
 
@@ -58,6 +59,7 @@ export default function Report() {
             <BusinessProfileCard />
             <TemplateImportCard />
           </div>
+          <MetricInputsCard />
           <AdvisoryReportView />
         </div>
       </PortalLayout>
