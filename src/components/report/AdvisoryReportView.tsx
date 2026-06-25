@@ -3,6 +3,7 @@
 // snapshot and never recomputes financials.
 import { useAdvisoryReport } from "@/lib/report/useAdvisoryReport";
 import { ReportSectionBlock, MoneyRecoveryStrip, ContributionByLine, DecisionMemo, TrustStamp } from "./ReportBlocks";
+import TemplateDownloadCard from "./TemplateDownloadCard";
 import { fmtDate } from "@/lib/report/format";
 
 export default function AdvisoryReportView() {
@@ -55,6 +56,8 @@ export default function AdvisoryReportView() {
         {report.recommendations && <DecisionMemo recs={report.recommendations} />}
 
         <TrustStamp coverage={report.coverage_pct} periodEnd={report.period_end} model={report.model} />
+
+        {m && !failed && <TemplateDownloadCard m={m} periodEnd={report.period_end} />}
       </div>
 
       <div className="mt-8 flex items-center gap-4">
