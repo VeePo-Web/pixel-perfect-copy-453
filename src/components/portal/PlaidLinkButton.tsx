@@ -27,9 +27,21 @@ export default function PlaidLinkButton({
   const [status, setStatus] = useState<"idle" | "exchanging" | "connected">("idle");
   const [refreshKey, setRefreshKey] = useState(0);
 
+  const storageKey = `plaid_link_token:${mode}:${itemId ?? "new"}`;
+  const isOAuthReturn =
+    typeof window !== "undefined" && window.location.search.includes("oauth_state_id=");
+
   useEffect(() => {
     let alive = true;
     (async () => {
+      // On OAuth return, reuse the link token saved before redirect.
+      if (isOAuthReturn) {
+        const stored = sessionStorage.getItem(storageKey);
+        if (stored) {
+          setLinkToken(stored);
+          return;
+        }
+      }
       setLoading(true);
       setError(null);
       const { data, error } = await supabase.functions.invoke("plaid-create-link-token", {
@@ -39,14 +51,17 @@ export default function PlaidLinkButton({
       if (error || (data as { error?: string })?.error) {
         setError((data as { error?: string })?.error || error?.message || "Failed to start Plaid");
       } else {
-        setLinkToken((data as { linkToken: string }).linkToken);
+        const tok = (data as { linkToken: string }).linkToken;
+        setLinkToken(tok);
+        try { sessionStorage.setItem(storageKey, tok); } catch { /* ignore */ }
       }
       setLoading(false);
     })();
     return () => {
       alive = false;
     };
-  }, [mode, itemId, refreshKey]);
+  }, [mode, itemId, refreshKey, isOAuthReturn, storageKey]);
+
 
   const onSuccess = useCallback(
     async (publicToken: string, metadata: { institution?: { institution_id?: string; name?: string } | null }) => {
