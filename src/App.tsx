@@ -47,7 +47,7 @@ const App = () => {
     return (
       <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
         <PaymentTestModeBanner />
-        <GlobalTopBar currentPath="home" />
+        <GlobalTopBar currentPath="home" onDarkHero={false} />
         <BillingPage />
         <GoldFinFooter />
         <CheckoutOverlay />
@@ -55,15 +55,16 @@ const App = () => {
     );
   }
 
-  const wrap = (key: NavKey, children: React.ReactNode, extraTopPad = false) => (
+  // Single adaptive GlobalTopBar handles its own spacing:
+  //  • The homepage hero is dark + full-bleed; the bar floats transparent over
+  //    it (its own padding clears the bar), so the page must NOT add top pad.
+  //  • Interior pages are white and ship their own pt-32 heroes that clear the
+  //    bar, so no wrapper padding is needed there either.
+  const wrap = (key: NavKey, children: React.ReactNode) => (
     <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
       <PaymentTestModeBanner />
       <GlobalTopBar currentPath={key} />
-      <div
-        id="main-content"
-        tabIndex={-1}
-        className={`focus:outline-none${extraTopPad ? " pt-14" : ""}`}
-      >
+      <div id="main-content" tabIndex={-1} className="focus:outline-none">
         {children}
       </div>
       <GoldFinFooter />
@@ -108,7 +109,6 @@ const App = () => {
       <FounderTrustStrip />
       <ClosingBaitCTA />
     </>,
-    true,
   );
 };
 
