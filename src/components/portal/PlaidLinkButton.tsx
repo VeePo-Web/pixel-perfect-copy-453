@@ -67,6 +67,7 @@ export default function PlaidLinkButton({
     async (publicToken: string, metadata: { institution?: { institution_id?: string; name?: string } | null }) => {
       setStatus("exchanging");
       setError(null);
+      try { sessionStorage.removeItem(storageKey); } catch { /* ignore */ }
       if (mode === "update") {
         const { error } = await supabase.functions.invoke("plaid-sync-accounts", { body: { itemId } });
         if (error) {
@@ -102,7 +103,7 @@ export default function PlaidLinkButton({
         setRefreshKey((k) => k + 1);
       }, 1500);
     },
-    [mode, itemId, onConnected],
+    [mode, itemId, onConnected, storageKey],
   );
 
   const onExit = useCallback(
@@ -110,13 +111,33 @@ export default function PlaidLinkButton({
       if (err) {
         setError(err.display_message || err.error_message || "Plaid Link was closed");
       }
-      // Re-mint token so the button is usable again
+      try { sessionStorage.removeItem(storageKey); } catch { /* ignore */ }
       setRefreshKey((k) => k + 1);
     },
-    [],
+    [storageKey],
   );
 
-  const { open, ready } = usePlaidLink({ token: linkToken, onSuccess, onExit });
+  const { open, ready } = usePlaidLink({
+    token: linkToken,
+    onSuccess,
+    onExit,
+    receivedRedirectUri: isOAuthReturn ? window.location.href : undefined,
+  });
+
+  // Auto-resume Plaid Link after an OAuth bank redirect.
+  useEffect(() => {
+    if (isOAuthReturn && ready && linkToken) {
+      open();
+    }
+  }, [isOAuthReturn, ready, linkToken, open]);
+
+  const handleOpen = () => {
+    if (linkToken) {
+      try { sessionStorage.setItem(storageKey, linkToken); } catch { /* ignore */ }
+    }
+    open();
+  };
+
 
   const buttonLabel =
     status === "exchanging"
