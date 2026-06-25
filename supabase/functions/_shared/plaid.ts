@@ -3,27 +3,39 @@ import type { SupabaseClient } from "npm:@supabase/supabase-js@2.45.0";
 
 const PLAID_HOSTS: Record<string, string> = {
   sandbox: "https://sandbox.plaid.com",
-  development: "https://development.plaid.com",
   production: "https://production.plaid.com",
 };
 
-function plaidEnv(): string {
+export function plaidEnv(): string {
   return (Deno.env.get("PLAID_ENV") || "sandbox").toLowerCase();
+}
+
+export function isProduction(): boolean {
+  return plaidEnv() === "production";
 }
 
 function host(): string {
   return PLAID_HOSTS[plaidEnv()] ?? PLAID_HOSTS.sandbox;
 }
 
+function plaidSecret(): string {
+  const env = plaidEnv();
+  const key = env === "production" ? "PLAID_PRODUCTION_SECRET" : "PLAID_SANDBOX_SECRET";
+  const val = Deno.env.get(key);
+  if (!val) throw new Error(`Plaid secret missing: ${key} required for PLAID_ENV=${env}`);
+  return val;
+}
+
 export async function plaid<T>(path: string, body: Record<string, unknown>): Promise<T> {
   const clientId = Deno.env.get("PLAID_CLIENT_ID");
-  const secret = Deno.env.get("PLAID_SANDBOX_SECRET");
-  if (!clientId || !secret) throw new Error("Plaid credentials missing");
+  if (!clientId) throw new Error("PLAID_CLIENT_ID missing");
+  const secret = plaidSecret();
   const res = await fetch(`${host()}${path}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ client_id: clientId, secret, ...body }),
   });
+
   const text = await res.text();
   let parsed: unknown;
   try {
