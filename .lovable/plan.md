@@ -1,40 +1,34 @@
+## Goal
+Prove the Plaid sandbox connect flow works end-to-end in the live preview: sign in → mint link token → complete Plaid Link → exchange public token → see the account render in `/portal/accounts` and rows in `plaid_items` + `plaid_accounts`.
 
-## Context
+## Steps
 
-The Plaid Link flow is already wired:
+1. **Preflight (read-only checks)**
+   - `supabase--read_query` to confirm a usable preview user exists (or note we need one created).
+   - `supabase--curl_edge_functions` against `plaid-create-link-token` using the preview session to confirm a `linkToken` is returned.
 
-- `src/components/portal/PlaidLinkButton.tsx` mints a link token via `plaid-create-link-token`, opens Plaid Link via `react-plaid-link`, and posts the public token to `plaid-exchange-public-token`.
-- `plaid-create-link-token` builds a `/link/token/create` request (create or update mode), with the webhook URL pointing at `plaid-webhook`.
-- `plaid-exchange-public-token` swaps the public token for an access token, inserts a `plaid_items` row, then calls `syncAccountsForItem` to populate `plaid_accounts`.
-- `src/pages/portal/Accounts.tsx` already renders `<PlaidLinkButton onConnected={load} />` in both the header and the empty state, and reloads on success.
+2. **Sign in via Playwright**
+   - Launch headless Chromium against `http://localhost:8080`.
+   - Restore the managed Supabase session from `LOVABLE_BROWSER_SUPABASE_*` env vars (per browser-use rules) so we land authenticated.
+   - If `LOVABLE_BROWSER_AUTH_STATUS=signed_out`, stop and ask the user to sign in once in the preview so the session injects on the next turn.
+   - Satisfy the OTP gate by writing `gf_otp_verified_at` into `localStorage` (the gate this app uses), then navigate to `/portal/accounts`.
 
-So the feature exists. What's missing for a clean E2E is verification, a couple of UX gaps, and a sandbox-only helper to drive the flow without clicking through Plaid's modal.
+3. **Drive Plaid Link (primary path)**
+   - Click "Connect a bank" → wait for Plaid Link iframe → select "First Platypus Bank" → credentials `user_good` / `pass_good` → MFA `1234` if prompted → continue → submit.
+   - Screenshot each step into `/tmp/browser/plaid-e2e/screenshots/`.
+   - Assert the new institution card renders in the Accounts list.
 
-## Plan
+4. **Fallback if the Plaid iframe is flaky in headless Chromium**
+   - Call `plaid-sandbox-public-token` edge function to mint a sandbox public token server-side.
+   - POST it to `plaid-exchange-public-token` with the preview session.
+   - Reload `/portal/accounts` and assert the card appears. This proves exchange + sync + render without depending on the modal.
 
-1. **Harden `PlaidLinkButton`**
-   - Add `onExit` to `usePlaidLink` so user-cancelled or errored sessions surface a message instead of silently doing nothing.
-   - Re-mint the link token after a successful exchange or exit so the same button can be reused without a page reload.
-   - Show a clear success state (brief "Connected" label) before `onConnected` callback fires.
+5. **Verify persistence**
+   - `supabase--read_query` on `plaid_items` and `plaid_accounts` filtered to the test user — confirm an item row exists with `status=active` and at least one account row.
 
-2. **Confirm edge-function wiring**
-   - Verify `PLAID_CLIENT_ID` and `PLAID_SANDBOX_SECRET` secrets are present (they are).
-   - Confirm `plaid-create-link-token` and `plaid-exchange-public-token` are deployed; redeploy if needed.
-   - Smoke-test `plaid-create-link-token` via `supabase--curl_edge_functions` with the preview session to confirm a `linkToken` comes back.
-
-3. **Sandbox E2E verification (Playwright)**
-   - Script: sign in as the preview user → navigate to `/portal/accounts` → click "Connect a bank" → in Plaid Link sandbox iframe pick "First Platypus Bank" → credentials `user_good` / `pass_good` → continue through account select → confirm.
-   - Assert a new card appears in the Accounts list with at least one account row, and that `plaid_items` + `plaid_accounts` got rows for the user (via `supabase--read_query`).
-   - Capture screenshots at each step into `/tmp/browser/plaid-e2e/screenshots/`.
-
-4. **Fallback: programmatic sandbox path**
-   - If the Plaid Link iframe is flaky in headless Chromium (common), use the already-existing `plaid-sandbox-public-token` edge function to mint a sandbox public token server-side and POST it to `plaid-exchange-public-token`, then reload `/portal/accounts` and assert the UI updates. This proves the exchange + sync + render path without depending on the modal.
-
-5. **Report**
-   - Summarize: token mint OK, modal completed (or sandbox fallback used), exchange OK, rows in DB, UI shows the institution. Any failures get a targeted fix and a re-run.
+6. **Report**
+   - Final status: link-token OK, modal (or fallback) OK, exchange OK, DB rows present, UI updated, with screenshot paths. Any failure gets one targeted fix and a re-run.
 
 ## Out of scope
-
-- Transactions sync UI (separate `plaid-sync-transactions` function already exists).
-- Production Plaid environment (`PLAID_ENV` stays `sandbox`).
-- Reauth/update-mode flow beyond confirming the create path; update-mode is already wired and covered by the `ITEM_LOGIN_REQUIRED` work.
+- Transactions sync UI, production Plaid env, update-mode reauth flow.
+- No code changes unless a failure in step 3/4 requires a targeted fix.
