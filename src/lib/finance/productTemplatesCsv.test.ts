@@ -105,3 +105,34 @@ test("download file names are slugged and safe", () => {
   assert.equal(templateFileName(fillCashFlowForecast(M)), "cash-flow-forecast.csv");
   assert.equal(templateFileName(fillSubscriptionAudit(M)), "subscription-waste-audit.csv");
 });
+
+// The Tuesday: a brand-new connect with almost no activity must still produce clean,
+// honest, gate-passing templates — no "-$0.00", no throw on null runway.
+const ZERO: ProductMetrics = {
+  period: { start: "2026-06-01", end: "2026-06-14" },
+  cashOnHand: 0,
+  inflow: 0,
+  outflow: 0,
+  netCash: 0,
+  monthlyBurn: 0,
+  runwayMonths: null,
+  ownerPay: { profit: 0, ownerPay: 0, tax: 0, opex: 0 },
+  waste: [],
+  wasteAnnualTotal: 0,
+  costCreep: [],
+  coveragePct: 0,
+  transactionsCount: 0,
+  profile: { reserve_floor_months: 3 },
+};
+
+test("a zero-outflow period never emits negative zero", () => {
+  const moneyOut = fillCashFlowForecast(ZERO).rows.find((r) => r.label === "Money out");
+  assert.equal(moneyOut?.value, 0);
+  assert.equal(Object.is(moneyOut?.value, -0), false); // would render as "-$0.00" on screen
+});
+
+test("sparse metrics still pass the grounding gate (null runway, empty waste)", () => {
+  const csv = safeTemplatesCsv(fillAllTemplates(ZERO), traceableValues(ZERO));
+  assert.ok(csv.includes("Money out,0"));
+  assert.ok(csv.includes("None found"));
+});

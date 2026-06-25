@@ -35,6 +35,8 @@ export interface ProductMetrics {
 }
 
 const r2 = (n: number): number => Math.round((n + Number.EPSILON) * 100) / 100;
+/** Negate, but never produce -0 (which renders as "-$0.00" for a zero-outflow period). */
+const negate = (n: number): number => (n === 0 ? 0 : -n);
 const periodLabel = (m: ProductMetrics): string => `${m.period.start} → ${m.period.end}`;
 
 function section(label: string): TemplateRow {
@@ -63,7 +65,7 @@ export function fillCashFlowForecast(m: ProductMetrics): FilledTemplate {
     rows: [
       line("Starting cash", m.cashOnHand, 0),
       line("Expected money in", m.inflow, 0),
-      line("Money out", -m.outflow, 0),
+      line("Money out", negate(m.outflow), 0),
       total("Net cash this period", m.netCash, 0),
       total("Projected ending cash", projectedEndingCash(m), 0),
       memo("Monthly burn", m.monthlyBurn, 0),
@@ -127,7 +129,7 @@ export function fillMonthlyReview(m: ProductMetrics): FilledTemplate {
     rows: [
       line("Cash on hand", m.cashOnHand, 0),
       line("Money in", m.inflow, 0),
-      line("Money out", -m.outflow, 0),
+      line("Money out", negate(m.outflow), 0),
       total("Net cash", m.netCash, 0),
       memo("Monthly burn", m.monthlyBurn, 0),
       memo("Runway (months)", m.runwayMonths ?? 0, 0, "months"),
@@ -157,7 +159,7 @@ export function traceableValues(m: ProductMetrics): ReadonlySet<number> {
   const out = new Set<number>([
     m.cashOnHand,
     m.inflow,
-    -m.outflow,
+    negate(m.outflow),
     m.netCash,
     projectedEndingCash(m),
     m.monthlyBurn,
