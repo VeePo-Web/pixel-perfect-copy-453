@@ -24,6 +24,9 @@ Deno.serve(async (req) => {
       country_codes: PLAID_COUNTRY_CODES,
       webhook: `${Deno.env.get("SUPABASE_URL")}/functions/v1/plaid-webhook`,
     };
+    const redirectUri = Deno.env.get("PLAID_REDIRECT_URI");
+    if (redirectUri) baseReq.redirect_uri = redirectUri;
+
 
     if (mode === "update") {
       if (!itemId) return json({ error: "itemId required" }, 400);
