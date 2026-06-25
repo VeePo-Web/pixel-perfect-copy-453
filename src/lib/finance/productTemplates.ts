@@ -46,8 +46,8 @@ function line(label: string, value: number, indent = 1): TemplateRow {
 function total(label: string, value: number, indent = 1): TemplateRow {
   return { label, value, kind: "total", indent };
 }
-function memo(label: string, value: number, indent = 1): TemplateRow {
-  return { label, value, kind: "memo", indent };
+function memo(label: string, value: number, indent = 1, unit: TemplateRow["unit"] = "usd"): TemplateRow {
+  return { label, value, kind: "memo", indent, unit };
 }
 
 /** Projected ending cash = cash on hand + net cash flow this period (derived, registered). */
@@ -67,7 +67,7 @@ export function fillCashFlowForecast(m: ProductMetrics): FilledTemplate {
       total("Net cash this period", m.netCash, 0),
       total("Projected ending cash", projectedEndingCash(m), 0),
       memo("Monthly burn", m.monthlyBurn, 0),
-      memo("Runway (months)", m.runwayMonths ?? 0, 0),
+      memo("Runway (months)", m.runwayMonths ?? 0, 0, "months"),
     ],
   };
 }
@@ -114,7 +114,7 @@ export function fillTaxReserve(m: ProductMetrics): FilledTemplate {
     periodLabel: periodLabel(m),
     rows: [
       line("Set aside for tax this period", m.ownerPay.tax, 0),
-      memo("Reserve floor (months)", m.profile.reserve_floor_months, 0),
+      memo("Reserve floor (months)", m.profile.reserve_floor_months, 0, "months"),
     ],
   };
 }
@@ -130,9 +130,9 @@ export function fillMonthlyReview(m: ProductMetrics): FilledTemplate {
       line("Money out", -m.outflow, 0),
       total("Net cash", m.netCash, 0),
       memo("Monthly burn", m.monthlyBurn, 0),
-      memo("Runway (months)", m.runwayMonths ?? 0, 0),
-      memo("Categorization coverage %", m.coveragePct, 0),
-      memo("Transactions this period", m.transactionsCount, 0),
+      memo("Runway (months)", m.runwayMonths ?? 0, 0, "months"),
+      memo("Categorization coverage %", m.coveragePct, 0, "percent"),
+      memo("Transactions this period", m.transactionsCount, 0, "count"),
     ],
   };
 }

@@ -102,6 +102,9 @@ export interface PeriodMetrics {
 
 export type TemplateRowKind = "section" | "line" | "total" | "memo";
 
+/** How a row's value should be FORMATTED on screen. Default "usd". CSV ignores this. */
+export type TemplateRowUnit = "usd" | "percent" | "months" | "count";
+
 export interface TemplateRow {
   readonly label: string;
   /** Currency value, or null for a section header row. */
@@ -110,6 +113,8 @@ export interface TemplateRow {
   readonly indent: number;
   /** True for percentage rows (e.g. Gross Margin %). */
   readonly isPercent?: boolean;
+  /** Display unit for the value; "usd" when omitted. */
+  readonly unit?: TemplateRowUnit;
 }
 
 export interface FilledTemplate {
