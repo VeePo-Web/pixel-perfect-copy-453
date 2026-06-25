@@ -92,3 +92,20 @@ When all five are ✓, fire: **"Plaid Architect — build Phase 0 sandbox spike"
 ## 6. Why this is the blocker (the honest constraint)
 
 A world-class Plaid build does not write integration code before the Sandbox exists, because every edge function (`plaid-link-token`, `plaid-exchange-token`, `plaid-sync`, `plaid-webhook`) needs these secrets to run and be verified — and the persona's Law 10 forbids claiming "done" without running it. Provisioning the Sandbox (free, ~10 minutes) turns Phase 0 from "unverifiable scaffold" into "runnable, testable, shippable." This runbook is the one thing only the account owner can do; everything after it is the architect's job.
+
+---
+
+## 7. Going to production
+
+The codebase supports production with **one env flip**, no code changes. Order matters:
+
+1. **Request Production access** in the Plaid dashboard. Plaid reviews use-case + security; approval typically 1–3 business days.
+2. **Add `PLAID_PRODUCTION_SECRET`** as an edge function secret (do NOT delete `PLAID_SANDBOX_SECRET` — sandbox regression tests still use it).
+3. **Add `PLAID_REDIRECT_URI`** as an edge function secret — full public URL of the OAuth return route, e.g. `https://app.goldfindesk.com/portal/accounts`. Must be registered verbatim in Plaid dashboard → API → Allowed redirect URIs, including the exact scheme, host, and path. Required for OAuth banks (Chase, Wells, Capital One, etc.); harmless in sandbox.
+4. **Register the webhook URL** in the Plaid dashboard (API → Webhooks): `https://<project-ref>.functions.supabase.co/plaid-webhook`. With this set, Plaid signs each webhook with a `plaid-verification` JWT — the function verifies it against Plaid's JWKS automatically. `PLAID_WEBHOOK_SECRET` remains the fallback for internal/sandbox tooling.
+5. **Flip `PLAID_ENV=production`**. The shared client switches host + secret on the next invocation. No deploy needed beyond the secret update.
+6. **Smoke test**: as a real user, mint a link token via the app's "Connect a bank" button and confirm the Plaid Link modal opens against a real institution list (not the Platypus sandbox set). Do not exchange unless you intend a real connection.
+7. **Existing sandbox `plaid_items` will not work** against production (different access tokens). If any test users have sandbox connections, expect them to reconnect.
+
+The sandbox-only edge functions (`plaid-sandbox-public-token`, `plaid-sandbox-fire-webhook`) refuse to run when `PLAID_ENV !== "sandbox"` and log a warning if called, so production cannot accidentally mint fake tokens.
+
