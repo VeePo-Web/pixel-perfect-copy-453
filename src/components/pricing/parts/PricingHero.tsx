@@ -1,10 +1,5 @@
 ﻿import { startAutoFillCheckout } from "../../../lib/checkout";
 export default function PricingHero() {
-  const tiers = [
-    { name: "GoldFin Template Vault", price: "Free", muted: true },
-    { name: "GoldFin Reports", price: "$99/mo", flagship: true },
-    { name: "GoldFin Advisory", price: "$1,500/mo", muted: true },
-  ];
   return (
     <section className="relative isolate overflow-hidden border-b border-ink/[0.05] bg-charcoal-950">
       <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -50,49 +45,79 @@ export default function PricingHero() {
             </p>
           </div>
 
-          {/* Layered preview cards */}
-          <div aria-hidden className="relative h-[460px] lg:h-[520px]">
-            {tiers.map((t, i) => {
-              const positions = [
-                "left-0 top-2 rotate-[-3deg] z-10",
-                "left-1/2 -translate-x-1/2 top-0 z-30",
-                "right-0 top-6 rotate-[3deg] z-20",
-              ];
-              return (
-                <div
-                  key={t.name}
-                  style={{ animationDelay: `${i * 90}ms` }}
-                  className={`absolute ${positions[i]} w-[68%] sm:w-[58%] lg:w-[300px] motion-safe:animate-panel-rise`}
-                >
-                  <div
-                    className={`overflow-hidden rounded-2xl border backdrop-blur-sm ${
-                      t.flagship
-                        ? "border-champagne-200/40 bg-charcoal-900/80 shadow-[0_30px_80px_-30px_rgba(217,190,130,0.45)]"
-                        : "border-ink/[0.07] bg-charcoal-900/60"
-                    }`}
-                  >
-                    <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent" />
-                    <div className="px-5 pb-6 pt-5">
-                      <div className="text-[10px] uppercase tracking-[0.28em] text-champagne-300/70">
-                        {t.flagship ? "Recommended" : "Tier"}
-                      </div>
-                      <div className="mt-2 text-[15px] text-ink">{t.name}</div>
-                      <div className={`mt-4 font-light tabular-nums ${t.flagship ? "text-[36px] text-ink" : "text-[26px] text-ink/80"}`}>
-                        {t.price}
-                      </div>
-                      <div className="mt-5 space-y-2">
-                        {[0, 1, 2, 3].map((k) => (
-                          <div key={k} className="flex items-center gap-2">
-                            <span className={`h-1.5 w-1.5 rounded-full ${t.flagship ? "bg-champagne-200" : "bg-ink/15"}`} />
-                            <span className={`h-1.5 rounded ${t.flagship ? "bg-ink/15" : "bg-ink/[0.06]"}`} style={{ width: `${50 + ((k * 13) % 35)}%` }} />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+          {/* ── Focal price visual — the $99 plan rendered as the hero object ── */}
+          <div
+            aria-hidden
+            className="pointer-events-none relative flex h-[440px] items-center justify-center sm:h-[500px] lg:h-[540px]"
+          >
+            {/* concentrated gold halo behind the focal card */}
+            <div className="absolute left-1/2 top-1/2 h-[380px] w-[380px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(212,168,69,0.20),transparent_70%)] blur-2xl" />
+
+            {/* ghosted value-ladder cards — depth + context, hidden on small screens */}
+            <div className="absolute left-[4%] top-[15%] hidden w-[42%] -rotate-[8deg] rounded-2xl border border-ink/[0.06] bg-paper/70 p-4 opacity-60 shadow-[0_24px_60px_-32px_rgba(11,13,18,0.25)] backdrop-blur-sm motion-safe:animate-panel-rise sm:block">
+              <div className="text-[9px] uppercase tracking-[0.26em] text-ink/40">Free</div>
+              <div className="mt-1.5 text-[12px] text-ink/70">Template Vault</div>
+              <div className="mt-2 text-[24px] font-light tabular-nums text-ink/70">Free</div>
+            </div>
+            <div
+              className="absolute bottom-[15%] right-[4%] hidden w-[42%] rotate-[8deg] rounded-2xl border border-ink/[0.06] bg-paper/70 p-4 opacity-60 shadow-[0_24px_60px_-32px_rgba(11,13,18,0.25)] backdrop-blur-sm motion-safe:animate-panel-rise sm:block"
+              style={{ animationDelay: "90ms" }}
+            >
+              <div className="text-[9px] uppercase tracking-[0.26em] text-ink/40">Advisory</div>
+              <div className="mt-1.5 text-[12px] text-ink/70">Done with you</div>
+              <div className="mt-2 text-[24px] font-light tabular-nums text-ink/70">
+                $1,500<span className="text-[11px] text-ink/40">/mo</span>
+              </div>
+            </div>
+
+            {/* THE focal card — GoldFin Reports · $99/mo */}
+            <div
+              className="relative z-20 w-[80%] max-w-[348px] overflow-hidden rounded-[22px] border border-champagne-200/50 bg-paper shadow-[0_44px_110px_-30px_rgba(212,168,69,0.45),0_22px_56px_-34px_rgba(11,13,18,0.45)] motion-safe:animate-panel-rise"
+              style={{ animationDelay: "160ms" }}
+            >
+              <span className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-300 to-transparent" />
+              <div className="relative px-6 pb-6 pt-5">
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-champagne-200/50 bg-champagne-300/[0.08] px-2.5 py-1 text-[9.5px] uppercase tracking-[0.22em] text-champagne-300">
+                    <span className="h-1 w-1 rounded-full bg-champagne-300 motion-safe:animate-soft-pulse" />
+                    Recommended
+                  </span>
+                  <span className="text-[9.5px] uppercase tracking-[0.24em] text-ink/35">Continuity</span>
                 </div>
-              );
-            })}
+                <div className="mt-4 text-[15px] text-ink">GoldFin Reports</div>
+                <div className="mt-1 flex items-baseline gap-1.5">
+                  <span className="text-[54px] font-light leading-none tabular-nums text-ink">$99</span>
+                  <span className="text-[13px] text-ink/45">/month</span>
+                </div>
+                <div className="mt-5 space-y-2.5">
+                  {[
+                    "Your templates auto-filled monthly",
+                    "A plain-English briefing every cycle",
+                    "No bank connection to start",
+                    "Cancel anytime",
+                  ].map((line) => (
+                    <div key={line} className="flex items-center gap-2.5 text-[12.5px] text-ink/75">
+                      <svg
+                        viewBox="0 0 16 16"
+                        className="h-3.5 w-3.5 shrink-0 text-champagne-300"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M3 8.5l3.2 3.2L13 5" />
+                      </svg>
+                      {line}
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-6 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 py-2.5 text-center text-[12px] font-medium text-navy shadow-[0_10px_28px_-10px_rgba(212,168,69,0.55)]">
+                  Auto-fill my reports
+                </div>
+              </div>
+              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/55 to-transparent motion-safe:animate-shimmer-slow" />
+            </div>
           </div>
         </div>
       </div>
