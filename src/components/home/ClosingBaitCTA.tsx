@@ -107,10 +107,15 @@ export default function ClosingBaitCTA() {
             <input
               type="email"
               required
+              inputMode="email"
+              autoComplete="email"
+              autoCapitalize="none"
+              autoCorrect="off"
+              spellCheck={false}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
-              className="w-full rounded-full border border-ink/[0.12] bg-white/80 px-5 py-3.5 text-[14px] text-ink placeholder:text-ink/35 focus:outline-none focus:ring-2 focus:ring-champagne-200/60"
+              className="w-full rounded-full border border-ink/[0.12] bg-white/80 px-5 py-3.5 text-[16px] text-ink placeholder:text-ink/35 focus:outline-none focus:ring-2 focus:ring-champagne-200/60 sm:text-[14px]"
               disabled={status === "sending"}
             />
 

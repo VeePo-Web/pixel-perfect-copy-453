@@ -23,8 +23,11 @@ export default function TextField({ label, value, onChange, placeholder, type = 
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         autoComplete={autoComplete}
+        inputMode={type === "email" ? "email" : undefined}
+        autoCapitalize={type === "email" ? "none" : undefined}
+        autoCorrect={type === "email" ? "off" : undefined}
         maxLength={maxLength}
-        className={`w-full rounded-xl border bg-charcoal-900/50 px-4 py-3 text-[14.5px] text-ink placeholder:text-ink/30 transition-all duration-300 ease-cinema focus:outline-none focus:border-champagne-200/50 focus:bg-charcoal-900/70 ${
+        className={`w-full rounded-xl border bg-charcoal-900/50 px-4 py-3 text-[16px] text-ink placeholder:text-ink/30 transition-all duration-300 ease-cinema focus:outline-none focus:border-champagne-200/50 focus:bg-charcoal-900/70 sm:text-[14.5px] ${
           error ? "border-champagne-300/50" : "border-ink/[0.08]"
         }`}
       />
