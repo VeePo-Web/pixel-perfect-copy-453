@@ -19,6 +19,10 @@ verify_jwt = false
 [functions.cron-run-reports]
 verify_jwt = false
 
+# Daily data-retention sweep; gated by CRON_SECRET header.
+[functions.cron-retention-sweep]
+verify_jwt = false
+
 # Public one-click unsubscribe (token-gated); no session required.
 [functions.email-unsubscribe]
 verify_jwt = false

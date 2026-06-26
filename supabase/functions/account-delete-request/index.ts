@@ -42,12 +42,12 @@ Deno.serve(async (req) => {
     try {
       const { data: subs } = await admin
         .from("subscriptions")
-        .select("stripe_subscription_id, env")
+        .select("stripe_subscription_id, environment")
         .eq("user_id", user.id)
         .in("status", ["active", "trialing"]);
       for (const s of subs ?? []) {
         const sid = (s as { stripe_subscription_id?: string }).stripe_subscription_id;
-        const env = (s as { env?: string }).env === "live" ? "live" : "sandbox";
+        const env = (s as { environment?: string }).environment === "live" ? "live" : "sandbox";
         if (!sid) continue;
         try {
           const stripe = createStripeClient(env);
