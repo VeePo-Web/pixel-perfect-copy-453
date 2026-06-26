@@ -11,6 +11,7 @@ const Terms = lazy(() => import("../pages/legal/Terms"));
 const PlaidConsent = lazy(() => import("../pages/legal/PlaidConsent"));
 const Privacy = lazy(() => import("../pages/legal/Privacy"));
 const DataRetention = lazy(() => import("../pages/legal/DataRetention"));
+const PlaidOperations = lazy(() => import("../pages/legal/PlaidOperations"));
 
 const Fallback = () => (
   <div className="flex min-h-screen items-center justify-center bg-charcoal-950 text-[13px] text-ink/55">
@@ -24,7 +25,8 @@ export function isPortalRoute(pathname: string) {
     pathname === "/terms" ||
     pathname === "/plaid-consent" ||
     pathname === "/privacy" ||
-    pathname === "/data-retention"
+    pathname === "/data-retention" ||
+    pathname === "/plaid-operations"
   );
 }
 
@@ -75,6 +77,9 @@ export default function PortalRouter({ pathname }: { pathname: string }) {
       break;
     case "/data-retention":
       node = <DataRetention />;
+      break;
+    case "/plaid-operations":
+      node = <PlaidOperations />;
       break;
     default:
       node = (

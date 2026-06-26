@@ -1,76 +1,48 @@
-## Goal
+# Plaid Operational Policy — Documented, Maturing, Downloadable
 
-Stand up a defined, enforced, periodically-reviewed Data Retention & Deletion Policy for Goldfin Desk that meets GDPR Art. 5(1)(e) / 17, CCPA §1798.105, PIPEDA Principle 5, and Plaid's End User Data Disposal obligations — and expose it at a stable public URL.
+Goal: Stand up a formal **Plaid Integration Operations & Maturity Policy** (POMP) for Goldfin Desk, published at a public URL and available as a one-click PDF download in the chat. Include a defined review/maturity cadence so it is "constantly matured," not static.
 
-## 1. Public policy page (the link)
+## What gets built
 
-New route `/data-retention` rendered by `PortalRouter` (treated like `/terms`, `/privacy`, `/plaid-consent`).
+### 1. Source-of-truth policy document
+`docs/plaid/plaid-operations-policy.md` — single canonical markdown file covering:
+- Scope & system description (Plaid Link, Items, Accounts, Transactions, Auth, Webhooks)
+- Roles & responsibilities (Owner: Chris Sam; Engineering; Support)
+- Environments (sandbox → production), secret management, rotation cadence
+- Data flow diagram (ASCII) + data classes touched (account, balance, tx, identity)
+- Access control: who can read Plaid data, RLS posture, admin audit trail
+- Token lifecycle: link token → public token exchange → access token storage (encrypted at rest), revocation on user delete
+- Webhook handling: signature verification, retry, dead-letter logging in `webhook_events`
+- Incident response runbook: detection → containment (rotate `PLAID_*` secrets, revoke items) → notification SLAs
+- Change management: every Plaid-affecting PR must update this doc + bump `POLICY_VERSION`
+- Vendor management: Plaid as sub-processor, EUDPA + DPA references
+- Retention alignment (links to `/data-retention`)
+- Maturity model: levels 1–5 (Initial → Optimizing) with current self-assessed level and target
+- Review cadence: quarterly review logged in `retention_policy_reviews` (reused table, new `policy_type` filter) — surfaced on admin Audit dashboard
+- Change log table at bottom (version, date, author, summary)
 
-File: `src/pages/legal/DataRetention.tsx`. Sections:
-- Effective date + version (`RETENTION_POLICY_VERSION` in `src/lib/portal/tos.ts`).
-- Scope & legal basis (GDPR, CCPA, PIPEDA, Plaid EUDPA).
-- Retention schedule table (see §3).
-- How to request deletion (in-portal button + `privacy@goldfindesk.com`).
-- Automated enforcement summary + review cadence (quarterly, owner: Founder/CTO).
-- Sub-processor list pointer (Supabase, Stripe, Plaid, Resend).
+### 2. Public web page
+`src/pages/legal/PlaidOperations.tsx` route `/plaid-operations` — renders the policy as styled HTML with TOC, "Last reviewed" badge, "Download PDF" button.
 
-Linked from:
-- `GoldFinFooter.tsx` legal nav.
-- `Terms.tsx` and `PlaidConsent.tsx` cross-links.
-- `Settings.tsx` ("Your data" section, next to Delete button).
+### 3. Downloadable PDF (chat-deliverable)
+Generate `/mnt/documents/goldfin-plaid-operations-policy.pdf` from the markdown via `reportlab` so the user can download it directly from this chat, and host the same file at `/downloads/goldfin-plaid-operations-policy.pdf` (copied into `public/`) so the web page's Download button works.
 
-## 2. User-facing deletion (CCPA/GDPR right to erasure)
+### 4. Constant maturity wiring
+- New row in admin Audit dashboard: "Plaid Operations Policy — last reviewed: <date> — [Record review]"
+- Reuse existing `retention_policy_reviews` table by adding a `policy_type` text column (default `'retention'`); insert `'plaid_ops'` rows on review
+- Sign-in time check: if `PLAID_OPS_POLICY_VERSION` in `src/lib/portal/tos.ts` is newer than the user's last-acknowledged version AND user is admin, show a banner prompting re-review
 
-- New edge function `account-delete-request` (JWT-verified): marks `profiles.deletion_requested_at = now()`, revokes Plaid items via `/item/remove`, cancels Stripe subscription at period end, queues hard-delete in 30 days (grace window).
-- New edge function `account-delete-execute` (CRON_SECRET gated): hard-deletes rows for users whose `deletion_requested_at < now() - interval '30 days'`. Uses `auth.admin.deleteUser` then cascades.
-- Settings UI: "Delete my account & data" button → confirmation modal → calls `account-delete-request`. Shows pending-deletion banner with cancel option.
+### 5. Discoverability
+- Footer legal nav: add "Plaid Operations"
+- Link from `/data-retention` and `/terms`
+- Link from Portal Settings → Compliance section
 
-## 3. Automated retention enforcement
+## Technical notes
+- One small migration: `alter table public.retention_policy_reviews add column policy_type text not null default 'retention';`
+- PDF generation script: `scripts/build-plaid-policy-pdf.ts` (run once during this turn; output committed to `public/downloads/`)
+- No new edge functions, no new secrets
+- No changes to Plaid runtime code paths
 
-New scheduled function `cron-retention-sweep` (daily 09:00 UTC via pg_cron, CRON_SECRET gated). Applies:
-
-| Data | Table | Retention | Action |
-|---|---|---|---|
-| Expired login OTPs | `login_otps` | 24h after expiry | DELETE |
-| Webhook event log | `webhook_events` | 90 days | DELETE |
-| Cron run log | `cron_runs` | 90 days | DELETE |
-| Advisory reports | `advisory_reports` | 24 months | DELETE (or anonymize if user opts in) |
-| Plaid accounts/transactions for disconnected items | `plaid_accounts`, `plaid_items` (status=`removed`) | 30 days | DELETE + Plaid `/item/remove` |
-| Leads (no conversion) | `leads` | 18 months | DELETE |
-| Applications (rejected/abandoned) | `applications` | 24 months | DELETE |
-| Soft-deleted users | `auth.users` via profiles flag | 30 days post-request | hard DELETE |
-| ToS acceptances | `tos_acceptances` | 7 years (legal evidence) | RETAIN |
-| Subscriptions (financial record) | `subscriptions` | 7 years | RETAIN, then DELETE |
-
-Implementation: single SQL function `public.run_retention_sweep()` (SECURITY DEFINER) invoked by the edge function; each step wrapped in a try/log block writing to `cron_runs` for auditability.
-
-## 4. Schema additions (one migration)
-
-- `profiles`: add `deletion_requested_at timestamptz`, `deletion_executed_at timestamptz`.
-- New table `retention_policy_reviews` (id, version, reviewed_at, reviewer_user_id, notes) — records the quarterly review for audit. Admin-only RLS via `has_role(auth.uid(),'admin')`. Standard GRANT block.
-- pg_cron entry: `select cron.schedule('retention-sweep-daily','0 9 * * *', $$ select net.http_post(...cron-retention-sweep, header CRON_SECRET) $$);`
-
-## 5. Admin review surface
-
-Extend `src/pages/portal/admin/Audit.tsx` with a "Retention" tab:
-- Last sweep run + counts deleted per table (from `cron_runs.summary`).
-- Pending deletion requests list.
-- "Record quarterly review" button → inserts into `retention_policy_reviews` with current `RETENTION_POLICY_VERSION`.
-
-## 6. Versioning + periodic review
-
-- `RETENTION_POLICY_VERSION = "2026-06-26"` in `src/lib/portal/tos.ts`.
-- Bumping the version triggers a re-acceptance banner in `AcceptTerms` flow (same pattern as TOS).
-- Quarterly cadence enforced by `cron-retention-sweep` writing a `webhook_events` warning row if no `retention_policy_reviews` entry in the last 100 days.
-
-## 7. Out of scope
-
-- Storage bucket cleanup (none configured yet).
-- Per-jurisdiction (state-by-state CCPA-equivalent) variations — the single policy covers the strictest baseline.
-- Stripe data export to user (covered separately under data-portability if requested).
-
-## Deliverable link
-
-After implementation, the public policy will live at: `https://goldfindesk.com/data-retention` (and on preview at `/data-retention`).
-
-Approve and I'll execute steps 1–6 in one pass: migration, edge functions, cron schedule, public page, footer link, Settings delete flow, admin review tab.
+## Deliverables in chat after build
+- Public link: `/plaid-operations`
+- `<presentation-artifact>` for `goldfin-plaid-operations-policy.pdf` so you can download it directly here
