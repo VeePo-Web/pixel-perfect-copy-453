@@ -18,3 +18,7 @@ verify_jwt = false
 # Gated by the CRON_SECRET header; called server-to-server by pg_cron.
 [functions.cron-run-reports]
 verify_jwt = false
+
+# Public one-click unsubscribe (token-gated); no session required.
+[functions.email-unsubscribe]
+verify_jwt = false

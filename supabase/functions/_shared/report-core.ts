@@ -8,7 +8,7 @@
 import type { SupabaseClient } from "npm:@supabase/supabase-js@2.45.0";
 import { computeMetrics, type MetricsPayload, type Txn } from "./report-metrics.ts";
 import { verifyReport } from "./report-verify.ts";
-import { renderReportEmail } from "./report-email.ts";
+import { deliverReportEmail } from "./report-delivery.ts";
 
 const BENCHMARKS: Record<string, { nums: number[]; text: string }> = {
   restaurant: { nums: [55, 65, 28, 35], text: "Prime cost target 55–65% of sales; food cost 28–35%." },
@@ -182,35 +182,25 @@ export async function generateReportForUser(
   }).select("id").single();
   if (insErr) throw new Error(insErr.message);
 
-  // Layer 5: email — only a verified report is ever sent.
+  // Layer 5: email — idempotent, compliant, durable delivery (report-delivery.ts).
+  // Only a verified report is ever sent; deliverReportEmail records the attempt
+  // in report_email_deliveries, never double-sends, respects unsubscribe, and
+  // flips advisory_reports.status to 'sent' on success.
   let sent = false;
-  const email = profEmailRes.data?.email as string | undefined;
-  if (opts.send && verify.passed && email) {
-    sent = await sendReportEmail(email, {
-      subjectLine: report?.subject_line ?? null, sections: report?.sections ?? [],
-      metrics, recommendations: report?.recommendations ?? [], coveragePct: metrics.coveragePct,
-      periodEnd: cur.end, model, businessName: profile.business_name,
-    });
-    if (sent) await admin.from("advisory_reports").update({ status: "sent" }).eq("id", saved.id);
+  if (opts.send && verify.passed) {
+    const email = profEmailRes.data?.email as string | undefined;
+    if (email) {
+      const res = await deliverReportEmail(admin, {
+        reportId: saved.id, userId, email,
+        render: {
+          subjectLine: report?.subject_line ?? null, sections: report?.sections ?? [],
+          metrics, recommendations: report?.recommendations ?? [], coveragePct: metrics.coveragePct,
+          periodEnd: cur.end, model, businessName: profile.business_name,
+        },
+      });
+      sent = res.status === "sent";
+    }
   }
 
   return { ok: true, id: saved.id, status: verify.passed ? (sent ? "sent" : "generated") : "failed", verification_passed: verify.passed, coverage_pct: metrics.coveragePct, sent };
-}
-
-async function sendReportEmail(email: string, render: Parameters<typeof renderReportEmail>[0]): Promise<boolean> {
-  const lovableKey = Deno.env.get("LOVABLE_API_KEY");
-  const resendKey = Deno.env.get("RESEND_API_KEY");
-  if (!lovableKey || !resendKey) return false;
-  const from = Deno.env.get("RESEND_FROM") ?? "GoldFin Desk <noreply@goldfindesk.com>";
-  const { subject, html } = renderReportEmail(render);
-  try {
-    const res = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${lovableKey}`, "X-Connection-Api-Key": resendKey },
-      body: JSON.stringify({ from, to: [email], subject, html }),
-    });
-    return res.ok;
-  } catch {
-    return false;
-  }
 }
