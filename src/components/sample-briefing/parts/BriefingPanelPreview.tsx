@@ -12,6 +12,16 @@ const fmt = (n: number) => `$${n.toLocaleString()}`;
 const delta = (n: number) =>
   `${n >= 0 ? "+" : ""}${n}% vs prior period`;
 
+// Idle state sells the briefing: each section + the question it answers.
+const SECTIONS: { label: string; desc: string }[] = [
+  { label: "Cash Movement", desc: "What actually changed in cash" },
+  { label: "Revenue Trend", desc: "Where revenue is heading" },
+  { label: "Expense Pattern", desc: "Where the money went" },
+  { label: "Unusual Spend", desc: "Anything to flag this cycle" },
+  { label: "Questions to Review", desc: "What to look at next" },
+  { label: "Decisions to Consider", desc: "The 2-3 moves that matter" },
+];
+
 export default function BriefingPanelPreview({ business, status, loaderIndex }: Props) {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-champagne-200/15 bg-charcoal-900/60 backdrop-blur-sm">
@@ -76,23 +86,32 @@ export default function BriefingPanelPreview({ business, status, loaderIndex }: 
           </p>
         </div>
       ) : (
-        <div className="p-6">
-          <div className="grid grid-cols-2 gap-3">
-            {["Cash Movement", "Revenue Trend", "Expense Pattern", "Unusual Spend", "Questions to Review", "Decisions to Consider"].map(
-              (label) => (
-                <div
-                  key={label}
-                  className="rounded-lg border border-ink/[0.05] bg-ink/[0.015] px-4 py-5"
-                >
-                  <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/45">{label}</div>
-                  <div className="mt-3 h-2 w-3/4 rounded bg-ink/[0.05]" />
-                  <div className="mt-2 h-2 w-1/2 rounded bg-ink/[0.04]" />
-                </div>
-              )
-            )}
+        <div className="p-6 motion-safe:animate-panel-rise">
+          <div className="text-[10px] uppercase tracking-[0.24em] text-champagne-300/70">
+            Your briefing will answer
           </div>
-          <p className="mt-6 text-[12px] text-ink/45">
-            Choose a demo business or describe your own to generate a sample briefing preview.
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            {SECTIONS.map((s, i) => (
+              <div
+                key={s.label}
+                className="rounded-lg border border-ink/[0.06] bg-ink/[0.015] px-4 py-3.5 transition-colors duration-300 hover:border-champagne-200/25"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-champagne-200/30 bg-champagne-300/[0.08] text-[9.5px] font-medium tabular-nums text-champagne-300">
+                    {i + 1}
+                  </span>
+                  <div className="text-[11.5px] font-medium leading-tight text-ink/85">{s.label}</div>
+                </div>
+                <div className="mt-1.5 text-[11px] leading-[1.5] text-ink/55">{s.desc}</div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-5 flex items-center gap-2 text-[12px] text-ink/55">
+            <span
+              aria-hidden
+              className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-champagne-300/70 motion-safe:animate-soft-pulse"
+            />
+            Pick a business above to generate the full briefing →
           </p>
         </div>
       )}
