@@ -121,6 +121,17 @@ Deno.serve(async (req) => {
       .eq("plaid_item_id", body.item_id)
       .maybeSingle();
 
+    // Audit log: record every inbound Plaid event, even for unknown items.
+    try {
+      await admin.from("webhook_events").insert({
+        source: "plaid",
+        event_type: `${body.webhook_type}.${body.webhook_code}`,
+        user_id: item?.user_id ?? null,
+        external_id: body.item_id ?? null,
+        summary: { error: body.error ?? null, item_id: body.item_id },
+      });
+    } catch (e) { console.error("webhook_events log failed", e); }
+
     if (!item) return json({ received: true, unknown_item: true });
 
     const isReauth =
