@@ -397,6 +397,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      upsert_cron_secret: { Args: { p_secret: string }; Returns: undefined }
     }
     Enums: {
       app_role: "admin" | "member"
