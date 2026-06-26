@@ -27,7 +27,7 @@ export default function EpiphanyBridge() {
       aria-labelledby="epiphany-bridge-title"
       className="bg-white"
     >
-      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 md:py-28 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-16 md:py-28 lg:px-10">
         {/* Section header */}
         <div className="mb-14 max-w-[46ch]">
           <div

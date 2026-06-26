@@ -19,7 +19,7 @@ export default function PainClarity() {
       aria-labelledby="pain-clarity-title"
       className="relative border-y border-ink/[0.06] bg-white"
     >
-      <div ref={ref} className="mx-auto max-w-4xl px-6 py-24 md:py-28 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-4xl px-6 py-16 md:py-28 lg:px-10">
         <div
           className={`text-[10.5px] uppercase tracking-[0.32em] text-champagne-300 transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
