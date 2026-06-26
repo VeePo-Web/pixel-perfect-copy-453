@@ -287,10 +287,18 @@ export default function GlobalTopBar({
     const onScroll = () => {
       setScrolled(window.scrollY > 8);
       setScrollDeep(window.scrollY > 280);
+      // [UPGRADE 6] Scroll progress bar — CSS custom property avoids React
+      // re-renders on every scroll pixel (Mercury / editorial pattern).
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0;
+      document.documentElement.style.setProperty("--nav-progress", `${pct}%`);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      document.documentElement.style.removeProperty("--nav-progress");
+    };
   }, []);
 
   // Keep scrollPaddingTop in sync so anchor jumps always clear the full nav zone
@@ -527,6 +535,7 @@ export default function GlobalTopBar({
                 <a
                   href="/templates"
                   className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[11.5px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                  style={{ boxShadow: goldCtaShadow }}
                 >
                   <span className="relative z-10">My templates</span>
                   <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -536,6 +545,7 @@ export default function GlobalTopBar({
                   type="button"
                   onClick={startAutoFillCheckout}
                   className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[11.5px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                  style={{ boxShadow: goldCtaShadow }}
                 >
                   <span className="relative z-10">Auto-fill — $99/mo</span>
                   <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
@@ -572,6 +582,18 @@ export default function GlobalTopBar({
             </div>
 
           </div>
+
+          {/* [UPGRADE 6] Scroll progress bar — renders at the bottom edge of the
+              header once the user has scrolled. Width is driven by a CSS custom
+              property set inside the scroll handler (no React re-renders).
+              Hidden over the dark hero; appears with the white-glass state. */}
+          <div
+            aria-hidden
+            className={`pointer-events-none absolute bottom-0 left-0 h-[1.5px] bg-gradient-to-r from-champagne-200 to-champagne-300 transition-opacity duration-500 ${
+              scrolled ? "opacity-100" : "opacity-0"
+            }`}
+            style={{ width: "var(--nav-progress, 0%)" }}
+          />
         </header>
       </div>
 
