@@ -44,7 +44,18 @@ export default function BriefingPanelPreview({ business, status, loaderIndex }: 
         </div>
       ) : status === "ready" ? (
         <div className="p-6 motion-safe:animate-panel-rise">
-          <div className="grid grid-cols-3 gap-3">
+          {/* Plain-English verdict FIRST: the "are we okay?" answer — one number + read. */}
+          <div className="rounded-xl border border-champagne-200/25 bg-[rgba(201,163,90,0.05)] p-4">
+            <div className="text-[10px] uppercase tracking-[0.24em] text-champagne-300/80">
+              Plain-English verdict
+            </div>
+            <p className="mt-2 text-[15px] leading-[1.55] text-ink">
+              <span className="font-medium tabular-nums">{`Cash ${fmt(business.cash)} (${business.cashDelta >= 0 ? "+" : ""}${business.cashDelta}%)`}</span>
+              {" — watch: "}
+              {business.mainRisk}
+            </p>
+          </div>
+          <div className="mt-4 grid grid-cols-3 gap-3">
             <Kpi label="Cash" value={fmt(business.cash)} sub={delta(business.cashDelta)} positive={business.cashDelta >= 0} />
             <Kpi label="Revenue" value={fmt(business.revenue)} sub={delta(business.revenueDelta)} positive={business.revenueDelta >= 0} />
             <Kpi
