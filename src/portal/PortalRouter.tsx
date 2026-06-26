@@ -13,6 +13,7 @@ const Privacy = lazy(() => import("../pages/legal/Privacy"));
 const DataRetention = lazy(() => import("../pages/legal/DataRetention"));
 const PlaidOperations = lazy(() => import("../pages/legal/PlaidOperations"));
 const MfaPolicy = lazy(() => import("../pages/legal/MfaPolicy"));
+const MfaAttestation = lazy(() => import("../pages/legal/MfaAttestation"));
 
 const Fallback = () => (
   <div className="flex min-h-screen items-center justify-center bg-charcoal-950 text-[13px] text-ink/55">
@@ -28,7 +29,8 @@ export function isPortalRoute(pathname: string) {
     pathname === "/privacy" ||
     pathname === "/data-retention" ||
     pathname === "/plaid-operations" ||
-    pathname === "/mfa-policy"
+    pathname === "/mfa-policy" ||
+    pathname === "/mfa-attestation"
   );
 }
 
@@ -85,6 +87,9 @@ export default function PortalRouter({ pathname }: { pathname: string }) {
       break;
     case "/mfa-policy":
       node = <MfaPolicy />;
+      break;
+    case "/mfa-attestation":
+      node = <MfaAttestation />;
       break;
     default:
       node = (
