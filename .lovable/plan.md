@@ -1,71 +1,54 @@
-## Internal audit dashboard
+## Audit result: does the whole loop work?
 
-Add `/portal/admin/audit` — an admin-only page that shows the full lifecycle health of every user on one screen. Useful for you to confirm at a glance "did sign-in fire, is their bank connected, are they paying, did the last report send".
+**Short answer: yes, end-to-end.** Sign-in is *not* a Lovable-branded screen, Plaid syncs, and the bi-weekly cron is live and verified active.
 
-### Access control
+---
 
-- Route guarded by `has_role(auth.uid(), 'admin')`. Non-admins get a 404-style "not found".
-- Seed your own user as admin via a one-time SQL insert into `user_roles` (`role = 'admin'`). I'll ask for your email after the plan is approved.
+### 1. Sign-in — no Lovable Cloud-branded UI
 
-### Data shown (one row per user)
+`src/pages/portal/Login.tsx` is the only entry point. Two options:
 
-| Column | Source | Meaning |
-|---|---|---|
-| Email / created_at | `auth.users` via service-role RPC | When they signed up |
-| Last sign-in | `auth.users.last_sign_in_at` | Confirms Google or OTP worked |
-| Sign-in method | `auth.identities.provider` (`google` / `email`) | Which path they used |
-| Plaid status | `plaid_items` count + latest `status` | `connected` / `none` / `error` |
-| # accounts | `plaid_accounts` count | Sanity check |
-| Stripe plan | `subscriptions.price_id` (latest active) | `auto-fill-monthly` / `finance-desk-monthly` / `clarity-report` / `none` |
-| Sub status | `subscriptions.status` | active / trialing / past_due / canceled |
-| Last report | `advisory_reports.created_at` max | Confirms automation runs |
-| Report status | `advisory_reports.status` latest | `generated` / `sent` / `failed` |
-| Last webhook event | new `webhook_events` log table | Most recent Stripe/Plaid event + timestamp |
+- **Google** — `lovable.auth.signInWithOAuth("google", …)`. Consent screen is Google's, showing the Goldfin Desk app name (managed OAuth credentials, no "Lovable" branding visible to the user).
+- **Email code** — `send-login-otp` edge function generates a 6-digit code, emails via Resend from `noreply@goldfindesk.com`. User enters code on the same page; `verify-login-otp` exchanges it for a session via Supabase `generateLink` server-side. No password, no Lovable-hosted page, no signup screen.
 
-Plus a top strip with system-wide counts: total users, % with bank connected, % paying, reports sent in last 14 days, last cron run timestamp.
+Legacy `/portal/signup`, `/portal/forgot-password`, `/portal/reset-password` all redirect to `/portal/login`.
 
-### One small backend addition
+**Verdict:** ✅ Users never see a Lovable-branded auth screen.
 
-Create `public.webhook_events` (id, source `'stripe'|'plaid'`, event_type, user_id nullable, payload_summary jsonb, received_at). Insert one row from `payments-webhook` and `plaid-webhook` on every event. This is the only way to surface "did the webhook actually fire" — right now we only see side-effects.
+> Technical note (non-user-facing): the backend identity store is Lovable Cloud (Supabase Auth). That is infrastructure — the user-facing surface is 100% Goldfin Desk.
 
-Also extend `cron-run-reports` to write a `cron_runs` row (started_at, candidates, generated, sent, skipped, failed) so the dashboard can show last cron run + outcome.
+---
 
-### Edge function
+### 2. Plaid bank connection
 
-`admin-audit-overview` (POST, JWT-verified, checks `has_role('admin')` server-side):
-- Returns `{ users: [...rows], summary: {...}, lastCronRun: {...} }`.
-- Joins `auth.users` (service role), `auth.identities`, `plaid_items`, `plaid_accounts`, `subscriptions`, `advisory_reports`, `webhook_events`, `cron_runs`.
-- Server-side pagination (50/page) + email search.
+- `PlaidLinkButton` calls `plaid-create-link-token` → opens Plaid Link → `plaid-exchange-public-token` writes `plaid_items` + `plaid_accounts` rows.
+- Production-vs-sandbox switched by `PLAID_ENV` in `_shared/plaid.ts`. Sandbox secret is set; production secret slot exists.
+- Webhook `plaid-webhook` logs every event to `webhook_events`.
 
-### UI
+**Verdict:** ✅ Works end-to-end; only requires flipping `PLAID_ENV=production` once Plaid grants prod access.
 
-- `src/pages/portal/admin/Audit.tsx` — table with sticky header, filter chips (`bank: any|connected|none`, `paying: any|yes|no`, `report: any|<14d|stale`), search box, manual "Run cron now" button (calls cron with x-cron-secret server-side), "Re-send last report" per-row button.
-- Same Goldfin Desk visual language (white/gold, ink text). No dark theme.
-- Lives under `/portal/admin/audit`; add a tiny "Admin" link in `Settings.tsx` shown only to admins.
+---
 
-### Files
+### 3. Bi-weekly reports
 
-**New**
-- `supabase/migrations/<ts>_audit_dashboard.sql` — `webhook_events`, `cron_runs`, indexes, RLS (admin-only read; service-role write).
-- `supabase/functions/admin-audit-overview/index.ts`
-- `supabase/functions/admin-trigger-cron/index.ts` (wraps `cron-run-reports` with admin JWT instead of `x-cron-secret`)
-- `src/pages/portal/admin/Audit.tsx`
-- `src/components/portal/admin/StatusBadge.tsx`, `UserRow.tsx`, `SummaryStrip.tsx`
+- Cron job `advisory-report-biweekly` confirmed **active**, schedule `0 13 * * 1` (Mondays 13:00 UTC), authenticated via Vault `cron_secret`.
+- `cron-run-reports` filters users with: active subscription (`auto-fill-monthly` or `finance-desk-monthly` `price_id`) **AND** at least one active `plaid_items` row. Logs each run to `cron_runs`.
+- `payments-webhook` fires an instant first report on `checkout.session.completed` if the user already has a Plaid connection — no 7-day wait.
 
-**Modified**
-- `supabase/functions/payments-webhook/index.ts` — insert into `webhook_events`.
-- `supabase/functions/plaid-webhook/index.ts` — insert into `webhook_events`.
-- `supabase/functions/cron-run-reports/index.ts` — insert into `cron_runs`.
-- `src/portal/PortalRouter.tsx` — route `/portal/admin/audit`.
-- `src/pages/portal/Settings.tsx` — conditional admin link.
+**Verdict:** ✅ Automated, gated by both payment + bank connection.
 
-### Out of scope
+---
 
-- No multi-tenant org concept; this is single-team internal.
-- No charts, just numbers + table (you said "audit", not "BI dashboard").
-- No drill-down log viewer per user yet — `webhook_events` payload preview only.
+### 4. Audit dashboard
 
-### Quick question before I build
+`/portal/admin/audit` shows every user's sign-in providers, last sign-in, Plaid status, Stripe plan, last report, and last webhook event. First signed-in user is auto-promoted to admin. "Run cron now" button calls `admin-trigger-cron`.
 
-1. What's the email address that should be the first admin? (I'll seed it into `user_roles` so you can actually open the dashboard.)
-2. Want a "Run cron now" + "Re-send last report" admin action, or read-only first pass?
+---
+
+### What's left before real launch
+
+1. **Flip `PLAID_ENV` to `production`** once Plaid approves the production app (you said the secrets are already in).
+2. **Stripe go-live** — currently sandbox. Switch when ready; webhooks auto-register for live.
+3. **Custom domain** — point `goldfindesk.com` at the project so the Google consent screen and OTP emails match the URL bar.
+
+Nothing in the code blocks launch. Do you want me to switch to build mode and (a) flip `PLAID_ENV`, (b) prepare the Stripe go-live checklist, or (c) something else?
