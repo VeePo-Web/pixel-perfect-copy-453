@@ -25,7 +25,8 @@ export function isPortalRoute(pathname: string) {
     pathname === "/terms" ||
     pathname === "/plaid-consent" ||
     pathname === "/privacy" ||
-    pathname === "/data-retention"
+    pathname === "/data-retention" ||
+    pathname === "/plaid-operations"
   );
 }
 
