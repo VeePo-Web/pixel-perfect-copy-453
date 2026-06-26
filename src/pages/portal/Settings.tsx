@@ -74,20 +74,11 @@ export default function Settings() {
         <section className="mt-6 rounded-2xl border border-ink/10 bg-paper p-6">
           <h2 className="text-[16px] font-medium text-ink">Sign-in security</h2>
           <p className="mt-2 text-[13px] text-ink/65">
-            Every sign-in requires a 6-digit code sent to your email. Codes expire in 10 minutes.
-            If you didn't request a code, change your password immediately.
+            You sign in with Google or a 6-digit code emailed to you. No passwords.
+            Codes expire in 10 minutes.
           </p>
         </section>
 
-        <section className="mt-6 rounded-2xl border border-ink/10 bg-paper p-6">
-          <h2 className="text-[16px] font-medium text-ink">Password</h2>
-          <a
-            href="/portal/forgot-password"
-            className="mt-3 inline-block text-[12.5px] text-ink underline underline-offset-4"
-          >
-            Send password reset email →
-          </a>
-        </section>
       </PortalLayout>
     </ProtectedRoute>
   );

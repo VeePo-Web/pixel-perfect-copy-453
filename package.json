@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
+    "@lovable.dev/cloud-auth-js": "^1.1.2",
     "@stripe/react-stripe-js": "^6.2.0",
     "@stripe/stripe-js": "^9.2.0",
     "@supabase/supabase-js": "^2.108.2",

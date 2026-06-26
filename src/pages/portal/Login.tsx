@@ -1,167 +1,197 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AuthShell, Field, PrimaryButton, supabase } from "../../components/portal/AuthShell";
-import PortalOtpVerify from "../../components/portal/PortalOtpVerify";
 import { useLoginOtp } from "../../hooks/useLoginOtp";
+import { lovable } from "../../integrations/lovable";
 
-const MAX_ATTEMPTS = 5;
-const LOCKOUT_MS = 30_000;
-
-type Stage = "credentials" | "otp";
+type Stage = "entry" | "otp";
 
 export default function PortalLogin() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [capsLock, setCapsLock] = useState(false);
+  const [stage, setStage] = useState<Stage>("entry");
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
-  const [failedAttempts, setFailedAttempts] = useState(0);
-  const [lockoutUntil, setLockoutUntil] = useState<number | null>(null);
-  const [lockoutRemaining, setLockoutRemaining] = useState(0);
+  const [digits, setDigits] = useState<string[]>(["", "", "", "", "", ""]);
+  const [resendCooldown, setResendCooldown] = useState(0);
+  const [otpError, setOtpError] = useState<string | null>(null);
 
-  const [stage, setStage] = useState<Stage>("credentials");
-  const { sendOtp, isSending } = useLoginOtp();
+  const { sendOtp, verifyOtp, isSending, isVerifying } = useLoginOtp();
+  const code = digits.join("");
+  const masked = email.replace(/(.{2})(.*)(@.*)/, "$1•••$3");
 
+  // If already signed in, bounce straight in.
   useEffect(() => {
-    if (!lockoutUntil) return;
-    const t = setInterval(() => {
-      const remaining = Math.max(0, lockoutUntil - Date.now());
-      setLockoutRemaining(Math.ceil(remaining / 1000));
-      if (remaining <= 0) {
-        setLockoutUntil(null);
-        setFailedAttempts(0);
-      }
-    }, 250);
-    return () => clearInterval(t);
-  }, [lockoutUntil]);
-
-  const isLockedOut = !!lockoutUntil && Date.now() < lockoutUntil;
-
-  const onCapsKey = useCallback((e: React.KeyboardEvent) => {
-    setCapsLock(e.getModifierState("CapsLock"));
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) window.location.assign("/portal");
+    });
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (isLockedOut) return;
-    setLoading(true);
-    setError(null);
-    try {
-      const { error: signErr, data } = await supabase.auth.signInWithPassword({ email, password });
-      if (signErr || !data.user) {
-        const next = failedAttempts + 1;
-        setFailedAttempts(next);
-        if (next >= MAX_ATTEMPTS) {
-          setLockoutUntil(Date.now() + LOCKOUT_MS);
-          setError("Too many failed attempts. Try again in 30 seconds.");
-        } else {
-          setError(
-            `${signErr?.message || "Invalid credentials"}${
-              next >= 3 ? ` · ${MAX_ATTEMPTS - next} attempt${MAX_ATTEMPTS - next === 1 ? "" : "s"} remaining` : ""
-            }`,
-          );
-        }
-        setLoading(false);
-        return;
-      }
-      setFailedAttempts(0);
-      const r = await sendOtp(email, data.user.id);
-      if (!r.success) {
-        setError(r.error);
-        setLoading(false);
-        return;
-      }
-      setStage("otp");
-    } catch {
-      setError("An unexpected error occurred");
-    } finally {
-      setLoading(false);
-    }
-  };
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    const t = setTimeout(() => setResendCooldown((c) => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [resendCooldown]);
 
-  const handleOtpSuccess = () => {
+  useEffect(() => {
+    if (stage !== "otp" || code.length !== 6 || isVerifying) return;
+    (async () => {
+      setOtpError(null);
+      const r = await verifyOtp(email, code);
+      if (r.success) {
+        window.location.assign("/portal");
+      } else {
+        setOtpError(r.error);
+        setDigits(["", "", "", "", "", ""]);
+      }
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [code, stage]);
+
+  const handleGoogle = async () => {
+    setError(null);
+    setGoogleLoading(true);
+    const result = await lovable.auth.signInWithOAuth("google", {
+      redirect_uri: `${window.location.origin}/portal/login`,
+    });
+    if (result.error) {
+      setError(result.error.message || "Google sign-in failed");
+      setGoogleLoading(false);
+      return;
+    }
+    if (result.redirected) return;
     window.location.assign("/portal");
   };
 
-  const handleOtpCancel = async () => {
-    await supabase.auth.signOut();
-    setStage("credentials");
-    setPassword("");
+  const handleEmail = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    const r = await sendOtp(email);
+    if (!r.success) {
+      setError(r.error);
+      return;
+    }
+    setStage("otp");
+    setResendCooldown(60);
   };
 
   const handleResend = async () => {
-    const { data } = await supabase.auth.getUser();
-    if (!data.user) return { success: false, error: "Session expired. Please sign in again." };
-    return sendOtp(email, data.user.id);
+    if (resendCooldown > 0) return;
+    setOtpError(null);
+    const r = await sendOtp(email);
+    if (r.success) setResendCooldown(60);
+    else setOtpError(r.error);
   };
 
   if (stage === "otp") {
     return (
-      <PortalOtpVerify
-        email={email}
-        onSuccess={handleOtpSuccess}
-        onCancel={handleOtpCancel}
-        onResend={handleResend}
-      />
+      <AuthShell title="Check your email">
+        <p className="text-[13.5px] text-ink/65">
+          We sent a 6-digit code to <strong className="text-ink">{masked}</strong>. It expires in 10 minutes.
+        </p>
+        <div className="mt-6 flex gap-2">
+          {digits.map((d, i) => (
+            <input
+              key={i}
+              type="text"
+              inputMode="numeric"
+              maxLength={1}
+              value={d}
+              disabled={isVerifying}
+              onChange={(e) => {
+                const v = e.target.value.replace(/\D/g, "").slice(-1);
+                const next = [...digits];
+                next[i] = v;
+                setDigits(next);
+                if (v && i < 5) {
+                  const el = document.getElementById(`d${i + 1}`) as HTMLInputElement | null;
+                  el?.focus();
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace" && !digits[i] && i > 0) {
+                  const el = document.getElementById(`d${i - 1}`) as HTMLInputElement | null;
+                  el?.focus();
+                }
+              }}
+              onPaste={(e) => {
+                const t = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
+                if (t.length === 6) {
+                  e.preventDefault();
+                  setDigits(t.split(""));
+                }
+              }}
+              id={`d${i}`}
+              aria-label={`Digit ${i + 1}`}
+              className="h-12 w-full rounded-lg border border-ink/15 bg-paper text-center text-[18px] font-medium text-ink outline-none focus:border-ink/50 disabled:opacity-50"
+            />
+          ))}
+        </div>
+        {otpError && <p className="mt-4 text-center text-[13px] text-red-700">{otpError}</p>}
+        {isVerifying && <p className="mt-4 text-center text-[12.5px] text-ink/55">Verifying…</p>}
+        <div className="mt-6 flex items-center justify-between">
+          <button
+            type="button"
+            onClick={() => {
+              setStage("entry");
+              setDigits(["", "", "", "", "", ""]);
+              setOtpError(null);
+            }}
+            className="text-[12.5px] text-ink/55 hover:text-ink"
+          >
+            ← Use a different email
+          </button>
+          <button
+            type="button"
+            onClick={handleResend}
+            disabled={resendCooldown > 0 || isSending}
+            className="text-[12.5px] text-ink/55 underline underline-offset-4 hover:text-ink disabled:no-underline disabled:opacity-50"
+          >
+            {isSending ? "Sending…" : resendCooldown > 0 ? `Resend in ${resendCooldown}s` : "Resend code"}
+          </button>
+        </div>
+      </AuthShell>
     );
   }
 
   return (
-    <AuthShell
-      title="Sign in to your portal"
-      footer={
-        <>
-          New here?{" "}
-          <a href="/portal/signup" className="text-ink underline underline-offset-4">
-            Create an account
-          </a>
-        </>
-      }
-    >
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <AuthShell title="Sign in to Goldfin Desk">
+      <button
+        type="button"
+        onClick={handleGoogle}
+        disabled={googleLoading}
+        className="flex w-full items-center justify-center gap-3 rounded-full border border-ink/15 bg-paper py-2.5 text-[13.5px] font-medium text-ink hover:bg-ink/5 disabled:opacity-50"
+      >
+        <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+          <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.17-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62z" />
+          <path fill="#34A853" d="M9 18c2.43 0 4.47-.81 5.96-2.18l-2.92-2.26c-.8.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.33A9 9 0 0 0 9 18z" />
+          <path fill="#FBBC05" d="M3.97 10.71A5.41 5.41 0 0 1 3.68 9c0-.59.1-1.17.29-1.71V4.96H.96A9 9 0 0 0 0 9c0 1.45.35 2.83.96 4.04l3.01-2.33z" />
+          <path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.34l2.58-2.58A9 9 0 0 0 .96 4.96L3.97 7.3C4.68 5.18 6.66 3.58 9 3.58z" />
+        </svg>
+        {googleLoading ? "Opening Google…" : "Continue with Google"}
+      </button>
+
+      <div className="my-6 flex items-center gap-3">
+        <div className="h-px flex-1 bg-ink/10" />
+        <span className="text-[11px] uppercase tracking-wider text-ink/45">or</span>
+        <div className="h-px flex-1 bg-ink/10" />
+      </div>
+
+      <form onSubmit={handleEmail} className="space-y-4">
         <Field
           label="Email"
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          disabled={isLockedOut || loading || isSending}
+          disabled={isSending}
+          placeholder="you@company.com"
         />
-        <Field
-          label="Password"
-          type="password"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onKeyDown={onCapsKey}
-          onKeyUp={onCapsKey}
-          disabled={isLockedOut || loading || isSending}
-        />
-        {capsLock && (
-          <p className="text-[12px] text-amber-600">⚠ Caps Lock is on</p>
-        )}
         {error && <p className="text-[12.5px] text-red-700">{error}</p>}
-        {isLockedOut && (
-          <p className="text-[12.5px] text-red-700">
-            Locked out. Try again in {lockoutRemaining}s.
-          </p>
-        )}
-        <PrimaryButton disabled={loading || isSending || isLockedOut}>
-          {loading
-            ? "Signing in…"
-            : isSending
-              ? "Sending code…"
-              : isLockedOut
-                ? `Locked (${lockoutRemaining}s)`
-                : "Sign in"}
+        <PrimaryButton disabled={isSending || !email}>
+          {isSending ? "Sending code…" : "Email me a code"}
         </PrimaryButton>
-        <div className="text-center text-[12.5px]">
-          <a href="/portal/forgot-password" className="text-ink/55 hover:text-ink">
-            Forgot password?
-          </a>
-        </div>
         <p className="text-center text-[11.5px] text-ink/45">
-          Email verification required for security.
+          We'll email a 6-digit code to sign you in. No password.
         </p>
       </form>
     </AuthShell>

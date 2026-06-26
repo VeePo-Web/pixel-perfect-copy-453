@@ -1,38 +1,125 @@
-## Honest end‑to‑end status
 
-Short answer: **the pipes are connected, but a few production switches aren't flipped yet, and one assumption in your message is off.** Here's exactly what happens today vs. what's missing.
+# Goldfin Portal — Passwordless Auth Rebuild
 
-### Quick correction
-Auth *is* Lovable — Lovable Cloud is the backend (Supabase under the hood). There is no separate auth system. What we built on top of it:
-- Email + password signup via Lovable Cloud auth
-- Supabase sends a confirmation link email (default template)
-- On every login: password → then a 6‑digit OTP we email via Resend (`send-login-otp` / `verify-login-otp`), valid 24h on that device
+## Goal
 
-So a new user actually gets **two** auth emails on day one: confirmation link, then login OTP. That's fine, but it's not the "no signup, just a code" flow you described — worth deciding which you want.
+Users sign in with **Google** (one click) or, as a fallback, with a **6-digit code emailed to them**. No passwords, no signup form, no confirmation links. The rest of the system (Plaid bank connect → biweekly Stripe-gated advisory reports) stays exactly as built.
 
-### What works end‑to‑end right now
-1. `/portal/signup` → Supabase creates user → confirmation email link → `/portal/login`
-2. Login: password check → OTP emailed → `PortalOtpVerify` → 24h verified flag
-3. `/portal/accounts` → `PlaidLinkButton` → `plaid-create-link-token` → Plaid Link → `plaid-exchange-public-token` → accounts + balances synced (verified via Playwright + sandbox API)
-4. Plaid webhooks → `plaid-webhook` (JWT verified in prod) → transactions resync / reauth flag
-5. Stripe checkout + portal + webhook → `subscriptions` table populated
-6. `cron-run-reports` edge function exists, generates a report from `plaid_accounts` + `ledger_entries` and emails it via Resend; gated to one per user per 13 days
+## Reality check on "no Lovable"
 
-### What's NOT verified / missing for "real biweekly reports start landing"
-| Gap | Impact | Fix |
-|---|---|---|
-| `CRON_SECRET` not in the visible secret list, and Vault entry `cron_secret` is set inside a `DO` block that swallows errors | Cron may be running but `cron-run-reports` rejects with 401, silently | Confirm both, or re‑run the schedule migration after secrets are set |
-| `RESEND_FROM` not in secret list | Report emails fall back to `noreply@goldfindesk.com` (fine if domain verified) or fail | Confirm Resend domain `goldfindesk.com` is verified, set `RESEND_FROM` |
-| No link between `subscriptions.status='active'` and report eligibility | Free users would also get reports | Add a `status = 'active'` filter in `cron-run-reports` user query |
-| No per‑user cadence preference | Everyone gets the same Monday 13:00 UTC pass | Add `report_cadence_days` column on `profiles` if you want flexibility; otherwise leave |
-| No "first report on day 1 of subscription" trigger | New paying users wait up to 13 days for their first report | Call `generate-advisory-report` from `payments-webhook` on `checkout.session.completed` |
-| `PLAID_ENV` still `sandbox` | All bank data is fake | Flip to `production` after Plaid grants access |
+Lovable Cloud is the backend (database, edge functions, Stripe webhooks, Plaid token storage). It cannot be removed without rebuilding the entire app on another stack. What we *can* remove is any user-visible trace of it: no Lovable branding, no Lovable login UI, no Supabase email templates. From the user's perspective the auth is "Sign in with Google" on `goldfindesk.com`, full stop.
 
-### Proposal — pick one
-Tell me which path and I'll switch to build mode:
+## Scope of changes
 
-- **A. Verify only.** I run the cron function manually with the secret, confirm it sends a real report email to a test account, and report what breaks. No code changes.
-- **B. Verify + close the gaps above** (Stripe gating in cron, kickoff report on first payment, confirmed `RESEND_FROM`). Code changes are small and contained.
-- **C. Also rework signup to passwordless** (email → OTP only, no password, no confirmation link) — closer to what your message described. Bigger change; touches `Signup.tsx`, `Login.tsx`, and the OTP functions.
+### 1. Auth UX (frontend)
 
-Which one?
+Replace the current `/portal/signup` + `/portal/login` + `/portal/verify` with a **single page** at `/portal/login`:
+
+```text
+┌─────────────────────────────────────┐
+│  Goldfin Desk                       │
+│                                     │
+│  [  Continue with Google  ]         │
+│                                     │
+│  ─────────  or  ─────────           │
+│                                     │
+│  Email address                      │
+│  [____________________]             │
+│  [  Email me a code  ]              │
+└─────────────────────────────────────┘
+```
+
+After "Email me a code" → second step on same route shows 6-digit input → verified → `/portal/accounts`.
+
+- Delete `src/pages/portal/Signup.tsx`
+- Rewrite `src/pages/portal/Login.tsx` as the unified entry
+- Keep `PortalOtpVerify.tsx` logic but inline it as a step in `Login.tsx`
+- Remove all password fields, "forgot password", and "create account" links from the app
+- Update any "Sign up" CTAs on marketing pages to point to `/portal/login`
+
+### 2. Google Sign-In
+
+- Use Lovable Cloud managed Google OAuth (zero config, no client ID/secret needed from user)
+- Configure via `supabase--configure_social_auth` with `providers: ["google"]` and `disable_providers: ["email"]` … but keep email enabled because OTP path still needs it. So actually: enable `google`, leave `email` enabled (OTP rides on it), do not disable.
+- Call `lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin + "/portal/accounts" })` — but per Lovable rules `redirect_uri` cannot be a protected route, so use `${window.location.origin}/portal/login` and let the post-session effect navigate to `/portal/accounts`.
+
+### 3. Email OTP (fallback)
+
+Two options for the email-code path:
+
+- **Option A (recommended):** Use Supabase native `signInWithOtp({ email })` — sends a 6-digit code via Supabase Auth (email magic-link/OTP). One built-in mechanism, no custom edge functions, no custom OTP table. Verified with `verifyOtp({ email, token, type: 'email' })`.
+- **Option B:** Keep our custom `send-login-otp` / `verify-login-otp` edge functions and `login_otps` table (already built, already wired to Resend with our branded template).
+
+Recommendation: **Option B** — we already have branded emails going through `noreply@goldfindesk.com` via Resend, and the table is in place. Just remove the "password check first" step so it becomes pure passwordless: email → OTP → session. Reuse existing functions, just stop requiring a prior password verification.
+
+### 4. Backend changes
+
+- Drop the password requirement: `send-login-otp` already accepts just an email; remove any caller code that gates it behind a password.
+- After OTP verification, mint a Supabase session for that email (the function already does this via admin `generateLink` or magic-link flow — confirm it does, otherwise add it).
+- Profile auto-creation trigger (`handle_new_user`) already exists and works for both Google and email-OTP first-time logins. No change needed.
+- Keep `ProtectedRoute.tsx` as-is (checks session).
+
+### 5. Wipe existing test users
+
+Run in this order via migration:
+1. Delete from `public.plaid_accounts`, `public.plaid_items`, `public.subscriptions`, `public.tos_acceptances`, `public.login_otps`, `public.user_roles`, `public.profiles`
+2. Delete all users from `auth.users` (via admin RPC, since we can't touch `auth` schema directly in a normal migration — use a SECURITY DEFINER function calling `auth.admin` or a one-shot edge function with service role)
+
+Cleanest path: one-shot edge function `admin-wipe-users` using `SUPABASE_SERVICE_ROLE_KEY` to call `supabase.auth.admin.listUsers()` + `deleteUser()` for each. Invoked once, then deleted.
+
+### 6. Auth emails
+
+Currently Supabase sends a default confirmation email on signup. After this change there *is* no signup (Google creates the user silently; OTP creates the user on first verified code). So:
+
+- Disable email confirmation requirement for new signups via `configure_auth` (`auto_confirm_email: true`) so OTP-created users are immediately usable.
+- Our branded OTP email continues to go via Resend through `send-login-otp` — already on `noreply@goldfindesk.com`, no Lovable branding visible.
+
+### 7. Things that DO NOT change
+
+- Plaid Link button, account sync, webhook handling
+- Stripe Checkout, customer portal, subscription gating
+- `cron-run-reports` biweekly schedule + instant first-report-on-payment trigger
+- All marketing pages, pricing, terms
+
+## End-to-end flow after this change
+
+1. User clicks "Get Started" on marketing site → `/portal/login`
+2. User clicks **Continue with Google** → Google popup → returns authenticated → redirected to `/portal/accounts`
+   *(or)* enters email → receives 6-digit code from `noreply@goldfindesk.com` → enters code → `/portal/accounts`
+3. `/portal/accounts` → clicks "Connect bank" → Plaid Link → accounts synced
+4. User goes to `/pricing` → picks plan → Stripe Checkout → returns → `payments-webhook` fires first advisory report within seconds
+5. Every 13 days after, `cron-run-reports` emails the next report
+
+Nothing in this flow shows "Lovable" or "Supabase" branding anywhere.
+
+## Technical file list
+
+**Modify:**
+- `src/pages/portal/Login.tsx` (rewrite as unified Google + OTP entry)
+- `src/components/portal/PortalRouter.tsx` (remove signup/verify routes)
+- `src/App.tsx` (remove signup route)
+- `supabase/functions/send-login-otp/index.ts` (confirm passwordless, no prior password check)
+- `supabase/functions/verify-login-otp/index.ts` (confirm it mints a real session, not just a "verified" flag)
+- Any marketing CTA pointing to `/portal/signup`
+
+**Delete:**
+- `src/pages/portal/Signup.tsx`
+- `src/pages/portal/PortalOtpVerify.tsx` (inline into Login)
+
+**Create:**
+- `supabase/functions/admin-wipe-users/index.ts` (one-shot, deleted after run)
+- Migration to clear public tables
+
+**Tool calls:**
+- `supabase--configure_social_auth` with `providers: ["google"]`
+- `supabase--configure_auth` with `auto_confirm_email: true`, `disable_signup: false`, `external_anonymous_users_enabled: false`, `password_hibp_enabled: false`
+
+## Open question I'll need to verify in build mode
+
+Whether `verify-login-otp` currently returns a real Supabase session (access_token + refresh_token the client can set via `supabase.auth.setSession`) or just a custom "verified" flag. If the latter, I'll switch it to use `supabase.auth.admin.generateLink({ type: 'magiclink' })` server-side and complete the session client-side — standard Supabase passwordless pattern. This is small and contained.
+
+## What you'll see when it's done
+
+- `/portal/login` with a Google button and an email field, nothing else
+- Old test accounts gone
+- Sign in with your Google account in one click → land on Accounts → connect Plaid → pay → first report hits your inbox within ~30 seconds

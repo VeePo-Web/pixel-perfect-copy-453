@@ -1,13 +1,10 @@
-// Generates a 6-digit login OTP, stores a SHA-256 hash, and emails it via
-// the Resend connector gateway. Unauthenticated endpoint — guarded by the
-// password sign-in that just succeeded on the client.
+// Passwordless login: generate a 6-digit code, store SHA-256 hash, email it.
+// Creates the auth user on first use (auto-confirmed) so OTP verify can mint
+// a session for brand-new accounts.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, json } from "../_shared/auth-context.ts";
 
-const Body = z.object({
-  email: z.string().email(),
-  userId: z.string().uuid(),
-});
+const Body = z.object({ email: z.string().email() });
 
 const RESEND_GATEWAY = "https://connector-gateway.lovable.dev/resend";
 const FROM = "Goldfin Desk <noreply@goldfindesk.com>";
@@ -33,10 +30,26 @@ function emailHtml(code: string) {
     <h1 style="font-size:20px;margin:16px 0 8px;color:#1a1815">Your sign-in code</h1>
     <p style="font-size:14px;color:#55534c;margin:0 0 24px;line-height:1.6">Enter this code in the portal to finish signing in. It expires in ${OTP_TTL_MIN} minutes.</p>
     <div style="font-size:32px;letter-spacing:.4em;font-weight:600;text-align:center;padding:20px;background:#f7f3e8;border-radius:12px;color:#1a1815;font-family:Menlo,Consolas,monospace">${code}</div>
-    <p style="font-size:12px;color:#8a857a;margin:24px 0 0;line-height:1.6">If you didn't try to sign in, ignore this email and change your password — someone may know it. Goldfin Desk will never ask you for this code.</p>
+    <p style="font-size:12px;color:#8a857a;margin:24px 0 0;line-height:1.6">If you didn't try to sign in, ignore this email. Goldfin Desk will never ask you for this code.</p>
   </div>
   <p style="font-size:11px;color:#a8a499;text-align:center;margin-top:16px">Goldfin Desk · read-only financial clarity</p>
 </body></html>`;
+}
+
+async function findOrCreateUser(admin: ReturnType<typeof adminClient>, email: string): Promise<string | null> {
+  // listUsers w/ filter; fall back to create if not found.
+  const { data: list } = await admin.auth.admin.listUsers({ page: 1, perPage: 200 });
+  const found = list?.users?.find((u) => u.email?.toLowerCase() === email.toLowerCase());
+  if (found) return found.id;
+  const { data: created, error } = await admin.auth.admin.createUser({
+    email,
+    email_confirm: true,
+  });
+  if (error) {
+    console.error("createUser failed", error);
+    return null;
+  }
+  return created.user?.id ?? null;
 }
 
 Deno.serve(async (req) => {
@@ -44,15 +57,11 @@ Deno.serve(async (req) => {
   try {
     const parsed = Body.safeParse(await req.json());
     if (!parsed.success) return json({ error: "Invalid request" }, 400);
-    const { email, userId } = parsed.data;
+    const email = parsed.data.email.toLowerCase();
 
     const admin = adminClient();
-
-    // Confirm the userId actually matches the email (defends against forged userIds).
-    const { data: userLookup, error: lookupErr } = await admin.auth.admin.getUserById(userId);
-    if (lookupErr || !userLookup?.user || userLookup.user.email?.toLowerCase() !== email.toLowerCase()) {
-      return json({ error: "Invalid request" }, 400);
-    }
+    const userId = await findOrCreateUser(admin, email);
+    if (!userId) return json({ error: "Could not start sign-in" }, 500);
 
     const code = generateCode();
     const codeHash = await sha256Hex(code);
@@ -60,7 +69,6 @@ Deno.serve(async (req) => {
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
     const userAgent = req.headers.get("user-agent");
 
-    // Invalidate any prior unconsumed codes for this user.
     await admin
       .from("login_otps")
       .update({ consumed_at: new Date().toISOString() })
@@ -77,7 +85,6 @@ Deno.serve(async (req) => {
     });
     if (insErr) return json({ error: "Failed to issue code" }, 500);
 
-    // Send via Resend gateway. Don't leak send failures to the caller.
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
     if (LOVABLE_API_KEY && RESEND_API_KEY) {
@@ -94,7 +101,7 @@ Deno.serve(async (req) => {
             to: [email],
             subject: `Your Goldfin Desk sign-in code: ${code}`,
             html: emailHtml(code),
-            text: `Your Goldfin Desk sign-in code is ${code}. It expires in ${OTP_TTL_MIN} minutes. If you didn't request this, change your password immediately.`,
+            text: `Your Goldfin Desk sign-in code is ${code}. It expires in ${OTP_TTL_MIN} minutes.`,
           }),
         });
         if (!r.ok) console.error("Resend send failed", r.status, await r.text());
@@ -102,7 +109,7 @@ Deno.serve(async (req) => {
         console.error("Resend exception", e);
       }
     } else {
-      console.warn("send-login-otp: email service env not configured; OTP not sent");
+      console.warn("send-login-otp: email env not configured; OTP not sent");
     }
 
     return json({ ok: true, expiresAt });
