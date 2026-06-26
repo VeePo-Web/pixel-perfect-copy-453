@@ -28,7 +28,7 @@ export default function SecurityFAQHero() {
         <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70"><span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-300/70" />
           Security & FAQ
         </div>
-        <h1 className="mt-5 max-w-4xl font-light text-ink text-[34px] leading-[1.08] tracking-[-0.015em] sm:text-[48px] lg:text-[62px]">
+        <h1 className="mt-5 max-w-4xl font-light text-ink [text-wrap:balance] text-[34px] leading-[1.08] tracking-[-0.015em] sm:text-[48px] lg:text-[62px]">
           Preview safely. Apply without connecting your bank.
         </h1>
         <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-ink/65 sm:text-[16.5px]">

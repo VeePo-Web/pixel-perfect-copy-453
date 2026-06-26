@@ -22,7 +22,7 @@ export default function ComparisonHero() {
             </div>
             <h1
               id="three-way-hero-heading"
-              className="mt-5 max-w-[22ch] font-light text-ink text-[38px] leading-[1.04] tracking-[-0.01em] sm:text-[52px] lg:text-[60px]"
+              className="mt-5 max-w-[22ch] font-light text-ink [text-wrap:balance] text-[38px] leading-[1.04] tracking-[-0.01em] sm:text-[52px] lg:text-[60px]"
             >
               Bookkeeper vs Fractional CFO vs GoldFin Desk.
             </h1>

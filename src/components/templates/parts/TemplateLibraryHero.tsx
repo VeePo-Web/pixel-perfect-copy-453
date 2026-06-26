@@ -23,7 +23,7 @@ export default function TemplateLibraryHero() {
           </div>
           <h1
             id="templates-hero-heading"
-            className="mt-5 font-light text-ink text-[38px] leading-[1.06] tracking-[-0.01em] sm:text-[52px] lg:text-[58px]"
+            className="mt-5 font-light text-ink [text-wrap:balance] text-[38px] leading-[1.06] tracking-[-0.01em] sm:text-[52px] lg:text-[58px]"
           >
             Start organizing your numbers before they surprise you.
           </h1>

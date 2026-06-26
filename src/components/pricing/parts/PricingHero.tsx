@@ -18,7 +18,7 @@ export default function PricingHero() {
             <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70"><span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-300/70" />
               Pricing
             </div>
-            <h1 className="mt-5 max-w-[24ch] font-light text-ink text-[38px] leading-[1.08] tracking-[-0.01em] sm:text-[50px] lg:text-[58px]">
+            <h1 className="mt-5 max-w-[24ch] font-light text-ink [text-wrap:balance] text-[38px] leading-[1.08] tracking-[-0.01em] sm:text-[50px] lg:text-[58px]">
               Free templates. <span className="text-champagne-300">$99 to have them filled for you.</span> $1,500 to have them read with you.
             </h1>
             <p className="mt-6 max-w-[56ch] text-[15.5px] leading-[1.7] text-ink/70">

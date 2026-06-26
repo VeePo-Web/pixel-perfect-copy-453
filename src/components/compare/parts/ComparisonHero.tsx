@@ -21,7 +21,7 @@ export default function ComparisonHero() {
             </div>
             <h1
               id="compare-hero-heading"
-              className="mt-5 max-w-[24ch] font-light text-ink text-[40px] leading-[1.04] tracking-[-0.01em] sm:text-[54px] lg:text-[62px]"
+              className="mt-5 max-w-[24ch] font-light text-ink [text-wrap:balance] text-[40px] leading-[1.04] tracking-[-0.01em] sm:text-[54px] lg:text-[62px]"
             >
               What kind of financial support does your business actually need?
             </h1>
