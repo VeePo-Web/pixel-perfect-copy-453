@@ -47,10 +47,10 @@ export default function FounderTrustStrip() {
         <div className="flex items-start gap-5 text-left">
           {/* Avatar */}
           <div
-            className="flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full border border-champagne-200/20 bg-charcoal-900"
+            className="flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full border border-champagne-200/30 bg-navy shadow-[0_10px_28px_-12px_rgba(15,27,61,0.55)]"
             aria-hidden="true"
           >
-            <span className="text-[15px] font-medium text-champagne-300">CS</span>
+            <span className="text-[16px] font-medium tracking-wide text-champagne-100">CS</span>
           </div>
 
           {/* Name + credential */}

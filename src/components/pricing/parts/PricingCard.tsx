@@ -76,6 +76,15 @@ export default function PricingCard({ plan, emphasis }: Props) {
           {plan.cta.label}
           <span aria-hidden>→</span>
         </a>
+        {(plan.tone === "entry" || plan.tone === "continuity" || plan.tone === "flagship") && (
+          <p className="mt-2.5 text-center text-[10.5px] uppercase tracking-[0.16em] text-ink/55">
+            {plan.tone === "entry"
+              ? "No account required · Instant access"
+              : plan.tone === "continuity"
+              ? "Month-to-month · Cancel anytime"
+              : "By application · No obligation"}
+          </p>
+        )}
       </div>
     </article>
   );
