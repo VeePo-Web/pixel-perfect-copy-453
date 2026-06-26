@@ -137,4 +137,31 @@ Ranked by leverage. Frontend items are Claude-ownable now; backend/edge items ro
 
 ---
 
+## 8 — STATUS UPDATE (rolling) — what shipped vs. what's left
+
+> Tracks execution against §6's next-actions so the plan stays the single source of truth. As of this update, the frontend of the whole connect → AI-categorize → report → spreadsheet loop is **feature-complete and mobile-correct.**
+
+**Shipped (frontend, on `main`):**
+- Connect flow: payoff-above-ask + read-only/never-move-money trust strip; first-person CTA (§2.1/2.2) — `Accounts.tsx`
+- Instant-first-value sync: no dead-ends, progressive feedback (§2.6) — `Report.tsx`
+- First-run **activation checklist** (connect → sync → generate report), live status, one next action (Ramp/Mercury pattern) — `ActivationChecklist.tsx`
+- Dashboard routes connected owners straight to the report (activation funnel)
+- Merchant-keyed, confidence-scored **AI categorization review** (one fix back-fills all charges) (§3.1/3.2) — `TransactionReviewCard.tsx`
+- **Trust stamp** (coverage %, reconciled-as-of, "no figures invented") (§3.4) + verification-failed hold banner — Lovable
+- **Anomaly / unfamiliar-large-charge detector** (§3.4) — Lovable
+- **Accountability loop** (owner marks advice acted-on; memory compounds) — Lovable
+- **Five auto-filled spreadsheets** rendered on-screen + download-all/per-template, anti-hallucination gated (the "missing half") — `TemplateDownloadCard.tsx` / `FilledTemplateTable.tsx` (mobile-safe `<dl>` reflow)
+- **Anticipatory generating state** at the report-generation wait (perceived perf) — `GeneratingState.tsx`
+- Disconnect / data-control + Settings; brand-casing unified (`Goldfin`→`GoldFin`); **responsive portal layout** (was desktop-only, squeezed phone content to a sliver) — `PortalLayout.tsx`
+
+**Remaining material work — backend, Lovable-owned (do not edit edge fns/migrations from the frontend lane):**
+1. 🔴 Exclude internal transfers + owner draws; request **PFCv2** — the #1 correctness blocker for trustworthy burn/runway (`_shared/report-metrics.ts`; engine-fix T1/T6). *In progress (observed live).*
+2. 🔴 **Encrypt the Plaid `access_token` at rest** — production launch gate (engine-fix T2).
+3. 🟠 Verifier allow-list split ($/%/count) + tolerance tighten + bare-number scan (engine-fix T3/T5).
+4. 🟡 Statement/CSV-upload fallback for unsupported-bank OAuth (§2.4) — needs a small parse endpoint before any UI; do backend-first, then a thin frontend.
+
+**Net:** frontend leverage is largely exhausted; the next dollar is in backend numeric correctness (#1) and the security gate (#2).
+
+---
+
 *Sources: category knowledge of Plaid-powered finance products as of 2026-01 (Ramp, Brex, Mercury, Puzzle, Digits, Bench, Pilot, QuickBooks/Xero) cross-referenced with GoldFin's VOC report dossiers (cycles 2–7) and the existing Plaid architecture/handoff docs. Product specifics evolve; verify exact Plaid scopes and any competitor claim against current vendor docs before quoting externally.*
