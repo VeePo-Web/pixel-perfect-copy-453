@@ -4,6 +4,7 @@
 // publicly. Invoked on schedule by pg_cron (see migration 20260623140000).
 import { adminClient, corsHeaders, json } from "../_shared/auth-context.ts";
 import { generateReportForUser } from "../_shared/report-core.ts";
+import { retryFailedDeliveries } from "../_shared/report-delivery.ts";
 
 const DUE_AFTER_DAYS = 13;
 const MAX_BATCH = 100;
@@ -67,13 +68,17 @@ Deno.serve(async (req) => {
       }
     }
 
+    // Durability: re-attempt earlier emails that failed transiently, with
+    // exponential backoff (report-delivery.ts). Idempotent — never double-sends.
+    const retry = await retryFailedDeliveries(admin);
+
     if (runId) {
       await admin.from("cron_runs").update({
         finished_at: new Date().toISOString(),
         candidates: userIds.length, generated, sent, skipped, failed,
       }).eq("id", runId);
     }
-    return json({ candidates: userIds.length, generated, sent, skipped, failed, processed: processed.length });
+    return json({ candidates: userIds.length, generated, sent, skipped, failed, processed: processed.length, retried: retry.retried, recovered: retry.recovered });
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : "Unknown error" }, 500);
   }
