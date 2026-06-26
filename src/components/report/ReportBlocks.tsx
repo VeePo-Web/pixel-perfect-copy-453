@@ -1,6 +1,7 @@
 // Presentational building blocks for the advisory report surface.
 // Token-driven (ink / paper / gold / champagne / charcoal). Renders the
 // server-computed snapshot — never recomputes financials.
+import { useState } from "react";
 import type { MetricsSnapshot, Recommendation, IndustryMetric, IndustryPack, GrowthBlock } from "@/lib/report/types";
 import { BUCKET_LABEL } from "@/lib/report/types";
 import { fmtUSD, fmtPct, fmtDate } from "@/lib/report/format";
@@ -224,18 +225,29 @@ const BUCKET_STYLE: Record<string, string> = {
   earn_new: "border-ink/25 text-ink/60",
 };
 
-export function DecisionMemo({ recs }: { recs: Recommendation[] }) {
+export function DecisionMemo({
+  recs,
+  onMark,
+}: {
+  recs: Recommendation[];
+  onMark?: (index: number, acted: boolean | null, outcome: string | null) => void;
+}) {
   if (!recs.length) return null;
   return (
     <section className="animate-[section-in_0.5s_ease-cinema_both] rounded-xl border border-charcoal-700 bg-paper-raised px-6 py-6">
       <h3 className="text-[18px] font-light tracking-[-0.005em] text-ink">What to do now</h3>
+      {onMark && (
+        <p className="mt-1 text-[12.5px] leading-[1.6] text-ink/50">
+          Mark what you act on — your next briefing follows up on it, so the advice compounds.
+        </p>
+      )}
       <ol className="mt-4 space-y-4">
         {recs.map((r, i) => (
           <li key={i} className="flex gap-4">
             <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-gold-500/40 text-[12px] text-gold-700">
               {i + 1}
             </span>
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <p className="text-[14.5px] leading-[1.6] text-ink/85">{r.text}</p>
               <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[11.5px]">
                 <span className={`rounded-full border px-2 py-0.5 uppercase tracking-[0.12em] ${BUCKET_STYLE[r.bucket] ?? BUCKET_STYLE.earn_new}`}>
@@ -244,11 +256,52 @@ export function DecisionMemo({ recs }: { recs: Recommendation[] }) {
                 {r.dollar != null && <span className="text-green-signal">{fmtUSD(r.dollar)}</span>}
                 {r.deadline && <span className="text-ink/45">by {fmtDate(r.deadline)}</span>}
               </div>
+              {onMark && <AccountabilityControls rec={r} onMark={(acted, outcome) => onMark(i, acted, outcome)} />}
             </div>
           </li>
         ))}
       </ol>
     </section>
+  );
+}
+
+function AccountabilityControls({
+  rec,
+  onMark,
+}: {
+  rec: Recommendation;
+  onMark: (acted: boolean | null, outcome: string | null) => void;
+}) {
+  const [note, setNote] = useState(rec.outcome ?? "");
+  const pill = (active: boolean, tone: "done" | "not") =>
+    `rounded-full border px-2.5 py-0.5 text-[11px] transition-colors duration-200 ease-cinema focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/40 ${
+      active
+        ? tone === "done"
+          ? "border-green-signal/50 bg-green-signal/[0.08] text-green-signal"
+          : "border-ink/30 bg-charcoal-800 text-ink/70"
+        : "border-charcoal-700 text-ink/45 hover:text-ink"
+    }`;
+  return (
+    <div className="mt-2.5">
+      <div className="flex items-center gap-2">
+        <button type="button" className={pill(rec.acted === true, "done")}
+          onClick={() => onMark(rec.acted === true ? null : true, note || null)}>
+          ✓ Done
+        </button>
+        <button type="button" className={pill(rec.acted === false, "not")}
+          onClick={() => onMark(rec.acted === false ? null : false, null)}>
+          Not yet
+        </button>
+      </div>
+      {rec.acted === true && (
+        <input
+          type="text" value={note} placeholder="What happened? (optional — feeds next cycle)"
+          onChange={(e) => setNote(e.target.value)}
+          onBlur={() => note !== (rec.outcome ?? "") && onMark(true, note || null)}
+          className="mt-2 w-full rounded-lg border border-charcoal-700 bg-paper px-3 py-1.5 text-[12.5px] text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/40"
+        />
+      )}
+    </div>
   );
 }
 

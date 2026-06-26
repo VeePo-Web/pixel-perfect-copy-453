@@ -7,7 +7,7 @@ import TemplateDownloadCard from "./TemplateDownloadCard";
 import { fmtDate } from "@/lib/report/format";
 
 export default function AdvisoryReportView() {
-  const { report, loading, generating, error, generate } = useAdvisoryReport();
+  const { report, loading, generating, error, generate, markRecommendation } = useAdvisoryReport();
 
   if (loading) return <ReportSkeleton />;
 
@@ -56,7 +56,12 @@ export default function AdvisoryReportView() {
           </div>
         ))}
 
-        {report.recommendations && <DecisionMemo recs={report.recommendations} />}
+        {report.recommendations && (
+          <DecisionMemo
+            recs={report.recommendations}
+            onMark={(i, acted, outcome) => void markRecommendation(report.id, i, acted, outcome)}
+          />
+        )}
 
         <TrustStamp coverage={report.coverage_pct} periodEnd={report.period_end} model={report.model} />
 

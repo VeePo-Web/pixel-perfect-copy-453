@@ -53,9 +53,34 @@ export function useAdvisoryReport() {
     setState((s) => ({ ...s, generating: false }));
   }, [fetchLatest]);
 
+  // Accountability loop: mark a recommendation acted-on (+ outcome). Optimistic;
+  // persisted via the server (advisory_reports is SELECT-only for the client).
+  const markRecommendation = useCallback(
+    async (reportId: string, index: number, acted: boolean | null, outcome: string | null = null) => {
+      setState((s) =>
+        s.report && s.report.id === reportId
+          ? {
+              ...s,
+              report: {
+                ...s.report,
+                recommendations: (s.report.recommendations ?? []).map((r, i) =>
+                  i === index ? { ...r, acted, outcome } : r,
+                ),
+              },
+            }
+          : s,
+      );
+      const { error } = await supabase.functions.invoke("report-mark-recommendation", {
+        body: { reportId, index, acted, outcome },
+      });
+      if (error) await fetchLatest(); // revert to server truth on failure
+    },
+    [fetchLatest],
+  );
+
   useEffect(() => {
     void fetchLatest();
   }, [fetchLatest]);
 
-  return { ...state, refetch: fetchLatest, generate };
+  return { ...state, refetch: fetchLatest, generate, markRecommendation };
 }
