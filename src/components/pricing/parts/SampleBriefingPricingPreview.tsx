@@ -22,7 +22,7 @@
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <a
-                href="#/sample-briefing"
+                href="/sample-briefing"
                 className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 <span className="relative z-10">Generate Sample Finance Briefing</span>
@@ -30,7 +30,7 @@
               </a>
               {/* Advisory — text/tertiary; never border or gold per value ladder */}
               <a
-                href="#/apply"
+                href="/apply"
                 className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors duration-300 hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-950"
               >
                 Apply for the GoldFin Desk →

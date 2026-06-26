@@ -4,7 +4,7 @@ import { faqItems } from "../content";
 const TITLE = "Security & FAQ | GoldFin Desk";
 const DESC =
   "Learn how GoldFin Desk handles previews, applications, bank connection timing, privacy expectations, and common questions for owner-led businesses.";
-const CANONICAL = "https://pixel-perfect-copy-453.lovable.app/#/security-faq";
+const CANONICAL = "https://pixel-perfect-copy-453.lovable.app/security-faq";
 
 function ensureMeta(attr: "name" | "property", key: string): HTMLMetaElement {
   let el = document.querySelector(

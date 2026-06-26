@@ -58,7 +58,7 @@ export default function PricingFinalCTA() {
               <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
             </button>
             <a
-              href="#/sample-briefing"
+              href="/sample-briefing"
               className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
             >
               See a sample briefing
@@ -68,7 +68,7 @@ export default function PricingFinalCTA() {
             No contracts · Cancel anytime · No bank connection required
           </p>
           <a
-            href="#/apply"
+            href="/apply"
             className="mt-1 rounded text-[12.5px] text-ink/45 underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             Want a human reading your numbers? Apply for the $1,500 Desk

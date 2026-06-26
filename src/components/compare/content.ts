@@ -32,7 +32,7 @@ export const options: SupportOption[] = [
     usuallyMisses: "Automation, interpretation, and outside accountability.",
     chooseIf: "You are early-stage or want to start organizing yourself.",
     ctaText: "Get Free Templates",
-    ctaHref: "#/templates",
+    ctaHref: "/templates",
     anchorId: "row-diy",
     position: 0.05,
   },
@@ -95,7 +95,7 @@ export const options: SupportOption[] = [
     chooseIf:
       "You have financial data but need recurring clarity before decisions.",
     ctaText: "Auto-fill my reports — $99/mo",
-    ctaHref: "#/pricing#auto-fill",
+    ctaHref: "/pricing#auto-fill",
     anchorId: "row-mfd",
     position: 0.66,
     isMfd: true,
@@ -120,7 +120,7 @@ export const options: SupportOption[] = [
     usuallyMisses: "Higher fixed cost, slower to set up, requires management.",
     chooseIf: "Your business runs full-time finance work daily.",
     ctaText: "Read Pricing",
-    ctaHref: "#/pricing",
+    ctaHref: "/pricing",
     anchorId: "row-internal",
     position: 0.97,
   },
@@ -224,24 +224,24 @@ export const useCases: UseCase[] = [
     quote: "I have a bookkeeper, but I still feel like I’m guessing.",
     recommendation:
       "Bookkeeping keeps records clean, but does not interpret them. The GoldFin Desk adds a recurring layer of plain-English review on top of your existing bookkeeper.",
-    primaryCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
+    primaryCTA: { label: "Generate Sample Briefing", href: "/sample-briefing" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
   },
   {
     id: "cash-still-tight",
     quote: "Revenue is up, but cash still feels tight.",
     recommendation:
       "This is usually a clarity problem, not a math problem. A sample briefing makes cash movement, revenue trend, and expense pattern visible in one view.",
-    primaryCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Browse Free Templates", href: "#/templates" },
+    primaryCTA: { label: "Generate Sample Briefing", href: "/sample-briefing" },
+    secondaryCTA: { label: "Browse Free Templates", href: "/templates" },
   },
   {
     id: "hiring-decision",
     quote: "I am deciding whether to hire.",
     recommendation:
       "Pair the Hiring Affordability template with a GoldFin Desk briefing to see whether current cash flow can support another fixed payroll cost.",
-    primaryCTA: { label: "Review Hiring Readiness", href: "#/templates" },
-    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
+    primaryCTA: { label: "Review Hiring Readiness", href: "/templates" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
   },
   {
     id: "considering-cfo",
@@ -249,23 +249,23 @@ export const useCases: UseCase[] = [
     recommendation:
       "Many owner-led businesses get most of the value from a recurring clarity rhythm before they ever need full CFO leadership.",
     primaryCTA: { label: "Compare CFO Options", href: "#row-cfo" },
-    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
   },
   {
     id: "structure-first",
     quote: "I just need structure first.",
     recommendation:
       "The Free Template Library gives you a manual starting structure for cash, expenses, hiring, and monthly review.",
-    primaryCTA: { label: "Get Free Templates", href: "#/templates" },
-    secondaryCTA: { label: "Read Pricing", href: "#/pricing" },
+    primaryCTA: { label: "Get Free Templates", href: "/templates" },
+    secondaryCTA: { label: "Read Pricing", href: "/pricing" },
   },
   {
     id: "dashboards-no-decisions",
     quote: "I have dashboards but no decisions.",
     recommendation:
       "Dashboards visualize data. The GoldFin Desk turns that data into questions to review and decisions to consider every two weeks.",
-    primaryCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
+    primaryCTA: { label: "Generate Sample Briefing", href: "/sample-briefing" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
   },
 ];
 
@@ -330,9 +330,9 @@ export const recommendations: Record<RecommendationKey, Recommendation> = {
     title: "Bookkeeping cleanup first.",
     summary:
       "The GoldFin Desk works best on financial activity that is already organized. Start with bookkeeping cleanup through your current accountant or bookkeeper, then come back when records are caught up.",
-    primaryCTA: { label: "Start With Free Templates", href: "#/templates" },
-    secondaryCTA: { label: "See how GoldFin Desk works", href: "#/pricing" },
-    mobileCTA: { label: "Get Free Templates", href: "#/templates" },
+    primaryCTA: { label: "Start With Free Templates", href: "/templates" },
+    secondaryCTA: { label: "See how GoldFin Desk works", href: "/pricing" },
+    mobileCTA: { label: "Get Free Templates", href: "/templates" },
   },
   mfdFit: {
     key: "mfdFit",
@@ -340,9 +340,9 @@ export const recommendations: Record<RecommendationKey, Recommendation> = {
     title: "The GoldFin Desk is likely the missing layer.",
     summary:
       "You already have financial data — bookkeeper, software, dashboards, or spreadsheets — but lack a recurring way to understand what it means. The GoldFin Desk adds structure, plain-English bi-weekly briefings, and a monthly strategy review.",
-    primaryCTA: { label: "Generate Sample Finance Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
-    mobileCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
+    primaryCTA: { label: "Generate Sample Finance Briefing", href: "/sample-briefing" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+    mobileCTA: { label: "Generate Sample Briefing", href: "/sample-briefing" },
   },
   cfoCompare: {
     key: "cfoCompare",
@@ -351,8 +351,8 @@ export const recommendations: Record<RecommendationKey, Recommendation> = {
     summary:
       "A fractional CFO provides deeper strategic leadership. The GoldFin Desk is the lighter recurring clarity layer many owners find sufficient before that step. Compare both before committing.",
     primaryCTA: { label: "Compare Fractional CFO", href: "#row-cfo" },
-    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
-    mobileCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+    mobileCTA: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
   },
   templatesFirst: {
     key: "templatesFirst",
@@ -360,9 +360,9 @@ export const recommendations: Record<RecommendationKey, Recommendation> = {
     title: "Start with the Free Template Library.",
     summary:
       "At this stage, the most useful step is building a manual financial structure you can review on your own. The free templates cover cash flow, expenses, hiring, and monthly review.",
-    primaryCTA: { label: "Get Free Templates", href: "#/templates" },
-    secondaryCTA: { label: "Read Pricing", href: "#/pricing" },
-    mobileCTA: { label: "Get Free Templates", href: "#/templates" },
+    primaryCTA: { label: "Get Free Templates", href: "/templates" },
+    secondaryCTA: { label: "Read Pricing", href: "/pricing" },
+    mobileCTA: { label: "Get Free Templates", href: "/templates" },
   },
 };
 
@@ -473,7 +473,7 @@ export const pageIndex: { id: string; title: string; who: string; diff: string; 
     title: "Bookkeeper vs Fractional CFO vs GoldFin Desk",
     who: "Owners unsure what level of support they actually need.",
     diff: "Records vs recurring clarity vs strategic leadership.",
-    href: "#/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk",
+    href: "/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk",
   },
   {
     id: "idx-data",

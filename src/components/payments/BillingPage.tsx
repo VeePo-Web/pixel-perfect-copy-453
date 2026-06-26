@@ -21,7 +21,7 @@ export default function BillingPage() {
         body: {
           email: email.trim().toLowerCase(),
           environment: getStripeEnvironment(),
-          returnUrl: `${window.location.origin}/#/billing`,
+          returnUrl: `${window.location.origin}/billing`,
         },
       });
       if (invokeError) throw new Error(invokeError.message);

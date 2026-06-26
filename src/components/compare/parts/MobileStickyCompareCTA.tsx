@@ -29,11 +29,11 @@ export default function MobileStickyCompareCTA({ recommendation }: Props) {
         <a
           href={href}
           onClick={() => {
-            if (href === "#/sample-briefing")
+            if (href === "/sample-briefing")
               track("sample_briefing_clicked_from_compare", { source: "mobile-sticky" });
-            else if (href === "#/apply")
+            else if (href === "/apply")
               track("apply_clicked_from_compare", { source: "mobile-sticky" });
-            else if (href === "#/templates")
+            else if (href === "/templates")
               track("templates_clicked_from_compare", { source: "mobile-sticky" });
           }}
           className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"

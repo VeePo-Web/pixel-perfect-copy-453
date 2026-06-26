@@ -51,9 +51,9 @@ export default function AccessSequence() {
         </ol>
         <div className="mt-10">
           <a
-            href="#/sample-briefing"
+            href="/sample-briefing"
             onClick={() =>
-              trackCtaByHref("#/sample-briefing", "security_faq_sequence")
+              trackCtaByHref("/sample-briefing", "security_faq_sequence")
             }
             className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-ink transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
           >

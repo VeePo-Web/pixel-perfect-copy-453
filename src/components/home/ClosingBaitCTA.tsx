@@ -57,7 +57,7 @@ export default function ClosingBaitCTA() {
       setStatus("error");
     }
 
-    window.location.hash = "/templates";
+    window.history.pushState({}, "", "/templates"); window.dispatchEvent(new PopStateEvent("popstate")); window.scrollTo({ top: 0 });
   }
 
   return (
@@ -95,7 +95,7 @@ export default function ClosingBaitCTA() {
               ✓ Check your inbox — the templates are on their way.
             </p>
             <a
-              href="#/templates"
+              href="/templates"
               className="text-[13px] text-champagne-300 transition-colors duration-300 hover:text-champagne-200"
             >
               Browse all templates →
@@ -131,7 +131,7 @@ export default function ClosingBaitCTA() {
             {status === "error" && (
               <p className="text-[13px] text-red-500">
                 Something went wrong. Try again or{" "}
-                <a href="#/templates" className="underline">
+                <a href="/templates" className="underline">
                   visit the templates page
                 </a>
                 .

@@ -31,7 +31,7 @@ export default function MobileStickyCTA({ recommendation }: Props) {
 
   if (pastBriefing) {
     label = "Auto-fill my reports — $99/mo";
-    href = "#/pricing#auto-fill";
+    href = "/pricing#auto-fill";
     eyebrow = "Your next step";
   } else if (recommendation) {
     label = recommendation.mobileCTA.label;

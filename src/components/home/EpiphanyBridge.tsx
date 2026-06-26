@@ -129,7 +129,7 @@ export default function EpiphanyBridge() {
             {/* Quiet text link CTA — NO button, NO gold */}
             <div className="mt-8">
               <a
-                href="#/pricing"
+                href="/pricing"
                 className="group inline-flex items-center border-b border-ink/20 pb-0.5 text-[13px] text-ink/65 transition-colors duration-300 hover:border-champagne-300/60 hover:text-champagne-300"
               >
                 See how auto-fill works

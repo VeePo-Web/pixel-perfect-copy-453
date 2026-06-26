@@ -5,19 +5,19 @@ const cards = [
     eyebrow: "Preview",
     title: "Generate Sample Finance Briefing",
     body: "Preview the kind of plain-English briefing the GoldFin Desk creates.",
-    cta: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
+    cta: { label: "Generate Sample Briefing", href: "/sample-briefing" },
   },
   {
     eyebrow: "Start light",
     title: "Get Free Templates",
     body: "Start organizing cash flow, expenses, hiring decisions, and monthly review manually.",
-    cta: { label: "Get Free Templates", href: "#/templates" },
+    cta: { label: "Get Free Templates", href: "/templates" },
   },
   {
     eyebrow: "Understand",
     title: "See Pricing",
     body: "Understand what is included in the $1,500/month GoldFin Desk.",
-    cta: { label: "View Pricing", href: "#/pricing" },
+    cta: { label: "View Pricing", href: "/pricing" },
   },
 ];
 

@@ -45,7 +45,7 @@ export default function TemplateLibraryHero() {
           style={{ animationDelay: "160ms" }}
         >
           <a
-            href="#/sample-briefing"
+            href="/sample-briefing"
             className="text-[13px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
             Or see a sample briefing first →

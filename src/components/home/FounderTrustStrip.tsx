@@ -76,7 +76,7 @@ export default function FounderTrustStrip() {
                 your money.
               </p>
               <a
-                href="#/security-faq"
+                href="/security-faq"
                 className="mt-2 block text-[12.5px] text-champagne-300/70 transition-colors duration-300 hover:text-champagne-300"
               >
                 How does the connection work? →

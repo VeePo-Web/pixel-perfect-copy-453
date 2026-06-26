@@ -72,7 +72,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
                 Get this template free
               </button>
               <a
-                href="#/sample-briefing"
+                href="/sample-briefing"
                 onClick={() => track("sample_briefing_clicked_from_templates", { source: "featured" })}
                 className="inline-flex min-h-[44px] items-center rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/40 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >

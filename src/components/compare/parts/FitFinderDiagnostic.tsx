@@ -205,10 +205,10 @@ function RecommendationPanel({ rec }: { rec: import("../content").Recommendation
           href={rec.primaryCTA.href}
           onClick={() => {
             const h = rec.primaryCTA.href;
-            if (h === "#/apply") track("apply_clicked_from_compare", { source: "fit-finder" });
-            else if (h === "#/sample-briefing")
+            if (h === "/apply") track("apply_clicked_from_compare", { source: "fit-finder" });
+            else if (h === "/sample-briefing")
               track("sample_briefing_clicked_from_compare", { source: "fit-finder" });
-            else if (h === "#/templates")
+            else if (h === "/templates")
               track("templates_clicked_from_compare", { source: "fit-finder" });
           }}
           className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"

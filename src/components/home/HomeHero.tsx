@@ -1,7 +1,7 @@
 ﻿import { useInView } from "../how-it-works/hooks/useInView";
 
 // Homepage Section 1 — Bait Hero (Pattern A: asymmetric 7/5 copy-left + layered template cards right).
-// HOMEPAGE EXCEPTION: gold CTA = "Get the free templates" → #/templates. NO $99/mo CTA here.
+// HOMEPAGE EXCEPTION: gold CTA = "Get the free templates" → /templates. NO $99/mo CTA here.
 
 interface CardDef {
   label: string;
@@ -132,7 +132,7 @@ export default function HomeHero() {
           >
             {/* Gold primary CTA — free templates only, NO $99/mo */}
             <a
-              href="#/templates"
+              href="/templates"
               className="group relative inline-flex overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(217,190,130,0.45)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0D12]"
             >
               <span
@@ -149,7 +149,7 @@ export default function HomeHero() {
 
             {/* Text link secondary */}
             <a
-              href="#/sample-briefing"
+              href="/sample-briefing"
               className="group mt-5 inline-flex items-center text-[12.5px] uppercase tracking-[0.18em] text-white/45 transition-colors duration-300 hover:text-champagne-300"
             >
               <span className="border-b border-white/15 pb-0.5 group-hover:border-champagne-300/60">

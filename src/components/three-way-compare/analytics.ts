@@ -24,12 +24,12 @@ export function track(event: ThreeWayEvent, payload?: Record<string, unknown>) {
 
 /** Convenience wrapper for CTA clicks that infers the event from href. */
 export function trackCtaByHref(href: string, source: string) {
-  if (href === "#/apply")
+  if (href === "/apply")
     track("apply_clicked_from_three_way_compare", { source });
-  else if (href === "#/sample-briefing")
+  else if (href === "/sample-briefing")
     track("sample_briefing_clicked_from_three_way_compare", { source });
-  else if (href === "#/templates")
+  else if (href === "/templates")
     track("templates_clicked_from_three_way_compare", { source });
-  else if (href.startsWith("#/pricing"))
+  else if (href.startsWith("/pricing"))
     track("pricing_clicked_from_three_way_compare", { source });
 }

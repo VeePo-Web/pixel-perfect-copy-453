@@ -41,7 +41,7 @@ export default function TemplateFinalCTA() {
             Send me the Vault
           </a>
           <a
-            href="#/sample-briefing"
+            href="/sample-briefing"
             onClick={() => track("sample_briefing_clicked_from_templates", { source: "final" })}
             className="text-[12.5px] text-ink/55 underline-offset-4 hover:text-ink hover:underline"
           >

@@ -30,7 +30,7 @@ export const plans: PricingPlan[] = [
       "Subscription Expense Tracker",
       "Tax Reserve Tracker",
     ],
-    cta: { label: "Get Free Templates", href: "#/templates" },
+    cta: { label: "Get Free Templates", href: "/templates" },
     tone: "entry",
   },
   {
@@ -52,7 +52,7 @@ export const plans: PricingPlan[] = [
       "Owner action list",
       "Spreadsheet export, always yours",
     ],
-    cta: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
+    cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
     tone: "continuity",
     note: "Cancel anytime",
   },
@@ -76,7 +76,7 @@ export const plans: PricingPlan[] = [
       "Decisions to consider",
       "Recurring financial rhythm",
     ],
-    cta: { label: "Apply for GoldFin Advisory", href: "#/apply" },
+    cta: { label: "Apply for GoldFin Advisory", href: "/apply" },
     tone: "flagship",
   },
   {
@@ -95,7 +95,7 @@ export const plans: PricingPlan[] = [
       "More detailed analysis memos",
       "Additional decision support",
     ],
-    cta: { label: "Apply for Plus", href: "#/apply" },
+    cta: { label: "Apply for Plus", href: "/apply" },
     tone: "plus",
     note: "By application",
   },
@@ -115,7 +115,7 @@ export const plans: PricingPlan[] = [
       "Deeper monthly/quarterly review",
       "More direct advisory involvement",
     ],
-    cta: { label: "Request Private Review", href: "#/apply" },
+    cta: { label: "Request Private Review", href: "/apply" },
     tone: "private",
     note: "By invitation",
   },
@@ -335,7 +335,7 @@ export const planFit = [
       "You want to organize manually",
       "You are not ready for a premium subscription",
     ],
-    cta: { label: "Send me the Vault", href: "#/templates" },
+    cta: { label: "Send me the Vault", href: "/templates" },
     tone: "entry" as PlanTone,
   },
   {
@@ -348,7 +348,7 @@ export const planFit = [
       "You are ready to stop doing spreadsheet work",
       "You want to cancel anytime with no lock-in",
     ],
-    cta: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
+    cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
     tone: "continuity" as PlanTone,
   },
   {
@@ -361,7 +361,7 @@ export const planFit = [
       "You have hiring, cash flow, or expense decisions to make",
       "You want a recurring monthly financial rhythm",
     ],
-    cta: { label: "Apply for the GoldFin Desk", href: "#/apply" },
+    cta: { label: "Apply for the GoldFin Desk", href: "/apply" },
     tone: "flagship" as PlanTone,
   },
 ];
@@ -437,7 +437,7 @@ export function recommend(a: SelectorAnswers): Recommendation {
       planId: "templates",
       headline: "Start with Free Templates.",
       body: "You have a real shot at meaningful clarity with a stronger self-guided foundation first.",
-      cta: { label: "Get Free Templates", href: "#/templates" },
+      cta: { label: "Get Free Templates", href: "/templates" },
     };
   }
   if (veryHighRev && wantsStrategy) {
@@ -445,7 +445,7 @@ export function recommend(a: SelectorAnswers): Recommendation {
       planId: "private",
       headline: "Request a Private Finance Room review.",
       body: "Your size and complexity warrant a more direct, higher-touch arrangement.",
-      cta: { label: "Request Private Review", href: "#/apply" },
+      cta: { label: "Request Private Review", href: "/apply" },
     };
   }
   if (lowRev) {
@@ -453,13 +453,13 @@ export function recommend(a: SelectorAnswers): Recommendation {
       planId: "autofill",
       headline: "Start with Auto-Filled Monthly Reports.",
       body: "The bridge between free templates and the full Desk — your templates filled for you every month, at $99.",
-      cta: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
+      cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
     };
   }
   return {
     planId: "desk",
     headline: "Apply for the GoldFin Desk.",
     body: "Your stage suggests the recurring rhythm is exactly what is missing — more than a tool, lighter than a full finance team.",
-    cta: { label: "Apply for the GoldFin Desk", href: "#/apply" },
+    cta: { label: "Apply for the GoldFin Desk", href: "/apply" },
   };
 }

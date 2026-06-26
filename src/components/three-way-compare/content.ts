@@ -175,45 +175,45 @@ export const recommendations: Record<RecommendationKey, Recommendation> = {
     eyebrow: "Start here",
     title: "Start with bookkeeping cleanup first.",
     body: "GoldFin Desk works best when your financial activity can be reviewed consistently. If the books are unusable or far behind, cleanup may be the first step.",
-    primaryCTA: { label: "Start With Free Templates", href: "#/templates" },
-    secondaryCTA: { label: "See how GoldFin Desk works", href: "#/pricing" },
-    mobileCTA: { label: "Get Free Templates", href: "#/templates" },
+    primaryCTA: { label: "Start With Free Templates", href: "/templates" },
+    secondaryCTA: { label: "See how GoldFin Desk works", href: "/pricing" },
+    mobileCTA: { label: "Get Free Templates", href: "/templates" },
   },
   mfdLikely: {
     key: "mfdLikely",
     eyebrow: "Likely fit",
     title: "GoldFin Desk may be the right next layer.",
     body: "You may already have records. The missing piece is recurring interpretation and monthly decision rhythm.",
-    primaryCTA: { label: "Generate Sample Finance Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
-    mobileCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
+    primaryCTA: { label: "Generate Sample Finance Briefing", href: "/sample-briefing" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+    mobileCTA: { label: "Generate Sample Briefing", href: "/sample-briefing" },
   },
   mfdBuiltFor: {
     key: "mfdBuiltFor",
     eyebrow: "Built for this",
     title: "GoldFin Desk is built for this.",
     body: "If the bank balance has become your decision dashboard, you likely need a clearer recurring financial view.",
-    primaryCTA: { label: "Generate Sample Finance Briefing", href: "#/sample-briefing" },
-    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
-    mobileCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
+    primaryCTA: { label: "Generate Sample Finance Briefing", href: "/sample-briefing" },
+    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+    mobileCTA: { label: "Generate Sample Briefing", href: "/sample-briefing" },
   },
   cfo: {
     key: "cfo",
     eyebrow: "Consider CFO support",
     title: "Consider fractional CFO support.",
     body: "If you need advanced forecasting, investor reporting, board support, or complex strategic finance leadership, a fractional CFO may be the better fit.",
-    primaryCTA: { label: "Compare CFO Options", href: "#/compare" },
-    secondaryCTA: { label: "See GoldFin Desk Pricing", href: "#/pricing" },
-    mobileCTA: { label: "Compare CFO Options", href: "#/compare" },
+    primaryCTA: { label: "Compare CFO Options", href: "/compare" },
+    secondaryCTA: { label: "See GoldFin Desk Pricing", href: "/pricing" },
+    mobileCTA: { label: "Compare CFO Options", href: "/compare" },
   },
   templatesFirst: {
     key: "templatesFirst",
     eyebrow: "Start light",
     title: "Start with the Free Templates.",
     body: "The free templates may be the best starting point until the business has more recurring financial complexity.",
-    primaryCTA: { label: "Get Free Templates", href: "#/templates" },
-    secondaryCTA: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
-    mobileCTA: { label: "Get Free Templates", href: "#/templates" },
+    primaryCTA: { label: "Get Free Templates", href: "/templates" },
+    secondaryCTA: { label: "Generate Sample Briefing", href: "/sample-briefing" },
+    mobileCTA: { label: "Get Free Templates", href: "/templates" },
   },
 };
 
@@ -306,9 +306,9 @@ export const tableRows: TableRow[] = [
 ];
 
 export const tableCTAs = {
-  bookkeeper: { label: "Clean up records", href: "#/templates" },
-  mfd: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
-  cfo: { label: "Consider CFO support", href: "#/compare" },
+  bookkeeper: { label: "Clean up records", href: "/templates" },
+  mfd: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+  cfo: { label: "Consider CFO support", href: "/compare" },
 };
 
 /* ───────── Maturity spectrum ───────── */
@@ -344,42 +344,42 @@ export const scenarios: Scenario[] = [
     quote: "My books are messy.",
     recommendation: "Bookkeeper first.",
     explanation: "If your records are behind, clean bookkeeping may be the first priority.",
-    cta: { label: "Start With Free Templates", href: "#/templates" },
+    cta: { label: "Start With Free Templates", href: "/templates" },
   },
   {
     id: "clean-but-unclear",
     quote: "I have clean reports but still feel unclear.",
     recommendation: "GoldFin Desk.",
     explanation: "This is the exact gap: you have data, but not plain-English interpretation and monthly review.",
-    cta: { label: "Generate Sample Briefing", href: "#/sample-briefing" },
+    cta: { label: "Generate Sample Briefing", href: "/sample-briefing" },
   },
   {
     id: "can-i-hire",
     quote: "I need to know if I can hire.",
     recommendation: "GoldFin Desk.",
     explanation: "Hiring decisions require cash flow, expense pressure, and recurring cost review — not just a bank balance.",
-    cta: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
+    cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
   },
   {
     id: "fundraising",
     quote: "I need fundraising, board reporting, or complex forecasts.",
     recommendation: "Fractional CFO.",
     explanation: "Those needs often require deeper CFO-level support.",
-    cta: { label: "Compare Against Fractional CFO", href: "#/compare" },
+    cta: { label: "Compare Against Fractional CFO", href: "/compare" },
   },
   {
     id: "not-ready",
     quote: "I am not ready for $1,500/month.",
     recommendation: "Free Templates.",
     explanation: "Start manually with templates, then upgrade when the financial complexity justifies a monthly rhythm.",
-    cta: { label: "Get Free Templates", href: "#/templates" },
+    cta: { label: "Get Free Templates", href: "/templates" },
   },
   {
     id: "serious-monthly",
     quote: "I want someone serious looking at my numbers monthly.",
     recommendation: "GoldFin Desk.",
     explanation: "That is what the monthly strategy review and bi-weekly briefings are built for.",
-    cta: { label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" },
+    cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
   },
 ];
 
@@ -490,12 +490,12 @@ export const faq: { q: string; a: string }[] = [
 /* ───────── Decision summary ───────── */
 
 export const decisionSummary = [
-  { need: "Need clean records?", answer: "Start with a bookkeeper.", href: "#/templates" },
-  { need: "Need senior finance strategy?", answer: "Consider a fractional CFO.", href: "#/compare" },
+  { need: "Need clean records?", answer: "Start with a bookkeeper.", href: "/templates" },
+  { need: "Need senior finance strategy?", answer: "Consider a fractional CFO.", href: "/compare" },
   {
     need: "Need recurring clarity between the two?",
     answer: "Have it done for you — GoldFin Reports, $99/mo.",
-    href: "#/pricing#auto-fill",
+    href: "/pricing#auto-fill",
   },
 ];
 

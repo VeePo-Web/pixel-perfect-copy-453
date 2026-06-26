@@ -32,14 +32,14 @@ export default function ComparisonFinalCTA() {
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </button>
           <a
-            href="#/sample-briefing"
+            href="/sample-briefing"
             onClick={() => track("sample_briefing_clicked_from_compare", { source: "final" })}
             className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
           >
             See a sample briefing
           </a>
           <a
-            href="#/templates"
+            href="/templates"
             onClick={() => track("templates_clicked_from_compare", { source: "final" })}
             className="text-[12.5px] text-ink/55 underline-offset-4 hover:text-ink hover:underline"
           >

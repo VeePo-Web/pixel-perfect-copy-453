@@ -40,14 +40,14 @@ export default function ComparisonHero() {
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </a>
               <a
-                href="#/sample-briefing"
-                onClick={() => trackCtaByHref("#/sample-briefing", "hero")}
+                href="/sample-briefing"
+                onClick={() => trackCtaByHref("/sample-briefing", "hero")}
                 className="rounded-full border border-ink/[0.12] px-6 py-3.5 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
               Generate Sample Finance Briefing
               </a>
               <button
                 type="button"
-                onClick={() => { startAutoFillCheckout(); trackCtaByHref("#/pricing#auto-fill", "hero"); }}
+                onClick={() => { startAutoFillCheckout(); trackCtaByHref("/pricing#auto-fill", "hero"); }}
                 className="text-[12.5px] text-ink/55 underline-offset-4 transition-all duration-300 ease-cinema hover:text-ink hover:underline"
               >
                 Or have it done for you — $99/mo

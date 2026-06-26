@@ -38,9 +38,9 @@ export default function SecurityFAQHero() {
         </p>
         <div className="mt-9 flex flex-wrap items-center gap-3">
           <a
-            href="#/sample-briefing"
+            href="/sample-briefing"
             onClick={() =>
-              trackCtaByHref("#/sample-briefing", "security_faq_hero")
+              trackCtaByHref("/sample-briefing", "security_faq_hero")
             }
             className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
@@ -48,14 +48,14 @@ export default function SecurityFAQHero() {
           </a>
           <button
             type="button"
-            onClick={() => { startAutoFillCheckout(); trackCtaByHref("#/pricing#auto-fill", "security_faq_hero"); }}
+            onClick={() => { startAutoFillCheckout(); trackCtaByHref("/pricing#auto-fill", "security_faq_hero"); }}
             className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-6 text-[13.5px] text-ink transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
           >
             Auto-fill my reports — $99/mo
           </button>
           <a
-            href="#/templates"
-            onClick={() => trackCtaByHref("#/templates", "security_faq_hero")}
+            href="/templates"
+            onClick={() => trackCtaByHref("/templates", "security_faq_hero")}
             className="inline-flex min-h-11 items-center text-[13px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
             Start with free templates →

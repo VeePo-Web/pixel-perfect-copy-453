@@ -34,13 +34,13 @@ export default function CheckoutReturnPage() {
         )}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <a
-            href="#/"
+            href="/"
             className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3 text-[13.5px] font-medium text-navy"
           >
             Back to home
           </a>
           <a
-            href="#/billing"
+            href="/billing"
             className="rounded-full border border-ink/15 px-6 py-3 text-[13.5px] text-ink/85 hover:border-champagne-200/40"
           >
             Manage billing

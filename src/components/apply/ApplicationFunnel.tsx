@@ -78,7 +78,7 @@ export default function ApplicationFunnel() {
         consent: state.consent,
       });
       if (error) throw error;
-      navigate("#/apply/thank-you");
+      navigate("/apply/thank-you");
     } catch {
       setSubmitError(APPLY.errors.submit);
     } finally {

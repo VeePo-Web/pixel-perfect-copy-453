@@ -204,7 +204,7 @@ export default function VaultPreview() {
           style={{ transitionDelay: `${200 + VAULT.length * 60 + 120}ms` }}
         >
           <a
-            href="#/templates"
+            href="/templates"
             className="group relative inline-flex overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(217,190,130,0.45)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
           >
             <span

@@ -33,7 +33,7 @@ export default function SampleBriefingCTA({ onAnother }: Props) {
               The same templates these numbers came from — sent to your inbox, free.
             </p>
             <a
-              href="#/templates"
+              href="/templates"
               className="mt-6 inline-flex w-full items-center justify-center rounded-full border border-ink/[0.14] px-5 py-3 text-[13px] text-ink/90 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
             >
               Send me the Vault
@@ -68,7 +68,7 @@ export default function SampleBriefingCTA({ onAnother }: Props) {
             Generate another sample briefing
           </button>
           <a
-            href="#/apply"
+            href="/apply"
             className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
             Running something larger? Apply for GoldFin Advisory →

@@ -46,15 +46,15 @@ export default function PricingValueContext() {
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <a
-                href="#/pricing"
-                onClick={() => trackCtaByHref("#/pricing", "pricing-context")}
+                href="/pricing"
+                onClick={() => trackCtaByHref("/pricing", "pricing-context")}
                 className="rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 View Pricing
               </a>
               <button
                 type="button"
-                onClick={() => { startAutoFillCheckout(); trackCtaByHref("#/pricing#auto-fill", "pricing-context"); }}
+                onClick={() => { startAutoFillCheckout(); trackCtaByHref("/pricing#auto-fill", "pricing-context"); }}
                 className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
               Auto-fill my reports — $99/mo
               </button>

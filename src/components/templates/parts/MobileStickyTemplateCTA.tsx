@@ -12,7 +12,7 @@ export default function MobileStickyTemplateCTA({ downloaded }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const href = downloaded ? "#/pricing#auto-fill" : "#vault-capture";
+  const href = downloaded ? "/pricing#auto-fill" : "#vault-capture";
   const label = downloaded ? "Auto-fill my reports — $99/mo" : "Send me the Vault";
 
   return (

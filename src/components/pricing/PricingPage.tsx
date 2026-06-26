@@ -34,7 +34,7 @@ export default function PricingPage() {
     };
   }, []);
 
-  // Scroll to the $99/mo Auto-Fill offer when linked as #/pricing#auto-fill
+  // Scroll to the $99/mo Auto-Fill offer when linked as /pricing#auto-fill
   // (from the homepage bridge, ladder card, or recommender).
   useEffect(() => {
     const scrollToOffer = () => {

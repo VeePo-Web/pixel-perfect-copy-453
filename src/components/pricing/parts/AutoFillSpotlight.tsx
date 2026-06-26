@@ -131,7 +131,7 @@ export default function AutoFillSpotlight() {
               </button>
 
               <a
-                href="#/templates"
+                href="/templates"
                 className="mt-4 text-[12px] text-ink/50 underline-offset-4 transition-colors hover:text-champagne-300 hover:underline"
               >
                 {o.microbridge}

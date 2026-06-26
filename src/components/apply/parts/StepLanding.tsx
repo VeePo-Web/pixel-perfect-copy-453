@@ -39,13 +39,13 @@ export default function StepLanding({ onStart, showWelcomeBack, onResume }: Prop
         </button>
         <button
           type="button"
-          onClick={() => navigate("#/sample-briefing")}
+          onClick={() => navigate("/sample-briefing")}
           className="group inline-flex items-center text-[13px] text-ink/70 hover:text-champagne-300 transition-all duration-300 ease-cinema"
         >
           <span className="border-b border-bone/20 pb-0.5 group-hover:border-champagne-200/60">{c.secondary}</span>
           <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
         </button>
-        <a href="#/templates" className="text-[13px] text-ink/55 hover:text-champagne-300 underline-offset-4 hover:underline">
+        <a href="/templates" className="text-[13px] text-ink/55 hover:text-champagne-300 underline-offset-4 hover:underline">
           {c.tertiary}
         </a>
       </div>

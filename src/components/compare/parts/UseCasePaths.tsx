@@ -73,10 +73,10 @@ export default function UseCasePaths() {
                         href={u.primaryCTA.href}
                         onClick={() => {
                           const h = u.primaryCTA.href;
-                          if (h === "#/apply") track("apply_clicked_from_compare", { source: `use-case:${u.id}` });
-                          else if (h === "#/sample-briefing")
+                          if (h === "/apply") track("apply_clicked_from_compare", { source: `use-case:${u.id}` });
+                          else if (h === "/sample-briefing")
                             track("sample_briefing_clicked_from_compare", { source: `use-case:${u.id}` });
-                          else if (h === "#/templates")
+                          else if (h === "/templates")
                             track("templates_clicked_from_compare", { source: `use-case:${u.id}` });
                         }}
                         className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-2 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"

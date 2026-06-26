@@ -9,7 +9,7 @@ const cards = [
     copy:
       "GoldFin Reports fills your templates from your numbers and briefs you in plain English — every month. No spreadsheet work.",
     cta: "Auto-fill my reports",
-    href: "#/pricing#auto-fill",
+    href: "/pricing#auto-fill",
     event: "autofill_clicked_from_compare" as const,
     tone: "flagship" as const,
   },
@@ -20,7 +20,7 @@ const cards = [
     copy:
       "Use demo data or rough non-sensitive numbers to see what a plain-English financial briefing feels like.",
     cta: "Generate sample briefing",
-    href: "#/sample-briefing",
+    href: "/sample-briefing",
     event: "sample_briefing_clicked_from_compare" as const,
     tone: "muted" as const,
   },
@@ -31,7 +31,7 @@ const cards = [
     copy:
       "Start organizing cash flow, expenses, hiring decisions, and monthly review yourself — free.",
     cta: "Send me the Vault",
-    href: "#/templates",
+    href: "/templates",
     event: "templates_clicked_from_compare" as const,
     tone: "muted" as const,
   },

@@ -52,15 +52,15 @@ export default function SampleBriefingProof() {
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <a
-                href="#/sample-briefing"
-                onClick={() => trackCtaByHref("#/sample-briefing", "briefing-proof")}
+                href="/sample-briefing"
+                onClick={() => trackCtaByHref("/sample-briefing", "briefing-proof")}
                 className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 <span className="relative z-10">Generate My Sample Finance Briefing</span>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </a>
               <a
-                href="#/sample-briefing"
+                href="/sample-briefing"
                 className="text-[12.5px] text-ink/60 underline-offset-4 hover:text-ink hover:underline"
               >
                 See Full Sample Briefing →

@@ -45,7 +45,7 @@ export function useFAQState() {
       if (next) {
         track("faq_opened", { id, question: q });
         try {
-          history.replaceState(null, "", `#/security-faq#${id}`);
+          history.replaceState(null, "", `/security-faq#${id}`);
         } catch {
           /* noop */
         }

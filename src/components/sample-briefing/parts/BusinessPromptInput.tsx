@@ -41,7 +41,7 @@ export default function BusinessPromptInput({ value, onChange, onGenerate, onUse
           Use Demo Business Data
         </button>
         <a
-          href="#/apply"
+          href="/apply"
           className="ml-auto text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
         >
           Apply for the GoldFin Desk →

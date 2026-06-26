@@ -34,7 +34,7 @@ export function openCheckout(plan: PlanKey, customerEmail?: string): void {
   analytics.checkoutStarted(plan, PLAN_PRICE_USD[plan]);
 
   if (!hasPaymentsConfigured()) {
-    window.location.hash = "#/pricing#auto-fill";
+    window.history.pushState({}, "", "/pricing#auto-fill"); window.dispatchEvent(new PopStateEvent("popstate"));
     return;
   }
 

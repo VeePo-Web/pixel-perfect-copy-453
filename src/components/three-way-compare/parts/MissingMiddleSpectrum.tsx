@@ -110,8 +110,8 @@ export default function MissingMiddleSpectrum() {
               </p>
               <div className="mt-6">
                 <a
-                  href="#/sample-briefing"
-                  onClick={() => trackCtaByHref("#/sample-briefing", "missing-middle")}
+                  href="/sample-briefing"
+                  onClick={() => trackCtaByHref("/sample-briefing", "missing-middle")}
                   className="group relative overflow-hidden inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
                   <span className="relative z-10">Generate Sample Finance Briefing</span>
                   <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />

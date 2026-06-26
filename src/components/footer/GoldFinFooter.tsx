@@ -6,23 +6,23 @@ const NAV_GROUPS = [
     label: "Product",
     links: [
       { label: "How It Works", href: "/#how-it-works" },
-      { label: "Sample Briefing", href: "#/sample-briefing" },
-      { label: "Templates", href: "#/templates" },
-      { label: "Pricing", href: "#/pricing" },
+      { label: "Sample Briefing", href: "/sample-briefing" },
+      { label: "Templates", href: "/templates" },
+      { label: "Pricing", href: "/pricing" },
     ],
   },
   {
     label: "Compare",
     links: [
-      { label: "vs. Alternatives", href: "#/compare" },
-      { label: "vs. Bookkeeper & CFO", href: "#/three-way-compare" },
+      { label: "vs. Alternatives", href: "/compare" },
+      { label: "vs. Bookkeeper & CFO", href: "/three-way-compare" },
     ],
   },
   {
     label: "Company",
     links: [
-      { label: "Security & FAQ", href: "#/security-faq" },
-      { label: "Apply", href: "#/apply" },
+      { label: "Security & FAQ", href: "/security-faq" },
+      { label: "Apply", href: "/apply" },
     ],
   },
 ] as const;

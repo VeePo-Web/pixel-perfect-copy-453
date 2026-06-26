@@ -44,7 +44,7 @@ export default function TemplateSuccessState({ template, onClose, headingId }: P
           <div className="mt-1 text-[12.5px] text-ink/60">Same template, auto-filled from your numbers, with a plain-English briefing. Cancel anytime.</div>
         </button>
         <a
-          href="#/sample-briefing"
+          href="/sample-briefing"
           onClick={() => track("sample_briefing_clicked_from_templates", { source: "success", templateId: template.id })}
           className="block rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-4 transition-all duration-300 ease-cinema hover:border-ink/20"
         >

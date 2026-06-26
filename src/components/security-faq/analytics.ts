@@ -26,12 +26,12 @@ export function track(event: SecurityFAQEvent, payload?: Record<string, unknown>
 }
 
 export function trackCtaByHref(href: string, source: string) {
-  if (href.startsWith("#/pricing")) track("autofill_clicked_from_security_faq", { source });
-  else if (href === "#/apply") track("apply_clicked_from_security_faq", { source });
-  else if (href === "#/sample-briefing")
+  if (href.startsWith("/pricing")) track("autofill_clicked_from_security_faq", { source });
+  else if (href === "/apply") track("apply_clicked_from_security_faq", { source });
+  else if (href === "/sample-briefing")
     track("sample_briefing_clicked_from_security_faq", { source });
-  else if (href === "#/templates")
+  else if (href === "/templates")
     track("templates_clicked_from_security_faq", { source });
-  else if (href === "#/compare")
+  else if (href === "/compare")
     track("compare_clicked_from_security_faq", { source });
 }

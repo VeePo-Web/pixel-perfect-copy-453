@@ -22,7 +22,7 @@ export default function StepReview({ state, update, onBack, onEdit, onSubmit, su
 
   const handleSave = async () => {
     try {
-      await navigator.clipboard.writeText(window.location.origin + window.location.pathname + "#/apply");
+      await navigator.clipboard.writeText(window.location.origin + window.location.pathname + "/apply");
       setToast("Resume link copied. Your progress is saved on this device.");
     } catch {
       setToast("Your progress is saved on this device.");

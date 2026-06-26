@@ -12,7 +12,7 @@ import GlobalTopBar, { type NavKey } from "./components/nav/GlobalTopBar";
 import GoldFinFooter from "./components/footer/GoldFinFooter";
 import PaymentTestModeBanner from "./components/payments/PaymentTestModeBanner";
 import CheckoutMount from "./components/payments/CheckoutMount";
-import { useHashRoute } from "./components/apply/hooks/useHashRoute";
+import { useHashRoute, navigate } from "./components/apply/hooks/useHashRoute";
 import PortalRouter, { isPortalRoute } from "./portal/PortalRouter";
 
 // Interior routes are code-split: the homepage no longer ships their JS, which
@@ -48,6 +48,36 @@ function usePathname(): string {
 const App = () => {
   const route = useHashRoute();
   const pathname = usePathname();
+
+  // Intercept internal <a href="/…"> clicks for instant SPA navigation (no full
+  // reload), so path routing keeps the speed of the old hash router. External,
+  // new-tab, modified, download, and #anchor links fall through to the browser.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = (e.target as HTMLElement | null)?.closest("a");
+      if (!a) return;
+      const href = a.getAttribute("href");
+      if (!href || !href.startsWith("/") || href.startsWith("//")) return;
+      const target = a.getAttribute("target");
+      if ((target && target !== "_self") || a.hasAttribute("download")) return;
+      e.preventDefault();
+      navigate(href);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
+  // Self-canonical every route to its real path (one indexable URL per page).
+  useEffect(() => {
+    let link = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "canonical";
+      document.head.appendChild(link);
+    }
+    link.href = window.location.origin + window.location.pathname;
+  }, [pathname]);
 
   // Portal + legal pages live entirely outside the marketing chrome.
   if (isPortalRoute(pathname)) return <PortalRouter pathname={pathname} />;

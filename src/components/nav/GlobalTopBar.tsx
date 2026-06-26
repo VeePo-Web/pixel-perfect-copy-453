@@ -22,10 +22,10 @@ type Props = {
 // Hick's Law: 4 links — ordered by Brunson conversion journey
 // proof → price → lead-magnet → trust
 const LINKS: { key: NavKey; label: string; href: string }[] = [
-  { key: "sample-briefing", label: "Sample Briefing", href: "#/sample-briefing" },
-  { key: "pricing",         label: "Pricing",         href: "#/pricing" },
-  { key: "templates",       label: "Free Templates",  href: "#/templates" },
-  { key: "security-faq",    label: "Security",        href: "#/security-faq" },
+  { key: "sample-briefing", label: "Sample Briefing", href: "/sample-briefing" },
+  { key: "pricing",         label: "Pricing",         href: "/pricing" },
+  { key: "templates",       label: "Free Templates",  href: "/templates" },
+  { key: "security-faq",    label: "Security",        href: "/security-faq" },
 ];
 
 // ─── NavTrustStrip ────────────────────────────────────────────────────────────
@@ -170,7 +170,7 @@ function MobileSheet({
           // Homepage: gold = free Vault (Rung 1 lead-magnet is the primary ask)
           <>
             <a
-              href="#/templates"
+              href="/templates"
               onClick={onClose}
               className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-4 text-[15px] font-medium text-navy shadow-[0_4px_24px_-6px_rgba(201,162,74,0.45)] transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0D12]"
             >
@@ -197,7 +197,7 @@ function MobileSheet({
               <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
             </button>
             <a
-              href="#/templates"
+              href="/templates"
               onClick={onClose}
               className="inline-flex items-center justify-center rounded-full border border-white/[0.16] px-5 py-[13px] text-[14px] text-white/70 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-white active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0D12]"
             >
@@ -334,7 +334,7 @@ export default function GlobalTopBar({
 
             {/* ── Logo ── */}
             <a
-              href="#/"
+              href="/"
               className="group flex items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/50 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
               aria-label="GoldFin Desk — Home"
             >
@@ -384,7 +384,7 @@ export default function GlobalTopBar({
                       $99/mo →
                     </button>
                     <a
-                      href="#/templates"
+                      href="/templates"
                       className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-px hover:shadow-[0_8px_28px_-8px_rgba(201,162,74,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                     >
                       <span className="relative z-10">Get the free Vault</span>
@@ -395,7 +395,7 @@ export default function GlobalTopBar({
                   <>
                     {/* All other pages: Free Templates = text link; $99/mo = gold */}
                     <a
-                      href="#/templates"
+                      href="/templates"
                       className={`rounded-sm text-[12.5px] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/30 focus-visible:ring-offset-1 ${textLink}`}
                     >
                       Free Templates
@@ -420,7 +420,7 @@ export default function GlobalTopBar({
               {/* Compact gold pill — homepage-aware */}
               {isHome ? (
                 <a
-                  href="#/templates"
+                  href="/templates"
                   className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[11.5px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 >
                   <span className="relative z-10">Free Vault</span>

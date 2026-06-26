@@ -84,8 +84,8 @@ export default function ProductBoundariesSection() {
         </p>
         <div className="mt-8">
           <a
-            href="#/compare"
-            onClick={() => trackCtaByHref("#/compare", "security_faq_boundaries")}
+            href="/compare"
+            onClick={() => trackCtaByHref("/compare", "security_faq_boundaries")}
             className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-ink transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
           >
             Compare Your Options →

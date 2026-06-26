@@ -4,11 +4,11 @@ GoldFin Desk turns a business's financial activity into organized spreadsheet te
 
 ## Key Pages
 - Home: / — what GoldFin Desk is and who it serves
-- Pricing: /#/pricing — Free templates, $99/mo automated Reports, $1,500/mo Advisory
-- Sample Briefing: /#/sample-briefing — an example plain-English monthly finance briefing
-- Free Templates: /#/templates — seven free financial templates
-- Compare: /#/compare — GoldFin vs bookkeeper, fractional CFO, and dashboards
-- Security & FAQ: /#/security-faq — data handling, Plaid, and common questions
+- Pricing: /pricing — Free templates, $99/mo automated Reports, $1,500/mo Advisory
+- Sample Briefing: /sample-briefing — an example plain-English monthly finance briefing
+- Free Templates: /templates — seven free financial templates
+- Compare: /compare — GoldFin vs bookkeeper, fractional CFO, and dashboards
+- Security & FAQ: /security-faq — data handling, Plaid, and common questions
 
 ## Services
 - GoldFin Template Vault (Free): seven financial templates owners can use immediately

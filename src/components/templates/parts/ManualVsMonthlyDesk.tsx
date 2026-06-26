@@ -39,8 +39,8 @@ export default function ManualVsMonthlyDesk() {
             items={comparison.desk.items}
             bestFor={comparison.desk.bestFor}
             tone="flagship"
-            cta={{ label: "Auto-fill my reports — $99/mo", href: "#/pricing#auto-fill" }}
-            secondary={{ label: "See a sample briefing", href: "#/sample-briefing" }}
+            cta={{ label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" }}
+            secondary={{ label: "See a sample briefing", href: "/sample-briefing" }}
           />
         </div>
 
