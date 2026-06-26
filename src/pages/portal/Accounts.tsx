@@ -50,10 +50,22 @@ export default function Accounts() {
             <p className="text-[13px] text-ink/55">Loading…</p>
           ) : items.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-ink/15 p-10 text-center">
-              <p className="text-[14px] text-ink/70">No banks connected yet.</p>
-              <div className="mt-4 inline-block">
-                <PlaidLinkButton onConnected={load} />
+              {/* Payoff above the ask: the owner connects after the value is concrete,
+                  not before — the highest-leverage conversion lever in the connect flow
+                  (docs/research/2026-06-25-plaid-competitor-teardown.md §2.1). */}
+              <h2 className="text-[20px] font-medium text-ink">Connect your bank to build your first report</h2>
+              <p className="mx-auto mt-2 max-w-[46ch] text-[14px] leading-[1.6] text-ink/65">
+                We read your transactions, categorize them automatically, and turn them into a
+                plain-English report in minutes. The more accounts you connect, the more complete
+                your numbers.
+              </p>
+              <div className="mt-5 inline-block">
+                <PlaidLinkButton onConnected={load} label="Connect my bank & build my report" />
               </div>
+              {/* Trust reducer at the exact moment of hesitation — the connect CTA (§2.2). */}
+              <p className="mt-4 text-[12px] text-ink/45">
+                Read-only · We never see your login · Bank-level encryption · We never move money · Powered by Plaid
+              </p>
             </div>
           ) : (
             items.map((it) => <AccountCard key={it.id} item={it} onChange={load} />)
