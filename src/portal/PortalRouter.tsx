@@ -1,9 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 
 const Login = lazy(() => import("../pages/portal/Login"));
-const Signup = lazy(() => import("../pages/portal/Signup"));
-const ForgotPassword = lazy(() => import("../pages/portal/ForgotPassword"));
-const ResetPassword = lazy(() => import("../pages/portal/ResetPassword"));
 const AcceptTerms = lazy(() => import("../pages/portal/AcceptTerms"));
 const Dashboard = lazy(() => import("../pages/portal/Dashboard"));
 const Accounts = lazy(() => import("../pages/portal/Accounts"));
@@ -19,10 +16,6 @@ const Fallback = () => (
   </div>
 );
 
-/**
- * Minimal path-based router for portal + legal routes. Returns null if the
- * current pathname is not portal/legal — the existing marketing App takes over.
- */
 export function isPortalRoute(pathname: string) {
   return (
     pathname.startsWith("/portal") ||
@@ -47,16 +40,11 @@ export default function PortalRouter({ pathname }: { pathname: string }) {
       node = <Dashboard />;
       break;
     case "/portal/login":
-      node = <Login />;
-      break;
     case "/portal/signup":
-      node = <Signup />;
-      break;
     case "/portal/forgot-password":
-      node = <ForgotPassword />;
-      break;
     case "/portal/reset-password":
-      node = <ResetPassword />;
+      // All legacy auth paths now route to the single passwordless login.
+      node = <Login />;
       break;
     case "/portal/accept-terms":
       node = <AcceptTerms />;
@@ -93,4 +81,3 @@ export default function PortalRouter({ pathname }: { pathname: string }) {
   }
   return <Suspense fallback={<Fallback />}>{node}</Suspense>;
 }
-
