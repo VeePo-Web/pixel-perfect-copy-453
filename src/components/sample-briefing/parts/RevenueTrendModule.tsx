@@ -15,7 +15,7 @@ export default function RevenueTrendModule({ business }: { business: DemoBusines
             <div>
               <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/55">Total revenue</div>
               <div className="mt-2 text-[30px] font-light tabular-nums text-ink">{fmt(business.revenue)}</div>
-              <div className={`mt-1 text-[12.5px] ${positive ? "text-green-signal" : "text-champagne-200"}`}>
+              <div className={`mt-1 text-[12.5px] ${positive ? "text-green-signal" : "text-red-signal"}`}>
                 {positive ? "+" : ""}{business.revenueDelta}% vs prior 2 weeks
               </div>
             </div>

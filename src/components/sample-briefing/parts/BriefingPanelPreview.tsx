@@ -94,7 +94,7 @@ function Kpi({ label, value, sub, positive }: { label: string; value: string; su
     <div className="rounded-lg border border-ink/[0.06] bg-ink/[0.02] p-4">
       <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/55">{label}</div>
       <div className="mt-2 text-[18px] tabular-nums text-ink">{value}</div>
-      <div className={`mt-1 text-[11.5px] ${positive ? "text-green-signal" : "text-champagne-200"}`}>{sub}</div>
+      <div className={`mt-1 text-[11.5px] ${positive ? "text-green-signal" : "text-red-signal"}`}>{sub}</div>
     </div>
   );
 }

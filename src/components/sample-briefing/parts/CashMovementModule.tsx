@@ -13,7 +13,7 @@ export default function CashMovementModule({ business }: { business: DemoBusines
           <div className="rounded-xl border border-ink/[0.07] bg-ink/[0.02] p-5">
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/55">Cash balance</div>
             <div className="mt-2 text-[34px] font-light tabular-nums text-ink">{fmt(business.cash)}</div>
-            <div className={`mt-1 text-[12.5px] ${positive ? "text-green-signal" : "text-champagne-200"}`}>
+            <div className={`mt-1 text-[12.5px] ${positive ? "text-green-signal" : "text-red-signal"}`}>
               {positive ? "+" : ""}{business.cashDelta}% vs prior 2 weeks
             </div>
           </div>
