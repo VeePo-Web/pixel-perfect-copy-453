@@ -17,16 +17,16 @@ export default function Settings() {
   useEffect(() => {
     if (!user) return;
     (async () => {
-      const { data } = await supabase
-        .from("profiles")
-        .select("first_name, last_name, phone")
-        .eq("id", user.id)
-        .maybeSingle();
+      const [{ data }, { data: role }] = await Promise.all([
+        supabase.from("profiles").select("first_name, last_name, phone").eq("id", user.id).maybeSingle(),
+        supabase.from("user_roles").select("role").eq("user_id", user.id).eq("role", "admin").maybeSingle(),
+      ]);
       if (data) {
         setFirst(data.first_name ?? "");
         setLast(data.last_name ?? "");
         setPhone(data.phone ?? "");
       }
+      setIsAdmin(!!role);
     })();
   }, [user]);
 
