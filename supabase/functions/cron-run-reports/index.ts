@@ -22,7 +22,11 @@ Deno.serve(async (req) => {
 
     // Candidate users: an active connected bank AND an active paid subscription
     // on a plan that includes the advisory report.
-    const ELIGIBLE_PLANS = ["auto-fill-monthly", "finance-desk-monthly"];
+    // Accept both naming styles in case Stripe lookup_keys drift across envs.
+    const ELIGIBLE_PRICES = [
+      "auto-fill-monthly", "auto_fill_monthly",
+      "finance-desk-monthly", "finance_desk_monthly",
+    ];
     const ACTIVE_STATUSES = ["active", "trialing"];
     const { data: items } = await admin
       .from("plaid_items").select("user_id").eq("status", "active");
@@ -30,11 +34,12 @@ Deno.serve(async (req) => {
     if (itemUserIds.size === 0) {
       return json({ candidates: 0, generated: 0, sent: 0, skipped: 0, failed: 0, processed: 0 });
     }
-    const { data: subs } = await admin
-      .from("subscriptions").select("user_id, plan, status")
+    const { data: subs, error: subErr } = await admin
+      .from("subscriptions").select("user_id, price_id, status")
       .in("user_id", [...itemUserIds])
       .in("status", ACTIVE_STATUSES)
-      .in("plan", ELIGIBLE_PLANS);
+      .in("price_id", ELIGIBLE_PRICES);
+    if (subErr) console.error("cron: subscription filter failed", subErr);
     const userIds = [...new Set((subs ?? []).map((s) => s.user_id as string).filter(Boolean))];
 
 
