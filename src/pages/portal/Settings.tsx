@@ -4,6 +4,8 @@ import ProtectedRoute from "../../components/portal/ProtectedRoute";
 import { useAuth } from "../../contexts/AuthContext";
 import { supabase } from "../../integrations/supabase/client";
 
+
+
 export default function Settings() {
   const { user } = useAuth();
   const [first, setFirst] = useState("");
