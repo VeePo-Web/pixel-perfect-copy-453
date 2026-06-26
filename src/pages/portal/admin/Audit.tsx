@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import PortalLayout from "../../../components/portal/PortalLayout";
 import ProtectedRoute from "../../../components/portal/ProtectedRoute";
 import { supabase } from "../../../integrations/supabase/client";
+import { useAuth } from "../../../contexts/AuthContext";
+import { RETENTION_POLICY_VERSION } from "../../../lib/portal/tos";
 
 type Row = {
   user_id: string;
@@ -55,26 +57,44 @@ function Pill({ tone, children }: { tone: "ok" | "warn" | "bad" | "muted"; child
 }
 
 export default function Audit() {
+  const { user } = useAuth();
   const [rows, setRows] = useState<Row[] | null>(null);
   const [run, setRun] = useState<CronRun | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [running, setRunning] = useState(false);
   const [lastTriggerMsg, setLastTriggerMsg] = useState<string | null>(null);
+  const [lastReview, setLastReview] = useState<{ reviewed_at: string; policy_version: string } | null>(null);
+  const [reviewMsg, setReviewMsg] = useState<string | null>(null);
 
   const load = async () => {
     setError(null);
-    const [{ data, error: e1 }, { data: cronRows }] = await Promise.all([
+    const [{ data, error: e1 }, { data: cronRows }, { data: rev }] = await Promise.all([
       supabase.rpc("admin_audit_overview"),
       supabase.from("cron_runs").select("started_at, finished_at, candidates, generated, sent, skipped, failed")
         .order("started_at", { ascending: false }).limit(1),
+      supabase.from("retention_policy_reviews").select("reviewed_at, policy_version")
+        .order("reviewed_at", { ascending: false }).limit(1),
     ]);
     if (e1) { setError(e1.message); return; }
     setRows((data as Row[]) ?? []);
     setRun((cronRows?.[0] as CronRun) ?? null);
+    setLastReview((rev?.[0] as { reviewed_at: string; policy_version: string }) ?? null);
   };
 
   useEffect(() => { load(); }, []);
+
+  const recordReview = async () => {
+    if (!user) return;
+    setReviewMsg(null);
+    const { error } = await supabase.from("retention_policy_reviews").insert({
+      policy_version: RETENTION_POLICY_VERSION,
+      reviewer_user_id: user.id,
+      notes: "Quarterly review recorded from admin dashboard.",
+    });
+    setReviewMsg(error ? `Error: ${error.message}` : "Review recorded.");
+    load();
+  };
 
   const triggerCron = async () => {
     setRunning(true); setLastTriggerMsg(null);
