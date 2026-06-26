@@ -47,6 +47,9 @@ export default function PortalRouter({ pathname }: { pathname: string }) {
       // All legacy auth paths now route to the single passwordless login.
       node = <Login />;
       break;
+    case "/portal/admin/audit":
+      node = <AdminAudit />;
+      break;
     case "/portal/accept-terms":
       node = <AcceptTerms />;
       break;
