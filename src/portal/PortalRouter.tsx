@@ -6,6 +6,7 @@ const Dashboard = lazy(() => import("../pages/portal/Dashboard"));
 const Accounts = lazy(() => import("../pages/portal/Accounts"));
 const Report = lazy(() => import("../pages/portal/Report"));
 const Settings = lazy(() => import("../pages/portal/Settings"));
+const AdminAudit = lazy(() => import("../pages/portal/admin/Audit"));
 const Terms = lazy(() => import("../pages/legal/Terms"));
 const PlaidConsent = lazy(() => import("../pages/legal/PlaidConsent"));
 const Privacy = lazy(() => import("../pages/legal/Privacy"));
@@ -45,6 +46,9 @@ export default function PortalRouter({ pathname }: { pathname: string }) {
     case "/portal/reset-password":
       // All legacy auth paths now route to the single passwordless login.
       node = <Login />;
+      break;
+    case "/portal/admin/audit":
+      node = <AdminAudit />;
       break;
     case "/portal/accept-terms":
       node = <AcceptTerms />;

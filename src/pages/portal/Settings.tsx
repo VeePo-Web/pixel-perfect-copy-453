@@ -4,26 +4,29 @@ import ProtectedRoute from "../../components/portal/ProtectedRoute";
 import { useAuth } from "../../contexts/AuthContext";
 import { supabase } from "../../integrations/supabase/client";
 
+
+
 export default function Settings() {
   const { user } = useAuth();
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
   const [phone, setPhone] = useState("");
   const [savedAt, setSavedAt] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (!user) return;
     (async () => {
-      const { data } = await supabase
-        .from("profiles")
-        .select("first_name, last_name, phone")
-        .eq("id", user.id)
-        .maybeSingle();
+      const [{ data }, { data: role }] = await Promise.all([
+        supabase.from("profiles").select("first_name, last_name, phone").eq("id", user.id).maybeSingle(),
+        supabase.from("user_roles").select("role").eq("user_id", user.id).eq("role", "admin").maybeSingle(),
+      ]);
       if (data) {
         setFirst(data.first_name ?? "");
         setLast(data.last_name ?? "");
         setPhone(data.phone ?? "");
       }
+      setIsAdmin(!!role);
     })();
   }, [user]);
 
@@ -78,6 +81,16 @@ export default function Settings() {
             Codes expire in 10 minutes.
           </p>
         </section>
+
+        {isAdmin && (
+          <section className="mt-6 rounded-2xl border border-ink/10 bg-paper p-6">
+            <h2 className="text-[16px] font-medium text-ink">Admin</h2>
+            <p className="mt-2 text-[13px] text-ink/65">Internal lifecycle dashboard.</p>
+            <a href="/portal/admin/audit" className="mt-3 inline-block rounded-full bg-ink px-5 py-2 text-[12.5px] font-medium text-paper">
+              Open audit dashboard →
+            </a>
+          </section>
+        )}
 
       </PortalLayout>
     </ProtectedRoute>

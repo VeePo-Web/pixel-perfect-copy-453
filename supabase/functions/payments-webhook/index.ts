@@ -148,6 +148,19 @@ async function handleInvoicePaymentFailed(invoice: any) {
 async function handleWebhook(req: Request, env: StripeEnv) {
   const event = await verifyWebhook(req, env);
 
+  // Audit log: every Stripe event in, before branching.
+  try {
+    const obj: any = event.data?.object ?? {};
+    await getSupabase().from("webhook_events").insert({
+      source: "stripe",
+      event_type: event.type,
+      user_id: obj.metadata?.userId ?? null,
+      external_id: obj.id ?? null,
+      summary: { customer: obj.customer ?? null, status: obj.status ?? null, env },
+    });
+  } catch (e) { console.error("webhook_events log failed", e); }
+
+
   switch (event.type) {
     case "checkout.session.completed":
       await handleCheckoutCompleted(event.data.object, env);
