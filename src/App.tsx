@@ -7,6 +7,7 @@ import VaultPreview from "./components/home/VaultPreview";
 import EpiphanyBridge from "./components/home/EpiphanyBridge";
 import FounderTrustStrip from "./components/home/FounderTrustStrip";
 import ClosingBaitCTA from "./components/home/ClosingBaitCTA";
+import HomeMobileStickyCTA from "./components/home/HomeMobileStickyCTA";
 // Chrome is shared by every marketing route — keep eager so it paints instantly.
 import GlobalTopBar, { type NavKey } from "./components/nav/GlobalTopBar";
 import GoldFinFooter from "./components/footer/GoldFinFooter";
@@ -163,6 +164,7 @@ const App = () => {
       <EpiphanyBridge />
       <FounderTrustStrip />
       <ClosingBaitCTA />
+      <HomeMobileStickyCTA />
     </>,
   );
 };

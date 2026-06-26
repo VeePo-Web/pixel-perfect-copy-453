@@ -84,7 +84,7 @@ export default function HomeHero() {
 
       <div
         ref={ref}
-        className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-24 md:grid-cols-12 md:items-center md:gap-8 md:py-32 lg:px-10"
+        className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-16 md:grid-cols-12 md:items-center md:gap-8 md:py-32 lg:px-10"
       >
         {/* ── Left column — 7 cols ── */}
         <div className="md:col-span-7">
@@ -133,7 +133,7 @@ export default function HomeHero() {
             {/* Gold primary CTA — free templates only, NO $99/mo */}
             <a
               href="/templates"
-              className="group relative inline-flex overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(217,190,130,0.45)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0D12]"
+              className="group relative inline-flex w-full justify-center overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-4 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema sm:w-auto sm:justify-start sm:py-3.5 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(217,190,130,0.45)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0D12]"
             >
               <span
                 aria-hidden

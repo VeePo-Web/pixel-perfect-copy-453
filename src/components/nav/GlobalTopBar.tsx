@@ -29,12 +29,11 @@ const LINKS: { key: NavKey; label: string; href: string }[] = [
 ];
 
 // ─── NavTrustStrip ────────────────────────────────────────────────────────────
-// 34 px bar above the header. Addresses the three objections that stop
-// first-time visitors from engaging with the primary CTA before they even
-// reach the hero:
-//   1 "Is it safe?"      → No bank connection required
-//   2 "Will it work?"    → Automated bi-weekly
-//   3 "Am I locked in?"  → Cancel anytime
+// 34 px bar above the header. Three objection-killers, ordered by psychological
+// weight on a first-time financial-software visitor:
+//   1 "Can I trust the person behind this?"  → Founder credential (authority)
+//   2 "Is my bank account safe?"             → No bank connection required
+//   3 "Am I locked in?"                      → Cancel anytime
 // Dismissed once per session (sessionStorage), collapses with a height
 // transition so there is no layout shift.
 function NavTrustStrip({ onDismiss }: { onDismiss: () => void }) {
@@ -47,8 +46,11 @@ function NavTrustStrip({ onDismiss }: { onDismiss: () => void }) {
       {/* Desktop — three bullets */}
       <span className="hidden items-center sm:flex" aria-hidden="false">
         <span className="mr-2 text-[10px] text-champagne-300/50">✦</span>
+        {/* [UPGRADE 1] Credential replaces generic "Automated bi-weekly" — authority
+            signal positioned first because E-E-A-T trust is the highest objection for
+            financial software. Maps to FounderTrustStrip: "10 years in institutional finance." */}
         <span className="text-[10px] uppercase tracking-[0.24em] text-ink/45">
-          Automated bi-weekly
+          10 yrs institutional finance
         </span>
         <span className="mx-3 text-ink/20">·</span>
         <span className="text-[10px] uppercase tracking-[0.24em] text-ink/45">
@@ -130,6 +132,7 @@ function MobileSheet({
       <nav aria-label="Primary mobile" className="flex flex-col gap-0">
         {LINKS.map((l, i) => {
           const active = currentPath === l.key;
+          const isSample = l.key === "sample-briefing";
           return (
             <a
               key={l.key}
@@ -145,7 +148,19 @@ function MobileSheet({
               }`}
               style={{ transitionDelay: show ? `${i * 55}ms` : "0ms" }}
             >
-              <span>{l.label}</span>
+              <span className="flex items-center gap-2.5">
+                {/* [UPGRADE 2] Gold dot marks the lead-magnet entry point — the single
+                    highest-value nav link. Visual distinction without extra copy. */}
+                {isSample && (
+                  <span
+                    aria-hidden="true"
+                    className={`h-1.5 w-1.5 flex-shrink-0 rounded-full bg-champagne-300 ${
+                      active ? "opacity-100" : "opacity-60"
+                    }`}
+                  />
+                )}
+                {l.label}
+              </span>
               <span
                 aria-hidden="true"
                 className={`text-[14px] transition-colors duration-300 ${
@@ -159,12 +174,25 @@ function MobileSheet({
         })}
       </nav>
 
+      {/* [UPGRADE 5] Founder credential — appears between nav links and CTAs.
+          Authority signal positioned at the decision point: just before the ask. */}
+      <div
+        className={`mt-6 flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] text-champagne-300/45 transition-[opacity,transform] duration-500 ease-cinema ${
+          show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+        }`}
+        style={{ transitionDelay: show ? `${LINKS.length * 55 + 10}ms` : "0ms" }}
+        aria-label="Founder credential"
+      >
+        <span aria-hidden="true" className="text-champagne-300/50">✦</span>
+        <span>Built by a 10-yr institutional finance veteran</span>
+      </div>
+
       {/* Value-ladder CTAs */}
       <div
-        className={`mt-10 flex flex-col gap-3 transition-[opacity,transform] duration-500 ease-cinema ${
+        className={`mt-5 flex flex-col gap-3 transition-[opacity,transform] duration-500 ease-cinema ${
           show ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
-        style={{ transitionDelay: show ? `${LINKS.length * 55 + 40}ms` : "0ms" }}
+        style={{ transitionDelay: show ? `${LINKS.length * 55 + 60}ms` : "0ms" }}
       >
         {isHome ? (
           // Homepage: gold = free Vault (Rung 1 lead-magnet is the primary ask)
@@ -228,6 +256,10 @@ export default function GlobalTopBar({
 }: Props) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // [UPGRADE 3] scrollDeep: fires at 280 px — the depth where a visitor has
+  // actively engaged with the content and is ready for a stronger CTA signal.
+  // Escalates the gold button shadow from warm ambient to committed glow.
+  const [scrollDeep, setScrollDeep] = useState(false);
 
   // Lazy-initialise from sessionStorage so the strip never flashes on returning
   // visitors who dismissed it earlier in the same session.
@@ -250,7 +282,10 @@ export default function GlobalTopBar({
   };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 8);
+      setScrollDeep(window.scrollY > 280);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -290,6 +325,12 @@ export default function GlobalTopBar({
   const hamburger = overDark
     ? "border-white/20 text-white/80 hover:border-white/40 hover:text-white"
     : "border-ink/[0.12] text-ink/70 hover:border-ink/25 hover:text-ink";
+
+  // [UPGRADE 3] Box-shadow escalates when visitor has scrolled deep — inline
+  // style used (not Tailwind arbitrary value) so JIT never strips the class.
+  const goldCtaShadow = scrollDeep
+    ? "0 8px_36px_-8px_rgba(201,162,74,0.70)"
+    : "0 8px_28px_-8px_rgba(201,162,74,0.55)";
 
   return (
     <>
@@ -353,15 +394,27 @@ export default function GlobalTopBar({
               <div className="flex items-center gap-0.5">
                 {LINKS.map((l) => {
                   const active = currentPath === l.key;
+                  const isSample = l.key === "sample-briefing";
                   return (
                     <a
                       key={l.key}
                       href={l.href}
                       aria-current={active ? "page" : undefined}
-                      className={`rounded-full px-3.5 py-1.5 text-[12.5px] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/50 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent ${
+                      className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[12.5px] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/50 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent ${
                         active ? linkActive : linkInactive
                       }`}
                     >
+                      {/* [UPGRADE 2] Gold dot on Sample Briefing — visually marks the
+                          lead-magnet link, drawing the eye to the highest-value first step
+                          without adding copy or breaking Hick's Law. */}
+                      {isSample && (
+                        <span
+                          aria-hidden="true"
+                          className={`h-1.5 w-1.5 flex-shrink-0 rounded-full bg-champagne-300 transition-opacity duration-200 ${
+                            active ? "opacity-100" : "opacity-55"
+                          }`}
+                        />
+                      )}
                       {l.label}
                     </a>
                   );
@@ -383,13 +436,27 @@ export default function GlobalTopBar({
                     >
                       $99/mo →
                     </button>
-                    <a
-                      href="/templates"
-                      className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-px hover:shadow-[0_8px_28px_-8px_rgba(201,162,74,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-                    >
-                      <span className="relative z-10">Get the free Vault</span>
-                      <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
-                    </a>
+                    {/* [UPGRADE 4] group wrapper: friction-killer sub-text reveals
+                        below the CTA on hover — placed at the decision moment,
+                        not buried in body copy. opacity-0 → opacity-100 on group-hover. */}
+                    <div className="group relative flex flex-col items-center">
+                      <a
+                        href="/templates"
+                        className="relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-px active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                        style={{
+                          boxShadow: goldCtaShadow.replace(/_/g, " "),
+                        }}
+                      >
+                        <span className="relative z-10">Get the free Vault</span>
+                        <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+                      </a>
+                      <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute -bottom-5 whitespace-nowrap text-[9.5px] uppercase tracking-[0.18em] text-ink/35 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                      >
+                        No bank connection · Cancel anytime
+                      </span>
+                    </div>
                   </>
                 ) : (
                   <>
@@ -400,15 +467,27 @@ export default function GlobalTopBar({
                     >
                       Free Templates
                     </a>
-                    {/* First-person CTA copy — "my" ownership lift (+90% CTR) */}
-                    <button
-                      type="button"
-                      onClick={startAutoFillCheckout}
-                      className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-px hover:shadow-[0_8px_28px_-8px_rgba(201,162,74,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-                    >
-                      <span className="relative z-10">Auto-fill my reports — $99/mo</span>
-                      <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
-                    </button>
+                    {/* [UPGRADE 4] group wrapper: friction-killer sub-text on hover */}
+                    <div className="group relative flex flex-col items-center">
+                      {/* First-person CTA copy — "my" ownership lift (+90% CTR) */}
+                      <button
+                        type="button"
+                        onClick={startAutoFillCheckout}
+                        className="relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-px active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                        style={{
+                          boxShadow: goldCtaShadow.replace(/_/g, " "),
+                        }}
+                      >
+                        <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+                        <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+                      </button>
+                      <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute -bottom-5 whitespace-nowrap text-[9.5px] uppercase tracking-[0.18em] text-ink/35 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                      >
+                        No bank connection · Cancel anytime
+                      </span>
+                    </div>
                   </>
                 )}
               </div>
@@ -444,7 +523,7 @@ export default function GlobalTopBar({
                 aria-expanded={open}
                 aria-controls="global-nav-sheet"
                 onClick={() => setOpen((v) => !v)}
-                className={`flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-200 active:scale-[0.95] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/50 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent ${hamburger}`}
+                className={`flex h-11 w-11 items-center justify-center rounded-lg border transition-all duration-200 active:scale-[0.95] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/50 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent ${hamburger}`}
               >
                 <span className="relative flex h-[14px] w-[15px] flex-col items-center justify-between" aria-hidden>
                   <span
