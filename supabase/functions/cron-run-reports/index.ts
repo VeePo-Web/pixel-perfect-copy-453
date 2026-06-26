@@ -17,6 +17,8 @@ Deno.serve(async (req) => {
     }
 
     const admin = adminClient();
+    const { data: runRow } = await admin.from("cron_runs").insert({ job: "advisory-report-biweekly" }).select("id").maybeSingle();
+    const runId = runRow?.id as string | undefined;
     const today = new Date().toISOString().slice(0, 10);
     const dueCutoff = new Date(Date.now() - DUE_AFTER_DAYS * 86_400_000).toISOString();
 
