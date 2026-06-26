@@ -37,7 +37,7 @@ export default function AccountCard({
   };
 
   const remove = async () => {
-    if (!confirm("Disconnect this institution? Goldfin will lose access immediately.")) return;
+    if (!confirm("Disconnect this institution? GoldFin will lose access immediately.")) return;
     setBusy(true);
     await supabase.functions.invoke("plaid-remove-item", { body: { itemId: item.id } });
     setBusy(false);

@@ -154,7 +154,7 @@ export default function PortalLogin() {
   }
 
   return (
-    <AuthShell title="Sign in to Goldfin Desk">
+    <AuthShell title="Sign in to GoldFin Desk">
       <button
         type="button"
         onClick={handleGoogle}

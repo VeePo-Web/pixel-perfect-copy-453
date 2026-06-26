@@ -12,7 +12,7 @@ export default function PlaidConsent() {
     <main className="min-h-screen bg-paper">
       <article className="mx-auto max-w-2xl px-6 py-16 text-ink">
         <a href="/" className="text-[12.5px] text-ink/55 hover:text-ink">
-          ← Back to Goldfin Desk
+          ← Back to GoldFin Desk
         </a>
         <h1 className="mt-6 font-zentry text-[36px] leading-[1.1] tracking-[-0.01em]">
           Plaid Data Consent
@@ -22,12 +22,12 @@ export default function PlaidConsent() {
         </p>
 
         <P>
-          To enable Goldfin Desk to read information about your financial accounts, you authorize
+          To enable GoldFin Desk to read information about your financial accounts, you authorize
           Plaid Inc. ("Plaid") to act on your behalf, and you authorize Plaid to share the
-          following information with Goldfin Desk.
+          following information with GoldFin Desk.
         </P>
 
-        <H2>What Plaid will share with Goldfin</H2>
+        <H2>What Plaid will share with GoldFin</H2>
         <ul className="mt-3 list-disc space-y-1 pl-5 text-[14px] leading-[1.75] text-ink/75">
           <li>Account names, masks, types, and subtypes.</li>
           <li>Current and available balances, in the account's native currency.</li>
@@ -66,7 +66,7 @@ export default function PlaidConsent() {
 
         <H2>What we are not responsible for</H2>
         <P>
-          Goldfin is not responsible for, and disclaims all liability arising from, any breach,
+          GoldFin is not responsible for, and disclaims all liability arising from, any breach,
           intrusion, outage, data loss, or unauthorized disclosure affecting Plaid or your
           financial institution. See the full Terms of Service for the complete liability
           disclaimer.

@@ -32,7 +32,7 @@ export default function AcceptTerms() {
     <AuthShell title="Terms & Plaid consent">
       <p className="text-[13.5px] leading-relaxed text-ink/75">
         Before you can use the portal you need to acknowledge our current Terms of Service and
-        Plaid Data Consent. These spell out — in plain English — that Goldfin Desk is read-only,
+        Plaid Data Consent. These spell out — in plain English — that GoldFin Desk is read-only,
         is not your fiduciary, and is not liable for any breach, hack, outage, or loss involving
         Plaid, your financial institution, or any other third party.
       </p>

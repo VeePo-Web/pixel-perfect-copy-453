@@ -10,7 +10,7 @@ export default function Privacy() {
     <main className="min-h-screen bg-paper">
       <article className="mx-auto max-w-2xl px-6 py-16 text-ink">
         <a href="/" className="text-[12.5px] text-ink/55 hover:text-ink">
-          ← Back to Goldfin Desk
+          ← Back to GoldFin Desk
         </a>
         <h1 className="mt-6 font-zentry text-[36px] leading-[1.1] tracking-[-0.01em]">
           Privacy Policy

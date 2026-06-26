@@ -12,7 +12,7 @@ export default function Terms() {
     <main className="min-h-screen bg-paper">
       <article className="mx-auto max-w-2xl px-6 py-16 text-ink">
         <a href="/" className="text-[12.5px] text-ink/55 hover:text-ink">
-          ← Back to Goldfin Desk
+          ← Back to GoldFin Desk
         </a>
         <h1 className="mt-6 font-zentry text-[36px] leading-[1.1] tracking-[-0.01em]">
           Terms of Service
@@ -22,11 +22,11 @@ export default function Terms() {
         </p>
 
         <P>
-          These Terms of Service ("Terms") govern your access to and use of Goldfin Desk (the
-          "Service"), provided by Goldfin Desk ("Goldfin," "we," "us"). By creating an account,
+          These Terms of Service ("Terms") govern your access to and use of GoldFin Desk (the
+          "Service"), provided by GoldFin Desk ("GoldFin," "we," "us"). By creating an account,
           clicking "I agree," or using the Service in any manner, you accept and agree to be
           bound by these Terms in full. If you do not agree, do not use the Service. These Terms
-          form a binding legal contract between you and Goldfin.
+          form a binding legal contract between you and GoldFin.
         </P>
 
         <H2>1. Read-only access</H2>
@@ -45,7 +45,7 @@ export default function Terms() {
           see, store, process, or have access to your bank username, password, multi-factor
           codes, security questions, OAuth tokens, or any other login credentials. Your
           relationship with Plaid is governed by Plaid's own End User Privacy Policy and Plaid's
-          terms, which you accept separately when you complete Plaid Link. Goldfin is not
+          terms, which you accept separately when you complete Plaid Link. GoldFin is not
           responsible for Plaid's services, availability, security, data handling, pricing, or
           changes thereto.
         </P>
@@ -95,7 +95,7 @@ export default function Terms() {
 
         <H2>6. Third-party breach and outage disclaimer</H2>
         <P>
-          To the maximum extent permitted by law, Goldfin is not liable for any breach, hack,
+          To the maximum extent permitted by law, GoldFin is not liable for any breach, hack,
           ransomware, intrusion, unauthorized access, data exfiltration, leak, outage, data
           corruption, data loss, service interruption, mis-delivery, mis-routing, throttling,
           deprecation, account closure, or other security, privacy, or availability incident
@@ -109,7 +109,7 @@ export default function Terms() {
 
         <H2>6a. Force majeure</H2>
         <P>
-          Goldfin is not liable for any failure or delay in performance caused by events beyond
+          GoldFin is not liable for any failure or delay in performance caused by events beyond
           its reasonable control, including acts of God, natural disasters, pandemics, war,
           terrorism, civil unrest, labor disputes, government action, regulatory change,
           sanctions, embargoes, denial-of-service or other cyberattacks, internet or
@@ -119,7 +119,7 @@ export default function Terms() {
 
         <H2>7. Your responsibility for account security</H2>
         <P>
-          You are solely responsible for safeguarding your Goldfin account credentials, the
+          You are solely responsible for safeguarding your GoldFin account credentials, the
           devices and browsers you use to access the Service, your email account (which receives
           one-time sign-in codes), and the physical security of those devices. You must use a
           strong, unique password and protect access to the email inbox associated with your
@@ -157,7 +157,7 @@ export default function Terms() {
 
         <H2>9. Indemnification</H2>
         <P>
-          You agree to defend, indemnify, and hold harmless Goldfin and its personnel from and
+          You agree to defend, indemnify, and hold harmless GoldFin and its personnel from and
           against any and all claims, damages, obligations, losses, liabilities, costs, and
           expenses (including reasonable attorneys' fees) arising from (a) your use of or
           access to the Service, (b) your violation of these Terms, (c) your violation of any
@@ -216,7 +216,7 @@ export default function Terms() {
 
         <H2>13. Governing law and venue</H2>
         <P>
-          These Terms are governed by the laws of the jurisdiction in which Goldfin is
+          These Terms are governed by the laws of the jurisdiction in which GoldFin is
           principally established (the "Governing Jurisdiction"), without regard to conflict-of-
           laws principles. Subject to Section 12, any action or proceeding that is not subject
           to arbitration must be brought exclusively in the state or federal courts located
@@ -235,11 +235,11 @@ export default function Terms() {
         <H2>15. Entire agreement; severability</H2>
         <P>
           These Terms, together with the Plaid Data Consent and our Privacy Policy, constitute
-          the entire agreement between you and Goldfin regarding the Service and supersede all
+          the entire agreement between you and GoldFin regarding the Service and supersede all
           prior or contemporaneous understandings. If any provision is held unenforceable, the
           remainder remains in full effect, and the unenforceable provision will be reformed
           only to the minimum extent needed to make it enforceable. No waiver is effective
-          unless in writing and signed by Goldfin.
+          unless in writing and signed by GoldFin.
         </P>
 
         <H2>16. Contact</H2>
