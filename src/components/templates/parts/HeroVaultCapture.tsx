@@ -83,7 +83,7 @@ export default function HeroVaultCapture() {
             placeholder="First name"
             autoComplete="given-name"
             aria-invalid={!!errors.firstName}
-            className="w-full rounded-xl border border-ink/[0.12] bg-white px-4 py-3 text-[15px] text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-champagne-300/70"
+            className="w-full rounded-xl border border-ink/[0.12] bg-white px-4 py-3 text-[16px] text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-champagne-300/70 sm:text-[15px]"
           />
         </div>
         <div className="flex-1">
@@ -96,7 +96,7 @@ export default function HeroVaultCapture() {
             placeholder="Work email"
             autoComplete="email"
             aria-invalid={!!errors.email}
-            className="w-full rounded-xl border border-ink/[0.12] bg-white px-4 py-3 text-[15px] text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-champagne-300/70"
+            className="w-full rounded-xl border border-ink/[0.12] bg-white px-4 py-3 text-[16px] text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-champagne-300/70 sm:text-[15px]"
           />
         </div>
       </div>

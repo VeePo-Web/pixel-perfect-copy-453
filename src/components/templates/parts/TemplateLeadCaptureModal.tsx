@@ -179,10 +179,13 @@ function Field({
         type={type}
         value={value}
         autoComplete={autoComplete}
+        inputMode={type === "email" ? "email" : undefined}
+        autoCapitalize={type === "email" ? "none" : undefined}
+        autoCorrect={type === "email" ? "off" : undefined}
         onChange={(e) => onChange(e.target.value)}
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-err` : undefined}
-        className="mt-1.5 w-full rounded-xl border border-ink/[0.1] bg-ink/[0.02] px-3.5 py-3 text-[14px] text-ink outline-none transition-colors focus:border-champagne-200/50"
+        className="mt-1.5 w-full rounded-xl border border-ink/[0.1] bg-ink/[0.02] px-3.5 py-3 text-[16px] text-ink outline-none transition-colors focus:border-champagne-200/50 sm:text-[14px]"
       />
       {error ? (
         <p id={`${id}-err`} role="alert" aria-live="polite" className="mt-1.5 text-[11.5px] text-champagne-300">
