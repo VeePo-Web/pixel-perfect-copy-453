@@ -78,4 +78,22 @@ describe("renderReportEmail", () => {
     expect(html).toContain("No figures were invented");
     expect(html).toContain("claude-opus-4-8");
   });
+
+  it("leads with the one-number headline from metrics", () => {
+    const { html } = renderReportEmail(base);
+    expect(html).toContain("Cash runway");
+    expect(html).toContain("Net cash (period)");
+    expect(html).toContain("Revenue vs prior");
+  });
+
+  it("includes hidden preheader preview text built from metrics", () => {
+    const { html } = renderReportEmail(base);
+    expect(html).toContain("mso-hide:all");        // the hidden preheader span
+    expect(html).toContain("Cash runway");
+  });
+
+  it("text part carries a one-line metric summary", () => {
+    const { text } = renderReportEmail(base);
+    expect(text).toContain("Cash runway");
+  });
 });

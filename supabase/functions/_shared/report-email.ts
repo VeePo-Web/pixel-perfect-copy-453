@@ -57,11 +57,55 @@ function decisionsHtml(recs: EmailRec[]): string {
   return `<h3 style="font-size:17px;font-weight:400;color:#0B0D12;margin:24px 0 8px">What to do now</h3><ol style="margin:0;padding-left:20px">${items}</ol>`;
 }
 
+// The "one number" headline — the owner grasps "am I OK?" in five seconds
+// (Report-Value: understood-in-30s). Pure render of ALREADY-VERIFIED metrics
+// (the same figures the model was grounded on) — no model text, nothing to
+// hallucinate. Runway is coloured against the owner's reserve floor.
+function headlineHtml(m: MetricsPayload): string {
+  const floor = m.profile?.reserve_floor_months ?? 3;
+  const netColor = m.netCash >= 0 ? "#2E6B4A" : "#B4452F";
+  const cell = (label: string, value: string, color: string) =>
+    `<td style="padding:0 6px;vertical-align:top;width:33%">
+      <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8A93A3;margin:0 0 4px">${label}</div>
+      <div style="font-size:22px;line-height:1.1;color:${color}">${value}</div></td>`;
+
+  const cells: string[] = [];
+  if (m.runwayMonths != null) {
+    const runwayColor = m.runwayMonths >= floor ? "#2E6B4A" : m.runwayMonths >= floor / 2 ? "#B8893A" : "#B4452F";
+    cells.push(cell("Cash runway", `${m.runwayMonths} mo`, runwayColor));
+    cells.push(cell("Net cash (period)", usd(m.netCash), netColor));
+  } else {
+    cells.push(cell("Net cash (period)", usd(m.netCash), netColor));
+    cells.push(cell("Monthly burn", usd(m.monthlyBurn), "#0B0D12"));
+  }
+  const revValue = m.revenueVsPriorPct == null
+    ? "—"
+    : `${m.revenueVsPriorPct >= 0 ? "▲ " : "▼ "}${Math.abs(m.revenueVsPriorPct)}%`;
+  const revColor = m.revenueVsPriorPct == null ? "#0B0D12" : (m.revenueVsPriorPct >= 0 ? "#2E6B4A" : "#B4452F");
+  cells.push(cell("Revenue vs prior", revValue, revColor));
+
+  return `<div style="border:1px solid #E6E8EC;border-radius:12px;padding:18px 14px;margin:0 0 16px;box-shadow:0 0 0 1px rgba(212,168,69,.18)">
+    <table style="width:100%;border-collapse:collapse"><tr>${cells.join("")}</tr></table></div>`;
+}
+
+// Hidden preview text shown by inboxes next to the subject (drives the open).
+function preheaderText(m: MetricsPayload | null): string {
+  if (!m) return "";
+  const parts: string[] = [];
+  if (m.runwayMonths != null) parts.push(`Cash runway ${m.runwayMonths} months`);
+  else parts.push(`Net cash ${usd(m.netCash)} this period`);
+  if (m.revenueVsPriorPct != null) parts.push(`revenue ${m.revenueVsPriorPct >= 0 ? "up" : "down"} ${Math.abs(m.revenueVsPriorPct)}% vs last cycle`);
+  if (m.wasteAnnualTotal > 0) parts.push(`${usd(m.wasteAnnualTotal)}/yr to recover`);
+  return parts.join(" · ");
+}
+
 // Plain-text part — every well-formed email ships text/plain alongside HTML
 // (deliverability + accessibility + clients that strip HTML).
 function renderText(input: RenderInput, stamp: string): string {
   const out: string[] = ["GOLDFIN DESK — BI-WEEKLY ADVISORY"];
   if (input.subjectLine) out.push("", input.subjectLine);
+  const summary = preheaderText(input.metrics);
+  if (summary) out.push("", summary);
   for (const s of input.sections) out.push("", s.heading.toUpperCase(), s.body.trim());
   if (input.recommendations.length) {
     out.push("", "WHAT TO DO NOW");
@@ -93,10 +137,15 @@ export function renderReportEmail(input: RenderInput): { subject: string; html: 
     ? `<p style="font-size:11px;line-height:1.6;color:#B0B5BE;margin:10px 0 0">You're receiving this as part of your GoldFin Desk plan. <a href="${esc(input.unsubscribeUrl)}" style="color:#8A93A3;text-decoration:underline">Unsubscribe from advisory emails</a>.</p>`
     : "";
 
+  const preheader = preheaderText(input.metrics);
+  const headline = input.metrics ? headlineHtml(input.metrics) : "";
+
   const html = `<!doctype html><html><body style="margin:0;background:#ffffff;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0B0D12">
+  ${preheader ? `<span style="display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;max-height:0;max-width:0;overflow:hidden;mso-hide:all">${esc(preheader)}</span>` : ""}
   <div style="max-width:600px;margin:0 auto;padding:36px 24px">
     <p style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#B8893A;margin:0 0 6px">GoldFin Desk · Bi-Weekly Advisory</p>
-    ${input.subjectLine ? `<h1 style="font-size:24px;font-weight:400;line-height:1.2;color:#0B0D12;margin:0 0 20px">${esc(input.subjectLine)}</h1>` : ""}
+    ${input.subjectLine ? `<h1 style="font-size:24px;font-weight:400;line-height:1.2;color:#0B0D12;margin:0 0 16px">${esc(input.subjectLine)}</h1>` : ""}
+    ${headline}
     ${blocks}
     ${decisionsHtml(input.recommendations)}
     <hr style="border:none;border-top:1px solid #E6E8EC;margin:22px 0 14px" />
