@@ -77,6 +77,7 @@ function DecisionMap() {
 
   return (
     <div className="relative rounded-3xl border border-ink/[0.07] bg-ink/[0.02] p-6 shadow-[0_30px_120px_-40px_rgba(25,28,34,0.14)] sm:p-8">
+      <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(212,168,69,0.16),transparent_70%)] blur-2xl" />
       <div className="text-[10.5px] uppercase tracking-[0.28em] text-ink/45">
         Financial support map
       </div>
