@@ -82,6 +82,16 @@ export default function Settings() {
           </p>
         </section>
 
+        {isAdmin && (
+          <section className="mt-6 rounded-2xl border border-ink/10 bg-paper p-6">
+            <h2 className="text-[16px] font-medium text-ink">Admin</h2>
+            <p className="mt-2 text-[13px] text-ink/65">Internal lifecycle dashboard.</p>
+            <a href="/portal/admin/audit" className="mt-3 inline-block rounded-full bg-ink px-5 py-2 text-[12.5px] font-medium text-paper">
+              Open audit dashboard →
+            </a>
+          </section>
+        )}
+
       </PortalLayout>
     </ProtectedRoute>
   );
