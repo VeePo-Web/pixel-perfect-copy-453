@@ -66,10 +66,10 @@ async function handleCheckoutCompleted(session: any, env: StripeEnv) {
       const { data: hasBank } = await getSupabase()
         .from("plaid_items").select("id").eq("user_id", userId).eq("status", "active").limit(1).maybeSingle();
       if (hasBank) {
-        await getSupabase().functions.invoke("generate-advisory-report", {
-          body: { user_id: userId, send: true, reason: "checkout_kickoff" },
-        });
+        const today = new Date().toISOString().slice(0, 10);
+        await generateReportForUser(getSupabase() as any, userId, { send: true, today });
       }
+
     } catch (e) {
       console.error("kickoff report failed:", e);
     }
