@@ -1,0 +1,22 @@
+# GoldFin Desk
+
+GoldFin Desk turns a business's financial activity into organized spreadsheet templates and a plain-English monthly briefing — a recurring finance rhythm for owner-led businesses, without hiring a CFO or bookkeeper.
+
+## Key Pages
+- Home: / — what GoldFin Desk is and who it serves
+- Pricing: /#/pricing — Free templates, $99/mo automated Reports, $1,500/mo Advisory
+- Sample Briefing: /#/sample-briefing — an example plain-English monthly finance briefing
+- Free Templates: /#/templates — seven free financial templates
+- Compare: /#/compare — GoldFin vs bookkeeper, fractional CFO, and dashboards
+- Security & FAQ: /#/security-faq — data handling, Plaid, and common questions
+
+## Services
+- GoldFin Template Vault (Free): seven financial templates owners can use immediately
+- GoldFin Reports ($99/mo): your templates auto-filled from your numbers plus a plain-English briefing every month, fully automated
+- GoldFin Advisory ($1,500/mo): everything in Reports plus a monthly one-hour strategy review with a finance professional (by application)
+
+## Key Facts
+- Category: monthly financial clarity and reporting for small, owner-led businesses
+- Not a replacement for tax, legal, accounting, or bookkeeping — it is the clarity layer on top
+- Bank connection is optional and read-only via Plaid; no money is ever moved
+- Start free; the $99/mo plan is month-to-month and cancellable anytime

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import PricingFAQSchema from "./parts/PricingFAQSchema";
 
 import PricingHero from "./parts/PricingHero";
 import AutoFillSpotlight from "./parts/AutoFillSpotlight";
@@ -53,6 +54,7 @@ export default function PricingPage() {
   return (
     <div className="relative pb-24 lg:pb-0">
 
+      <PricingFAQSchema />
       <PricingHero />
       <AutoFillSpotlight />
       <WhyAutoFill />
