@@ -27,7 +27,7 @@ export default function TemplateLibraryHero() {
           >
             Start organizing your numbers before they surprise you.
           </h1>
-          <p className="mt-5 text-[15.5px] leading-[1.7] text-ink/70">
+          <p className="mt-5 text-[15.5px] leading-[1.7] [text-wrap:pretty] text-ink/70">
             The full Vault — cash flow, expenses, hiring decisions, monthly reviews, and tax reserves — sent to your inbox. Free.
           </p>
         </div>

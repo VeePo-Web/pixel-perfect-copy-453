@@ -26,7 +26,7 @@ export default function ComparisonHero() {
             >
               Bookkeeper vs Fractional CFO vs GoldFin Desk.
             </h1>
-            <p className="mt-5 max-w-[60ch] text-[15.5px] leading-[1.7] text-ink/70">
+            <p className="mt-5 max-w-[60ch] text-[15.5px] leading-[1.7] [text-wrap:pretty] text-ink/70">
               A bookkeeper helps keep records clean. A fractional CFO helps with deeper
               financial strategy. The GoldFin Desk gives owner-led businesses the
               missing middle: structured financial clarity, bi-weekly plain-English briefings,

@@ -33,7 +33,7 @@ export default function SampleBriefingHero(props: Props) {
             <h1 className="mt-5 max-w-[18ch] font-light text-ink text-[40px] leading-[1.05] tracking-[-0.01em] sm:text-[52px] lg:text-[60px]">
               Your numbers, finally in plain English.
             </h1>
-            <p className="mt-5 max-w-[52ch] text-[15.5px] leading-[1.7] text-ink/70">
+            <p className="mt-5 max-w-[52ch] text-[15.5px] leading-[1.7] [text-wrap:pretty] text-ink/70">
               Pick your industry or describe your own situation — and watch it turn into a plain-English finance briefing in seconds. No bank connection required.
             </p>
 

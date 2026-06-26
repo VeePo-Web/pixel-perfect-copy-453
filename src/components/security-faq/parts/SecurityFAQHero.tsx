@@ -31,7 +31,7 @@ export default function SecurityFAQHero() {
         <h1 className="mt-5 max-w-4xl font-light text-ink [text-wrap:balance] text-[34px] leading-[1.08] tracking-[-0.015em] sm:text-[48px] lg:text-[62px]">
           Preview safely. Apply without connecting your bank.
         </h1>
-        <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-ink/65 sm:text-[16.5px]">
+        <p className="mt-6 max-w-2xl text-[15px] leading-relaxed [text-wrap:pretty] text-ink/65 sm:text-[16.5px]">
           You can preview the GoldFin Desk experience with demo data or
           rough non-sensitive numbers, then apply without payment, documents, or
           bank access. Bank connection only becomes relevant after onboarding.

@@ -25,7 +25,7 @@ export default function ComparisonHero() {
             >
               What kind of financial support does your business actually need?
             </h1>
-            <p className="mt-5 max-w-[58ch] text-[15.5px] leading-[1.7] text-ink/70">
+            <p className="mt-5 max-w-[58ch] text-[15.5px] leading-[1.7] [text-wrap:pretty] text-ink/70">
               If your business has outgrown bank-balance guessing but is not ready for a full
               finance team, this guide helps you compare the options and choose the right next
               step.

@@ -21,7 +21,7 @@ export default function PricingHero() {
             <h1 className="mt-5 max-w-[24ch] font-light text-ink [text-wrap:balance] text-[38px] leading-[1.08] tracking-[-0.01em] sm:text-[50px] lg:text-[58px]">
               Free templates. <span className="text-champagne-300">$99 to have them filled for you.</span> $1,500 to have them read with you.
             </h1>
-            <p className="mt-6 max-w-[56ch] text-[15.5px] leading-[1.7] text-ink/70">
+            <p className="mt-6 max-w-[56ch] text-[15.5px] leading-[1.7] [text-wrap:pretty] text-ink/70">
               Most owners don’t need a full finance team — they need their numbers organized and explained every month. That’s the $99 Auto-Fill plan. Start there.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
