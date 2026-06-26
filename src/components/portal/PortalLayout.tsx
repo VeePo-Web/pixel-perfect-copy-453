@@ -18,29 +18,31 @@ export default function PortalLayout({
   const { user, signOut } = useAuth();
   return (
     <div className="min-h-screen bg-charcoal-950 text-ink">
-      <header className="border-b border-ink/10 px-6 py-4 flex items-center justify-between">
-        <a href="/portal" className="font-zentry text-[18px] tracking-wide">
+      <header className="flex items-center justify-between gap-4 border-b border-ink/10 px-6 py-4">
+        <a href="/portal" className="shrink-0 font-zentry text-[18px] tracking-wide">
           GOLDFIN DESK
         </a>
-        <div className="text-[12px] text-ink/55">
-          {user?.email}{" "}
+        <div className="flex min-w-0 items-center text-[12px] text-ink/55">
+          <span className="truncate">{user?.email}</span>
           <button
             onClick={signOut}
-            className="ml-4 underline underline-offset-4 hover:text-ink"
+            className="ml-4 shrink-0 underline underline-offset-4 hover:text-ink"
           >
             Sign out
           </button>
         </div>
       </header>
-      <div className="mx-auto flex max-w-6xl gap-10 px-6 py-10">
-        <nav className="w-48 shrink-0 space-y-1">
+      {/* Stacks on mobile; the fixed w-48 sidebar only applies at lg+ so phone
+          content isn't squeezed into a sliver. Nav becomes a scrollable pill row. */}
+      <div className="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8 lg:flex-row lg:gap-10 lg:py-10">
+        <nav className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-1 lg:mx-0 lg:w-48 lg:shrink-0 lg:flex-col lg:gap-0 lg:space-y-1 lg:overflow-visible lg:px-0 lg:pb-0">
           {NAV.map((n) => {
             const on = n.href === active;
             return (
               <a
                 key={n.href}
                 href={n.href}
-                className={`block rounded px-3 py-2 text-[13.5px] transition ${
+                className={`block whitespace-nowrap rounded px-3 py-2 text-[13.5px] transition ${
                   on ? "bg-champagne-50 text-ink" : "text-ink/65 hover:text-ink"
                 }`}
               >
