@@ -48,7 +48,10 @@ export default function MobileStickyCTA() {
     : "Generate Sample Briefing";
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-ink/[0.06] bg-charcoal-950/95 px-4 py-3 backdrop-blur-md lg:hidden">
+    <div
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-ink/[0.06] bg-charcoal-950/95 px-4 pt-3 backdrop-blur-md lg:hidden"
+      style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
+    >
       <a
         href={href}
         onClick={() => trackCtaByHref(href, "security_faq_mobile_sticky")}
