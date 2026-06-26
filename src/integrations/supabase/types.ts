@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      advisory_reports: {
+        Row: {
+          created_at: string
+          id: string
+          metrics_snapshot: Json | null
+          period_end: string | null
+          period_start: string | null
+          recommendations: Json | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          metrics_snapshot?: Json | null
+          period_end?: string | null
+          period_start?: string | null
+          recommendations?: Json | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          metrics_snapshot?: Json | null
+          period_end?: string | null
+          period_start?: string | null
+          recommendations?: Json | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       applications: {
         Row: {
           budget_fit: string | null
@@ -68,6 +104,45 @@ export type Database = {
           revenue_range?: string | null
           timeline?: string | null
           worth_it?: string | null
+        }
+        Relationships: []
+      }
+      cron_runs: {
+        Row: {
+          candidates: number | null
+          error: string | null
+          failed: number | null
+          finished_at: string | null
+          generated: number | null
+          id: string
+          job: string
+          sent: number | null
+          skipped: number | null
+          started_at: string
+        }
+        Insert: {
+          candidates?: number | null
+          error?: string | null
+          failed?: number | null
+          finished_at?: string | null
+          generated?: number | null
+          id?: string
+          job: string
+          sent?: number | null
+          skipped?: number | null
+          started_at?: string
+        }
+        Update: {
+          candidates?: number | null
+          error?: string | null
+          failed?: number | null
+          finished_at?: string | null
+          generated?: number | null
+          id?: string
+          job?: string
+          sent?: number | null
+          skipped?: number | null
+          started_at?: string
         }
         Relationships: []
       }
@@ -385,11 +460,62 @@ export type Database = {
         }
         Relationships: []
       }
+      webhook_events: {
+        Row: {
+          event_type: string
+          external_id: string | null
+          id: string
+          received_at: string
+          source: string
+          summary: Json | null
+          user_id: string | null
+        }
+        Insert: {
+          event_type: string
+          external_id?: string | null
+          id?: string
+          received_at?: string
+          source: string
+          summary?: Json | null
+          user_id?: string | null
+        }
+        Update: {
+          event_type?: string
+          external_id?: string | null
+          id?: string
+          received_at?: string
+          source?: string
+          summary?: Json | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      admin_audit_overview: {
+        Args: never
+        Returns: {
+          created_at: string
+          email: string
+          last_report_at: string
+          last_report_status: string
+          last_sign_in_at: string
+          last_webhook_at: string
+          last_webhook_source: string
+          last_webhook_type: string
+          plaid_account_count: number
+          plaid_item_count: number
+          plaid_status: string
+          providers: string[]
+          sub_period_end: string
+          sub_plan: string
+          sub_status: string
+          user_id: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
