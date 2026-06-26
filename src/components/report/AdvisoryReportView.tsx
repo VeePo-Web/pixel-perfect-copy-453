@@ -4,6 +4,7 @@
 import { useAdvisoryReport } from "@/lib/report/useAdvisoryReport";
 import { ReportSectionBlock, MoneyRecoveryStrip, ContributionByLine, DecisionMemo, TrustStamp, IndustryKpi, GrowthGate } from "./ReportBlocks";
 import TemplateDownloadCard from "./TemplateDownloadCard";
+import GeneratingState from "./GeneratingState";
 import { fmtDate } from "@/lib/report/format";
 
 export default function AdvisoryReportView() {
@@ -116,20 +117,25 @@ function EmptyState({
     <div className="mx-auto max-w-2xl px-6 py-20 text-center">
       <div className="text-[10.5px] uppercase tracking-[0.3em] text-champagne-300/80">Your advisory desk</div>
       <h1 className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em]">
-        No report yet
+        {generating ? "Building your first report" : "No report yet"}
       </h1>
-      <p className="mx-auto mt-3 max-w-[46ch] text-[14px] leading-[1.7] text-ink/60">
-        Connect a bank or card account and sync your transactions, then generate your first grounded bi-weekly
-        briefing — every number tied to your real data.
-      </p>
-      <button
-        type="button"
-        onClick={() => void onGenerate()}
-        disabled={generating}
-        className="mt-7 rounded-full bg-ink px-6 py-2.5 text-[13.5px] text-paper transition-transform duration-200 ease-cinema hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/40 disabled:opacity-50"
-      >
-        {generating ? "Generating…" : "Generate my first report"}
-      </button>
+      {generating ? (
+        <GeneratingState />
+      ) : (
+        <>
+          <p className="mx-auto mt-3 max-w-[46ch] text-[14px] leading-[1.7] text-ink/60">
+            Connect a bank or card account and sync your transactions, then generate your first grounded bi-weekly
+            briefing — every number tied to your real data.
+          </p>
+          <button
+            type="button"
+            onClick={() => void onGenerate()}
+            className="mt-7 rounded-full bg-ink px-6 py-2.5 text-[13.5px] text-paper transition-transform duration-200 ease-cinema hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/40 disabled:opacity-50"
+          >
+            Generate my first report
+          </button>
+        </>
+      )}
       {error && <p className="mt-4 text-[12px] text-ink/45">{error}</p>}
     </div>
   );
