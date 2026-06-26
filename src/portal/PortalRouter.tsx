@@ -11,6 +11,7 @@ const Terms = lazy(() => import("../pages/legal/Terms"));
 const PlaidConsent = lazy(() => import("../pages/legal/PlaidConsent"));
 const Privacy = lazy(() => import("../pages/legal/Privacy"));
 const DataRetention = lazy(() => import("../pages/legal/DataRetention"));
+const PlaidOperations = lazy(() => import("../pages/legal/PlaidOperations"));
 
 const Fallback = () => (
   <div className="flex min-h-screen items-center justify-center bg-charcoal-950 text-[13px] text-ink/55">
