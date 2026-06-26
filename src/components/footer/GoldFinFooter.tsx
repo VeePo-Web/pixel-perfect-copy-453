@@ -48,6 +48,7 @@ const LEGAL_LINKS = [
   { label: "Terms",    href: "/terms" },
   { label: "Security", href: "/security-faq" },
   { label: "Data Retention", href: "/data-retention" },
+  { label: "Plaid Operations", href: "/plaid-operations" },
 ] as const;
 
 export default function GoldFinFooter() {
