@@ -55,7 +55,25 @@ async function handleCheckoutCompleted(session: any, env: StripeEnv) {
     }, { onConflict: "stripe_session_id" });
   }
   if (email && plan) await sendWelcomeEmail(email, plan);
+
+  // Kickoff first advisory report immediately for paying users who already
+  // connected a bank — so they don't wait up to 13 days for the cron pass.
+  const ELIGIBLE_PLANS = ["auto-fill-monthly", "finance-desk-monthly"];
+  if (userId && plan && ELIGIBLE_PLANS.includes(plan)) {
+    try {
+      const { data: hasBank } = await getSupabase()
+        .from("plaid_items").select("id").eq("user_id", userId).eq("status", "active").limit(1).maybeSingle();
+      if (hasBank) {
+        await getSupabase().functions.invoke("generate-advisory-report", {
+          body: { user_id: userId, send: true, reason: "checkout_kickoff" },
+        });
+      }
+    } catch (e) {
+      console.error("kickoff report failed:", e);
+    }
+  }
 }
+
 
 async function handleSubscriptionUpsert(subscription: any, env: StripeEnv) {
   const item = subscription.items?.data?.[0];
