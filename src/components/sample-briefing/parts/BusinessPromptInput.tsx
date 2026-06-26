@@ -28,7 +28,7 @@ export default function BusinessPromptInput({ value, onChange, onGenerate, onUse
           type="button"
           onClick={onGenerate}
           disabled={disabled}
-          className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 disabled:opacity-60"
+          className="group relative w-full overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3.5 text-center text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema sm:w-auto sm:py-3 hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 disabled:opacity-60"
         >
           <span className="relative z-10">Generate My Sample Briefing</span>
           <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />

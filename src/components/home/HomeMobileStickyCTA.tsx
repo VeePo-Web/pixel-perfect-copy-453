@@ -11,10 +11,22 @@ export default function HomeMobileStickyCTA() {
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 520);
+    const onScroll = () => {
+      const scrolled = window.scrollY;
+      // Hide near the page bottom so the bar never covers the final lead-capture
+      // form or the footer (the primary action is already on-screen there).
+      const nearBottom =
+        window.innerHeight + scrolled >=
+        document.documentElement.scrollHeight - 220;
+      setVisible(scrolled > 520 && !nearBottom);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   const show = visible && !dismissed;
