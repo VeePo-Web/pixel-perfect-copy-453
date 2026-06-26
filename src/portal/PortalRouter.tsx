@@ -10,6 +10,7 @@ const AdminAudit = lazy(() => import("../pages/portal/admin/Audit"));
 const Terms = lazy(() => import("../pages/legal/Terms"));
 const PlaidConsent = lazy(() => import("../pages/legal/PlaidConsent"));
 const Privacy = lazy(() => import("../pages/legal/Privacy"));
+const DataRetention = lazy(() => import("../pages/legal/DataRetention"));
 
 const Fallback = () => (
   <div className="flex min-h-screen items-center justify-center bg-charcoal-950 text-[13px] text-ink/55">
@@ -22,7 +23,8 @@ export function isPortalRoute(pathname: string) {
     pathname.startsWith("/portal") ||
     pathname === "/terms" ||
     pathname === "/plaid-consent" ||
-    pathname === "/privacy"
+    pathname === "/privacy" ||
+    pathname === "/data-retention"
   );
 }
 
@@ -70,6 +72,9 @@ export default function PortalRouter({ pathname }: { pathname: string }) {
       break;
     case "/privacy":
       node = <Privacy />;
+      break;
+    case "/data-retention":
+      node = <DataRetention />;
       break;
     default:
       node = (

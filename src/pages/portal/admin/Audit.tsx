@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import PortalLayout from "../../../components/portal/PortalLayout";
 import ProtectedRoute from "../../../components/portal/ProtectedRoute";
 import { supabase } from "../../../integrations/supabase/client";
+import { useAuth } from "../../../contexts/AuthContext";
+import { RETENTION_POLICY_VERSION } from "../../../lib/portal/tos";
 
 type Row = {
   user_id: string;
@@ -55,26 +57,44 @@ function Pill({ tone, children }: { tone: "ok" | "warn" | "bad" | "muted"; child
 }
 
 export default function Audit() {
+  const { user } = useAuth();
   const [rows, setRows] = useState<Row[] | null>(null);
   const [run, setRun] = useState<CronRun | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [running, setRunning] = useState(false);
   const [lastTriggerMsg, setLastTriggerMsg] = useState<string | null>(null);
+  const [lastReview, setLastReview] = useState<{ reviewed_at: string; policy_version: string } | null>(null);
+  const [reviewMsg, setReviewMsg] = useState<string | null>(null);
 
   const load = async () => {
     setError(null);
-    const [{ data, error: e1 }, { data: cronRows }] = await Promise.all([
+    const [{ data, error: e1 }, { data: cronRows }, { data: rev }] = await Promise.all([
       supabase.rpc("admin_audit_overview"),
       supabase.from("cron_runs").select("started_at, finished_at, candidates, generated, sent, skipped, failed")
         .order("started_at", { ascending: false }).limit(1),
+      supabase.from("retention_policy_reviews").select("reviewed_at, policy_version")
+        .order("reviewed_at", { ascending: false }).limit(1),
     ]);
     if (e1) { setError(e1.message); return; }
     setRows((data as Row[]) ?? []);
     setRun((cronRows?.[0] as CronRun) ?? null);
+    setLastReview((rev?.[0] as { reviewed_at: string; policy_version: string }) ?? null);
   };
 
   useEffect(() => { load(); }, []);
+
+  const recordReview = async () => {
+    if (!user) return;
+    setReviewMsg(null);
+    const { error } = await supabase.from("retention_policy_reviews").insert({
+      policy_version: RETENTION_POLICY_VERSION,
+      reviewer_user_id: user.id,
+      notes: "Quarterly review recorded from admin dashboard.",
+    });
+    setReviewMsg(error ? `Error: ${error.message}` : "Review recorded.");
+    load();
+  };
 
   const triggerCron = async () => {
     setRunning(true); setLastTriggerMsg(null);
@@ -119,6 +139,32 @@ export default function Audit() {
           <Stat label="Last cron" value={run ? since(run.started_at) : "never"}
             sub={run ? `g${run.generated} s${run.sent} sk${run.skipped} f${run.failed}` : undefined} />
         </div>
+
+        <section className="mt-6 rounded-2xl border border-ink/10 bg-paper p-5">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-[15px] font-medium text-ink">Data retention policy</h2>
+              <p className="mt-1 text-[12px] text-ink/60">
+                Current version <code>{RETENTION_POLICY_VERSION}</code> ·{" "}
+                <a href="/data-retention" target="_blank" rel="noreferrer" className="underline">
+                  View policy
+                </a>{" "}
+                · Last review:{" "}
+                {lastReview
+                  ? `${new Date(lastReview.reviewed_at).toLocaleDateString()} (v${lastReview.policy_version})`
+                  : "never recorded"}
+              </p>
+            </div>
+            <button
+              onClick={recordReview}
+              className="rounded-full border border-ink/15 px-4 py-2 text-[12px] font-medium text-ink hover:bg-ink/5"
+            >
+              Record quarterly review
+            </button>
+          </div>
+          {reviewMsg && <p className="mt-2 text-[12px] text-ink/65">{reviewMsg}</p>}
+        </section>
+
 
         <div className="mt-6 flex items-center gap-2">
           <input

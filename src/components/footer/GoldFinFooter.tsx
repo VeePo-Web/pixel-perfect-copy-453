@@ -47,6 +47,7 @@ const LEGAL_LINKS = [
   { label: "Privacy",  href: "/privacy" },
   { label: "Terms",    href: "/terms" },
   { label: "Security", href: "/security-faq" },
+  { label: "Data Retention", href: "/data-retention" },
 ] as const;
 
 export default function GoldFinFooter() {
