@@ -406,10 +406,10 @@ export const demoBusinesses: DemoBusiness[] = [
 ];
 
 export const loaderLines = [
-  "Reading sample revenue movement…",
-  "Reviewing expense patterns…",
-  "Checking cash pressure…",
-  "Preparing plain-English briefing…",
+  "Reading your revenue movement…",
+  "Reviewing your expense patterns…",
+  "Checking your cash pressure…",
+  "Finding the one decision that matters this month…",
 ];
 
 export const reportSections = [

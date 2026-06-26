@@ -1,8 +1,7 @@
-﻿import BusinessPromptInput from "./BusinessPromptInput";
+import BusinessPromptInput from "./BusinessPromptInput";
 import DemoBusinessSelector from "./DemoBusinessSelector";
 import BriefingPanelPreview from "./BriefingPanelPreview";
 import type { DemoBusiness } from "../content";
-import { startAutoFillCheckout } from "../../../lib/checkout";
 
 type Props = {
   prompt: string;
@@ -10,7 +9,6 @@ type Props = {
   businessId: string;
   selectBusiness: (id: string) => void;
   onGenerate: () => void;
-  onUseDemo: () => void;
   business: DemoBusiness;
   status: "idle" | "loading" | "ready";
   loaderIndex: number;
@@ -32,11 +30,11 @@ export default function SampleBriefingHero(props: Props) {
             <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70"><span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-300/70" />
               Sample bi-weekly finance briefing
             </div>
-            <h1 className="mt-5 max-w-[18ch] font-light text-ink [text-wrap:balance] text-[40px] leading-[1.05] tracking-[-0.01em] sm:text-[52px] lg:text-[60px]">
-              See what financial clarity feels like before you apply.
+            <h1 className="mt-5 max-w-[18ch] font-light text-ink text-[40px] leading-[1.05] tracking-[-0.01em] sm:text-[52px] lg:text-[60px]">
+              Your numbers, finally in plain English.
             </h1>
             <p className="mt-5 max-w-[52ch] text-[15.5px] leading-[1.7] text-ink/70">
-              Choose a demo business or describe your own situation to preview a plain-English finance briefing — no bank connection required.
+              Pick your industry or describe your own situation — and watch it turn into a plain-English finance briefing in seconds. No bank connection required.
             </p>
 
             <div className="mt-8">
@@ -51,23 +49,13 @@ export default function SampleBriefingHero(props: Props) {
                 value={props.prompt}
                 onChange={props.setPrompt}
                 onGenerate={props.onGenerate}
-                onUseDemo={props.onUseDemo}
+                disabled={props.status === "loading"}
               />
             </div>
 
-            <p className="mt-4 max-w-[60ch] text-[11.5px] uppercase tracking-[0.2em] text-ink/55">
-              Use demo data or rough non-sensitive numbers. No bank connection required for this preview.
+            <p className="mt-5 max-w-[60ch] text-[12px] leading-[1.6] text-ink/45">
+              Built for agencies, clinics, trades, restaurants, e-commerce &amp; professional services. Use demo data or rough non-sensitive numbers — nothing is connected to your bank.
             </p>
-            <button
-              type="button"
-              onClick={startAutoFillCheckout}
-              className="group mt-5 inline-flex items-center text-[12.5px] text-champagne-300/70 transition-colors duration-300 hover:text-champagne-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-950"
-            >
-              <span className="border-b border-champagne-200/20 pb-0.5 group-hover:border-champagne-300/60">
-                Already convinced? Auto-fill my reports &#x2014; $99/mo
-              </span>
-              <span aria-hidden className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">&#x2192;</span>
-            </button>
           </div>
 
           <div className="lg:sticky lg:top-24">

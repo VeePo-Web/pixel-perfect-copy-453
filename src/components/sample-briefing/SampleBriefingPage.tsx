@@ -29,21 +29,15 @@ export default function SampleBriefingPage() {
     };
   }, []);
 
-  const useDemo = () => {
-    s.selectBusiness(s.businessId);
-    s.generate(true);
-  };
-
   return (
     <div className="relative pb-24 lg:pb-0">
-      
+
       <SampleBriefingHero
         prompt={s.prompt}
         setPrompt={s.setPrompt}
         businessId={s.businessId}
         selectBusiness={s.selectBusiness}
         onGenerate={() => s.generate(true)}
-        onUseDemo={useDemo}
         business={s.business}
         status={s.status}
         loaderIndex={s.loaderIndex}
