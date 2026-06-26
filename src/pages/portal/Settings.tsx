@@ -12,6 +12,7 @@ export default function Settings() {
   const [last, setLast] = useState("");
   const [phone, setPhone] = useState("");
   const [savedAt, setSavedAt] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (!user) return;
