@@ -55,13 +55,33 @@ export default function Dashboard() {
         {accountCount === 0 && (
           <div className="mt-10 rounded-2xl border border-dashed border-ink/15 p-8 text-center">
             <p className="text-[14px] text-ink/70">
-              You haven't connected a bank yet. Goldfin starts working the moment you do.
+              You haven't connected a bank yet. GoldFin starts working the moment you do.
             </p>
             <a
               href="/portal/accounts"
-              className="mt-4 inline-block rounded-full bg-ink px-6 py-2.5 text-[13px] font-medium text-paper"
+              className="mt-4 inline-block rounded-full bg-ink px-6 py-2.5 text-[13px] font-medium text-paper transition-transform duration-200 ease-cinema hover:-translate-y-0.5"
             >
-              Connect a bank
+              Connect my bank &amp; build my report
+            </a>
+          </div>
+        )}
+
+        {/* Connected → route straight to the product. The advisory report is
+            what the $99/mo buys; the home screen must hand the owner to it. */}
+        {accountCount != null && accountCount > 0 && (
+          <div className="mt-10 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-ink/10 bg-paper p-6">
+            <div>
+              <p className="text-[15px] font-medium text-ink">Your advisory report is ready when you are</p>
+              <p className="mt-1 max-w-[52ch] text-[13px] leading-[1.6] text-ink/60">
+                We turn your connected transactions into a plain-English, grounded briefing — every number tied to
+                your real data.
+              </p>
+            </div>
+            <a
+              href="/portal/report"
+              className="inline-block shrink-0 rounded-full bg-ink px-6 py-2.5 text-[13px] font-medium text-paper transition-transform duration-200 ease-cinema hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/40"
+            >
+              See my advisory report &rarr;
             </a>
           </div>
         )}
