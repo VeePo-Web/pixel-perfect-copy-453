@@ -140,6 +140,32 @@ export default function Audit() {
             sub={run ? `g${run.generated} s${run.sent} sk${run.skipped} f${run.failed}` : undefined} />
         </div>
 
+        <section className="mt-6 rounded-2xl border border-ink/10 bg-paper p-5">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-[15px] font-medium text-ink">Data retention policy</h2>
+              <p className="mt-1 text-[12px] text-ink/60">
+                Current version <code>{RETENTION_POLICY_VERSION}</code> ·{" "}
+                <a href="/data-retention" target="_blank" rel="noreferrer" className="underline">
+                  View policy
+                </a>{" "}
+                · Last review:{" "}
+                {lastReview
+                  ? `${new Date(lastReview.reviewed_at).toLocaleDateString()} (v${lastReview.policy_version})`
+                  : "never recorded"}
+              </p>
+            </div>
+            <button
+              onClick={recordReview}
+              className="rounded-full border border-ink/15 px-4 py-2 text-[12px] font-medium text-ink hover:bg-ink/5"
+            >
+              Record quarterly review
+            </button>
+          </div>
+          {reviewMsg && <p className="mt-2 text-[12px] text-ink/65">{reviewMsg}</p>}
+        </section>
+
+
         <div className="mt-6 flex items-center gap-2">
           <input
             value={query}
