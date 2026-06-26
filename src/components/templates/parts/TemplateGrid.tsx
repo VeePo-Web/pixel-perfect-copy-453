@@ -37,7 +37,7 @@ export default function TemplateGrid({ templates, highlightedIds, onGet, onPrevi
             No templates in this category yet.
           </div>
         ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
             {templates.map((t, i) => (
               <div
                 key={t.id}
