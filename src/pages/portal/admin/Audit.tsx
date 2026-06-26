@@ -32,7 +32,7 @@ type CronRun = {
   failed: number;
 };
 
-const fmt = (s: string | null) => (s ? new Date(s).toLocaleString() : "—");
+
 const since = (s: string | null) => {
   if (!s) return "—";
   const d = (Date.now() - new Date(s).getTime()) / 86_400_000;
