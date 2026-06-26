@@ -20,6 +20,7 @@ export type Txn = {
   merchant_name_norm: string | null;
   amount: number;                 // Plaid sign convention
   category: string | null;
+  category_raw?: unknown;         // Plaid PFC { primary, detailed } — drives non-operating exclusion
   confidence: number;             // 0..1
 };
 
@@ -90,6 +91,7 @@ export type MetricsPayload = {
   netCash: number;
   monthlyBurn: number;
   runwayMonths: number | null;
+  nonOperatingExcluded: number;   // transfers + card payoffs + owner draws removed from cash flow
   // profit truth (whole-business, bank-feed proxy)
   revenueVsPriorPct: number | null;
   profitProxy: number;            // inflow - outflow over period (cash basis proxy)
@@ -123,6 +125,42 @@ const r2 = (n: number) => Math.round(n * 100) / 100;
 const outflow = (t: Txn) => (t.amount > 0 ? t.amount : 0);
 const inflowOf = (t: Txn) => (t.amount < 0 ? -t.amount : 0);
 
+// --- NON-OPERATING FILTER -------------------------------------------------
+// A bank-feed sum is not cash flow until you remove money that only moved
+// between the owner's own accounts (internal transfers), paid down a credit
+// card (the underlying card spend is already counted — a double-count), or paid
+// the owner (draws/distributions — equity, not expense). Including these is the
+// #1 reason naive bank-feed reports overstate burn and understate runway. We
+// exclude ONLY unambiguous non-operating flows, so real revenue/expense is
+// never dropped (e.g. a customer deposit via TRANSFER_IN_DEPOSIT still counts).
+const NON_OPERATING_DETAILED = new Set([
+  "TRANSFER_IN_ACCOUNT_TRANSFER",
+  "TRANSFER_OUT_ACCOUNT_TRANSFER",
+  "TRANSFER_OUT_INVESTMENT_AND_RETIREMENT_FUNDS",
+  "LOAN_PAYMENTS_CREDIT_CARD_PAYMENT",
+]);
+// Conservative name fallback when Plaid's detailed category is absent — only
+// phrases that cannot be customer revenue or an operating expense.
+const NON_OPERATING_NAME =
+  /\b(owner'?s?\s+draw|owner\s+distribution|member\s+draw|shareholder\s+distribution|capital\s+contribution|internal\s+transfer|transfer\s+to\s+(savings|checking|brokerage)|credit\s+card\s+payment|cardmember\s+(payment|pmt)|amex\s+epayment)\b/i;
+
+function plaidDetailed(t: Txn): string {
+  const raw = (t as { category_raw?: unknown }).category_raw;
+  if (raw && typeof raw === "object" && !Array.isArray(raw)) {
+    return String((raw as { detailed?: unknown }).detailed ?? "").toUpperCase();
+  }
+  return "";
+}
+
+/** True when a transaction is an internal transfer, credit-card payoff, or
+ *  owner draw — i.e. NOT operating cash flow. Exported for unit tests. */
+export function isNonOperating(t: Txn): boolean {
+  const detailed = plaidDetailed(t);
+  if (detailed && NON_OPERATING_DETAILED.has(detailed)) return true;
+  const name = `${t.name ?? ""} ${t.merchant_name_norm ?? ""}`;
+  return NON_OPERATING_NAME.test(name);
+}
+
 function daysBetween(a: string, b: string): number {
   const ms = Date.parse(b) - Date.parse(a);
   return Math.round(ms / 86_400_000);
@@ -149,15 +187,23 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
       .reduce((s, a) => s + (a.current_balance ?? 0), 0),
   );
 
-  const inflow = r2(input.transactions.reduce((s, t) => s + inflowOf(t), 0));
-  const outflowSum = r2(input.transactions.reduce((s, t) => s + outflow(t), 0));
+  // Operating activity only (exclude internal transfers / card payoffs / owner
+  // draws) for every cash figure — current and prior, apples-to-apples.
+  const operating = input.transactions.filter((t) => !isNonOperating(t));
+  const priorOperating = input.priorTransactions.filter((t) => !isNonOperating(t));
+  const nonOperatingExcluded = r2(
+    input.transactions.filter(isNonOperating).reduce((s, t) => s + Math.abs(t.amount), 0),
+  );
+
+  const inflow = r2(operating.reduce((s, t) => s + inflowOf(t), 0));
+  const outflowSum = r2(operating.reduce((s, t) => s + outflow(t), 0));
   const netCash = r2(inflow - outflowSum);
   const monthlyBurn = r2(outflowSum / span);
   const runwayMonths = monthlyBurn > 0 ? r2(cashOnHand / monthlyBurn) : null;
 
   // prior-period comparisons
-  const priorInflow = input.priorTransactions.reduce((s, t) => s + inflowOf(t), 0);
-  const priorOutflow = input.priorTransactions.reduce((s, t) => s + outflow(t), 0);
+  const priorInflow = priorOperating.reduce((s, t) => s + inflowOf(t), 0);
+  const priorOutflow = priorOperating.reduce((s, t) => s + outflow(t), 0);
   const revenueVsPriorPct =
     priorInflow > 0 ? r2(((inflow - priorInflow) / priorInflow) * 100) : null;
   const profitProxy = netCash;
@@ -207,7 +253,7 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
 
   // --- CARD AUDIT: duplicate charges (same merchant + amount within 2 days) ---
   const duplicates: DuplicateItem[] = [];
-  const spends = input.transactions
+  const spends = operating
     .filter((t) => outflow(t) > 0 && t.merchant_name_norm)
     .sort((a, b) => a.posted_date.localeCompare(b.posted_date));
   for (let i = 0; i < spends.length; i++) {
@@ -233,11 +279,11 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
   //     unauthorized charge to verify. Same 60-day federal dispute window. ---
   const unfamiliarThreshold = input.unfamiliarThreshold ?? 200;
   const priorMerchants = new Set(
-    input.priorTransactions.map((t) => t.merchant_name_norm).filter(Boolean) as string[],
+    priorOperating.map((t) => t.merchant_name_norm).filter(Boolean) as string[],
   );
   const unfamiliar: UnfamiliarItem[] = [];
   const seenUnfamiliar = new Set<string>();
-  for (const t of input.transactions) {
+  for (const t of operating) {
     const m = t.merchant_name_norm;
     if (!m || outflow(t) < unfamiliarThreshold) continue;
     if (priorMerchants.has(m) || seenUnfamiliar.has(m)) continue;
@@ -254,10 +300,10 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
   // --- BIGGEST EXPENSE MOVER: category with largest outflow delta vs prior ---
   const catNow = new Map<string, number>();
   const catPrior = new Map<string, number>();
-  for (const t of input.transactions) {
+  for (const t of operating) {
     if (outflow(t) > 0) catNow.set(t.category ?? "Uncategorized", (catNow.get(t.category ?? "Uncategorized") ?? 0) + outflow(t));
   }
-  for (const t of input.priorTransactions) {
+  for (const t of priorOperating) {
     if (outflow(t) > 0) catPrior.set(t.category ?? "Uncategorized", (catPrior.get(t.category ?? "Uncategorized") ?? 0) + outflow(t));
   }
   let biggestMover: MoverItem | null = null;
@@ -320,7 +366,7 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
     cac: input.industryInputs?.cac ?? null,
   });
 
-  // --- COVERAGE ---
+  // --- COVERAGE (over ALL transactions — categorization quality of the feed) ---
   const transactionsCount = input.transactions.length;
   const categorized = input.transactions.filter((t) => t.confidence >= conf && t.category).length;
   const coveragePct = transactionsCount > 0 ? r2((categorized / transactionsCount) * 100) : 0;
@@ -328,6 +374,7 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
   // --- VERIFICATION REGISTRY: every citable number, flat ---
   const figures: Record<string, number> = {
     cashOnHand, inflow, outflow: outflowSum, netCash, monthlyBurn,
+    nonOperatingExcluded,
     profitProxy, wasteAnnualTotal, coveragePct, transactionsCount,
     ownerPay_profit: ownerPay.profit, ownerPay_ownerPay: ownerPay.ownerPay,
     ownerPay_tax: ownerPay.tax, ownerPay_opex: ownerPay.opex,
@@ -351,6 +398,7 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
   return {
     period: { start: input.periodStart, end: input.periodEnd },
     cashOnHand, inflow, outflow: outflowSum, netCash, monthlyBurn, runwayMonths,
+    nonOperatingExcluded,
     revenueVsPriorPct, profitProxy, profitVsPriorPct,
     waste, wasteAnnualTotal, duplicates, unfamiliar, costCreep, biggestMover,
     ownerPay, contributionByLine, bestLine, worstLine,

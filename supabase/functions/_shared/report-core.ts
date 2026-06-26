@@ -107,7 +107,7 @@ export async function generateReportForUser(
   const [profileRes, acctRes, txRes, streamRes, ledgerRes, priorReportRes, profEmailRes, inputsRes] = await Promise.all([
     admin.from("business_profiles").select("business_name, industry, entity_type, reserve_floor_months").eq("user_id", userId).maybeSingle(),
     admin.from("plaid_accounts").select("current_balance, type").eq("user_id", userId),
-    admin.from("plaid_transactions").select("posted_date, name, merchant_name_norm, amount, category, confidence").eq("user_id", userId).gte("posted_date", prior.start).lte("posted_date", cur.end),
+    admin.from("plaid_transactions").select("posted_date, name, merchant_name_norm, amount, category, category_raw, confidence").eq("user_id", userId).gte("posted_date", prior.start).lte("posted_date", cur.end),
     admin.from("recurring_streams").select("direction, description, merchant_name, category, frequency, last_amount, first_amount, last_date, is_active").eq("user_id", userId),
     admin.from("ledger_entries").select("entry_date, kind, amount, revenue_line, category, is_variable").eq("user_id", userId).gte("entry_date", cur.start).lte("entry_date", cur.end),
     admin.from("advisory_reports").select("metrics_snapshot, recommendations, period_end").eq("user_id", userId).eq("status", "generated").order("created_at", { ascending: false }).limit(1).maybeSingle(),
