@@ -53,7 +53,7 @@ export default function ComparisonHero() {
                 Or have it done for you — $99/mo
               </button>
             </div>
-            <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
+            <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/55">
               No bank connection required to preview or apply.
             </p>
           </div>

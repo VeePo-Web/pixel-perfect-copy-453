@@ -55,7 +55,7 @@ export default function SampleBriefingHero(props: Props) {
               />
             </div>
 
-            <p className="mt-4 max-w-[60ch] text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
+            <p className="mt-4 max-w-[60ch] text-[11.5px] uppercase tracking-[0.2em] text-ink/55">
               Use demo data or rough non-sensitive numbers. No bank connection required for this preview.
             </p>
             <button
