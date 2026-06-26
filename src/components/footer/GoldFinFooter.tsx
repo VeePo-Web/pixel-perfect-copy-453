@@ -50,6 +50,7 @@ const LEGAL_LINKS = [
   { label: "Data Retention", href: "/data-retention" },
   { label: "Plaid Operations", href: "/plaid-operations" },
   { label: "MFA Policy", href: "/mfa-policy" },
+  { label: "MFA Attestation", href: "/mfa-attestation" },
 ] as const;
 
 export default function GoldFinFooter() {
