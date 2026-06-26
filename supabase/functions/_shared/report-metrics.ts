@@ -72,10 +72,12 @@ export type MetricsInput = {
   periodEnd: string;
   today: string;                  // injected (no Date.now in pure logic)
   confidenceThreshold?: number;   // default 0.6
+  unfamiliarThreshold?: number;   // default 200 — first-seen charge to flag for review
 };
 
 export type WasteItem = { merchant: string; monthly: number; annual: number; lastDate: string | null };
 export type DuplicateItem = { merchant: string; amount: number; date: string; disputeBy: string };
+export type UnfamiliarItem = { merchant: string; amount: number; date: string; disputeBy: string };
 export type CostCreepItem = { merchant: string; from: number; to: number };
 export type MoverItem = { category: string; from: number; to: number; delta: number };
 
@@ -96,6 +98,7 @@ export type MetricsPayload = {
   waste: WasteItem[];
   wasteAnnualTotal: number;
   duplicates: DuplicateItem[];
+  unfamiliar: UnfamiliarItem[];
   costCreep: CostCreepItem[];
   biggestMover: MoverItem | null;
   // owner pay (Profit First)
@@ -224,6 +227,30 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
     }
   }
 
+  // --- CARD AUDIT: unfamiliar/large charges (first-seen merchant this period
+  //     above threshold). Completes the card-statement audit — a merchant that
+  //     never appeared before, charging real money, is the classic gray/
+  //     unauthorized charge to verify. Same 60-day federal dispute window. ---
+  const unfamiliarThreshold = input.unfamiliarThreshold ?? 200;
+  const priorMerchants = new Set(
+    input.priorTransactions.map((t) => t.merchant_name_norm).filter(Boolean) as string[],
+  );
+  const unfamiliar: UnfamiliarItem[] = [];
+  const seenUnfamiliar = new Set<string>();
+  for (const t of input.transactions) {
+    const m = t.merchant_name_norm;
+    if (!m || outflow(t) < unfamiliarThreshold) continue;
+    if (priorMerchants.has(m) || seenUnfamiliar.has(m)) continue;
+    seenUnfamiliar.add(m);
+    unfamiliar.push({
+      merchant: m,
+      amount: r2(t.amount),
+      date: t.posted_date,
+      disputeBy: addDays(t.posted_date, 60),
+    });
+  }
+  unfamiliar.sort((a, b) => b.amount - a.amount);
+
   // --- BIGGEST EXPENSE MOVER: category with largest outflow delta vs prior ---
   const catNow = new Map<string, number>();
   const catPrior = new Map<string, number>();
@@ -310,6 +337,7 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
   if (profitVsPriorPct != null) figures.profitVsPriorPct = profitVsPriorPct;
   waste.forEach((w, i) => { figures[`waste_${i}_annual`] = w.annual; figures[`waste_${i}_monthly`] = w.monthly; });
   duplicates.forEach((d, i) => { figures[`dup_${i}_amount`] = d.amount; });
+  unfamiliar.forEach((u, i) => { figures[`unfam_${i}_amount`] = u.amount; });
   costCreep.forEach((c, i) => { figures[`creep_${i}_from`] = c.from; figures[`creep_${i}_to`] = c.to; });
   if (biggestMover) { figures.mover_from = biggestMover.from; figures.mover_to = biggestMover.to; figures.mover_delta = biggestMover.delta; }
   contributionByLine.forEach((c, i) => {
@@ -324,7 +352,7 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
     period: { start: input.periodStart, end: input.periodEnd },
     cashOnHand, inflow, outflow: outflowSum, netCash, monthlyBurn, runwayMonths,
     revenueVsPriorPct, profitProxy, profitVsPriorPct,
-    waste, wasteAnnualTotal, duplicates, costCreep, biggestMover,
+    waste, wasteAnnualTotal, duplicates, unfamiliar, costCreep, biggestMover,
     ownerPay, contributionByLine, bestLine, worstLine,
     industry, growth,
     coveragePct, transactionsCount,

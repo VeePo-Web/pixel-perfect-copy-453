@@ -35,6 +35,7 @@ export interface BusinessProfile {
 
 export interface WasteItem { merchant: string; monthly: number; annual: number; lastDate: string | null }
 export interface DuplicateItem { merchant: string; amount: number; date: string; disputeBy: string }
+export interface UnfamiliarItem { merchant: string; amount: number; date: string; disputeBy: string }
 export interface CostCreepItem { merchant: string; from: number; to: number }
 export interface MoverItem { category: string; from: number; to: number; delta: number }
 export interface ContributionLine {
@@ -102,6 +103,7 @@ export interface MetricsSnapshot {
   waste: WasteItem[];
   wasteAnnualTotal: number;
   duplicates: DuplicateItem[];
+  unfamiliar: UnfamiliarItem[];
   costCreep: CostCreepItem[];
   biggestMover: MoverItem | null;
   ownerPay: { profit: number; ownerPay: number; tax: number; opex: number };

@@ -188,7 +188,8 @@ export function ReportSectionBlock({
 }
 
 export function MoneyRecoveryStrip({ m }: { m: MetricsSnapshot }) {
-  const hasAny = m.waste.length > 0 || m.duplicates.length > 0 || m.costCreep.length > 0;
+  const unfamiliar = m.unfamiliar ?? [];
+  const hasAny = m.waste.length > 0 || m.duplicates.length > 0 || unfamiliar.length > 0 || m.costCreep.length > 0;
   if (!hasAny) return null;
   return (
     <div className="mt-4 space-y-3 rounded-lg border border-gold-500/30 bg-gold-300/[0.06] px-5 py-4">
@@ -206,6 +207,12 @@ export function MoneyRecoveryStrip({ m }: { m: MetricsSnapshot }) {
           <li key={`d${i}`} className="flex items-baseline justify-between gap-4">
             <span>Duplicate charge: <span className="text-ink">{d.merchant}</span> — dispute by <span className="text-ink">{fmtDate(d.disputeBy)}</span></span>
             <span className="shrink-0 font-[robert-medium] text-green-signal">{fmtUSD(d.amount)} back</span>
+          </li>
+        ))}
+        {unfamiliar.map((u, i) => (
+          <li key={`u${i}`} className="flex items-baseline justify-between gap-4">
+            <span>Unfamiliar charge: <span className="text-ink">{u.merchant}</span> — first time, verify or dispute by <span className="text-ink">{fmtDate(u.disputeBy)}</span></span>
+            <span className="shrink-0 font-[robert-medium] text-gold-700">{fmtUSD(u.amount)}</span>
           </li>
         ))}
         {m.costCreep.map((c, i) => (

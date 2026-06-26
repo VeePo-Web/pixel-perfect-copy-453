@@ -136,3 +136,26 @@ describe("computeMetrics — coverage", () => {
     expect(m.transactionsCount).toBe(3);
   });
 });
+
+describe("computeMetrics — card audit: unfamiliar charges", () => {
+  it("flags a first-seen merchant above threshold with a 60-day dispute date", () => {
+    const m = computeMetrics(baseInput()); // Landlord (2000 out) is new; Gusto recurs
+    const landlord = m.unfamiliar.find((u) => u.merchant === "Landlord");
+    expect(landlord).toBeDefined();
+    expect(landlord!.amount).toBe(2000);
+    expect(landlord!.disputeBy).toBe("2026-08-14"); // 2026-06-15 + 60 days
+    expect(m.unfamiliar.some((u) => u.merchant === "Gusto")).toBe(false); // recurring -> not flagged
+    expect(Object.values(m.figures)).toContain(2000); // registered for verification
+  });
+
+  it("ignores first-seen charges below the threshold and inflows", () => {
+    const m = computeMetrics(baseInput({
+      transactions: [
+        { posted_date: "2026-06-12", name: "Coffee", merchant_name_norm: "NewCafe", amount: 50, category: "Meals", confidence: 0.8 },
+        { posted_date: "2026-06-13", name: "Deposit", merchant_name_norm: "NewClient", amount: -5000, category: "Income", confidence: 0.9 },
+      ],
+      priorTransactions: [],
+    }));
+    expect(m.unfamiliar.length).toBe(0); // $50 below threshold; deposit is inflow
+  });
+});
