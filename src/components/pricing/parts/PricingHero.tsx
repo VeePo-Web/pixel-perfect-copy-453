@@ -15,7 +15,7 @@ export default function PricingHero() {
       <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-32 sm:pt-36 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1.05fr_1.1fr] lg:gap-16">
           <div className="motion-safe:animate-section-in">
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+            <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70"><span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-300/70" />
               Pricing
             </div>
             <h1 className="mt-5 max-w-[24ch] font-light text-ink text-[38px] leading-[1.08] tracking-[-0.01em] sm:text-[50px] lg:text-[58px]">

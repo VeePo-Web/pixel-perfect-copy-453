@@ -25,7 +25,7 @@ export default function SecurityFAQHero() {
         className="pointer-events-none absolute left-1/2 top-0 -z-0 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-champagne-200/[0.08] blur-3xl"
       />
       <div className="relative mx-auto max-w-6xl px-6 py-20 lg:px-10 lg:py-24 motion-safe:animate-section-in">
-        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+        <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70"><span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-300/70" />
           Security & FAQ
         </div>
         <h1 className="mt-5 max-w-4xl font-light text-ink text-[34px] leading-[1.08] tracking-[-0.015em] sm:text-[48px] lg:text-[62px]">
@@ -64,7 +64,7 @@ export default function SecurityFAQHero() {
         <p className="mt-5 inline-flex items-center gap-2 text-[12px] text-ink/45">
           <span
             aria-hidden
-            className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400/70"
+            className="inline-block h-1.5 w-1.5 rounded-full bg-green-signal"
           />
           No bank connection required to preview or apply.
         </p>

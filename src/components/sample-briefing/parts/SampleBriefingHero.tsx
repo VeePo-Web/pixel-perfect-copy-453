@@ -29,7 +29,7 @@ export default function SampleBriefingHero(props: Props) {
       <div className="mx-auto max-w-7xl px-6 pb-20 pt-28 sm:pt-32 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[1.05fr_1.1fr] lg:gap-16">
           <div className="motion-safe:animate-section-in">
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+            <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70"><span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-300/70" />
               Sample bi-weekly finance briefing
             </div>
             <h1 className="mt-5 max-w-[18ch] font-light text-ink text-[40px] leading-[1.05] tracking-[-0.01em] sm:text-[52px] lg:text-[60px]">

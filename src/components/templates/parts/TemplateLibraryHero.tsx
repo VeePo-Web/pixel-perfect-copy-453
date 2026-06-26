@@ -18,7 +18,7 @@ export default function TemplateLibraryHero() {
       {/* Pattern B — Centered squeeze, single column, form is the sole visual focus */}
       <div className="relative mx-auto max-w-3xl px-6 pb-12 pt-28 text-center sm:pt-32 lg:px-10">
         <div className="motion-safe:animate-section-in mx-auto max-w-[56ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+          <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70"><span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-300/70" />
             GoldFin Template Vault · Free
           </div>
           <h1
