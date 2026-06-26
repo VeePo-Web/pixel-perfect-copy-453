@@ -84,8 +84,21 @@ function headlineHtml(m: MetricsPayload): string {
   const revColor = m.revenueVsPriorPct == null ? "#0B0D12" : (m.revenueVsPriorPct >= 0 ? "#2E6B4A" : "#B4452F");
   cells.push(cell("Revenue vs prior", revValue, revColor));
 
+  // Why the figures won't match the raw bank balance (transparency builds trust).
+  const note = m.nonOperatingExcluded > 0
+    ? `<p style="font-size:11px;line-height:1.5;color:#8A93A3;margin:12px 0 0">${usd(m.nonOperatingExcluded)} of transfers and owner draws were set aside — they aren't business income or expense, so this won't match your raw bank balance.</p>`
+    : "";
+
   return `<div style="border:1px solid #E6E8EC;border-radius:12px;padding:18px 14px;margin:0 0 16px;box-shadow:0 0 0 1px rgba(212,168,69,.18)">
-    <table style="width:100%;border-collapse:collapse"><tr>${cells.join("")}</tr></table></div>`;
+    <table style="width:100%;border-collapse:collapse"><tr>${cells.join("")}</tr></table>${note}</div>`;
+}
+
+// Trust signal: when coverage is low, say so plainly rather than present shaky
+// figures with false confidence (Report-Value: TRUSTED). Pure render.
+function trustBannerHtml(m: MetricsPayload): string {
+  if (m.coveragePct == null || m.coveragePct >= 80) return "";
+  return `<div style="border:1px solid rgba(184,137,58,.4);background:rgba(184,137,58,.07);border-radius:10px;padding:12px 16px;margin:0 0 14px">
+    <p style="font-size:12.5px;line-height:1.55;color:#7A5B1E;margin:0">Heads up — ${m.coveragePct}% of your transactions are categorized so far. Treat the figures below as directional; they sharpen as the rest are reviewed.</p></div>`;
 }
 
 // Hidden preview text shown by inboxes next to the subject (drives the open).
@@ -106,6 +119,13 @@ function renderText(input: RenderInput, stamp: string): string {
   if (input.subjectLine) out.push("", input.subjectLine);
   const summary = preheaderText(input.metrics);
   if (summary) out.push("", summary);
+  const m = input.metrics;
+  if (m && m.coveragePct != null && m.coveragePct < 80) {
+    out.push("", `Heads up: ${m.coveragePct}% of transactions categorized so far — figures are directional.`);
+  }
+  if (m && m.nonOperatingExcluded > 0) {
+    out.push("", `Note: ${usd(m.nonOperatingExcluded)} of transfers and owner draws were set aside (not business income or expense).`);
+  }
   for (const s of input.sections) out.push("", s.heading.toUpperCase(), s.body.trim());
   if (input.recommendations.length) {
     out.push("", "WHAT TO DO NOW");
@@ -139,12 +159,14 @@ export function renderReportEmail(input: RenderInput): { subject: string; html: 
 
   const preheader = preheaderText(input.metrics);
   const headline = input.metrics ? headlineHtml(input.metrics) : "";
+  const trust = input.metrics ? trustBannerHtml(input.metrics) : "";
 
   const html = `<!doctype html><html><body style="margin:0;background:#ffffff;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:#0B0D12">
   ${preheader ? `<span style="display:none!important;visibility:hidden;opacity:0;color:transparent;height:0;width:0;max-height:0;max-width:0;overflow:hidden;mso-hide:all">${esc(preheader)}</span>` : ""}
   <div style="max-width:600px;margin:0 auto;padding:36px 24px">
     <p style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#B8893A;margin:0 0 6px">GoldFin Desk · Bi-Weekly Advisory</p>
     ${input.subjectLine ? `<h1 style="font-size:24px;font-weight:400;line-height:1.2;color:#0B0D12;margin:0 0 16px">${esc(input.subjectLine)}</h1>` : ""}
+    ${trust}
     ${headline}
     ${blocks}
     ${decisionsHtml(input.recommendations)}

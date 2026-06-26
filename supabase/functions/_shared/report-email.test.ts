@@ -96,4 +96,22 @@ describe("renderReportEmail", () => {
     const { text } = renderReportEmail(base);
     expect(text).toContain("Cash runway");
   });
+
+  it("warns on low coverage and explains transfers set aside", () => {
+    const lowCov = computeMetrics({
+      accounts: [{ current_balance: 20000, type: "depository" }],
+      transactions: [
+        { posted_date: "2026-06-12", name: "Misc", merchant_name_norm: "Misc", amount: 500, category: null, confidence: 0.2 },
+        { posted_date: "2026-06-13", name: "Transfer to Savings", merchant_name_norm: "Savings", amount: 4000, category: null, confidence: 0.2, category_raw: { detailed: "TRANSFER_OUT_ACCOUNT_TRANSFER" } },
+      ],
+      priorTransactions: [],
+      recurringStreams: [],
+      profile: { business_name: "Y", industry: "other", entity_type: "llc_sole_prop", reserve_floor_months: 3 },
+      periodStart: "2026-06-09", periodEnd: "2026-06-23", today: "2026-06-23",
+    });
+    const { html, text } = renderReportEmail({ ...base, metrics: lowCov, coveragePct: lowCov.coveragePct });
+    expect(html).toContain("are categorized so far");   // low-coverage trust banner
+    expect(html).toContain("set aside");                 // transfers transparency note
+    expect(text).toContain("set aside");
+  });
 });
