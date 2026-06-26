@@ -328,6 +328,8 @@ export type Database = {
       profiles: {
         Row: {
           created_at: string
+          deletion_executed_at: string | null
+          deletion_requested_at: string | null
           email: string | null
           first_name: string | null
           id: string
@@ -337,6 +339,8 @@ export type Database = {
         }
         Insert: {
           created_at?: string
+          deletion_executed_at?: string | null
+          deletion_requested_at?: string | null
           email?: string | null
           first_name?: string | null
           id: string
@@ -346,12 +350,38 @@ export type Database = {
         }
         Update: {
           created_at?: string
+          deletion_executed_at?: string | null
+          deletion_requested_at?: string | null
           email?: string | null
           first_name?: string | null
           id?: string
           last_name?: string | null
           phone?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      retention_policy_reviews: {
+        Row: {
+          id: string
+          notes: string | null
+          policy_version: string
+          reviewed_at: string
+          reviewer_user_id: string | null
+        }
+        Insert: {
+          id?: string
+          notes?: string | null
+          policy_version: string
+          reviewed_at?: string
+          reviewer_user_id?: string | null
+        }
+        Update: {
+          id?: string
+          notes?: string | null
+          policy_version?: string
+          reviewed_at?: string
+          reviewer_user_id?: string | null
         }
         Relationships: []
       }
@@ -523,6 +553,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      run_retention_sweep: { Args: never; Returns: Json }
       upsert_cron_secret: { Args: { p_secret: string }; Returns: undefined }
     }
     Enums: {
