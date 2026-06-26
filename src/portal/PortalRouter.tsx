@@ -78,6 +78,9 @@ export default function PortalRouter({ pathname }: { pathname: string }) {
     case "/data-retention":
       node = <DataRetention />;
       break;
+    case "/plaid-operations":
+      node = <PlaidOperations />;
+      break;
     default:
       node = (
         <div className="flex min-h-screen items-center justify-center bg-charcoal-950 text-ink">
