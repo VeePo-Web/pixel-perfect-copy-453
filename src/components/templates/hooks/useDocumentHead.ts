@@ -4,7 +4,7 @@ import { faq } from "../content";
 const TITLE = "Free Financial Templates · GoldFin Desk";
 const DESC =
   "Free spreadsheet templates for cash flow, expenses, hiring decisions, monthly reviews, and tax reserves — built for owner-led businesses ready to stop guessing from their bank balance.";
-const CANONICAL = "https://pixel-perfect-copy-453.lovable.app/templates";
+const CANONICAL = "https://goldfindesk.com/templates";
 
 function ensureMeta(attr: "name" | "property", key: string): HTMLMetaElement {
   let el = document.querySelector(

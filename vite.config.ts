@@ -3,8 +3,10 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import fs from 'fs'
 
-// Deployed host (matches robots.txt / sitemap.xml / per-route canonicals).
-const HOST = 'https://pixel-perfect-copy-453.lovable.app'
+// Production canonical host (matches index.html, robots.txt, sitemap.xml and
+// per-route canonicals -- keep these four in sync; single source of truth for
+// the prerendered <link rel="canonical"> and og:url on every route).
+const HOST = 'https://goldfindesk.com'
 
 // Per-route <head>. After `vite build`, the plugin below emits
 // dist/<route>/index.html — a copy of the SPA shell with this page's real title,
@@ -74,6 +76,7 @@ function prerenderRouteMeta(): Plugin {
           .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${t}$2`)
           .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${d}$2`)
           .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${canon}$2`)
+          .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${canon}$2`)
         const outDir = path.join(dist, ...r.path.split('/'))
         fs.mkdirSync(outDir, { recursive: true })
         fs.writeFileSync(path.join(outDir, 'index.html'), html)

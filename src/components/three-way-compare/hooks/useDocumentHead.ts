@@ -5,7 +5,7 @@ const TITLE = "Bookkeeper vs Fractional CFO vs GoldFin Desk";
 const DESC =
   "Compare bookkeepers, fractional CFOs, and GoldFin Desk to understand which financial support option fits your owner-led business.";
 const CANONICAL =
-  "https://pixel-perfect-copy-453.lovable.app/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk";
+  "https://goldfindesk.com/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk";
 
 function ensureMeta(attr: "name" | "property", key: string): HTMLMetaElement {
   let el = document.querySelector(
