@@ -8,6 +8,7 @@ import PlaidExplanationSection from "./parts/PlaidExplanationSection";
 import PrivacyPrinciplesSection from "./parts/PrivacyPrinciplesSection";
 import FeaturedFAQPreview from "./parts/FeaturedFAQPreview";
 import FAQHub from "./parts/FAQHub";
+import FAQSchema from "./parts/FAQSchema";
 import ProductBoundariesSection from "./parts/ProductBoundariesSection";
 import SecuritySampleBriefingPreview from "./parts/SecuritySampleBriefingPreview";
 import SecurityFinalCTA from "./parts/SecurityFinalCTA";
@@ -24,7 +25,7 @@ export default function SecurityFAQPage() {
 
   return (
     <div className="relative pb-28 lg:pb-0">
-      
+      <FAQSchema />
       <SecurityFAQHero />
       <AccessSequence />
       <UpfrontRequirementsSection />

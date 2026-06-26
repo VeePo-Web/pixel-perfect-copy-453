@@ -40,7 +40,7 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
       data-highlighted={highlighted ? "true" : "false"}
       className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-ink/[0.02] p-5 transition-all duration-500 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/30 hover:bg-ink/[0.035] ${
         highlighted
-          ? "border-champagne-200/55 shadow-[0_0_0_1px_rgba(217,190,130,0.25),0_30px_60px_-30px_rgba(217,190,130,0.35)]"
+          ? "border-champagne-200/55 shadow-[0_30px_60px_-30px_rgba(217,190,130,0.4)]"
           : "border-ink/[0.07]"
       }`}
     >
@@ -76,7 +76,7 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
         </div>
       </div>
 
-      <p className="mt-3 max-h-0 overflow-hidden text-[12px] text-champagne-300/70 opacity-0 transition-all duration-500 ease-cinema group-hover:max-h-12 group-hover:opacity-100">
+      <p className="mt-3 max-h-0 overflow-hidden text-[12px] text-champagne-300/70 opacity-0 transition-all duration-500 ease-cinema group-hover:max-h-24 group-hover:opacity-100">
         {template.decisionLine}
       </p>
 
