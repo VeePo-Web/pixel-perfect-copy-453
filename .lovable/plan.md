@@ -1,48 +1,39 @@
-# Plaid Operational Policy — Documented, Maturing, Downloadable
+# Plaid MFA Documentation — Downloadable PDF
 
-Goal: Stand up a formal **Plaid Integration Operations & Maturity Policy** (POMP) for Goldfin Desk, published at a public URL and available as a one-click PDF download in the chat. Include a defined review/maturity cadence so it is "constantly matured," not static.
+Create a formal Multi-Factor Authentication policy document for Goldfin Desk that you can download directly from the chat and upload to Plaid's production review.
 
 ## What gets built
 
-### 1. Source-of-truth policy document
-`docs/plaid/plaid-operations-policy.md` — single canonical markdown file covering:
-- Scope & system description (Plaid Link, Items, Accounts, Transactions, Auth, Webhooks)
-- Roles & responsibilities (Owner: Chris Sam; Engineering; Support)
-- Environments (sandbox → production), secret management, rotation cadence
-- Data flow diagram (ASCII) + data classes touched (account, balance, tx, identity)
-- Access control: who can read Plaid data, RLS posture, admin audit trail
-- Token lifecycle: link token → public token exchange → access token storage (encrypted at rest), revocation on user delete
-- Webhook handling: signature verification, retry, dead-letter logging in `webhook_events`
-- Incident response runbook: detection → containment (rotate `PLAID_*` secrets, revoke items) → notification SLAs
-- Change management: every Plaid-affecting PR must update this doc + bump `POLICY_VERSION`
-- Vendor management: Plaid as sub-processor, EUDPA + DPA references
-- Retention alignment (links to `/data-retention`)
-- Maturity model: levels 1–5 (Initial → Optimizing) with current self-assessed level and target
-- Review cadence: quarterly review logged in `retention_policy_reviews` (reused table, new `policy_type` filter) — surfaced on admin Audit dashboard
-- Change log table at bottom (version, date, author, summary)
+1. **Canonical markdown source** — `docs/plaid/mfa-policy.md`
+   - Version + last-reviewed date header
+   - Scope: who/what is covered (all portal users, all admins, all Plaid-linked accounts)
+   - MFA mechanism: passwordless Email OTP (6-digit, 10-min TTL, single-use, rate-limited) via Resend, plus Google OAuth as a federated second-factor-equivalent identity provider
+   - Enforcement: every sign-in requires OTP or Google OAuth — no password-only path exists
+   - Admin access: admin role gated behind same MFA + role check in `user_roles` table
+   - Session policy: JWT lifetime, refresh rotation, idle timeout, forced re-auth before Plaid Link
+   - Plaid-specific controls: re-authentication required before initiating Plaid Link Token creation and before viewing connected account details
+   - Account recovery: OTP-to-verified-email only; no security-question fallback
+   - Logging & monitoring: `webhook_events` + auth audit trail in admin dashboard
+   - Incident response: lockout, token revocation, user notification runbook
+   - Review cadence: quarterly + triggered, with append-only change log
 
-### 2. Public web page
-`src/pages/legal/PlaidOperations.tsx` route `/plaid-operations` — renders the policy as styled HTML with TOC, "Last reviewed" badge, "Download PDF" button.
+2. **Web page** — `src/pages/legal/MfaPolicy.tsx` at route `/mfa-policy`
+   - Renders the policy
+   - "Download PDF" button serving the file below
+   - Registered in `PortalRouter.tsx` and linked from `GoldFinFooter.tsx`
 
-### 3. Downloadable PDF (chat-deliverable)
-Generate `/mnt/documents/goldfin-plaid-operations-policy.pdf` from the markdown via `reportlab` so the user can download it directly from this chat, and host the same file at `/downloads/goldfin-plaid-operations-policy.pdf` (copied into `public/`) so the web page's Download button works.
+3. **PDF generator + artifact** — `scripts/build-mfa-policy-pdf.py`
+   - Uses `reportlab` (same pattern as the Plaid Operations policy)
+   - Outputs `public/downloads/goldfin-mfa-policy.pdf`
+   - Run once during build; file committed so the public URL `/downloads/goldfin-mfa-policy.pdf` works immediately
 
-### 4. Constant maturity wiring
-- New row in admin Audit dashboard: "Plaid Operations Policy — last reviewed: <date> — [Record review]"
-- Reuse existing `retention_policy_reviews` table by adding a `policy_type` text column (default `'retention'`); insert `'plaid_ops'` rows on review
-- Sign-in time check: if `PLAID_OPS_POLICY_VERSION` in `src/lib/portal/tos.ts` is newer than the user's last-acknowledged version AND user is admin, show a banner prompting re-review
-
-### 5. Discoverability
-- Footer legal nav: add "Plaid Operations"
-- Link from `/data-retention` and `/terms`
-- Link from Portal Settings → Compliance section
+4. **In-chat download**
+   - After generation, surface the PDF as an `<artifact>` block so you can download it directly from this conversation and upload to Plaid
 
 ## Technical notes
-- One small migration: `alter table public.retention_policy_reviews add column policy_type text not null default 'retention';`
-- PDF generation script: `scripts/build-plaid-policy-pdf.ts` (run once during this turn; output committed to `public/downloads/`)
-- No new edge functions, no new secrets
-- No changes to Plaid runtime code paths
 
-## Deliverables in chat after build
-- Public link: `/plaid-operations`
-- `<presentation-artifact>` for `goldfin-plaid-operations-policy.pdf` so you can download it directly here
+- No schema changes, no new edge functions, no auth changes — this is documentation of the MFA system that already exists (Email OTP via `send-login-otp` / `verify-login-otp` + Google OAuth).
+- Footer link added alongside existing "Plaid Operations" and "Data Retention" links.
+- PDF styling matches the Plaid Operations policy for visual consistency in Plaid's review packet.
+
+Approve and I'll build it and drop the PDF in the chat.
