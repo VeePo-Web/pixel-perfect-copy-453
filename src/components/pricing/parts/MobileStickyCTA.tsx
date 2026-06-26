@@ -4,7 +4,7 @@ import { startAutoFillCheckout } from "../../../lib/checkout";
 export default function MobileStickyCTA() {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 720);
+    const onScroll = () => setVisible(window.scrollY > 720 && window.innerHeight + window.scrollY < document.documentElement.scrollHeight - 200);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);

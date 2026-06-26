@@ -11,7 +11,7 @@ export default function MobileStickyCTA({ recommendation }: Props) {
   useEffect(() => {
     const briefingEl = document.getElementById("sample-briefing");
     const onScroll = () => {
-      setVisible(window.scrollY > 640);
+      setVisible(window.scrollY > 640 && window.innerHeight + window.scrollY < document.documentElement.scrollHeight - 200);
       if (briefingEl) {
         const r = briefingEl.getBoundingClientRect();
         setPastBriefing(r.bottom < window.innerHeight * 0.4);

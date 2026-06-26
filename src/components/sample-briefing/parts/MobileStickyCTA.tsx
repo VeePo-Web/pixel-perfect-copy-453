@@ -8,7 +8,7 @@ type Props = {
 export default function MobileStickyCTA({ status, onGenerate }: Props) {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 480);
+    const onScroll = () => setVisible(window.scrollY > 480 && window.innerHeight + window.scrollY < document.documentElement.scrollHeight - 200);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
