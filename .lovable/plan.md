@@ -1,54 +1,29 @@
-## Audit result: does the whole loop work?
+## Flip Plaid to production
 
-**Short answer: yes, end-to-end.** Sign-in is *not* a Lovable-branded screen, Plaid syncs, and the bi-weekly cron is live and verified active.
+### What I'll change
 
----
+1. **Set `PLAID_ENV=production`** as a runtime secret. Currently absent, so `plaidEnv()` defaults to `sandbox`. Once set, all edge functions (`plaid-create-link-token`, `plaid-exchange-public-token`, `plaid-webhook`, `cron-run-reports` account refresh) route to `https://production.plaid.com` and read `PLAID_PRODUCTION_SECRET`.
 
-### 1. Sign-in — no Lovable Cloud-branded UI
+2. **Verify `PLAID_PRODUCTION_SECRET` is present.** The current secrets listing shows `PLAID_SANDBOX_SECRET` and `PLAID_CLIENT_ID` only — no `PLAID_PRODUCTION_SECRET`. If it's actually missing despite your earlier note, I'll request it via the secure form (one-time paste, never echoed).
 
-`src/pages/portal/Login.tsx` is the only entry point. Two options:
+3. **Update `PlaidLinkButton.tsx` env hint.** The component currently shows a "Sandbox" banner when `PLAID_ENV !== production`. After the flip, the banner disappears automatically — no code change needed, but I'll double-check the conditional reads from a fresh server call.
 
-- **Google** — `lovable.auth.signInWithOAuth("google", …)`. Consent screen is Google's, showing the Goldfin Desk app name (managed OAuth credentials, no "Lovable" branding visible to the user).
-- **Email code** — `send-login-otp` edge function generates a 6-digit code, emails via Resend from `noreply@goldfindesk.com`. User enters code on the same page; `verify-login-otp` exchanges it for a session via Supabase `generateLink` server-side. No password, no Lovable-hosted page, no signup screen.
+4. **Smoke test in production.**
+   - Call `plaid-create-link-token` and confirm the returned `link_token` starts with `link-production-…` (sandbox tokens start with `link-sandbox-…`).
+   - Confirm the `plaid-webhook` URL registered on Plaid's production dashboard matches our edge function URL. If not, I'll show you the exact URL to paste into Plaid Dashboard → Team Settings → Webhooks.
 
-Legacy `/portal/signup`, `/portal/forgot-password`, `/portal/reset-password` all redirect to `/portal/login`.
+5. **Document the rollback.** Add a one-liner to `docs/plaid-sandbox-setup.md`: set `PLAID_ENV=sandbox` to revert instantly; no code redeploy required.
 
-**Verdict:** ✅ Users never see a Lovable-branded auth screen.
+### What I will NOT change
 
-> Technical note (non-user-facing): the backend identity store is Lovable Cloud (Supabase Auth). That is infrastructure — the user-facing surface is 100% Goldfin Desk.
+- No schema changes. `plaid_items` / `plaid_accounts` already store production data identically.
+- No client code paths beyond removing the sandbox banner (which auto-hides).
+- Stripe stays in sandbox until you say otherwise.
 
----
+### Open question before I execute
 
-### 2. Plaid bank connection
+`PLAID_PRODUCTION_SECRET` does not appear in the current secrets listing. Two possibilities:
+- (a) It's set in the **production** environment slot, not the dev one I can see → flipping `PLAID_ENV` will just work.
+- (b) It was never added → I'll need you to paste it once via the secure form.
 
-- `PlaidLinkButton` calls `plaid-create-link-token` → opens Plaid Link → `plaid-exchange-public-token` writes `plaid_items` + `plaid_accounts` rows.
-- Production-vs-sandbox switched by `PLAID_ENV` in `_shared/plaid.ts`. Sandbox secret is set; production secret slot exists.
-- Webhook `plaid-webhook` logs every event to `webhook_events`.
-
-**Verdict:** ✅ Works end-to-end; only requires flipping `PLAID_ENV=production` once Plaid grants prod access.
-
----
-
-### 3. Bi-weekly reports
-
-- Cron job `advisory-report-biweekly` confirmed **active**, schedule `0 13 * * 1` (Mondays 13:00 UTC), authenticated via Vault `cron_secret`.
-- `cron-run-reports` filters users with: active subscription (`auto-fill-monthly` or `finance-desk-monthly` `price_id`) **AND** at least one active `plaid_items` row. Logs each run to `cron_runs`.
-- `payments-webhook` fires an instant first report on `checkout.session.completed` if the user already has a Plaid connection — no 7-day wait.
-
-**Verdict:** ✅ Automated, gated by both payment + bank connection.
-
----
-
-### 4. Audit dashboard
-
-`/portal/admin/audit` shows every user's sign-in providers, last sign-in, Plaid status, Stripe plan, last report, and last webhook event. First signed-in user is auto-promoted to admin. "Run cron now" button calls `admin-trigger-cron`.
-
----
-
-### What's left before real launch
-
-1. **Flip `PLAID_ENV` to `production`** once Plaid approves the production app (you said the secrets are already in).
-2. **Stripe go-live** — currently sandbox. Switch when ready; webhooks auto-register for live.
-3. **Custom domain** — point `goldfindesk.com` at the project so the Google consent screen and OTP emails match the URL bar.
-
-Nothing in the code blocks launch. Do you want me to switch to build mode and (a) flip `PLAID_ENV`, (b) prepare the Stripe go-live checklist, or (c) something else?
+I'll attempt the flip; if Plaid returns `INVALID_API_KEYS`, I'll prompt for the secret. Approve and I'll proceed.
