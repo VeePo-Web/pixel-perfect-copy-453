@@ -73,6 +73,9 @@ export default function PortalRouter({ pathname }: { pathname: string }) {
     case "/privacy":
       node = <Privacy />;
       break;
+    case "/data-retention":
+      node = <DataRetention />;
+      break;
     default:
       node = (
         <div className="flex min-h-screen items-center justify-center bg-charcoal-950 text-ink">
