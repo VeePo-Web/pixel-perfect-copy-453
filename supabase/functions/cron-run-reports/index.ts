@@ -67,6 +67,12 @@ Deno.serve(async (req) => {
       }
     }
 
+    if (runId) {
+      await admin.from("cron_runs").update({
+        finished_at: new Date().toISOString(),
+        candidates: userIds.length, generated, sent, skipped, failed,
+      }).eq("id", runId);
+    }
     return json({ candidates: userIds.length, generated, sent, skipped, failed, processed: processed.length });
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : "Unknown error" }, 500);
