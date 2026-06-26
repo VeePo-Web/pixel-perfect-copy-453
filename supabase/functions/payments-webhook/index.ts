@@ -1,5 +1,7 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { type StripeEnv, verifyWebhook } from "../_shared/stripe.ts";
+import { generateReportForUser } from "../_shared/report-core.ts";
+
 
 let _supabase: ReturnType<typeof createClient> | null = null;
 function getSupabase() {
@@ -55,7 +57,25 @@ async function handleCheckoutCompleted(session: any, env: StripeEnv) {
     }, { onConflict: "stripe_session_id" });
   }
   if (email && plan) await sendWelcomeEmail(email, plan);
+
+  // Kickoff first advisory report immediately for paying users who already
+  // connected a bank — so they don't wait up to 13 days for the cron pass.
+  const ELIGIBLE_PLANS = ["auto-fill-monthly", "finance-desk-monthly"];
+  if (userId && plan && ELIGIBLE_PLANS.includes(plan)) {
+    try {
+      const { data: hasBank } = await getSupabase()
+        .from("plaid_items").select("id").eq("user_id", userId).eq("status", "active").limit(1).maybeSingle();
+      if (hasBank) {
+        const today = new Date().toISOString().slice(0, 10);
+        await generateReportForUser(getSupabase() as any, userId, { send: true, today });
+      }
+
+    } catch (e) {
+      console.error("kickoff report failed:", e);
+    }
+  }
 }
+
 
 async function handleSubscriptionUpsert(subscription: any, env: StripeEnv) {
   const item = subscription.items?.data?.[0];
