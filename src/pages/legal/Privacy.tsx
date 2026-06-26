@@ -41,7 +41,9 @@ export default function Privacy() {
         <H2>Your choices</H2>
         <P>
           You can update your profile, regenerate two-factor authentication, disconnect any
-          institution, or delete your account from the portal at any time. Contact{" "}
+          institution, or delete your account from the portal at any time. See our{" "}
+          <a href="/data-retention" className="underline">Data Retention &amp; Deletion Policy</a>{" "}
+          for the full schedule and your right to erasure. Contact{" "}
           <a href="mailto:privacy@goldfindesk.com" className="underline">
             privacy@goldfindesk.com
           </a>{" "}
