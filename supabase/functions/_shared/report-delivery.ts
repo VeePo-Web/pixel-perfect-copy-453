@@ -48,6 +48,26 @@ export function unsubscribeHeaders(unsubscribeUrl: string): Record<string, strin
   };
 }
 
+// ---- PURE: map a Resend webhook event to a suppression reason (or null) ----
+// Hard bounce + spam complaint => never email this address again (reputation).
+export function suppressionReasonForEvent(eventType: string): "bounce" | "complaint" | null {
+  if (eventType === "email.bounced") return "bounce";
+  if (eventType === "email.complained") return "complaint";
+  return null;
+}
+
+// ---- PURE: which delivery timestamp column a Resend event stamps (or null) ----
+export function deliveryTimestampField(eventType: string): string | null {
+  switch (eventType) {
+    case "email.delivered": return "delivered_at";
+    case "email.opened": return "opened_at";
+    case "email.clicked": return "clicked_at";
+    case "email.bounced": return "bounced_at";
+    case "email.complained": return "complained_at";
+    default: return null;
+  }
+}
+
 async function ensurePreference(
   admin: SupabaseClient,
   userId: string,
@@ -74,6 +94,18 @@ async function getDelivery(admin: SupabaseClient, reportId: string) {
     .eq("report_id", reportId)
     .maybeSingle();
   return data as { status: DeliveryStatus; attempts: number; last_attempt_at: string | null } | null;
+}
+
+// Global do-not-send check (fed by the Resend webhook: hard bounces + complaints).
+// Fails open if the table is absent (pre-migration) so delivery is never blocked
+// by a missing dependency.
+async function isEmailSuppressed(admin: SupabaseClient, email: string): Promise<{ suppressed: boolean; reason: string | null }> {
+  const { data } = await admin
+    .from("email_suppressions")
+    .select("reason")
+    .eq("email", email.toLowerCase())
+    .maybeSingle();
+  return { suppressed: !!data, reason: (data?.reason as string | undefined) ?? null };
 }
 
 async function recordAttempt(admin: SupabaseClient, reportId: string, fields: Record<string, unknown>) {
@@ -120,7 +152,8 @@ export async function deliverReportEmail(
 
   const pref = await ensurePreference(admin, userId);
   const existing = await getDelivery(admin, reportId);
-  const decision = decideDelivery(pref.enabled, existing?.status ?? null);
+  const sup = await isEmailSuppressed(admin, email);
+  const decision = decideDelivery(pref.enabled && !sup.suppressed, existing?.status ?? null);
 
   if (decision === "skip") return { status: "sent", skipped: true };
 
@@ -128,7 +161,8 @@ export async function deliverReportEmail(
   const nowIso = new Date().toISOString();
 
   if (decision === "suppress") {
-    await recordAttempt(admin, reportId, { status: "suppressed", last_error: "user_unsubscribed", last_attempt_at: nowIso });
+    const reason = sup.suppressed ? "suppressed_" + sup.reason : "user_unsubscribed";
+    await recordAttempt(admin, reportId, { status: "suppressed", last_error: reason, last_attempt_at: nowIso });
     return { status: "suppressed" };
   }
 

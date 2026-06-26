@@ -22,3 +22,7 @@ verify_jwt = false
 # Public one-click unsubscribe (token-gated); no session required.
 [functions.email-unsubscribe]
 verify_jwt = false
+
+# Resend (Svix) email webhook; signature-verified inside the function.
+[functions.resend-webhook]
+verify_jwt = false

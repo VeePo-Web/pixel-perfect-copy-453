@@ -1,5 +1,8 @@
 import { test, assert } from "vitest";
-import { nextRetryDue, decideDelivery, unsubscribeHeaders, BACKOFF_MS, MAX_DELIVERY_ATTEMPTS } from "./report-delivery.ts";
+import {
+  nextRetryDue, decideDelivery, unsubscribeHeaders, BACKOFF_MS, MAX_DELIVERY_ATTEMPTS,
+  suppressionReasonForEvent, deliveryTimestampField,
+} from "./report-delivery.ts";
 
 test("decideDelivery suppresses when the recipient has opted out", () => {
   assert.equal(decideDelivery(false, null), "suppress");
@@ -39,4 +42,21 @@ test("unsubscribeHeaders are RFC 8058 one-click", () => {
   const h = unsubscribeHeaders("https://x.co/u?token=abc");
   assert.equal(h["List-Unsubscribe"], "<https://x.co/u?token=abc>");
   assert.equal(h["List-Unsubscribe-Post"], "List-Unsubscribe=One-Click");
+});
+
+test("suppressionReasonForEvent flags only hard bounces and complaints", () => {
+  assert.equal(suppressionReasonForEvent("email.bounced"), "bounce");
+  assert.equal(suppressionReasonForEvent("email.complained"), "complaint");
+  assert.equal(suppressionReasonForEvent("email.delivered"), null);
+  assert.equal(suppressionReasonForEvent("email.opened"), null);
+  assert.equal(suppressionReasonForEvent("email.sent"), null);
+});
+
+test("deliveryTimestampField maps each lifecycle event to its column", () => {
+  assert.equal(deliveryTimestampField("email.delivered"), "delivered_at");
+  assert.equal(deliveryTimestampField("email.opened"), "opened_at");
+  assert.equal(deliveryTimestampField("email.clicked"), "clicked_at");
+  assert.equal(deliveryTimestampField("email.bounced"), "bounced_at");
+  assert.equal(deliveryTimestampField("email.complained"), "complained_at");
+  assert.equal(deliveryTimestampField("email.sent"), null);
 });
