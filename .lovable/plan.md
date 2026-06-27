@@ -1,44 +1,80 @@
-# Plaid MFA Attestation — Downloadable Answer Document
+# Plaid Submission Packet — One Downloadable ZIP
 
-A short, Plaid-review-ready document that directly answers Plaid's question:
+Bundle every document Plaid is asking for into a single zip at `/mnt/documents/goldfin-plaid-submission-packet.zip`, mapped 1:1 to the questionnaire items so you can upload each one in the right slot.
 
-> "Is multi-factor authentication (MFA) in place for access to critical systems that store or process consumer financial data?"
+## ZIP contents (final layout)
 
-This is purpose-built for the Plaid Production Access questionnaire — one declarative answer up front, then the evidence Plaid reviewers expect to see, then a pointer to the full MFA Policy already published at `/mfa-policy`.
+```
+goldfin-plaid-submission-packet.zip
+├── README.md                                  ← index mapping each file to Q#
+├── Q2-information-security-policy.pdf         ← NEW
+├── Q3-access-control-policy.pdf               ← NEW (covers OAuth/TLS non-human auth,
+│                                                  periodic access reviews, zero-trust,
+│                                                  centralized IAM)
+├── Q4-mfa-consumer-screenshots/               ← existing screenshots
+│   ├── mfa-login.png
+│   ├── mfa-otp-step.png
+│   ├── accept-terms.png
+│   └── Q4-mfa-consumer-cover.pdf              ← NEW 1-page cover explaining the flow
+├── Q5-mfa-critical-systems/
+│   ├── goldfin-mfa-attestation.pdf            ← existing
+│   ├── goldfin-mfa-policy.pdf                 ← existing
+│   └── mfa-admin-login.png                    ← captured fresh via Playwright
+├── Q6-Q7-encryption-policy.pdf                ← NEW (TLS 1.2+ in-transit, AES-256
+│                                                  at-rest for all Plaid-derived data)
+├── Q8-vulnerability-management-policy.pdf     ← NEW (scans on laptops + prod,
+│                                                  EOL software monitoring)
+├── Q9-Q10-privacy-and-consent-policy.pdf      ← NEW (links to /privacy and
+│                                                  /plaid-consent, in-app display
+│                                                  evidence, consent capture flow)
+├── Q11-data-retention-and-disposal-policy.pdf ← NEW (mirrors /data-retention)
+└── Q-supplemental-plaid-operations-policy.pdf ← existing Plaid Operations & Maturity
+```
 
 ## What gets built
 
-1. **Markdown source** — `docs/plaid/mfa-attestation.md`
-   - **Answer:** Yes. Every account that can reach a critical system storing or processing consumer financial data authenticates via MFA. There is no password-only path.
-   - **Critical systems in scope:** GoldFin portal, admin dashboard, edge functions that call Plaid, the Lovable Cloud database holding Plaid-derived rows, the Plaid Dashboard, Stripe Dashboard, Resend, and the source-code repository.
-   - **Per-system control table:** for each critical system → who can access, MFA factors enforced, evidence/reference.
-   - **End-user MFA:** Email OTP (6-digit, 10-min TTL, single-use, rate-limited) or Google OAuth with 2-Step Verification required. NIST AAL2.
-   - **Privileged/admin MFA:** Same passwordless flow + `has_role()` RLS check; no separate admin password.
-   - **Vendor consoles:** Plaid, Stripe, Resend, Lovable Cloud, GitHub — MFA enforced on every operator account; recovery codes stored in a sealed vault.
-   - **Enforcement evidence:** no password form exists in the product; legacy `/signup` and `/reset-password` routes redirect to `/portal/login`; every edge function re-verifies `auth.uid()`; Plaid Link requires a fresh-auth assertion within 30 minutes.
-   - **Attestation block:** signed by Chris Sam, Founder, with date and version.
-   - **Pointer:** "Full policy and quarterly review cadence: `goldfindesk.com/mfa-policy` (downloadable PDF)."
+1. **Six new markdown sources** under `docs/plaid/submission/`:
+   - `information-security-policy.md`
+   - `access-control-policy.md`
+   - `mfa-consumer-cover.md`
+   - `encryption-policy.md`
+   - `vulnerability-management-policy.md`
+   - `privacy-and-consent-policy.md`
+   - `data-retention-and-disposal-policy.md`
 
-2. **PDF generator** — `scripts/build-mfa-attestation-pdf.py`
-   - Same reportlab styling as the existing MFA Policy and Plaid Operations PDFs (navy headings, gold rule, consistent header/footer) so it slots into the same Plaid submission packet.
-   - Writes `/mnt/documents/goldfin-mfa-attestation.pdf` and `public/downloads/goldfin-mfa-attestation.pdf`.
-   - Visual QA: render every page to JPG and inspect before delivery.
+   Each one is written to plug directly into the specific Plaid question, signed by Chris Sam, versioned `2026-06-26.1`, quarterly review cadence, cites the same standards stack (SOC 2, NIST, PCI-DSS) used in the existing policies.
 
-3. **Web page** — `src/pages/legal/MfaAttestation.tsx` at route `/mfa-attestation`
-   - Same layout primitives as `MfaPolicy.tsx` (no new design system).
-   - Prominent "Download PDF" button.
-   - Cross-link back to `/mfa-policy` and `/plaid-operations`.
+2. **One generic PDF builder** — `scripts/build-submission-pdf.py`
+   - Takes a markdown source + output path as args.
+   - Reuses the exact reportlab style from `scripts/build-mfa-attestation-pdf.py` (navy headings, gold rule, header/footer) so every PDF in the packet matches.
+   - Used to render all six new PDFs in one loop.
 
-4. **Wiring**
-   - Register the route in `src/portal/PortalRouter.tsx` (lazy import + case branch + `isPortalRoute`).
-   - Add a "MFA Attestation" footer link in `src/components/footer/GoldFinFooter.tsx` next to "MFA Policy".
+3. **Web mirrors** for the policies that should also be linkable from the site (so Plaid reviewers can verify they're live):
+   - `/info-sec-policy`, `/access-control-policy`, `/encryption-policy`, `/vulnerability-policy` — minimal pages reusing `MfaPolicy.tsx` layout primitives, each with a "Download PDF" button.
+   - Register routes in `src/portal/PortalRouter.tsx` and add footer links in `src/components/footer/GoldFinFooter.tsx`.
+   - (Privacy, Plaid Consent, Data Retention, MFA Policy, MFA Attestation, Plaid Operations already have pages — leave them as-is.)
 
-5. **In-chat artifact**
-   - Surface the generated PDF as a `<presentation-artifact>` so you can download it from this chat and upload it as the answer to that exact Plaid question.
+4. **Capture missing screenshot** — `mfa-admin-login.png` via Playwright against the running preview (admin login route, post-OTP state) to round out the Q5 evidence.
+
+5. **Packet assembler** — `scripts/build-submission-packet.py`
+   - Generates a `README.md` index that lists every file with its mapped Plaid question number and a one-line description.
+   - Copies the screenshots from `/mnt/documents/screenshots/*` into the staging dir.
+   - Zips the whole staging tree to `/mnt/documents/goldfin-plaid-submission-packet.zip`.
+   - Prints final size + file count.
+
+6. **QA**
+   - Render every new PDF to JPG, inspect each page for clipping/overflow/missing glyphs, fix and re-render until clean.
+   - `unzip -l` the final archive to confirm structure matches the layout above.
+
+7. **Deliver** — surface the zip in chat:
+   ```
+   <presentation-artifact path="goldfin-plaid-submission-packet.zip" mime_type="application/zip"></presentation-artifact>
+   ```
 
 ## What is NOT in scope
 
-- No auth changes, no schema changes, no edge-function changes — the MFA system already exists; this is documentation of it.
-- No new design tokens; reuse the existing trust-page styling.
+- No changes to auth, database schema, edge functions, or Plaid integration code — this is pure documentation + packaging.
+- No new design tokens; web mirror pages reuse the existing trust-page layout.
+- Documents describe controls that already exist; nothing is fabricated. Anything I'm uncertain about (e.g. whether you personally run a laptop MDM/EDR product) will be phrased as the actual current state — sole-operator with full-disk encryption, auto-updates, password-manager-backed credentials, no shared accounts — not as a fictional enterprise MDM rollout.
 
-Approve and I'll build it and drop the PDF in chat.
+Approve and I'll generate the packet and drop the zip in chat.
