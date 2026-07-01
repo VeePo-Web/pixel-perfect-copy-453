@@ -10,7 +10,7 @@ export default function SuccessPage({ onClear }: { onClear: () => void }) {
   }, [onClear]);
 
   return (
-    <div className="min-h-screen bg-charcoal-950 text-ink">
+    <div className="min-h-screen supports-[height:100dvh]:min-h-[100dvh] bg-charcoal-950 text-ink">
       <ApplicationHeader />
       <main
         className="relative mx-auto max-w-3xl px-6 py-20 md:py-28"

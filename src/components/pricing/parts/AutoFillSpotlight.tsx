@@ -125,14 +125,14 @@ export default function AutoFillSpotlight() {
               <button
                 type="button"
                 onClick={downloadSample}
-                className="mt-5 self-start rounded-full border border-champagne-200/35 px-4 py-1.5 text-[12px] text-champagne-300 transition-colors duration-200 ease-cinema hover:bg-champagne-300/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/50"
+                className="mt-5 inline-flex min-h-[44px] items-center self-start rounded-full border border-champagne-200/35 px-4 py-1.5 text-[12px] lg:min-h-0 text-champagne-300 transition-colors duration-200 ease-cinema hover:bg-champagne-300/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/50"
               >
                 See a filled sample (CSV)
               </button>
 
               <a
                 href="/templates"
-                className="mt-4 text-[12px] text-ink/50 underline-offset-4 transition-colors hover:text-champagne-300 hover:underline"
+                className="mt-4 inline-block py-2 text-[12px] text-ink/50 underline-offset-4 lg:py-0 transition-colors hover:text-champagne-300 hover:underline"
               >
                 {o.microbridge}
               </a>

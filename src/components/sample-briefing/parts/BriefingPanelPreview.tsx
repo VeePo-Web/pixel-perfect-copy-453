@@ -65,7 +65,7 @@ export default function BriefingPanelPreview({ business, status, loaderIndex }: 
               {business.mainRisk}
             </p>
           </div>
-          <div className="mt-4 grid grid-cols-3 gap-3">
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
             <Kpi label="Cash" value={fmt(business.cash)} sub={delta(business.cashDelta)} positive={business.cashDelta >= 0} />
             <Kpi label="Revenue" value={fmt(business.revenue)} sub={delta(business.revenueDelta)} positive={business.revenueDelta >= 0} />
             <Kpi
