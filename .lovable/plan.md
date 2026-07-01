@@ -1,80 +1,62 @@
-# Plaid Submission Packet — One Downloadable ZIP
 
-Bundle every document Plaid is asking for into a single zip at `/mnt/documents/goldfin-plaid-submission-packet.zip`, mapped 1:1 to the questionnaire items so you can upload each one in the right slot.
+# Deliverable Brief for Chris Sam (VP Finance — LA)
 
-## ZIP contents (final layout)
+Goal: one self-contained doc Chris can open on his time off and start building from. It encodes the Hormozi/Brunson offer logic so every spreadsheet doubles as a sales asset, and hands him a tight 7-sheet build list with clear inputs, outputs, and "the one number this changes" for the owner.
 
-```
-goldfin-plaid-submission-packet.zip
-├── README.md                                  ← index mapping each file to Q#
-├── Q2-information-security-policy.pdf         ← NEW
-├── Q3-access-control-policy.pdf               ← NEW (covers OAuth/TLS non-human auth,
-│                                                  periodic access reviews, zero-trust,
-│                                                  centralized IAM)
-├── Q4-mfa-consumer-screenshots/               ← existing screenshots
-│   ├── mfa-login.png
-│   ├── mfa-otp-step.png
-│   ├── accept-terms.png
-│   └── Q4-mfa-consumer-cover.pdf              ← NEW 1-page cover explaining the flow
-├── Q5-mfa-critical-systems/
-│   ├── goldfin-mfa-attestation.pdf            ← existing
-│   ├── goldfin-mfa-policy.pdf                 ← existing
-│   └── mfa-admin-login.png                    ← captured fresh via Playwright
-├── Q6-Q7-encryption-policy.pdf                ← NEW (TLS 1.2+ in-transit, AES-256
-│                                                  at-rest for all Plaid-derived data)
-├── Q8-vulnerability-management-policy.pdf     ← NEW (scans on laptops + prod,
-│                                                  EOL software monitoring)
-├── Q9-Q10-privacy-and-consent-policy.pdf      ← NEW (links to /privacy and
-│                                                  /plaid-consent, in-app display
-│                                                  evidence, consent capture flow)
-├── Q11-data-retention-and-disposal-policy.pdf ← NEW (mirrors /data-retention)
-└── Q-supplemental-plaid-operations-policy.pdf ← existing Plaid Operations & Maturity
-```
+No app code changes. Output is one markdown file (`docs/chris-sam-deliverables-brief.md`) plus a paste-ready WhatsApp reply.
 
-## What gets built
+---
 
-1. **Six new markdown sources** under `docs/plaid/submission/`:
-   - `information-security-policy.md`
-   - `access-control-policy.md`
-   - `mfa-consumer-cover.md`
-   - `encryption-policy.md`
-   - `vulnerability-management-policy.md`
-   - `privacy-and-consent-policy.md`
-   - `data-retention-and-disposal-policy.md`
+## Part 1 — The Deep-Research Prompt (embedded in the doc)
 
-   Each one is written to plug directly into the specific Plaid question, signed by Chris Sam, versioned `2026-06-26.1`, quarterly review cadence, cites the same standards stack (SOC 2, NIST, PCI-DSS) used in the existing policies.
+A single runnable prompt Chris (or the AI he uses) applies to every sheet before he builds it.
 
-2. **One generic PDF builder** — `scripts/build-submission-pdf.py`
-   - Takes a markdown source + output path as args.
-   - Reuses the exact reportlab style from `scripts/build-mfa-attestation-pdf.py` (navy headings, gold rule, header/footer) so every PDF in the packet matches.
-   - Used to render all six new PDFs in one loop.
+1. **Context block** — GoldFin Desk, $99/mo continuity + $1,500/mo advisory, owner-led SMBs ($250k–$5M), Plaid-fed data, plain-English briefing product.
+2. **Hormozi "Grand Slam Offer" lens** — per sheet, force answers to:
+   - Dream Outcome (in owner's words)
+   - Perceived Likelihood of Achievement (what makes the number believable)
+   - Time Delay (how fast owner feels it)
+   - Effort & Sacrifice (what we removed)
+   - Value Equation score before/after
+   - Bonus stack that naturally bolts on
+   - Guarantee the sheet earns us the right to make
+3. **Brunson "Hook / Story / Offer + Value Ladder" lens** — per sheet:
+   - Hook (one-line curiosity headline on the cover tab)
+   - Story (60-second owner narrative)
+   - Offer (the CTA the sheet earns)
+   - Ladder rung: Free Vault → $99 Reports → $1,500 Advisory
+   - Epiphany (the false belief it breaks)
+4. **Owner-Language Filter** — every label passes "would a plumber, dentist, or agency owner say this out loud?" CFO jargon banned unless immediately translated.
+5. **Verification gate** — every filled cell traces to a Plaid-derivable or owner-entered input. No fabricated benchmarks.
+6. **Return format per sheet**: Name · Owner-language one-liner · Inputs · Outputs · The One Number · Hook headline · Ladder rung · Upgrade trigger · Build complexity (S/M/L).
 
-3. **Web mirrors** for the policies that should also be linkable from the site (so Plaid reviewers can verify they're live):
-   - `/info-sec-policy`, `/access-control-policy`, `/encryption-policy`, `/vulnerability-policy` — minimal pages reusing `MfaPolicy.tsx` layout primitives, each with a "Download PDF" button.
-   - Register routes in `src/portal/PortalRouter.tsx` and add footer links in `src/components/footer/GoldFinFooter.tsx`.
-   - (Privacy, Plaid Consent, Data Retention, MFA Policy, MFA Attestation, Plaid Operations already have pages — leave them as-is.)
+## Part 2 — The 7 Deliverables
 
-4. **Capture missing screenshot** — `mfa-admin-login.png` via Playwright against the running preview (admin login route, post-OTP state) to round out the Q5 evidence.
+Ordered by ladder rung so the set doubles as a funnel.
 
-5. **Packet assembler** — `scripts/build-submission-packet.py`
-   - Generates a `README.md` index that lists every file with its mapped Plaid question number and a one-line description.
-   - Copies the screenshots from `/mnt/documents/screenshots/*` into the staging dir.
-   - Zips the whole staging tree to `/mnt/documents/goldfin-plaid-submission-packet.zip`.
-   - Prints final size + file count.
+### Free Vault (lead magnets — prove competence, spark the epiphany)
 
-6. **QA**
-   - Render every new PDF to JPG, inspect each page for clipping/overflow/missing glyphs, fix and re-render until clean.
-   - `unzip -l` the final archive to confirm structure matches the layout above.
+1. **Owner's Cash Clarity Sheet** — starting cash, 14-day inflow/outflow, ending cash, runway in months. Hook: *"How many Fridays of payroll do you actually have?"* One number: **Fridays of runway**. Upgrade trigger: connect Plaid to auto-fill.
+2. **Profit First Split Calculator** — enter real revenue, get Profit / Owner Pay / Tax / OpEx envelopes with owner-adjustable %. Hook: *"Pay yourself first, on paper, in 60 seconds."* One number: **Owner Pay this month**.
+3. **Subscription & Waste Audit** — paste last 90 days of card charges; sheet flags recurring + cost creep and totals annual waste. Hook: *"The $X you're spending every year on tools you forgot about."* One number: **Annual waste $**.
 
-7. **Deliver** — surface the zip in chat:
-   ```
-   <presentation-artifact path="goldfin-plaid-submission-packet.zip" mime_type="application/zip"></presentation-artifact>
-   ```
+### $99 Reports (continuity — the "auto-filled" promise)
 
-## What is NOT in scope
+4. **Bi-Weekly Owner Briefing Workbook** — 5-tab pack Plaid auto-fills every 2 weeks: Summary · Cash · Revenue & Concentration · OpEx · Watchlist. Owner-language callouts, no dashboards. One number: **Net cash this period**. Upgrade trigger: recurring anomalies → book Advisory.
+5. **Client / Revenue Concentration Tracker** — top-3 client share, month-over-month trend, alert when >40%. Hook: *"How exposed are you to losing one client?"* One number: **Top-3 client share %**.
+6. **Tax Reserve Ledger** — pulls revenue, applies owner's effective rate, tracks reserve balance vs target. One number: **Under/over-reserved $**.
 
-- No changes to auth, database schema, edge functions, or Plaid integration code — this is pure documentation + packaging.
-- No new design tokens; web mirror pages reuse the existing trust-page layout.
-- Documents describe controls that already exist; nothing is fabricated. Anything I'm uncertain about (e.g. whether you personally run a laptop MDM/EDR product) will be phrased as the actual current state — sole-operator with full-disk encryption, auto-updates, password-manager-backed credentials, no shared accounts — not as a fictional enterprise MDM rollout.
+### $1,500 Advisory (backend — modeling, not tracking)
 
-Approve and I'll generate the packet and drop the zip in chat.
+7. **Pricing & Margin Simulator** — plug in service/product, cost, price, volume; see gross margin, break-even units, and price-increase impact on profit. Hook: *"What a 7% price increase actually does to your take-home."* One number: **Profit delta at new price**.
+
+## Part 3 — The WhatsApp Reply to Chris
+
+Short paste-ready message: thanks him, confirms tomorrow evening's call, and lists the 7 sheets in one scannable block with the "one number this changes" beside each so he can react and prioritize before building.
+
+---
+
+## Deliverable
+
+- New file: `docs/chris-sam-deliverables-brief.md` — Parts 1–3 in full. Prompt is verbatim/runnable; each of the 7 sheets is expanded with Inputs / Outputs / One Number / Hook / Ladder rung / Upgrade trigger / Build size (S/M/L).
+- No app code changes.
