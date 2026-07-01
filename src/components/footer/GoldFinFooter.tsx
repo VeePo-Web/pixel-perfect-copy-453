@@ -205,7 +205,7 @@ export default function GoldFinFooter() {
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="group inline-flex items-center text-[13.5px] text-ink/60 transition-colors duration-200 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/60 focus-visible:ring-offset-2"
+                        className="group inline-flex items-center py-3 text-[13.5px] text-ink/60 lg:py-0 transition-colors duration-200 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/60 focus-visible:ring-offset-2"
                       >
                         <span className="border-b border-transparent pb-px group-hover:border-ink/20">
                           {link.label}
@@ -237,7 +237,7 @@ export default function GoldFinFooter() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-[12px] text-ink/30 transition-colors duration-200 hover:text-ink/55 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-300/40 focus-visible:ring-offset-1"
+                      className="inline-flex items-center py-2 text-[12px] text-ink/30 lg:py-0 transition-colors duration-200 hover:text-ink/55 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-300/40 focus-visible:ring-offset-1"
                     >
                       {link.label}
                     </a>
