@@ -48,7 +48,7 @@ export default function BriefingTabs({ business }: { business: DemoBusiness }) {
           </h2>
         </div>
 
-        <div className="mt-10 -mx-6 overflow-x-auto px-6 lg:mx-0 lg:px-0">
+        <div className="mt-10 -mx-6 no-scrollbar overflow-x-auto overscroll-x-contain px-6 lg:mx-0 lg:px-0">
           <div
             role="tablist"
             aria-label="Briefing topics"

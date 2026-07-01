@@ -84,7 +84,7 @@ export default function HomeHero() {
 
       <div
         ref={ref}
-        className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-16 md:grid-cols-12 md:items-center md:gap-8 md:py-32 lg:px-10"
+        className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 pb-16 pt-28 md:grid-cols-12 md:items-center md:gap-8 md:py-32 lg:px-10"
       >
         {/* ── Left column — 7 cols ── */}
         <div className="md:col-span-7">

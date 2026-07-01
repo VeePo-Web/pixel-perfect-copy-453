@@ -78,7 +78,7 @@ function NavTrustStrip({ onDismiss }: { onDismiss: () => void }) {
         type="button"
         onClick={onDismiss}
         aria-label="Dismiss this notice"
-        className="absolute right-3 top-1/2 -translate-y-1/2 flex h-5 w-5 items-center justify-center rounded text-ink/25 transition-colors duration-200 hover:text-ink/60 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-200/50"
+        className="absolute right-1 top-1/2 flex h-[34px] w-11 -translate-y-1/2 items-center justify-center rounded lg:right-3 lg:h-5 lg:w-5 text-ink/25 transition-colors duration-200 hover:text-ink/60 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-200/50"
       >
         <span aria-hidden className="mt-[-1px] text-[14px] leading-none">×</span>
       </button>
@@ -115,7 +115,7 @@ function MobileSheet({
       role="dialog"
       aria-modal="true"
       aria-label="Site navigation"
-      className="fixed inset-0 z-30 flex flex-col bg-[#0B0D12]/[0.98] px-6 pb-10 pt-[90px] backdrop-blur-xl lg:hidden"
+      className="fixed inset-0 z-30 flex flex-col overflow-y-auto bg-[#0B0D12]/[0.98] px-6 pb-[calc(env(safe-area-inset-bottom,0px)+48px)] pt-[90px] backdrop-blur-xl lg:hidden"
     >
       {/* Current-page context crumb */}
       {activeLabel && (
@@ -534,7 +534,7 @@ export default function GlobalTopBar({
               {isHome ? (
                 <a
                   href="/templates"
-                  className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[11.5px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                  className="group relative inline-flex min-h-[44px] items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[11.5px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   style={{ boxShadow: goldCtaShadow }}
                 >
                   <span className="relative z-10">My templates</span>
@@ -544,7 +544,7 @@ export default function GlobalTopBar({
                 <button
                   type="button"
                   onClick={startAutoFillCheckout}
-                  className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[11.5px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                  className="group relative inline-flex min-h-[44px] items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[11.5px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   style={{ boxShadow: goldCtaShadow }}
                 >
                   <span className="relative z-10">Auto-fill — $99/mo</span>

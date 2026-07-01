@@ -72,3 +72,9 @@
     @apply flex items-center justify-center;
   }
 }
+
+/* Mobile-only chip-rail scrollbar hide — desktop (>=1024px) rendering untouched */
+@media (max-width: 1023px) {
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+}

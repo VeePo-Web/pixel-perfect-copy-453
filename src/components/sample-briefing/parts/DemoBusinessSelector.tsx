@@ -7,7 +7,7 @@ type Props = {
 
 export default function DemoBusinessSelector({ selectedId, onSelect }: Props) {
   return (
-    <div role="radiogroup" aria-label="Demo business" className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-2 md:flex-wrap md:overflow-visible">
+    <div role="radiogroup" aria-label="Demo business" className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto overscroll-x-contain px-1 pb-2 md:flex-wrap md:overflow-visible">
       {demoBusinesses.map((b: DemoBusiness) => {
         const active = b.id === selectedId;
         return (
