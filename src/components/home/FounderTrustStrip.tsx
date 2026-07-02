@@ -43,22 +43,21 @@ export default function FounderTrustStrip() {
           Who built GoldFin Desk
         </p>
 
-        {/* Founder row */}
+        {/* Team row */}
         <div className="flex items-start gap-5 text-left">
-          {/* Avatar */}
           <div
             className="flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full border border-champagne-200/30 bg-navy shadow-[0_10px_28px_-12px_rgba(15,27,61,0.55)]"
             aria-hidden="true"
           >
-            <span className="text-[16px] font-medium tracking-wide text-champagne-100">CS</span>
+            <span className="text-[16px] font-medium tracking-wide text-champagne-100">GF</span>
           </div>
 
-          {/* Name + credential */}
           <div>
-            <p className="text-[18px] font-light text-ink">Chris Sam</p>
+            <p className="text-[18px] font-light text-ink">The GoldFin Desk team</p>
             <p className="mt-1 max-w-[52ch] text-[14px] leading-relaxed text-ink/65">
-              10 years in institutional finance, built this for owners who needed better answers
-              than their accountant was giving them.
+              Team experience from Goldman Sachs, Bank of America, RBC, and Merrill
+              Lynch. Built for owners who needed better answers than their accountant
+              was giving them.
             </p>
           </div>
         </div>
