@@ -29,7 +29,7 @@ export default function AutoFillSpotlight() {
         <div className="absolute inset-0 bg-[radial-gradient(60%_42%_at_50%_0%,rgba(201,163,90,0.10),transparent_65%)]" />
       </div>
 
-      <div className="relative mx-auto max-w-5xl px-6 py-24 lg:px-10">
+      <div className="relative mx-auto max-w-5xl px-6 py-14 md:py-24 lg:px-10">
         <div className="mb-10 max-w-[60ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             {o.eyebrow}

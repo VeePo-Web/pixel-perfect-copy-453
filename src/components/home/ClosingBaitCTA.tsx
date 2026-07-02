@@ -63,7 +63,7 @@ export default function ClosingBaitCTA() {
   return (
     <section
       ref={ref as React.RefObject<HTMLElement>}
-      className="bg-[#FAF8F3] py-24"
+      className="bg-[#FAF8F3] py-14 md:py-24"
       aria-label="Get the free Template Vault"
     >
       <div

@@ -9,7 +9,7 @@ export default function SampleBriefingProofBlock() {
       aria-labelledby="proof-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-14 md:py-24 lg:px-10">
         <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.1fr]">
           <div
             className={`transition-all duration-700 ease-cinema ${

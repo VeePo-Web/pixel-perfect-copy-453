@@ -11,7 +11,7 @@ const COLS: { key: keyof typeof comparisonRows[number]; label: string }[] = [
 export default function CostComparisonTable() {
   return (
     <section aria-labelledby="compare-title" className="border-b border-ink/[0.05] bg-charcoal-950">
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div className="mx-auto max-w-7xl px-6 py-14 md:py-24 lg:px-10">
         <div className="max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Compare the alternatives

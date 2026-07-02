@@ -23,7 +23,7 @@ export default function BriefingReportShell({ business, visible }: Props) {
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(60%_40%_at_30%_0%,rgba(63,122,94,0.08),transparent_60%)]" />
       </div>
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div className="mx-auto max-w-7xl px-6 py-14 md:py-24 lg:px-10">
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-ink/[0.06] pb-8">
           <div>
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">

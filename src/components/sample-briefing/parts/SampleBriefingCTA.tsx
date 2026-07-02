@@ -11,7 +11,7 @@ export default function SampleBriefingCTA({ onAnother }: Props) {
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(55%_60%_at_50%_100%,rgba(201,163,90,0.10),transparent_60%)]" />
       </div>
-      <div className="relative mx-auto max-w-5xl px-6 py-28 lg:px-10">
+      <div className="relative mx-auto max-w-5xl px-6 py-16 md:py-28 lg:px-10">
         <div className="text-center">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Two ways to make this yours

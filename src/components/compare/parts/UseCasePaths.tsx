@@ -11,7 +11,7 @@ export default function UseCasePaths() {
       aria-labelledby="use-cases-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-14 md:py-24 lg:px-10">
         <div
           className={`max-w-[60ch] transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"

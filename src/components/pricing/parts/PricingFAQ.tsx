@@ -19,7 +19,7 @@ export default function PricingFAQ() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <div className="mx-auto max-w-5xl px-6 py-24 lg:px-10">
+      <div className="mx-auto max-w-5xl px-6 py-14 md:py-24 lg:px-10">
         <div className="max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             FAQ
