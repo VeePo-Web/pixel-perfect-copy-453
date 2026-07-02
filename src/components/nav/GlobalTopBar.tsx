@@ -443,7 +443,7 @@ export default function GlobalTopBar({
               <div className="flex items-center gap-3">
                 {isHome ? (
                   <>
-                    {/* Homepage: $99 = tertiary text link; free Vault = gold */}
+                    {/* Homepage: $150 = tertiary text link; free Vault = gold */}
                     <button
                       type="button"
                       onClick={startAutoFillCheckout}

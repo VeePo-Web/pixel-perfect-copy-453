@@ -80,7 +80,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
               </a>
             </div>
 
-            {/* $99 bridge — this filled example IS the monthly product */}
+            {/* $150 bridge — this filled example IS the monthly product */}
             <p className="mt-1 text-[13px] leading-[1.6] text-ink/60">
               Don't want to fill it in yourself every month?{" "}
               <button

@@ -16,7 +16,7 @@ export default function RecommendedPlanSpotlight() {
             When you want a human reading the numbers with you.
           </h2>
           <p className="mt-4 text-[15.5px] leading-[1.7] text-ink/70">
-            Auto-fill keeps your reports current. The GoldFin Desk adds a person who interprets them and meets with you every month. Most owners start with $99 auto-fill and move here when the decisions get bigger.
+            Auto-fill keeps your reports current. The GoldFin Desk adds a person who interprets them and meets with you every month. Most owners start with $150 auto-fill and move here when the decisions get bigger.
           </p>
         </div>
 

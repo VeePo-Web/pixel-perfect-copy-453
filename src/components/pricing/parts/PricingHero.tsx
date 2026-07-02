@@ -14,7 +14,7 @@ export default function PricingHero() {
               Pricing
             </div>
             <h1 className="mt-5 max-w-[24ch] font-light text-ink [text-wrap:balance] text-[38px] leading-[1.08] tracking-[-0.01em] sm:text-[50px] lg:text-[58px]">
-              Free templates. <span className="text-champagne-300">$99 to have them filled for you.</span> $1,500 to have them read with you.
+              Free templates. <span className="text-champagne-300">$150 to have them filled for you.</span> $1,500 to have them read with you.
             </h1>
             <p className="mt-6 max-w-[56ch] text-[15.5px] leading-[1.7] [text-wrap:pretty] text-ink/70">
               Most owners don’t need a full finance team — they need their numbers organized and explained every month. That’s the $150 Auto-Fill plan. Start there.
@@ -86,7 +86,7 @@ export default function PricingHero() {
                 </div>
                 <div className="mt-4 text-[15px] text-ink">GoldFin Reports</div>
                 <div className="mt-1 flex items-baseline gap-1.5">
-                  <span className="text-[54px] font-light leading-none tabular-nums text-ink">$99</span>
+                  <span className="text-[54px] font-light leading-none tabular-nums text-ink">$150</span>
                   <span className="text-[13px] text-ink/45">/month</span>
                 </div>
                 <div className="mt-5 space-y-2.5">

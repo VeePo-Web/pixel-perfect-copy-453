@@ -1,7 +1,7 @@
 import { faq } from "../content";
 
 // FAQPage schema — eligible for Google rich results + AI Overview citations
-// (personas/seo-faq.md). Questions answer real $99 objections at the ask.
+// (personas/seo-faq.md). Questions answer real $150 objections at the ask.
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",

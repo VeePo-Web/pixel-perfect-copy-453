@@ -1,7 +1,7 @@
 ﻿import { useInView } from "../../how-it-works/hooks/useInView";
 import { startAutoFillCheckout } from "../../../lib/checkout";
 // Squeeze §5 — Soap-Opera Promise. Sets expectations for the email sequence
-// (reduces unsubscribes) and pre-frames the $99 upgrade. No CTA by design —
+// (reduces unsubscribes) and pre-frames the $150 upgrade. No CTA by design —
 // the value is the promise itself.
 const DAYS = [
   { d: "Day 1", t: "Your Vault — and the one number most owners miss" },

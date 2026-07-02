@@ -306,7 +306,7 @@ export const faq = [
   },
   {
     q: "What's the difference between $150 Reports and $1,500 Advisory?",
-    a: "GoldFin Reports ($150/mo) fills your reports and briefs you every month — fully automated. GoldFin Advisory ($1,500/mo) adds a person who interprets them with you on a monthly strategy call. Most owners start with $99 and move up when the decisions get bigger.",
+    a: "GoldFin Reports ($150/mo) fills your reports and briefs you every month — fully automated. GoldFin Advisory ($1,500/mo) adds a person who interprets them with you on a monthly strategy call. Most owners start with $150 and move up when the decisions get bigger.",
   },
   {
     q: "Is this a bookkeeping or CFO replacement?",
