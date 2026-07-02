@@ -4,7 +4,7 @@ import { track } from "../analytics";
 const cards = [
   {
     id: "bridge-reports",
-    eyebrow: "Recommended · $99/mo",
+    eyebrow: "Recommended · $150/mo",
     title: "Have it done for you",
     copy:
       "GoldFin Reports fills your templates from your numbers and briefs you in plain English — every month. No spreadsheet work.",

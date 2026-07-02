@@ -10,21 +10,18 @@ export type NavKey =
   | "compare"
   | "sample-briefing"
   | "security-faq"
-  | "apply";
+  | "about";
 
 type Props = {
   currentPath?: NavKey;
-  // Whether the page renders a dark, full-bleed hero behind the bar (homepage
-  // only). When true, the bar floats transparent with light text until scrolled.
   onDarkHero?: boolean;
 };
 
-// Hick's Law: 4 links — ordered by Brunson conversion journey
-// proof → price → lead-magnet → trust
 const LINKS: { key: NavKey; label: string; href: string }[] = [
   { key: "sample-briefing", label: "Sample Briefing", href: "/sample-briefing" },
   { key: "pricing",         label: "Pricing",         href: "/pricing" },
   { key: "templates",       label: "Free Templates",  href: "/templates" },
+  { key: "about",           label: "About",           href: "/about" },
   { key: "security-faq",    label: "Security",        href: "/security-faq" },
 ];
 
@@ -212,18 +209,18 @@ function MobileSheet({
               onClick={() => { startAutoFillCheckout(); onClose(); }}
               className="inline-flex items-center justify-center rounded-full border border-white/[0.16] px-5 py-[13px] text-[14px] text-white/70 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-white active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0D12]"
             >
-              Auto-fill my reports — $99/mo →
+              Auto-fill my reports — $150/mo →
             </button>
           </>
         ) : (
-          // All other pages: gold = $99/mo (bread-and-butter conversion)
+          // All other pages: gold = $150/mo (bread-and-butter conversion)
           <>
             <button
               type="button"
               onClick={() => { startAutoFillCheckout(); onClose(); }}
               className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-4 text-[15px] font-medium text-navy shadow-[0_4px_24px_-6px_rgba(201,162,74,0.45)] transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0D12]"
             >
-              <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+              <span className="relative z-10">Auto-fill my reports — $150/mo</span>
               <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
             </button>
             <a
@@ -443,13 +440,13 @@ export default function GlobalTopBar({
               <div className="flex items-center gap-3">
                 {isHome ? (
                   <>
-                    {/* Homepage: $99 = tertiary text link; free Vault = gold */}
+                    {/* Homepage: $150 = tertiary text link; free Vault = gold */}
                     <button
                       type="button"
                       onClick={startAutoFillCheckout}
                       className={`rounded-sm text-[12.5px] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/30 focus-visible:ring-offset-1 ${textLink}`}
                     >
-                      $99/mo →
+                      $150/mo →
                     </button>
                     {/* [UPGRADE 2+3] Layered CTA: social proof by default on white-glass nav,
                         cross-fades to friction-killers on hover (Joanna Wiebe pattern).
@@ -485,7 +482,7 @@ export default function GlobalTopBar({
                   </>
                 ) : (
                   <>
-                    {/* All other pages: Free Templates = text link; $99/mo = gold */}
+                    {/* All other pages: Free Templates = text link; $150/mo = gold */}
                     <a
                       href="/templates"
                       className={`rounded-sm text-[12.5px] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/30 focus-visible:ring-offset-1 ${textLink}`}
@@ -500,7 +497,7 @@ export default function GlobalTopBar({
                         className="relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-px active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                         style={{ boxShadow: goldCtaShadow }}
                       >
-                        <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+                        <span className="relative z-10">Auto-fill my reports — $150/mo</span>
                         <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
                       </button>
                       {/* Social proof — default when scrolled on white-glass nav */}
@@ -547,7 +544,7 @@ export default function GlobalTopBar({
                   className="group relative inline-flex min-h-[44px] items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-1.5 text-[11.5px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   style={{ boxShadow: goldCtaShadow }}
                 >
-                  <span className="relative z-10">Auto-fill — $99/mo</span>
+                  <span className="relative z-10">Auto-fill — $150/mo</span>
                   <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
                 </button>
               )}

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 // so the primary action ("Get the free templates") stays in the thumb's reach on
 // the long landing scroll. Matches the established interior-page MobileStickyCTA
 // pattern, plus a dismiss control (2026 sticky-CTA best practice).
-// HOMEPAGE EXCEPTION: free-templates CTA only — NO $99/mo here.
+// HOMEPAGE EXCEPTION: free-templates CTA only — NO $150/mo here.
 export default function HomeMobileStickyCTA() {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);

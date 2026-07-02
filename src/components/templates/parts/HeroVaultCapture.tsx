@@ -65,7 +65,7 @@ export default function HeroVaultCapture() {
           type="button" onClick={startAutoFillCheckout}
           className="mt-5 inline-flex items-center gap-2 text-[13px] text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline"
         >
-          Prefer it filled for you every month? See GoldFin Reports — $99/mo →
+          Prefer it filled for you every month? See GoldFin Reports — $150/mo →
         </button>
       </div>
     );

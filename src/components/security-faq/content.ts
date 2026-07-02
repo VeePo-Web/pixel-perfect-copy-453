@@ -291,12 +291,12 @@ export const faqItems: FAQItem[] = [
     id: "faq-17",
     category: "pricing",
     q: "How much does GoldFin Desk cost?",
-    a: "The core GoldFin Desk offer is $1,500/month.",
+    a: "The core GoldFin Desk offer is $150/mo.",
   },
   {
     id: "faq-18",
     category: "pricing",
-    q: "Why does it cost $1,500/month?",
+    q: "Why does it cost $150/mo?",
     a: "Because the offer is not just software or templates. It combines structure, automation, plain-English written briefings, and a monthly strategy review.",
   },
   {
@@ -308,7 +308,7 @@ export const faqItems: FAQItem[] = [
   {
     id: "faq-20",
     category: "pricing",
-    q: "What if I am not ready for $1,500/month?",
+    q: "What if I am not ready for $150/mo?",
     a: "Start with the free templates or generate a sample briefing. The premium desk is best for owners ready for a recurring monthly finance rhythm.",
   },
   // Fit

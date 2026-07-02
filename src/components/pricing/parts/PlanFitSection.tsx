@@ -16,7 +16,7 @@ export default function PlanFitSection() {
 
         <div className="mt-12 grid gap-5 md:grid-cols-3">
           {planFit.map((col) => {
-            // continuity ($99/mo) is the ONLY plan that earns gold — not Advisory
+            // continuity ($150/mo) is the ONLY plan that earns gold — not Advisory
             const gold = col.tone === "continuity";
             const isContinuity = gold;
             return (

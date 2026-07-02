@@ -1,7 +1,7 @@
 ﻿import { useInView } from "../../how-it-works/hooks/useInView";
 import { startAutoFillCheckout } from "../../../lib/checkout";
 // Squeeze §5 — Soap-Opera Promise. Sets expectations for the email sequence
-// (reduces unsubscribes) and pre-frames the $99 upgrade. No CTA by design —
+// (reduces unsubscribes) and pre-frames the $150 upgrade. No CTA by design —
 // the value is the promise itself.
 const DAYS = [
   { d: "Day 1", t: "Your Vault — and the one number most owners miss" },
@@ -56,7 +56,7 @@ export default function SoapOperaPromise() {
           className="group mt-6 inline-flex items-center text-[12px] uppercase tracking-[0.18em] text-ink/35 transition-colors duration-300 hover:text-champagne-300"
         >
           <span className="border-b border-ink/10 pb-0.5 group-hover:border-champagne-300/60">
-            Already decided? Auto-fill my reports — $99/mo
+            Already decided? Auto-fill my reports — $150/mo
           </span>
           <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
         </button>

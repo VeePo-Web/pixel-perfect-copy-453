@@ -7,7 +7,7 @@ type Props = {
 
 // ONE-CTA doctrine: pre-aha the hero has exactly one loud action (Generate). The
 // industry chips above pre-fill this prompt, so demo data is implicit (zero friction)
-// and no second button is needed. Offer CTAs (99/mo, Apply) appear only AFTER the
+// and no second button is needed. Offer CTAs (150/mo, Apply) appear only AFTER the
 // reveal. Post-aha (status ready) the Generate button is demoted to a quiet
 // "generate another" so the eye flows down to the full briefing and the offer.
 export default function BusinessPromptInput({ value, onChange, onGenerate, status }: Props) {

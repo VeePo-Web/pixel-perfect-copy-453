@@ -1,6 +1,6 @@
 ﻿import { useInView } from "../how-it-works/hooks/useInView";
 
-// Homepage Section 4 — Epiphany Bridge: free templates → $99/mo auto-fill.
+// Homepage Section 4 — Epiphany Bridge: free templates → $150/mo auto-fill.
 // Pattern D: two-column reframe. Left = manual/painful. Right = GoldFin/calm.
 // Right column CTA: quiet text link ONLY — NO button, NO gold.
 

@@ -185,7 +185,7 @@ export const recommendations: Record<RecommendationKey, Recommendation> = {
     title: "GoldFin Desk may be the right next layer.",
     body: "You may already have records. The missing piece is recurring interpretation and monthly decision rhythm.",
     primaryCTA: { label: "Generate Sample Finance Briefing", href: "/sample-briefing" },
-    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+    secondaryCTA: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
     mobileCTA: { label: "Generate Sample Briefing", href: "/sample-briefing" },
   },
   mfdBuiltFor: {
@@ -194,7 +194,7 @@ export const recommendations: Record<RecommendationKey, Recommendation> = {
     title: "GoldFin Desk is built for this.",
     body: "If the bank balance has become your decision dashboard, you likely need a clearer recurring financial view.",
     primaryCTA: { label: "Generate Sample Finance Briefing", href: "/sample-briefing" },
-    secondaryCTA: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+    secondaryCTA: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
     mobileCTA: { label: "Generate Sample Briefing", href: "/sample-briefing" },
   },
   cfo: {
@@ -307,7 +307,7 @@ export const tableRows: TableRow[] = [
 
 export const tableCTAs = {
   bookkeeper: { label: "Clean up records", href: "/templates" },
-  mfd: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+  mfd: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
   cfo: { label: "Consider CFO support", href: "/compare" },
 };
 
@@ -358,7 +358,7 @@ export const scenarios: Scenario[] = [
     quote: "I need to know if I can hire.",
     recommendation: "GoldFin Desk.",
     explanation: "Hiring decisions require cash flow, expense pressure, and recurring cost review — not just a bank balance.",
-    cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+    cta: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
   },
   {
     id: "fundraising",
@@ -369,7 +369,7 @@ export const scenarios: Scenario[] = [
   },
   {
     id: "not-ready",
-    quote: "I am not ready for $1,500/month.",
+    quote: "I am not ready for $150/mo.",
     recommendation: "Free Templates.",
     explanation: "Start manually with templates, then upgrade when the financial complexity justifies a monthly rhythm.",
     cta: { label: "Get Free Templates", href: "/templates" },
@@ -379,7 +379,7 @@ export const scenarios: Scenario[] = [
     quote: "I want someone serious looking at my numbers monthly.",
     recommendation: "GoldFin Desk.",
     explanation: "That is what the monthly strategy review and bi-weekly briefings are built for.",
-    cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+    cta: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
   },
 ];
 
@@ -482,7 +482,7 @@ export const faq: { q: string; a: string }[] = [
     a: "No. GoldFin Desk does not replace tax, legal, accounting, bookkeeping cleanup, or investment advice.",
   },
   {
-    q: "What if I am not ready for $1,500/month?",
+    q: "What if I am not ready for $150/mo?",
     a: "Start with the free templates or generate a sample briefing. The premium desk is best for owners ready to build a recurring monthly finance rhythm.",
   },
 ];
@@ -494,7 +494,7 @@ export const decisionSummary = [
   { need: "Need senior finance strategy?", answer: "Consider a fractional CFO.", href: "/compare" },
   {
     need: "Need recurring clarity between the two?",
-    answer: "Have it done for you — GoldFin Reports, $99/mo.",
+    answer: "Have it done for you — GoldFin Reports, $150/mo.",
     href: "/pricing#auto-fill",
   },
 ];

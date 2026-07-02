@@ -18,13 +18,14 @@ import PortalRouter, { isPortalRoute } from "./portal/PortalRouter";
 
 // Interior routes are code-split: the homepage no longer ships their JS, which
 // keeps initial bundle / LCP small (the #1 SEO signal). Each loads on demand.
-const ApplicationFunnel = lazy(() => import("./components/apply/ApplicationFunnel"));
+// Interior routes are code-split.
 const SampleBriefingPage = lazy(() => import("./components/sample-briefing/SampleBriefingPage"));
 const PricingPage = lazy(() => import("./components/pricing/PricingPage"));
 const FreeTemplateLibraryPage = lazy(() => import("./components/templates/FreeTemplateLibraryPage"));
 const ComparisonHubPage = lazy(() => import("./components/compare/ComparisonHubPage"));
 const BookkeeperVsFractionalCFOPage = lazy(() => import("./components/three-way-compare/BookkeeperVsFractionalCFOPage"));
 const SecurityFAQPage = lazy(() => import("./components/security-faq/SecurityFAQPage"));
+const AboutPage = lazy(() => import("./components/about/AboutPage"));
 const CheckoutReturnPage = lazy(() => import("./components/payments/CheckoutReturnPage"));
 const BillingPage = lazy(() => import("./components/payments/BillingPage"));
 
@@ -124,16 +125,15 @@ const App = () => {
     </main>
   );
 
-  // Apply is a focused conversion funnel. It ships its own minimal header
-  // (ApplicationHeader), so it must NOT also render the marketing GlobalTopBar —
-  // that produced two stacked nav bars. Dropping the marketing nav + footer also
-  // removes escape links that leak funnel conversions (CXL / Brunson).
+  // /apply is retired — the funnel now routes to /pricing (the $150 offer).
   if (route === "apply" || route === "thank-you") {
-    return (
-      <Suspense fallback={<RouteFallback />}>
-        <ApplicationFunnel />
-      </Suspense>
-    );
+    if (typeof window !== "undefined") {
+      window.history.replaceState({}, "", "/pricing");
+    }
+    return wrap("pricing", <PricingPage />);
+  }
+  if (route === "about") {
+    return wrap("about" as NavKey, <AboutPage />);
   }
   if (route === "sample-briefing") {
     return wrap("sample-briefing", <SampleBriefingPage />);

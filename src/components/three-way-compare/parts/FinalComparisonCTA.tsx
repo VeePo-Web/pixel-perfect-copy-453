@@ -19,7 +19,7 @@ export default function FinalComparisonCTA() {
         </h2>
         <p className="mx-auto mt-5 max-w-[64ch] text-[15px] leading-[1.7] text-ink/70">
           GoldFin Reports is that layer — your numbers filled from your activity and briefed
-          in plain English every month, for $99. No spreadsheet work. Cancel anytime.
+          in plain English every month, for $150. No spreadsheet work. Cancel anytime.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
@@ -31,7 +31,7 @@ export default function FinalComparisonCTA() {
               trackCtaByHref("/pricing#auto-fill", "final-cta");
             }}
             className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
-            <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+            <span className="relative z-10">Auto-fill my reports — $150/mo</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </button>
           <a
@@ -56,7 +56,7 @@ export default function FinalComparisonCTA() {
         </div>
 
         <p className="mt-7 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
-          $99/mo. No bank connection required to start. Cancel anytime.
+          $150/mo. No bank connection required to start. Cancel anytime.
         </p>
 
         <p className="mx-auto mt-10 max-w-[64ch] text-[11.5px] leading-relaxed text-ink/40">

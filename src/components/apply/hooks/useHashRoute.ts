@@ -13,12 +13,14 @@ export type ApplyRoute =
   | "templates"
   | "compare"
   | "three-way-compare"
-  | "security-faq";
+  | "security-faq"
+  | "about";
 
 function parse(): ApplyRoute {
   const p = (window.location.pathname || "/").replace(/\/+$/, "") || "/";
-  if (p.startsWith("/apply/thank-you")) return "thank-you";
-  if (p.startsWith("/apply")) return "apply";
+  // /apply is retired — redirect any legacy links to /pricing (the $150 offer).
+  if (p.startsWith("/apply")) return "pricing";
+  if (p.startsWith("/about")) return "about";
   if (p.startsWith("/sample-briefing")) return "sample-briefing";
   if (p.startsWith("/pricing")) return "pricing";
   if (p.startsWith("/templates")) return "templates";

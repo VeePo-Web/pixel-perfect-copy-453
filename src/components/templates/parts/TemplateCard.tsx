@@ -109,7 +109,7 @@ export default function TemplateCard({ template, highlighted, onGet, onPreview }
           className="text-[11.5px] text-ink/50 transition-colors hover:text-champagne-300"
           onClick={() => { startAutoFillCheckout(); track("autofill_clicked_from_templates", { source: "card", templateId: template.id }); }}
         >
-          Want this filled for you every month? <span className="underline-offset-4 hover:underline">GoldFin Reports · $99/mo →</span>
+          Want this filled for you every month? <span className="underline-offset-4 hover:underline">GoldFin Reports · $150/mo →</span>
         </button>
       </div>
     </article>

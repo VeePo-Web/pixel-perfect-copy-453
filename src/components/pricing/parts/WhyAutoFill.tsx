@@ -12,13 +12,13 @@ export default function WhyAutoFill() {
       <div className="mx-auto max-w-5xl px-6 py-24 lg:px-10">
         <div className="max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
-            Why $99 makes sense
+            Why $150 makes sense
           </div>
           <h2 id="why99-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[46px]">
             The work doesn’t go away. It just stops being yours.
           </h2>
           <p className="mt-4 text-[15.5px] leading-[1.7] text-ink/70">
-            Organizing and reading your numbers takes about three hours every month — the part most owners quietly skip. Auto-fill does it for you for $99. If an hour of your time is worth more than about $33, the math already works.
+            Organizing and reading your numbers takes about three hours every month — the part most owners quietly skip. Auto-fill does it for you for $150. If an hour of your time is worth more than about $33, the math already works.
           </p>
         </div>
 
@@ -49,7 +49,7 @@ export default function WhyAutoFill() {
         <p className="mt-8 text-[13px] text-ink/50">
           You decide what your time is worth.{" "}
           <button type="button" onClick={startAutoFillCheckout} className="text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline">
-            See what’s included for $99/mo →
+            See what’s included for $150/mo →
           </button>
         </p>
       </div>

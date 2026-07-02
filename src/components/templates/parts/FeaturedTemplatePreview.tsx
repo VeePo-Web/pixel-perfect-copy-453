@@ -80,7 +80,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
               </a>
             </div>
 
-            {/* $99 bridge — this filled example IS the monthly product */}
+            {/* $150 bridge — this filled example IS the monthly product */}
             <p className="mt-1 text-[13px] leading-[1.6] text-ink/60">
               Don't want to fill it in yourself every month?{" "}
               <button
@@ -88,7 +88,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
                 onClick={() => { startAutoFillCheckout(); track("autofill_clicked_from_templates", { source: "featured" }); }}
                 className="text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
-                GoldFin Reports does it for you — $99/mo →
+                GoldFin Reports does it for you — $150/mo →
               </button>
             </p>
           </div>

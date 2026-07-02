@@ -36,7 +36,7 @@ export const plans: PricingPlan[] = [
   {
     id: "autofill",
     name: "GoldFin Reports",
-    price: "$99",
+    price: "$150",
     priceSuffix: "/month",
     badge: "Recommended starting point",
     positioning: "The same templates — filled for you every month.",
@@ -52,14 +52,14 @@ export const plans: PricingPlan[] = [
       "Owner action list",
       "Spreadsheet export, always yours",
     ],
-    cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+    cta: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
     tone: "continuity",
     note: "Cancel anytime",
   },
   {
     id: "desk",
     name: "GoldFin Advisory",
-    price: "$1,500",
+    price: "$150",
     priceSuffix: "/month",
     badge: "Most relevant for serious owner-led businesses",
     positioning:
@@ -121,15 +121,15 @@ export const plans: PricingPlan[] = [
   },
 ];
 
-// $99/mo continuity rung — value-stacked offer (Pattern E).
+// $150/mo continuity rung — value-stacked offer (Pattern E).
 // Per-item values are deliberately realistic so the stack stays credible
 // (premium finance brand: no inflated anchoring).
 export const autoFillOffer = {
-  eyebrow: "GoldFin Reports · $99 / month",
+  eyebrow: "GoldFin Reports · $150 / month",
   name: "GoldFin Reports",
   headline: "Use the templates free. Or have them filled for you every month.",
   sub: "The same financial templates you can download free — except we keep them filled from your numbers, every month, and hand you a plain-English briefing. No spreadsheet work. No catching up at year-end.",
-  price: "$99",
+  price: "$150",
   priceSuffix: "/ month",
   stack: [
     { item: "Every template auto-filled from your numbers", value: "$120/mo" },
@@ -143,7 +143,7 @@ export const autoFillOffer = {
   ] as const,
   totalValueLabel: "Total value",
   totalValue: "$400+/mo",
-  cta: "Auto-fill my reports — $99/mo",
+  cta: "Auto-fill my reports — $150/mo",
   guarantee: "Try one month. Cancel anytime before your next billing cycle.",
   trust: "No bank connection required to start. When you connect, it is read-only — we never move money.",
   microbridge: "Not ready for done-for-you? The same templates are free →",
@@ -265,7 +265,7 @@ export const comparisonRows: ComparisonRow[] = [
     role: "Recurring financial clarity system",
     helps: "Structure, automation, plain-English briefings, monthly strategy rhythm",
     misses: "Not a replacement for tax, legal, or full bookkeeping cleanup",
-    investment: "$1,500 / month",
+    investment: "$150 / month",
     bestFit:
       "Owner-led businesses that need more than tools, but are not ready for a full finance team",
     flagship: true,
@@ -294,10 +294,10 @@ export const decisionCards = [
 export const faq = [
   {
     q: "Can I cancel GoldFin Reports anytime?",
-    a: "Yes. The $99/mo plan is month-to-month. Try one month — if it isn't clearer, cancel before your next billing cycle. No friction, no lock-in.",
+    a: "Yes. The $150/mo plan is month-to-month. Try one month — if it isn't clearer, cancel before your next billing cycle. No friction, no lock-in.",
   },
   {
-    q: "Do I need to connect my bank for the $99 plan?",
+    q: "Do I need to connect my bank for the $150 plan?",
     a: "No bank connection is required to start. When you do connect, it is read-only through a secure connection — we never move money. You can also start with rough, non-sensitive numbers.",
   },
   {
@@ -305,15 +305,15 @@ export const faq = [
     a: "Keep them. A bookkeeper keeps your records clean. GoldFin Reports turns those records into a monthly plain-English briefing on what changed, what's risky, and what to decide next. They work together.",
   },
   {
-    q: "What's the difference between $99 Reports and $1,500 Advisory?",
-    a: "GoldFin Reports ($99/mo) fills your reports and briefs you every month — fully automated. GoldFin Advisory ($1,500/mo) adds a person who interprets them with you on a monthly strategy call. Most owners start with $99 and move up when the decisions get bigger.",
+    q: "What's the difference between $150 Reports and $150 Advisory?",
+    a: "GoldFin Reports ($150/mo) fills your reports and briefs you every month — fully automated. GoldFin Advisory ($150/mo) adds a person who interprets them with you on a monthly strategy call. Most owners start with $150 and move up when the decisions get bigger.",
   },
   {
     q: "Is this a bookkeeping or CFO replacement?",
     a: "Neither. It does not replace tax, legal, accounting, or bookkeeping. It is the missing clarity layer — more than templates or a dashboard, lighter than a full finance hire.",
   },
   {
-    q: "Why does GoldFin Advisory cost $1,500/month?",
+    q: "Why does GoldFin Advisory cost $150/mo?",
     a: "Because it is not just software. Advisory combines structure, automation, plain-English briefings, and a monthly one-hour strategy review with a finance professional. It is by application.",
   },
   {
@@ -339,7 +339,7 @@ export const planFit = [
     tone: "entry" as PlanTone,
   },
   {
-    // continuity = gold CTA in PlanFitSection — bread & butter $99/mo
+    // continuity = gold CTA in PlanFitSection — bread & butter $150/mo
     title: "Choose GoldFin Reports if:",
     bullets: [
       "You want your reports filled for you monthly",
@@ -348,7 +348,7 @@ export const planFit = [
       "You are ready to stop doing spreadsheet work",
       "You want to cancel anytime with no lock-in",
     ],
-    cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+    cta: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
     tone: "continuity" as PlanTone,
   },
   {
@@ -452,8 +452,8 @@ export function recommend(a: SelectorAnswers): Recommendation {
     return {
       planId: "autofill",
       headline: "Start with Auto-Filled Monthly Reports.",
-      body: "The bridge between free templates and the full Desk — your templates filled for you every month, at $99.",
-      cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+      body: "The bridge between free templates and the full Desk — your templates filled for you every month, at $150.",
+      cta: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
     };
   }
   return {

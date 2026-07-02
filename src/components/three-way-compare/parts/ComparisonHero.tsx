@@ -50,7 +50,7 @@ export default function ComparisonHero() {
                 onClick={() => { startAutoFillCheckout(); trackCtaByHref("/pricing#auto-fill", "hero"); }}
                 className="text-[12.5px] text-ink/55 underline-offset-4 transition-all duration-300 ease-cinema hover:text-ink hover:underline"
               >
-                Or have it done for you — $99/mo
+                Or have it done for you — $150/mo
               </button>
             </div>
             <p className="mt-5 text-[11.5px] uppercase tracking-[0.2em] text-ink/55">

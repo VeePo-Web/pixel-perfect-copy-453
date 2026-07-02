@@ -16,7 +16,7 @@ export default function RecommendedPlanSpotlight() {
             When you want a human reading the numbers with you.
           </h2>
           <p className="mt-4 text-[15.5px] leading-[1.7] text-ink/70">
-            Auto-fill keeps your reports current. The GoldFin Desk adds a person who interprets them and meets with you every month. Most owners start with $99 auto-fill and move here when the decisions get bigger.
+            Auto-fill keeps your reports current. The GoldFin Desk adds a person who interprets them and meets with you every month. Most owners start with $150 auto-fill and move here when the decisions get bigger.
           </p>
         </div>
 
@@ -32,25 +32,25 @@ export default function RecommendedPlanSpotlight() {
                 The GoldFin Desk
               </h3>
               <div className="mt-6 flex items-baseline gap-2">
-                <span className="text-[56px] font-light tabular-nums text-ink">$1,500</span>
+                <span className="text-[56px] font-light tabular-nums text-ink">$150</span>
                 <span className="text-[14px] text-ink/55">/ month</span>
               </div>
               <p className="mt-5 max-w-[44ch] text-[14.5px] leading-[1.7] text-ink/75">
                 A recurring system that keeps the financial side of the business from disappearing into the background.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                {/* $99/mo — gold, the bread-and-butter rung; Advisory is never gold */}
+                {/* $150/mo — gold, the bread-and-butter rung; Advisory is never gold */}
                 <button
                   type="button"
                   onClick={startAutoFillCheckout}
                   className="group relative inline-flex w-full justify-center items-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3.5 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema sm:w-auto sm:justify-start sm:py-3 hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 >
-                  <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+                  <span className="relative z-10">Auto-fill my reports — $150/mo</span>
                   <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
                 </button>
                 {/* Advisory — border/secondary */}
                 <a
-                  href="/apply"
+                  href="/pricing"
                   className="rounded-full border border-ink/[0.12] px-5 py-3 text-[13px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 >
                   Apply for the GoldFin Desk
@@ -63,7 +63,7 @@ export default function RecommendedPlanSpotlight() {
                 </a>
               </div>
               <p className="mt-4 text-[11px] uppercase tracking-[0.22em] text-ink/45">
-                Most owners start at $99 · Advisory is application-only
+                Most owners start at $150 · Advisory is application-only
               </p>
             </div>
 

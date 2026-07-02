@@ -1,14 +1,11 @@
-// Central brand + offer naming. One source of truth so the GoldFin naming
-// system stays identical across every surface (Brunson: consistent offer naming).
+// Central brand + offer naming. One source of truth.
+// Ladder is now TWO rungs: Free Vault + $150/mo Auto-Filled Reports. Nothing else.
 export const BRAND = {
   name: "GoldFin Desk",
-  tagline: "Financial clarity for owner-led businesses",
+  tagline: "A mini Goldman Sachs — built for the people who make Main Street run.",
   // Offer ladder
   vault: "GoldFin Template Vault", // Free lead magnet
-  reports: "GoldFin Reports", // $99/mo continuity — bread & butter
-  advisory: "GoldFin Advisory", // $1,500/mo human advisory
-  executive: "GoldFin Executive Desk", // future high-end
+  reports: "GoldFin Reports", // $150/mo continuity — the offer
   // Prices
-  reportsPrice: "$99",
-  advisoryPrice: "$1,500",
+  reportsPrice: "$150",
 } as const;

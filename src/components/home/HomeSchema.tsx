@@ -1,6 +1,6 @@
 // Service schema for the homepage (personas/seo-expert.md approves Service;
 // explicitly NOT Product/Review until genuine reviews exist — penalty risk).
-// Lists both offers, with the $99 GoldFin Reports first (the bread-and-butter).
+// Lists both offers, with the $150 GoldFin Reports first (the bread-and-butter).
 const schema = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -15,26 +15,12 @@ const schema = {
       "@type": "Offer",
       name: "GoldFin Reports",
       description:
-        "Your templates filled from your numbers and a plain-English briefing, every month. Fully automated.",
-      price: "99",
+        "Your templates filled from your bank feed and a plain-English briefing, every two weeks. Fully automated.",
+      price: "150",
       priceCurrency: "USD",
       priceSpecification: {
         "@type": "UnitPriceSpecification",
-        price: "99",
-        priceCurrency: "USD",
-        unitText: "MONTH",
-      },
-    },
-    {
-      "@type": "Offer",
-      name: "GoldFin Advisory",
-      description:
-        "Everything in Reports plus a monthly one-hour strategy review with a finance professional. By application.",
-      price: "1500",
-      priceCurrency: "USD",
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: "1500",
+        price: "150",
         priceCurrency: "USD",
         unitText: "MONTH",
       },
