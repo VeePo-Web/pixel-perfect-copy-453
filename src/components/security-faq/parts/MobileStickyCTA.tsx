@@ -44,7 +44,7 @@ export default function MobileStickyCTA() {
   const showApply = pastFAQ;
   const href = showApply ? "/pricing#auto-fill" : "/sample-briefing";
   const label = showApply
-    ? "Auto-fill my reports — $99/mo"
+    ? "Auto-fill my reports — $150/mo"
     : "Generate Sample Briefing";
 
   return (

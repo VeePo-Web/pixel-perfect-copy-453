@@ -39,13 +39,13 @@ export default function ManualVsMonthlyDesk() {
             items={comparison.desk.items}
             bestFor={comparison.desk.bestFor}
             tone="flagship"
-            cta={{ label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" }}
+            cta={{ label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" }}
             secondary={{ label: "See a sample briefing", href: "/sample-briefing" }}
           />
         </div>
 
         <p className="mt-8 max-w-[68ch] text-[14px] leading-relaxed text-ink/65">
-          If you use the Vault and realize, “I don't want to keep doing this manually,” that is exactly what GoldFin Reports is built for — the same templates, filled for you, for $99/mo.
+          If you use the Vault and realize, “I don't want to keep doing this manually,” that is exactly what GoldFin Reports is built for — the same templates, filled for you, for $150/mo.
         </p>
       </div>
     </section>

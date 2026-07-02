@@ -68,7 +68,7 @@ export default function Dashboard() {
         )}
 
         {/* Connected → guide the owner through connect → sync → report, the
-            highest-leverage activation path. The report is what the $99/mo buys. */}
+            highest-leverage activation path. The report is what the $150/mo buys. */}
         {accountCount != null && accountCount > 0 && (
           <ActivationChecklist accountCount={accountCount} />
         )}

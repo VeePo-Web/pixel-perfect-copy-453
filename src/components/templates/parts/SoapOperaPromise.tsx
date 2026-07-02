@@ -56,7 +56,7 @@ export default function SoapOperaPromise() {
           className="group mt-6 inline-flex items-center text-[12px] uppercase tracking-[0.18em] text-ink/35 transition-colors duration-300 hover:text-champagne-300"
         >
           <span className="border-b border-ink/10 pb-0.5 group-hover:border-champagne-300/60">
-            Already decided? Auto-fill my reports — $99/mo
+            Already decided? Auto-fill my reports — $150/mo
           </span>
           <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
         </button>

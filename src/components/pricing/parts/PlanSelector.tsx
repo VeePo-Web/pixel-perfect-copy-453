@@ -97,7 +97,7 @@ export default function PlanSelector() {
                 </h3>
                 <p className="mt-4 text-[15px] leading-[1.7] text-ink/80">{s.recommendation.body}</p>
                 <div className="mt-7 flex flex-wrap items-center gap-3">
-                  {/* Gold CTA only for $99/mo autofill — all other plans use border */}
+                  {/* Gold CTA only for $150/mo autofill — all other plans use border */}
                   {s.recommendation.planId === "autofill" ? (
                     <button
                       type="button"

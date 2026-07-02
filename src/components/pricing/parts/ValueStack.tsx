@@ -22,13 +22,13 @@ export default function ValueStack() {
         </ol>
 
         <div className="mt-10 flex flex-wrap items-center gap-5">
-          {/* $99/mo — gold, bread-and-butter */}
+          {/* $150/mo — gold, bread-and-butter */}
           <button
             type="button"
             onClick={startAutoFillCheckout}
             className="group relative inline-flex w-full justify-center items-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-4 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema sm:w-auto sm:justify-start sm:py-3.5 hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+            <span className="relative z-10">Auto-fill my reports — $150/mo</span>
             <span aria-hidden className="relative z-10">→</span>
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </button>

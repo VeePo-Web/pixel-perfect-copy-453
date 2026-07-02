@@ -351,7 +351,7 @@ export const comparison = {
     bestFor: "Owners who want to organize their numbers themselves.",
   },
   desk: {
-    label: "Done for you · GoldFin Reports · $99/mo",
+    label: "Done for you · GoldFin Reports · $150/mo",
     time: "0 hrs / month",
     positioning: "Have the Vault filled for you",
     items: [

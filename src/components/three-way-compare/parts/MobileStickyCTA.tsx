@@ -30,7 +30,7 @@ export default function MobileStickyCTA({ recommendation }: Props) {
   let eyebrow = "60-second diagnostic";
 
   if (pastBriefing) {
-    label = "Auto-fill my reports — $99/mo";
+    label = "Auto-fill my reports — $150/mo";
     href = "/pricing#auto-fill";
     eyebrow = "Your next step";
   } else if (recommendation) {

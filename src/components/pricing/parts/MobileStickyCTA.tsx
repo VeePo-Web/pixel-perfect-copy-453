@@ -17,7 +17,7 @@ export default function MobileStickyCTA() {
       style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
     >
       <div className="flex items-center justify-between gap-3 px-4 pt-3">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-ink/50">$99 / month</p>
+        <p className="text-[11px] uppercase tracking-[0.22em] text-ink/50">$150 / month</p>
         <button
           type="button"
           onClick={startAutoFillCheckout}

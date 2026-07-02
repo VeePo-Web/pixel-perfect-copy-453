@@ -21,12 +21,12 @@ import MobileStickyCTA from "./parts/MobileStickyCTA";
 export default function PricingPage() {
   useEffect(() => {
     const prevTitle = document.title;
-    document.title = "Monthly Financial Reports — $99/mo | GoldFin Desk";
+    document.title = "Monthly Financial Reports — $150/mo | GoldFin Desk";
     const meta = document.querySelector('meta[name="description"]');
     const prevDesc = meta?.getAttribute("content") ?? "";
     meta?.setAttribute(
       "content",
-      "GoldFin Reports fills your financial templates from your numbers and sends a plain-English monthly briefing — $99/mo, no spreadsheet work, cancel anytime. GoldFin Advisory ($1,500/mo) available by application.",
+      "GoldFin Reports fills your financial templates from your numbers and sends a plain-English monthly briefing — $150/mo, no spreadsheet work, cancel anytime. GoldFin Advisory ($1,500/mo) available by application.",
     );
     return () => {
       document.title = prevTitle;
@@ -34,7 +34,7 @@ export default function PricingPage() {
     };
   }, []);
 
-  // Scroll to the $99/mo Auto-Fill offer when linked as /pricing#auto-fill
+  // Scroll to the $150/mo Auto-Fill offer when linked as /pricing#auto-fill
   // (from the homepage bridge, ladder card, or recommender).
   useEffect(() => {
     const scrollToOffer = () => {

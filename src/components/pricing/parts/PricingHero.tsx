@@ -17,14 +17,14 @@ export default function PricingHero() {
               Free templates. <span className="text-champagne-300">$99 to have them filled for you.</span> $1,500 to have them read with you.
             </h1>
             <p className="mt-6 max-w-[56ch] text-[15.5px] leading-[1.7] [text-wrap:pretty] text-ink/70">
-              Most owners don’t need a full finance team — they need their numbers organized and explained every month. That’s the $99 Auto-Fill plan. Start there.
+              Most owners don’t need a full finance team — they need their numbers organized and explained every month. That’s the $150 Auto-Fill plan. Start there.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <button
                 type="button" onClick={startAutoFillCheckout}
                 className="group relative w-full overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-4 text-center text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema sm:w-auto sm:py-3.5 hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
-                <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+                <span className="relative z-10">Auto-fill my reports — $150/mo</span>
                 <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </button>
               <a
@@ -45,7 +45,7 @@ export default function PricingHero() {
             </p>
           </div>
 
-          {/* ── Focal price visual — the $99 plan rendered as the hero object ── */}
+          {/* ── Focal price visual — the $150 plan rendered as the hero object ── */}
           <div
             aria-hidden
             className="pointer-events-none relative flex h-[440px] items-center justify-center sm:h-[500px] lg:h-[540px]"
@@ -70,7 +70,7 @@ export default function PricingHero() {
               </div>
             </div>
 
-            {/* THE focal card — GoldFin Reports · $99/mo */}
+            {/* THE focal card — GoldFin Reports · $150/mo */}
             <div
               className="relative z-20 w-[80%] max-w-[348px] overflow-hidden rounded-[22px] border border-champagne-200/50 bg-paper shadow-[0_44px_110px_-30px_rgba(212,168,69,0.45),0_22px_56px_-34px_rgba(11,13,18,0.45)] motion-safe:animate-panel-rise"
               style={{ animationDelay: "160ms" }}

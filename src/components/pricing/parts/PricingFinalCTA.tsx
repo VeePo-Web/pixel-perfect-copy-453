@@ -39,7 +39,7 @@ export default function PricingFinalCTA() {
         </div>
 
         <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
-          $99 / month · Auto-Filled Reports
+          $150 / month · Auto-Filled Reports
         </div>
         <h2 id="final-title" className="mx-auto mt-5 max-w-[24ch] font-light text-ink text-[42px] leading-[1.05] tracking-[-0.01em] sm:text-[60px]">
           Ready to stop guessing from your bank balance?
@@ -54,7 +54,7 @@ export default function PricingFinalCTA() {
               onClick={startAutoFillCheckout}
               className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3.5 text-[13.5px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
             >
-              <span className="relative z-10">Auto-fill my reports — $99/mo</span>
+              <span className="relative z-10">Auto-fill my reports — $150/mo</span>
               <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
             </button>
             <a

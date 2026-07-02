@@ -13,7 +13,7 @@ export default function MobileStickyTemplateCTA({ downloaded }: Props) {
   }, []);
 
   const href = downloaded ? "/pricing#auto-fill" : "#vault-capture";
-  const label = downloaded ? "Auto-fill my reports — $99/mo" : "Send me the Vault";
+  const label = downloaded ? "Auto-fill my reports — $150/mo" : "Send me the Vault";
 
   return (
     <div

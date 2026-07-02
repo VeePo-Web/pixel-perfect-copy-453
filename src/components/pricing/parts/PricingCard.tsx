@@ -4,7 +4,7 @@ type Props = { plan: PricingPlan; emphasis?: boolean };
 
 export default function PricingCard({ plan, emphasis }: Props) {
   const flagship = plan.tone === "flagship" || emphasis;
-  // The $99 continuity rung is the ONLY plan that earns the gold CTA.
+  // The $150 continuity rung is the ONLY plan that earns the gold CTA.
   // Advisory (flagship) is text/tertiary — never gold.
   const recommended = plan.tone === "continuity";
   const gold = recommended; // advisory does NOT get gold

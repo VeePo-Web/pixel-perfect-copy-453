@@ -1,7 +1,7 @@
 ﻿import { useInView } from "../how-it-works/hooks/useInView";
 
 // Homepage Section 1 — Bait Hero (Pattern A: asymmetric 7/5 copy-left + layered template cards right).
-// HOMEPAGE EXCEPTION: gold CTA = "Get the free templates" → /templates. NO $99/mo CTA here.
+// HOMEPAGE EXCEPTION: gold CTA = "Get the free templates" → /templates. NO $150/mo CTA here.
 
 interface CardDef {
   label: string;
@@ -130,7 +130,7 @@ export default function HomeHero() {
             }`}
             style={{ transitionDelay: "240ms" }}
           >
-            {/* Gold primary CTA — free templates only, NO $99/mo */}
+            {/* Gold primary CTA — free templates only, NO $150/mo */}
             <a
               href="/templates"
               className="group relative inline-flex w-full justify-center overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-4 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema sm:w-auto sm:justify-start sm:py-3.5 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(217,190,130,0.45)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0D12]"

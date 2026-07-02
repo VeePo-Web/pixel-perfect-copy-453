@@ -63,7 +63,7 @@ export default function MissingMiddleSection() {
             onClick={() => { startAutoFillCheckout(); track("autofill_clicked_from_compare", { source: "missing-middle" }); }}
             className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            Auto-fill my reports — $99/mo
+            Auto-fill my reports — $150/mo
           </button>
         </div>
       </div>

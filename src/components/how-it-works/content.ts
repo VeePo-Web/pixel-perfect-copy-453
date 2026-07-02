@@ -2,8 +2,8 @@ export const HIW_COPY = {
   intro: {
     eyebrow: "HOW IT WORKS",
     headline: "Your monthly finance rhythm, built for owner-led businesses.",
-    sub: "GoldFin Desk turns scattered financial activity into organized spreadsheets, plain-English briefings, and a monthly review — so you can stop guessing from your bank balance. Start free, or have it done for you for $99/mo.",
-    primary: "Auto-fill my reports — $99/mo",
+    sub: "GoldFin Desk turns scattered financial activity into organized spreadsheets, plain-English briefings, and a monthly review — so you can stop guessing from your bank balance. Start free, or have it done for you for $150/mo.",
+    primary: "Auto-fill my reports — $150/mo",
     secondary: "Get the free templates",
     trust: "No contracts · Cancel anytime",
     loop: ["Bank activity", "Spreadsheet structure", "Plain-English briefing", "Monthly review"],
@@ -162,7 +162,7 @@ export const HIW_COPY = {
         ],
       },
     ],
-    cta: "Auto-fill my reports — $99/mo",
+    cta: "Auto-fill my reports — $150/mo",
     micro: "No bank connection required to preview the experience.",
   },
   diff: {
@@ -201,7 +201,7 @@ export const HIW_COPY = {
         highlight: true,
       },
     ],
-    cta: "Auto-fill my reports — $99/mo",
+    cta: "Auto-fill my reports — $150/mo",
   },
   trust: {
     headline: "Preview safely. Connect only after trust is built.",
@@ -215,8 +215,8 @@ export const HIW_COPY = {
   },
   final: {
     headline: "Ready to stop guessing from your bank balance?",
-    sub: "Have your reports auto-filled every month for $99/mo — or start free with the GoldFin Template Vault and upgrade anytime.",
-    primary: "Auto-fill my reports — $99/mo",
+    sub: "Have your reports auto-filled every month for $150/mo — or start free with the GoldFin Template Vault and upgrade anytime.",
+    primary: "Auto-fill my reports — $150/mo",
     secondary: "Get the free Template Vault",
     tertiary: "Or apply for GoldFin Advisory",
     micro: "No contracts · Cancel anytime · Start free with the Template Vault",
