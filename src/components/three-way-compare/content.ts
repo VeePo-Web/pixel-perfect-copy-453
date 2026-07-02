@@ -369,7 +369,7 @@ export const scenarios: Scenario[] = [
   },
   {
     id: "not-ready",
-    quote: "I am not ready for $1,500/month.",
+    quote: "I am not ready for $150/mo.",
     recommendation: "Free Templates.",
     explanation: "Start manually with templates, then upgrade when the financial complexity justifies a monthly rhythm.",
     cta: { label: "Get Free Templates", href: "/templates" },
@@ -482,7 +482,7 @@ export const faq: { q: string; a: string }[] = [
     a: "No. GoldFin Desk does not replace tax, legal, accounting, bookkeeping cleanup, or investment advice.",
   },
   {
-    q: "What if I am not ready for $1,500/month?",
+    q: "What if I am not ready for $150/mo?",
     a: "Start with the free templates or generate a sample briefing. The premium desk is best for owners ready to build a recurring monthly finance rhythm.",
   },
 ];

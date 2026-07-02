@@ -32,7 +32,7 @@ export default function RecommendedPlanSpotlight() {
                 The GoldFin Desk
               </h3>
               <div className="mt-6 flex items-baseline gap-2">
-                <span className="text-[56px] font-light tabular-nums text-ink">$1,500</span>
+                <span className="text-[56px] font-light tabular-nums text-ink">$150</span>
                 <span className="text-[14px] text-ink/55">/ month</span>
               </div>
               <p className="mt-5 max-w-[44ch] text-[14.5px] leading-[1.7] text-ink/75">

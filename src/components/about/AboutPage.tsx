@@ -151,7 +151,7 @@ export default function AboutPage() {
             },
             {
               title: "Fair pricing",
-              body: "$150 a month, not $1,500 an hour. Because you're building a business, not a hedge fund.",
+              body: "$150 a month, not $150 an hour. Because you're building a business, not a hedge fund.",
             },
           ].map((c) => (
             <div

@@ -59,7 +59,7 @@ export const plans: PricingPlan[] = [
   {
     id: "desk",
     name: "GoldFin Advisory",
-    price: "$1,500",
+    price: "$150",
     priceSuffix: "/month",
     badge: "Most relevant for serious owner-led businesses",
     positioning:
@@ -265,7 +265,7 @@ export const comparisonRows: ComparisonRow[] = [
     role: "Recurring financial clarity system",
     helps: "Structure, automation, plain-English briefings, monthly strategy rhythm",
     misses: "Not a replacement for tax, legal, or full bookkeeping cleanup",
-    investment: "$1,500 / month",
+    investment: "$150 / month",
     bestFit:
       "Owner-led businesses that need more than tools, but are not ready for a full finance team",
     flagship: true,
@@ -305,15 +305,15 @@ export const faq = [
     a: "Keep them. A bookkeeper keeps your records clean. GoldFin Reports turns those records into a monthly plain-English briefing on what changed, what's risky, and what to decide next. They work together.",
   },
   {
-    q: "What's the difference between $150 Reports and $1,500 Advisory?",
-    a: "GoldFin Reports ($150/mo) fills your reports and briefs you every month — fully automated. GoldFin Advisory ($1,500/mo) adds a person who interprets them with you on a monthly strategy call. Most owners start with $150 and move up when the decisions get bigger.",
+    q: "What's the difference between $150 Reports and $150 Advisory?",
+    a: "GoldFin Reports ($150/mo) fills your reports and briefs you every month — fully automated. GoldFin Advisory ($150/mo) adds a person who interprets them with you on a monthly strategy call. Most owners start with $150 and move up when the decisions get bigger.",
   },
   {
     q: "Is this a bookkeeping or CFO replacement?",
     a: "Neither. It does not replace tax, legal, accounting, or bookkeeping. It is the missing clarity layer — more than templates or a dashboard, lighter than a full finance hire.",
   },
   {
-    q: "Why does GoldFin Advisory cost $1,500/month?",
+    q: "Why does GoldFin Advisory cost $150/mo?",
     a: "Because it is not just software. Advisory combines structure, automation, plain-English briefings, and a monthly one-hour strategy review with a finance professional. It is by application.",
   },
   {

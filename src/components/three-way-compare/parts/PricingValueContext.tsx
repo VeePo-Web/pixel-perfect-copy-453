@@ -22,7 +22,7 @@ export default function PricingValueContext() {
               id="pricing-context-heading"
               className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
             >
-              Why the GoldFin Desk is $1,500/month.
+              Why the GoldFin Desk is $150/mo.
             </h2>
             <p className="mt-4 max-w-[58ch] text-[15px] leading-[1.7] text-ink/70">
               You are not paying for bookkeeping. You are not paying for a spreadsheet. You are
@@ -71,7 +71,7 @@ export default function PricingValueContext() {
                 Included monthly
               </div>
               <div className="text-[12px] uppercase tracking-[0.22em] text-ink/45">
-                $1,500 / mo
+                $150 / mo
               </div>
             </div>
             <ul className="mt-5 divide-y divide-ink/[0.06]">

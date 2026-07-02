@@ -16,7 +16,7 @@ const cards = [
   {
     eyebrow: "Understand",
     title: "See Pricing",
-    body: "Understand what is included in the $1,500/month GoldFin Desk.",
+    body: "Understand what is included in the $150/mo GoldFin Desk.",
     cta: { label: "View Pricing", href: "/pricing" },
   },
 ];

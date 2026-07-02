@@ -71,7 +71,7 @@ export default function PricingFinalCTA() {
             href="/apply"
             className="mt-1 rounded text-[12.5px] text-ink/45 underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            Want a human reading your numbers? Apply for the $1,500 Desk
+            Want a human reading your numbers? Apply for the $150 Desk
           </a>
         </div>
       </div>

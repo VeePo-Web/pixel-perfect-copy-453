@@ -4,7 +4,7 @@ type Props = { onAnother: () => void };
 // Proof-page close (conversion-prompt PAGE 3 Â§6). The ONE place equal-weight
 // CTAs are allowed: the visitor just consumed proof, so let them self-select
 // the rung. Card B ($150 GoldFin Reports) carries the visual emphasis — the
-// bread-and-butter. $1,500 Advisory demoted to a tertiary text link.
+// bread-and-butter. $150 Advisory demoted to a tertiary text link.
 export default function SampleBriefingCTA({ onAnother }: Props) {
   return (
     <section className="relative overflow-hidden border-b border-ink/[0.05] bg-charcoal-950">
