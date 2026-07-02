@@ -68,7 +68,7 @@ export default function SampleBriefingCTA({ onAnother }: Props) {
             Generate another sample briefing
           </button>
           <a
-            href="/apply"
+            href="/pricing"
             className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
             Running something larger? Apply for GoldFin Advisory →

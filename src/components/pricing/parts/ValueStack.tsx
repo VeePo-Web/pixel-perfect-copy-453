@@ -34,7 +34,7 @@ export default function ValueStack() {
           </button>
           {/* Advisory — text/tertiary per value ladder */}
           <a
-            href="/apply"
+            href="/pricing"
             className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors duration-300 hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-950"
           >
             Running something larger? Apply for GoldFin Advisory →

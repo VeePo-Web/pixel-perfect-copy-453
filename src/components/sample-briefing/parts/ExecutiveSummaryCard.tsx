@@ -11,7 +11,7 @@ export default function ExecutiveSummaryCard({ business }: Props) {
       title="What this period is telling you."
       cta={
         <a
-          href="/apply"
+          href="/pricing"
           className="inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)]"
         >
           Apply to Get This for Your Real Numbers

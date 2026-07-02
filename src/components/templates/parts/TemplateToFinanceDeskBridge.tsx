@@ -13,7 +13,7 @@ export default function TemplateToFinanceDeskBridge() {
         <p className="mt-4 text-[15px] leading-[1.7] text-ink/65">
           When you're ready for a human to read your numbers with you,{" "}
           <a
-            href="/apply"
+            href="/pricing"
             onClick={() => track("desk_bridge_clicked_from_templates", { source: "bridge" })}
             className="text-ink/85 underline decoration-champagne-200/50 underline-offset-4 transition-colors hover:text-ink hover:decoration-champagne-300"
           >

@@ -62,7 +62,7 @@ export default function PrivacyPrinciplesSection() {
             <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
           </button>
           <a
-            href="/apply"
+            href="/pricing"
             onClick={() => track("privacy_principles_cta_apply")}
             className="inline-flex min-h-11 items-center rounded-full border border-ink/[0.14] px-5 text-[13.5px] text-ink/90 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
