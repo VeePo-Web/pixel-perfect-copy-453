@@ -25,8 +25,8 @@ const NAV_GROUPS = [
     label: "Company",
     ariaLabel: "Company navigation",
     links: [
+      { label: "About",          href: "/about" },
       { label: "Security & FAQ", href: "/security-faq" },
-      { label: "Apply",          href: "/apply" },
     ],
   },
 ] as const;
