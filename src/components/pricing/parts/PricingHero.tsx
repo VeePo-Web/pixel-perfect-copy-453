@@ -63,11 +63,9 @@ export default function PricingHero() {
               className="absolute bottom-[15%] right-[4%] hidden w-[42%] rotate-[8deg] rounded-2xl border border-ink/[0.06] bg-paper/70 p-4 opacity-60 shadow-[0_24px_60px_-32px_rgba(11,13,18,0.25)] backdrop-blur-sm motion-safe:animate-panel-rise sm:block"
               style={{ animationDelay: "90ms" }}
             >
-              <div className="text-[9px] uppercase tracking-[0.26em] text-ink/40">Advisory</div>
-              <div className="mt-1.5 text-[12px] text-ink/70">Done with you</div>
-              <div className="mt-2 text-[24px] font-light tabular-nums text-ink/70">
-                $150<span className="text-[11px] text-ink/40">/mo</span>
-              </div>
+              <div className="text-[9px] uppercase tracking-[0.26em] text-ink/40">Sample</div>
+              <div className="mt-1.5 text-[12px] text-ink/70">See a briefing</div>
+              <div className="mt-2 text-[24px] font-light tabular-nums text-ink/70">Preview</div>
             </div>
 
             {/* THE focal card — GoldFin Reports · $150/mo */}
