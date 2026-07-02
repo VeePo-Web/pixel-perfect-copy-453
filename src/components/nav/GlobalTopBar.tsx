@@ -10,21 +10,18 @@ export type NavKey =
   | "compare"
   | "sample-briefing"
   | "security-faq"
-  | "apply";
+  | "about";
 
 type Props = {
   currentPath?: NavKey;
-  // Whether the page renders a dark, full-bleed hero behind the bar (homepage
-  // only). When true, the bar floats transparent with light text until scrolled.
   onDarkHero?: boolean;
 };
 
-// Hick's Law: 4 links — ordered by Brunson conversion journey
-// proof → price → lead-magnet → trust
 const LINKS: { key: NavKey; label: string; href: string }[] = [
   { key: "sample-briefing", label: "Sample Briefing", href: "/sample-briefing" },
   { key: "pricing",         label: "Pricing",         href: "/pricing" },
   { key: "templates",       label: "Free Templates",  href: "/templates" },
+  { key: "about",           label: "About",           href: "/about" },
   { key: "security-faq",    label: "Security",        href: "/security-faq" },
 ];
 
