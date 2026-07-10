@@ -1,7 +1,7 @@
 // Disconnects a Plaid item: revokes access at Plaid, deletes locally.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
-import { plaid } from "../_shared/plaid.ts";
+import { plaid, getAccessToken } from "../_shared/plaid.ts";
 
 const Body = z.object({ itemId: z.string().uuid() });
 
@@ -15,7 +15,7 @@ Deno.serve(async (req) => {
     const admin = adminClient();
     const { data: item, error } = await admin
       .from("plaid_items")
-      .select("id, access_token, user_id")
+      .select("id, user_id")
       .eq("id", parsed.data.itemId)
       .single();
     if (error || !item || item.user_id !== user.id) {
@@ -23,7 +23,8 @@ Deno.serve(async (req) => {
     }
 
     try {
-      await plaid("/item/remove", { access_token: item.access_token });
+      const accessToken = await getAccessToken(admin, item.id);
+      await plaid("/item/remove", { access_token: accessToken });
     } catch (e) {
       // Continue even if remote remove fails; we still delete locally.
       console.error("plaid /item/remove failed:", e);

@@ -2,7 +2,7 @@
 // Pass { mode: "update", itemId } to get an update-mode token for re-auth.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
-import { plaid, PLAID_COUNTRY_CODES, PLAID_PRODUCTS } from "../_shared/plaid.ts";
+import { plaid, PLAID_COUNTRY_CODES, PLAID_PRODUCTS, getAccessToken } from "../_shared/plaid.ts";
 
 const Body = z.object({
   mode: z.enum(["create", "update"]).default("create"),
@@ -33,13 +33,13 @@ Deno.serve(async (req) => {
       const admin = adminClient();
       const { data: item, error } = await admin
         .from("plaid_items")
-        .select("access_token, user_id")
+        .select("id, user_id")
         .eq("id", itemId)
         .single();
       if (error || !item || item.user_id !== user.id) {
         return json({ error: "Item not found" }, 404);
       }
-      baseReq.access_token = item.access_token;
+      baseReq.access_token = await getAccessToken(admin, item.id);
     } else {
       baseReq.products = PLAID_PRODUCTS;
     }
