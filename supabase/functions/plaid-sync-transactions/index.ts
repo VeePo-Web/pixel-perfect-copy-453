@@ -78,7 +78,7 @@ Deno.serve(async (req) => {
     let added = 0, modified = 0, removed = 0;
     for (let guard = 0; guard < 50; guard++) {
       const resp = await plaid<SyncResp>("/transactions/sync", {
-        access_token: item.access_token,
+        access_token: accessToken,
         cursor: cursor ?? null,
         count: 500,
       });
