@@ -154,7 +154,8 @@ Deno.serve(async (req) => {
         .update({ status: "reauth_required" })
         .eq("id", item.id);
     } else if (isUpdate) {
-      await syncAccountsForItem(admin, item);
+      const accessToken = await getAccessToken(admin, item.id);
+      await syncAccountsForItem(admin, { ...item, access_token: accessToken });
     }
 
     return json({ received: true });
