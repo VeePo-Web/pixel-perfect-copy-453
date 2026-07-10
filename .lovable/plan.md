@@ -1,158 +1,58 @@
-# End-to-end smoke test audit — pre-launch
+## Fix P0 blocker: recreate the 9 missing tables, then finish the audit
 
-Goal: verify every system a real customer touches actually works before we flip Plaid/Stripe to production. This is read-only auditing plus controlled sandbox test calls — nothing destructive to real users.
+### The problem
 
-I'll produce a single audit report at the end with pass/fail per section and a prioritized fix list.
+Five past migrations partially applied — `advisory_reports` landed, but nine sibling tables the edge functions depend on never got created. Any bank sync or report generation crashes with `relation does not exist`. DB is a clean slate (0 users), so re-applying is safe.
 
----
+Missing tables (from source migrations already in `supabase/migrations/`):
+- `business_profiles`, `plaid_transactions`, `recurring_streams` (from `20260623120000_advisory_reports.sql`)
+- `ledger_entries` (from `20260623130000_ledger_entries.sql`)
+- `transaction_corrections`, `business_metric_inputs` (from `20260624120000_layer0_enrichment.sql`)
+- `email_preferences`, `report_email_deliveries` (from `20260626120000_report_email_delivery.sql`)
+- `email_suppressions` (from `20260626130000_email_suppressions.sql`)
 
-## Track A — Backend infrastructure (I run, ~10 min)
+### Step 1 — Consolidated repair migration (P0)
 
-**A1. Database health & RLS**
-- Read all RLS policies on: `profiles`, `user_roles`, `plaid_items`, `plaid_accounts`, `transactions`, `advisory_reports`, `subscriptions`, `login_otps`, `webhook_events`, `cron_runs`, `leads`, `applications`, `email_send_log`, `suppressed_emails`.
-- Confirm every user-facing table filters on `auth.uid()` and has `service_role` full access.
-- Run `supabase--linter` for security warnings.
-- Verify GRANTs match policies (no missing `GRANT SELECT` on tables that need anon or authenticated reads).
+Create one new migration `2026071xxxxxx_repair_missing_tables.sql` that:
+- Uses `CREATE TABLE IF NOT EXISTS` for each of the 9 tables (copies the exact column definitions from the original migrations — no schema drift).
+- Skips `advisory_reports` (already exists).
+- Adds `GRANT SELECT, INSERT, UPDATE, DELETE ... TO authenticated` + `GRANT ALL ... TO service_role` per table (no anon — all are user-scoped).
+- `ALTER TABLE ... ENABLE ROW LEVEL SECURITY` + recreates the original RLS policies (`auth.uid() = user_id`, plus the token-scoped policies for `report_email_deliveries` and `email_suppressions`).
+- Recreates the indexes and the `updated_at` triggers from the originals.
+- Idempotent throughout (`IF NOT EXISTS` / `DROP POLICY IF EXISTS ... CREATE POLICY`) so re-running is a no-op.
 
-**A2. Cron jobs**
-- Query `cron.job` and `cron.job_run_details` (last 30 days):
-  - `advisory-report-biweekly` — did it run? Any failures? Correct `x-cron-secret` header?
-  - `retention-sweep-daily` — same.
-- Confirm both jobs schedule matches business intent (Monday 13:00 UTC for reports, daily 09:00 UTC for sweep).
+Because the original 5 migration files are already in git but not in `schema_migrations`, I will NOT mark them applied — the new consolidated file is the single source of truth for the repair. The originals stay in the folder as history.
 
-**A3. Edge function health**
-- List all deployed functions and their last-modified timestamp.
-- Fetch recent logs (last 24h) for the critical ones and grep for errors:
-  - `plaid-webhook`, `plaid-create-link-token`, `plaid-exchange-public-token`, `plaid-sync-accounts`, `plaid-sync-transactions`
-  - `create-checkout`, `payments-webhook`, `create-portal-session`
-  - `send-email`, `send-template-email`, `send-login-otp`, `verify-login-otp`
-  - `generate-advisory-report`, `cron-run-reports`, `cron-retention-sweep`
-  - `email-unsubscribe`, `resend-webhook`
-- Flag any function with unhandled errors or missing env vars.
+### Step 2 — Verify tables and RLS
 
-**A4. Secrets & env vars**
-- Read `fetch_secrets` list; confirm all required ones present for the two paths (sandbox now, production later): `PLAID_CLIENT_ID`, `PLAID_SANDBOX_SECRET`, `PLAID_PRODUCTION_SECRET`, `PLAID_WEBHOOK_SECRET`, `CRON_SECRET`, `STRIPE_SANDBOX_API_KEY`, `PAYMENTS_SANDBOX_WEBHOOK_SECRET`, `RESEND_API_KEY`, `LOVABLE_API_KEY`.
-- Flag any that are missing or will need to be added before go-live (`PAYMENTS_LIVE_WEBHOOK_SECRET`, `STRIPE_LIVE_API_KEY` — added automatically at Stripe go-live).
+After the migration is approved and run:
+- `psql \dt public.*` — confirm all 22 tables present.
+- Query `pg_policies` — confirm every new table has the expected policies.
+- Run `supabase--linter` — flag any new warnings.
 
----
+### Step 3 — Playwright smoke test (Track B from earlier plan)
 
-## Track B — Full sandbox user journey (I drive Playwright, ~15 min)
+Only after Step 2 passes:
+- Sign up a test user via OTP → confirm `profiles`, `user_roles` rows.
+- Plaid Link sandbox → confirm `plaid_items`, `plaid_accounts`, `plaid_transactions`, `recurring_streams` rows all populate without error.
+- Fire `SANDBOX_SYNC_UPDATES_AVAILABLE` webhook → confirm `plaid-sync-transactions` completes cleanly.
+- Stripe checkout with test card `4242…` → confirm `subscriptions` row lands via webhook.
+- Invoke `generate-advisory-report` → confirm `advisory_reports` row with `status='generated'`, all 6 sections, `verification_passed=true`, and `report_email_deliveries` row appears.
+- Extract unsubscribe token from delivered email → hit `email-unsubscribe` → confirm `email_suppressions` row created.
+- Cleanup: delete the test user (cascades to all owned rows).
 
-Real end-to-end run against the live preview using the Plaid sandbox and Stripe sandbox — this is the actual "can a customer plug in and get reports" test.
+### Step 4 — Final audit report
 
-**B1. Marketing → CTA**
-- Land on `/`, verify hero + pricing ladder + FAQ render.
-- Click each primary CTA on `/`, `/pricing`, `/about#advisory-contact` — verify each routes to the correct destination (not the retired `/apply`, no `$99`).
-- Verify `chris@goldfindesk.com` mailto works from Advisory CTAs.
-- Screenshot each page for visual confirmation.
+Update `.lovable/plan.md` with pass/fail per section and any residual fix list. Deliverability (Track D) stays deferred until Resend DNS is verified — I'll flag that as the only remaining pre-launch item.
 
-**B2. Portal auth (OTP path)**
-- Go to `/portal/login`, enter a test email.
-- Verify OTP email is sent — check `email_send_log` for a row with `sent` status.
-- Read the OTP from the DB (test-only access via `login_otps` table), submit it.
-- Confirm session is created, redirected to `/portal` dashboard.
-- Confirm `profiles` and `user_roles` rows created via the `handle_new_user` trigger.
+### Technical notes
 
-**B3. Portal auth (Google OAuth)**
-- Verify Google is listed as a provider on `/portal/login` page (visual).
-- I can't complete a real Google OAuth in headless Playwright without credentials, so this is a visual check only. If you have a Google test account you're comfortable using, I can add a full flow — otherwise I'll note "manual verification needed."
+- Original migration bodies are all in-repo, so Step 1 is copy-paste with `IF NOT EXISTS` wrappers — no design decisions.
+- `report_email_deliveries` has two special policies (user can read their own; service role manages) — preserved verbatim.
+- `email_suppressions` is service-role-only for writes; users read via edge function only — preserved.
+- No changes to `advisory_reports` (already exists with correct shape per earlier query).
+- No frontend changes. No changes to edge functions or `config.toml`.
 
-**B4. Plaid Link (sandbox)**
-- Signed in as the test user, navigate to `/portal/accounts`.
-- Click "Connect a bank" → Plaid Link modal opens.
-- Complete Sandbox flow with `user_good` / `pass_good` at "First Platypus Bank."
-- Confirm: `plaid_items` row created (encrypted `access_token`), `plaid_accounts` rows populated, transactions row count > 0.
-- Fire `plaid-sandbox-fire-webhook` for `SYNC_UPDATES_AVAILABLE` — confirm webhook function accepts it, `plaid-sync-transactions` runs, log row lands in `webhook_events`.
+### What I need from you
 
-**B5. Stripe checkout (sandbox)**
-- From `/pricing`, click "Auto-fill my reports — $150/mo."
-- Verify checkout session opens.
-- Complete with Stripe test card `4242 4242 4242 4242`, any future expiry, any CVC.
-- Confirm redirect to `/portal/billing/return` shows success.
-- Confirm `subscriptions` row created via webhook: `status='active'`, `price_id='auto_fill_monthly'`, `environment='sandbox'`.
-- Verify `hasPaymentsConfigured()` still returns false in dev (correct — the sandbox key isn't `pk_live_…`).
-
-**B6. Advisory report generation**
-- With the test user connected and subscribed, invoke `generate-advisory-report` manually.
-- Confirm: report row in `advisory_reports` with `status='ready'`, all 6 sections populated, no verification gate failures.
-- Confirm email delivered — row in `email_send_log` with `sent` status for template `advisory-report`.
-- Read the delivered HTML from the log — visual check for template correctness and unsubscribe link.
-
-**B7. Unsubscribe flow**
-- Click the unsubscribe link (extract token from the delivered email).
-- Confirm token validates, row appears in `suppressed_emails`, subsequent sends to that address are blocked.
-
-**B8. Portal settings & account deletion**
-- Verify `/portal/settings` loads, shows current plan, Plaid item, unsubscribe status.
-- Trigger `account-delete-request` — confirm it enqueues, doesn't delete immediately (24h grace).
-
----
-
-## Track C — Cron & long-running (I audit, no execution)
-
-**C1. Bi-weekly report cron**
-- Verify `cron-run-reports` gate logic: only users with active `auto_fill_monthly` subscription AND at least one `active` plaid_item AND last report >13 days old.
-- Read the last 5 runs from `cron_runs` — confirm each has a `success` outcome and processed the expected user count.
-
-**C2. Retention sweep**
-- Verify `run_retention_sweep()` function logic matches the retention memory rules.
-- Read last 5 runs from `cron_runs`.
-
----
-
-## Track D — Deliverability & branding (waits on Resend DNS verification)
-
-Cannot fully execute until you confirm Resend shows the domain as Verified. What I audit now:
-- Confirm no code sends from `onboarding@resend.dev` (the Resend test sender) — that will fail for real recipients.
-- Confirm the `FROM_DEFAULT` constant in `send-email` and `send-template-email` is consistent.
-- Verify `List-Unsubscribe` header wiring in `report-delivery.ts`.
-
-After you say "Resend verified" I'll:
-- Update FROM addresses to your chosen A or B option.
-- Redeploy the 4 email functions.
-- Send a real OTP to a test address you provide → I read the raw headers (via Playwright accessing the delivered mail) or you paste the headers, and I confirm `dkim=pass spf=pass dmarc=pass`.
-
----
-
-## Track E — Security scan
-
-- Run `security--run_security_scan`.
-- Cross-reference findings against the retention/RLS work already done.
-- Flag any Critical or High.
-
----
-
-## Deliverable
-
-A single audit report I paste into chat covering:
-
-```text
-Section          Result      Notes / Action
---------------- ----------- --------------------------------
-A1 RLS          pass/fail
-A2 Cron         pass/fail
-A3 Functions    pass/fail
-A4 Secrets      pass/fail
-B1 CTAs         pass/fail
-B2 OTP          pass/fail
-B3 Google       manual
-B4 Plaid        pass/fail
-B5 Stripe       pass/fail
-B6 Report       pass/fail
-B7 Unsub        pass/fail
-B8 Settings     pass/fail
-C1 Report cron  pass/fail
-C2 Retention    pass/fail
-D  Deliverab.   deferred to post-Resend-verify
-E  Security     pass/fail
-```
-
-Plus a prioritized fix list ordered blocker → nit.
-
----
-
-## One thing to confirm before I start
-
-The Playwright flow (Track B) will create real rows in your dev database: a test user (`smoke-test-<timestamp>@goldfindesk.com`), a sandbox Plaid item, a sandbox Stripe subscription. All are in `environment='sandbox'` and never touch real money, but they're persistent.
-
-**OK to proceed?** If yes I run the full audit. If you want me to wipe the smoke-test user afterward, say so and I'll add a cleanup step (delete the test user + cascade).
+Just approval to run. I'll clean up the test user at the end.
