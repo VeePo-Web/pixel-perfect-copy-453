@@ -42,16 +42,21 @@ Deno.serve(async (req) => {
       .insert({
         user_id: user.id,
         plaid_item_id: exch.item_id,
-        access_token: exch.access_token,
         institution_id: institutionId,
         institution_name: institution?.name ?? null,
         status: "active",
       })
-      .select("id, user_id, access_token")
+      .select("id, user_id")
       .single();
     if (itemErr || !itemRow) throw new Error(itemErr?.message || "Insert failed");
 
-    const sync = await syncAccountsForItem(admin, itemRow);
+    // Persist access token encrypted-at-rest via service-role-only RPC.
+    await setAccessToken(admin, itemRow.id, exch.access_token);
+
+    const sync = await syncAccountsForItem(admin, {
+      ...itemRow,
+      access_token: exch.access_token,
+    });
     return json({ itemId: itemRow.id, accountCount: sync.updated });
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : "Unknown error" }, 500);
