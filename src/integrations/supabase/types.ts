@@ -429,7 +429,7 @@ export type Database = {
       }
       plaid_items: {
         Row: {
-          access_token: string
+          access_token_encrypted: string
           created_at: string
           cursor: string | null
           id: string
@@ -443,7 +443,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          access_token: string
+          access_token_encrypted: string
           created_at?: string
           cursor?: string | null
           id?: string
@@ -457,7 +457,7 @@ export type Database = {
           user_id: string
         }
         Update: {
-          access_token?: string
+          access_token_encrypted?: string
           created_at?: string
           cursor?: string | null
           id?: string
@@ -909,6 +909,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      _plaid_token_key: { Args: never; Returns: string }
       admin_audit_overview: {
         Args: never
         Returns: {
@@ -936,6 +937,11 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      plaid_get_access_token: { Args: { _item_id: string }; Returns: string }
+      plaid_set_access_token: {
+        Args: { _item_id: string; _token: string }
+        Returns: undefined
       }
       run_retention_sweep: { Args: never; Returns: Json }
       upsert_cron_secret: { Args: { p_secret: string }; Returns: undefined }
