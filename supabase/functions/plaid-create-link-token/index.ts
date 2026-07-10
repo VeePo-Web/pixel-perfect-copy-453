@@ -33,13 +33,13 @@ Deno.serve(async (req) => {
       const admin = adminClient();
       const { data: item, error } = await admin
         .from("plaid_items")
-        .select("access_token, user_id")
+        .select("id, user_id")
         .eq("id", itemId)
         .single();
       if (error || !item || item.user_id !== user.id) {
         return json({ error: "Item not found" }, 404);
       }
-      baseReq.access_token = item.access_token;
+      baseReq.access_token = await getAccessToken(admin, item.id);
     } else {
       baseReq.products = PLAID_PRODUCTS;
     }
