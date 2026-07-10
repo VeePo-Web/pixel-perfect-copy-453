@@ -60,10 +60,11 @@ Deno.serve(async (req) => {
     const admin = adminClient();
     const { data: item, error } = await admin
       .from("plaid_items")
-      .select("id, access_token, user_id, cursor")
+      .select("id, user_id, cursor")
       .eq("id", parsed.data.itemId)
       .single();
     if (error || !item || item.user_id !== user.id) return json({ error: "Item not found" }, 404);
+    const accessToken = await getAccessToken(admin, item.id);
 
     // ---- Layer 0: load the owner's correction memory (self-training categorizer) ----
     const correctionsRes = await admin
