@@ -6,11 +6,13 @@
  * The values must match the `price_id` strings registered via
  * `batch_create_product` (see docs/payments.md). They are stable across
  * sandbox and live.
+ *
+ * As of the current pricing page, the only paid SKU is GoldFin Reports at
+ * $150/mo. GoldFin Advisory is contact-only (no Stripe). The free Template
+ * Vault has no SKU.
  */
 export const PRICE_IDS = {
   "auto-fill-monthly": "auto_fill_monthly",
-  "finance-desk-monthly": "finance_desk_monthly",
-  "clarity-report": "clarity_report_once",
 } as const;
 
 export type PlanKey = keyof typeof PRICE_IDS;

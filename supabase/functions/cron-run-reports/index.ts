@@ -28,7 +28,6 @@ Deno.serve(async (req) => {
     // Accept both naming styles in case Stripe lookup_keys drift across envs.
     const ELIGIBLE_PRICES = [
       "auto-fill-monthly", "auto_fill_monthly",
-      "finance-desk-monthly", "finance_desk_monthly",
     ];
     const ACTIVE_STATUSES = ["active", "trialing"];
     const { data: items } = await admin
