@@ -7,7 +7,7 @@
 // - Branches on webhook_type/code: marks items needing reauth, and re-syncs
 //   accounts/balances on TRANSACTIONS/HOLDINGS update events.
 import { adminClient, corsHeaders, json } from "../_shared/auth-context.ts";
-import { plaid, syncAccountsForItem, isProduction } from "../_shared/plaid.ts";
+import { plaid, syncAccountsForItem, isProduction, getAccessToken } from "../_shared/plaid.ts";
 
 type Webhook = {
   webhook_type: string;
