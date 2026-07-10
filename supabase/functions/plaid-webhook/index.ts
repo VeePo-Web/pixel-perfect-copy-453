@@ -101,13 +101,16 @@ Deno.serve(async (req) => {
         return false;
       });
       if (!ok) return json({ error: "unauthorized" }, 401);
+    } else if (isProduction()) {
+      // Production accepts ONE authentication mode: Plaid's signed JWT.
+      // No shared-secret fallback — that path is sandbox-tooling only.
+      console.warn("prod plaid webhook rejected: missing plaid-verification header");
+      return json({ error: "unauthorized" }, 401);
     } else {
-      // Fallback: shared-secret header (sandbox/internal tooling).
-      // In production with no JWT present, require the shared secret.
+      // Sandbox / internal tooling fallback: shared-secret header.
       const expected = Deno.env.get("PLAID_WEBHOOK_SECRET");
       const got = req.headers.get("x-plaid-webhook-secret");
       if (!expected || got !== expected) {
-        if (isProduction()) console.warn("prod webhook missing plaid-verification and bad shared secret");
         return json({ error: "unauthorized" }, 401);
       }
     }
@@ -117,7 +120,7 @@ Deno.serve(async (req) => {
 
     const { data: item } = await admin
       .from("plaid_items")
-      .select("id, user_id, access_token")
+      .select("id, user_id")
       .eq("plaid_item_id", body.item_id)
       .maybeSingle();
 
