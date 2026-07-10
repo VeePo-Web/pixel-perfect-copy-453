@@ -1,75 +1,76 @@
-# Launch prep: Plaid production secret + Resend domain for goldfindesk.com
+# Resend domain setup on Vercel DNS for goldfindesk.com
 
-Two independent tracks. Track 1 is a single secret entry in Lovable. Track 2 is DNS work you do at your domain registrar plus a verification click in the Resend dashboard — I can't add DNS records for you, but I'll give you the exact records to paste.
-
----
-
-## Track 1 — Plaid production secret
-
-### What you do in the Plaid dashboard
-1. Log in at dashboard.plaid.com → top-left environment switcher → **Production**.
-2. If Production shows "Request access": submit the access request (use-case + security review). Approval is typically 1–3 business days. You cannot get a Production secret until this is approved.
-3. Once approved: **Team Settings → Keys → Production**. Copy the **Production secret** (not the sandbox one, not the client ID).
-4. While you're there, on the API page confirm:
-   - **Allowed redirect URIs** contains `https://goldfindesk.com/portal/accounts` (exact match, https, no trailing slash).
-   - **Webhook URL** is set to `https://paarucbnaxorpxqjecrz.supabase.co/functions/v1/plaid-webhook`.
-   - **Link customization** has the GoldFin logo and gold primary `#D4A845`.
-
-### What I do in Lovable (build mode)
-1. Open a secure secret form for `PLAID_PRODUCTION_SECRET` — you paste the Production secret from step 3 above. It never appears in code or chat.
-2. **Do not flip `PLAID_ENV` to `production` yet.** We keep sandbox on until Stripe go-live is also ready, so we can smoke-test one thing at a time. When you say "flip it," I'll update `PLAID_ENV=production`; the shared client picks the new host + secret on the next invocation — no redeploy.
-3. Smoke test: mint a link token from the portal → confirm real institution list (Chase/BofA/etc., not the Platypus sandbox banks). Do not exchange a token unless you intend a real connection.
-
-The sandbox secret stays configured so regression tests still work.
+Vercel DNS handles this cleanly — no proxy toggles like Cloudflare, no legacy record-type limits like Shopify. The steps are mechanical.
 
 ---
 
-## Track 2 — Resend domain: goldfindesk.com
+## Step 1 — Resend: add the domain (you, 2 min)
 
-Right now `send-email` sends from `Goldfin Desk <noreply@goldfindesk.com>` but the domain isn't verified in Resend, so mail lands in spam or is rejected outright.
-
-### What you do
-1. **Buy/own goldfindesk.com** — I assume you already do. If not, tell me and I'll add domain purchase as a step.
-2. **Resend dashboard → Domains → Add domain** → enter `goldfindesk.com`. Choose region closest to your users (US East is fine for North America).
-3. Resend shows you 4–6 DNS records. Copy each one exactly. They will look like this (values will differ — use Resend's exact output, not these):
-   - **MX** `send.goldfindesk.com` → `feedback-smtp.us-east-1.amazonses.com` priority `10`
-   - **TXT (SPF)** `send.goldfindesk.com` → `v=spf1 include:amazonses.com ~all`
-   - **TXT (DKIM)** `resend._domainkey.goldfindesk.com` → long `p=MIGfMA0...` value
-   - **TXT (DMARC, recommended)** `_dmarc.goldfindesk.com` → `v=DMARC1; p=none; rua=mailto:dmarc@goldfindesk.com`
-4. **At your DNS provider** (Cloudflare, GoDaddy, Namecheap, wherever `goldfindesk.com` is hosted): add every record. If using Cloudflare, set proxy to **DNS only** (grey cloud) for these — proxied MX/TXT will fail.
-5. Back in Resend → click **Verify DNS records**. Propagation is usually minutes; can take up to 72 hours. Wait until all rows are green.
-6. In Resend → **Domain settings** → set the domain to **verified / primary**. Turn on **Click tracking** off and **Open tracking** off for transactional (they hurt deliverability). Turn on **DMARC alignment**.
-
-### What I do in Lovable (build mode)
-1. Update `supabase/functions/send-email/index.ts` and `send-template-email/index.ts` so `FROM_DEFAULT` is `Goldfin Desk <desk@send.goldfindesk.com>` (uses the verified `send.` subdomain — best-practice for transactional so a hard bounce doesn't damage the root domain's reputation). OTP login mail from `Goldfin Desk <login@send.goldfindesk.com>`. Advisory replies keep `Reply-To: chris@goldfindesk.com`.
-2. Add unsubscribe headers on marketing-adjacent mail (`List-Unsubscribe`, `List-Unsubscribe-Post`) — the report unsubscribe function already exists, we just need to wire the header.
-3. Re-deploy `send-email`, `send-template-email`, `cron-run-reports` (uses report-delivery), and the auth OTP function so they pick up the new sender.
-4. Smoke test: send yourself an OTP and a sample report; verify (a) inbox not spam, (b) DKIM=pass, SPF=pass, DMARC=pass in the raw headers, (c) unsubscribe link works.
-
-### Why the `send.` subdomain
-- Isolates transactional reputation from anything you might do on the root (marketing, sales replies).
-- Standard pattern used by Stripe (`stripe.com` sends from `bounces.stripe.com`), Linear, Notion.
-- Zero deliverability cost — mail still shows as "from goldfindesk.com" in the reply-to and display name.
+1. Resend dashboard → **Domains → Add Domain** → `goldfindesk.com`.
+2. Region: **US East** (lowest latency for North American recipients; can't be changed later without re-verifying).
+3. Toggle **"Use a subdomain (recommended)"** ON, subdomain = `send`. This makes Resend generate records for `send.goldfindesk.com` — the standard for transactional isolation.
+4. Resend displays 3 records to add: **MX**, **SPF TXT**, **DKIM TXT**. Leave that tab open.
 
 ---
 
-## Order of operations
+## Step 2 — Vercel: add the DNS records (you, 5 min)
 
-```text
-Now       You: request Plaid Production access (starts 1–3 day clock)
-Now       You: add goldfindesk.com in Resend, copy DNS records
-Now       You: paste DNS records at registrar
-+15 min   You: click Verify in Resend
-+15 min   Me:  update FROM addresses in email functions, redeploy, smoke-test OTP + report
-+1–3 day  You: Plaid Production approved → copy Production secret
-Then      Me:  open secret form for PLAID_PRODUCTION_SECRET; you paste it
-Then      Me:  (on your go-ahead) flip PLAID_ENV=production, smoke-test real bank connect
-```
+1. Vercel dashboard → **Domains → goldfindesk.com → DNS records**.
+2. For each row Resend shows, click **Add** in Vercel and paste it. Vercel's UI:
+   - **MX** → Type MX, Name `send`, Value `feedback-smtp.us-east-1.amazonses.com` (whatever Resend shows), Priority `10`, TTL `60`.
+   - **SPF TXT** → Type TXT, Name `send`, Value `v=spf1 include:amazonses.com ~all`, TTL `60`.
+   - **DKIM TXT** → Type TXT, Name `resend._domainkey` (Resend will give the exact name — could be `resend._domainkey.send` — copy verbatim), Value = the long `p=MIGf...` string, TTL `60`.
+3. Add DMARC manually — Resend doesn't generate this one:
+   - Type TXT, Name `_dmarc`, Value `v=DMARC1; p=none; rua=mailto:chris@goldfindesk.com; adkim=s; aspf=s`, TTL `60`.
+   - `p=none` for the first 30 days to observe; we tighten to `p=quarantine` after we confirm no legitimate mail is failing.
 
-## What I need from you to switch to build mode
+Vercel-specific gotchas:
+- **Do not include `goldfindesk.com` in the Name field.** Vercel appends the domain automatically. If Resend says `send.goldfindesk.com`, you type `send` in Vercel. If it says `resend._domainkey.goldfindesk.com`, type `resend._domainkey`.
+- Vercel accepts TXT values without wrapping quotes — paste the raw string.
+- If a record already exists (rare, but sometimes an old SPF on root), don't create a duplicate; edit the existing one and merge includes.
 
-Just approve the plan. On approval I'll:
-1. Open the secure form for `PLAID_PRODUCTION_SECRET` (you can paste it whenever Plaid approves you — the form waits).
-2. Update the email `FROM_DEFAULT` values and redeploy the functions so they're ready the moment Resend shows "Verified."
+---
 
-If `goldfindesk.com` is not yet purchased or is hosted somewhere unusual (Shopify DNS can't add MX/TXT freely — we'd need a workaround), tell me now so I can adjust the plan.
+## Step 3 — Verify (you, 2–15 min)
+
+1. Resend → domain page → **Verify DNS records**.
+2. Vercel DNS usually propagates in under 5 minutes. If any row is still red after 15 min, click Verify again. Occasionally DKIM lags — up to 1 hour is normal, 72 hours is the outer bound.
+3. When all three (MX, SPF, DKIM) are green, the domain shows **Verified** — mail can send.
+
+---
+
+## Step 4 — Resend deliverability settings (you, 1 min)
+
+While in the Resend domain settings:
+- **Click tracking: OFF** for transactional. Rewritten links hurt inbox placement.
+- **Open tracking: OFF** for transactional. Same reason + privacy.
+- **Custom Return-Path**: enable if offered — improves SPF alignment.
+
+---
+
+## Step 5 — Codebase updates (me, in build mode, after you say verified)
+
+1. Update `supabase/functions/send-email/index.ts`: `FROM_DEFAULT` → **still pending your answer** (see question below).
+2. Update `supabase/functions/send-template-email/index.ts` same way.
+3. Update `supabase/functions/send-login-otp/index.ts` sender to `Goldfin Desk <login@…>`.
+4. Update `_shared/report-delivery.ts` / `report-email.ts` sender for bi-weekly briefings to `Goldfin Desk <reports@…>`.
+5. Add `List-Unsubscribe` + `List-Unsubscribe-Post` headers to briefing emails (unsubscribe function already exists at `email-unsubscribe`).
+6. Redeploy: `send-email`, `send-template-email`, `send-login-otp`, `cron-run-reports`, `resend-webhook`.
+7. Smoke test: send myself an OTP + trigger a sample report; check raw headers show `dkim=pass spf=pass dmarc=pass` and inbox placement (not Promotions, not Spam).
+
+---
+
+## One question I still need answered before I can wire the FROM address
+
+Which visible sender do you want in the recipient's inbox?
+
+**Option A (recommended):** `Goldfin Desk <desk@goldfindesk.com>`
+- Looks like it came from the root domain. Cleaner, more premium.
+- Sent through the verified `send.` subdomain under the hood (Return-Path is `bounces@send.goldfindesk.com`) — recipient never sees this.
+- Requires one extra SPF record on the root: TXT at name `@` value `v=spf1 include:amazonses.com ~all`. I'll add this to the Vercel steps if you pick A.
+
+**Option B:** `Goldfin Desk <desk@send.goldfindesk.com>`
+- Literally shows the `send.` subdomain to recipients. Less pretty but zero extra DNS.
+- Every other pro shop (Stripe, Linear, Notion) uses Option A. I'd pick A.
+
+Tell me A or B and I'll switch to build mode and execute Step 5.
