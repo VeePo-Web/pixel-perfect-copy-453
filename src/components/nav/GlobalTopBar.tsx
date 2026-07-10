@@ -234,7 +234,7 @@ function MobileSheet({
         )}
 
         <p className="mt-1 text-center text-[10.5px] uppercase tracking-[0.22em] text-white/35">
-          No bank connection required · Cancel anytime
+          Read-only Plaid · Cancel anytime
         </p>
       </div>
     </div>
@@ -476,7 +476,7 @@ export default function GlobalTopBar({
                         aria-hidden="true"
                         className="pointer-events-none absolute -bottom-5 whitespace-nowrap text-[9.5px] uppercase tracking-[0.18em] text-ink/35 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
                       >
-                        No bank connection · Cancel anytime
+                        Read-only Plaid · Cancel anytime
                       </span>
                     </div>
                   </>
@@ -516,7 +516,7 @@ export default function GlobalTopBar({
                         aria-hidden="true"
                         className="pointer-events-none absolute -bottom-5 whitespace-nowrap text-[9.5px] uppercase tracking-[0.18em] text-ink/35 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
                       >
-                        No bank connection · Cancel anytime
+                        Read-only Plaid · Cancel anytime
                       </span>
                     </div>
                   </>

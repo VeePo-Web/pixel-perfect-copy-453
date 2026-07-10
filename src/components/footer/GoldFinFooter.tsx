@@ -32,13 +32,13 @@ const NAV_GROUPS = [
 ] as const;
 
 const TRUST_PILLS = [
-  "No bank connection required",
+  "No bank connection for preview",
+  "Read-only Plaid for GoldFin Reports",
   "Cancel anytime",
-  "47 founders trust GoldFin",
 ] as const;
 
 const SECURITY_SIGNALS = [
-  "No bank connection required",
+  "Read-only Plaid connection",
   "256-bit encryption",
   "Cancel anytime",
 ] as const;

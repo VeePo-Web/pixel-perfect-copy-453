@@ -65,7 +65,7 @@ export default function PricingFinalCTA() {
             </a>
           </div>
           <p className="text-[11.5px] uppercase tracking-[0.22em] text-ink/50">
-            No contracts · Cancel anytime · No bank connection required
+            Secure bank connection via Plaid — read-only, we never move money. Cancel anytime.
           </p>
           <a
             href="/sample-briefing"
