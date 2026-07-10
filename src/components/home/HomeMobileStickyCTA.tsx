@@ -41,7 +41,7 @@ export default function HomeMobileStickyCTA() {
     >
       <div className="flex items-center gap-3 px-4 pt-3">
         <div className="min-w-0 flex-1">
-          <p className="truncate text-[11px] uppercase tracking-[0.22em] text-white/45">
+          <p className="truncate text-[11px] uppercase tracking-[0.22em] text-white/70">
             Free · No bank connection
           </p>
         </div>
