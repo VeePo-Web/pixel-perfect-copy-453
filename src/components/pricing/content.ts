@@ -311,15 +311,14 @@ export const planFit = [
   },
   {
     // advisory — border/secondary per value ladder (not gold)
-    title: "Apply for GoldFin Advisory if:",
+    title: "Talk to us about Advisory if:",
     bullets: [
-      "Your business has real monthly financial movement",
-      "You feel unclear even with tools or a bookkeeper",
-      "You want plain-English interpretation plus a strategy call",
-      "You have hiring, cash flow, or expense decisions to make",
-      "You want a recurring monthly financial rhythm",
+      "Your business does roughly $1M–$10M in revenue",
+      "You want a senior finance partner in the room, not another tool",
+      "You have hiring, pricing, or cash decisions coming up",
+      "You want standing counsel — not a one-time project",
     ],
-    cta: { label: "Apply for the GoldFin Desk", href: "/apply" },
+    cta: { label: "Request a conversation", href: "/about#advisory-contact" },
     tone: "flagship" as PlanTone,
   },
 ];
