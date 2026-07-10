@@ -2,7 +2,7 @@
 // and pulls the initial account list.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
-import { plaid, syncAccountsForItem } from "../_shared/plaid.ts";
+import { plaid, syncAccountsForItem, setAccessToken } from "../_shared/plaid.ts";
 
 const Body = z.object({
   publicToken: z.string().min(1),
