@@ -38,86 +38,44 @@ export const plans: PricingPlan[] = [
     name: "GoldFin Reports",
     price: "$150",
     priceSuffix: "/month",
-    badge: "Recommended starting point",
-    positioning: "The same templates — filled for you every month.",
+    badge: "Most owners start here",
+    positioning: "The same templates — filled for you, every two weeks.",
     bestFor:
-      "Owners who want monthly financial clarity without doing the spreadsheet work themselves.",
+      "Owners who want a recurring, plain-English financial rhythm without doing the spreadsheet work themselves.",
     includes: [
       "Every template auto-filled from your numbers",
-      "Monthly cash-flow summary",
-      "Expense-change report",
-      "Subscription & recurring-cost tracker",
-      "Revenue snapshot",
-      "Monthly PDF briefing",
-      "Owner action list",
-      "Spreadsheet export, always yours",
+      "Bi-weekly Owner Briefing (plain English)",
+      "Cash, margin, and payroll-runway read",
+      "Concentration & customer profitability tracker",
+      "Subscription & recurring-cost audit",
+      "Tax reserve ledger",
+      "PDF briefing + spreadsheet export",
+      "Read-only bank connection via Plaid",
     ],
     cta: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
     tone: "continuity",
     note: "Cancel anytime",
   },
   {
-    id: "desk",
+    id: "advisory",
     name: "GoldFin Advisory",
-    price: "$150",
-    priceSuffix: "/month",
-    badge: "Most relevant for serious owner-led businesses",
+    price: "Custom",
+    badge: "Standing counsel with Chris Sam",
     positioning:
-      "A premium monthly finance rhythm combining structure, automation, interpretation, and review.",
+      "A senior finance partner in the room for the decisions that move the business.",
     bestFor:
-      "Owner-led businesses that have outgrown bank-balance guessing, messy spreadsheets, and unclear reports.",
+      "Owner-led businesses roughly $1M–$10M in revenue, past the point where gut feel alone is enough.",
     includes: [
-      "Expert-built financial spreadsheet system",
-      "Plaid-connected bank data after onboarding",
-      "AI-assisted organization of financial activity",
-      "Bi-weekly plain-English financial briefings",
-      "Monthly one-hour strategy review",
-      "Questions to review",
-      "Decisions to consider",
-      "Recurring financial rhythm",
+      "Everything in GoldFin Reports",
+      "Direct line to Chris Sam for live decisions",
+      "Planning sessions on your calendar",
+      "Pricing, hiring, and cash calls, discussed",
+      "Diagnostic model built and kept current",
+      "Senior judgment on every engagement",
     ],
-    cta: { label: "Apply for GoldFin Advisory", href: "/apply" },
+    cta: { label: "Request a conversation", href: "/about#advisory-contact" },
     tone: "flagship",
-  },
-  {
-    id: "plus",
-    name: "Finance Desk Plus",
-    price: "$3,000",
-    priceSuffix: "/month",
-    positioning: "A deeper monthly finance rhythm for more complex businesses.",
-    bestFor:
-      "Owners who need additional advisory time, deeper reporting, or more frequent planning support.",
-    includes: [
-      "Everything in GoldFin Advisory",
-      "Expanded monthly review",
-      "Deeper KPI tracking",
-      "Quarterly planning support",
-      "More detailed analysis memos",
-      "Additional decision support",
-    ],
-    cta: { label: "Apply for Plus", href: "/apply" },
-    tone: "plus",
-    note: "By application",
-  },
-  {
-    id: "private",
-    name: "Private Finance Room",
-    price: "$5,000–$7,500",
-    priceSuffix: "/month",
-    positioning: "A higher-touch private finance experience.",
-    bestFor:
-      "Larger owner-led businesses needing strategic financial visibility and high-touch support.",
-    includes: [
-      "Everything in Finance Desk Plus",
-      "Private strategy memo",
-      "Scenario planning",
-      "Forecasting support",
-      "Deeper monthly/quarterly review",
-      "More direct advisory involvement",
-    ],
-    cta: { label: "Request Private Review", href: "/apply" },
-    tone: "private",
-    note: "By invitation",
+    note: "By conversation",
   },
 ];
 
@@ -305,24 +263,24 @@ export const faq = [
     a: "Keep them. A bookkeeper keeps your records clean. GoldFin Reports turns those records into a monthly plain-English briefing on what changed, what's risky, and what to decide next. They work together.",
   },
   {
-    q: "What's the difference between $150 Reports and $150 Advisory?",
-    a: "GoldFin Reports ($150/mo) fills your reports and briefs you every month — fully automated. GoldFin Advisory ($150/mo) adds a person who interprets them with you on a monthly strategy call. Most owners start with $150 and move up when the decisions get bigger.",
+    q: "What's the difference between Reports and Advisory?",
+    a: "GoldFin Reports ($150/mo) is fully automated — your templates filled from your numbers and a bi-weekly plain-English briefing, delivered to your inbox. GoldFin Advisory (custom, by conversation) adds Chris Sam directly: a senior finance partner in the room for the calls that move the business — pricing, hiring, cash, and planning. Most owners start with Reports and move up when the decisions get bigger.",
   },
   {
     q: "Is this a bookkeeping or CFO replacement?",
     a: "Neither. It does not replace tax, legal, accounting, or bookkeeping. It is the missing clarity layer — more than templates or a dashboard, lighter than a full finance hire.",
   },
   {
-    q: "Why does GoldFin Advisory cost $150/mo?",
-    a: "Because it is not just software. Advisory combines structure, automation, plain-English briefings, and a monthly one-hour strategy review with a finance professional. It is by application.",
+    q: "How does GoldFin Advisory pricing work?",
+    a: "Advisory is priced by conversation, not by tier. Every business is different in size, complexity, and how often decisions come up — so we scope it together on a short call. There is no application form and no obligation.",
   },
   {
     q: "Who is this best for?",
     a: "Owner-led businesses with real financial movement, recurring expenses, and cash-flow questions — but no full-time finance leader.",
   },
   {
-    q: "What happens after I apply for Advisory?",
-    a: "Your application is reviewed for fit. If there's a potential match, you receive next steps. No payment or bank connection is required to apply.",
+    q: "What happens if I request an Advisory conversation?",
+    a: "You email Chris directly at chris@goldfindesk.com. We set a 30-minute call — no charge — to learn your business and see if we're a fit. If we are, we scope the engagement. If we aren't, we'll say so.",
   },
 ];
 
@@ -353,15 +311,14 @@ export const planFit = [
   },
   {
     // advisory — border/secondary per value ladder (not gold)
-    title: "Apply for GoldFin Advisory if:",
+    title: "Talk to us about Advisory if:",
     bullets: [
-      "Your business has real monthly financial movement",
-      "You feel unclear even with tools or a bookkeeper",
-      "You want plain-English interpretation plus a strategy call",
-      "You have hiring, cash flow, or expense decisions to make",
-      "You want a recurring monthly financial rhythm",
+      "Your business does roughly $1M–$10M in revenue",
+      "You want a senior finance partner in the room, not another tool",
+      "You have hiring, pricing, or cash decisions coming up",
+      "You want standing counsel — not a one-time project",
     ],
-    cta: { label: "Apply for the GoldFin Desk", href: "/apply" },
+    cta: { label: "Request a conversation", href: "/about#advisory-contact" },
     tone: "flagship" as PlanTone,
   },
 ];
@@ -442,24 +399,24 @@ export function recommend(a: SelectorAnswers): Recommendation {
   }
   if (veryHighRev && wantsStrategy) {
     return {
-      planId: "private",
-      headline: "Request a Private Finance Room review.",
-      body: "Your size and complexity warrant a more direct, higher-touch arrangement.",
-      cta: { label: "Request Private Review", href: "/apply" },
+      planId: "advisory",
+      headline: "Talk to Chris about Advisory.",
+      body: "Your size and complexity warrant a senior finance partner in the room, not another tool.",
+      cta: { label: "Request a conversation", href: "/about#advisory-contact" },
     };
   }
   if (lowRev) {
     return {
       planId: "autofill",
-      headline: "Start with Auto-Filled Monthly Reports.",
-      body: "The bridge between free templates and the full Desk — your templates filled for you every month, at $150.",
+      headline: "Start with GoldFin Reports.",
+      body: "Your templates filled from your numbers, plus a bi-weekly plain-English briefing. $150/mo, cancel anytime.",
       cta: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
     };
   }
   return {
-    planId: "desk",
-    headline: "Apply for the GoldFin Desk.",
-    body: "Your stage suggests the recurring rhythm is exactly what is missing — more than a tool, lighter than a full finance team.",
-    cta: { label: "Apply for the GoldFin Desk", href: "/apply" },
+    planId: "advisory",
+    headline: "Talk to Chris about Advisory.",
+    body: "Your stage suggests standing counsel — a senior finance partner in the room for the calls that move the business.",
+    cta: { label: "Request a conversation", href: "/about#advisory-contact" },
   };
 }

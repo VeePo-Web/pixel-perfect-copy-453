@@ -1,22 +1,28 @@
 # GoldFin Desk
 
-GoldFin Desk turns a business's financial activity into organized spreadsheet templates and a plain-English monthly briefing — a recurring finance rhythm for owner-led businesses, without hiring a CFO or bookkeeper.
+GoldFin Desk is a dedicated thought partner for owner-led businesses — institutional-grade financial thinking, translated into plain English and delivered on a recurring rhythm. Built by a team with experience at Goldman Sachs, Bank of America, RBC, and Merrill Lynch.
 
 ## Key Pages
 - Home: / — what GoldFin Desk is and who it serves
-- Pricing: /pricing — Free templates, $99/mo automated Reports, $1,500/mo Advisory
-- Sample Briefing: /sample-briefing — an example plain-English monthly finance briefing
+- About: /about — the team, positioning, and how we think
+- Pricing: /pricing — Free templates, $150/mo Reports, and Advisory (custom)
+- Sample Briefing: /sample-briefing — an example bi-weekly Owner Briefing
 - Free Templates: /templates — seven free financial templates
 - Compare: /compare — GoldFin vs bookkeeper, fractional CFO, and dashboards
 - Security & FAQ: /security-faq — data handling, Plaid, and common questions
 
 ## Services
 - GoldFin Template Vault (Free): seven financial templates owners can use immediately
-- GoldFin Reports ($99/mo): your templates auto-filled from your numbers plus a plain-English briefing every month, fully automated
-- GoldFin Advisory ($1,500/mo): everything in Reports plus a monthly one-hour strategy review with a finance professional (by application)
+- GoldFin Reports ($150/mo): every template auto-filled from your numbers plus a bi-weekly plain-English Owner Briefing, fully automated
+- GoldFin Advisory (Custom, by conversation): standing counsel with Chris Sam — everything in Reports plus a direct line for live decisions and planning sessions. Contact-only, no self-serve checkout.
+
+## Team
+- Chris Sam, Founder — ex-Goldman Sachs (Capital Solutions Group), ex-Bank of America Merrill Lynch (Leveraged Finance Credit); Vice President, Structured Credit Solutions at Royal Bank of Canada.
+- Parker G, Partner (Operations) — Canadian business operations, on-the-ground operator lens.
 
 ## Key Facts
-- Category: monthly financial clarity and reporting for small, owner-led businesses
+- Category: recurring financial clarity and reporting for small, owner-led businesses
 - Not a replacement for tax, legal, accounting, or bookkeeping — it is the clarity layer on top
 - Bank connection is optional and read-only via Plaid; no money is ever moved
-- Start free; the $99/mo plan is month-to-month and cancellable anytime
+- Start free; the $150/mo plan is month-to-month and cancellable anytime
+- Team experience references prior employment. GoldFin Desk is independent and not affiliated with, endorsed by, or a partner of any listed institution.

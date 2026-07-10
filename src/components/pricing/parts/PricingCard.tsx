@@ -82,7 +82,7 @@ export default function PricingCard({ plan, emphasis }: Props) {
               ? "No account required · Instant access"
               : plan.tone === "continuity"
               ? "Month-to-month · Cancel anytime"
-              : "By application · No obligation"}
+              : "By conversation · No obligation"}
           </p>
         )}
       </div>
