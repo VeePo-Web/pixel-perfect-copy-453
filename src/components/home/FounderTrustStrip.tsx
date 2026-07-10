@@ -53,12 +53,21 @@ export default function FounderTrustStrip() {
           </div>
 
           <div>
-            <p className="text-[18px] font-light text-ink">The GoldFin Desk team</p>
-            <p className="mt-1 max-w-[52ch] text-[14px] leading-relaxed text-ink/65">
-              Team experience from Goldman Sachs, Bank of America, RBC, and Merrill
-              Lynch. Built for owners who needed better answers than their accountant
-              was giving them.
+            <p className="text-[18px] font-light text-ink">
+              Chris Sam &amp; Parker G — the GoldFin Desk team
             </p>
+            <p className="mt-1 max-w-[54ch] text-[14px] leading-relaxed text-ink/65">
+              Chris — ex-Goldman Sachs, ex-Bank of America Merrill Lynch, now VP of
+              Structured Credit Solutions at RBC — reads the numbers. Parker reads
+              the operation. Built for owners who needed better answers than their
+              accountant was giving them.
+            </p>
+            <a
+              href="/about"
+              className="mt-2 inline-block text-[12.5px] text-champagne-300/80 transition-colors hover:text-champagne-300"
+            >
+              Meet the team →
+            </a>
           </div>
         </div>
 
