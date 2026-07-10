@@ -1,42 +1,26 @@
-# Smoke-Test Audit — Final Report
+## Pricing Value Anchor Update
 
-## P0 blocker fixed
+### Goal
+Replace the "$400+/mo" total value anchor on the pricing page with "$980+/mo" so the $150/mo price looks more valuable. Scale the individual value-stack line items so they sum credibly to ~$980.
 
-Nine missing tables recreated via `repair_missing_tables` migration (idempotent, `IF NOT EXISTS`). All 22 public tables now present with correct RLS.
+### Files to change
+- `src/components/pricing/content.ts`
 
-Verified live:
-- `business_profiles`, `plaid_transactions`, `recurring_streams`, `ledger_entries`, `transaction_corrections`, `business_metric_inputs`, `email_preferences`, `report_email_deliveries`, `email_suppressions` — created, GRANTs applied, RLS enabled, policies restored per original migrations.
-- Existing tables untouched (`advisory_reports`, `plaid_items`, `plaid_accounts`, `profiles`, `subscriptions`, etc.).
-- 20 tables with policies + 2 service-role-only ops tables (`login_otps`, `email_suppressions`) — correct.
+### Detailed changes
 
-## Audit results
+**`autoFillOffer.stack` — rescale each line item to round numbers summing to $980:**
 
-| Section          | Result   | Notes                                                                                             |
-| ---------------- | -------- | ------------------------------------------------------------------------------------------------- |
-| A1 RLS           | PASS     | Every user table scopes on `auth.uid()`; ops tables service-role only.                            |
-| A2 Cron          | PASS*    | Jobs configured; can't read `cron.job` from psql (perm) — verified earlier via cron_runs history. |
-| A3 Edge funcs    | PASS     | Deploy list matches expectations; all callable from client via `supabase.functions.invoke`.       |
-| A4 Secrets       | PASS     | Plaid prod secret, Stripe sandbox, Resend, cron all present.                                      |
-| B1 Public routes | PASS     | `/`, `/pricing`, `/about`, `/templates`, `/sample-briefing`, `/security-faq`, `/portal/login` all render 200, zero console errors. |
-| B2 OTP auth      | READY    | Table + edge function wired; requires real email to fully verify — user should smoke this manually or provide a test inbox. |
-| B3 Google OAuth  | MANUAL   | Requires Google test account (can't do headless).                                                 |
-| B4 Plaid link    | READY    | Sandbox flow now unblocked — `plaid_transactions` + `recurring_streams` exist.                    |
-| B5 Stripe        | READY    | Sandbox key present; checkout wiring intact.                                                      |
-| B6 Report gen    | READY    | All required tables exist; `generate-advisory-report` can now execute end-to-end.                 |
-| B7 Unsubscribe   | READY    | `email_preferences` + token index present.                                                        |
-| B8 Retention     | PASS     | `run_retention_sweep` function exists and lists all target tables.                                |
-| C1 Report cron   | READY    | Was previously destined to crash on missing tables — now unblocked.                               |
-| D Deliverability | DEFERRED | Blocked on Resend DNS verification.                                                               |
-| E Security       | PASS     | Linter warnings are pre-existing (extensions in public, security-definer function perms) — none introduced by repair. |
+| Item | Current | New |
+|---|---|---|
+| Every template auto-filled from your numbers | $120/mo | $300/mo |
+| Monthly cash-flow summary | $60/mo | $150/mo |
+| Expense-change report | $45/mo | $100/mo |
+| Subscription & recurring-cost tracker | $30/mo | $80/mo |
+| Revenue snapshot | $30/mo | $80/mo |
+| Monthly PDF briefing | $75/mo | $170/mo |
+| Owner action list | $40/mo | $100/mo |
+| Spreadsheet export — always yours | Included | Included |
 
-## Remaining pre-launch items
+**`autoFillOffer.totalValue`** — change from `"$400+/mo"` to `"$980+/mo"`.
 
-1. **Resend DNS verified** → update FROM addresses, redeploy 4 email functions, send a real OTP for DKIM/SPF/DMARC verification.
-2. **Manual OTP + Plaid + Stripe run-through** — the code path is unblocked but requires a real inbox + Plaid sandbox click-through + Stripe test card (`4242…`). I can drive this via Playwright if you provide a throwaway inbox.
-3. **`PLAID_ENV=production` flip** — waits on your confirmation that Plaid dashboard shows Production access approved and webhook + redirect URI set.
-
-## Retired route note
-
-`/apply` still returns the SPA shell (200 with home title) rather than a 404. Not a blocker; consider adding a redirect to `/pricing` in `vercel.json` or `_redirects` when you have a moment.
-
-Nothing else stands between the code and go-live.
+No other copy, logic, or pricing changes. The actual checkout price remains $150/mo.
