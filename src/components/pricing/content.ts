@@ -103,7 +103,7 @@ export const autoFillOffer = {
   totalValue: "$980+/mo",
   cta: "Auto-fill my reports — $150/mo",
   guarantee: "Try one month. Cancel anytime before your next billing cycle.",
-  trust: "No bank connection required to start. When you connect, it is read-only — we never move money.",
+  trust: "Secure bank connection via Plaid — read-only, we never move money. Cancel anytime.",
   microbridge: "Not ready for done-for-you? The same templates are free →",
 };
 
@@ -256,7 +256,7 @@ export const faq = [
   },
   {
     q: "Do I need to connect my bank for the $150 plan?",
-    a: "No bank connection is required to start. When you do connect, it is read-only through a secure connection — we never move money. You can also start with rough, non-sensitive numbers.",
+    a: "Yes — GoldFin Reports auto-fills from your real numbers, so after onboarding you connect your business bank through Plaid. It is a read-only connection (we can see balances and transactions; we cannot move money), the same bank-grade link used by thousands of finance apps, and you can disconnect anytime from Settings. If you want to trial the rhythm first, start with the free Template Vault or sample briefing — those need no connection.",
   },
   {
     q: "What if I already have a bookkeeper?",
@@ -327,6 +327,7 @@ export const trustCards = [
   "No bank connection required for preview",
   "No bank connection required to apply",
   "No payment required to apply",
+  "$150/mo connection is read-only via Plaid",
   "Plaid connection happens after onboarding",
   "Use demo data or rough non-sensitive numbers first",
   "Clear process before any financial connection",
