@@ -1,9 +1,10 @@
 // Receives Plaid webhooks.
-// - Production: verifies the `plaid-verification` JWT (ES256) against Plaid's
-//   per-key JWKS via /webhook_verification_key/get, with a small in-memory key
-//   cache and ±5min iat skew check. Also verifies sha256(body) === claims.request_body_sha256.
-// - Sandbox / internal callers: falls back to a shared-secret header
-//   (`x-plaid-webhook-secret` === PLAID_WEBHOOK_SECRET) when no JWT is present.
+// - Production: REQUIRES the `plaid-verification` JWT (ES256). Verified against
+//   Plaid's per-key JWKS via /webhook_verification_key/get, with a small
+//   in-memory key cache and ±5min iat skew check. Also verifies
+//   sha256(body) === claims.request_body_sha256. No shared-secret fallback.
+// - Sandbox only: falls back to `x-plaid-webhook-secret` === PLAID_WEBHOOK_SECRET
+//   when no JWT is present (used by plaid-sandbox-fire-webhook).
 // - Branches on webhook_type/code: marks items needing reauth, and re-syncs
 //   accounts/balances on TRANSACTIONS/HOLDINGS update events.
 import { adminClient, corsHeaders, json } from "../_shared/auth-context.ts";
