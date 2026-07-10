@@ -129,7 +129,7 @@ export default function GoldFinFooter() {
             {TRUST_PILLS.map((pill) => (
               <span
                 key={pill}
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.04] px-3.5 py-1.5 text-[11px] text-white/42"
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.04] px-3.5 py-1.5 text-[11px] text-white/75"
               >
                 <span aria-hidden className="text-[9px] text-champagne-300/70">✓</span>
                 {pill}
