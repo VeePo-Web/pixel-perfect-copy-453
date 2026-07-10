@@ -68,7 +68,7 @@ export default function SecurityFinalCTA() {
           </a>
         </div>
         <p className="mt-6 text-[12px] text-ink/45">
-          $150/mo. Read-only connection. No bank connection required to start.
+          $150/mo. Read-only bank connection via Plaid — we never move money. Cancel anytime.
         </p>
       </div>
     </section>

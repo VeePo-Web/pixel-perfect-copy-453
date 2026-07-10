@@ -47,7 +47,7 @@ export default function ComparisonFinalCTA() {
           </a>
         </div>
         <p className="mt-6 text-[11.5px] uppercase tracking-[0.22em] text-ink/40">
-          $150/mo. No bank connection required to start. Cancel anytime.
+          $150/mo. Secure read-only Plaid connection. Cancel anytime.
         </p>
       </div>
     </section>

@@ -87,7 +87,7 @@ const COPY = {
     tertiary: "Running something larger? Apply for GoldFin Advisory →",
     tertiaryHref: "/apply",
     micro:
-      "$150/mo · No contracts · Cancel anytime · No bank connection required.",
+      "$150/mo · No contracts · Cancel anytime · Read-only Plaid connection.",
   },
   mobile: {
     eyebrow: "For serious small business owners",
@@ -356,7 +356,7 @@ const FinanceHero = () => {
                   </span>
                 </button>
                 <span className="font-general text-[11px] uppercase tracking-[0.16em] text-ink/40">
-                  No bank connection &middot; Cancel anytime
+                  Read-only Plaid &middot; Cancel anytime
                 </span>
               </div>
             </div>

@@ -41,7 +41,7 @@ export default function PricingHero() {
               </a>
             </div>
             <p className="mt-4 text-[11.5px] uppercase tracking-[0.2em] text-ink/50">
-              No contracts · Cancel anytime · No bank connection required to start
+              No contracts · Cancel anytime · Read-only Plaid connection
             </p>
           </div>
 
@@ -91,7 +91,7 @@ export default function PricingHero() {
                   {[
                     "Your templates auto-filled monthly",
                     "A plain-English briefing every cycle",
-                    "No bank connection to start",
+                    "Read-only Plaid connection · never moves money",
                     "Cancel anytime",
                   ].map((line) => (
                     <div key={line} className="flex items-center gap-2.5 text-[12.5px] text-ink/75">
