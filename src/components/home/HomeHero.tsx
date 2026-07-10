@@ -187,7 +187,7 @@ export default function HomeHero() {
               </div>
 
               {/* Decision question */}
-              <p className="mb-3 text-[11px] italic leading-[1.4] text-white/45">
+              <p className="mb-3 text-[11px] italic leading-[1.4] text-white/70">
                 {card.decision}
               </p>
 
