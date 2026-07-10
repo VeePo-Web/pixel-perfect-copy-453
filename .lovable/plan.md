@@ -1,76 +1,158 @@
-# Resend domain setup on Vercel DNS for goldfindesk.com
+# End-to-end smoke test audit — pre-launch
 
-Vercel DNS handles this cleanly — no proxy toggles like Cloudflare, no legacy record-type limits like Shopify. The steps are mechanical.
+Goal: verify every system a real customer touches actually works before we flip Plaid/Stripe to production. This is read-only auditing plus controlled sandbox test calls — nothing destructive to real users.
 
----
-
-## Step 1 — Resend: add the domain (you, 2 min)
-
-1. Resend dashboard → **Domains → Add Domain** → `goldfindesk.com`.
-2. Region: **US East** (lowest latency for North American recipients; can't be changed later without re-verifying).
-3. Toggle **"Use a subdomain (recommended)"** ON, subdomain = `send`. This makes Resend generate records for `send.goldfindesk.com` — the standard for transactional isolation.
-4. Resend displays 3 records to add: **MX**, **SPF TXT**, **DKIM TXT**. Leave that tab open.
+I'll produce a single audit report at the end with pass/fail per section and a prioritized fix list.
 
 ---
 
-## Step 2 — Vercel: add the DNS records (you, 5 min)
+## Track A — Backend infrastructure (I run, ~10 min)
 
-1. Vercel dashboard → **Domains → goldfindesk.com → DNS records**.
-2. For each row Resend shows, click **Add** in Vercel and paste it. Vercel's UI:
-   - **MX** → Type MX, Name `send`, Value `feedback-smtp.us-east-1.amazonses.com` (whatever Resend shows), Priority `10`, TTL `60`.
-   - **SPF TXT** → Type TXT, Name `send`, Value `v=spf1 include:amazonses.com ~all`, TTL `60`.
-   - **DKIM TXT** → Type TXT, Name `resend._domainkey` (Resend will give the exact name — could be `resend._domainkey.send` — copy verbatim), Value = the long `p=MIGf...` string, TTL `60`.
-3. Add DMARC manually — Resend doesn't generate this one:
-   - Type TXT, Name `_dmarc`, Value `v=DMARC1; p=none; rua=mailto:chris@goldfindesk.com; adkim=s; aspf=s`, TTL `60`.
-   - `p=none` for the first 30 days to observe; we tighten to `p=quarantine` after we confirm no legitimate mail is failing.
+**A1. Database health & RLS**
+- Read all RLS policies on: `profiles`, `user_roles`, `plaid_items`, `plaid_accounts`, `transactions`, `advisory_reports`, `subscriptions`, `login_otps`, `webhook_events`, `cron_runs`, `leads`, `applications`, `email_send_log`, `suppressed_emails`.
+- Confirm every user-facing table filters on `auth.uid()` and has `service_role` full access.
+- Run `supabase--linter` for security warnings.
+- Verify GRANTs match policies (no missing `GRANT SELECT` on tables that need anon or authenticated reads).
 
-Vercel-specific gotchas:
-- **Do not include `goldfindesk.com` in the Name field.** Vercel appends the domain automatically. If Resend says `send.goldfindesk.com`, you type `send` in Vercel. If it says `resend._domainkey.goldfindesk.com`, type `resend._domainkey`.
-- Vercel accepts TXT values without wrapping quotes — paste the raw string.
-- If a record already exists (rare, but sometimes an old SPF on root), don't create a duplicate; edit the existing one and merge includes.
+**A2. Cron jobs**
+- Query `cron.job` and `cron.job_run_details` (last 30 days):
+  - `advisory-report-biweekly` — did it run? Any failures? Correct `x-cron-secret` header?
+  - `retention-sweep-daily` — same.
+- Confirm both jobs schedule matches business intent (Monday 13:00 UTC for reports, daily 09:00 UTC for sweep).
 
----
+**A3. Edge function health**
+- List all deployed functions and their last-modified timestamp.
+- Fetch recent logs (last 24h) for the critical ones and grep for errors:
+  - `plaid-webhook`, `plaid-create-link-token`, `plaid-exchange-public-token`, `plaid-sync-accounts`, `plaid-sync-transactions`
+  - `create-checkout`, `payments-webhook`, `create-portal-session`
+  - `send-email`, `send-template-email`, `send-login-otp`, `verify-login-otp`
+  - `generate-advisory-report`, `cron-run-reports`, `cron-retention-sweep`
+  - `email-unsubscribe`, `resend-webhook`
+- Flag any function with unhandled errors or missing env vars.
 
-## Step 3 — Verify (you, 2–15 min)
-
-1. Resend → domain page → **Verify DNS records**.
-2. Vercel DNS usually propagates in under 5 minutes. If any row is still red after 15 min, click Verify again. Occasionally DKIM lags — up to 1 hour is normal, 72 hours is the outer bound.
-3. When all three (MX, SPF, DKIM) are green, the domain shows **Verified** — mail can send.
-
----
-
-## Step 4 — Resend deliverability settings (you, 1 min)
-
-While in the Resend domain settings:
-- **Click tracking: OFF** for transactional. Rewritten links hurt inbox placement.
-- **Open tracking: OFF** for transactional. Same reason + privacy.
-- **Custom Return-Path**: enable if offered — improves SPF alignment.
+**A4. Secrets & env vars**
+- Read `fetch_secrets` list; confirm all required ones present for the two paths (sandbox now, production later): `PLAID_CLIENT_ID`, `PLAID_SANDBOX_SECRET`, `PLAID_PRODUCTION_SECRET`, `PLAID_WEBHOOK_SECRET`, `CRON_SECRET`, `STRIPE_SANDBOX_API_KEY`, `PAYMENTS_SANDBOX_WEBHOOK_SECRET`, `RESEND_API_KEY`, `LOVABLE_API_KEY`.
+- Flag any that are missing or will need to be added before go-live (`PAYMENTS_LIVE_WEBHOOK_SECRET`, `STRIPE_LIVE_API_KEY` — added automatically at Stripe go-live).
 
 ---
 
-## Step 5 — Codebase updates (me, in build mode, after you say verified)
+## Track B — Full sandbox user journey (I drive Playwright, ~15 min)
 
-1. Update `supabase/functions/send-email/index.ts`: `FROM_DEFAULT` → **still pending your answer** (see question below).
-2. Update `supabase/functions/send-template-email/index.ts` same way.
-3. Update `supabase/functions/send-login-otp/index.ts` sender to `Goldfin Desk <login@…>`.
-4. Update `_shared/report-delivery.ts` / `report-email.ts` sender for bi-weekly briefings to `Goldfin Desk <reports@…>`.
-5. Add `List-Unsubscribe` + `List-Unsubscribe-Post` headers to briefing emails (unsubscribe function already exists at `email-unsubscribe`).
-6. Redeploy: `send-email`, `send-template-email`, `send-login-otp`, `cron-run-reports`, `resend-webhook`.
-7. Smoke test: send myself an OTP + trigger a sample report; check raw headers show `dkim=pass spf=pass dmarc=pass` and inbox placement (not Promotions, not Spam).
+Real end-to-end run against the live preview using the Plaid sandbox and Stripe sandbox — this is the actual "can a customer plug in and get reports" test.
+
+**B1. Marketing → CTA**
+- Land on `/`, verify hero + pricing ladder + FAQ render.
+- Click each primary CTA on `/`, `/pricing`, `/about#advisory-contact` — verify each routes to the correct destination (not the retired `/apply`, no `$99`).
+- Verify `chris@goldfindesk.com` mailto works from Advisory CTAs.
+- Screenshot each page for visual confirmation.
+
+**B2. Portal auth (OTP path)**
+- Go to `/portal/login`, enter a test email.
+- Verify OTP email is sent — check `email_send_log` for a row with `sent` status.
+- Read the OTP from the DB (test-only access via `login_otps` table), submit it.
+- Confirm session is created, redirected to `/portal` dashboard.
+- Confirm `profiles` and `user_roles` rows created via the `handle_new_user` trigger.
+
+**B3. Portal auth (Google OAuth)**
+- Verify Google is listed as a provider on `/portal/login` page (visual).
+- I can't complete a real Google OAuth in headless Playwright without credentials, so this is a visual check only. If you have a Google test account you're comfortable using, I can add a full flow — otherwise I'll note "manual verification needed."
+
+**B4. Plaid Link (sandbox)**
+- Signed in as the test user, navigate to `/portal/accounts`.
+- Click "Connect a bank" → Plaid Link modal opens.
+- Complete Sandbox flow with `user_good` / `pass_good` at "First Platypus Bank."
+- Confirm: `plaid_items` row created (encrypted `access_token`), `plaid_accounts` rows populated, transactions row count > 0.
+- Fire `plaid-sandbox-fire-webhook` for `SYNC_UPDATES_AVAILABLE` — confirm webhook function accepts it, `plaid-sync-transactions` runs, log row lands in `webhook_events`.
+
+**B5. Stripe checkout (sandbox)**
+- From `/pricing`, click "Auto-fill my reports — $150/mo."
+- Verify checkout session opens.
+- Complete with Stripe test card `4242 4242 4242 4242`, any future expiry, any CVC.
+- Confirm redirect to `/portal/billing/return` shows success.
+- Confirm `subscriptions` row created via webhook: `status='active'`, `price_id='auto_fill_monthly'`, `environment='sandbox'`.
+- Verify `hasPaymentsConfigured()` still returns false in dev (correct — the sandbox key isn't `pk_live_…`).
+
+**B6. Advisory report generation**
+- With the test user connected and subscribed, invoke `generate-advisory-report` manually.
+- Confirm: report row in `advisory_reports` with `status='ready'`, all 6 sections populated, no verification gate failures.
+- Confirm email delivered — row in `email_send_log` with `sent` status for template `advisory-report`.
+- Read the delivered HTML from the log — visual check for template correctness and unsubscribe link.
+
+**B7. Unsubscribe flow**
+- Click the unsubscribe link (extract token from the delivered email).
+- Confirm token validates, row appears in `suppressed_emails`, subsequent sends to that address are blocked.
+
+**B8. Portal settings & account deletion**
+- Verify `/portal/settings` loads, shows current plan, Plaid item, unsubscribe status.
+- Trigger `account-delete-request` — confirm it enqueues, doesn't delete immediately (24h grace).
 
 ---
 
-## One question I still need answered before I can wire the FROM address
+## Track C — Cron & long-running (I audit, no execution)
 
-Which visible sender do you want in the recipient's inbox?
+**C1. Bi-weekly report cron**
+- Verify `cron-run-reports` gate logic: only users with active `auto_fill_monthly` subscription AND at least one `active` plaid_item AND last report >13 days old.
+- Read the last 5 runs from `cron_runs` — confirm each has a `success` outcome and processed the expected user count.
 
-**Option A (recommended):** `Goldfin Desk <desk@goldfindesk.com>`
-- Looks like it came from the root domain. Cleaner, more premium.
-- Sent through the verified `send.` subdomain under the hood (Return-Path is `bounces@send.goldfindesk.com`) — recipient never sees this.
-- Requires one extra SPF record on the root: TXT at name `@` value `v=spf1 include:amazonses.com ~all`. I'll add this to the Vercel steps if you pick A.
+**C2. Retention sweep**
+- Verify `run_retention_sweep()` function logic matches the retention memory rules.
+- Read last 5 runs from `cron_runs`.
 
-**Option B:** `Goldfin Desk <desk@send.goldfindesk.com>`
-- Literally shows the `send.` subdomain to recipients. Less pretty but zero extra DNS.
-- Every other pro shop (Stripe, Linear, Notion) uses Option A. I'd pick A.
+---
 
-Tell me A or B and I'll switch to build mode and execute Step 5.
+## Track D — Deliverability & branding (waits on Resend DNS verification)
+
+Cannot fully execute until you confirm Resend shows the domain as Verified. What I audit now:
+- Confirm no code sends from `onboarding@resend.dev` (the Resend test sender) — that will fail for real recipients.
+- Confirm the `FROM_DEFAULT` constant in `send-email` and `send-template-email` is consistent.
+- Verify `List-Unsubscribe` header wiring in `report-delivery.ts`.
+
+After you say "Resend verified" I'll:
+- Update FROM addresses to your chosen A or B option.
+- Redeploy the 4 email functions.
+- Send a real OTP to a test address you provide → I read the raw headers (via Playwright accessing the delivered mail) or you paste the headers, and I confirm `dkim=pass spf=pass dmarc=pass`.
+
+---
+
+## Track E — Security scan
+
+- Run `security--run_security_scan`.
+- Cross-reference findings against the retention/RLS work already done.
+- Flag any Critical or High.
+
+---
+
+## Deliverable
+
+A single audit report I paste into chat covering:
+
+```text
+Section          Result      Notes / Action
+--------------- ----------- --------------------------------
+A1 RLS          pass/fail
+A2 Cron         pass/fail
+A3 Functions    pass/fail
+A4 Secrets      pass/fail
+B1 CTAs         pass/fail
+B2 OTP          pass/fail
+B3 Google       manual
+B4 Plaid        pass/fail
+B5 Stripe       pass/fail
+B6 Report       pass/fail
+B7 Unsub        pass/fail
+B8 Settings     pass/fail
+C1 Report cron  pass/fail
+C2 Retention    pass/fail
+D  Deliverab.   deferred to post-Resend-verify
+E  Security     pass/fail
+```
+
+Plus a prioritized fix list ordered blocker → nit.
+
+---
+
+## One thing to confirm before I start
+
+The Playwright flow (Track B) will create real rows in your dev database: a test user (`smoke-test-<timestamp>@goldfindesk.com`), a sandbox Plaid item, a sandbox Stripe subscription. All are in `environment='sandbox'` and never touch real money, but they're persistent.
+
+**OK to proceed?** If yes I run the full audit. If you want me to wipe the smoke-test user afterward, say so and I'll add a cleanup step (delete the test user + cascade).
