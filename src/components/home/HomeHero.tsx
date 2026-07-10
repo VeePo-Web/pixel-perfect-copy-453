@@ -150,7 +150,7 @@ export default function HomeHero() {
             {/* Text link secondary */}
             <a
               href="/sample-briefing"
-              className="group mt-5 inline-flex items-center text-[12.5px] uppercase tracking-[0.18em] text-white/45 transition-colors duration-300 hover:text-champagne-300"
+              className="group mt-5 inline-flex items-center text-[12.5px] uppercase tracking-[0.18em] text-white/70 transition-colors duration-300 hover:text-champagne-300"
             >
               <span className="border-b border-white/15 pb-0.5 group-hover:border-champagne-300/60">
                 Watch your numbers turn into plain English
@@ -187,7 +187,7 @@ export default function HomeHero() {
               </div>
 
               {/* Decision question */}
-              <p className="mb-3 text-[11px] italic leading-[1.4] text-white/45">
+              <p className="mb-3 text-[11px] italic leading-[1.4] text-white/70">
                 {card.decision}
               </p>
 
