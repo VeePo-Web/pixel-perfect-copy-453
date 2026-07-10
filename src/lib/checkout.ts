@@ -7,13 +7,11 @@ import { supabase } from "../integrations/supabase/client";
 import { getStripeEnvironment, hasPaymentsConfigured } from "./stripe";
 import { analytics } from "./analytics";
 
-export type PlanKey = "auto-fill-monthly" | "finance-desk-monthly" | "clarity-report";
+export type PlanKey = "auto-fill-monthly";
 
 /** Display/analytics value per plan (USD). Source of truth for price = Stripe. */
 const PLAN_PRICE_USD: Partial<Record<PlanKey, number>> = {
   "auto-fill-monthly": 150,
-  "finance-desk-monthly": 149,
-  "clarity-report": 49,
 };
 
 const RETURN_PATH = "/checkout/return";
@@ -56,11 +54,10 @@ export function startAutoFillCheckout(): void {
   openCheckout("auto-fill-monthly");
 }
 
-export function startClarityReportCheckout(email?: string): void {
-  openCheckout("clarity-report", email);
-}
-
-export function startFinanceDeskCheckout(email?: string): void {
+// Legacy checkout helpers (finance-desk-monthly, clarity-report) removed:
+// the current pricing page has a single paid SKU (auto-fill-monthly).
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function _legacy_removed(email?: string): void {
   openCheckout("finance-desk-monthly", email);
 }
 
