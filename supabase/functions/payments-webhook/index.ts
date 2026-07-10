@@ -60,7 +60,7 @@ async function handleCheckoutCompleted(session: any, env: StripeEnv) {
 
   // Kickoff first advisory report immediately for paying users who already
   // connected a bank — so they don't wait up to 13 days for the cron pass.
-  const ELIGIBLE_PLANS = ["auto-fill-monthly", "finance-desk-monthly"];
+  const ELIGIBLE_PLANS = ["auto-fill-monthly", "auto_fill_monthly"];
   if (userId && plan && ELIGIBLE_PLANS.includes(plan)) {
     try {
       const { data: hasBank } = await getSupabase()

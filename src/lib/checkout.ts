@@ -56,10 +56,6 @@ export function startAutoFillCheckout(): void {
 
 // Legacy checkout helpers (finance-desk-monthly, clarity-report) removed:
 // the current pricing page has a single paid SKU (auto-fill-monthly).
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function _legacy_removed(email?: string): void {
-  openCheckout("finance-desk-monthly", email);
-}
 
 /** Server call used by <CheckoutOverlay/> — kept here so all Stripe wiring lives in one module. */
 export async function fetchCheckoutClientSecret(
