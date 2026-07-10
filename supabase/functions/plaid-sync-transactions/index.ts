@@ -6,7 +6,7 @@
 // confidence. Server-authoritative: all writes via service_role.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
-import { plaid } from "../_shared/plaid.ts";
+import { plaid, getAccessToken } from "../_shared/plaid.ts";
 import { buildCorrectionMap, enrichTransaction } from "../_shared/report-enrich.ts";
 
 const Body = z.object({ itemId: z.string().uuid() });
