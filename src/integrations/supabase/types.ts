@@ -938,6 +938,17 @@ export type Database = {
         }
         Returns: boolean
       }
+      plaid_create_item: {
+        Args: {
+          _institution_id: string
+          _institution_name: string
+          _plaid_item_id: string
+          _status: string
+          _token: string
+          _user_id: string
+        }
+        Returns: string
+      }
       plaid_get_access_token: { Args: { _item_id: string }; Returns: string }
       plaid_set_access_token: {
         Args: { _item_id: string; _token: string }

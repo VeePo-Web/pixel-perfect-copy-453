@@ -2,7 +2,7 @@
 // and pulls the initial account list.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
-import { plaid, syncAccountsForItem, setAccessToken } from "../_shared/plaid.ts";
+import { plaid, syncAccountsForItem } from "../_shared/plaid.ts";
 
 const Body = z.object({
   publicToken: z.string().min(1),
@@ -37,21 +37,17 @@ Deno.serve(async (req) => {
     }
 
     const admin = adminClient();
-    const { data: itemRow, error: itemErr } = await admin
-      .from("plaid_items")
-      .insert({
-        user_id: user.id,
-        plaid_item_id: exch.item_id,
-        institution_id: institutionId,
-        institution_name: institution?.name ?? null,
-        status: "active",
-      })
-      .select("id, user_id")
-      .single();
-    if (itemErr || !itemRow) throw new Error(itemErr?.message || "Insert failed");
-
-    // Persist access token encrypted-at-rest via service-role-only RPC.
-    await setAccessToken(admin, itemRow.id, exch.access_token);
+    // Atomic insert with encrypted-at-rest access token (service-role-only RPC).
+    const { data: newId, error: rpcErr } = await admin.rpc("plaid_create_item", {
+      _user_id: user.id,
+      _plaid_item_id: exch.item_id,
+      _institution_id: institutionId,
+      _institution_name: institution?.name ?? null,
+      _status: "active",
+      _token: exch.access_token,
+    });
+    if (rpcErr || !newId) throw new Error(rpcErr?.message || "Insert failed");
+    const itemRow = { id: newId as string, user_id: user.id };
 
     const sync = await syncAccountsForItem(admin, {
       ...itemRow,
