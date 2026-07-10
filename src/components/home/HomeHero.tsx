@@ -150,7 +150,7 @@ export default function HomeHero() {
             {/* Text link secondary */}
             <a
               href="/sample-briefing"
-              className="group mt-5 inline-flex items-center text-[12.5px] uppercase tracking-[0.18em] text-white/45 transition-colors duration-300 hover:text-champagne-300"
+              className="group mt-5 inline-flex items-center text-[12.5px] uppercase tracking-[0.18em] text-white/70 transition-colors duration-300 hover:text-champagne-300"
             >
               <span className="border-b border-white/15 pb-0.5 group-hover:border-champagne-300/60">
                 Watch your numbers turn into plain English
