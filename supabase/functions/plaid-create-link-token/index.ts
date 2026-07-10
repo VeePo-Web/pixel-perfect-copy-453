@@ -2,7 +2,7 @@
 // Pass { mode: "update", itemId } to get an update-mode token for re-auth.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
-import { plaid, PLAID_COUNTRY_CODES, PLAID_PRODUCTS } from "../_shared/plaid.ts";
+import { plaid, PLAID_COUNTRY_CODES, PLAID_PRODUCTS, getAccessToken } from "../_shared/plaid.ts";
 
 const Body = z.object({
   mode: z.enum(["create", "update"]).default("create"),
