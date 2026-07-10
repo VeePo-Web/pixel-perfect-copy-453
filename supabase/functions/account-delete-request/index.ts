@@ -27,11 +27,12 @@ Deno.serve(async (req) => {
     // 1. Revoke Plaid items immediately.
     const { data: items } = await admin
       .from("plaid_items")
-      .select("id, access_token")
+      .select("id")
       .eq("user_id", user.id);
     for (const it of items ?? []) {
       try {
-        await plaid("/item/remove", { access_token: it.access_token });
+        const accessToken = await getAccessToken(admin, it.id);
+        await plaid("/item/remove", { access_token: accessToken });
       } catch (e) {
         console.error("plaid remove failed", it.id, e);
       }
