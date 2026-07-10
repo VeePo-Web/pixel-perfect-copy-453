@@ -263,24 +263,24 @@ export const faq = [
     a: "Keep them. A bookkeeper keeps your records clean. GoldFin Reports turns those records into a monthly plain-English briefing on what changed, what's risky, and what to decide next. They work together.",
   },
   {
-    q: "What's the difference between $150 Reports and $150 Advisory?",
-    a: "GoldFin Reports ($150/mo) fills your reports and briefs you every month — fully automated. GoldFin Advisory ($150/mo) adds a person who interprets them with you on a monthly strategy call. Most owners start with $150 and move up when the decisions get bigger.",
+    q: "What's the difference between Reports and Advisory?",
+    a: "GoldFin Reports ($150/mo) is fully automated — your templates filled from your numbers and a bi-weekly plain-English briefing, delivered to your inbox. GoldFin Advisory (custom, by conversation) adds Chris Sam directly: a senior finance partner in the room for the calls that move the business — pricing, hiring, cash, and planning. Most owners start with Reports and move up when the decisions get bigger.",
   },
   {
     q: "Is this a bookkeeping or CFO replacement?",
     a: "Neither. It does not replace tax, legal, accounting, or bookkeeping. It is the missing clarity layer — more than templates or a dashboard, lighter than a full finance hire.",
   },
   {
-    q: "Why does GoldFin Advisory cost $150/mo?",
-    a: "Because it is not just software. Advisory combines structure, automation, plain-English briefings, and a monthly one-hour strategy review with a finance professional. It is by application.",
+    q: "How does GoldFin Advisory pricing work?",
+    a: "Advisory is priced by conversation, not by tier. Every business is different in size, complexity, and how often decisions come up — so we scope it together on a short call. There is no application form and no obligation.",
   },
   {
     q: "Who is this best for?",
     a: "Owner-led businesses with real financial movement, recurring expenses, and cash-flow questions — but no full-time finance leader.",
   },
   {
-    q: "What happens after I apply for Advisory?",
-    a: "Your application is reviewed for fit. If there's a potential match, you receive next steps. No payment or bank connection is required to apply.",
+    q: "What happens if I request an Advisory conversation?",
+    a: "You email Chris directly at chris@goldfindesk.com. We set a 30-minute call — no charge — to learn your business and see if we're a fit. If we are, we scope the engagement. If we aren't, we'll say so.",
   },
 ];
 
