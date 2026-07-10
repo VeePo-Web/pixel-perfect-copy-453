@@ -96,7 +96,7 @@ export default function GoldFinFooter() {
           </h2>
 
           {/* Sub-headline */}
-          <p className="mx-auto mb-9 max-w-[40ch] text-[14.5px] leading-[1.72] text-white/45">
+          <p className="mx-auto mb-9 max-w-[40ch] text-[14.5px] leading-[1.72] text-white/60">
             Monthly financial briefings, auto-generated from your numbers —
             delivered to owner-led businesses.
           </p>
