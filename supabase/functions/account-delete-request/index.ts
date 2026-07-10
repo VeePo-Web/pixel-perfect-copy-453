@@ -3,7 +3,7 @@
 // subscription at period end. Pass { cancel: true } to undo a pending request.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
-import { plaid } from "../_shared/plaid.ts";
+import { plaid, getAccessToken } from "../_shared/plaid.ts";
 import { createStripeClient } from "../_shared/stripe.ts";
 
 const Body = z.object({ cancel: z.boolean().optional() });
