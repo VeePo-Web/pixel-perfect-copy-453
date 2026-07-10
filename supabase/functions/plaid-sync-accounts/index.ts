@@ -1,7 +1,7 @@
 // Refreshes account list + balances for one Plaid item.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
-import { syncAccountsForItem } from "../_shared/plaid.ts";
+import { syncAccountsForItem, getAccessToken } from "../_shared/plaid.ts";
 
 const Body = z.object({ itemId: z.string().uuid() });
 
@@ -15,14 +15,15 @@ Deno.serve(async (req) => {
     const admin = adminClient();
     const { data: item, error } = await admin
       .from("plaid_items")
-      .select("id, access_token, user_id")
+      .select("id, user_id")
       .eq("id", parsed.data.itemId)
       .single();
     if (error || !item || item.user_id !== user.id) {
       return json({ error: "Item not found" }, 404);
     }
 
-    const result = await syncAccountsForItem(admin, item);
+    const accessToken = await getAccessToken(admin, item.id);
+    const result = await syncAccountsForItem(admin, { ...item, access_token: accessToken });
     return json(result);
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : "Unknown error" }, 500);
