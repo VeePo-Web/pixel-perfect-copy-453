@@ -399,24 +399,24 @@ export function recommend(a: SelectorAnswers): Recommendation {
   }
   if (veryHighRev && wantsStrategy) {
     return {
-      planId: "private",
-      headline: "Request a Private Finance Room review.",
-      body: "Your size and complexity warrant a more direct, higher-touch arrangement.",
-      cta: { label: "Request Private Review", href: "/apply" },
+      planId: "advisory",
+      headline: "Talk to Chris about Advisory.",
+      body: "Your size and complexity warrant a senior finance partner in the room, not another tool.",
+      cta: { label: "Request a conversation", href: "/about#advisory-contact" },
     };
   }
   if (lowRev) {
     return {
       planId: "autofill",
-      headline: "Start with Auto-Filled Monthly Reports.",
-      body: "The bridge between free templates and the full Desk — your templates filled for you every month, at $150.",
+      headline: "Start with GoldFin Reports.",
+      body: "Your templates filled from your numbers, plus a bi-weekly plain-English briefing. $150/mo, cancel anytime.",
       cta: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
     };
   }
   return {
-    planId: "desk",
-    headline: "Apply for the GoldFin Desk.",
-    body: "Your stage suggests the recurring rhythm is exactly what is missing — more than a tool, lighter than a full finance team.",
-    cta: { label: "Apply for the GoldFin Desk", href: "/apply" },
+    planId: "advisory",
+    headline: "Talk to Chris about Advisory.",
+    body: "Your stage suggests standing counsel — a senior finance partner in the room for the calls that move the business.",
+    cta: { label: "Request a conversation", href: "/about#advisory-contact" },
   };
 }
