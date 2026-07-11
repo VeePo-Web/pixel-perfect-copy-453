@@ -2,6 +2,7 @@ import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import fs from 'fs'
+import { blogStaticStyles, getStaticBlogRoutes } from './src/lib/blog/static'
 
 // Production canonical host (matches index.html, robots.txt, sitemap.xml and
 // per-route canonicals -- keep these four in sync; single source of truth for
@@ -19,10 +20,10 @@ const HOST = 'https://goldfindesk.com'
 const ROUTE_META: { path: string; title: string; description: string; h1: string }[] = [
   {
     path: 'pricing',
-    title: 'Monthly Financial Reports — $99/mo | GoldFin Desk',
-    h1: 'Monthly financial reports, done for you — $99/mo',
+    title: 'Monthly Financial Reports — $150/mo | GoldFin Desk',
+    h1: 'Monthly financial reports, done for you — $150/mo',
     description:
-      'GoldFin Reports fills your financial templates from your numbers and sends a plain-English monthly briefing — $99/mo, no spreadsheet work, cancel anytime. GoldFin Advisory ($1,500/mo) by application.',
+      'GoldFin Reports fills your financial templates from your numbers and sends a plain-English monthly briefing — $150/mo, no spreadsheet work, cancel anytime. GoldFin Advisory ($1,500/mo) by application.',
   },
   {
     path: 'templates',
@@ -112,12 +113,46 @@ function prerenderRouteMeta(): Plugin {
         fs.writeFileSync(path.join(outDir, 'index.html'), html)
       }
 
+      // Blog routes: full static article bodies, article metadata, and JSON-LD.
+      // The React app renders the same content after boot; this first byte is
+      // for crawlers, social unfurlers, and AI search systems that reward
+      // textual, crawlable, well-structured pages.
+      for (const r of getStaticBlogRoutes()) {
+        const t = esc(r.title)
+        const d = esc(r.description)
+        const canon = `${HOST}${r.path}`
+        const jsonLd = r.structuredData
+          .map((data) => {
+            const safeJson = JSON.stringify(data).replace(/</g, '\\u003c')
+            return `<script type="application/ld+json">${safeJson}</script>`
+          })
+          .join('')
+        const articleMeta =
+          r.ogType === 'article'
+            ? `<meta property="article:published_time" content="2026-07-10"><meta property="article:modified_time" content="2026-07-10">`
+            : ''
+        const html = tpl
+          .replace(/<title>[^<]*<\/title>/, `<title>${t}</title>`)
+          .replace(/(<meta name="description" content=")[^"]*(")/, `$1${d}$2`)
+          .replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${t}$2`)
+          .replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${d}$2`)
+          .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${t}$2`)
+          .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${d}$2`)
+          .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${canon}$2`)
+          .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${canon}$2`)
+          .replace(/(<meta property="og:type" content=")[^"]*(")/, `$1${r.ogType}$2`)
+          .replace('</head>', `${blogStaticStyles()}${articleMeta}${jsonLd}</head>`)
+          .replace('<div id="root"></div>', r.body)
+        const outDir = path.join(dist, ...r.path.replace(/^\/|\/$/g, '').split('/'))
+        fs.mkdirSync(outDir, { recursive: true })
+        fs.writeFileSync(path.join(outDir, 'index.html'), html)
+      }
+
       // Homepage: inject the body fallback into the root shell (head already correct).
       const homeHtml = tpl.replace('<div id="root"></div>', bodyFallback(HOME.h1, HOME.description))
       fs.writeFileSync(tplPath, homeHtml)
 
-      // eslint-disable-next-line no-console
-      console.log(`prerender-route-meta: wrote ${ROUTE_META.length} route shells + home body`)
+      console.log(`prerender-route-meta: wrote ${ROUTE_META.length} route shells + ${getStaticBlogRoutes().length} blog shells + home body`)
     },
   }
 }

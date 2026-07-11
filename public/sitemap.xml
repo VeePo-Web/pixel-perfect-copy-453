@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Hash-routed SPA. Update the host to the production domain at launch. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://goldfindesk.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://goldfindesk.com/pricing</loc><priority>0.9</priority></url>
-  <url><loc>https://goldfindesk.com/templates</loc><priority>0.9</priority></url>
-  <url><loc>https://goldfindesk.com/sample-briefing</loc><priority>0.8</priority></url>
-  <url><loc>https://goldfindesk.com/compare</loc><priority>0.7</priority></url>
-  <url><loc>https://goldfindesk.com/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk</loc><priority>0.7</priority></url>
-  <url><loc>https://goldfindesk.com/security-faq</loc><priority>0.6</priority></url>
-  <url><loc>https://goldfindesk.com/apply</loc><priority>0.6</priority></url>
+  <url><loc>https://goldfindesk.com/</loc><lastmod>2026-07-10</lastmod><priority>1.0</priority></url>
+  <url><loc>https://goldfindesk.com/pricing</loc><lastmod>2026-07-10</lastmod><priority>0.9</priority></url>
+  <url><loc>https://goldfindesk.com/templates</loc><lastmod>2026-07-10</lastmod><priority>0.9</priority></url>
+  <url><loc>https://goldfindesk.com/sample-briefing</loc><lastmod>2026-07-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://goldfindesk.com/compare</loc><lastmod>2026-07-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://goldfindesk.com/compare/bookkeeper-vs-fractional-cfo-vs-monthly-finance-desk</loc><lastmod>2026-07-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://goldfindesk.com/security-faq</loc><lastmod>2026-07-10</lastmod><priority>0.6</priority></url>
+  <url><loc>https://goldfindesk.com/apply</loc><lastmod>2026-07-10</lastmod><priority>0.6</priority></url>
+  <url><loc>https://goldfindesk.com/blog/</loc><lastmod>2026-07-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://goldfindesk.com/blog/monthly-financial-reporting/</loc><lastmod>2026-07-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://goldfindesk.com/blog/what-small-business-monthly-financial-report-should-include/</loc><lastmod>2026-07-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://goldfindesk.com/blog/monthly-financial-review-checklist/</loc><lastmod>2026-07-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://goldfindesk.com/blog/sample-monthly-finance-briefing/</loc><lastmod>2026-07-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://goldfindesk.com/blog/how-monthly-financial-reporting-service-works/</loc><lastmod>2026-07-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://goldfindesk.com/blog/bank-balance-vs-financial-report/</loc><lastmod>2026-07-10</lastmod><priority>0.7</priority></url>
 </urlset>

@@ -27,6 +27,7 @@ const BookkeeperVsFractionalCFOPage = lazy(() => import("./components/three-way-
 const SecurityFAQPage = lazy(() => import("./components/security-faq/SecurityFAQPage"));
 const CheckoutReturnPage = lazy(() => import("./components/payments/CheckoutReturnPage"));
 const BillingPage = lazy(() => import("./components/payments/BillingPage"));
+const BlogRouter = lazy(() => import("./components/blog/BlogRouter"));
 
 // Min-height spacer holds the viewport while a route chunk loads, so the footer
 // never jumps up (zero CLS) and there is no blank flash.
@@ -112,10 +113,10 @@ const App = () => {
   //    bar, so no wrapper padding is needed there either.
   // Suspense is universal here; eager home content never suspends, lazy interior
   // routes show the spacer fallback while their chunk loads.
-  const wrap = (key: NavKey, children: React.ReactNode) => (
+  const wrap = (key: NavKey, children: React.ReactNode, onDarkHero?: boolean) => (
     <main className="relative min-h-screen w-screen overflow-x-hidden bg-charcoal-950">
       <PaymentTestModeBanner />
-      <GlobalTopBar currentPath={key} />
+      <GlobalTopBar currentPath={key} onDarkHero={onDarkHero} />
       <div id="main-content" tabIndex={-1} className="focus:outline-none">
         <Suspense fallback={<RouteFallback />}>{children}</Suspense>
       </div>
@@ -134,6 +135,9 @@ const App = () => {
         <ApplicationFunnel />
       </Suspense>
     );
+  }
+  if (pathname === "/blog" || pathname.startsWith("/blog/")) {
+    return wrap("home", <BlogRouter pathname={pathname} />, false);
   }
   if (route === "sample-briefing") {
     return wrap("sample-briefing", <SampleBriefingPage />);

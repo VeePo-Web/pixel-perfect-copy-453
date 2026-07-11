@@ -11,6 +11,7 @@ const NAV_GROUPS = [
       { label: "Sample Briefing", href: "/sample-briefing" },
       { label: "Templates",       href: "/templates" },
       { label: "Pricing",         href: "/pricing" },
+      { label: "Blog",            href: "/blog/" },
     ],
   },
   {
@@ -62,7 +63,7 @@ export default function GoldFinFooter() {
           Brunson: the highest-intent visitors on any page are the ones who
           scroll to the bottom. This band is their last conversion moment.
           Rung 1 (free templates) is the primary so there's always a "yes."
-          Rung 2 ($99/mo) is ghost-secondary for ready buyers.
+          Rung 2 ($150/mo) is ghost-secondary for ready buyers.
           Trust pills kill any remaining objections at the decision point.
       ──────────────────────────────────────────────────────────────────── */}
       <section
@@ -120,7 +121,7 @@ export default function GoldFinFooter() {
               onClick={startAutoFillCheckout}
               className="rounded-full border border-white/20 px-8 py-3 text-[13.5px] font-medium text-white/65 transition-all duration-200 hover:border-white/40 hover:text-white active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080A0E]"
             >
-              Or start at $99/mo
+              Or start at $150/mo
             </button>
           </div>
 
