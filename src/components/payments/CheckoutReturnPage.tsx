@@ -16,7 +16,7 @@ export default function CheckoutReturnPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-charcoal-950 text-ink">
+    <main className="min-h-screen supports-[height:100dvh]:min-h-[100dvh] bg-charcoal-950 text-ink">
       <div className="mx-auto flex max-w-2xl flex-col items-center px-6 py-24 text-center">
         <div className="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-full border border-green-signal/25 bg-green-signal/[0.08] text-green-signal">
           ✓

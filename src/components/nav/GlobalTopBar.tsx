@@ -10,21 +10,18 @@ export type NavKey =
   | "compare"
   | "sample-briefing"
   | "security-faq"
-  | "apply";
+  | "about";
 
 type Props = {
   currentPath?: NavKey;
-  // Whether the page renders a dark, full-bleed hero behind the bar (homepage
-  // only). When true, the bar floats transparent with light text until scrolled.
   onDarkHero?: boolean;
 };
 
-// Hick's Law: 4 links — ordered by Brunson conversion journey
-// proof → price → lead-magnet → trust
 const LINKS: { key: NavKey; label: string; href: string }[] = [
   { key: "sample-briefing", label: "Sample Briefing", href: "/sample-briefing" },
   { key: "pricing",         label: "Pricing",         href: "/pricing" },
   { key: "templates",       label: "Free Templates",  href: "/templates" },
+  { key: "about",           label: "About",           href: "/about" },
   { key: "security-faq",    label: "Security",        href: "/security-faq" },
 ];
 
@@ -75,7 +72,7 @@ function NavTrustStrip({ onDismiss }: { onDismiss: () => void }) {
         type="button"
         onClick={onDismiss}
         aria-label="Dismiss this notice"
-        className="absolute right-3 top-1/2 -translate-y-1/2 flex h-5 w-5 items-center justify-center rounded text-white/35 transition-colors duration-200 hover:text-white/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-200/50"
+        className="absolute right-1 top-1/2 flex h-[34px] w-11 -translate-y-1/2 items-center justify-center rounded lg:right-3 lg:h-5 lg:w-5 text-white/35 transition-colors duration-200 hover:text-white/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-200/50"
       >
         <span aria-hidden className="mt-[-1px] text-[14px] leading-none">×</span>
       </button>
@@ -112,7 +109,7 @@ function MobileSheet({
       role="dialog"
       aria-modal="true"
       aria-label="Site navigation"
-      className="fixed inset-0 z-30 flex flex-col bg-[#0B0D12]/[0.98] px-6 pb-10 pt-[90px] backdrop-blur-xl lg:hidden"
+      className="fixed inset-0 z-30 flex flex-col overflow-y-auto bg-[#0B0D12]/[0.98] px-6 pb-[calc(env(safe-area-inset-bottom,0px)+48px)] pt-[90px] backdrop-blur-xl lg:hidden"
     >
       {/* Current-page context crumb */}
       {activeLabel && (
@@ -229,7 +226,7 @@ function MobileSheet({
         )}
 
         <p className="mt-1 text-center font-general text-[10.5px] uppercase tracking-[0.22em] text-white/35">
-          No bank connection required · Cancel anytime
+          Read-only Plaid · Cancel anytime
         </p>
       </div>
     </div>
@@ -462,7 +459,7 @@ export default function GlobalTopBar({
               {isHome ? (
                 <a
                   href="/templates"
-                  className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-4 py-1.5 text-[11.5px] font-medium text-ink transition-all duration-300 ease-cinema active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-4 py-1.5 text-[11.5px] font-medium text-ink transition-all duration-300 ease-cinema active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   style={{ boxShadow: goldCtaShadow }}
                 >
                   My templates
@@ -471,7 +468,7 @@ export default function GlobalTopBar({
                 <button
                   type="button"
                   onClick={startAutoFillCheckout}
-                  className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-4 py-1.5 text-[11.5px] font-medium text-ink transition-all duration-300 ease-cinema active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                  className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-4 py-1.5 text-[11.5px] font-medium text-ink transition-all duration-300 ease-cinema active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                   style={{ boxShadow: goldCtaShadow }}
                 >
                   Auto-fill — $150/mo

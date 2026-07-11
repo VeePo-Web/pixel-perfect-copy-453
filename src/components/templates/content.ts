@@ -173,7 +173,7 @@ export const comparison = {
     bestFor: "Owners who want a strong financial operating structure they can update themselves.",
   },
   desk: {
-    label: "Done for you - GoldFin Reports - $150/mo",
+    label: "Done for you · GoldFin Reports · $150/mo",
     time: "0 hrs / month",
     positioning: "Have the four-workbook Vault filled for you",
     items: [

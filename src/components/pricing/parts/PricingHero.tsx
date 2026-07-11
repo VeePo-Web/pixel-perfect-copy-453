@@ -5,17 +5,17 @@ export default function PricingHero() {
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(70%_50%_at_70%_0%,rgba(201,163,90,0.10),transparent_60%)]" />
       </div>
-      <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-32 sm:pt-36 lg:px-10">
+      <div className="relative mx-auto max-w-7xl px-6 pb-14 pt-32 md:pb-24 sm:pt-36 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1.05fr_1.1fr] lg:gap-16">
           <div className="motion-safe:animate-section-in">
             <div className="flex items-center gap-2 font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/80"><span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-300/70" />
               Pricing
             </div>
             <h1 className="mt-5 max-w-[24ch] font-display font-medium text-ink [text-wrap:balance] text-[38px] leading-[1.06] tracking-[-0.02em] sm:text-[50px] lg:text-[58px]">
-              Free templates. <span className="text-champagne-300">$150 to have them filled for you.</span> $1,500 to have them read with you.
+              Free templates. <span className="text-champagne-300">$150 to have them filled for you</span> — every two weeks.
             </h1>
             <p className="mt-6 max-w-[56ch] text-[15.5px] leading-[1.7] [text-wrap:pretty] text-ink/70">
-              Most owners don’t need a full finance team — they need their numbers organized and explained every month. That’s the $150 Auto-Fill plan. Start there.
+              Most owners don&rsquo;t need a full finance team — they need their numbers organized and explained on a schedule. That&rsquo;s $150/mo. Start there, or grab the free templates below.
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <button
@@ -38,7 +38,7 @@ export default function PricingHero() {
               </a>
             </div>
             <p className="mt-5 font-general text-[10.5px] uppercase tracking-[0.22em] text-ink/45">
-              No contracts · Cancel anytime · No bank connection required to start
+              No contracts · Cancel anytime · Read-only Plaid connection
             </p>
           </div>
 
@@ -60,11 +60,9 @@ export default function PricingHero() {
               className="absolute bottom-[12%] right-0 hidden w-[150px] rotate-6 rounded-2xl border border-ink/[0.08] bg-white p-4 text-right opacity-[0.55] shadow-[0_16px_40px_-24px_rgba(11,13,18,0.25)] motion-safe:animate-panel-rise sm:block"
               style={{ animationDelay: "90ms" }}
             >
-              <div className="font-general text-[9px] uppercase tracking-[0.26em] text-ink/40">Advisory</div>
-              <div className="mt-1.5 whitespace-nowrap text-[12px] text-ink/70">Done with you</div>
-              <div className="mt-2 whitespace-nowrap font-display text-[22px] font-medium leading-none tabular-nums text-ink/60">
-                $1,500<span className="font-general text-[10px] tabular-nums text-ink/40">/mo</span>
-              </div>
+              <div className="font-general text-[9px] uppercase tracking-[0.26em] text-ink/40">Sample</div>
+              <div className="mt-1.5 text-[12px] text-ink/70">See a briefing</div>
+              <div className="mt-2 font-display text-[22px] font-medium leading-none tabular-nums text-ink/60">Preview</div>
             </div>
 
             {/* THE focal card — GoldFin Reports · $150/mo */}
@@ -90,7 +88,7 @@ export default function PricingHero() {
                   {[
                     "Your templates auto-filled monthly",
                     "A plain-English briefing every cycle",
-                    "No bank connection to start",
+                    "Read-only Plaid connection · never moves money",
                     "Cancel anytime",
                   ].map((line) => (
                     <div key={line} className="flex items-center gap-2.5 text-[12.5px] text-ink/75">

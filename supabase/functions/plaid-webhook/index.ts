@@ -1,13 +1,14 @@
 // Receives Plaid webhooks.
-// - Production: verifies the `plaid-verification` JWT (ES256) against Plaid's
-//   per-key JWKS via /webhook_verification_key/get, with a small in-memory key
-//   cache and ±5min iat skew check. Also verifies sha256(body) === claims.request_body_sha256.
-// - Sandbox / internal callers: falls back to a shared-secret header
-//   (`x-plaid-webhook-secret` === PLAID_WEBHOOK_SECRET) when no JWT is present.
+// - Production: REQUIRES the `plaid-verification` JWT (ES256). Verified against
+//   Plaid's per-key JWKS via /webhook_verification_key/get, with a small
+//   in-memory key cache and ±5min iat skew check. Also verifies
+//   sha256(body) === claims.request_body_sha256. No shared-secret fallback.
+// - Sandbox only: falls back to `x-plaid-webhook-secret` === PLAID_WEBHOOK_SECRET
+//   when no JWT is present (used by plaid-sandbox-fire-webhook).
 // - Branches on webhook_type/code: marks items needing reauth, and re-syncs
 //   accounts/balances on TRANSACTIONS/HOLDINGS update events.
 import { adminClient, corsHeaders, json } from "../_shared/auth-context.ts";
-import { plaid, syncAccountsForItem, isProduction } from "../_shared/plaid.ts";
+import { plaid, syncAccountsForItem, isProduction, getAccessToken } from "../_shared/plaid.ts";
 
 type Webhook = {
   webhook_type: string;
@@ -101,13 +102,16 @@ Deno.serve(async (req) => {
         return false;
       });
       if (!ok) return json({ error: "unauthorized" }, 401);
+    } else if (isProduction()) {
+      // Production accepts ONE authentication mode: Plaid's signed JWT.
+      // No shared-secret fallback — that path is sandbox-tooling only.
+      console.warn("prod plaid webhook rejected: missing plaid-verification header");
+      return json({ error: "unauthorized" }, 401);
     } else {
-      // Fallback: shared-secret header (sandbox/internal tooling).
-      // In production with no JWT present, require the shared secret.
+      // Sandbox / internal tooling fallback: shared-secret header.
       const expected = Deno.env.get("PLAID_WEBHOOK_SECRET");
       const got = req.headers.get("x-plaid-webhook-secret");
       if (!expected || got !== expected) {
-        if (isProduction()) console.warn("prod webhook missing plaid-verification and bad shared secret");
         return json({ error: "unauthorized" }, 401);
       }
     }
@@ -117,7 +121,7 @@ Deno.serve(async (req) => {
 
     const { data: item } = await admin
       .from("plaid_items")
-      .select("id, user_id, access_token")
+      .select("id, user_id")
       .eq("plaid_item_id", body.item_id)
       .maybeSingle();
 
@@ -151,7 +155,8 @@ Deno.serve(async (req) => {
         .update({ status: "reauth_required" })
         .eq("id", item.id);
     } else if (isUpdate) {
-      await syncAccountsForItem(admin, item);
+      const accessToken = await getAccessToken(admin, item.id);
+      await syncAccountsForItem(admin, { ...item, access_token: accessToken });
     }
 
     return json({ received: true });

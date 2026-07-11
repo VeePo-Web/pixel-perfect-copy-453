@@ -38,7 +38,7 @@ export default function BriefingTabs({ business }: { business: DemoBusiness }) {
 
   return (
     <section className="border-b border-ink/[0.05] bg-charcoal-950">
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div className="mx-auto max-w-7xl px-6 py-14 md:py-24 lg:px-10">
         <div className="max-w-[58ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Explore the briefing
@@ -48,7 +48,7 @@ export default function BriefingTabs({ business }: { business: DemoBusiness }) {
           </h2>
         </div>
 
-        <div className="mt-10 -mx-6 overflow-x-auto px-6 lg:mx-0 lg:px-0">
+        <div className="mt-10 -mx-6 no-scrollbar overflow-x-auto overscroll-x-contain px-6 lg:mx-0 lg:px-0">
           <div
             role="tablist"
             aria-label="Briefing topics"

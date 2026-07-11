@@ -10,7 +10,7 @@ export default function ScenarioRecommendationCards() {
       aria-labelledby="scenario-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div className="mx-auto max-w-7xl px-6 py-14 md:py-24 lg:px-10">
         <div className="max-w-[62ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Self-identify

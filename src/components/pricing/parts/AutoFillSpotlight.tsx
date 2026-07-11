@@ -116,10 +116,10 @@ export default function AutoFillSpotlight() {
               <p className="mt-3 text-[12px] leading-[1.5] text-ink/55">{o.guarantee}</p>
               <div className="mt-4 flex items-center gap-2.5 border-t border-ink/[0.06] pt-4">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-champagne-300/45 font-general text-[10px] text-champagne-300">
-                  CS
+                  GF
                 </span>
                 <span className="font-general text-[10.5px] uppercase tracking-[0.16em] text-ink/45">
-                  Built by Chris Sam - institutional finance background
+                  Built by alumni of Goldman Sachs, BofA, RBC &amp; Merrill Lynch
                 </span>
               </div>
               <p className="mt-3 text-[11.5px] leading-[1.6] text-ink/45">{o.trust}</p>
@@ -135,14 +135,14 @@ export default function AutoFillSpotlight() {
               <button
                 type="button"
                 onClick={downloadCsvFallback}
-                className="mt-2 self-start text-[11.5px] text-ink/45 underline-offset-4 transition-colors hover:text-champagne-300 hover:underline"
+                className="mt-5 inline-flex min-h-[44px] items-center self-start rounded-full border border-champagne-200/35 px-4 py-1.5 text-[12px] lg:min-h-0 text-champagne-300 transition-colors duration-200 ease-cinema hover:bg-champagne-300/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200/50"
               >
                 CSV fallback
               </button>
 
               <a
                 href="/templates"
-                className="mt-4 text-[12px] text-ink/50 underline-offset-4 transition-colors hover:text-champagne-300 hover:underline"
+                className="mt-4 inline-block py-2 text-[12px] text-ink/50 underline-offset-4 lg:py-0 transition-colors hover:text-champagne-300 hover:underline"
               >
                 {o.microbridge}
               </a>

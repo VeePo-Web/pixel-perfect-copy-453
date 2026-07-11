@@ -6,7 +6,7 @@ export default function WhyItMakesSense() {
       <div className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-10">
         <div className="max-w-[58ch]">
           <div className="font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/80">
-            Why $1,500 / month
+            Why $150 / month
           </div>
           <h2 id="why-title" className="mt-5 font-display font-medium text-ink [text-wrap:balance] text-[34px] leading-[1.08] tracking-[-0.02em] sm:text-[46px]">
             You are not paying for a spreadsheet.

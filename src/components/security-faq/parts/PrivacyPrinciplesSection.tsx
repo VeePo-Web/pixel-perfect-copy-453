@@ -61,7 +61,7 @@ export default function PrivacyPrinciplesSection() {
             Auto-fill my reports — $150/mo
           </button>
           <a
-            href="/apply"
+            href="/pricing"
             onClick={() => track("privacy_principles_cta_apply")}
             className="inline-flex min-h-11 items-center rounded-full border border-ink/[0.12] bg-white px-5 text-[13.5px] text-ink/80 transition-all duration-300 ease-cinema hover:border-ink/[0.25] hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >

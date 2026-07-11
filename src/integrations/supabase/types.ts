@@ -107,6 +107,63 @@ export type Database = {
         }
         Relationships: []
       }
+      business_metric_inputs: {
+        Row: {
+          created_at: string
+          id: string
+          inputs: Json
+          period_end: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          inputs?: Json
+          period_end: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          inputs?: Json
+          period_end?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      business_profiles: {
+        Row: {
+          business_name: string | null
+          created_at: string
+          entity_type: string
+          industry: string
+          reserve_floor_months: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          business_name?: string | null
+          created_at?: string
+          entity_type?: string
+          industry?: string
+          reserve_floor_months?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          business_name?: string | null
+          created_at?: string
+          entity_type?: string
+          industry?: string
+          reserve_floor_months?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       cron_runs: {
         Row: {
           candidates: number | null
@@ -146,6 +203,54 @@ export type Database = {
         }
         Relationships: []
       }
+      email_preferences: {
+        Row: {
+          advisory_report_enabled: boolean
+          created_at: string
+          unsubscribe_token: string
+          unsubscribed_at: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          advisory_report_enabled?: boolean
+          created_at?: string
+          unsubscribe_token?: string
+          unsubscribed_at?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          advisory_report_enabled?: boolean
+          created_at?: string
+          unsubscribe_token?: string
+          unsubscribed_at?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      email_suppressions: {
+        Row: {
+          created_at: string
+          detail: string | null
+          email: string
+          reason: string
+        }
+        Insert: {
+          created_at?: string
+          detail?: string | null
+          email: string
+          reason: string
+        }
+        Update: {
+          created_at?: string
+          detail?: string | null
+          email?: string
+          reason?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           business_type: string | null
@@ -182,6 +287,48 @@ export type Database = {
           source?: string | null
           template_id?: string | null
           template_name?: string | null
+        }
+        Relationships: []
+      }
+      ledger_entries: {
+        Row: {
+          amount: number
+          category: string | null
+          created_at: string
+          description: string | null
+          entry_date: string
+          id: string
+          is_variable: boolean
+          kind: string
+          revenue_line: string | null
+          source: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          entry_date: string
+          id?: string
+          is_variable?: boolean
+          kind?: string
+          revenue_line?: string | null
+          source?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          entry_date?: string
+          id?: string
+          is_variable?: boolean
+          kind?: string
+          revenue_line?: string | null
+          source?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -282,7 +429,7 @@ export type Database = {
       }
       plaid_items: {
         Row: {
-          access_token: string
+          access_token_encrypted: string
           created_at: string
           cursor: string | null
           id: string
@@ -296,7 +443,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          access_token: string
+          access_token_encrypted: string
           created_at?: string
           cursor?: string | null
           id?: string
@@ -310,7 +457,7 @@ export type Database = {
           user_id: string
         }
         Update: {
-          access_token?: string
+          access_token_encrypted?: string
           created_at?: string
           cursor?: string | null
           id?: string
@@ -324,6 +471,80 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      plaid_transactions: {
+        Row: {
+          account_id: string
+          amount: number
+          category: string | null
+          category_raw: Json | null
+          confidence: number
+          created_at: string
+          id: string
+          is_recurring: boolean
+          iso_currency_code: string | null
+          merchant_name_norm: string | null
+          merchant_name_raw: string | null
+          name: string | null
+          owner_corrected: boolean
+          pending: boolean
+          plaid_item_id: string
+          plaid_transaction_id: string
+          posted_date: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          account_id: string
+          amount: number
+          category?: string | null
+          category_raw?: Json | null
+          confidence?: number
+          created_at?: string
+          id?: string
+          is_recurring?: boolean
+          iso_currency_code?: string | null
+          merchant_name_norm?: string | null
+          merchant_name_raw?: string | null
+          name?: string | null
+          owner_corrected?: boolean
+          pending?: boolean
+          plaid_item_id: string
+          plaid_transaction_id: string
+          posted_date: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          account_id?: string
+          amount?: number
+          category?: string | null
+          category_raw?: Json | null
+          confidence?: number
+          created_at?: string
+          id?: string
+          is_recurring?: boolean
+          iso_currency_code?: string | null
+          merchant_name_norm?: string | null
+          merchant_name_raw?: string | null
+          name?: string | null
+          owner_corrected?: boolean
+          pending?: boolean
+          plaid_item_id?: string
+          plaid_transaction_id?: string
+          posted_date?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "plaid_transactions_plaid_item_id_fkey"
+            columns: ["plaid_item_id"]
+            isOneToOne: false
+            referencedRelation: "plaid_items"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -360,6 +581,142 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      recurring_streams: {
+        Row: {
+          average_amount: number | null
+          category: string | null
+          created_at: string
+          description: string | null
+          direction: string
+          first_amount: number | null
+          frequency: string | null
+          id: string
+          is_active: boolean
+          last_amount: number | null
+          last_date: string | null
+          merchant_name: string | null
+          plaid_item_id: string
+          status: string | null
+          stream_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          average_amount?: number | null
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          direction?: string
+          first_amount?: number | null
+          frequency?: string | null
+          id?: string
+          is_active?: boolean
+          last_amount?: number | null
+          last_date?: string | null
+          merchant_name?: string | null
+          plaid_item_id: string
+          status?: string | null
+          stream_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          average_amount?: number | null
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          direction?: string
+          first_amount?: number | null
+          frequency?: string | null
+          id?: string
+          is_active?: boolean
+          last_amount?: number | null
+          last_date?: string | null
+          merchant_name?: string | null
+          plaid_item_id?: string
+          status?: string | null
+          stream_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recurring_streams_plaid_item_id_fkey"
+            columns: ["plaid_item_id"]
+            isOneToOne: false
+            referencedRelation: "plaid_items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      report_email_deliveries: {
+        Row: {
+          attempts: number
+          bounced_at: string | null
+          clicked_at: string | null
+          complained_at: string | null
+          created_at: string
+          delivered_at: string | null
+          id: string
+          last_attempt_at: string | null
+          last_error: string | null
+          opened_at: string | null
+          provider_message_id: string | null
+          recipient_email: string
+          report_id: string
+          sent_at: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          attempts?: number
+          bounced_at?: string | null
+          clicked_at?: string | null
+          complained_at?: string | null
+          created_at?: string
+          delivered_at?: string | null
+          id?: string
+          last_attempt_at?: string | null
+          last_error?: string | null
+          opened_at?: string | null
+          provider_message_id?: string | null
+          recipient_email: string
+          report_id: string
+          sent_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          attempts?: number
+          bounced_at?: string | null
+          clicked_at?: string | null
+          complained_at?: string | null
+          created_at?: string
+          delivered_at?: string | null
+          id?: string
+          last_attempt_at?: string | null
+          last_error?: string | null
+          opened_at?: string | null
+          provider_message_id?: string | null
+          recipient_email?: string
+          report_id?: string
+          sent_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_email_deliveries_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: true
+            referencedRelation: "advisory_reports"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       retention_policy_reviews: {
         Row: {
@@ -469,6 +826,33 @@ export type Database = {
         }
         Relationships: []
       }
+      transaction_corrections: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          merchant_name_norm: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          id?: string
+          merchant_name_norm: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          merchant_name_norm?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -525,6 +909,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      _plaid_token_key: { Args: never; Returns: string }
       admin_audit_overview: {
         Args: never
         Returns: {
@@ -552,6 +937,22 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      plaid_create_item: {
+        Args: {
+          _institution_id: string
+          _institution_name: string
+          _plaid_item_id: string
+          _status: string
+          _token: string
+          _user_id: string
+        }
+        Returns: string
+      }
+      plaid_get_access_token: { Args: { _item_id: string }; Returns: string }
+      plaid_set_access_token: {
+        Args: { _item_id: string; _token: string }
+        Returns: undefined
       }
       run_retention_sweep: { Args: never; Returns: Json }
       upsert_cron_secret: { Args: { p_secret: string }; Returns: undefined }

@@ -12,7 +12,7 @@ export default function ComparisonHero() {
         <div className="absolute inset-0 bg-[radial-gradient(70%_50%_at_70%_0%,rgba(201,163,90,0.08),transparent_60%)]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-32 sm:pt-36 lg:px-10">
+      <div className="relative mx-auto max-w-7xl px-6 pb-14 pt-32 md:pb-24 sm:pt-36 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1.05fr_1.05fr] lg:gap-16">
           <div className="motion-safe:animate-section-in">
             <div className="flex items-center gap-2 font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70"><span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-300/70" />

@@ -7,7 +7,7 @@ export default function FinalComparisonCTA() {
       aria-labelledby="final-cta-heading"
       className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-5xl px-6 py-28 text-center lg:px-10">
+      <div className="mx-auto max-w-5xl px-6 py-16 md:py-28 text-center lg:px-10">
         <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
           Apply
         </div>
@@ -55,7 +55,7 @@ export default function FinalComparisonCTA() {
         </div>
 
         <p className="mt-7 text-[11.5px] uppercase tracking-[0.2em] text-ink/40">
-          $150/mo. No bank connection required to start. Cancel anytime.
+          $150/mo. Secure read-only Plaid connection. Cancel anytime.
         </p>
 
         <p className="mx-auto mt-10 max-w-[64ch] text-[11.5px] leading-relaxed text-ink/40">

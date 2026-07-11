@@ -58,19 +58,12 @@ export default function HeroVaultCapture() {
         <p className="mt-2 text-[13.5px] leading-[1.6] text-ink/60">
           Over the next few days we will show you how owners use each template to review cash, profitability, expenses, and monthly decisions.
         </p>
-        <a
-          href="/downloads/goldfin-template-vault.xlsx"
-          download
-          className="mt-5 inline-flex items-center justify-center rounded-full border border-ink/[0.12] px-5 py-2.5 text-[13px] font-medium text-ink transition-all duration-300 ease-cinema hover:border-champagne-200/45 hover:text-champagne-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-        >
-          Download the XLSX vault
-        </a>
         <button
           type="button"
           onClick={startAutoFillCheckout}
-          className="ml-2 mt-5 inline-flex items-center justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-5 py-2.5 text-[13px] font-medium text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(11,13,18,0.10)] transition-all duration-300 ease-cinema hover:-translate-y-px hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_10px_28px_-10px_rgba(184,137,58,0.55)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+          className="mt-5 inline-flex items-center gap-2 rounded-sm text-[13px] text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
         >
-          Auto-fill my reports - $150/mo
+          Prefer it filled for you every month? See GoldFin Reports — $150/mo →
         </button>
         <p className="mt-2 text-[11.5px] text-ink/45">
           Same templates, filled from your numbers. Cancel anytime.

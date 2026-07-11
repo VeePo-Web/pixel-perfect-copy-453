@@ -6,7 +6,7 @@
 // confidence. Server-authoritative: all writes via service_role.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
-import { plaid } from "../_shared/plaid.ts";
+import { plaid, getAccessToken } from "../_shared/plaid.ts";
 import { buildCorrectionMap, enrichTransaction } from "../_shared/report-enrich.ts";
 
 const Body = z.object({ itemId: z.string().uuid() });
@@ -60,10 +60,11 @@ Deno.serve(async (req) => {
     const admin = adminClient();
     const { data: item, error } = await admin
       .from("plaid_items")
-      .select("id, access_token, user_id, cursor")
+      .select("id, user_id, cursor")
       .eq("id", parsed.data.itemId)
       .single();
     if (error || !item || item.user_id !== user.id) return json({ error: "Item not found" }, 404);
+    const accessToken = await getAccessToken(admin, item.id);
 
     // ---- Layer 0: load the owner's correction memory (self-training categorizer) ----
     const correctionsRes = await admin
@@ -77,7 +78,7 @@ Deno.serve(async (req) => {
     let added = 0, modified = 0, removed = 0;
     for (let guard = 0; guard < 50; guard++) {
       const resp = await plaid<SyncResp>("/transactions/sync", {
-        access_token: item.access_token,
+        access_token: accessToken,
         cursor: cursor ?? null,
         count: 500,
       });
@@ -147,7 +148,7 @@ Deno.serve(async (req) => {
         };
         const rec = await plaid<{ outflow_streams: Stream[]; inflow_streams: Stream[] }>(
           "/transactions/recurring/get",
-          { access_token: item.access_token, account_ids: accountIds },
+          { access_token: accessToken, account_ids: accountIds },
         );
         const mapStream = (s: Stream, direction: string) => ({
           user_id: item.user_id,

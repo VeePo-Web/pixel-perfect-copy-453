@@ -59,7 +59,7 @@ export default function TemplatePreviewModal({ template, onClose, onGet }: Props
             {template.ctaText}
           </button>
           <a
-            href="/apply"
+            href="/pricing"
             className="rounded-full border border-ink/[0.12] px-6 py-3 text-center text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink"
           >
             Want this automated and reviewed monthly? Apply for the GoldFin Desk

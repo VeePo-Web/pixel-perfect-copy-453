@@ -66,7 +66,7 @@ function StepPlaid() {
   return (
     <div ref={ref}>
       <Frame label="Secure data connection">
-        <div className="relative grid grid-cols-3 items-center gap-4 py-6">
+        <div className="relative grid grid-cols-1 items-center gap-4 py-6 sm:grid-cols-3">
           <div className="rounded-xl border border-charcoal-700 bg-paper-raised p-4 shadow-sm">
             <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Bank</div>
             <div className="mt-3 text-[15px] text-ink/85">Operating Account</div>

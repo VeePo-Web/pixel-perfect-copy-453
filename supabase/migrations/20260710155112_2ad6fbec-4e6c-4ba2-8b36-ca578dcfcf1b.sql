@@ -1,0 +1,1 @@
+UPDATE public.plaid_items SET status='active' WHERE id='93ccf2a9-d15c-46b1-9edc-f3f4ce6c90a8';

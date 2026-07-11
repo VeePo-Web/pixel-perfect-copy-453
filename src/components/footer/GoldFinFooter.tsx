@@ -26,20 +26,20 @@ const NAV_GROUPS = [
     label: "Company",
     ariaLabel: "Company navigation",
     links: [
+      { label: "About",          href: "/about" },
       { label: "Security & FAQ", href: "/security-faq" },
-      { label: "Apply",          href: "/apply" },
     ],
   },
 ] as const;
 
 const TRUST_PILLS = [
-  "No bank connection required",
+  "No bank connection for preview",
+  "Read-only Plaid for GoldFin Reports",
   "Cancel anytime",
-  "47 founders trust GoldFin",
 ] as const;
 
 const SECURITY_SIGNALS = [
-  "No bank connection required",
+  "Read-only Plaid connection",
   "256-bit encryption",
   "Cancel anytime",
 ] as const;
@@ -97,7 +97,7 @@ export default function GoldFinFooter() {
           </h2>
 
           {/* Sub-headline */}
-          <p className="mx-auto mb-9 max-w-[40ch] text-[14.5px] leading-[1.72] text-white/55">
+          <p className="mx-auto mb-9 max-w-[40ch] text-[14.5px] leading-[1.72] text-white/60">
             Monthly financial briefings, auto-generated from your numbers —
             delivered to owner-led businesses.
           </p>
@@ -204,7 +204,7 @@ export default function GoldFinFooter() {
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="group inline-flex items-center text-[13.5px] text-ink/60 transition-colors duration-200 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/60 focus-visible:ring-offset-2"
+                        className="group inline-flex items-center py-3 text-[13.5px] text-ink/60 lg:py-0 transition-colors duration-200 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/60 focus-visible:ring-offset-2"
                       >
                         <span className="border-b border-transparent pb-px group-hover:border-ink/20">
                           {link.label}
@@ -236,7 +236,7 @@ export default function GoldFinFooter() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-[12px] text-ink/45 transition-colors duration-200 hover:text-ink/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-300/40 focus-visible:ring-offset-1"
+                      className="inline-flex items-center py-2 text-[12px] text-ink/45 lg:py-0 transition-colors duration-200 hover:text-ink/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-300/40 focus-visible:ring-offset-1"
                     >
                       {link.label}
                     </a>

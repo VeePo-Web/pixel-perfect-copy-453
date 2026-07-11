@@ -15,26 +15,12 @@ const schema = {
       "@type": "Offer",
       name: "GoldFin Reports",
       description:
-        "Your templates filled from your numbers and a plain-English briefing, every month. Fully automated.",
+        "Your templates filled from your bank feed and a plain-English briefing, every two weeks. Fully automated.",
       price: "150",
       priceCurrency: "USD",
       priceSpecification: {
         "@type": "UnitPriceSpecification",
         price: "150",
-        priceCurrency: "USD",
-        unitText: "MONTH",
-      },
-    },
-    {
-      "@type": "Offer",
-      name: "GoldFin Advisory",
-      description:
-        "Everything in Reports plus a monthly one-hour strategy review with a finance professional. By application.",
-      price: "1500",
-      priceCurrency: "USD",
-      priceSpecification: {
-        "@type": "UnitPriceSpecification",
-        price: "1500",
         priceCurrency: "USD",
         unitText: "MONTH",
       },

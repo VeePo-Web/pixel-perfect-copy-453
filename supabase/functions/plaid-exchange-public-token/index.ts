@@ -37,21 +37,22 @@ Deno.serve(async (req) => {
     }
 
     const admin = adminClient();
-    const { data: itemRow, error: itemErr } = await admin
-      .from("plaid_items")
-      .insert({
-        user_id: user.id,
-        plaid_item_id: exch.item_id,
-        access_token: exch.access_token,
-        institution_id: institutionId,
-        institution_name: institution?.name ?? null,
-        status: "active",
-      })
-      .select("id, user_id, access_token")
-      .single();
-    if (itemErr || !itemRow) throw new Error(itemErr?.message || "Insert failed");
+    // Atomic insert with encrypted-at-rest access token (service-role-only RPC).
+    const { data: newId, error: rpcErr } = await admin.rpc("plaid_create_item", {
+      _user_id: user.id,
+      _plaid_item_id: exch.item_id,
+      _institution_id: institutionId,
+      _institution_name: institution?.name ?? null,
+      _status: "active",
+      _token: exch.access_token,
+    });
+    if (rpcErr || !newId) throw new Error(rpcErr?.message || "Insert failed");
+    const itemRow = { id: newId as string, user_id: user.id };
 
-    const sync = await syncAccountsForItem(admin, itemRow);
+    const sync = await syncAccountsForItem(admin, {
+      ...itemRow,
+      access_token: exch.access_token,
+    });
     return json({ itemId: itemRow.id, accountCount: sync.updated });
   } catch (e) {
     return json({ error: e instanceof Error ? e.message : "Unknown error" }, 500);

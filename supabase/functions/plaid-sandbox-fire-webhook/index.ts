@@ -1,13 +1,15 @@
-// TEST-ONLY: fires a synthetic Plaid webhook against plaid-webhook with the
-// correct shared secret so the full reauth/update branches can be exercised
-// from outside without exposing PLAID_WEBHOOK_SECRET to clients.
+// SANDBOX-ONLY TOOLING. Fires a synthetic Plaid webhook against plaid-webhook
+// with the correct shared secret so the reauth/update branches can be
+// exercised from outside without exposing PLAID_WEBHOOK_SECRET to clients.
+// Refuses to run in production, and requires PLAID_ENV=sandbox explicitly.
 import { corsHeaders, getUserFromRequest, json, adminClient } from "../_shared/auth-context.ts";
+import { isProduction, plaidEnv } from "../_shared/plaid.ts";
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   try {
-    if ((Deno.env.get("PLAID_ENV") || "sandbox").toLowerCase() !== "sandbox") {
-      console.warn("plaid-sandbox-fire-webhook called outside sandbox; rejecting");
+    if (isProduction() || plaidEnv() !== "sandbox") {
+      console.error("plaid-sandbox-fire-webhook rejected: PLAID_ENV=", plaidEnv());
       return json({ error: "sandbox only" }, 403);
     }
 

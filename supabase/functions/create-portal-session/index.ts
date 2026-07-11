@@ -24,42 +24,34 @@ Deno.serve(async (req) => {
     const returnUrl: string | undefined = typeof body.returnUrl === "string"
       ? body.returnUrl
       : undefined;
-    const email: string | undefined = typeof body.email === "string" && body.email.includes("@")
-      ? body.email.trim().toLowerCase()
-      : undefined;
-
-    let customerId: string | undefined;
-
-    // Auth path: get signed-in user → look up their customer id.
+    // Require a valid Supabase bearer token. The email-only self-serve path
+    // was removed — it leaked portal URLs by email enumeration. Post-checkout
+    // portal access happens from the authenticated /portal area, or via a
+    // Stripe-emailed manage-subscription link.
     const token = req.headers.get("Authorization")?.replace("Bearer ", "");
-    if (token) {
-      const { data: { user } } = await supabase.auth.getUser(token);
-      if (user) {
-        const { data: sub } = await supabase
-          .from("subscriptions")
-          .select("stripe_customer_id")
-          .eq("user_id", user.id)
-          .eq("environment", env)
-          .order("created_at", { ascending: false })
-          .limit(1)
-          .maybeSingle();
-        customerId = sub?.stripe_customer_id ?? undefined;
-      }
+    if (!token) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+    if (authError || !user) {
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
-    // Email-only path: site has no auth yet, so let buyers self-serve via the
-    // email they paid with.
-    if (!customerId && email) {
-      const { data: sub } = await supabase
-        .from("subscriptions")
-        .select("stripe_customer_id")
-        .eq("email", email)
-        .eq("environment", env)
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-      customerId = sub?.stripe_customer_id ?? undefined;
-    }
+    const { data: sub } = await supabase
+      .from("subscriptions")
+      .select("stripe_customer_id")
+      .eq("user_id", user.id)
+      .eq("environment", env)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+    const customerId = sub?.stripe_customer_id ?? undefined;
 
     if (!customerId) {
       return new Response(JSON.stringify({ error: "No subscription found" }), {

@@ -1,6 +1,8 @@
 import { useInView } from "../../how-it-works/hooks/useInView";
 import { startAutoFillCheckout } from "../../../lib/checkout";
-
+// Squeeze §5 — Soap-Opera Promise. Sets expectations for the email sequence
+// (reduces unsubscribes) and pre-frames the $150 upgrade. No CTA by design —
+// the value is the promise itself.
 const DAYS = [
   { d: "Day 1", t: "Your Vault, and the one cash number most owners miss" },
   { d: "Day 2", t: "Why your bank balance is not a strategy" },
@@ -13,7 +15,7 @@ export default function SoapOperaPromise() {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.2 });
   return (
     <section aria-labelledby="soap-title" className="border-b border-ink/[0.05] bg-white">
-      <div ref={ref} className="mx-auto max-w-4xl px-6 py-24 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-4xl px-6 py-14 md:py-24 lg:px-10">
         <div
           className={`text-[10.5px] uppercase tracking-[0.32em] text-champagne-300 transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
@@ -56,7 +58,7 @@ export default function SoapOperaPromise() {
           className="group mt-6 inline-flex items-center text-[12px] uppercase tracking-[0.18em] text-ink/35 transition-colors duration-300 hover:text-champagne-300"
         >
           <span className="border-b border-ink/10 pb-0.5 group-hover:border-champagne-300/60">
-            Already decided? Auto-fill my reports - $150/mo
+            Already decided? Auto-fill my reports — $150/mo
           </span>
           <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">{">"}</span>
         </button>

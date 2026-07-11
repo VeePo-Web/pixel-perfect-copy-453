@@ -1,5 +1,8 @@
 import { useInView } from "../how-it-works/hooks/useInView";
 
+// Homepage Section 1 — Bait Hero (Pattern A: asymmetric 7/5 copy-left + layered template cards right).
+// HOMEPAGE EXCEPTION: gold CTA = "Get the free templates" → /templates. NO $150/mo CTA here.
+
 interface CardDef {
   label: string;
   decision: string;
@@ -112,6 +115,7 @@ export default function HomeHero() {
             }`}
             style={{ transitionDelay: "240ms" }}
           >
+            {/* Gold primary CTA — free templates only, NO $150/mo */}
             <a
               href="/templates"
               className="inline-flex w-full justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-7 py-4 text-[13.5px] font-medium text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(0,0,0,0.25)] transition-all duration-300 ease-cinema sm:w-auto sm:justify-start sm:py-3.5 hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_12px_32px_-10px_rgba(212,168,69,0.5)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0D12]"
@@ -159,6 +163,7 @@ export default function HomeHero() {
                 </span>
               </div>
 
+              {/* Decision question */}
               <p className="mb-3 mt-2 text-[12px] leading-[1.4] text-white/45">
                 {card.decision}
               </p>

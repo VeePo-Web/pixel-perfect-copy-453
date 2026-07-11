@@ -22,7 +22,7 @@ export const APPLY = {
         "Bi-weekly plain-English briefing",
         "Monthly one-hour strategy review",
       ],
-      price: "$1,500 / month",
+      price: "$150 / month",
       sub: "Built for owner-led businesses.",
     },
     welcomeBack: "Welcome back. Continue your GoldFin Advisory application.",
@@ -111,7 +111,7 @@ export const APPLY = {
       reassureText: "That is exactly the gap the GoldFin Advisory is designed to solve.",
     },
     budget: {
-      label: "Are you comfortable with a $1,500/month premium finance subscription if it is a fit?",
+      label: "Are you comfortable with a $150/mo premium finance subscription if it is a fit?",
       options: ["Yes", "Possibly, if I understand the value", "Not right now"],
       reassureValue: "Not right now",
       reassureText: "The free templates may be the better starting point. You can still finish the application, or start there.",

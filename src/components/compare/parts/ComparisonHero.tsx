@@ -11,7 +11,7 @@ export default function ComparisonHero() {
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(70%_50%_at_70%_0%,rgba(201,163,90,0.08),transparent_60%)]" />
       </div>
-      <div className="relative mx-auto max-w-7xl px-6 pb-24 pt-32 sm:pt-36 lg:px-10">
+      <div className="relative mx-auto max-w-7xl px-6 pb-14 pt-32 md:pb-24 sm:pt-36 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1.05fr_1.05fr] lg:gap-16">
           <div className="motion-safe:animate-section-in">
             <div className="flex items-center gap-2 font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70"><span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-300/70" />
@@ -77,17 +77,17 @@ function DecisionMap() {
       <div className="font-general text-[10.5px] uppercase tracking-[0.28em] text-ink/45">
         Financial support map
       </div>
-      <div className="mt-5 grid grid-cols-3 items-stretch gap-3">
+      <div className="mt-5 grid grid-cols-1 items-stretch gap-3 sm:grid-cols-3">
         <Column label="Records & data" items={left.map((o) => o.shortLabel).concat(tools.map((o) => o.shortLabel))} />
         <FlagshipColumn item={middle} />
         <Column label="Leadership" items={right.map((o) => o.shortLabel)} align="right" />
       </div>
-      <div aria-hidden className="mt-5 grid grid-cols-3 items-center text-center font-general text-[10px] uppercase tracking-[0.24em] text-ink/35">
+      <div aria-hidden className="mt-5 hidden grid-cols-3 items-center text-center font-general sm:grid text-[10px] uppercase tracking-[0.24em] text-ink/35">
         <span>DIY / Low</span>
         <span className="text-champagne-300/70">Missing middle</span>
         <span>High-touch</span>
       </div>
-      <div aria-hidden className="pointer-events-none absolute inset-x-8 bottom-[78px] h-px bg-gradient-to-r from-transparent via-champagne-200/30 to-transparent" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-8 bottom-[78px] hidden h-px sm:block bg-gradient-to-r from-transparent via-champagne-200/30 to-transparent" />
     </div>
   );
 }

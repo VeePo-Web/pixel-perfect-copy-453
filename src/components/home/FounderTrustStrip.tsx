@@ -43,7 +43,7 @@ export default function FounderTrustStrip() {
           Who built GoldFin Desk
         </p>
 
-        {/* Founder card */}
+        {/* Founder / team card */}
         <div className="mx-auto max-w-xl rounded-2xl border border-ink/[0.08] bg-white p-6 text-left shadow-[0_1px_2px_rgba(11,13,18,0.04)] sm:p-7">
           <div className="flex items-start gap-5">
             {/* Avatar */}
@@ -51,16 +51,26 @@ export default function FounderTrustStrip() {
               className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-champagne-200/30 bg-navy shadow-[0_6px_16px_-8px_rgba(15,27,61,0.35)]"
               aria-hidden="true"
             >
-              <span className="text-[15px] font-medium tracking-wide text-champagne-100">CS</span>
+              <span className="text-[15px] font-medium tracking-wide text-champagne-100">GF</span>
             </div>
 
             {/* Name + credential */}
             <div>
-              <p className="text-[16px] font-medium text-ink">Chris Sam</p>
-              <p className="mt-1.5 max-w-[52ch] text-[15px] leading-relaxed text-ink/75">
-                10 years in institutional finance, built this for owners who needed better answers
-                than their accountant was giving them.
+              <p className="text-[16px] font-medium text-ink">
+                Chris Sam &amp; Parker G — the GoldFin Desk team
               </p>
+              <p className="mt-1.5 max-w-[54ch] text-[15px] leading-relaxed text-ink/75">
+                Chris — ex-Goldman Sachs, ex-Bank of America Merrill Lynch, now VP of
+                Structured Credit Solutions at RBC — reads the numbers. Parker reads
+                the operation. Built for owners who needed better answers than their
+                accountant was giving them.
+              </p>
+              <a
+                href="/about"
+                className="mt-2 inline-block text-[12.5px] text-champagne-300/80 transition-colors hover:text-champagne-300"
+              >
+                Meet the team →
+              </a>
             </div>
           </div>
         </div>

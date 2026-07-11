@@ -32,7 +32,7 @@ export default function RecommendedPlanSpotlight() {
                 The GoldFin Desk
               </h3>
               <div className="mt-6 flex items-baseline gap-2">
-                <span className="font-display text-[56px] font-medium leading-none tracking-[-0.01em] tabular-nums text-ink">$1,500</span>
+                <span className="font-display text-[56px] font-medium leading-none tracking-[-0.01em] tabular-nums text-ink">$150</span>
                 <span className="text-[14px] text-ink/55">/ month</span>
               </div>
               <p className="mt-5 max-w-[44ch] text-[14.5px] leading-[1.7] text-ink/75">
@@ -49,7 +49,7 @@ export default function RecommendedPlanSpotlight() {
                 </button>
                 {/* Advisory — border/secondary */}
                 <a
-                  href="/apply"
+                  href="/pricing"
                   className="rounded-full border border-ink/[0.12] bg-white px-5 py-3 text-[13px] text-ink/80 transition-all duration-300 ease-cinema hover:border-ink/[0.25] hover:text-ink active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                 >
                   Apply for the GoldFin Desk

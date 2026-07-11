@@ -45,7 +45,7 @@ export default function TemplateCategoryFilters({ active, onChange }: Props) {
           ref={listRef}
           role="radiogroup"
           aria-label="Filter templates by category"
-          className="flex gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex gap-2 no-scrollbar overflow-x-auto overscroll-x-contain pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {categories.map((c, i) => {
             const isActive = c === active;

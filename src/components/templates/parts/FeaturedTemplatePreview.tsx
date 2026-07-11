@@ -80,6 +80,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
               </a>
             </div>
 
+            {/* $150 bridge — this filled example IS the monthly product */}
             <p className="mt-1 text-[13px] leading-[1.6] text-ink/60">
               Do not want to fill it in yourself every month?{" "}
               <button
@@ -90,7 +91,7 @@ export default function FeaturedTemplatePreview({ onGet }: Props) {
                 }}
                 className="text-champagne-300 underline-offset-4 transition-colors hover:text-ink hover:underline"
               >
-                GoldFin Reports does it for you - $150/mo
+                GoldFin Reports does it for you — $150/mo →
               </button>
             </p>
           </div>

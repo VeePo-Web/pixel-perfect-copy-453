@@ -78,6 +78,39 @@ export type PlaidItemRow = {
   access_token: string;
 };
 
+/**
+ * Reads and decrypts an item's access_token via the service-role-only RPC.
+ * The plaintext token is never stored on the row — see migration
+ * "encrypt Plaid access tokens at rest". Callers must already have verified
+ * ownership of the item before invoking.
+ */
+export async function getAccessToken(
+  admin: SupabaseClient,
+  itemLocalId: string,
+): Promise<string> {
+  const { data, error } = await admin.rpc("plaid_get_access_token", {
+    _item_id: itemLocalId,
+  });
+  if (error) throw new Error(`plaid_get_access_token failed: ${error.message}`);
+  if (!data || typeof data !== "string") {
+    throw new Error("plaid access_token missing for item");
+  }
+  return data;
+}
+
+/** Encrypt-on-write helper. Service-role-only RPC. */
+export async function setAccessToken(
+  admin: SupabaseClient,
+  itemLocalId: string,
+  token: string,
+): Promise<void> {
+  const { error } = await admin.rpc("plaid_set_access_token", {
+    _item_id: itemLocalId,
+    _token: token,
+  });
+  if (error) throw new Error(`plaid_set_access_token failed: ${error.message}`);
+}
+
 /** Fetches /accounts/get for an item and upserts plaid_accounts. */
 export async function syncAccountsForItem(
   admin: SupabaseClient,

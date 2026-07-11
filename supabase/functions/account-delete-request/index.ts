@@ -3,7 +3,7 @@
 // subscription at period end. Pass { cancel: true } to undo a pending request.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
-import { plaid } from "../_shared/plaid.ts";
+import { plaid, getAccessToken } from "../_shared/plaid.ts";
 import { createStripeClient } from "../_shared/stripe.ts";
 
 const Body = z.object({ cancel: z.boolean().optional() });
@@ -27,11 +27,12 @@ Deno.serve(async (req) => {
     // 1. Revoke Plaid items immediately.
     const { data: items } = await admin
       .from("plaid_items")
-      .select("id, access_token")
+      .select("id")
       .eq("user_id", user.id);
     for (const it of items ?? []) {
       try {
-        await plaid("/item/remove", { access_token: it.access_token });
+        const accessToken = await getAccessToken(admin, it.id);
+        await plaid("/item/remove", { access_token: accessToken });
       } catch (e) {
         console.error("plaid remove failed", it.id, e);
       }

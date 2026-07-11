@@ -14,7 +14,7 @@ export default function PainToValueReframe() {
       aria-labelledby="reframe-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-14 md:py-24 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.15fr]">
           <div>
             <div className="font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300">

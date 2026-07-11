@@ -1,14 +1,16 @@
-// Central brand + offer naming. One source of truth so the GoldFin naming
-// system stays identical across every surface (Brunson: consistent offer naming).
+// Central brand + offer naming. One source of truth.
+// Three-rung ladder: Free Vault · $150/mo Reports · Advisory (custom, contact-only).
+// Advisory has NO Stripe SKU and NO public price. Never reintroduce $1,500.
 export const BRAND = {
   name: "GoldFin Desk",
-  tagline: "Financial clarity for owner-led businesses",
+  tagline: "A dedicated thought partner for business owners.",
   // Offer ladder
   vault: "GoldFin Template Vault", // Free lead magnet
-  reports: "GoldFin Reports", // $150/mo continuity — bread & butter
-  advisory: "GoldFin Advisory", // $1,500/mo human advisory
-  executive: "GoldFin Executive Desk", // future high-end
+  reports: "GoldFin Reports", // $150/mo continuity — the offer
+  advisory: "GoldFin Advisory", // Enterprise — custom, contact-only
   // Prices
   reportsPrice: "$150",
-  advisoryPrice: "$1,500",
+  advisoryPrice: "Custom",
+  // Contact
+  advisoryContactEmail: "chris@goldfindesk.com",
 } as const;

@@ -7,7 +7,7 @@ export default function PricingFinalCTA() {
         <div className="absolute inset-0 bg-[radial-gradient(60%_65%_at_50%_100%,rgba(201,163,90,0.14),transparent_65%)]" />
         <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:80px_80px]" />
       </div>
-      <div className="relative mx-auto max-w-5xl px-6 py-28 text-center lg:px-10">
+      <div className="relative mx-auto max-w-5xl px-6 py-16 md:py-28 text-center lg:px-10">
         {/* layered cards behind headline */}
         <div aria-hidden className="mx-auto mb-10 flex h-[120px] w-full max-w-md items-end justify-center">
           {[0, 1, 2].map((i) => (
@@ -64,13 +64,13 @@ export default function PricingFinalCTA() {
             </a>
           </div>
           <p className="text-[11.5px] uppercase tracking-[0.22em] text-ink/50">
-            No contracts · Cancel anytime · No bank connection required
+            Secure bank connection via Plaid — read-only, we never move money. Cancel anytime.
           </p>
           <a
-            href="/apply"
+            href="/sample-briefing"
             className="mt-1 rounded text-[12.5px] text-ink/45 underline-offset-4 transition-colors hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            Want a human reading your numbers? Apply for the $1,500 Desk
+            Or see a sample briefing first →
           </a>
         </div>
       </div>

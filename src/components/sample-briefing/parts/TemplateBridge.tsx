@@ -3,7 +3,7 @@ import { templateBridgeItems } from "../content";
 export default function TemplateBridge() {
   return (
     <section id="templates" className="bg-charcoal-950">
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div className="mx-auto max-w-7xl px-6 py-14 md:py-24 lg:px-10">
         <div className="grid items-end gap-6 lg:grid-cols-[1.2fr_1fr]">
           <div>
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">

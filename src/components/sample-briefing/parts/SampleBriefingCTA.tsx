@@ -4,14 +4,14 @@ type Props = { onAnother: () => void };
 // Proof-page close. The ONE place equal-weight
 // CTAs are allowed: the visitor just consumed proof, so let them self-select
 // the rung. Card B ($150 GoldFin Reports) carries the visual emphasis — the
-// bread-and-butter. $1,500 Advisory demoted to a tertiary text link.
+// bread-and-butter. $150 Advisory demoted to a tertiary text link.
 export default function SampleBriefingCTA({ onAnother }: Props) {
   return (
     <section className="relative overflow-hidden border-b border-ink/[0.05] bg-charcoal-950">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(55%_60%_at_50%_100%,rgba(201,163,90,0.10),transparent_60%)]" />
       </div>
-      <div className="relative mx-auto max-w-5xl px-6 py-28 lg:px-10">
+      <div className="relative mx-auto max-w-5xl px-6 py-16 md:py-28 lg:px-10">
         <div className="text-center">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Two ways to make this yours
@@ -67,7 +67,7 @@ export default function SampleBriefingCTA({ onAnother }: Props) {
             Generate another sample briefing
           </button>
           <a
-            href="/apply"
+            href="/pricing"
             className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors hover:text-ink hover:underline"
           >
             Running something larger? Apply for GoldFin Advisory →

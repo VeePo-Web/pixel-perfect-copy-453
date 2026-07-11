@@ -16,7 +16,7 @@ const cards = [
   {
     eyebrow: "Understand",
     title: "See Pricing",
-    body: "Understand what is included in the $1,500/month GoldFin Desk.",
+    body: "Understand what is included in the $150/mo GoldFin Desk.",
     cta: { label: "View Pricing", href: "/pricing" },
   },
 ];
@@ -27,7 +27,7 @@ export default function SoftConversionBridge() {
       aria-labelledby="soft-bridge-heading"
       className="relative border-b border-ink/[0.05] bg-charcoal-950"
     >
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div className="mx-auto max-w-7xl px-6 py-14 md:py-24 lg:px-10">
         <div className="max-w-[60ch]">
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Not ready to apply yet?
