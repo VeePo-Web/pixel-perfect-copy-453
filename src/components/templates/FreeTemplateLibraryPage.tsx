@@ -38,7 +38,7 @@ export default function FreeTemplateLibraryPage() {
   };
 
   const handleFeaturedGet = () => {
-    const cf = allTemplates.find((t) => t.id === "cash-flow-forecast");
+    const cf = allTemplates.find((t) => t.id === "13-week-cash-map");
     if (cf) open(cf);
   };
 

@@ -10,7 +10,7 @@ import type { LeadSubmitPayload } from "../../../lib/leads";
 const schema = z.object({
   firstName: z.string().trim().min(1, "First name required").max(60, "Too long"),
   email: z.string().trim().email("Enter a valid email").max(120),
-  businessType: z.string().trim().min(1, "Select your business type").max(80),
+  businessType: z.string().trim().max(80, "Too long"),
 });
 
 type Props = {
@@ -70,7 +70,7 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
               <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
                 Get the free template
               </div>
-              <h2 id={headingId} className="mt-2 text-[22px] font-light leading-snug text-ink">
+              <h2 id={headingId} className="mt-2 text-[22px] font-display font-medium leading-snug text-ink">
                 {template.name}
               </h2>
               <p className="mt-2 text-[13px] text-ink/65">
@@ -83,7 +83,7 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
               onClick={onClose}
               className="rounded-full border border-ink/[0.08] px-2.5 py-1 text-[11px] text-ink/60 hover:text-ink"
             >
-              âœ•
+              x
             </button>
           </div>
 
@@ -104,7 +104,7 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
               autoComplete="email"
             />
             <SelectField
-              label="Business type"
+              label="Business type (optional)"
               value={businessType}
               onChange={setBusinessType}
               options={businessTypes}
@@ -140,7 +140,7 @@ export default function TemplateLeadCaptureModal({ state, onClose, onSubmit }: P
           <button
             type="submit"
             disabled={state.kind === "sending"}
-            className="mt-6 w-full rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 disabled:opacity-70"
+            className="mt-6 w-full rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-6 py-3 text-[13px] font-medium text-ink transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 disabled:opacity-70"
           >
             {state.kind === "sending" ? "Sending…" : "Send My Template"}
           </button>

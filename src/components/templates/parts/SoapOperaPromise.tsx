@@ -1,14 +1,12 @@
-﻿import { useInView } from "../../how-it-works/hooks/useInView";
+import { useInView } from "../../how-it-works/hooks/useInView";
 import { startAutoFillCheckout } from "../../../lib/checkout";
-// Squeeze §5 — Soap-Opera Promise. Sets expectations for the email sequence
-// (reduces unsubscribes) and pre-frames the $99 upgrade. No CTA by design —
-// the value is the promise itself.
+
 const DAYS = [
-  { d: "Day 1", t: "Your Vault — and the one number most owners miss" },
-  { d: "Day 2", t: "Why your bank balance isn't a strategy" },
+  { d: "Day 1", t: "Your Vault, and the one cash number most owners miss" },
+  { d: "Day 2", t: "Why your bank balance is not a strategy" },
   { d: "Day 3", t: "Clean books still need interpretation" },
-  { d: "Day 4", t: "Can you actually afford the next hire?" },
-  { d: "Day 5", t: "Revenue grew. Cash still felt tight. Here's why." },
+  { d: "Day 4", t: "What recurring charges are quietly reducing flexibility?" },
+  { d: "Day 5", t: "Revenue grew. Cash still felt tight. Here is why." },
 ];
 
 export default function SoapOperaPromise() {
@@ -49,16 +47,18 @@ export default function SoapOperaPromise() {
         </ol>
 
         <p className="mt-8 max-w-[56ch] text-[14px] leading-[1.65] text-ink/55">
-          No spam, ever. By the end you'll know exactly what your numbers are telling you — and whether you'd rather have them filled for you every month.
+          No spam, ever. By the end you will know exactly what your numbers are telling you,
+          and whether you would rather have them filled for you every month.
         </p>
         <button
-          type="button" onClick={startAutoFillCheckout}
+          type="button"
+          onClick={startAutoFillCheckout}
           className="group mt-6 inline-flex items-center text-[12px] uppercase tracking-[0.18em] text-ink/35 transition-colors duration-300 hover:text-champagne-300"
         >
           <span className="border-b border-ink/10 pb-0.5 group-hover:border-champagne-300/60">
-            Already decided? Auto-fill my reports — $99/mo
+            Already decided? Auto-fill my reports - $150/mo
           </span>
-          <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">→</span>
+          <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5">{">"}</span>
         </button>
       </div>
     </section>

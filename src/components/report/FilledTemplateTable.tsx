@@ -1,4 +1,4 @@
-// Shared, presentational renderer for one auto-filled template — used in the portal
+// Shared, presentational renderer for one auto-filled template, used in the portal
 // report AND on the marketing /templates page so both show the SAME honest engine
 // output (no mock). Totals bold, memos muted, section headers, and per-unit number
 // formatting (USD / % / months / count). Pure: it renders a FilledTemplate, nothing more.
@@ -35,10 +35,10 @@ export default function FilledTemplateTable({
           <button
             type="button"
             onClick={onDownload}
-            aria-label={`Download ${t.title} as CSV`}
+            aria-label={`Download ${t.title} as Excel workbook`}
             className="shrink-0 rounded-full border border-gold-500/50 px-3.5 py-1 text-[11.5px] text-gold-700 transition-colors duration-200 ease-cinema hover:bg-gold-300/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/40"
           >
-            Download
+            XLSX
           </button>
         )}
       </div>

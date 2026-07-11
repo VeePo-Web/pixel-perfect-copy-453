@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { faq } from "../content";
 
-const TITLE = "Free Financial Templates · GoldFin Desk";
+const TITLE = "Free XLSX Financial Templates | GoldFin Desk";
 const DESC =
-  "Free spreadsheet templates for cash flow, expenses, hiring decisions, monthly reviews, and tax reserves — built for owner-led businesses ready to stop guessing from their bank balance.";
+  "Free GoldFin Desk XLSX template vault for owner command center, 13-week cash map, cash-basis P&L, and expense audit.";
 const CANONICAL = "https://goldfindesk.com/templates";
 
 function ensureMeta(attr: "name" | "property", key: string): HTMLMetaElement {
   let el = document.querySelector(
-    `meta[${attr}="${key}"]`
+    `meta[${attr}="${key}"]`,
   ) as HTMLMetaElement | null;
   if (!el) {
     el = document.createElement("meta");

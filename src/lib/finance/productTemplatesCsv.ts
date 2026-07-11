@@ -1,13 +1,12 @@
-// GoldFin Desk — CSV export for the auto-filled spreadsheet templates (the "missing half", v1).
-// Turns the pure FilledTemplate rows into RFC-4180 CSV a real spreadsheet (Excel / Google
-// Sheets / Numbers) opens as live, computable numbers — NOT pre-formatted "$" strings.
-// The product sells "your templates, filled from your numbers"; this is the download that
-// delivers it. xlsx is a later (v2) pass; CSV is universal and zero-dependency.
+// GoldFin Desk CSV export for the auto-filled spreadsheet templates.
+// Turns FilledTemplate rows into RFC-4180 CSV a real spreadsheet opens as live,
+// computable numbers, not pre-formatted "$" strings. The branded XLSX is the
+// primary lead magnet; CSV remains the universal fallback.
 //
-// THE GROUNDING CONTRACT (report 17): every numeric cell that ships must trace back to a
-// production-metrics value. `safeTemplatesCsv` enforces it with the SAME allow-list
-// (`traceableValues`) that protects the advisory report — a cell the engine didn't compute
-// can never reach the customer's spreadsheet. Fabrication is structurally impossible here.
+// Grounding contract: every numeric cell that ships must trace back to a
+// production-metrics value. `safeTemplatesCsv` enforces the same allow-list
+// (`traceableValues`) that protects the advisory report: a cell the engine did
+// not compute can never reach the customer's spreadsheet.
 
 import type { FilledTemplate, TemplateRow } from "./types.ts";
 
@@ -19,7 +18,7 @@ export class UntraceableCellError extends Error {
     readonly value: number,
   ) {
     super(
-      `Untraceable cell in "${template}" → "${label}" = ${value}. ` +
+      `Untraceable cell in "${template}" -> "${label}" = ${value}. ` +
         `Every spreadsheet number must come from the metrics engine; refusing to export.`,
     );
     this.name = "UntraceableCellError";
@@ -32,35 +31,30 @@ function csvField(raw: string): string {
   return raw;
 }
 
-/** Serialize a cell value as a spreadsheet-native number (or "" for a section header). */
+/** Serialize a cell value as a spreadsheet-native number, or blank for sections. */
 function csvValue(row: TemplateRow): string {
   if (row.value === null) return "";
-  // Emit a raw number the spreadsheet can compute on. Percent rows carry the bare
-  // magnitude (the label already says "%"); a trailing "%" would make it text.
+  // Percent rows carry the bare magnitude; adding "%" would make the value text.
   return String(row.value);
 }
 
-/** Header columns for every template block. */
-const HEADER = "Item,Amount";
-
-/** One template → its own CSV block (title, period, header, rows). No trailing newline. */
+/** One template to its own CSV block: title, period, header, rows. */
 export function templateToCsv(t: FilledTemplate): string {
-  const lines: string[] = [csvField(t.title), csvField(t.periodLabel), HEADER];
+  const lines: string[] = [csvField(t.title), csvField(t.periodLabel), "Item,Amount"];
   for (const row of t.rows) {
     lines.push(`${csvField(row.label)},${csvValue(row)}`);
   }
   return lines.join("\r\n");
 }
 
-/** Many templates → one combined CSV, blank line between blocks (download-all). */
+/** Many templates to one combined CSV, blank line between blocks. */
 export function templatesToCsv(templates: readonly FilledTemplate[]): string {
   return templates.map(templateToCsv).join("\r\n\r\n");
 }
 
 /**
- * The safe export entry point. Verifies every numeric cell against the engine's
- * allow-list BEFORE serializing, then returns the combined CSV. Throws
- * `UntraceableCellError` on the first cell the engine didn't produce.
+ * Safe export entry point. Verifies every numeric cell against the engine's
+ * allow-list before serializing, then returns the combined CSV.
  */
 export function safeTemplatesCsv(
   templates: readonly FilledTemplate[],
@@ -76,7 +70,7 @@ export function safeTemplatesCsv(
   return templatesToCsv(templates);
 }
 
-/** Filename-safe slug for a single template download (e.g. "cash-flow-forecast"). */
+/** Filename-safe slug for a single template download. */
 export function templateFileName(t: FilledTemplate): string {
   const slug = t.title
     .toLowerCase()

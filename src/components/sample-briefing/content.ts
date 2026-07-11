@@ -469,10 +469,10 @@ export const clarityItems = [
 ];
 
 export const templateBridgeItems = [
-  { title: "Cash Flow Forecast Template", body: "Plan cash 8–13 weeks ahead." },
-  { title: "Monthly Financial Review Template", body: "A repeatable monthly review agenda." },
-  { title: "Expense Audit Template", body: "Find recurring costs worth trimming." },
-  { title: "Hiring Affordability Calculator", body: "Pressure-test the next hire." },
+  { title: "13-Week Cash Map", body: "Plan cash 8 to 13 weeks ahead." },
+  { title: "Cash-Basis P&L Review", body: "Review deposits, outflows, and profit proxy." },
+  { title: "Expense And Vendor Audit", body: "Find duplicate-like, unfamiliar, and moving costs." },
+  { title: "Owner Command Center", body: "Start with the owner-level view before opening details." },
 ];
 
 export type TabKey = "cash" | "revenue" | "expenses" | "risk" | "questions" | "decisions";

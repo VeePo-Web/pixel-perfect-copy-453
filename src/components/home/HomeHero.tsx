@@ -1,56 +1,45 @@
-﻿import { useInView } from "../how-it-works/hooks/useInView";
-
-// Homepage Section 1 — Bait Hero (Pattern A: asymmetric 7/5 copy-left + layered template cards right).
-// HOMEPAGE EXCEPTION: gold CTA = "Get the free templates" → /templates. NO $99/mo CTA here.
+import { useInView } from "../how-it-works/hooks/useInView";
 
 interface CardDef {
   label: string;
   decision: string;
   rows: { name: string; value: string }[];
-  rotate: string;
-  translate: string;
-  zIndex: string;
+  placement: string;
 }
 
 const CARDS: CardDef[] = [
   {
-    label: "Cash Flow Forecast",
-    decision: "Will cash feel tight next month?",
+    label: "13-Week Cash Map",
+    decision: "Will cash feel tight next quarter?",
     rows: [
       { name: "Starting cash", value: "$84,200" },
-      { name: "Expected revenue", value: "$132,400" },
-      { name: "Payroll + costs", value: "–$72,400" },
-      { name: "Projected end cash", value: "$129,060" },
+      { name: "Weekly deposits", value: "+$66,200" },
+      { name: "Weekly outflow", value: "-$43,770" },
+      { name: "Week 13 cash", value: "$375,790" },
     ],
-    rotate: "rotate-[3deg]",
-    translate: "translate-x-6 translate-y-2",
-    zIndex: "z-10",
+    placement: "top-0 ml-[-18px] -rotate-[1.25deg] z-10 opacity-70",
   },
   {
-    label: "Expense Audit",
+    label: "Expense And Vendor Audit",
     decision: "Where did my money actually go?",
     rows: [
-      { name: "Total expenses", value: "$87,540" },
-      { name: "Unusual spike Travel", value: "+212%" },
-      { name: "Duplicate tools", value: "3 found" },
-      { name: "Review items", value: "12" },
+      { name: "Total outflow", value: "$87,540" },
+      { name: "Duplicate-like", value: "1 found" },
+      { name: "Unfamiliar", value: "1 vendor" },
+      { name: "Biggest mover", value: "Software" },
     ],
-    rotate: "-rotate-[2deg]",
-    translate: "-translate-x-4 -translate-y-1",
-    zIndex: "z-20",
+    placement: "top-[28%] ml-[14px] rotate-[0.75deg] z-20 opacity-85",
   },
   {
-    label: "Owner Dashboard",
-    decision: "What's my real financial health?",
+    label: "Owner Command Center",
+    decision: "What should I look at first?",
     rows: [
-      { name: "Cash on hand", value: "$129,060" },
-      { name: "Gross margin", value: "61%" },
-      { name: "Months of runway", value: "7.4" },
-      { name: "Decision flag", value: "Audit subs" },
+      { name: "Cash on hand", value: "$84,200" },
+      { name: "Money in", value: "$132,400" },
+      { name: "Net cash", value: "+$44,860" },
+      { name: "Runway", value: "0.44 mo" },
     ],
-    rotate: "rotate-[1deg]",
-    translate: "translate-x-2 translate-y-4",
-    zIndex: "z-30",
+    placement: "top-[56%] ml-[-6px] z-30",
   },
 ];
 
@@ -62,7 +51,6 @@ export default function HomeHero() {
       aria-labelledby="home-hero-title"
       className="relative overflow-hidden bg-[#0B0D12]"
     >
-      {/* Gold radial glow — top-right */}
       <div
         aria-hidden
         className="pointer-events-none absolute -right-32 -top-32 h-[600px] w-[600px] rounded-full"
@@ -71,7 +59,6 @@ export default function HomeHero() {
             "radial-gradient(circle at 70% 30%, rgba(212,168,69,0.13) 0%, rgba(212,168,69,0.04) 45%, transparent 70%)",
         }}
       />
-      {/* Subtle grid texture */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
@@ -84,27 +71,24 @@ export default function HomeHero() {
 
       <div
         ref={ref}
-        className="relative mx-auto grid max-w-7xl grid-cols-1 gap-12 px-6 py-16 md:grid-cols-12 md:items-center md:gap-8 md:py-32 lg:px-10"
+        className="relative mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 py-20 md:grid-cols-12 md:items-center md:gap-8 md:py-32 lg:px-10"
       >
-        {/* ── Left column — 7 cols ── */}
         <div className="md:col-span-7">
-          {/* Eyebrow */}
           <div
-            className={`flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-champagne-300/80 transition-all duration-700 ease-cinema ${
+            className={`flex items-center gap-2 font-general text-[10px] uppercase tracking-[0.28em] text-champagne-300/80 transition-all duration-700 ease-cinema ${
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
             }`}
           >
             <span
               aria-hidden
-              className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-300/70"
+              className="inline-block h-1 w-1 rounded-full bg-champagne-300/70"
             />
-            Free financial templates
+            Free XLSX financial templates
           </div>
 
-          {/* H1 */}
           <h1
             id="home-hero-title"
-            className={`mt-5 font-robert-medium text-[clamp(2rem,4.8vw,3.6rem)] font-black uppercase leading-[0.96] tracking-tight text-white transition-all duration-700 ease-cinema ${
+            className={`mt-6 max-w-[16ch] font-display text-[clamp(2.35rem,4.6vw,3.75rem)] font-medium leading-[1.04] tracking-[-0.02em] text-white [text-wrap:balance] transition-all duration-700 ease-cinema ${
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
             }`}
             style={{ transitionDelay: "80ms" }}
@@ -112,104 +96,90 @@ export default function HomeHero() {
             Your business finances are not unclear. They are just unorganized.
           </h1>
 
-          {/* Subheading */}
           <p
-            className={`mt-6 max-w-[52ch] text-[17px] leading-[1.65] text-white/55 transition-all duration-700 ease-cinema ${
+            className={`mt-6 max-w-[52ch] text-[17px] leading-[1.65] text-white/60 [text-wrap:pretty] transition-all duration-700 ease-cinema ${
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
             }`}
             style={{ transitionDelay: "160ms" }}
           >
-            Seven free templates that answer the questions your bank account,
-            bookkeeping software, and spreadsheets never do.
+            Four branded XLSX templates that can be filled from business bank and card activity:
+            command center, cash map, cash-basis P&L, and expense audit.
           </p>
 
-          {/* CTA group */}
           <div
-            className={`mt-9 transition-all duration-700 ease-cinema ${
+            className={`mt-10 transition-all duration-700 ease-cinema ${
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
             }`}
             style={{ transitionDelay: "240ms" }}
           >
-            {/* Gold primary CTA — free templates only, NO $99/mo */}
             <a
               href="/templates"
-              className="group relative inline-flex w-full justify-center overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-4 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema sm:w-auto sm:justify-start sm:py-3.5 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(217,190,130,0.45)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0D12]"
+              className="inline-flex w-full justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-7 py-4 text-[13.5px] font-medium text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(0,0,0,0.25)] transition-all duration-300 ease-cinema sm:w-auto sm:justify-start sm:py-3.5 hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_12px_32px_-10px_rgba(212,168,69,0.5)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0D12]"
             >
-              <span
-                aria-hidden
-                className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent motion-safe:animate-shimmer-slow"
-              />
-              <span className="relative z-10">Get the free templates</span>
+              Get the free XLSX vault
             </a>
 
-            {/* Microcopy */}
-            <p className="mt-3 text-[11px] uppercase tracking-[0.22em] text-white/30">
-              Free · No bank connection required
+            <p className="mt-3.5 font-general text-[10.5px] uppercase tracking-[0.22em] text-white/35">
+              Free - No bank connection required
             </p>
 
-            {/* Text link secondary */}
             <a
               href="/sample-briefing"
-              className="group mt-5 inline-flex items-center text-[12.5px] uppercase tracking-[0.18em] text-white/45 transition-colors duration-300 hover:text-champagne-300"
+              className="group mt-6 inline-flex items-center gap-2 text-[14px] text-white/55 transition-colors duration-300 hover:text-champagne-100"
             >
-              <span className="border-b border-white/15 pb-0.5 group-hover:border-champagne-300/60">
+              <span className="border-b border-white/20 pb-0.5 transition-colors duration-300 group-hover:border-champagne-200/60">
                 Watch your numbers turn into plain English
               </span>
-              <span className="ml-2 transition-transform duration-300 group-hover:translate-x-0.5">
-                →
+              <span
+                aria-hidden
+                className="transition-transform duration-300 group-hover:translate-x-0.5"
+              >
+                {">"}
               </span>
             </a>
           </div>
         </div>
 
-        {/* ── Right column — 5 cols — layered template cards ── */}
-        <div className="relative flex h-[360px] items-center justify-center md:col-span-5 md:h-[420px]">
+        <div className="relative mx-auto h-[430px] w-full max-w-[340px] md:col-span-5 md:h-[480px] md:max-w-none">
           {CARDS.map((card, i) => (
             <div
               key={card.label}
-              className={`absolute w-[260px] rounded-xl border border-white/[0.09] bg-white/[0.05] p-4 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.55)] backdrop-blur-sm transition-all duration-700 ease-cinema ${card.rotate} ${card.translate} ${card.zIndex} ${
-                inView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-6"
+              className={`absolute left-1/2 w-[290px] -translate-x-1/2 rounded-2xl border border-white/[0.09] bg-[#12151D] p-5 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.6)] transition-all duration-700 ease-cinema ${card.placement} ${
+                inView ? "opacity-100" : "!opacity-0 translate-y-6"
               }`}
-              style={{ transitionDelay: `${300 + i * 100}ms` }}
+              style={{ transitionDelay: `${300 + i * 110}ms` }}
             >
-              {/* Card header */}
-              <div className="mb-2 flex items-center gap-2">
-                {/* Green signal dot */}
+              <div className="flex items-center gap-2">
                 <span
                   aria-hidden
-                  className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-green-signal"
+                  className="inline-block h-1 w-1 shrink-0 rounded-full bg-green-signal"
                 />
-                <span className="text-[10px] uppercase tracking-[0.2em] text-champagne-300/80">
+                <span className="font-general text-[10px] uppercase tracking-[0.2em] text-champagne-300/80">
                   {card.label}
                 </span>
               </div>
 
-              {/* Decision question */}
-              <p className="mb-3 text-[11px] italic leading-[1.4] text-white/45">
+              <p className="mb-3 mt-2 text-[12px] leading-[1.4] text-white/45">
                 {card.decision}
               </p>
 
-              {/* Data rows */}
               <div className="space-y-1.5">
                 {card.rows.map((row) => (
                   <div
                     key={row.name}
-                    className="flex items-baseline justify-between"
+                    className="flex items-baseline justify-between gap-4"
                   >
-                    <span className="text-[11px] text-white/50">{row.name}</span>
-                    <span className="text-[11px] font-medium text-white/80">
+                    <span className="text-[12px] text-white/50">{row.name}</span>
+                    <span className="font-general text-[11.5px] font-medium tabular-nums text-white/85">
                       {row.value}
                     </span>
                   </div>
                 ))}
               </div>
 
-              {/* Thin champagne gradient bottom line */}
               <div
                 aria-hidden
-                className="mt-3 h-px w-full"
+                className="mt-4 h-px w-full"
                 style={{
                   background:
                     "linear-gradient(90deg, transparent, rgba(212,168,69,0.35), transparent)",

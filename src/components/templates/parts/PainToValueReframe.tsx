@@ -1,14 +1,10 @@
 import { useInView } from "../../how-it-works/hooks/useInView";
 
-// Paired before -> after transformation (Brunson). Each line moves the owner
-// from a pain they recognize to the clarity the Vault gives — stronger than
-// two separate lists.
 const PAIRS: { before: string; after: string }[] = [
-  { before: "Guessing from the bank balance", after: "A cash-flow forecast you can read" },
+  { before: "Guessing from the bank balance", after: "A 13-week cash map you can read" },
   { before: "Expenses creeping unnoticed", after: "An expense audit that flags the creep" },
-  { before: "“Can I afford to hire?” — unsure", after: "A hiring-affordability check" },
-  { before: "Tax-season dread", after: "A tax reserve set aside on purpose" },
-  { before: "Spreadsheets nobody updates", after: "A monthly review rhythm" },
+  { before: "Revenue up but profit unclear", after: "A cash-basis P&L review" },
+  { before: "Monthly review feels scattered", after: "An owner command center" },
 ];
 
 export default function PainToValueReframe() {
@@ -21,27 +17,26 @@ export default function PainToValueReframe() {
       <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.15fr]">
           <div>
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300">
+            <div className="font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300">
               From scattered to clear
             </div>
             <h2
               id="reframe-heading"
-              className="mt-4 max-w-[22ch] font-light text-ink text-[32px] leading-[1.1] tracking-[-0.01em] sm:text-[44px]"
+              className="mt-4 max-w-[22ch] font-display font-medium text-ink [text-wrap:balance] text-[32px] leading-[1.08] tracking-[-0.02em] sm:text-[44px]"
             >
-              Most owners don't need more numbers. They need a clearer way to review them.
+              Most owners do not need more numbers. They need a clearer way to review them.
             </h2>
             <p className="mt-5 max-w-[54ch] text-[15px] leading-[1.7] text-ink/70">
-              Your bank balance tells you what's left. Your bookkeeping tells you what
-              happened. Your spreadsheets only help when someone has time to update them.
-              The Vault gives you the structure to actually review cash flow, expenses,
-              hiring, and monthly decisions — for free.
+              Your bank balance tells you what is left. Your bookkeeping tells you what happened.
+              Your spreadsheets only help when someone has time to update them. The Vault gives
+              you the structure to review cash flow, profitability, expenses, and owner decisions for free.
             </p>
             <a
               href="#vault-capture"
               className="group mt-7 inline-flex items-center text-[13px] text-champagne-300/80 underline-offset-4 transition-colors duration-300 hover:text-champagne-300 hover:underline"
             >
               <span>Send me the Vault</span>
-              <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden>→</span>
+              <span className="ml-1.5 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden>{">"}</span>
             </a>
           </div>
 
@@ -50,7 +45,7 @@ export default function PainToValueReframe() {
               <li
                 key={p.after}
                 style={{ transitionDelay: `${i * 80}ms` }}
-                className={`group grid grid-cols-[1fr_auto_1fr] items-center gap-3 rounded-2xl border border-ink/[0.07] bg-ink/[0.02] px-5 py-4 transition-all duration-700 ease-cinema hover:-translate-y-0.5 hover:border-champagne-200/25 sm:gap-5 ${
+                className={`group grid grid-cols-[1fr_auto_1fr] items-center gap-3 rounded-2xl border border-ink/[0.08] bg-white px-5 py-4 shadow-[0_1px_2px_rgba(11,13,18,0.04)] transition-all duration-700 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-20px_rgba(11,13,18,0.18)] sm:gap-5 ${
                   inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
                 }`}
               >
@@ -61,7 +56,7 @@ export default function PainToValueReframe() {
                   aria-hidden
                   className="text-champagne-300 transition-transform duration-300 group-hover:translate-x-0.5"
                 >
-                  →
+                  {">"}
                 </span>
                 <span className="text-[14px] font-medium leading-snug text-ink">
                   {p.after}

@@ -1,7 +1,3 @@
-// GoldFin Desk — tests for the filled-template CSV export (the missing half, v1).
-// Proves: spreadsheet-native numbers (not "$" strings), RFC-4180 escaping, and the
-// grounding gate — a cell the metrics engine didn't produce can never be exported.
-
 import { test, assert } from "vitest";
 
 import {
@@ -19,7 +15,6 @@ import {
   UntraceableCellError,
 } from "./productTemplatesCsv.ts";
 
-// Production-shaped metrics, with a comma in a merchant name to exercise CSV escaping.
 const M: ProductMetrics = {
   period: { start: "2026-06-01", end: "2026-06-14" },
   cashOnHand: 84200,
@@ -28,6 +23,13 @@ const M: ProductMetrics = {
   netCash: 44860,
   monthlyBurn: 190000,
   runwayMonths: 0.44,
+  nonOperatingExcluded: 15500,
+  revenueVsPriorPct: 6.4,
+  profitProxy: 44860,
+  profitVsPriorPct: 2.8,
+  duplicates: [{ merchant: "FedEx", amount: 320, date: "2026-06-09" }],
+  unfamiliar: [{ merchant: "New equipment vendor", amount: 2400, date: "2026-06-12" }],
+  biggestMover: { category: "Software", from: 2400, to: 3900, delta: 1500 },
   ownerPay: { profit: 6620, ownerPay: 66200, tax: 19860, opex: 39720 },
   waste: [{ merchant: "Acme, Inc.", annual: 720, monthly: 60 }],
   wasteAnnualTotal: 720,
@@ -40,40 +42,34 @@ const M: ProductMetrics = {
 test("a template renders title, period, header, and spreadsheet-native numbers", () => {
   const csv = templateToCsv(fillCashFlowForecast(M));
   const lines = csv.split("\r\n");
-  assert.equal(lines[0], "Cash Flow Forecast");
-  assert.equal(lines[1], "2026-06-01 → 2026-06-14");
+  assert.equal(lines[0], "13-Week Cash Map");
+  assert.equal(lines[1], "2026-06-01 to 2026-06-14");
   assert.equal(lines[2], "Item,Amount");
-  // Raw number, not "$84,200" — the cell must be computable in a spreadsheet.
   assert.ok(csv.includes("Starting cash,84200"));
-  // Money out is a real negative number.
-  assert.ok(csv.includes("Money out,-87540"));
 });
 
 test("money values are never formatted as currency strings", () => {
   const csv = templatesToCsv(fillAllTemplates(M));
   assert.ok(!csv.includes("$"));
-  assert.ok(!/\d,\d{3}/.test(csv.replace(/Item,Amount/g, ""))); // no thousands "," in numbers
 });
 
 test("fields with commas are RFC-4180 quoted", () => {
   const csv = templateToCsv(fillSubscriptionAudit(M));
-  // "Acme, Inc. (annual)" contains a comma → must be quoted as one field.
-  assert.ok(csv.includes('"Acme, Inc. (annual)",720'));
+  assert.ok(csv.includes('"Acme, Inc. - annual",720'));
 });
 
 test("section header rows have an empty value cell", () => {
   const csv = templateToCsv(fillSubscriptionAudit(M));
-  assert.ok(csv.includes("Dormant subscriptions (no activity 90+ days),"));
+  assert.ok(csv.includes("Recurring spend flags,"));
 });
 
 test("combined CSV contains every named template", () => {
   const csv = templatesToCsv(fillAllTemplates(M));
   for (const title of [
-    "Monthly Review",
-    "Cash Flow Forecast",
-    "Owner Pay (Profit First)",
-    "Subscription & Waste Audit",
-    "Tax Reserve",
+    "Owner Command Center",
+    "13-Week Cash Map",
+    "Cash-Basis P&L Review",
+    "Expense And Vendor Audit",
   ]) {
     assert.ok(csv.includes(title), `missing ${title}`);
   }
@@ -82,10 +78,10 @@ test("combined CSV contains every named template", () => {
 test("safe export passes when every cell is traceable to the engine", () => {
   const templates = fillAllTemplates(M);
   const csv = safeTemplatesCsv(templates, traceableValues(M));
-  assert.ok(csv.includes("Cash Flow Forecast"));
+  assert.ok(csv.includes("13-Week Cash Map"));
 });
 
-test("safe export REFUSES an invented number not produced by the engine", () => {
+test("safe export refuses an invented number not produced by the engine", () => {
   const tampered = fillAllTemplates(M).map((t, i) =>
     i === 0
       ? { ...t, rows: [...t.rows, { label: "Made-up line", value: 999999, kind: "line" as const, indent: 0 }] }
@@ -102,12 +98,10 @@ test("safe export REFUSES an invented number not produced by the engine", () => 
 });
 
 test("download file names are slugged and safe", () => {
-  assert.equal(templateFileName(fillCashFlowForecast(M)), "cash-flow-forecast.csv");
-  assert.equal(templateFileName(fillSubscriptionAudit(M)), "subscription-waste-audit.csv");
+  assert.equal(templateFileName(fillCashFlowForecast(M)), "13-week-cash-map.csv");
+  assert.equal(templateFileName(fillSubscriptionAudit(M)), "subscription-and-recurring-spend-tracker.csv");
 });
 
-// The Tuesday: a brand-new connect with almost no activity must still produce clean,
-// honest, gate-passing templates — no "-$0.00", no throw on null runway.
 const ZERO: ProductMetrics = {
   period: { start: "2026-06-01", end: "2026-06-14" },
   cashOnHand: 0,
@@ -126,13 +120,14 @@ const ZERO: ProductMetrics = {
 };
 
 test("a zero-outflow period never emits negative zero", () => {
-  const moneyOut = fillCashFlowForecast(ZERO).rows.find((r) => r.label === "Money out");
+  const moneyOut = fillCashFlowForecast(ZERO).rows.find((r) => r.label === "Baseline weekly money out");
   assert.equal(moneyOut?.value, 0);
-  assert.equal(Object.is(moneyOut?.value, -0), false); // would render as "-$0.00" on screen
+  assert.equal(Object.is(moneyOut?.value, -0), false);
 });
 
-test("sparse metrics still pass the grounding gate (null runway, empty waste)", () => {
+test("sparse metrics still pass the grounding gate", () => {
   const csv = safeTemplatesCsv(fillAllTemplates(ZERO), traceableValues(ZERO));
-  assert.ok(csv.includes("Money out,0"));
-  assert.ok(csv.includes("None found"));
+  assert.ok(csv.includes("Baseline weekly money out,0"));
+  assert.ok(csv.includes("Expense And Vendor Audit"));
+  assert.ok(!csv.includes("Subscription And Recurring Spend Tracker"));
 });

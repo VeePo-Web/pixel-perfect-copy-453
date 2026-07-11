@@ -23,12 +23,10 @@ export const plans: PricingPlan[] = [
     bestFor:
       "Owners who know they need better financial structure but are not ready for a premium monthly system.",
     includes: [
-      "Cash Flow Forecast Template",
-      "Monthly Financial Review Template",
-      "Expense Audit Template",
-      "Hiring Affordability Calculator",
-      "Subscription Expense Tracker",
-      "Tax Reserve Tracker",
+      "Owner Command Center",
+      "13-Week Cash Map",
+      "Cash-Basis P&L Review",
+      "Expense And Vendor Audit",
     ],
     cta: { label: "Get Free Templates", href: "/templates" },
     tone: "entry",
@@ -36,23 +34,22 @@ export const plans: PricingPlan[] = [
   {
     id: "autofill",
     name: "GoldFin Reports",
-    price: "$99",
+    price: "$150",
     priceSuffix: "/month",
     badge: "Recommended starting point",
     positioning: "The same templates — filled for you every month.",
     bestFor:
       "Owners who want monthly financial clarity without doing the spreadsheet work themselves.",
     includes: [
-      "Every template auto-filled from your numbers",
-      "Monthly cash-flow summary",
-      "Expense-change report",
-      "Subscription & recurring-cost tracker",
-      "Revenue snapshot",
+      "The four Plaid-fillable templates auto-filled from your numbers",
+      "Owner command center",
+      "13-week cash map",
+      "Cash-basis P&L review",
+      "Expense and vendor audit",
       "Monthly PDF briefing",
-      "Owner action list",
       "Spreadsheet export, always yours",
     ],
-    cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+    cta: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
     tone: "continuity",
     note: "Cancel anytime",
   },
@@ -121,29 +118,28 @@ export const plans: PricingPlan[] = [
   },
 ];
 
-// $99/mo continuity rung — value-stacked offer (Pattern E).
+// $150/mo continuity rung — value-stacked offer (Pattern E).
 // Per-item values are deliberately realistic so the stack stays credible
 // (premium finance brand: no inflated anchoring).
 export const autoFillOffer = {
-  eyebrow: "GoldFin Reports · $99 / month",
+  eyebrow: "GoldFin Reports · $150 / month",
   name: "GoldFin Reports",
   headline: "Use the templates free. Or have them filled for you every month.",
   sub: "The same financial templates you can download free — except we keep them filled from your numbers, every month, and hand you a plain-English briefing. No spreadsheet work. No catching up at year-end.",
-  price: "$99",
+  price: "$150",
   priceSuffix: "/ month",
   stack: [
-    { item: "Every template auto-filled from your numbers", value: "$120/mo" },
-    { item: "Monthly cash-flow summary", value: "$60/mo" },
-    { item: "Expense-change report", value: "$45/mo" },
-    { item: "Subscription & recurring-cost tracker", value: "$30/mo" },
-    { item: "Revenue snapshot", value: "$30/mo" },
+    { item: "Four Plaid-fillable templates auto-filled from your numbers", value: "$120/mo" },
+    { item: "Owner command center", value: "$50/mo" },
+    { item: "13-week cash map", value: "$60/mo" },
+    { item: "Cash-basis P&L review", value: "$45/mo" },
+    { item: "Expense and vendor audit", value: "$45/mo" },
     { item: "Monthly PDF briefing", value: "$75/mo" },
-    { item: "Owner action list", value: "$40/mo" },
     { item: "Spreadsheet export — always yours", value: "Included" },
   ] as const,
   totalValueLabel: "Total value",
-  totalValue: "$400+/mo",
-  cta: "Auto-fill my reports — $99/mo",
+  totalValue: "$395+/mo",
+  cta: "Auto-fill my reports — $150/mo",
   guarantee: "Try one month. Cancel anytime before your next billing cycle.",
   trust: "No bank connection required to start. When you connect, it is read-only — we never move money.",
   microbridge: "Not ready for done-for-you? The same templates are free →",
@@ -294,10 +290,10 @@ export const decisionCards = [
 export const faq = [
   {
     q: "Can I cancel GoldFin Reports anytime?",
-    a: "Yes. The $99/mo plan is month-to-month. Try one month — if it isn't clearer, cancel before your next billing cycle. No friction, no lock-in.",
+    a: "Yes. The $150/mo plan is month-to-month. Try one month — if it isn't clearer, cancel before your next billing cycle. No friction, no lock-in.",
   },
   {
-    q: "Do I need to connect my bank for the $99 plan?",
+    q: "Do I need to connect my bank for the $150 plan?",
     a: "No bank connection is required to start. When you do connect, it is read-only through a secure connection — we never move money. You can also start with rough, non-sensitive numbers.",
   },
   {
@@ -305,8 +301,8 @@ export const faq = [
     a: "Keep them. A bookkeeper keeps your records clean. GoldFin Reports turns those records into a monthly plain-English briefing on what changed, what's risky, and what to decide next. They work together.",
   },
   {
-    q: "What's the difference between $99 Reports and $1,500 Advisory?",
-    a: "GoldFin Reports ($99/mo) fills your reports and briefs you every month — fully automated. GoldFin Advisory ($1,500/mo) adds a person who interprets them with you on a monthly strategy call. Most owners start with $99 and move up when the decisions get bigger.",
+    q: "What's the difference between $150 Reports and $1,500 Advisory?",
+    a: "GoldFin Reports ($150/mo) fills your reports and briefs you every month — fully automated. GoldFin Advisory ($1,500/mo) adds a person who interprets them with you on a monthly strategy call. Most owners start with $150 and move up when the decisions get bigger.",
   },
   {
     q: "Is this a bookkeeping or CFO replacement?",
@@ -339,16 +335,17 @@ export const planFit = [
     tone: "entry" as PlanTone,
   },
   {
-    // continuity = gold CTA in PlanFitSection — bread & butter $99/mo
+    // continuity = gold CTA in PlanFitSection — bread & butter $150/mo
     title: "Choose GoldFin Reports if:",
     bullets: [
       "You want your reports filled for you monthly",
       "You have recurring revenue and real expenses",
       "You want a monthly plain-English briefing",
       "You are ready to stop doing spreadsheet work",
+      "You want the XLSX vault to stay current",
       "You want to cancel anytime with no lock-in",
     ],
-    cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+    cta: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
     tone: "continuity" as PlanTone,
   },
   {
@@ -358,7 +355,7 @@ export const planFit = [
       "Your business has real monthly financial movement",
       "You feel unclear even with tools or a bookkeeper",
       "You want plain-English interpretation plus a strategy call",
-      "You have hiring, cash flow, or expense decisions to make",
+      "You have cash flow, expense, owner pay, or growth decisions to make",
       "You want a recurring monthly financial rhythm",
     ],
     cta: { label: "Apply for the GoldFin Desk", href: "/apply" },
@@ -452,8 +449,8 @@ export function recommend(a: SelectorAnswers): Recommendation {
     return {
       planId: "autofill",
       headline: "Start with Auto-Filled Monthly Reports.",
-      body: "The bridge between free templates and the full Desk — your templates filled for you every month, at $99.",
-      cta: { label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" },
+      body: "The bridge between free templates and the full Desk — your templates filled for you every month, at $150.",
+      cta: { label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" },
     };
   }
   return {

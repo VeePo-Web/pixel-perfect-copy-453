@@ -1,9 +1,9 @@
 ﻿import { startAutoFillCheckout } from "../../../lib/checkout";
 type Props = { onAnother: () => void };
 
-// Proof-page close (conversion-prompt PAGE 3 Â§6). The ONE place equal-weight
+// Proof-page close. The ONE place equal-weight
 // CTAs are allowed: the visitor just consumed proof, so let them self-select
-// the rung. Card B ($99 GoldFin Reports) carries the visual emphasis — the
+// the rung. Card B ($150 GoldFin Reports) carries the visual emphasis — the
 // bread-and-butter. $1,500 Advisory demoted to a tertiary text link.
 export default function SampleBriefingCTA({ onAnother }: Props) {
   return (
@@ -16,7 +16,7 @@ export default function SampleBriefingCTA({ onAnother }: Props) {
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Two ways to make this yours
           </div>
-          <h2 className="mx-auto mt-5 max-w-[24ch] font-light text-ink text-[36px] leading-[1.05] tracking-[-0.01em] sm:text-[52px]">
+          <h2 className="mx-auto mt-5 max-w-[24ch] font-display font-medium text-ink text-[36px] leading-[1.05] tracking-[-0.02em] sm:text-[52px]">
             Want this briefing for your actual business?
           </h2>
           <p className="mx-auto mt-5 max-w-[58ch] text-[15.5px] leading-[1.7] text-ink/70">
@@ -28,7 +28,7 @@ export default function SampleBriefingCTA({ onAnother }: Props) {
           {/* Card A — free Vault */}
           <div className="flex flex-col rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-7">
             <div className="text-[10.5px] uppercase tracking-[0.26em] text-ink/45">Free</div>
-            <h3 className="mt-2 text-[20px] font-light text-ink">Get the free Template Vault</h3>
+            <h3 className="mt-2 text-[20px] font-display font-medium text-ink">Get the free Template Vault</h3>
             <p className="mt-2 flex-1 text-[13.5px] leading-[1.6] text-ink/60">
               The same templates these numbers came from — sent to your inbox, free.
             </p>
@@ -40,21 +40,20 @@ export default function SampleBriefingCTA({ onAnother }: Props) {
             </a>
           </div>
 
-          {/* Card B — $99 GoldFin Reports (recommended) */}
+          {/* Card B — $150 GoldFin Reports (recommended) */}
           <div className="relative flex flex-col overflow-hidden rounded-2xl border border-champagne-200/45 bg-charcoal-900/70 p-7 shadow-[0_30px_80px_-30px_rgba(217,190,130,0.4)]">
             <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/60 to-transparent" />
             <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300">
-              Recommended · $99/mo
+              Recommended · $150/mo
             </div>
-            <h3 className="mt-2 text-[20px] font-light text-ink">Have GoldFin fill these every month</h3>
+            <h3 className="mt-2 text-[20px] font-display font-medium text-ink">Have GoldFin fill these every month</h3>
             <p className="mt-2 flex-1 text-[13.5px] leading-[1.6] text-ink/70">
               Your numbers, filled and briefed in plain English — every month. No spreadsheet work. Cancel anytime.
             </p>
             <button type="button" onClick={startAutoFillCheckout}
-              className="group relative mt-6 inline-flex w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+              className="group relative mt-6 inline-flex w-full items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-5 py-3 text-[13px] font-medium text-ink transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
             >
-              <span className="relative z-10">Auto-fill my reports — $99/mo</span>
-              <span aria-hidden className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+              <span className="relative z-10">Auto-fill my reports — $150/mo</span>
             </button>
           </div>
         </div>
