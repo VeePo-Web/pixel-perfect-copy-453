@@ -1,22 +1,31 @@
 # GoldFin Desk
 
-GoldFin Desk turns a business's financial activity into organized spreadsheet templates and a plain-English monthly briefing — a recurring finance rhythm for owner-led businesses, without hiring a CFO or bookkeeper.
+GoldFin Desk turns a business's financial activity into organized spreadsheet templates and a plain-English monthly briefing - a recurring finance rhythm for owner-led businesses, without hiring a CFO or bookkeeper.
 
 ## Key Pages
-- Home: / — what GoldFin Desk is and who it serves
-- Pricing: /pricing — Free templates, $99/mo automated Reports, $1,500/mo Advisory
-- Sample Briefing: /sample-briefing — an example plain-English monthly finance briefing
-- Free Templates: /templates — seven free financial templates
-- Compare: /compare — GoldFin vs bookkeeper, fractional CFO, and dashboards
-- Security & FAQ: /security-faq — data handling, Plaid, and common questions
+- Home: / - what GoldFin Desk is and who it serves
+- Pricing: /pricing - Free templates, $150/mo automated Reports, custom-scoped Advisory
+- Sample Briefing: /sample-briefing - an example plain-English monthly finance briefing
+- Free Templates: /templates - seven free financial templates
+- Compare: /compare - GoldFin vs bookkeeper, fractional CFO, and dashboards
+- Security & FAQ: /security-faq - data handling, Plaid, and common questions
+- Blog: /blog/ - proof-led financial clarity guides for owner-led businesses
+- Monthly Financial Reporting Hub: /blog/monthly-financial-reporting/ - owner-ready monthly reporting guides
 
 ## Services
 - GoldFin Template Vault (Free): seven financial templates owners can use immediately
-- GoldFin Reports ($99/mo): your templates auto-filled from your numbers plus a plain-English briefing every month, fully automated
-- GoldFin Advisory ($1,500/mo): everything in Reports plus a monthly one-hour strategy review with a finance professional (by application)
+- GoldFin Reports ($150/mo): your templates auto-filled from your numbers plus a plain-English briefing every month, fully automated
+- GoldFin Advisory: custom-priced consultation with Chris Sam for businesses that need real insight, interpretation, and decision support (by application)
+
+## Blog Launch Pages
+- /blog/what-small-business-monthly-financial-report-should-include/ - what an owner-ready monthly financial report should include
+- /blog/monthly-financial-review-checklist/ - a 30-minute owner monthly financial review routine
+- /blog/sample-monthly-finance-briefing/ - how raw numbers become a plain-English monthly briefing
+- /blog/how-monthly-financial-reporting-service-works/ - how a monthly financial reporting service works
+- /blog/bank-balance-vs-financial-report/ - why bank balance and financial reports tell different stories
 
 ## Key Facts
 - Category: monthly financial clarity and reporting for small, owner-led businesses
-- Not a replacement for tax, legal, accounting, or bookkeeping — it is the clarity layer on top
+- Not a replacement for tax, legal, accounting, or bookkeeping - it is the clarity layer on top
 - Bank connection is optional and read-only via Plaid; no money is ever moved
-- Start free; the $99/mo plan is month-to-month and cancellable anytime
+- Start free; the $150/mo plan is month-to-month and cancellable anytime
