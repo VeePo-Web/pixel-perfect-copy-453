@@ -1,7 +1,7 @@
-# GoldFin Template Vault → GoldFin Reports ($99/mo) Email Sequence
+# GoldFin Template Vault → GoldFin Reports ($150/mo) Email Sequence
 
 Brunson soap-opera sequence. Job: take a free **GoldFin Template Vault** lead and walk
-them, over ~7 days, to the **$99/mo GoldFin Reports** upgrade (the bread-and-butter,
+them, over ~7 days, to the **$150/mo GoldFin Reports** upgrade (the bread-and-butter,
 fully-automated rung). Tone: calm, premium, plain-spoken, banker-grade — the persona
 voice. **Never** "AI magic", "unlock", "supercharge", "revolutionary", or emojis. Sell
 the *rhythm and interpretation*, not spreadsheets. Founder: **Chris Sam**.
@@ -13,10 +13,10 @@ the *rhythm and interpretation*, not spreadsheets. Founder: **Chris Sam**.
   date (add the contact to a Resend Audience via `RESEND_AUDIENCE_ID`, then schedule the
   automation: Day 2, 3, 4, 5, 7).
 - Links (replace `{{SITE_URL}}` with the live domain):
-  - Vault / templates: `{{SITE_URL}}/#/templates`
-  - Sample briefing (proof): `{{SITE_URL}}/#/sample-briefing`
-  - **GoldFin Reports $99/mo (primary upgrade): `{{SITE_URL}}/#/pricing#auto-fill`**
-  - GoldFin Advisory ($1,500, application): `{{SITE_URL}}/#/apply`
+  - Vault / templates: `{{SITE_URL}}/templates`
+  - Sample briefing (proof): `{{SITE_URL}}/sample-briefing`
+  - **GoldFin Reports $150/mo (primary upgrade): `{{SITE_URL}}/pricing#auto-fill`**
+  - GoldFin Advisory (custom-scoped consultation, by application): `{{SITE_URL}}/apply`
 - One idea, one primary CTA per email. Every email earns the next open.
 
 ---
@@ -32,7 +32,7 @@ Here's your GoldFin Template Vault — cash flow, monthly review, expense audit,
 affordability, subscription tracker, and tax reserve. Open it, drop in your numbers, and
 you'll see the business more clearly in about ten minutes.
 
-→ **Open my Vault:** {{SITE_URL}}/#/templates
+→ **Open my Vault:** {{SITE_URL}}/templates
 
 One thing before you go. Most owners check the **bank balance** to feel safe. It's the
 fastest number to find — and the most misleading. It tells you what's *left*. It says
@@ -46,7 +46,7 @@ thinking.
 — Chris Sam, GoldFin Desk
 
 **P.S.** If you'd rather not fill these in yourself every month, that's exactly what
-GoldFin Reports does for $99/mo. More on that later in the week.
+GoldFin Reports does for $150/mo. More on that later in the week.
 
 ---
 
@@ -74,7 +74,7 @@ The Cash Flow Forecast in your Vault fixes the *what's coming* part. Want to see
 full picture looks like, interpreted in plain English? Generate a sample briefing — no
 bank connection, demo data is fine:
 
-→ **See a sample briefing:** {{SITE_URL}}/#/sample-briefing
+→ **See a sample briefing:** {{SITE_URL}}/sample-briefing
 
 — Chris Sam
 
@@ -105,7 +105,7 @@ That recurring moment is what GoldFin Reports gives you: your templates filled f
 numbers every month, with a plain-English briefing on what changed and what's worth a
 second look.
 
-→ **See how GoldFin Reports works — $99/mo:** {{SITE_URL}}/#/pricing#auto-fill
+→ **See how GoldFin Reports works — $150/mo:** {{SITE_URL}}/pricing#auto-fill
 
 — Chris Sam
 
@@ -136,7 +136,7 @@ The Hiring Affordability template in your Vault runs this. GoldFin Reports keeps
 current *and* flags it for you — so the answer is sitting in your monthly briefing before
 you're staring at an offer letter wondering.
 
-→ **Have it filled for you every month — $99/mo:** {{SITE_URL}}/#/pricing#auto-fill
+→ **Have it filled for you every month — $150/mo:** {{SITE_URL}}/pricing#auto-fill
 
 — Chris Sam
 
@@ -168,7 +168,7 @@ and concentration first." That's the difference between data and clarity.
 
 This is exactly what GoldFin Reports delivers every month — for your real numbers.
 
-→ **Auto-fill my reports — $99/mo:** {{SITE_URL}}/#/pricing#auto-fill
+→ **Auto-fill my reports — $150/mo:** {{SITE_URL}}/pricing#auto-fill
 
 — Chris Sam
 
@@ -179,7 +179,7 @@ no-risk way to try it.
 
 ## Email 6 — The direct offer (Day 7)
 
-**Subject:** Have your reports filled for you — $99/mo
+**Subject:** Have your reports filled for you — $150/mo
 **Preview:** The Vault, done for you, every month. Cancel anytime.
 
 Hi {{firstName}},
@@ -188,7 +188,7 @@ You've had the Vault for a week. If you've used it, you already know two things:
 and keeping it current every month is work you'll quietly stop doing. That's the honest
 trap of free templates — the value is real, and so is the maintenance.
 
-**GoldFin Reports** removes the maintenance. For **$99/month** you get, every month:
+**GoldFin Reports** removes the maintenance. For **$150/month** you get, every month:
 
 - Every template **filled from your numbers** — no spreadsheet work *(~$120/mo of work)*
 - A monthly **cash-flow summary** *(~$60)*
@@ -199,20 +199,22 @@ trap of free templates — the value is real, and so is the maintenance.
 - An **owner action list** *(~$40)*
 - **Spreadsheet export — always yours**
 
-That's **$400+/month of work and interpretation for $99.** Try one month. If it's not
+That's **$400+/month of work and interpretation for $150.** Try one month. If it's not
 clearer, cancel before your next billing cycle — no friction. No bank connection required
 to start; when you connect, it's read-only and we never move money.
 
-→ **Auto-fill my reports — $99/mo:** {{SITE_URL}}/#/pricing#auto-fill
+→ **Auto-fill my reports — $150/mo:** {{SITE_URL}}/pricing#auto-fill
 
 — Chris Sam, GoldFin Desk
 
-**P.S.** Running something larger and want a person reading the numbers *with* you each
-month? That's GoldFin Advisory — by application: {{SITE_URL}}/#/apply
+**P.S.** Running something larger and want Chris Sam reading the numbers *with* you,
+turning the patterns into real decisions each month? That's GoldFin Advisory —
+consultation scoped and priced uniquely to the business after application:
+{{SITE_URL}}/apply
 
 ---
 
 ## After the sequence (optional)
-- Non-openers of Email 6 → resend with a new subject 3 days later ("One number worth $99").
-- Clicked $99 but didn't subscribe → a single cart-style nudge with the guarantee restated.
+- Non-openers of Email 6 → resend with a new subject 3 days later ("One number worth $150").
+- Clicked $150 but didn't subscribe → a single cart-style nudge with the guarantee restated.
 - Subscribed → stop the sequence, start onboarding.
