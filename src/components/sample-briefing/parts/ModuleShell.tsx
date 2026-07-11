@@ -19,7 +19,7 @@ export default function ModuleShell({ id, eyebrow, title, children, cta, classNa
       {eyebrow && (
         <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">{eyebrow}</div>
       )}
-      <h3 className="mt-2 font-light text-ink text-[26px] leading-[1.15] tracking-[-0.005em] sm:text-[30px]">
+      <h3 className="mt-2 font-display font-medium text-ink text-[26px] leading-[1.15] tracking-[-0.02em] sm:text-[30px]">
         {title}
       </h3>
       <div className="mt-6">{children}</div>

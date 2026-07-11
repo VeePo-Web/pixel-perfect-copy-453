@@ -36,7 +36,7 @@ export default function MfaAttestation() {
         <p className="mt-6 text-[11px] uppercase tracking-[0.28em] text-ink/45">
           Plaid Production Access · Security &amp; Access Control
         </p>
-        <h1 className="mt-2 font-zentry text-[34px] leading-[1.1] tracking-[-0.01em]">
+        <h1 className="mt-2 font-display font-medium text-[34px] leading-[1.12] tracking-[-0.02em]">
           MFA Attestation for Plaid
         </h1>
         <p className="mt-3 text-[12.5px] text-ink/55">

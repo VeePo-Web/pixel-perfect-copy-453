@@ -1,4 +1,4 @@
--- Free-template lead magnet capture (top of funnel → email list → $99/mo upgrade).
+-- Free-template lead magnet capture (top of funnel → email list → $150/mo upgrade).
 -- Owned source of truth; Resend handles delivery + sequence separately.
 CREATE TABLE public.leads (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),

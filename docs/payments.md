@@ -6,7 +6,7 @@ Lovable's built-in Stripe integration. Test mode works out of the box; live unlo
 
 | Plan key (frontend)      | Stripe price ID         | Amount         |
 |--------------------------|-------------------------|----------------|
-| `auto-fill-monthly`      | `auto_fill_monthly`     | $99 / month    |
+| `auto-fill-monthly`      | `auto_fill_monthly`     | $150 / month   |
 | `finance-desk-monthly`   | `finance_desk_monthly`  | $1,500 / month |
 | `clarity-report`         | `clarity_report_once`   | $99 one-time   |
 

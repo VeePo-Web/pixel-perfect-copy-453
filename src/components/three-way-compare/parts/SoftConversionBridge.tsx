@@ -49,7 +49,7 @@ export default function SoftConversionBridge() {
               <div className="text-[10.5px] uppercase tracking-[0.26em] text-champagne-300/70">
                 {c.eyebrow}
               </div>
-              <h3 className="mt-2 text-[17px] font-light leading-snug text-ink">{c.title}</h3>
+              <h3 className="mt-2 text-[17px] font-display font-medium leading-snug text-ink">{c.title}</h3>
               <p className="mt-3 text-[13.5px] leading-relaxed text-ink/70">{c.body}</p>
               <a
                 href={c.cta.href}

@@ -29,15 +29,15 @@ export default function MobileStickyCTA({ status, onGenerate }: Props) {
         {ready ? (
           <button
             type="button" onClick={startAutoFillCheckout}
-            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-5 py-2.5 text-[13px] font-medium text-ink transition-all duration-300 ease-cinema active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            Auto-fill my reports — $99/mo
+            Auto-fill my reports — $150/mo
           </button>
         ) : (
           <button
             type="button"
             onClick={onGenerate}
-            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-5 py-2.5 text-[13px] font-medium text-ink transition-all duration-300 ease-cinema active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
             Generate Sample Briefing
           </button>

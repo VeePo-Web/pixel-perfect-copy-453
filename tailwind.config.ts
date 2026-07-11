@@ -4,8 +4,21 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        // Role aliases — the design system speaks in these.
+        sans: [
+          "circular-web",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "Helvetica",
+          "Arial",
+          "sans-serif",
+        ],
+        display: ["robert-medium", "circular-web", "sans-serif"],
+        // Face names kept for existing call sites.
         zentry: ["zentry", "sans-serif"],
-        general: ["general", "sans-serif"],
+        general: ["general", "monospace"],
         "circular-web": ["circular-web", "sans-serif"],
         "robert-medium": ["robert-medium", "sans-serif"],
         "robert-regular": ["robert-regular", "sans-serif"],
@@ -94,20 +107,19 @@ export default {
           "0%, 100%": { opacity: "0.6" },
           "50%": { opacity: "1" },
         },
-        "ghost-drift": {
-          "0%, 100%": { transform: "translateY(0) rotate(-3deg)" },
-          "50%": { transform: "translateY(-4px) rotate(-3deg)" },
-        },
       },
+      // Motion discipline: no infinite attention loops on static UI.
+      // "shimmer-slow", "soft-pulse" and "ghost-drift" are intentionally
+      // undefined — their utility classes no-op, and shimmer overlays rest
+      // off-canvas (-translate-x-full), i.e. invisible. "shimmer" and
+      // "caret-blink" remain for genuine loading/progress states only.
       animation: {
         "panel-rise": "panel-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) both",
         "section-in": "section-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both",
         "rim-in": "rim-in 500ms cubic-bezier(0.22, 1, 0.36, 1) both",
         shimmer: "shimmer 1.8s linear infinite",
-        "shimmer-slow": "shimmer 6s linear infinite",
         "caret-blink": "caret-blink 1.1s steps(2, end) infinite",
         "soft-pulse": "soft-pulse 1.6s ease-in-out infinite",
-        "ghost-drift": "ghost-drift 16s ease-in-out infinite",
       },
     },
   },

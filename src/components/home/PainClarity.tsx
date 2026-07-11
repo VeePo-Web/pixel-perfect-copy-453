@@ -19,9 +19,9 @@ export default function PainClarity() {
       aria-labelledby="pain-clarity-title"
       className="relative border-y border-ink/[0.06] bg-white"
     >
-      <div ref={ref} className="mx-auto max-w-4xl px-6 py-16 md:py-28 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-4xl px-6 py-20 md:py-28 lg:px-10">
         <div
-          className={`text-[10.5px] uppercase tracking-[0.32em] text-champagne-300 transition-all duration-700 ease-cinema ${
+          className={`font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300 transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
           }`}
         >
@@ -30,7 +30,7 @@ export default function PainClarity() {
 
         <h2
           id="pain-clarity-title"
-          className={`mt-5 max-w-[20ch] font-robert-medium text-[clamp(2rem,4.6vw,3.5rem)] font-black uppercase leading-[0.98] tracking-tight text-ink transition-all duration-700 ease-cinema ${
+          className={`mt-5 max-w-[20ch] font-display text-[clamp(2rem,4.6vw,3.5rem)] font-medium leading-[1.06] tracking-[-0.02em] text-ink [text-wrap:balance] transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
           }`}
           style={{ transitionDelay: "80ms" }}
@@ -39,7 +39,7 @@ export default function PainClarity() {
         </h2>
 
         {/* The data lines — each tool, and the narrow thing it actually tells you */}
-        <ul className="mt-12 divide-y divide-ink/[0.07] border-y border-ink/[0.07]">
+        <ul className="mt-12 divide-y divide-ink/[0.06] border-y border-ink/[0.06]">
           {LINES.map((l, i) => (
             <li
               key={l.tool}
@@ -48,7 +48,7 @@ export default function PainClarity() {
               }`}
               style={{ transitionDelay: `${200 + i * 90}ms` }}
             >
-              <span className="w-[15ch] shrink-0 text-[15px] font-medium text-ink">
+              <span className="shrink-0 font-general text-[11px] uppercase tracking-[0.18em] text-ink/55 sm:w-44">
                 {l.tool}
               </span>
               <span className="text-[15px] leading-[1.6] text-ink/70">{l.says}</span>

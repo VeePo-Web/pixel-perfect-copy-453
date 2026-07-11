@@ -19,13 +19,13 @@ export default function MobileStickyCompareCTA({ recommendation }: Props) {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-40 transform border-t border-ink/[0.08] bg-charcoal-950/95 backdrop-blur-md transition-all duration-500 ease-cinema lg:hidden ${
+      className={`fixed inset-x-0 bottom-0 z-40 transform border-t border-ink/[0.08] bg-white/95 backdrop-blur-xl transition-all duration-500 ease-cinema lg:hidden ${
         visible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
       }`}
       style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
     >
       <div className="flex items-center justify-between gap-3 px-4 pt-3">
-        <p className="text-[11px] uppercase tracking-[0.22em] text-ink/50">{eyebrow}</p>
+        <p className="font-general text-[11px] uppercase tracking-[0.22em] text-ink/50">{eyebrow}</p>
         <a
           href={href}
           onClick={() => {
@@ -36,7 +36,7 @@ export default function MobileStickyCompareCTA({ recommendation }: Props) {
             else if (href === "/templates")
               track("templates_clicked_from_compare", { source: "mobile-sticky" });
           }}
-          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy"
+          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-5 py-2.5 text-[13px] font-medium text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(11,13,18,0.10)] transition-all duration-300 ease-cinema active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
         >
           {label}
         </a>

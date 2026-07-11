@@ -16,12 +16,12 @@ export default function ProductBoundariesSection() {
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+          <div className="font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/80">
             Scope
           </div>
           <h2
             id="boundaries-heading"
-            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-display font-medium text-ink [text-wrap:balance] text-[28px] leading-[1.08] tracking-[-0.02em] sm:text-[40px]"
           >
             What GoldFin Desk does — and does not do.
           </h2>
@@ -31,8 +31,8 @@ export default function ProductBoundariesSection() {
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <div className="rounded-2xl border border-emerald-400/15 bg-emerald-400/[0.03] p-6">
-            <div className="text-[10.5px] uppercase tracking-[0.28em] text-emerald-300/80">
+          <div className="rounded-2xl border border-ink/[0.08] bg-white p-6 shadow-[0_1px_2px_rgba(11,13,18,0.04)]">
+            <div className="font-general text-[10.5px] uppercase tracking-[0.28em] text-green-signal">
               What it does
             </div>
             <ul className="mt-5 space-y-3">
@@ -43,7 +43,7 @@ export default function ProductBoundariesSection() {
                 >
                   <span
                     aria-hidden
-                    className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 text-emerald-300/90"
+                    className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-green-signal/30 text-green-signal"
                   >
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M5 13l4 4L19 7" />
@@ -54,19 +54,19 @@ export default function ProductBoundariesSection() {
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl border border-amber-300/15 bg-amber-300/[0.025] p-6">
-            <div className="text-[10.5px] uppercase tracking-[0.28em] text-amber-200/80">
+          <div className="rounded-2xl border border-ink/[0.08] bg-[#FCFBF9] p-6 shadow-[0_1px_2px_rgba(11,13,18,0.04)]">
+            <div className="font-general text-[10.5px] uppercase tracking-[0.28em] text-ink/45">
               What it does not do
             </div>
             <ul className="mt-5 space-y-3">
               {productBoundaries.doesNot.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 text-[14px] leading-relaxed text-ink/80"
+                  className="flex items-start gap-3 text-[14px] leading-relaxed text-ink/70"
                 >
                   <span
                     aria-hidden
-                    className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-amber-300/25 text-amber-200/90"
+                    className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-ink/[0.15] text-ink/40"
                   >
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M6 6l12 12M6 18L18 6" />
@@ -86,7 +86,7 @@ export default function ProductBoundariesSection() {
           <a
             href="/compare"
             onClick={() => trackCtaByHref("/compare", "security_faq_boundaries")}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-ink transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/[0.12] bg-white px-5 text-[13px] text-ink/80 transition-all duration-300 ease-cinema hover:border-ink/[0.25] hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
           >
             Compare Your Options →
           </a>

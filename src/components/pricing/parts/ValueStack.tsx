@@ -1,16 +1,16 @@
-﻿import { valueStack } from "../content";
+import { valueStack } from "../content";
 import { useInView } from "../../how-it-works/hooks/useInView";
 import { startAutoFillCheckout } from "../../../lib/checkout";
 
 export default function ValueStack() {
   return (
-    <section aria-labelledby="value-title" className="border-b border-ink/[0.05] bg-charcoal-950">
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+    <section aria-labelledby="value-title" className="border-b border-ink/[0.06] bg-white">
+      <div className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-10">
         <div className="max-w-[58ch]">
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+          <div className="font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/80">
             Value stack
           </div>
-          <h2 id="value-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
+          <h2 id="value-title" className="mt-5 font-display font-medium text-ink [text-wrap:balance] text-[34px] leading-[1.08] tracking-[-0.02em] sm:text-[44px]">
             What is included in the GoldFin Desk.
           </h2>
         </div>
@@ -22,20 +22,19 @@ export default function ValueStack() {
         </ol>
 
         <div className="mt-10 flex flex-wrap items-center gap-5">
-          {/* $99/mo — gold, bread-and-butter */}
+          {/* $150/mo — gold, bread-and-butter */}
           <button
             type="button"
             onClick={startAutoFillCheckout}
-            className="group relative inline-flex w-full justify-center items-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-4 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema sm:w-auto sm:justify-start sm:py-3.5 hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-7 py-4 text-[13px] font-medium text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(11,13,18,0.10)] transition-all duration-300 ease-cinema sm:w-auto sm:justify-start sm:py-3.5 hover:-translate-y-px hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_10px_28px_-10px_rgba(184,137,58,0.55)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
           >
-            <span className="relative z-10">Auto-fill my reports — $99/mo</span>
-            <span aria-hidden className="relative z-10">→</span>
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+            Auto-fill my reports — $150/mo
+            <span aria-hidden>→</span>
           </button>
           {/* Advisory — text/tertiary per value ladder */}
           <a
             href="/apply"
-            className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors duration-300 hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-950"
+            className="text-[12.5px] text-ink/55 underline-offset-4 transition-colors duration-300 hover:text-ink hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
           >
             Running something larger? Apply for GoldFin Advisory →
           </a>
@@ -50,23 +49,23 @@ function ValueRow({ index, item }: { index: number; item: (typeof valueStack)[nu
   return (
     <li
       ref={ref}
-      className={`grid items-start gap-6 rounded-2xl border border-ink/[0.07] bg-charcoal-900/55 p-6 transition-all duration-700 ease-cinema sm:p-8 md:grid-cols-[60px_1fr_1fr] ${
+      className={`grid items-start gap-6 rounded-2xl border border-ink/[0.08] bg-white p-6 shadow-[0_1px_2px_rgba(11,13,18,0.04)] transition-all duration-700 ease-cinema sm:p-8 md:grid-cols-[60px_1fr_1fr] ${
         inView ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
       }`}
       style={{ transitionDelay: `${index * 60}ms` }}
     >
-      <div className="text-[11px] uppercase tracking-[0.28em] text-champagne-300/70 tabular-nums">
+      <div className="font-general text-[11px] uppercase tracking-[0.28em] tabular-nums text-champagne-300/80">
         0{index + 1}
       </div>
       <div>
-        <h3 className="text-[18px] font-light text-ink">{item.title}</h3>
+        <h3 className="text-[18px] font-medium text-ink">{item.title}</h3>
         <p className="mt-3 text-[14px] leading-[1.65] text-ink/80">{item.value}</p>
         {item.trust && (
-          <p className="mt-3 text-[12px] uppercase tracking-[0.18em] text-ink/45">{item.trust}</p>
+          <p className="mt-3 font-general text-[10.5px] uppercase tracking-[0.18em] text-ink/45">{item.trust}</p>
         )}
       </div>
-      <div className="rounded-xl border border-ink/[0.05] bg-ink/[0.02] p-5">
-        <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/50">Why it matters</div>
+      <div className="rounded-xl border border-ink/[0.06] bg-ink/[0.02] p-5">
+        <div className="font-general text-[10.5px] uppercase tracking-[0.22em] text-ink/45">Why it matters</div>
         <p className="mt-2 text-[14px] leading-[1.65] text-ink/80">{item.why}</p>
       </div>
     </li>

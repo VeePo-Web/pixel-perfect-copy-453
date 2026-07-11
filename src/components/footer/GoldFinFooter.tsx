@@ -84,20 +84,20 @@ export default function GoldFinFooter() {
         <div className="relative mx-auto max-w-2xl px-6 py-20 text-center md:px-10">
 
           {/* Eyebrow */}
-          <p className="mb-3 text-[10.5px] uppercase tracking-[0.3em] text-champagne-300/70">
+          <p className="mb-3 font-general text-[10.5px] uppercase tracking-[0.3em] text-champagne-300/80">
             Your reports, automated
           </p>
 
           {/* Headline — Hormozi: state the transformation, not the feature */}
           <h2
             id="footer-cta-heading"
-            className="mb-4 text-[2rem] font-semibold leading-[1.14] tracking-[-0.02em] text-white sm:text-[2.5rem]"
+            className="mb-4 font-display text-[2rem] font-medium leading-[1.1] tracking-[-0.02em] text-white [text-wrap:balance] sm:text-[2.5rem]"
           >
             Stop guessing. Start knowing.
           </h2>
 
           {/* Sub-headline */}
-          <p className="mx-auto mb-9 max-w-[40ch] text-[14.5px] leading-[1.72] text-white/45">
+          <p className="mx-auto mb-9 max-w-[40ch] text-[14.5px] leading-[1.72] text-white/55">
             Monthly financial briefings, auto-generated from your numbers —
             delivered to owner-led businesses.
           </p>
@@ -108,18 +108,16 @@ export default function GoldFinFooter() {
             {/* Gold primary — Rung 1 lead magnet recovery (Wiebe first-person) */}
             <a
               href="/templates"
-              className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-8 py-3 text-[13.5px] font-semibold text-navy shadow-[0_8px_36px_-8px_rgba(201,162,74,0.65)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-px hover:shadow-[0_12px_44px_-8px_rgba(201,162,74,0.80)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080A0E]"
+              className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-8 py-3 text-[13.5px] font-medium text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(11,13,18,0.10)] transition-all duration-300 ease-cinema hover:-translate-y-px hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_10px_28px_-10px_rgba(184,137,58,0.55)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080A0E]"
             >
-              <span className="relative z-10">Get my free templates →</span>
-              {/* Shimmer sweep — same as nav CTA for brand consistency */}
-              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent motion-safe:animate-shimmer-slow" />
+              Get my free templates →
             </a>
 
             {/* Ghost secondary — Rung 2 direct to checkout */}
             <button
               type="button"
               onClick={startAutoFillCheckout}
-              className="rounded-full border border-white/20 px-8 py-3 text-[13.5px] font-medium text-white/65 transition-all duration-200 hover:border-white/40 hover:text-white active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080A0E]"
+              className="rounded-full border border-white/[0.16] px-8 py-3 text-[13.5px] font-medium text-white/80 transition-all duration-200 hover:border-white/[0.32] hover:text-white active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/25 focus-visible:ring-offset-2 focus-visible:ring-offset-[#080A0E]"
             >
               Or start at $150/mo
             </button>
@@ -130,9 +128,9 @@ export default function GoldFinFooter() {
             {TRUST_PILLS.map((pill) => (
               <span
                 key={pill}
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.08] bg-white/[0.04] px-3.5 py-1.5 text-[11px] text-white/42"
+                className="inline-flex items-center gap-1.5 rounded-full border border-white/[0.14] bg-white/[0.06] px-3.5 py-1.5 text-[11px] text-white/75"
               >
-                <span aria-hidden className="text-[9px] text-champagne-300/70">✓</span>
+                <span aria-hidden className="text-[9px] text-champagne-200/90">✓</span>
                 {pill}
               </span>
             ))}
@@ -176,9 +174,9 @@ export default function GoldFinFooter() {
               </p>
 
               {/* Social proof — star ratings process 60,000× faster than copy */}
-              <p className="text-[12.5px] font-medium text-champagne-300">
+              <p className="text-[12.5px] text-champagne-300">
                 ★★★★★{" "}
-                <span className="font-normal text-ink/42">4.9 · 47 founders</span>
+                <span className="font-general text-[11px] tabular-nums text-ink/45">4.9 · 47 founders</span>
               </p>
 
               {/* Security signals — non-negotiable for a financial product */}
@@ -186,9 +184,9 @@ export default function GoldFinFooter() {
                 {SECURITY_SIGNALS.map((t) => (
                   <li
                     key={t}
-                    className="flex items-center gap-2 text-[11.5px] text-ink/36"
+                    className="flex items-center gap-2 text-[11.5px] text-ink/45"
                   >
-                    <span aria-hidden className="text-[9px] text-champagne-300/60">✓</span>
+                    <span aria-hidden className="text-[9px] text-green-signal">✓</span>
                     {t}
                   </li>
                 ))}
@@ -198,7 +196,7 @@ export default function GoldFinFooter() {
             {/* Nav groups — semantic <nav> per group (Victorious SEO standard) */}
             {NAV_GROUPS.map((group) => (
               <nav key={group.label} aria-label={group.ariaLabel}>
-                <p className="mb-4 text-[10px] uppercase tracking-[0.28em] text-champagne-300">
+                <p className="mb-4 font-general text-[10.5px] uppercase tracking-[0.24em] text-ink/40">
                   {group.label}
                 </p>
                 <ul className="flex flex-col gap-2.5">
@@ -227,18 +225,18 @@ export default function GoldFinFooter() {
           <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
             {/* Copyright */}
-            <p className="text-[12px] text-ink/38">
+            <p className="text-[12px] text-ink/45">
               © {year} {BRAND.name}. All rights reserved.
             </p>
 
             {/* Legal links — required for a financial SaaS product */}
             <nav aria-label="Legal">
-              <ul className="flex items-center gap-4">
+              <ul className="flex flex-wrap items-center gap-x-4 gap-y-2">
                 {LEGAL_LINKS.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-[12px] text-ink/30 transition-colors duration-200 hover:text-ink/55 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-300/40 focus-visible:ring-offset-1"
+                      className="text-[12px] text-ink/45 transition-colors duration-200 hover:text-ink/70 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-champagne-300/40 focus-visible:ring-offset-1"
                     >
                       {link.label}
                     </a>
@@ -248,7 +246,7 @@ export default function GoldFinFooter() {
             </nav>
 
             {/* Brand signature — replaces the previously duplicated tagline */}
-            <p className="text-[11.5px] italic text-ink/25 sm:text-right">
+            <p className="font-general text-[11px] italic text-champagne-300/70 sm:text-right">
               Clarity before complexity.
             </p>
 

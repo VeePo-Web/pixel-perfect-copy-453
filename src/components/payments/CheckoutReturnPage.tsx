@@ -18,30 +18,30 @@ export default function CheckoutReturnPage() {
   return (
     <main className="min-h-screen bg-charcoal-950 text-ink">
       <div className="mx-auto flex max-w-2xl flex-col items-center px-6 py-24 text-center">
-        <div className="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-full border border-champagne-200/40 bg-champagne-200/10 text-champagne-200">
+        <div className="mb-8 inline-flex h-14 w-14 items-center justify-center rounded-full border border-green-signal/25 bg-green-signal/[0.08] text-green-signal">
           ✓
         </div>
-        <h1 className="text-[42px] font-light leading-[1.05] tracking-[-0.01em]">
+        <h1 className="font-display text-[42px] font-medium leading-[1.05] tracking-[-0.02em]">
           Payment confirmed.
         </h1>
         <p className="mt-5 max-w-[52ch] text-[15.5px] leading-[1.7] text-ink/70">
-          You'll get a welcome email in the next minute or two with what to send us next. If you don't see it, check spam — or just reply to <a className="underline" href="mailto:hello@goldfindesk.com">hello@goldfindesk.com</a>.
+          You'll get a welcome email in the next minute or two with what to send us next. If you don't see it, check spam — or just reply to <a className="underline underline-offset-2 transition-colors duration-200 hover:text-ink" href="mailto:hello@goldfindesk.com">hello@goldfindesk.com</a>.
         </p>
         {sessionId && (
-          <p className="mt-6 text-[11.5px] uppercase tracking-[0.22em] text-ink/35">
+          <p className="mt-6 font-general text-[11px] uppercase tracking-[0.22em] text-ink/40">
             Reference · {sessionId.slice(0, 20)}…
           </p>
         )}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <a
             href="/"
-            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-7 py-3 text-[13.5px] font-medium text-navy"
+            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-7 py-3 text-[13.5px] font-medium text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(11,13,18,0.10)] transition-all duration-300 ease-cinema hover:-translate-y-px hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_10px_28px_-10px_rgba(184,137,58,0.55)] active:translate-y-0 active:scale-[0.98]"
           >
             Back to home
           </a>
           <a
             href="/billing"
-            className="rounded-full border border-ink/15 px-6 py-3 text-[13.5px] text-ink/85 hover:border-champagne-200/40"
+            className="rounded-full border border-ink/[0.12] bg-white px-6 py-3 text-[13.5px] text-ink/75 transition-colors duration-200 hover:border-ink/[0.25] hover:text-ink"
           >
             Manage billing
           </a>

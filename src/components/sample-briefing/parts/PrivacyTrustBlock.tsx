@@ -9,7 +9,7 @@ export default function PrivacyTrustBlock() {
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Preview safely
             </div>
-            <h2 className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[42px]">
+            <h2 className="mt-4 font-display font-medium text-ink text-[34px] leading-[1.1] tracking-[-0.02em] sm:text-[42px]">
               Preview safely. Connect only after onboarding.
             </h2>
             <p className="mt-5 max-w-[46ch] text-[15px] leading-[1.7] text-ink/70">

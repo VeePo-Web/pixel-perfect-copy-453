@@ -15,12 +15,12 @@ export default function UpfrontRequirementsSection() {
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+          <div className="font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/80">
             What we do not ask for upfront
           </div>
           <h2
             id="upfront-heading"
-            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-display font-medium text-ink [text-wrap:balance] text-[28px] leading-[1.08] tracking-[-0.02em] sm:text-[40px]"
           >
             What you do not need to share to preview or apply.
           </h2>
@@ -31,9 +31,9 @@ export default function UpfrontRequirementsSection() {
           {noUpfrontCards.map((c) => (
             <li
               key={c.title}
-              className="group relative rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6 transition-all duration-300 hover:border-ink/[0.2] hover:bg-ink/[0.04] motion-safe:hover:-translate-y-0.5"
+              className="group relative rounded-2xl border border-ink/[0.08] bg-white p-6 shadow-[0_1px_2px_rgba(11,13,18,0.04)] transition-all duration-300 ease-cinema hover:shadow-[0_16px_40px_-20px_rgba(11,13,18,0.18)] motion-safe:hover:-translate-y-0.5"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-400/25 bg-emerald-400/[0.07] text-emerald-200/90">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full border border-green-signal/25 bg-green-signal/[0.05] text-green-signal">
                 <svg
                   width="14"
                   height="14"
@@ -57,10 +57,9 @@ export default function UpfrontRequirementsSection() {
           <a
             href="/apply"
             onClick={() => trackCtaByHref("/apply", "security_faq_upfront")}
-            className="group relative overflow-hidden inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-6 text-[13.5px] font-medium text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(11,13,18,0.10)] transition-all duration-300 ease-cinema hover:-translate-y-px hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_10px_28px_-10px_rgba(184,137,58,0.55)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            <span className="relative z-10">Apply Without Bank Connection</span>
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+            Apply Without Bank Connection
           </a>
         </div>
       </div>

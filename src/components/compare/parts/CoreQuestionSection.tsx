@@ -22,21 +22,21 @@ export default function CoreQuestionSection() {
   return (
     <section
       aria-labelledby="core-question-heading"
-      className="relative border-b border-ink/[0.05] bg-charcoal-950"
+      className="relative border-b border-ink/[0.06] bg-white"
     >
-      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-10">
         <div className="grid items-start gap-14 lg:grid-cols-[1fr_1.1fr]">
           <div
             className={`transition-all duration-700 ease-cinema ${
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+            <div className="font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               The core question
             </div>
             <h2
               id="core-question-heading"
-              className="mt-4 max-w-[22ch] font-light text-ink text-[32px] leading-[1.1] tracking-[-0.01em] sm:text-[44px]"
+              className="mt-4 max-w-[22ch] font-display font-medium text-ink [text-wrap:balance] text-[32px] leading-[1.1] tracking-[-0.02em] sm:text-[44px]"
             >
               The question is not which tool is best. The question is what job your business needs done.
             </h2>
@@ -45,7 +45,7 @@ export default function CoreQuestionSection() {
             </p>
             <a
               href="#fit-finder"
-              className="mt-7 inline-flex items-center gap-2 rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-champagne-200/40 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+              className="mt-7 inline-flex items-center gap-2 rounded-full border border-ink/[0.12] bg-white px-5 py-2.5 text-[12.5px] text-ink/80 transition-all duration-300 ease-cinema hover:border-ink/[0.25] hover:text-ink active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
               Find the right fit <span aria-hidden>→</span>
             </a>
@@ -58,12 +58,12 @@ export default function CoreQuestionSection() {
             {rows.map((r) => (
               <li
                 key={r.n}
-                className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-5 transition-colors duration-300 hover:border-champagne-200/25"
+                className="rounded-2xl border border-ink/[0.08] bg-white p-5 shadow-[0_1px_2px_rgba(11,13,18,0.04)]"
               >
                 <div className="flex items-baseline gap-4">
-                  <span className="font-light text-champagne-300/70 text-[22px] leading-none">{r.n}</span>
+                  <span className="font-general text-[16px] tabular-nums leading-none text-champagne-300/80">{r.n}</span>
                   <div>
-                    <div className="text-[16px] font-light leading-snug text-ink">{r.title}</div>
+                    <div className="text-[16px] font-medium leading-snug text-ink">{r.title}</div>
                     <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink/60">{r.copy}</p>
                   </div>
                 </div>

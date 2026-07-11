@@ -14,7 +14,7 @@
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Proof
             </div>
-            <h2 id="proof-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
+            <h2 id="proof-title" className="mt-4 font-display font-medium text-ink text-[34px] leading-[1.1] tracking-[-0.02em] sm:text-[44px]">
               See what the GoldFin Desk actually produces.
             </h2>
             <p className="mt-4 max-w-[52ch] text-[15px] leading-[1.7] text-ink/70">
@@ -23,10 +23,9 @@
             <div className="mt-7 flex flex-wrap items-center gap-3">
               <a
                 href="/sample-briefing"
-                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-6 py-3 text-[13px] font-medium tracking-wide text-ink transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_14px_50px_-12px_rgba(217,190,130,0.6)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               >
                 <span className="relative z-10">Generate Sample Finance Briefing</span>
-                <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
               </a>
               {/* Advisory — text/tertiary; never border or gold per value ladder */}
               <a

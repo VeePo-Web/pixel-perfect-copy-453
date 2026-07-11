@@ -29,7 +29,7 @@ export default function SampleBriefingHero(props: Props) {
             <div className="flex items-center gap-2 text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70"><span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-champagne-300/70" />
               Sample bi-weekly finance briefing
             </div>
-            <h1 className="mt-5 max-w-[18ch] font-light text-ink text-[40px] leading-[1.05] tracking-[-0.01em] sm:text-[52px] lg:text-[60px]">
+            <h1 className="mt-5 max-w-[18ch] font-display font-medium text-ink text-[40px] leading-[1.05] tracking-[-0.02em] sm:text-[52px] lg:text-[60px]">
               Your numbers, finally in plain English.
             </h1>
             <p className="mt-5 max-w-[52ch] text-[15.5px] leading-[1.7] text-ink/70">

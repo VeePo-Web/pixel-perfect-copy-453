@@ -34,7 +34,7 @@ export default function StepFit({ state, update, errors, onBack, onContinue }: P
       <TextField label="Business name" value={state.business_name} onChange={(v) => update("business_name", v)} placeholder="Acme Marketing Agency" autoComplete="organization" error={errors.business_name && APPLY.errors.required} />
 
       <div>
-        <div className="mb-3 text-[11.5px] uppercase tracking-[0.22em] text-ink/45">What kind of business do you run?</div>
+        <div className="mb-3 font-general text-[11px] uppercase tracking-[0.22em] leading-[1.8] text-ink/45">What kind of business do you run?</div>
         <div role="radiogroup" className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
           {c.businessTypes.map((t) => (
             <SelectableCard
@@ -45,11 +45,11 @@ export default function StepFit({ state, update, errors, onBack, onContinue }: P
             />
           ))}
         </div>
-        {errors.business_type && <p role="alert" className="mt-2 text-[12.5px] text-champagne-200/90">{APPLY.errors.required}</p>}
+        {errors.business_type && <p role="alert" className="mt-2 text-[12.5px] text-red-signal">{APPLY.errors.required}</p>}
       </div>
 
       <div>
-        <div className="mb-3 text-[11.5px] uppercase tracking-[0.22em] text-ink/45">Approximate monthly revenue</div>
+        <div className="mb-3 font-general text-[11px] uppercase tracking-[0.22em] leading-[1.8] text-ink/45">Approximate monthly revenue</div>
         <div role="radiogroup" className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
           {c.revenueRanges.map((r) => (
             <SelectableCard
@@ -60,7 +60,7 @@ export default function StepFit({ state, update, errors, onBack, onContinue }: P
             />
           ))}
         </div>
-        {errors.revenue_range && <p role="alert" className="mt-2 text-[12.5px] text-champagne-200/90">{APPLY.errors.revenue}</p>}
+        {errors.revenue_range && <p role="alert" className="mt-2 text-[12.5px] text-red-signal">{APPLY.errors.revenue}</p>}
         {lowFit && (
           <div className="mt-4">
             <FitSignalCard tone="soft">

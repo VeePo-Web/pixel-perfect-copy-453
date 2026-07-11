@@ -36,8 +36,8 @@ export default function Accounts() {
       <PortalLayout active="/portal/accounts">
         <div className="flex items-start justify-between gap-6">
           <div>
-            <h1 className="text-[28px] font-medium text-ink">Connected accounts</h1>
-            <p className="mt-2 text-[14px] text-ink/60">
+            <h1 className="text-[28px] font-medium tracking-[-0.01em] text-ink">Connected accounts</h1>
+            <p className="mt-2 text-[14px] text-ink/55">
               Each institution is authorized separately through Plaid. We never see your bank
               credentials.
             </p>
@@ -49,11 +49,11 @@ export default function Accounts() {
           {loading ? (
             <p className="text-[13px] text-ink/55">Loading…</p>
           ) : items.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-ink/15 p-10 text-center">
+            <div className="rounded-2xl border border-dashed border-ink/[0.12] bg-white p-10 text-center">
               {/* Payoff above the ask: the owner connects after the value is concrete,
                   not before — the highest-leverage conversion lever in the connect flow
                   (docs/research/2026-06-25-plaid-competitor-teardown.md §2.1). */}
-              <h2 className="text-[20px] font-medium text-ink">Connect your bank to build your first report</h2>
+              <h2 className="text-[20px] font-medium tracking-[-0.01em] text-ink">Connect your bank to build your first report</h2>
               <p className="mx-auto mt-2 max-w-[46ch] text-[14px] leading-[1.6] text-ink/65">
                 We read your transactions, categorize them automatically, and turn them into a
                 plain-English report in minutes. The more accounts you connect, the more complete

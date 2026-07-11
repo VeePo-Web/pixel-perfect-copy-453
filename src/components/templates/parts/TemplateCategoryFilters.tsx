@@ -31,7 +31,7 @@ export default function TemplateCategoryFilters({ active, onChange }: Props) {
         {/* Filter affordance — makes it unmistakably a control, not navigation */}
         <span
           aria-hidden
-          className="hidden shrink-0 items-center gap-1.5 pl-1 text-[10px] uppercase tracking-[0.2em] text-ink/35 sm:flex"
+          className="hidden shrink-0 items-center gap-1.5 pl-1 font-general text-[10px] uppercase tracking-[0.2em] text-ink/35 sm:flex"
         >
           <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
             <path d="M2 4h12M4.5 8h7M6.5 12h3" />
@@ -63,8 +63,8 @@ export default function TemplateCategoryFilters({ active, onChange }: Props) {
                 }}
                 className={`min-h-[34px] shrink-0 rounded-full border px-4 py-1.5 text-[12.5px] transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-1 focus-visible:ring-offset-paper ${
                   isActive
-                    ? "border-champagne-200/60 bg-champagne-200/[0.10] text-ink shadow-[0_0_24px_-10px_rgba(217,190,130,0.6)]"
-                    : "border-ink/[0.08] bg-ink/[0.02] text-ink/65 hover:border-ink/20 hover:text-ink"
+                    ? "border-champagne-300/70 bg-champagne-50/60 font-medium text-ink"
+                    : "border-ink/[0.12] bg-white text-ink/65 hover:border-ink/[0.25] hover:text-ink"
                 }`}
               >
                 {c}

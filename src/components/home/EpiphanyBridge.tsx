@@ -1,6 +1,6 @@
 ﻿import { useInView } from "../how-it-works/hooks/useInView";
 
-// Homepage Section 4 — Epiphany Bridge: free templates → $99/mo auto-fill.
+// Homepage Section 4 — Epiphany Bridge: free templates → $150/mo auto-fill.
 // Pattern D: two-column reframe. Left = manual/painful. Right = GoldFin/calm.
 // Right column CTA: quiet text link ONLY — NO button, NO gold.
 
@@ -27,11 +27,11 @@ export default function EpiphanyBridge() {
       aria-labelledby="epiphany-bridge-title"
       className="bg-white"
     >
-      <div ref={ref} className="mx-auto max-w-7xl px-6 py-16 md:py-28 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-10">
         {/* Section header */}
         <div className="mb-14 max-w-[46ch]">
           <div
-            className={`text-[10px] uppercase tracking-[0.28em] text-champagne-300 transition-all duration-700 ease-cinema ${
+            className={`font-general text-[10px] uppercase tracking-[0.28em] text-champagne-300 transition-all duration-700 ease-cinema ${
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
             }`}
           >
@@ -40,7 +40,7 @@ export default function EpiphanyBridge() {
 
           <h2
             id="epiphany-bridge-title"
-            className={`mt-4 font-robert-medium text-[clamp(1.75rem,3.8vw,2.75rem)] font-black uppercase leading-[0.98] tracking-tight text-ink transition-all duration-700 ease-cinema ${
+            className={`mt-4 font-display text-[clamp(1.75rem,3.8vw,2.75rem)] font-medium leading-[1.08] tracking-[-0.02em] text-ink [text-wrap:balance] transition-all duration-700 ease-cinema ${
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
             }`}
             style={{ transitionDelay: "80ms" }}
@@ -50,16 +50,16 @@ export default function EpiphanyBridge() {
         </div>
 
         {/* Two-column comparison */}
-        <div className="grid grid-cols-1 gap-0 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12">
           {/* ── Left column — manual / painful ── */}
           <div
-            className={`border-ink/[0.06] py-8 pr-0 transition-all duration-700 ease-cinema md:border-r md:pr-12 ${
+            className={`transition-all duration-700 ease-cinema md:py-8 ${
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "200ms" }}
           >
             {/* Eyebrow */}
-            <div className="mb-5 text-[10px] uppercase tracking-[0.26em] text-ink/40">
+            <div className="mb-5 font-general text-[10px] uppercase tracking-[0.26em] text-ink/40">
               The manual way
             </div>
 
@@ -78,7 +78,7 @@ export default function EpiphanyBridge() {
                   >
                     —
                   </span>
-                  <span className="text-[14px] leading-[1.6] text-ink/65">
+                  <span className="text-[14px] leading-[1.6] text-ink/60">
                     {bullet}
                   </span>
                 </li>
@@ -88,18 +88,24 @@ export default function EpiphanyBridge() {
 
           {/* ── Right column — GoldFin / calm ── */}
           <div
-            className={`py-8 pl-0 transition-all duration-700 ease-cinema md:pl-12 ${
+            className={`relative overflow-hidden rounded-2xl border border-ink/[0.08] bg-white p-8 shadow-[0_16px_40px_-24px_rgba(11,13,18,0.16)] transition-all duration-700 ease-cinema ${
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
             style={{ transitionDelay: "300ms" }}
           >
+            {/* Gold hairline top edge */}
+            <span
+              aria-hidden
+              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/70 to-transparent"
+            />
+
             {/* Eyebrow with signal dot */}
             <div className="mb-5 flex items-center gap-2">
               <span
                 aria-hidden
                 className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-champagne-300/70"
               />
-              <span className="text-[10px] uppercase tracking-[0.26em] text-champagne-300">
+              <span className="font-general text-[10px] uppercase tracking-[0.26em] text-champagne-300">
                 The GoldFin way
               </span>
             </div>
@@ -115,7 +121,7 @@ export default function EpiphanyBridge() {
                 <li key={bullet} className="flex items-start gap-3">
                   <span
                     aria-hidden
-                    className="mt-[2px] shrink-0 text-[13px] text-champagne-300/80 select-none"
+                    className="mt-[2px] shrink-0 text-[13px] text-green-signal select-none"
                   >
                     ✓
                   </span>
@@ -129,7 +135,7 @@ export default function EpiphanyBridge() {
             {/* Quiet text link CTA — NO button, NO gold */}
             <div className="mt-8">
               <a
-                href="/pricing"
+                href="/pricing#auto-fill"
                 className="group inline-flex items-center border-b border-ink/20 pb-0.5 text-[13px] text-ink/65 transition-colors duration-300 hover:border-champagne-300/60 hover:text-champagne-300"
               >
                 See how auto-fill works

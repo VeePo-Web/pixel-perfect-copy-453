@@ -44,21 +44,20 @@ export default function MobileStickyCTA() {
   const showApply = pastFAQ;
   const href = showApply ? "/pricing#auto-fill" : "/sample-briefing";
   const label = showApply
-    ? "Auto-fill my reports — $99/mo"
+    ? "Auto-fill my reports — $150/mo"
     : "Generate Sample Briefing";
 
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-ink/[0.06] bg-charcoal-950/95 px-4 pt-3 backdrop-blur-md lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-ink/[0.08] bg-white/95 px-4 pt-3 backdrop-blur-xl lg:hidden"
       style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
     >
       <a
         href={href}
         onClick={() => trackCtaByHref(href, "security_faq_mobile_sticky")}
-        className="group relative overflow-hidden flex min-h-12 w-full items-center justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 text-[14px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+        className="flex min-h-12 w-full items-center justify-center rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-5 text-[14px] font-medium text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(11,13,18,0.10)] transition-all duration-300 ease-cinema active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
       >
-        <span className="relative z-10">{label}</span>
-        <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+        {label}
       </a>
     </div>
   );

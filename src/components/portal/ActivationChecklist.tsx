@@ -49,7 +49,7 @@ export default function ActivationChecklist({ accountCount }: { accountCount: nu
 
   // Don't render a half-formed checklist until status is known.
   if (txnCount === null || hasReport === null) {
-    return <div className="mt-10 h-28 animate-pulse rounded-2xl border border-ink/10 bg-paper" />;
+    return <div className="mt-10 h-28 animate-pulse rounded-2xl border border-ink/[0.08] bg-white shadow-[0_1px_2px_rgba(11,13,18,0.04)]" />;
   }
 
   const synced = txnCount > 0;
@@ -87,12 +87,12 @@ export default function ActivationChecklist({ accountCount }: { accountCount: nu
   const allDone = steps.every((s) => s.state === "done");
 
   return (
-    <section className="mt-10 rounded-2xl border border-ink/10 bg-paper p-6">
+    <section className="mt-10 rounded-2xl border border-ink/[0.08] bg-white p-6 shadow-[0_1px_2px_rgba(11,13,18,0.04)]">
       <div className="flex items-baseline justify-between gap-4">
-        <h2 className="text-[15px] font-medium text-ink">
+        <h2 className="text-[15px] font-medium tracking-[-0.01em] text-ink">
           {allDone ? "You're all set" : "Finish setting up GoldFin"}
         </h2>
-        <span className="text-[12px] tabular-nums text-ink/45">
+        <span className="font-general text-[11.5px] tabular-nums text-ink/45">
           {steps.filter((s) => s.state === "done").length}/{steps.length} done
         </span>
       </div>
@@ -107,12 +107,12 @@ export default function ActivationChecklist({ accountCount }: { accountCount: nu
           >
             <span
               aria-hidden
-              className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[12px] font-medium ${
+              className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full font-general text-[11.5px] tabular-nums ${
                 s.state === "done"
-                  ? "bg-ink text-paper"
+                  ? "bg-ink text-white"
                   : s.state === "active"
-                    ? "border border-ink/40 text-ink"
-                    : "border border-ink/15 text-ink/40"
+                    ? "border border-champagne-300/60 bg-champagne-50/60 text-ink"
+                    : "border border-ink/[0.12] text-ink/40"
               }`}
             >
               {s.state === "done" ? "✓" : s.n}
@@ -124,8 +124,10 @@ export default function ActivationChecklist({ accountCount }: { accountCount: nu
             {s.href && s.cta && s.state !== "todo" && (
               <a
                 href={s.href}
-                className={`shrink-0 rounded-full px-4 py-1.5 text-[12.5px] font-medium transition-transform duration-200 ease-cinema hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/40 ${
-                  s.state === "active" ? "bg-ink text-paper" : "border border-ink/15 text-ink/70"
+                className={`shrink-0 rounded-full px-4 py-1.5 text-[12.5px] font-medium transition-all duration-200 ease-cinema hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/40 ${
+                  s.state === "active"
+                    ? "bg-ink text-white hover:bg-ink/90"
+                    : "border border-ink/[0.12] bg-white text-ink/75 hover:border-ink/[0.25] hover:text-ink"
                 }`}
               >
                 {s.cta} &rarr;

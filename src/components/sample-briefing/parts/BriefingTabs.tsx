@@ -43,7 +43,7 @@ export default function BriefingTabs({ business }: { business: DemoBusiness }) {
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Explore the briefing
           </div>
-          <h2 className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
+          <h2 className="mt-4 font-display font-medium text-ink text-[34px] leading-[1.1] tracking-[-0.02em] sm:text-[44px]">
             Move through the briefing the way an owner would read it.
           </h2>
         </div>

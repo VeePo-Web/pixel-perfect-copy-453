@@ -1,7 +1,7 @@
 # GoldFin Desk — Plaid Engine Build Plan
 ## Phased, bite-sized implementation plan for the bank-connect → AI-categorize → auto-filled spreadsheet → grounded report pipeline
 
-> **Goal:** ship the financial-data engine the $99/mo actually buys — a frictionless bank-connect, auto-categorized transactions, an auto-filled spreadsheet, and a grounded monthly report — on goldfindesk.com.
+> **Goal:** ship the financial-data engine the $150/mo actually buys — a frictionless bank-connect, auto-categorized transactions, an auto-filled spreadsheet, and a grounded monthly report — on goldfindesk.com.
 > **Architecture:** `docs/plaid-integration-spec.md` · **Persona:** `personas/plaid-architect.md` · **Prompt:** `docs/plaid-architect-prompt.md`
 > **Stack:** React 18 + Vite + Tailwind (white/ink/gold) + Supabase (Deno edge fns, migrations, RPCs). Each task verifies with `build` + tests, then commits + pushes its own files.
 

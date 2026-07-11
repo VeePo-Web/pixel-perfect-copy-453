@@ -20,12 +20,12 @@ export default function SecurityFinalCTA() {
           inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >
-        <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+        <div className="font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/80">
           The first safe step
         </div>
         <h2
           id="final-cta-heading"
-          className="mt-4 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.015em] sm:text-[48px]"
+          className="mt-4 font-display font-medium text-ink [text-wrap:balance] text-[30px] leading-[1.06] tracking-[-0.02em] sm:text-[48px]"
         >
           Ready to take the first safe step?
         </h2>
@@ -42,9 +42,9 @@ export default function SecurityFinalCTA() {
               track("final_security_cta_clicked", { target: "reports" });
               trackCtaByHref("/pricing#auto-fill", "security_faq_final");
             }}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-6 text-[13.5px] font-medium text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(11,13,18,0.10)] transition-all duration-300 ease-cinema hover:-translate-y-px hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_10px_28px_-10px_rgba(184,137,58,0.55)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            Auto-fill my reports — $99/mo
+            Auto-fill my reports — $150/mo
           </button>
           <a
             href="/sample-briefing"
@@ -52,7 +52,7 @@ export default function SecurityFinalCTA() {
               track("final_security_cta_clicked", { target: "sample-briefing" });
               trackCtaByHref("/sample-briefing", "security_faq_final");
             }}
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-6 text-[13.5px] text-ink transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/[0.12] bg-white px-6 text-[13.5px] text-ink/80 transition-all duration-300 ease-cinema hover:border-ink/[0.25] hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
           >
             See a sample briefing
           </a>
@@ -68,7 +68,7 @@ export default function SecurityFinalCTA() {
           </a>
         </div>
         <p className="mt-6 text-[12px] text-ink/45">
-          $99/mo. Read-only connection. No bank connection required to start.
+          $150/mo. Read-only connection. No bank connection required to start.
         </p>
       </div>
     </section>

@@ -15,12 +15,12 @@ export default function AfterApplySection() {
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+          <div className="font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/80">
             After you apply
           </div>
           <h2
             id="after-apply-heading"
-            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-display font-medium text-ink [text-wrap:balance] text-[28px] leading-[1.08] tracking-[-0.02em] sm:text-[40px]"
           >
             What happens after you apply?
           </h2>
@@ -29,16 +29,16 @@ export default function AfterApplySection() {
           </p>
         </div>
         <ol
-          className={`mt-12 grid gap-px overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.02] sm:grid-cols-2 lg:grid-cols-5 transition-all duration-700 ease-cinema delay-150 ${
+          className={`mt-12 grid gap-px overflow-hidden rounded-2xl border border-ink/[0.08] bg-ink/[0.06] shadow-[0_1px_2px_rgba(11,13,18,0.04)] sm:grid-cols-2 lg:grid-cols-5 transition-all duration-700 ease-cinema delay-150 ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
           {afterApplySteps.map((s) => (
             <li
               key={s.n}
-              className="relative bg-charcoal-950/40 p-6 transition-colors hover:bg-ink/[0.025]"
+              className="relative bg-white p-6 transition-colors hover:bg-[#FCFBF9]"
             >
-              <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
+              <div className="font-general text-[10.5px] uppercase tracking-[0.28em] text-champagne-300">
                 Step {s.n}
               </div>
               <h3 className="mt-3 text-[15px] font-medium text-ink">{s.title}</h3>
@@ -46,10 +46,10 @@ export default function AfterApplySection() {
             </li>
           ))}
         </ol>
-        <div className="mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-emerald-400/15 bg-emerald-400/[0.04] p-5">
+        <div className="mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-green-signal/20 bg-green-signal/[0.04] p-5">
           <span
             aria-hidden
-            className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-300"
+            className="inline-block h-1.5 w-1.5 rounded-full bg-green-signal"
           />
           <p className="text-[13px] text-ink/80">
             Applying does not require payment, bank connection, or document upload.
@@ -59,10 +59,9 @@ export default function AfterApplySection() {
           <a
             href="/apply"
             onClick={() => trackCtaByHref("/apply", "security_faq_after_apply")}
-            className="group relative overflow-hidden inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 text-[13.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-6 text-[13.5px] font-medium text-ink shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_1px_2px_rgba(11,13,18,0.10)] transition-all duration-300 ease-cinema hover:-translate-y-px hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_10px_28px_-10px_rgba(184,137,58,0.55)] active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            <span className="relative z-10">Start My Application</span>
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+            Start My Application
           </a>
         </div>
       </div>

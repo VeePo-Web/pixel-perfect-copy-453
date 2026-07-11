@@ -29,7 +29,7 @@ export default function FounderTrustStrip() {
   return (
     <section
       ref={ref as React.RefObject<HTMLElement>}
-      className="bg-charcoal-950 py-20 lg:py-24"
+      className="border-t border-ink/[0.06] bg-white py-20 lg:py-24"
       aria-label="About the founder"
     >
       <div
@@ -39,45 +39,47 @@ export default function FounderTrustStrip() {
         ].join(" ")}
       >
         {/* Eyebrow */}
-        <p className="mb-8 text-[11px] font-medium uppercase tracking-[0.2em] text-champagne-300/70">
+        <p className="mb-6 font-general text-[11px] uppercase tracking-[0.2em] text-champagne-300">
           Who built GoldFin Desk
         </p>
 
-        {/* Founder row */}
-        <div className="flex items-start gap-5 text-left">
-          {/* Avatar */}
-          <div
-            className="flex h-[60px] w-[60px] shrink-0 items-center justify-center rounded-full border border-champagne-200/30 bg-navy shadow-[0_10px_28px_-12px_rgba(15,27,61,0.55)]"
-            aria-hidden="true"
-          >
-            <span className="text-[16px] font-medium tracking-wide text-champagne-100">CS</span>
-          </div>
+        {/* Founder card */}
+        <div className="mx-auto max-w-xl rounded-2xl border border-ink/[0.08] bg-white p-6 text-left shadow-[0_1px_2px_rgba(11,13,18,0.04)] sm:p-7">
+          <div className="flex items-start gap-5">
+            {/* Avatar */}
+            <div
+              className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-champagne-200/30 bg-navy shadow-[0_6px_16px_-8px_rgba(15,27,61,0.35)]"
+              aria-hidden="true"
+            >
+              <span className="text-[15px] font-medium tracking-wide text-champagne-100">CS</span>
+            </div>
 
-          {/* Name + credential */}
-          <div>
-            <p className="text-[18px] font-light text-ink">Chris Sam</p>
-            <p className="mt-1 max-w-[52ch] text-[14px] leading-relaxed text-ink/65">
-              10 years in institutional finance, built this for owners who needed better answers
-              than their accountant was giving them.
-            </p>
+            {/* Name + credential */}
+            <div>
+              <p className="text-[16px] font-medium text-ink">Chris Sam</p>
+              <p className="mt-1.5 max-w-[52ch] text-[15px] leading-relaxed text-ink/75">
+                10 years in institutional finance, built this for owners who needed better answers
+                than their accountant was giving them.
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Security note card */}
-        <div className="mx-auto mt-8 max-w-xl rounded-2xl border border-ink/[0.07] bg-ink/[0.02] px-6 py-5">
+        <div className="mx-auto mt-4 max-w-xl rounded-2xl border border-ink/[0.08] bg-[#FCFBF9] px-6 py-5">
           <div className="flex items-start gap-3">
             <span
               className="mt-[3px] h-2 w-2 shrink-0 rounded-full bg-green-signal"
               aria-hidden="true"
             />
             <div className="text-left">
-              <p className="text-[14px] text-ink/75">
+              <p className="text-[14px] leading-relaxed text-ink/75">
                 Read-only bank connection. GoldFin Desk never moves, withdraws, or transfers
                 your money.
               </p>
               <a
                 href="/security-faq"
-                className="mt-2 block text-[12.5px] text-champagne-300/70 transition-colors duration-300 hover:text-champagne-300"
+                className="mt-2 block text-[12.5px] text-champagne-300 transition-colors duration-300 hover:text-champagne-400"
               >
                 How does the connection work? →
               </a>

@@ -14,7 +14,7 @@ export default function PlaidConsent() {
         <a href="/" className="text-[12.5px] text-ink/55 hover:text-ink">
           ← Back to GoldFin Desk
         </a>
-        <h1 className="mt-6 font-zentry text-[36px] leading-[1.1] tracking-[-0.01em]">
+        <h1 className="mt-6 font-display font-medium text-[36px] leading-[1.12] tracking-[-0.02em]">
           Plaid Data Consent
         </h1>
         <p className="mt-3 text-[12.5px] uppercase tracking-wider text-ink/45">

@@ -28,13 +28,13 @@ function RadioGroup({
 }) {
   return (
     <div>
-      <div className="mb-3 text-[12.5px] text-ink/70">{label}</div>
+      <div className="mb-3 font-general text-[11px] uppercase tracking-[0.22em] leading-[1.8] text-ink/45">{label}</div>
       <div role="radiogroup" className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
         {options.map((o) => (
           <SelectableCard key={o} label={o} selected={value === o} onSelect={() => onChange(o)} />
         ))}
       </div>
-      {error && <p role="alert" className="mt-2 text-[12.5px] text-champagne-200/90">{error}</p>}
+      {error && <p role="alert" className="mt-2 text-[12.5px] text-red-signal">{error}</p>}
     </div>
   );
 }

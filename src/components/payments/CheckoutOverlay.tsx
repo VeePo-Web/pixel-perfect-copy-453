@@ -64,31 +64,31 @@ export default function CheckoutOverlay({
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-black/70 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-ink/40 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       onClick={() => setOpen(false)}
     >
       <div
-        className="relative my-10 w-full max-w-3xl rounded-2xl bg-white p-2 shadow-2xl"
+        className="relative my-10 w-full max-w-3xl rounded-2xl border border-ink/[0.08] bg-white p-2 shadow-[0_40px_120px_-24px_rgba(11,13,18,0.35)]"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
           onClick={() => setOpen(false)}
           aria-label="Close checkout"
-          className="absolute right-3 top-3 z-10 rounded-full bg-white/95 px-3 py-1 text-sm text-gray-700 shadow hover:bg-gray-100"
+          className="absolute right-3 top-3 z-10 rounded-full border border-ink/[0.08] bg-white px-3 py-1 text-sm text-ink/60 shadow-[0_1px_2px_rgba(11,13,18,0.08)] transition-colors duration-200 hover:border-ink/[0.2] hover:text-ink"
         >
           ✕
         </button>
         {error ? (
           <div className="p-10 text-center">
-            <p className="text-base font-medium text-red-700">Couldn't open checkout</p>
-            <p className="mt-2 text-sm text-gray-600">{error}</p>
+            <p className="text-base font-medium text-red-signal">Couldn't open checkout</p>
+            <p className="mt-2 text-sm text-ink/60">{error}</p>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="mt-6 rounded-full bg-gray-900 px-5 py-2 text-sm text-white"
+              className="mt-6 rounded-full bg-ink px-5 py-2 text-sm font-medium text-white transition-all duration-200 hover:bg-ink/90 active:scale-[0.98]"
             >
               Close
             </button>

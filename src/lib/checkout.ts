@@ -11,9 +11,9 @@ export type PlanKey = "auto-fill-monthly" | "finance-desk-monthly" | "clarity-re
 
 /** Display/analytics value per plan (USD). Source of truth for price = Stripe. */
 const PLAN_PRICE_USD: Partial<Record<PlanKey, number>> = {
-  "auto-fill-monthly": 99,
-  "finance-desk-monthly": 149,
-  "clarity-report": 49,
+  "auto-fill-monthly": 150,
+  "finance-desk-monthly": 1500,
+  "clarity-report": 99,
 };
 
 const RETURN_PATH = "/checkout/return";

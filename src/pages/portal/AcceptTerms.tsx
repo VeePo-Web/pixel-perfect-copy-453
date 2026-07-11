@@ -57,7 +57,7 @@ export default function AcceptTerms() {
           type="checkbox"
           checked={accept}
           onChange={(e) => setAccept(e.target.checked)}
-          className="mt-0.5"
+          className="mt-0.5 accent-[#B8893A]"
         />
         <span>
           I have read and agree to the Terms of Service v{TOS_VERSION} and Plaid Data Consent v
@@ -65,7 +65,7 @@ export default function AcceptTerms() {
           recorded.
         </span>
       </label>
-      {error && <p className="mt-3 text-[12.5px] text-red-700">{error}</p>}
+      {error && <p className="mt-3 text-[12.5px] text-red-signal">{error}</p>}
       <div className="mt-5">
         <PrimaryButton disabled={loading || !accept} onClick={run}>
           {loading ? "Saving…" : "Accept and continue"}

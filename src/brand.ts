@@ -5,10 +5,10 @@ export const BRAND = {
   tagline: "Financial clarity for owner-led businesses",
   // Offer ladder
   vault: "GoldFin Template Vault", // Free lead magnet
-  reports: "GoldFin Reports", // $99/mo continuity — bread & butter
+  reports: "GoldFin Reports", // $150/mo continuity — bread & butter
   advisory: "GoldFin Advisory", // $1,500/mo human advisory
   executive: "GoldFin Executive Desk", // future high-end
   // Prices
-  reportsPrice: "$99",
+  reportsPrice: "$150",
   advisoryPrice: "$1,500",
 } as const;

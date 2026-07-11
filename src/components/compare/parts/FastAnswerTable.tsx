@@ -7,20 +7,20 @@ export default function FastAnswerTable() {
     <section
       id="fast-answer"
       aria-labelledby="fast-answer-heading"
-      className="relative scroll-mt-24 border-b border-ink/[0.05] bg-charcoal-950"
+      className="relative scroll-mt-24 border-b border-ink/[0.06] bg-white"
     >
-      <div ref={ref} className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
+      <div ref={ref} className="mx-auto max-w-7xl px-6 py-20 md:py-28 lg:px-10">
         <div
           className={`max-w-[62ch] transition-all duration-700 ease-cinema ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
+          <div className="font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Fast answer
           </div>
           <h2
             id="fast-answer-heading"
-            className="mt-3 font-light text-ink text-[30px] leading-[1.1] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-display font-medium text-ink [text-wrap:balance] text-[30px] leading-[1.1] tracking-[-0.02em] sm:text-[40px]"
           >
             Choose based on the job you need done.
           </h2>
@@ -28,30 +28,30 @@ export default function FastAnswerTable() {
 
         {/* Desktop table */}
         <div
-          className={`mt-10 hidden overflow-hidden rounded-2xl border border-ink/[0.07] bg-ink/[0.02] lg:block transition-all duration-700 ease-cinema delay-150 ${
+          className={`mt-10 hidden overflow-hidden rounded-2xl border border-ink/[0.08] bg-white shadow-[0_1px_2px_rgba(11,13,18,0.04)] lg:block transition-all duration-700 ease-cinema delay-150 ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <table className="w-full border-collapse text-left text-[13px]">
+          <table className="w-full border-collapse text-left text-[14px]">
             <caption className="sr-only">Comparison of financial support options.</caption>
             <thead>
-              <tr className="border-b border-ink/[0.07] text-[10.5px] uppercase tracking-[0.24em] text-ink/45">
+              <tr className="border-b border-ink/[0.06] font-general text-[10.5px] uppercase tracking-[0.22em] text-ink/45">
                 <th scope="col" className="px-5 py-4 font-normal">Option</th>
                 <th scope="col" className="px-5 py-4 font-normal">Best when you need</th>
                 <th scope="col" className="px-5 py-4 font-normal">Usually misses</th>
                 <th scope="col" className="px-5 py-4 font-normal">Choose this if</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-ink/[0.06]">
               {options.map((o) => (
                 <tr
                   key={o.id}
                   id={o.anchorId}
-                  className={`scroll-mt-24 border-b border-ink/[0.05] align-top last:border-b-0 ${
-                    o.isMfd ? "bg-champagne-200/[0.04]" : ""
+                  className={`scroll-mt-24 align-top ${
+                    o.isMfd ? "border-y border-champagne-200/40 bg-champagne-50/40" : ""
                   }`}
                 >
-                  <th scope="row" className="px-5 py-5 font-normal text-ink">
+                  <th scope="row" className="px-5 py-4 font-medium text-ink">
                     <div className="flex items-center gap-2">
                       {o.isMfd ? (
                         <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-champagne-200" />
@@ -59,9 +59,9 @@ export default function FastAnswerTable() {
                       <span className={o.isMfd ? "text-ink" : "text-ink/85"}>{o.label}</span>
                     </div>
                   </th>
-                  <td className="px-5 py-5 text-ink/70">{o.bestWhen}</td>
-                  <td className="px-5 py-5 text-ink/55">{o.usuallyMisses}</td>
-                  <td className="px-5 py-5 text-ink/70">{o.chooseIf}</td>
+                  <td className="px-5 py-4 text-ink/75">{o.bestWhen}</td>
+                  <td className="px-5 py-4 text-ink/55">{o.usuallyMisses}</td>
+                  <td className="px-5 py-4 text-ink/75">{o.chooseIf}</td>
                 </tr>
               ))}
             </tbody>
@@ -78,18 +78,18 @@ export default function FastAnswerTable() {
             <li
               key={o.id}
               id={`m-${o.anchorId}`}
-              className={`rounded-2xl border ${
+              className={`overflow-hidden rounded-2xl border ${
                 o.isMfd
-                  ? "border-champagne-200/45 bg-charcoal-900/70"
-                  : "border-ink/[0.07] bg-ink/[0.02]"
+                  ? "border-champagne-200/50 bg-champagne-50/40"
+                  : "border-ink/[0.08] bg-white shadow-[0_1px_2px_rgba(11,13,18,0.04)]"
               }`}
             >
               <details className="group [&_summary::-webkit-details-marker]:hidden" open={o.isMfd}>
                 <summary className="flex cursor-pointer items-center justify-between gap-3 px-5 py-4">
-                  <span className="text-[14.5px] text-ink">{o.label}</span>
+                  <span className="text-[14.5px] font-medium text-ink">{o.label}</span>
                   <span
                     aria-hidden
-                    className="text-[18px] leading-none text-ink/50 transition-transform duration-300 group-open:rotate-45"
+                    className="text-[18px] leading-none text-ink/50 transition-transform duration-200 group-open:rotate-45"
                   >
                     +
                   </span>
@@ -111,7 +111,7 @@ export default function FastAnswerTable() {
 function Row({ label, value, tone }: { label: string; value: string; tone?: "muted" }) {
   return (
     <div>
-      <div className="text-[10.5px] uppercase tracking-[0.24em] text-ink/40">{label}</div>
+      <div className="font-general text-[10.5px] uppercase tracking-[0.22em] text-ink/40">{label}</div>
       <p className={`mt-1 leading-relaxed ${tone === "muted" ? "text-ink/55" : "text-ink/75"}`}>
         {value}
       </p>

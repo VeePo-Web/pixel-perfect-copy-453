@@ -18,15 +18,18 @@ export default function PortalLayout({
   const { user, signOut } = useAuth();
   return (
     <div className="min-h-screen bg-charcoal-950 text-ink">
-      <header className="flex items-center justify-between gap-4 border-b border-ink/10 px-6 py-4">
-        <a href="/portal" className="shrink-0 font-zentry text-[18px] tracking-wide">
+      <header className="flex items-center justify-between gap-4 border-b border-ink/[0.08] px-6 py-4">
+        <a
+          href="/portal"
+          className="shrink-0 font-general text-[12.5px] uppercase tracking-[0.26em] text-ink/85 transition-colors duration-200 hover:text-ink"
+        >
           GOLDFIN DESK
         </a>
         <div className="flex min-w-0 items-center text-[12px] text-ink/55">
-          <span className="truncate">{user?.email}</span>
+          <span className="truncate font-general text-[11.5px] text-ink/50">{user?.email}</span>
           <button
             onClick={signOut}
-            className="ml-4 shrink-0 underline underline-offset-4 hover:text-ink"
+            className="ml-4 shrink-0 underline underline-offset-4 transition-colors duration-200 hover:text-ink"
           >
             Sign out
           </button>
@@ -42,8 +45,8 @@ export default function PortalLayout({
               <a
                 key={n.href}
                 href={n.href}
-                className={`block whitespace-nowrap rounded px-3 py-2 text-[13.5px] transition ${
-                  on ? "bg-champagne-50 text-ink" : "text-ink/65 hover:text-ink"
+                className={`block whitespace-nowrap rounded-lg px-3 py-2 text-[13.5px] transition-colors duration-200 ${
+                  on ? "bg-champagne-50 font-medium text-ink" : "text-ink/60 hover:bg-ink/[0.03] hover:text-ink"
                 }`}
               >
                 {n.label}

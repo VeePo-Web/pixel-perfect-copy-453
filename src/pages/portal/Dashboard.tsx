@@ -26,27 +26,27 @@ export default function Dashboard() {
   return (
     <ProtectedRoute>
       <PortalLayout active="/portal">
-        <h1 className="text-[28px] font-medium text-ink">Welcome back.</h1>
-        <p className="mt-2 text-[14px] text-ink/60">
+        <h1 className="text-[28px] font-medium tracking-[-0.01em] text-ink">Welcome back.</h1>
+        <p className="mt-2 text-[14px] text-ink/55">
           Your cash position, refreshed read-only from your bank via Plaid.
         </p>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-ink/10 bg-paper p-6">
-            <p className="text-[11px] uppercase tracking-wider text-ink/45">Net cash</p>
-            <p className="mt-2 text-[28px] font-medium tabular-nums text-ink">
+          <div className="rounded-2xl border border-ink/[0.08] bg-white p-6 shadow-[0_1px_2px_rgba(11,13,18,0.04)]">
+            <p className="font-general text-[10.5px] uppercase tracking-[0.2em] text-ink/45">Net cash</p>
+            <p className="mt-2 font-general text-[26px] tabular-nums tracking-[-0.01em] text-ink">
               {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(netCash)}
             </p>
             <p className="mt-1 text-[12px] text-ink/50">Sum of depository balances.</p>
           </div>
-          <div className="rounded-2xl border border-ink/10 bg-paper p-6">
-            <p className="text-[11px] uppercase tracking-wider text-ink/45">Connected accounts</p>
-            <p className="mt-2 text-[28px] font-medium tabular-nums text-ink">
+          <div className="rounded-2xl border border-ink/[0.08] bg-white p-6 shadow-[0_1px_2px_rgba(11,13,18,0.04)]">
+            <p className="font-general text-[10.5px] uppercase tracking-[0.2em] text-ink/45">Connected accounts</p>
+            <p className="mt-2 font-general text-[26px] tabular-nums tracking-[-0.01em] text-ink">
               {accountCount ?? "—"}
             </p>
             <a
               href="/portal/accounts"
-              className="mt-1 inline-block text-[12.5px] text-ink underline underline-offset-4"
+              className="mt-1 inline-block text-[12.5px] text-ink/70 underline underline-offset-4 transition-colors duration-200 hover:text-ink"
             >
               Manage →
             </a>
@@ -54,13 +54,13 @@ export default function Dashboard() {
         </div>
 
         {accountCount === 0 && (
-          <div className="mt-10 rounded-2xl border border-dashed border-ink/15 p-8 text-center">
+          <div className="mt-10 rounded-2xl border border-dashed border-ink/[0.12] bg-white p-8 text-center">
             <p className="text-[14px] text-ink/70">
               You haven't connected a bank yet. GoldFin starts working the moment you do.
             </p>
             <a
               href="/portal/accounts"
-              className="mt-4 inline-block rounded-full bg-ink px-6 py-2.5 text-[13px] font-medium text-paper transition-transform duration-200 ease-cinema hover:-translate-y-0.5"
+              className="mt-4 inline-block rounded-full bg-ink px-6 py-2.5 text-[13px] font-medium text-white transition-all duration-200 ease-cinema hover:-translate-y-0.5 hover:bg-ink/90 active:translate-y-0 active:scale-[0.98]"
             >
               Connect my bank &amp; build my report
             </a>
@@ -68,7 +68,7 @@ export default function Dashboard() {
         )}
 
         {/* Connected → guide the owner through connect → sync → report, the
-            highest-leverage activation path. The report is what the $99/mo buys. */}
+            highest-leverage activation path. The report is what the $150/mo buys. */}
         {accountCount != null && accountCount > 0 && (
           <ActivationChecklist accountCount={accountCount} />
         )}

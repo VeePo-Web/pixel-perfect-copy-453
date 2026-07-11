@@ -47,7 +47,7 @@ export default function BriefingPanelPreview({ business, status, loaderIndex }: 
                 key={i}
                 className="h-20 overflow-hidden rounded-lg border border-ink/[0.05] bg-ink/[0.02]"
               >
-                <div className="h-full w-full motion-safe:animate-shimmer-slow bg-gradient-to-r from-transparent via-ink/[0.04] to-transparent" />
+                <div className="h-full w-full bg-gradient-to-r from-transparent via-ink/[0.04] to-transparent" />
               </div>
             ))}
           </div>
@@ -109,7 +109,7 @@ export default function BriefingPanelPreview({ business, status, loaderIndex }: 
           <p className="mt-5 flex items-center gap-2 text-[12px] text-ink/55">
             <span
               aria-hidden
-              className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-champagne-300/70 motion-safe:animate-soft-pulse"
+              className="inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-champagne-300/70"
             />
             Pick a business above to generate the full briefing →
           </p>

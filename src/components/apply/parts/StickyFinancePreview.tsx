@@ -4,10 +4,10 @@ import type { ApplicationState } from "../hooks/useApplicationState";
 
 function Card({ children, title, label }: { children: React.ReactNode; title?: string; label?: string }) {
   return (
-    <div className="relative rounded-2xl border border-champagne-200/15 bg-charcoal-900/60 p-6 backdrop-blur-sm">
-      <span className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent" />
-      {label && <div className="mb-3 text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">{label}</div>}
-      {title && <div className="mb-4 font-robert-medium text-[20px] leading-tight tracking-tight text-ink">{title}</div>}
+    <div className="relative overflow-hidden rounded-2xl border border-ink/[0.08] bg-white p-6 shadow-[0_1px_2px_rgba(11,13,18,0.04)]">
+      <span className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/60 to-transparent" />
+      {label && <div className="mb-3 font-general text-[10.5px] uppercase tracking-[0.28em] text-ink/45">{label}</div>}
+      {title && <div className="mb-4 font-display font-medium text-[20px] leading-tight tracking-[-0.01em] text-ink">{title}</div>}
       {children}
     </div>
   );
@@ -21,14 +21,14 @@ function StepContent({ step, state }: { step: number; state: ApplicationState })
         <ul className="space-y-2.5">
           {r.items.map((it) => (
             <li key={it} className="flex items-start gap-3 text-[14px] text-ink/80">
-              <span className="mt-[8px] inline-block h-1.5 w-3 bg-champagne-200/80" />
+              <span className="mt-[9px] inline-block h-[3px] w-3 rounded-full bg-champagne-200" />
               {it}
             </li>
           ))}
         </ul>
         <div className="mt-5 flex items-end justify-between border-t border-ink/[0.06] pt-4">
-          <span className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Investment</span>
-          <span className="font-robert-medium text-[22px] tracking-tight text-champagne-300">{r.price}</span>
+          <span className="font-general text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Investment</span>
+          <span className="font-general text-[17px] tabular-nums tracking-tight text-champagne-300">{r.price}</span>
         </div>
         <p className="mt-3 text-[12px] text-ink/45">{r.sub}</p>
         <p className="mt-5 text-[11.5px] leading-[1.55] text-ink/40">{APPLY.landing.fitNote}</p>
@@ -61,10 +61,10 @@ function StepContent({ step, state }: { step: number; state: ApplicationState })
         </p>
         {state.current_tools.length > 0 && (
           <div className="mt-5">
-            <div className="text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Tools you use</div>
+            <div className="font-general text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Tools you use</div>
             <div className="mt-2 flex flex-wrap gap-1.5">
               {state.current_tools.slice(0, 6).map((t) => (
-                <span key={t} className="rounded-full border border-ink/10 px-2.5 py-1 text-[11.5px] text-ink/65">
+                <span key={t} className="rounded-full border border-ink/[0.12] bg-white px-2.5 py-1 text-[11.5px] text-ink/60">
                   {t}
                 </span>
               ))}
@@ -84,7 +84,7 @@ function StepContent({ step, state }: { step: number; state: ApplicationState })
           <ul className="space-y-2.5">
             {state.decisions.slice(0, 5).map((d) => (
               <li key={d} className="flex items-start gap-3 text-[13.5px] text-ink/80">
-                <span className="mt-[8px] h-1.5 w-3 bg-champagne-200/80" />
+                <span className="mt-[9px] h-[3px] w-3 shrink-0 rounded-full bg-champagne-200" />
                 {d}
               </li>
             ))}
@@ -105,9 +105,9 @@ function StepContent({ step, state }: { step: number; state: ApplicationState })
       <Card label="Readiness Signals" title="What we look for">
         <ul className="space-y-3">
           {signals.map((s) => (
-            <li key={s.l} className="flex items-start justify-between gap-3 border-b border-ink/[0.05] pb-3 last:border-0 last:pb-0">
+            <li key={s.l} className="flex items-start justify-between gap-3 border-b border-ink/[0.06] pb-3 last:border-0 last:pb-0">
               <span className="text-[12.5px] text-ink/55">{s.l}</span>
-              <span className="text-right text-[12.5px] text-ink/85">{s.v}</span>
+              <span className="text-right font-general text-[12px] tabular-nums text-ink/85">{s.v}</span>
             </li>
           ))}
         </ul>
@@ -145,11 +145,11 @@ export default function StickyFinancePreview({ step, state }: { step: number; st
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}
-          className="flex w-full items-center justify-between rounded-xl border border-ink/[0.07] bg-charcoal-900/40 px-4 py-3 text-left"
+          className="flex w-full items-center justify-between rounded-xl border border-ink/[0.12] bg-white px-4 py-3 text-left shadow-[0_1px_2px_rgba(11,13,18,0.04)] transition-colors hover:border-ink/[0.25]"
           aria-expanded={open}
         >
-          <span className="text-[12px] uppercase tracking-[0.22em] text-champagne-300/70">What happens next?</span>
-          <span className={`text-ink/60 transition-transform duration-300 ${open ? "rotate-180" : ""}`}>⌄</span>
+          <span className="font-general text-[11px] uppercase tracking-[0.22em] text-ink/45">What happens next?</span>
+          <span className={`text-ink/50 transition-transform duration-300 ${open ? "rotate-180" : ""}`}>⌄</span>
         </button>
         {open && (
           <div className="mt-3">

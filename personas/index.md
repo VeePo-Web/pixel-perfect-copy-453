@@ -42,7 +42,7 @@ recurring rhythm — not spreadsheets, not AI, not dashboards.
 - `scroll-motion.md` — Motion philosophy and animation rules.
 - `responsive-mobile.md` — Mobile behavior of the product-led hero and flow.
 - `frontend-engineer.md` — Engineering guardrails (React + TS + Tailwind, Plaid, AI boundaries).
-- `plaid-architect.md` — **The Plaid engine architect.** Owns bank-connect → AI-categorize → auto-filled spreadsheet → grounded report. The hidden engine the $99/mo buys. Build prompt: `../docs/plaid-architect-prompt.md` · architecture: `../docs/plaid-integration-spec.md` · plan: `../docs/plaid-build-plan.md`.
+- `plaid-architect.md` — **The Plaid engine architect.** Owns bank-connect → AI-categorize → auto-filled spreadsheet → grounded report. The hidden engine the $150/mo buys. Build prompt: `../docs/plaid-architect-prompt.md` · architecture: `../docs/plaid-integration-spec.md` · plan: `../docs/plaid-build-plan.md`.
 - `performance-engineer.md` — Performance budgets and load priorities.
 - `seo-expert.md` — Keyword strategy and comparison-page map.
 - `seo-faq.md` — FAQ schema and objection-mapped Q&A.

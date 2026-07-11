@@ -80,14 +80,14 @@ const COPY = {
   postDemo: {
     headline: "Want this briefing for your real business every month?",
     body: "GoldFin Reports fills your templates from your numbers and sends a plain-English briefing like this one — every month. No spreadsheet work. Cancel anytime.",
-    primary: "Auto-fill my reports — $99/mo",
+    primary: "Auto-fill my reports — $150/mo",
     primaryHref: "/pricing#auto-fill",
     secondary: "Get the free Template Vault",
     secondaryHref: "/templates",
     tertiary: "Running something larger? Apply for GoldFin Advisory →",
     tertiaryHref: "/apply",
     micro:
-      "$99/mo · No contracts · Cancel anytime · No bank connection required.",
+      "$150/mo · No contracts · Cancel anytime · No bank connection required.",
   },
   mobile: {
     eyebrow: "For serious small business owners",
@@ -259,7 +259,7 @@ const FinanceHero = () => {
                     <button
                       onClick={startDemo}
                       disabled={ctasDisabled}
-                      className="group/btn relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-3.5 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy shadow-[0_10px_30px_-12px_rgba(217,190,130,0.7)] transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_16px_46px_-12px_rgba(217,190,130,0.85)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:translate-y-0 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:rounded-lg"
+                      className="group/btn relative inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-gradient-to-b from-champagne-100 to-champagne-200 px-5 py-3.5 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink shadow-[0_10px_30px_-12px_rgba(217,190,130,0.7)] transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_16px_46px_-12px_rgba(217,190,130,0.85)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-300/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:translate-y-0 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto sm:rounded-lg"
                     >
                       <span
                         aria-hidden
@@ -337,17 +337,17 @@ const FinanceHero = () => {
               </p>
 
               {/* Desktop money CTA. Pairs with the demo above the fold so the
-                  $99/mo path is unmistakable on large screens with zero scroll.
+                  $150/mo path is unmistakable on large screens with zero scroll.
                   Subordinate (outline) to the filled demo primary -> one dominant
                   primary + one clear money CTA. Below lg, the sticky bottom bar
-                  carries it, so there is exactly one $99 CTA per breakpoint. */}
+                  carries it, so there is exactly one $150 CTA per breakpoint. */}
               <div className="mt-7 hidden items-center gap-4 lg:flex">
                 <button
                   type="button"
                   onClick={startAutoFillCheckout}
-                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-champagne-300/60 bg-white px-6 py-3.5 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:border-champagne-300 hover:bg-champagne-50 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                  className="group inline-flex items-center justify-center gap-2 rounded-full border border-champagne-300/60 bg-white px-6 py-3.5 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:border-champagne-300 hover:bg-champagne-50 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                 >
-                  <span>Auto-fill my reports &mdash; $99/mo</span>
+                  <span>Auto-fill my reports &mdash; $150/mo</span>
                   <span
                     aria-hidden
                     className="transition-transform duration-300 group-hover:translate-x-0.5"
@@ -378,7 +378,7 @@ const FinanceHero = () => {
               ))}
             </div>
 
-            {/* $99/mo CTA placement by breakpoint: desktop = the left-column
+            {/* $150/mo CTA placement by breakpoint: desktop = the left-column
                 pair beside the demo (above fold); mobile/tablet = the sticky
                 bottom bar. Exactly one money CTA per breakpoint, no duplication. */}
             {state === "briefing" && <PostDemoCTA />}
@@ -391,7 +391,7 @@ const FinanceHero = () => {
 };
 
 // Mobile-only persistent money CTA. Guarantees one clear, thumb-reachable
-// $99/mo action on every phone viewport (Contentsquare: sticky bottom-bar
+// $150/mo action on every phone viewport (Contentsquare: sticky bottom-bar
 // CTAs ~+31% conversions). Appears after the in-hero demo button scrolls out
 // of the thumb zone, so it never competes with the demo for the same screen.
 const MobileStickyHeroCTA = () => {
@@ -417,15 +417,15 @@ const MobileStickyHeroCTA = () => {
             Done-for-you reports
           </p>
           <p className="font-general text-[11px] uppercase tracking-[0.16em] text-ink/45">
-            $99/mo &middot; cancel anytime
+            $150/mo &middot; cancel anytime
           </p>
         </div>
         <button
           type="button"
           onClick={startAutoFillCheckout}
-          className="shrink-0 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 font-general text-[13px] font-medium text-navy shadow-[0_8px_28px_-10px_rgba(217,190,130,0.6)] transition-all duration-300 ease-cinema active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+          className="shrink-0 rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-6 py-3 font-general text-[13px] font-medium text-ink shadow-[0_8px_28px_-10px_rgba(217,190,130,0.6)] transition-all duration-300 ease-cinema active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
         >
-          Start &mdash; $99/mo
+          Start &mdash; $150/mo
         </button>
       </div>
     </div>
@@ -626,7 +626,7 @@ const PostDemoCTA = () => (
       <button
         type="button"
         onClick={startAutoFillCheckout}
-        className="group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
+        className="group/cta relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-5 py-3 font-general text-[0.72rem] uppercase tracking-[0.18em] text-ink transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_10px_36px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2"
       >
         <span
           aria-hidden

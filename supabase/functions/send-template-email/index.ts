@@ -6,7 +6,7 @@ import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors';
 //   RESEND_API_KEY       — required to actually send
 //   RESEND_FROM          — e.g. "Monthly Finance Desk <hello@yourdomain.com>"
 //   RESEND_AUDIENCE_ID   — optional; enrolls the lead in the sequence audience
-//   SITE_URL             — optional; used for the $99 upgrade link
+//   SITE_URL             — optional; used for the $150 upgrade link
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -24,13 +24,13 @@ function deliveryHtml(firstName: string, templateName: string, siteUrl: string) 
     <p style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#B8893A;margin:0 0 20px">GoldFin Desk</p>
     <p style="${body}">${hi}</p>
     <p style="${body}">Here is your <strong>${tpl}</strong> — cash flow, monthly review, expense audit, hiring affordability, subscription tracker, and tax reserve. Open it, drop in your numbers, and you'll see the business more clearly in about ten minutes.</p>
-    <p style="margin:0 0 28px"><a href="${siteUrl}/#/templates" style="display:inline-block;background:#D4A845;color:#0F1B3D;text-decoration:none;font-weight:600;font-size:14px;padding:13px 24px;border-radius:9999px">Open my Vault</a></p>
+    <p style="margin:0 0 28px"><a href="${siteUrl}/templates" style="display:inline-block;background:#D4A845;color:#0F1B3D;text-decoration:none;font-weight:600;font-size:14px;padding:13px 24px;border-radius:9999px">Open my Vault</a></p>
     <p style="${body}">One thing before you go. Most owners check the <strong>bank balance</strong> to feel safe. It's the fastest number to find — and the most misleading. It tells you what's <em>left</em>. It says nothing about what's <em>coming</em>: payroll, taxes, the invoice that hasn't cleared, the client who pays late.</p>
     <p style="${body}">Over the next five days I'll send one short email showing how owners actually use each template to make real decisions — hiring, pricing, cash reserves. No spam. Just the thinking.</p>
     <p style="font-size:15px;line-height:1.6;margin:0 0 4px">— Chris Sam</p>
     <p style="font-size:13px;line-height:1.5;color:#8A93A3;margin:0 0 28px">GoldFin Desk</p>
     <hr style="border:none;border-top:1px solid #E6E8EC;margin:0 0 20px" />
-    <p style="${muted}"><strong style="color:#0B0D12">P.S.</strong> Prefer not to fill these in yourself every month? That's exactly what GoldFin Reports does for $99/mo — your templates filled from your numbers, with a plain-English briefing. <a href="${siteUrl}/#/pricing#auto-fill" style="color:#B8893A">See how it works →</a></p>
+    <p style="${muted}"><strong style="color:#0B0D12">P.S.</strong> Prefer not to fill these in yourself every month? That's exactly what GoldFin Reports does for $150/mo — your templates filled from your numbers, with a plain-English briefing. <a href="${siteUrl}/pricing#auto-fill" style="color:#B8893A">See how it works →</a></p>
   </div></body></html>`;
 }
 

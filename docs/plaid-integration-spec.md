@@ -10,7 +10,7 @@
 
 ## 0. The one-sentence product
 
-A non-accountant business owner pays **$99/mo**, connects their bank + Visa **once** (via Plaid — which they never see named), and a clean monthly/bi-weekly financial **report + auto-filled spreadsheet** just *arrives* — grounded in their real numbers, smarter every cycle.
+A non-accountant business owner pays **$150/mo**, connects their bank + Visa **once** (via Plaid — which they never see named), and a clean monthly/bi-weekly financial **report + auto-filled spreadsheet** just *arrives* — grounded in their real numbers, smarter every cycle.
 
 **Plaid is the hidden fuel line, not the product.** The product is the report. Optimize Plaid for the cheapest, most reliable path to clean transaction data; spend craft on the connect moment and the report.
 
@@ -246,7 +246,7 @@ Every competitor — Puzzle, Digits, QBO, even Ramp — stops at a **raw P&L the
 1. **Correctable, explainable categorization** (vs "AI gets it wrong and it's impossible to fix" — the universal #1 complaint).
 2. **Interpreted plain-English report**, not a raw P&L ("are you okay + what to do" — no one auto-delivers this).
 3. **All-accounts Plaid consolidation** (Mercury/Brex only see their own money).
-4. **Transparent flat $99 + portable data** (vs pricing opacity + Bench-style lock-in).
+4. **Transparent flat $150 + portable data** (vs pricing opacity + Bench-style lock-in).
 
 Positioning line: **"You didn't fail at bookkeeping — the tools were built for accountants, not for you."**
 
@@ -301,7 +301,7 @@ Each phase ships under brainstorm-first → spec → TDD → verify (`tsc --noEm
 
 ## 12. Cost model (confirm with Plaid sales)
 
-- **Plaid Transactions:** ~$0.30–$2.00 per connected Item/month (sliding down by volume). At $99/mo revenue per client with 1–3 connected accounts, Plaid is a small COGS line — but **per-Item subscriptions multiply with accounts**, so don't over-connect, and implement update mode (no duplicate Items).
+- **Plaid Transactions:** ~$0.30–$2.00 per connected Item/month (sliding down by volume). At $150/mo revenue per client with 1–3 connected accounts, Plaid is a small COGS line — but **per-Item subscriptions multiply with accounts**, so don't over-connect, and implement update mode (no duplicate Items).
 - **Balance:** per-request — call once per period close, not continuously.
 - **Claude:** Haiku for categorization (Batch API, 50% off, prompt-cached) is cents/client/month; Opus for the report (prompt-cached) is the main AI cost and is small per report.
 - **Plaid publishes no list price** — everything is negotiated on usage forecast. Get a quote before modeling unit economics.

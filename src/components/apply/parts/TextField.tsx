@@ -13,7 +13,7 @@ export default function TextField({ label, value, onChange, placeholder, type = 
   const id = `f-${label.replace(/\s+/g, "-").toLowerCase()}`;
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-[11.5px] uppercase tracking-[0.22em] text-ink/45">
+      <label htmlFor={id} className="mb-2 block font-general text-[11px] uppercase tracking-[0.22em] text-ink/45">
         {label}
       </label>
       <input
@@ -27,12 +27,14 @@ export default function TextField({ label, value, onChange, placeholder, type = 
         autoCapitalize={type === "email" ? "none" : undefined}
         autoCorrect={type === "email" ? "off" : undefined}
         maxLength={maxLength}
-        className={`w-full rounded-xl border bg-charcoal-900/50 px-4 py-3 text-[16px] text-ink placeholder:text-ink/30 transition-all duration-300 ease-cinema focus:outline-none focus:border-champagne-200/50 focus:bg-charcoal-900/70 sm:text-[14.5px] ${
-          error ? "border-champagne-300/50" : "border-ink/[0.08]"
+        className={`w-full rounded-xl border bg-white px-4 py-3 text-[16px] text-ink placeholder:text-ink/35 transition-colors focus:outline-none focus:ring-2 sm:text-[14.5px] ${
+          error
+            ? "border-red-signal/60 focus:border-red-signal/60 focus:ring-red-signal/20"
+            : "border-ink/[0.12] focus:border-champagne-300/50 focus:ring-champagne-200/40"
         }`}
       />
       {error && (
-        <p role="alert" className="mt-2 text-[12.5px] text-champagne-200/90">
+        <p role="alert" className="mt-2 text-[12.5px] text-red-signal">
           {error}
         </p>
       )}

@@ -7,7 +7,7 @@ type Props = {
 
 // ONE-CTA doctrine: pre-aha the hero has exactly one loud action (Generate). The
 // industry chips above pre-fill this prompt, so demo data is implicit (zero friction)
-// and no second button is needed. Offer CTAs (99/mo, Apply) appear only AFTER the
+// and no second button is needed. Offer CTAs (150/mo, Apply) appear only AFTER the
 // reveal. Post-aha (status ready) the Generate button is demoted to a quiet
 // "generate another" so the eye flows down to the full briefing and the offer.
 export default function BusinessPromptInput({ value, onChange, onGenerate, status }: Props) {
@@ -50,12 +50,11 @@ export default function BusinessPromptInput({ value, onChange, onGenerate, statu
               type="button"
               onClick={onGenerate}
               disabled={loading}
-              className="group relative w-full overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-4 text-center text-[14px] font-medium tracking-wide text-navy transition-all duration-300 ease-cinema sm:py-3.5 hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 disabled:opacity-60"
+              className="group relative w-full overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-6 py-4 text-center text-[14px] font-medium tracking-wide text-ink transition-all duration-300 ease-cinema sm:py-3.5 hover:-translate-y-0.5 hover:shadow-[0_10px_40px_-10px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 disabled:opacity-60"
             >
               <span className="relative z-10">
                 {loading ? "Generating your briefing…" : "Generate My Sample Briefing →"}
               </span>
-              <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
             </button>
             <p className="mt-3 text-center text-[11px] uppercase tracking-[0.2em] text-ink/45">
               Free · No bank connection · Takes ~10 seconds

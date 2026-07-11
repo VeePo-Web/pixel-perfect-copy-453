@@ -32,7 +32,7 @@ export default function RawDataVsClarity() {
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Data vs Clarity
           </div>
-          <h2 className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
+          <h2 className="mt-4 font-display font-medium text-ink text-[34px] leading-[1.1] tracking-[-0.02em] sm:text-[44px]">
             Financial data is not the same as financial clarity.
           </h2>
           <p className="mt-4 text-[15.5px] leading-[1.7] text-ink/70">

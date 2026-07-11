@@ -8,7 +8,7 @@ export default function WhatThisIsNot() {
           <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
             Category clarity
           </div>
-          <h2 className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[44px]">
+          <h2 className="mt-4 font-display font-medium text-ink text-[34px] leading-[1.1] tracking-[-0.02em] sm:text-[44px]">
             This is not another dashboard.
           </h2>
         </div>
@@ -20,7 +20,7 @@ export default function WhatThisIsNot() {
             >
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-champagne-200/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="text-[11px] uppercase tracking-[0.22em] text-ink/45">{c.title.split(" ")[0]}</div>
-              <h3 className="mt-2 text-[18px] font-light text-ink">{c.title}</h3>
+              <h3 className="mt-2 text-[18px] font-display font-medium text-ink">{c.title}</h3>
               <p className="mt-3 text-[13.5px] leading-[1.65] text-ink/70">{c.body}</p>
             </div>
           ))}

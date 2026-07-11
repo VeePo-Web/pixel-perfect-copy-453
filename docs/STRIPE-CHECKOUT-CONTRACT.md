@@ -16,7 +16,7 @@ frontend side (`src/lib/checkout.ts`) is already built to this contract.
 
 1. In Lovable, enable the **Stripe** integration and connect the Stripe account.
    Lovable sets the `STRIPE_SECRET_KEY` secret and generates the edge function.
-2. Create a **recurring $99/mo Price** in Stripe (Product: "Auto-Fill Monthly").
+2. Create a **recurring $150/mo Price** in Stripe (Product: "Auto-Fill Monthly").
    Copy its price id (`price_…`).
 3. Add the secret **`STRIPE_PRICE_AUTO_FILL_MONTHLY`** = that `price_…` id.
 4. (Optional) Add **`SITE_URL`** = the production origin, used as a fallback if the
@@ -74,7 +74,7 @@ fall back to the offer section — never a dead click.
 | Secret | Set by | Purpose |
 |---|---|---|
 | `STRIPE_SECRET_KEY` | Lovable (on connect) | Stripe API auth |
-| `STRIPE_PRICE_AUTO_FILL_MONTHLY` | You (paste `price_…`) | The $99/mo recurring price |
+| `STRIPE_PRICE_AUTO_FILL_MONTHLY` | You (paste `price_…`) | The $150/mo recurring price |
 | `SITE_URL` | You (optional) | Return-URL fallback if client omits them |
 
 ---

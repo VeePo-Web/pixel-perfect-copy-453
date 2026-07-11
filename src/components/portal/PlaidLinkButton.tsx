@@ -154,12 +154,12 @@ export default function PlaidLinkButton({
         type="button"
         disabled={disabled || loading || !ready || !linkToken || status !== "idle"}
         onClick={handleOpen}
-        className="rounded-full bg-ink px-6 py-2.5 text-[13px] font-medium text-paper disabled:opacity-40 hover:bg-ink/90"
+        className="rounded-full bg-ink px-6 py-2.5 text-[13px] font-medium text-white transition-all duration-200 hover:bg-ink/90 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-500/40 focus-visible:ring-offset-2 disabled:opacity-40"
       >
         {buttonLabel}
       </button>
       {error && (
-        <p role="alert" className="mt-2 text-[12px] text-red-600">
+        <p role="alert" className="mt-2 text-[12px] text-red-signal">
           {error}
         </p>
       )}

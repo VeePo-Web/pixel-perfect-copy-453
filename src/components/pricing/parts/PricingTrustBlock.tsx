@@ -9,7 +9,7 @@ export default function PricingTrustBlock() {
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Trust & privacy
             </div>
-            <h2 id="trust-title" className="mt-4 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[42px]">
+            <h2 id="trust-title" className="mt-4 font-display font-medium text-ink text-[34px] leading-[1.1] tracking-[-0.02em] sm:text-[42px]">
               Preview and apply without connecting your bank.
             </h2>
             <p className="mt-5 max-w-[46ch] text-[15px] leading-[1.7] text-ink/70">
@@ -31,10 +31,9 @@ export default function PricingTrustBlock() {
         <div className="mt-12 flex flex-wrap items-center gap-4">
           <button
             type="button" onClick={startAutoFillCheckout}
-            className="group relative inline-flex overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(217,190,130,0.45)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            className="group relative inline-flex overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-6 py-3 text-[13px] font-medium text-ink transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-8px_rgba(217,190,130,0.45)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
           >
-            <span className="relative z-10">Auto-fill my reports — $99/mo</span>
-            <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
+            <span className="relative z-10">Auto-fill my reports — $150/mo</span>
           </button>
           <a
             href="/sample-briefing"

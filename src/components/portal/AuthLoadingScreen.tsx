@@ -10,8 +10,14 @@ export default function AuthLoadingScreen() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-paper">
       <div className="text-center">
-        <div className="mx-auto mb-4 h-10 w-10 animate-pulse rounded-md bg-ink/90" />
-        <p className="text-[12.5px] uppercase tracking-[0.22em] text-ink/45">Authenticating…</p>
+        <p className="font-general text-[12.5px] uppercase tracking-[0.26em] text-ink/85">
+          GOLDFIN DESK
+        </p>
+        <span
+          aria-hidden
+          className="mx-auto mt-5 block h-1.5 w-1.5 animate-soft-pulse rounded-full bg-champagne-200"
+        />
+        <p className="mt-5 font-general text-[10.5px] uppercase tracking-[0.22em] text-ink/40">Authenticating…</p>
         <div
           className={`mt-4 transition-opacity duration-300 ${
             showRetry ? "opacity-100" : "pointer-events-none opacity-0"
@@ -19,7 +25,7 @@ export default function AuthLoadingScreen() {
         >
           <button
             onClick={() => window.location.reload()}
-            className="text-[12px] text-ink/45 underline underline-offset-4 hover:text-ink/70"
+            className="text-[12px] text-ink/45 underline underline-offset-4 transition-colors duration-200 hover:text-ink/70"
           >
             Taking too long? Retry
           </button>

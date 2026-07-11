@@ -126,7 +126,7 @@ export default function ThreeWayComparisonTable() {
                   <a
                     href={tableCTAs.mfd.href}
                     onClick={() => trackCtaByHref(tableCTAs.mfd.href, "table-mfd")}
-                    className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-4 py-2 text-[12px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                    className="inline-flex rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-4 py-2 text-[12px] font-medium text-ink transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                   >
                     {tableCTAs.mfd.label}
                   </a>
@@ -206,7 +206,7 @@ export default function ThreeWayComparisonTable() {
                     onClick={() => trackCtaByHref(cta.href, `mobile-table-${id}`)}
                     className={`mt-2 inline-flex w-fit rounded-full px-4 py-2 text-[12px] transition-all duration-300 ease-cinema active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                       isMfd
-                        ? "bg-gradient-to-b from-champagne-100 to-champagne-300 font-medium text-navy hover:-translate-y-0.5 active:translate-y-0 focus-visible:ring-champagne-200 focus-visible:ring-offset-ink"
+                        ? "bg-gradient-to-b from-champagne-100 to-champagne-200 font-medium text-ink hover:-translate-y-0.5 active:translate-y-0 focus-visible:ring-champagne-200 focus-visible:ring-offset-ink"
                         : "border border-ink/[0.12] text-ink/85 hover:border-champagne-200/40 hover:text-ink focus-visible:ring-champagne-200 focus-visible:ring-offset-ink"
                     }`}
                   >

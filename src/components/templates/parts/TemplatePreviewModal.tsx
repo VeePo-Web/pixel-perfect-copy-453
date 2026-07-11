@@ -27,7 +27,7 @@ export default function TemplatePreviewModal({ template, onClose, onGet }: Props
       </div>
 
       <div className="px-6 py-6">
-        <h2 id="preview-heading" className="text-[24px] font-light leading-snug text-ink">
+        <h2 id="preview-heading" className="text-[24px] font-display font-medium leading-snug text-ink">
           {template.name}
         </h2>
         <p className="mt-2 text-[13.5px] text-ink/65">{template.description}</p>
@@ -54,7 +54,7 @@ export default function TemplatePreviewModal({ template, onClose, onGet }: Props
           <button
             type="button"
             onClick={onGet}
-            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-6 py-3 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.6)]"
+            className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-6 py-3 text-[13px] font-medium text-ink transition-all duration-300 ease-cinema hover:shadow-[0_14px_40px_-12px_rgba(217,190,130,0.6)]"
           >
             {template.ctaText}
           </button>

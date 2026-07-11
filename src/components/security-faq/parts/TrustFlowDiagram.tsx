@@ -26,9 +26,9 @@ export default function TrustFlowDiagram({ steps }: { steps: TrustFlowStep[] }) 
       {steps.map((s, i) => (
         <div
           key={s.id}
-          className="group relative rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-4 backdrop-blur-sm transition-all duration-300 motion-safe:hover:-translate-y-0.5 hover:border-ink/[0.18] hover:bg-ink/[0.035]"
+          className="group relative rounded-2xl border border-ink/[0.08] bg-white p-4 shadow-[0_1px_2px_rgba(11,13,18,0.04)] transition-all duration-300 ease-cinema motion-safe:hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-20px_rgba(11,13,18,0.18)]"
         >
-          <div className="text-[10px] uppercase tracking-[0.24em] text-champagne-300/70">
+          <div className="font-general text-[10px] uppercase tracking-[0.24em] text-champagne-300">
             Step {i + 1}
           </div>
           <div className="mt-2 text-[14px] font-medium text-ink">{s.label}</div>
@@ -36,7 +36,7 @@ export default function TrustFlowDiagram({ steps }: { steps: TrustFlowStep[] }) 
           {i < steps.length - 1 && (
             <span
               aria-hidden
-              className="pointer-events-none absolute right-[-7px] top-1/2 hidden h-px w-3 -translate-y-1/2 bg-champagne-200/30 lg:block"
+              className="pointer-events-none absolute right-[-13px] top-1/2 hidden h-px w-3 -translate-y-1/2 bg-ink/[0.08] lg:block"
             />
           )}
         </div>

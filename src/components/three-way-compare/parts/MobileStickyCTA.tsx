@@ -30,7 +30,7 @@ export default function MobileStickyCTA({ recommendation }: Props) {
   let eyebrow = "60-second diagnostic";
 
   if (pastBriefing) {
-    label = "Auto-fill my reports — $99/mo";
+    label = "Auto-fill my reports — $150/mo";
     href = "/pricing#auto-fill";
     eyebrow = "Your next step";
   } else if (recommendation) {
@@ -51,7 +51,7 @@ export default function MobileStickyCTA({ recommendation }: Props) {
         <a
           href={href}
           onClick={() => trackCtaByHref(href, "mobile-sticky")}
-          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[13px] font-medium text-navy transition-all duration-300 ease-cinema active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+          className="rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-5 py-2.5 text-[13px] font-medium text-ink transition-all duration-300 ease-cinema active:scale-[0.97] active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
         >
           {label}
         </a>

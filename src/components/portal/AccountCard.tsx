@@ -47,13 +47,13 @@ export default function AccountCard({
   const needsReauth = item.status === "reauth_required";
 
   return (
-    <section className="rounded-2xl border border-ink/10 bg-paper p-6">
+    <section className="rounded-2xl border border-ink/[0.08] bg-white p-6 shadow-[0_1px_2px_rgba(11,13,18,0.04)]">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h3 className="text-[16px] font-medium text-ink">
+          <h3 className="text-[16px] font-medium tracking-[-0.01em] text-ink">
             {item.institution_name || "Connected institution"}
           </h3>
-          <p className="mt-1 text-[12px] text-ink/55">
+          <p className="mt-1 text-[12px] text-ink/50">
             {item.accounts.length} account{item.accounts.length === 1 ? "" : "s"} ·{" "}
             {item.last_synced_at
               ? `Synced ${new Date(item.last_synced_at).toLocaleString()}`
@@ -61,23 +61,23 @@ export default function AccountCard({
           </p>
         </div>
         <span
-          className={`rounded-full px-2.5 py-0.5 text-[11px] font-medium ${
+          className={`rounded-full px-2.5 py-1 font-general text-[10px] uppercase tracking-[0.14em] ring-1 ${
             needsReauth
-              ? "bg-red-50 text-red-700"
-              : "bg-green-50 text-green-deep"
+              ? "bg-red-signal/[0.06] text-red-signal ring-red-signal/20"
+              : "bg-green-signal/[0.06] text-green-signal ring-green-signal/20"
           }`}
         >
           {needsReauth ? "Re-auth required" : "Active"}
         </span>
       </div>
 
-      <ul className="mt-4 divide-y divide-ink/5 border-t border-ink/5">
+      <ul className="mt-4 divide-y divide-ink/[0.06] border-t border-ink/[0.06]">
         {item.accounts.map((a) => (
           <li key={a.id} className="flex items-center justify-between py-2.5 text-[13.5px]">
             <span className="text-ink">
-              {a.name} <span className="text-ink/45">··{a.mask}</span>
+              {a.name} <span className="font-general text-[12px] text-ink/40">··{a.mask}</span>
             </span>
-            <span className="font-medium tabular-nums text-ink">
+            <span className="font-general text-[13px] font-medium tabular-nums text-ink">
               {a.current_balance != null
                 ? new Intl.NumberFormat("en-US", {
                     style: "currency",
@@ -96,7 +96,7 @@ export default function AccountCard({
           <button
             onClick={sync}
             disabled={busy}
-            className="rounded-full border border-ink/15 px-5 py-2 text-[12.5px] text-ink hover:bg-ink/5 disabled:opacity-40"
+            className="rounded-full border border-ink/[0.12] bg-white px-5 py-2 text-[12.5px] text-ink/75 transition-colors duration-200 hover:border-ink/[0.25] hover:text-ink disabled:opacity-40"
           >
             {busy ? "Working…" : "Refresh balances"}
           </button>
@@ -104,7 +104,7 @@ export default function AccountCard({
         <button
           onClick={remove}
           disabled={busy}
-          className="text-[12.5px] text-ink/55 hover:text-red-700"
+          className="text-[12.5px] text-ink/55 transition-colors duration-200 hover:text-red-signal"
         >
           Disconnect
         </button>

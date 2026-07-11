@@ -18,7 +18,7 @@ export default function TextAreaWithChips({ label, value, onChange, placeholder,
   };
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-[11.5px] uppercase tracking-[0.22em] text-ink/45">
+      <label htmlFor={id} className="mb-2 block font-general text-[11px] uppercase tracking-[0.22em] leading-[1.8] text-ink/45">
         {label}
       </label>
       <textarea
@@ -28,8 +28,10 @@ export default function TextAreaWithChips({ label, value, onChange, placeholder,
         placeholder={placeholder}
         rows={4}
         maxLength={maxLength}
-        className={`w-full resize-none rounded-xl border bg-charcoal-900/50 px-4 py-3 text-[14.5px] leading-[1.6] text-ink placeholder:text-ink/30 transition-all duration-300 ease-cinema focus:outline-none focus:border-champagne-200/50 focus:bg-charcoal-900/70 ${
-          error ? "border-champagne-300/50" : "border-ink/[0.08]"
+        className={`w-full resize-none rounded-xl border bg-white px-4 py-3 text-[14.5px] leading-[1.6] text-ink placeholder:text-ink/35 transition-colors focus:outline-none focus:ring-2 ${
+          error
+            ? "border-red-signal/60 focus:border-red-signal/60 focus:ring-red-signal/20"
+            : "border-ink/[0.12] focus:border-champagne-300/50 focus:ring-champagne-200/40"
         }`}
       />
       {chips && (
@@ -39,16 +41,16 @@ export default function TextAreaWithChips({ label, value, onChange, placeholder,
               key={c}
               type="button"
               onClick={() => appendChip(c)}
-              className="rounded-full border border-ink/[0.07] bg-charcoal-900/40 px-3 py-1.5 text-[11.5px] text-ink/65 transition-all duration-300 hover:border-champagne-200/30 hover:text-ink"
+              className="rounded-full border border-ink/[0.12] bg-white px-3 py-1.5 text-[11.5px] text-ink/60 transition-colors duration-200 hover:border-ink/[0.3] hover:text-ink"
             >
               + {c}
             </button>
           ))}
         </div>
       )}
-      {micro && <p className="mt-3 text-[11.5px] text-ink/40">{micro}</p>}
+      {micro && <p className="mt-3 text-[12px] leading-[1.6] text-ink/45">{micro}</p>}
       {error && (
-        <p role="alert" className="mt-2 text-[12.5px] text-champagne-200/90">
+        <p role="alert" className="mt-2 text-[12.5px] text-red-signal">
           {error}
         </p>
       )}

@@ -181,7 +181,7 @@ function EmptyPanel({ filled }: { filled: number }) {
       </p>
       <div className="mt-6 h-1.5 w-full overflow-hidden rounded-full bg-ink/[0.06]">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-champagne-100 to-champagne-300 transition-all duration-500 ease-cinema"
+          className="h-full rounded-full bg-gradient-to-r from-champagne-100 to-champagne-200 transition-all duration-500 ease-cinema"
           style={{ width: `${(filled / 3) * 100}%` }}
         />
       </div>
@@ -206,7 +206,7 @@ function RecommendationPanel({
       <div className="text-[10.5px] uppercase tracking-[0.28em] text-champagne-300/70">
         {rec.eyebrow}
       </div>
-      <h3 className="mt-2 max-w-[26ch] font-light text-ink text-[24px] leading-[1.15] tracking-[-0.01em]">
+      <h3 className="mt-2 max-w-[26ch] font-display font-medium text-ink text-[24px] leading-[1.15] tracking-[-0.02em]">
         {rec.title}
       </h3>
       <p className="mt-4 max-w-[60ch] text-[14px] leading-relaxed text-ink/75">{rec.body}</p>
@@ -214,9 +214,8 @@ function RecommendationPanel({
         <a
           href={rec.primaryCTA.href}
           onClick={() => trackCtaByHref(rec.primaryCTA.href, "fit-finder")}
-          className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
+          className="group relative overflow-hidden rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-5 py-2.5 text-[12.5px] font-medium text-ink transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink">
           <span className="relative z-10">{rec.primaryCTA.label}</span>
-          <span className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-ink/40 to-transparent motion-safe:animate-shimmer-slow" />
         </a>
         <a
           href={rec.secondaryCTA.href}

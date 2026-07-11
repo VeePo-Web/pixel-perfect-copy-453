@@ -74,7 +74,7 @@ export default function VerticalReferenceReports() {
         <div className="text-[10.5px] uppercase tracking-[0.3em] text-champagne-300/80">
           Built for your industry
         </div>
-        <h2 className="mx-auto mt-3 max-w-[28ch] font-light text-ink text-[26px] leading-[1.15] tracking-[-0.01em] sm:text-[32px]">
+        <h2 className="mx-auto mt-3 max-w-[28ch] font-display font-medium text-ink text-[26px] leading-[1.15] tracking-[-0.02em] sm:text-[32px]">
           Every briefing leads with your make-or-break number
         </h2>
         <p className="mx-auto mt-3 max-w-[52ch] text-[14px] leading-[1.7] text-ink/60">
@@ -109,7 +109,7 @@ export default function VerticalReferenceReports() {
           <span className="text-[13px] font-[robert-medium] text-ink">{r.business}</span>
           <span className="text-[11.5px] text-ink/45">{r.meta}</span>
         </div>
-        <h3 className="mt-2 font-light text-ink text-[20px] leading-[1.2] tracking-[-0.005em] sm:text-[24px]">
+        <h3 className="mt-2 font-display font-medium text-ink text-[20px] leading-[1.2] tracking-[-0.02em] sm:text-[24px]">
           {r.subject}
         </h3>
 

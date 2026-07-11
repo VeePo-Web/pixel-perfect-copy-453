@@ -29,7 +29,7 @@ export default function BriefingReportShell({ business, visible }: Props) {
             <div className="text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/70">
               Sample Bi-Weekly Finance Briefing
             </div>
-            <h2 className="mt-3 font-light text-ink text-[34px] leading-[1.1] tracking-[-0.005em] sm:text-[42px]">
+            <h2 className="mt-3 font-display font-medium text-ink text-[34px] leading-[1.1] tracking-[-0.02em] sm:text-[42px]">
               {business.reportTitle}
             </h2>
             <p className="mt-2 text-[13px] text-ink/55">

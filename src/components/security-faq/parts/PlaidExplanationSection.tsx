@@ -44,12 +44,12 @@ export default function PlaidExplanationSection() {
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}
         >
-          <div className="text-[10.5px] uppercase tracking-[0.32em] text-sky-300/70">
+          <div className="font-general text-[10.5px] uppercase tracking-[0.32em] text-champagne-300/80">
             Data connection
           </div>
           <h2
             id="plaid-heading"
-            className="mt-3 font-light text-ink text-[28px] leading-[1.15] tracking-[-0.01em] sm:text-[40px]"
+            className="mt-3 font-display font-medium text-ink [text-wrap:balance] text-[28px] leading-[1.08] tracking-[-0.02em] sm:text-[40px]"
           >
             How Plaid fits into the process.
           </h2>
@@ -63,7 +63,7 @@ export default function PlaidExplanationSection() {
         <div className={`mt-10 grid gap-6 lg:grid-cols-[1fr_1.2fr] lg:items-center transition-all duration-700 ease-cinema delay-150 ${
           inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}>
-          <div className="rounded-2xl border border-ink/[0.07] bg-ink/[0.02] p-6">
+          <div className="rounded-2xl border border-ink/[0.08] bg-white p-6 shadow-[0_1px_2px_rgba(11,13,18,0.04)]">
             <p className="text-[14px] leading-relaxed text-ink/75">
               Plaid is used to help connect financial data from business bank accounts
               after onboarding. This helps reduce manual entry and allows the Monthly
@@ -80,7 +80,7 @@ export default function PlaidExplanationSection() {
                 <li key={item} className="flex items-start gap-2">
                   <span
                     aria-hidden
-                    className="mt-1.5 inline-block h-1 w-1 shrink-0 rounded-full bg-sky-300/70"
+                    className="mt-1.5 inline-block h-1 w-1 shrink-0 rounded-full bg-champagne-200"
                   />
                   {item}
                 </li>
@@ -92,9 +92,9 @@ export default function PlaidExplanationSection() {
             {flow.map((label, i) => (
               <li
                 key={label}
-                className="flex items-center gap-3 rounded-xl border border-ink/[0.06] bg-ink/[0.015] px-4 py-3"
+                className="flex items-center gap-3 rounded-xl border border-ink/[0.08] bg-white px-4 py-3 shadow-[0_1px_2px_rgba(11,13,18,0.04)]"
               >
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-sky-400/30 bg-sky-400/[0.08] text-[11px] text-sky-200/90">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-champagne-300/40 font-general text-[10px] text-champagne-300">
                   {i + 1}
                 </span>
                 <span className="text-[13.5px] text-ink/85">{label}</span>
@@ -109,7 +109,7 @@ export default function PlaidExplanationSection() {
             onClick={() =>
               trackCtaByHref("/sample-briefing", "security_faq_plaid")
             }
-            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/15 px-5 text-[13px] text-ink transition-all duration-300 ease-cinema hover:border-ink/30 hover:bg-ink/[0.03] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-ink/[0.12] bg-white px-5 text-[13px] text-ink/80 transition-all duration-300 ease-cinema hover:border-ink/[0.25] hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2"
           >
             Generate a Sample Briefing Without Plaid →
           </a>

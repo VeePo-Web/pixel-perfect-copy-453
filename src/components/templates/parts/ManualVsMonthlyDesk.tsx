@@ -1,6 +1,7 @@
 import { comparison } from "../content";
 import { track } from "../analytics";
 import { useInView } from "../../how-it-works/hooks/useInView";
+import { startAutoFillCheckout } from "../../../lib/checkout";
 
 export default function ManualVsMonthlyDesk() {
   const { ref, inView } = useInView<HTMLDivElement>();
@@ -39,13 +40,13 @@ export default function ManualVsMonthlyDesk() {
             items={comparison.desk.items}
             bestFor={comparison.desk.bestFor}
             tone="flagship"
-            cta={{ label: "Auto-fill my reports — $99/mo", href: "/pricing#auto-fill" }}
+            cta={{ label: "Auto-fill my reports — $150/mo", href: "/pricing#auto-fill" }}
             secondary={{ label: "See a sample briefing", href: "/sample-briefing" }}
           />
         </div>
 
         <p className="mt-8 max-w-[68ch] text-[14px] leading-relaxed text-ink/65">
-          If you use the Vault and realize, “I don't want to keep doing this manually,” that is exactly what GoldFin Reports is built for — the same templates, filled for you, for $99/mo.
+          If you use the Vault and realize, “I don't want to keep doing this manually,” that is exactly what GoldFin Reports is built for — the same templates, filled for you, for $150/mo.
         </p>
       </div>
     </section>
@@ -105,19 +106,33 @@ function Card({
         {bestFor}
       </div>
       <div className="mt-6 flex flex-wrap items-center gap-3">
-        <a
-          href={cta.href}
-          onClick={() => {
-            if (cta.href.includes("auto-fill")) track("autofill_clicked_from_templates", { source: "comparison" });
-          }}
-          className={
-            flag
-              ? "rounded-full bg-gradient-to-b from-champagne-100 to-champagne-300 px-5 py-2.5 text-[12.5px] font-medium text-navy transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
-              : "rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-ink/25 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
-          }
-        >
-          {cta.label}
-        </a>
+        {cta.href.includes("auto-fill") ? (
+          <button
+            type="button"
+            onClick={() => {
+              track("autofill_clicked_from_templates", { source: "comparison" });
+              startAutoFillCheckout();
+            }}
+            className={
+              flag
+                ? "rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-5 py-2.5 text-[12.5px] font-medium text-ink transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                : "rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-ink/25 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            }
+          >
+            {cta.label}
+          </button>
+        ) : (
+          <a
+            href={cta.href}
+            className={
+              flag
+                ? "rounded-full bg-gradient-to-b from-champagne-100 to-champagne-200 px-5 py-2.5 text-[12.5px] font-medium text-ink transition-all duration-300 ease-cinema hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-12px_rgba(217,190,130,0.55)] active:translate-y-0 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne-200 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+                : "rounded-full border border-ink/[0.12] px-5 py-2.5 text-[12.5px] text-ink/85 transition-all duration-300 ease-cinema hover:border-ink/25 hover:text-ink active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/25 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            }
+          >
+            {cta.label}
+          </a>
+        )}
         {secondary ? (
           <a
             href={secondary.href}

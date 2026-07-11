@@ -122,11 +122,11 @@ export default function PortalLogin() {
               }}
               id={`d${i}`}
               aria-label={`Digit ${i + 1}`}
-              className="h-12 w-full rounded-lg border border-ink/15 bg-paper text-center text-[18px] font-medium text-ink outline-none focus:border-ink/50 disabled:opacity-50"
+              className="h-12 w-full rounded-xl border border-ink/[0.12] bg-white text-center font-general text-[18px] tabular-nums text-ink transition-colors focus:border-champagne-300/50 focus:outline-none focus:ring-2 focus:ring-champagne-200/40 disabled:opacity-50"
             />
           ))}
         </div>
-        {otpError && <p className="mt-4 text-center text-[13px] text-red-700">{otpError}</p>}
+        {otpError && <p className="mt-4 text-center text-[13px] text-red-signal">{otpError}</p>}
         {isVerifying && <p className="mt-4 text-center text-[12.5px] text-ink/55">Verifying…</p>}
         <div className="mt-6 flex items-center justify-between">
           <button
@@ -136,7 +136,7 @@ export default function PortalLogin() {
               setDigits(["", "", "", "", "", ""]);
               setOtpError(null);
             }}
-            className="text-[12.5px] text-ink/55 hover:text-ink"
+            className="text-[12.5px] text-ink/55 transition-colors duration-200 hover:text-ink"
           >
             ← Use a different email
           </button>
@@ -144,7 +144,7 @@ export default function PortalLogin() {
             type="button"
             onClick={handleResend}
             disabled={resendCooldown > 0 || isSending}
-            className="text-[12.5px] text-ink/55 underline underline-offset-4 hover:text-ink disabled:no-underline disabled:opacity-50"
+            className="text-[12.5px] text-ink/55 underline underline-offset-4 transition-colors duration-200 hover:text-ink disabled:no-underline disabled:opacity-50"
           >
             {isSending ? "Sending…" : resendCooldown > 0 ? `Resend in ${resendCooldown}s` : "Resend code"}
           </button>
@@ -159,7 +159,7 @@ export default function PortalLogin() {
         type="button"
         onClick={handleGoogle}
         disabled={googleLoading}
-        className="flex w-full items-center justify-center gap-3 rounded-full border border-ink/15 bg-paper py-2.5 text-[13.5px] font-medium text-ink hover:bg-ink/5 disabled:opacity-50"
+        className="flex w-full items-center justify-center gap-3 rounded-full border border-ink/[0.12] bg-white py-2.5 text-[13.5px] font-medium text-ink transition-colors duration-200 hover:border-ink/[0.25] hover:bg-ink/[0.02] disabled:opacity-50"
       >
         <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
           <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.17-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62z" />
@@ -171,9 +171,9 @@ export default function PortalLogin() {
       </button>
 
       <div className="my-6 flex items-center gap-3">
-        <div className="h-px flex-1 bg-ink/10" />
-        <span className="text-[11px] uppercase tracking-wider text-ink/45">or</span>
-        <div className="h-px flex-1 bg-ink/10" />
+        <div className="h-px flex-1 bg-ink/[0.08]" />
+        <span className="font-general text-[10px] uppercase tracking-[0.2em] text-ink/40">or</span>
+        <div className="h-px flex-1 bg-ink/[0.08]" />
       </div>
 
       <form onSubmit={handleEmail} className="space-y-4">
@@ -186,7 +186,7 @@ export default function PortalLogin() {
           disabled={isSending}
           placeholder="you@company.com"
         />
-        {error && <p className="text-[12.5px] text-red-700">{error}</p>}
+        {error && <p className="text-[12.5px] text-red-signal">{error}</p>}
         <PrimaryButton disabled={isSending || !email}>
           {isSending ? "Sending code…" : "Email me a code"}
         </PrimaryButton>
