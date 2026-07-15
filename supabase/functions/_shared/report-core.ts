@@ -98,7 +98,13 @@ export async function generateReportForUser(
 ): Promise<GenerateResult> {
   const lovableKey = Deno.env.get("LOVABLE_API_KEY");
   if (!lovableKey) return { ok: false, reason: "missing_api_key" };
-  const model = Deno.env.get("ADVISORY_MODEL") ?? "claude-opus-4-8";
+  // The Lovable AI gateway does not carry Anthropic models (verified 2026-07-14:
+  // "invalid model: claude-opus-4-8" — allow-list is Gemini + OpenAI only), so the
+  // old claude-opus-4-8 default made EVERY report generation fail with a 500.
+  // Default to the strongest reasoning model the gateway actually offers; the
+  // deterministic verify layer (report-verify.ts) remains the grounding gate
+  // regardless of model. Override with the ADVISORY_MODEL secret if needed.
+  const model = Deno.env.get("ADVISORY_MODEL") ?? "google/gemini-3.1-pro-preview";
 
   const periodEnd = opts.periodEnd ?? opts.today;
   const cur = periodRange(periodEnd, 14);
