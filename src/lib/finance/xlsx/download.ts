@@ -6,7 +6,7 @@ import {
 } from "./buildWorkbook.ts";
 
 function triggerXlsxDownload(filename: string, bytes: Uint8Array) {
-  const blob = new Blob([bytes], {
+  const blob = new Blob([bytes as BlobPart], {
     type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
   });
   const url = URL.createObjectURL(blob);
