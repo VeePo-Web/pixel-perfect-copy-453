@@ -1,66 +1,72 @@
 
-## How I'll self-test the Plaid journey
+# Plan — Fix + Verify Plaid → Paid → Auto-Fill → Bi-Weekly Report Pipeline
 
-Your portal uses passwordless **email OTP** (with Google OAuth as the alternate). Both require an inbox I don't have, and OTP codes are stored as SHA-256 hashes in `login_otps` — I can't read the plaintext code from the database. So to run Track B/C/D myself I need one of these:
+Executed in six tasks, in order. Each task ends with observed values written into the final checklist.
 
-**Path I recommend (approve this):** Add a temporary, secret-gated **audit-bootstrap** edge function that uses the admin API to mint sessions for me, use it to run the whole audit end-to-end, then **delete the function and the test users** in the same turn. Nothing about it survives the audit.
+---
 
-## Scope of the temporary bootstrap
+## Task 1 — Deploy the model fix, prove report generation
 
-**New file** (deleted at end of the audit):
-`supabase/functions/audit-bootstrap/index.ts`
+1. Confirm `supabase/functions/_shared/report-core.ts` on `main` defaults to `google/gemini-3.1-pro-preview` and reads `ADVISORY_MODEL`. Set `ADVISORY_MODEL=google/gemini-3.1-pro-preview` as a belt-and-braces secret.
+2. Redeploy: `generate-advisory-report`, `cron-run-reports`, `payments-webhook`, `admin-trigger-cron` (any function that imports `report-core.ts`).
+3. Invoke `generate-advisory-report` `{send:false}` as test user `35c8c3ef-…`.
+4. Success gate: HTTP 200, `ok:true`, `verification_passed:true`, `advisory_reports` row `status='generated'` with populated `metrics_snapshot`, `narrative`, `recommendations`. If verifier flags orphans, tighten prompt (not verifier).
 
-Gated by a random `AUDIT_BOOTSTRAP_SECRET` I'll mint via `generate_secret` (32 chars, service-side only, never echoed to the user or logs). Any call missing or mismatching the `x-audit-bootstrap-secret` header → 401.
+## Task 2 — Prove the paid path in Stripe sandbox
 
-Supported actions:
-- `mint` — `admin.auth.admin.createUser({ email, email_confirm: true })` (idempotent), then `admin.auth.admin.generateLink({ type:"magiclink", email })`, then `POST /auth/v1/verify { type:"magiclink", token_hash }` to convert the hashed token into a real session. Returns `{ user_id, access_token, refresh_token }` in memory only — never persisted.
-- `cleanup` — for each email, `admin.auth.admin.deleteUser(user_id)`. Cascade drops any `plaid_items` / `plaid_accounts` / `plaid_transactions` / `webhook_events` rows.
+1. Create a sandbox checkout session for `auto-fill-monthly`, pay with `4242 4242 4242 4242`.
+2. Assert `subscriptions` row: `user_id=<test>`, `environment='sandbox'`, `status ∈ (active,trialing)`, `price_id` matches auto-fill-monthly slug.
+3. Assert `payments-webhook` kickoff report: new `advisory_reports` row + `report_email_deliveries` row for it (bank already connected from previous audit).
+4. Invoke `cron-run-reports` with `x-cron-secret`; assert user counted as candidate and `skipped` (13-day gate). Proves gating both directions.
 
-Two audit users, both throwaway:
-- `audit-a+<random>@goldfindesk.test`
-- `audit-b+<random>@goldfindesk.test`
+## Task 3 — Prove email + auto-filled workbook delivery
 
-`.test` is a reserved TLD that never routes to a real inbox, so no email is delivered and no user of yours is affected.
+1. Update `profiles.email` to a reachable inbox for the test user. Invoke `generate-advisory-report` `{send:true}`.
+2. Confirm email arrives; `resend-webhook` flips `report_email_deliveries` to `delivered`.
+3. In portal, open report → confirm `TemplateDownloadCard` renders auto-filled templates on-screen; download `.xlsx` and `.csv`. Spot-check workbook numbers match `metrics_snapshot`. `UntraceableWorkbookCellError` must not fire.
 
-## Audit run (unchanged from the previously-approved audit plan)
+## Task 4 — Close abuse hole on `generate-advisory-report`
 
-**Track B — signed-in E2E as user A, sandbox:**
-1. `plaid-create-link-token { mode:"create" }` → `link-sandbox-…`
-2. `plaid-sandbox-public-token { institution_id:"ins_109508", initial_products:["transactions"] }` → sandbox public_token
-3. `plaid-exchange-public-token { publicToken }` → `itemId`, `accountCount ≥ 1`
-4. DB assertions: `plaid_items` row present, `access_token_encrypted IS NOT NULL`, ≥1 `plaid_accounts` row
-5. `plaid-sync-accounts { itemId }` → 200, `last_synced_at` advances
-6. `plaid-sync-transactions { itemId }` → 200 with `{added, modified, removed, streams}` and populated `plaid_transactions` rows (category, merchant_name_norm, confidence)
-7. `plaid-sandbox-fire-webhook { itemId, code:"DEFAULT_UPDATE" }` → `webhook_events` `TRANSACTIONS.DEFAULT_UPDATE` row + `last_synced_at` advances again
-8. Fire `ITEM.ERROR` → `plaid_items.status='reauth_required'`; then `plaid-create-link-token { mode:"update", itemId }` returns a fresh link token
-9. `plaid-remove-item { itemId }` → row gone (cascade)
+Edit `supabase/functions/generate-advisory-report/index.ts`:
+1. Add subscription eligibility check (reuse `ELIGIBLE_PRICES` + `ACTIVE_STATUSES` from `cron-run-reports`). Bypass if `profiles.internal_test_allow = true`.
+2. Add per-user 24h rate limit: `SELECT count(*) FROM advisory_reports WHERE user_id=$1 AND created_at > now()-interval '24 hours'`; reject if ≥3.
+3. Migration: `ALTER TABLE profiles ADD COLUMN internal_test_allow boolean NOT NULL DEFAULT false;` (additive, defensive `IF NOT EXISTS`).
+4. Audit `generate-briefing`: add IP-based rate limit if missing (in-memory or ledger table keyed by IP + hour).
 
-**Track C — cross-user isolation:**
-- As user B, hit `plaid-sync-accounts`, `plaid-sync-transactions`, `plaid-remove-item`, `plaid-create-link-token mode=update` with user A's `itemId` → all 404 "Item not found"
-- Confirm `plaid_get_access_token` / `plaid_set_access_token` / `_plaid_token_key` EXECUTE grants are service_role only (already verified in interim report; re-check)
+## Task 5 — Handoff tasks 3–7 (correctness)
 
-**Track D — Playwright UI as user A:**
-Inject the minted session into localStorage against `http://localhost:8080`, then:
-- `/portal/accounts` empty state renders correctly → screenshot
-- Click **Connect my bank** → Plaid Link iframe from `cdn.plaid.com` mounts (we stop at iframe — the exchange path is already covered in B) → screenshot
-- After B.3, refresh `/portal/accounts` → institution card, Active badge, N accounts, "Synced …" timestamp → screenshot
-- `/portal/report` → **Sync transactions** → success line → screenshot
-- After B.8, refresh `/portal/accounts` → "Re-auth required" + "Re-authenticate" button → screenshot
-- Click **Disconnect** → confirm → card gone → screenshot
+**Task 3+5 verifier split** — `supabase/functions/_shared/report-verify.ts`:
+- Replace single `structuralAllowed` set with three: `countAllowed` (integer counts), `currencyAllowed` (dollar amounts), `percentAllowed` (percentages).
+- Match `$X` against `currencyAllowed` with tolerance = max($1, 0.5% of value); match `X%` against `percentAllowed` ±0.5pp; match bare integers against `countAllowed`.
+- Add bare-number scan: any number ≥100 without `$`, `%`, or "months"/"days" trailing token flagged, excluding 4-digit years 2000–2099.
 
-## Cleanup (same turn)
+**Task 4 trailing tax window** — `report-core.ts`:
+- Replace `annualNet = profitProxy * (365/14)` with trailing 180-day (fallback 90-day if <180d history) window after transfer/owner-draw exclusion.
+- Include window length in `TAX_FLAG` output (e.g. `"based on trailing 180 days"`).
 
-1. Call `audit-bootstrap { action:"cleanup" }` to delete user A + user B (cascades all Plaid rows).
-2. `rm supabase/functions/audit-bootstrap/index.ts`.
-3. `delete_secret AUDIT_BOOTSTRAP_SECRET`.
-4. Verify: `select count(*) from auth.users where email like 'audit-%@goldfindesk.test'` returns 0; `plaid_items` back to 0; the function is gone.
+**Task 6 PFCv2** — `plaid-sync-transactions/index.ts`:
+- Add `personal_finance_category_version: "v2"` to `/transactions/sync` and `/transactions/recurring/get` request bodies.
 
-## Deliverable
+**Task 7 duplicate detector** — same file:
+- Track matched indices; do not re-match. Skip merchants already present in `recurring_streams` for the item.
 
-Final green/yellow/red report with response codes, DB row evidence, and Playwright screenshots. I'll flag anything red before touching code, per the earlier plan.
+## Task 6 — Cleanup
 
-### Why this is safe
-- Bootstrap function is protected by a random 32-char secret; without it every call is 401.
-- Test emails use the reserved `.test` TLD, so no real inbox is touched.
-- Function file and secret both removed at the end of the audit — leaves no back door.
-- Only test users are created; your real `auth.users` rows are untouched.
+1. Call `plaid-remove-item` for test user's `plaid_items` (removes at Plaid).
+2. Call `admin-wipe-users` (or admin RPC) for `35c8c3ef-…`.
+3. Verify: no rows in `plaid_items`, `plaid_accounts`, `plaid_transactions`, `advisory_reports`, `subscriptions`, `report_email_deliveries`, `recurring_streams` for that user.
+4. `plaid_get_access_token(<old item id>)` returns null.
+
+---
+
+## Technical notes
+
+- Verifier changes must include unit tests in `supabase/functions/_shared/__tests__/report-verify.test.ts` covering: `$60` unlisted → fail; `$60.30` when snapshot has `$60.00` → pass; `30%` unlisted → fail; bare `250` unlisted → fail; `2026` year → pass.
+- Tax window change: add tests for 200-day and 45-day histories.
+- Rate limit: return HTTP 429 with `Retry-After` header.
+- All migrations use `IF NOT EXISTS` / `ADD COLUMN IF NOT EXISTS` per project convention.
+- Preserve existing `ELIGIBLE_PRICES` set — do not narrow.
+
+## Final deliverable
+
+A checklist mirroring Tasks 1–6 with observed values: report id from Task 1, subscription id + kickoff report id from Task 2, delivery id + workbook file hashes from Task 3, 429 response body from Task 4 rate-limit smoke test, verifier test output from Task 5, and empty-row confirmations from Task 6.

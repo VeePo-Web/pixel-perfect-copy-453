@@ -251,10 +251,35 @@ export type Database = {
         }
         Relationships: []
       }
+      lead_email_sends: {
+        Row: {
+          email: string
+          email_key: string
+          id: string
+          provider_message_id: string | null
+          sent_at: string
+        }
+        Insert: {
+          email: string
+          email_key: string
+          id?: string
+          provider_message_id?: string | null
+          sent_at?: string
+        }
+        Update: {
+          email?: string
+          email_key?: string
+          id?: string
+          provider_message_id?: string | null
+          sent_at?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           business_type: string | null
           consent: boolean
+          converted_at: string | null
           created_at: string
           email: string
           first_name: string | null
@@ -263,10 +288,13 @@ export type Database = {
           source: string | null
           template_id: string | null
           template_name: string | null
+          unsubscribe_token: string
+          unsubscribed_at: string | null
         }
         Insert: {
           business_type?: string | null
           consent?: boolean
+          converted_at?: string | null
           created_at?: string
           email: string
           first_name?: string | null
@@ -275,10 +303,13 @@ export type Database = {
           source?: string | null
           template_id?: string | null
           template_name?: string | null
+          unsubscribe_token?: string
+          unsubscribed_at?: string | null
         }
         Update: {
           business_type?: string | null
           consent?: boolean
+          converted_at?: string | null
           created_at?: string
           email?: string
           first_name?: string | null
@@ -287,6 +318,8 @@ export type Database = {
           source?: string | null
           template_id?: string | null
           template_name?: string | null
+          unsubscribe_token?: string
+          unsubscribed_at?: string | null
         }
         Relationships: []
       }
