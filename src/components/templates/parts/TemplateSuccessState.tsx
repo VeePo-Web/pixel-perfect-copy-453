@@ -15,8 +15,13 @@ const TEMPLATE_DOWNLOADS: Record<string, string> = {
   "expense-vendor-audit": "/downloads/goldfin-expense-and-vendor-audit-sample.xlsx",
 };
 
+// Full Vault = one zip, all four workbooks — matches what the delivery email sends.
+const VAULT_ZIP = "/downloads/goldfin-template-vault.zip";
+
 export default function TemplateSuccessState({ template, onClose, headingId }: Props) {
-  const downloadHref = TEMPLATE_DOWNLOADS[template.id] ?? "/downloads/goldfin-template-vault.xlsx";
+  const single = TEMPLATE_DOWNLOADS[template.id];
+  const downloadHref = single ?? VAULT_ZIP;
+  const isZip = !single;
 
   return (
     <div className="p-6 sm:p-7">
@@ -48,8 +53,14 @@ export default function TemplateSuccessState({ template, onClose, headingId }: P
           download
           className="block rounded-2xl border border-ink/[0.08] bg-ink/[0.02] p-4 transition-all duration-300 ease-cinema hover:border-champagne-200/40"
         >
-          <div className="text-[15px] font-medium text-ink">Download {template.shortName} (.xlsx)</div>
-          <div className="mt-1 text-[12.5px] text-ink/55">GoldFin-branded Excel workbook with hidden methodology tabs.</div>
+          <div className="text-[15px] font-medium text-ink">
+            {isZip ? "Download the full Vault (.zip)" : `Download ${template.shortName} (.xlsx)`}
+          </div>
+          <div className="mt-1 text-[12.5px] text-ink/55">
+            {isZip
+              ? "All four Excel workbooks — Command Center, 13-Week Cash Map, P&L Review, Expense & Vendor Audit."
+              : "GoldFin-branded Excel workbook with hidden methodology tabs."}
+          </div>
         </a>
         <button
           type="button"

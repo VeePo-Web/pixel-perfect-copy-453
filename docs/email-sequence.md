@@ -12,11 +12,18 @@ the *rhythm and interpretation*, not spreadsheets. Founder: **Chris Sam**.
 - **Emails 2–6** run as a Resend **Broadcast / Automation** keyed to the lead's signup
   date (add the contact to a Resend Audience via `RESEND_AUDIENCE_ID`, then schedule the
   automation: Day 2, 3, 4, 5, 7).
-- Links (replace `{{SITE_URL}}` with the live domain):
-  - Vault / templates: `{{SITE_URL}}/templates`
+- Links (replace `{{SITE_URL}}` with `https://goldfindesk.com`):
+  - **The Vault itself (Email 1 CTA — the zip, not a page):
+    `{{SITE_URL}}/downloads/goldfin-template-vault.zip`** — one folder, four .xlsx
+    workbooks: Owner Command Center, 13-Week Cash Map, Cash-Basis P&L Review,
+    Expense & Vendor Audit. Email 1's only job is that this opens.
+  - Template library (secondary/browse): `{{SITE_URL}}/templates`
   - Sample briefing (proof): `{{SITE_URL}}/sample-briefing`
   - **GoldFin Reports $150/mo (primary upgrade): `{{SITE_URL}}/pricing#auto-fill`**
-  - GoldFin Advisory (custom-scoped consultation, by application): `{{SITE_URL}}/apply`
+  - GoldFin Advisory (custom-scoped consultation with Chris Sam, priced per
+    business): **application by reply** — "Reply with ADVISORY and two sentences
+    about the business." The `/apply` page is retired; the reply IS the
+    application, and it lands in Chris's inbox as a warm sales conversation.
 - One idea, one primary CTA per email. Every email earns the next open.
 
 ---
@@ -28,11 +35,18 @@ the *rhythm and interpretation*, not spreadsheets. Founder: **Chris Sam**.
 
 Hi {{firstName}},
 
-Here's your GoldFin Template Vault — cash flow, monthly review, expense audit, hiring
-affordability, subscription tracker, and tax reserve. Open it, drop in your numbers, and
-you'll see the business more clearly in about ten minutes.
+Your GoldFin Template Vault is attached to this link — one zip folder, four Excel
+workbooks, ready to open:
 
-→ **Open my Vault:** {{SITE_URL}}/templates
+- **Owner Command Center** — the first-tab answer: cash, deposits, outflows, runway
+- **13-Week Cash Map** — will cash feel tight next quarter?
+- **Cash-Basis P&L Review** — is operating activity actually profitable?
+- **Expense & Vendor Audit** — where did the money go?
+
+→ **Download my Vault (.zip):** {{SITE_URL}}/downloads/goldfin-template-vault.zip
+
+Four .xlsx files. Opens in Excel, Google Sheets, or Numbers. Drop in your numbers and
+you'll see the business more clearly in about ten minutes.
 
 One thing before you go. Most owners check the **bank balance** to feel safe. It's the
 fastest number to find — and the most misleading. It tells you what's *left*. It says
@@ -209,8 +223,9 @@ to start; when you connect, it's read-only and we never move money.
 
 **P.S.** Running something larger and want Chris Sam reading the numbers *with* you,
 turning the patterns into real decisions each month? That's GoldFin Advisory —
-consultation scoped and priced uniquely to the business after application:
-{{SITE_URL}}/apply
+consultation scoped and priced uniquely to each business. **Reply to this email with
+"ADVISORY" and two sentences about the business**, and Chris will tell you honestly
+whether it's a fit.
 
 ---
 
@@ -266,7 +281,7 @@ decisions.
 | Proof-seeker | Clicked `/sample-briefing` | "This is what interpretation looks like." | Add proof nudge if no pricing click in 24h. |
 | High-intent Reports lead | Clicked `/pricing#auto-fill` | "$150/mo removes the maintenance." | Add checkout nudge if no purchase in 12–24h. |
 | Checkout abandon | Started checkout, no payment | "No bank connection required to start." | Send short reassurance email. |
-| Advisory-fit lead | Clicked `/apply`, replied, or selected larger-business signals | "This is Chris Sam consultation, scoped to the business." | Invite application; do not push checkout. |
+| Advisory-fit lead | Replied "ADVISORY", or reply mentions larger-business signals | "This is Chris Sam consultation, scoped to the business." | Chris replies personally within one business day; do not push checkout. |
 | Cold lead | No opens after two sends | "One specific question may wake them up." | One plain-text resend, then pause. |
 
 ### Lead Scoring
@@ -281,7 +296,7 @@ Use scoring to decide when to send a branch email or suppress the rest of the se
 | Clicks pricing | +25 |
 | Starts checkout | +35 |
 | Replies to any email | +40 |
-| Clicks apply | +45 |
+| Replies "ADVISORY" (application) | +45 |
 | No open after resend | -10 |
 | Unsubscribes | Suppress |
 | Subscribes to Reports | Suppress sales sequence; start onboarding |
@@ -394,9 +409,10 @@ never moves money.
 
 #### Branch E — Advisory-fit signal
 
-**Timing:** Trigger immediately after `/apply` click or high-intent reply.  
+**Timing:** Trigger immediately after a high-intent reply (hiring, payroll, taxes,
+cash crunch, revenue concentration, "big decision").  
 **Subject:** For bigger decisions  
-**CTA:** `{{SITE_URL}}/apply`
+**CTA:** Reply-based application.
 
 Hi {{firstName}},
 
@@ -406,9 +422,11 @@ pressure, taxes, or a month where the numbers are technically fine but still har
 
 That is where GoldFin Advisory fits. It is custom-scoped consultation with Chris Sam:
 your numbers read with you, the actual tradeoffs named, and the next decision made
-clearer.
+clearer. It is scoped and priced per business, after a short conversation — not off a
+pricing page.
 
-→ **Apply for GoldFin Advisory:** {{SITE_URL}}/apply
+→ **Reply with "ADVISORY" and two sentences about the business**, and Chris will tell
+you honestly whether it's a fit.
 
 — Chris Sam
 
@@ -509,9 +527,8 @@ If you want the automated monthly version, start here:
 
 → **Auto-fill my reports — $150/mo:** {{SITE_URL}}/pricing#auto-fill
 
-If the business is larger and you want Chris Sam reading the numbers with you, use this:
-
-→ **Apply for GoldFin Advisory:** {{SITE_URL}}/apply
+If the business is larger and you want Chris Sam reading the numbers with you, reply
+with **"ADVISORY"** and two sentences about the business.
 
 Either way, the goal is the same: fewer owner decisions made from a bank balance alone.
 
@@ -604,3 +621,165 @@ the sequence underperforms.
   the automated rhythm.
 - The best tone is calm certainty. No pressure. No fake urgency. Just the feeling that a
   serious finance person has finally made the next step obvious.
+
+---
+
+# PART II — BUYER ASCENSION: GoldFin Reports → GoldFin Advisory
+
+This is the top rung of the value ladder, sold **only to paying Reports subscribers**.
+The moment someone subscribes at $150/mo, the sales sequence above is suppressed and
+this track begins. It sells one thing: **Chris Sam himself** — consultation, analysis,
+and the steps forward, scoped and priced uniquely per business after application.
+
+## The Brunson mechanics at this rung
+
+- **New opportunity, not improvement.** Advisory is never "more reports." Reports
+  answers *what changed*. Advisory answers *what should I do* — with Chris's judgment
+  applied to the owner's actual decision. Different product, different belief.
+- **Status, not information.** The buyer at this rung is buying certainty and a named
+  person in their corner. Sell the relationship ("Chris reads your numbers with you"),
+  never the deliverable ("a call").
+- **Application, not checkout.** No price appears anywhere in this track. Price is
+  scoped per business after the application reply. The application is one email reply —
+  friction low enough to act on, high enough to filter.
+- **Real scarcity only.** Chris's reading time is genuinely finite. State the true
+  capacity ("a small number of businesses each quarter") and never invent a countdown.
+- **The briefing is the seed.** Every monthly briefing is the proof-of-work that makes
+  Advisory feel inevitable: the report shows the pattern; Advisory decides what to do
+  about it.
+
+## Ascension triggers (any one starts or accelerates the track)
+
+| Trigger | Action |
+| --- | --- |
+| Subscribes to Reports | Suppress sales sequence. Send A1 (welcome). Schedule A2–A4. |
+| First monthly briefing delivered | Send A2 within 48h of delivery. |
+| Opens the same briefing 3+ times, or forwards it | Send A3 early. |
+| Reply mentions hire / payroll / taxes / cash crunch / concentration / "big decision" | Send Branch E immediately; flag for Chris personally. |
+| 2+ briefing cycles completed, no Advisory reply | Send A4 (the direct invitation). |
+| Replies "ADVISORY" | Stop all automation. Chris replies personally within one business day. |
+
+## Email A1 — Welcome + the seed (Day 0 of subscription)
+
+**Subject:** Your first briefing is in motion  
+**Preview:** What happens now, and when to expect it.
+
+Hi {{firstName}},
+
+Welcome — you're in. Here's exactly what happens now:
+
+1. We prepare your first monthly cycle (connect read-only data when you're ready — demo
+   data works to start).
+2. Your four workbooks get filled from your numbers.
+3. You get a plain-English briefing: what changed, what deserves attention, what to not
+   overreact to.
+
+Nothing for you to maintain. The rhythm is the product.
+
+One expectation to set: the briefing will *tell you what changed*. Some months, what
+changed will raise a real decision — a hire, a price, a reserve, a client risk. When
+that happens, you'll want more than a report. Hold that thought; I'll show you what I
+mean once your first briefing lands.
+
+— Chris Sam, GoldFin Desk
+
+## Email A2 — The gap the report can't close (48h after first briefing)
+
+**Subject:** How to read your first briefing  
+**Preview:** And the one question no report can answer.
+
+Hi {{firstName}},
+
+Your first briefing is out. Read it in this order: the one number up top, then "what
+changed," then the action list. Ten minutes, no more.
+
+Here's the honest limit of what you now have. The briefing tells you **what happened**
+and **what's moving**. It cannot tell you what *you* should do about it — because that
+depends on things only visible in conversation: your risk tolerance, your plans, the
+client you already suspect is wobbling, the hire you've been circling for two months.
+
+A report flags the pattern. Judgment makes the call. That second layer is what I do
+with a small number of businesses each quarter — it's called GoldFin Advisory, and I'll
+tell you how it works after you've had a couple of cycles. For now: read the briefing,
+and reply if anything in it surprises you. I read every reply.
+
+— Chris Sam
+
+## Email A3 — The Epiphany Bridge case (after 2nd briefing, or early on high engagement)
+
+**Subject:** The month the report wasn't enough  
+**Preview:** A true pattern, and the decision underneath it.
+
+Hi {{firstName}},
+
+A pattern I've seen more than once. An owner's briefing showed the same thing three
+months running: revenue steady, margin drifting down about a point a month. Small
+enough to ignore. The report flagged it every time.
+
+What the report couldn't say: the drift was two underpriced legacy clients, and the
+owner had been avoiding the repricing conversation because one of them was a friend.
+The numbers weren't the problem. The *decision* was.
+
+We scoped it in one working session: which client, what number, what to say, what to do
+if they walked. Margin recovered in two cycles. The report found the pattern; the
+conversation made the call.
+
+That's GoldFin Advisory: me, reading your numbers with you, turning what the briefing
+flags into the steps forward — scoped to your business, priced to your business.
+
+If there's a decision like that sitting in your briefing right now, reply with
+**"ADVISORY"** and two sentences about it. I'll tell you honestly whether it needs a
+session or just a sharper look at next month's report.
+
+— Chris Sam
+
+## Email A4 — The direct invitation (after 2+ cycles, no reply)
+
+**Subject:** An invitation, plainly  
+**Preview:** For the decisions the briefing keeps pointing at.
+
+Hi {{firstName}},
+
+You've had a few briefings now, so you know what the rhythm does — and where it stops.
+
+Here's the invitation, plainly. **GoldFin Advisory** is me working with you directly:
+
+- A working session on your actual numbers — not a template, your ledger
+- The analysis behind the pattern: pricing, margin, cash, concentration, hiring
+- The steps forward, written down: what to do, in what order, and what to watch next
+- Follow-through in your monthly briefings — we track whether it worked
+
+It is not for everyone, and I keep it to a small number of businesses each quarter so
+the reading stays real. There's no pricing page: scope and price depend on the size and
+shape of the business, and I'd rather tell you "you don't need this yet" than sell you
+a session you don't need.
+
+→ **Reply with "ADVISORY" and two sentences about the business.** I'll come back within
+one business day with either a scoped proposal or an honest "not yet."
+
+— Chris Sam, GoldFin Desk
+
+## Ascension rules
+
+- Never send A-track emails to non-subscribers; never send the sales spine to
+  subscribers.
+- No more than one A-track email per week. The monthly briefing itself is the main
+  touch; the A-track rides alongside it, never over it.
+- Every A-track email may mention only ONE offer: Advisory. Reports is already bought;
+  the Vault is history.
+- The reply is the application. Chris answers every "ADVISORY" reply personally within
+  one business day. Speed of the personal reply is the highest-converting element in
+  the entire ladder — protect it.
+- If an Advisory conversation ends in "not yet," schedule a single follow-up keyed to
+  the specific decision ("when the hire comes back on the table, reply HIRE").
+- Churn save: if a Reports subscriber cancels, send one email offering the exports and
+  asking one question — "what did the briefing not answer?" Route any decision-shaped
+  answer to the Advisory conversation.
+
+## Ascension benchmarks
+
+- A1 open rate: 70%+ (it's transactional-adjacent)
+- Briefing → A2 click/read: 40%+
+- ADVISORY reply rate from A3+A4 combined: 3–8% of subscribers
+- Advisory conversation → scoped proposal: 50%+ (the reply filter does the qualifying)
+- Proposal → close: 40%+ (custom-scoped, warm, personal)

@@ -55,7 +55,16 @@ export default function HeroVaultCapture() {
         <p className="mt-2 text-[18px] font-medium text-ink">
           Check your inbox{firstName ? `, ${firstName}` : ""}. The Vault is on its way.
         </p>
-        <p className="mt-2 text-[13.5px] leading-[1.6] text-ink/60">
+        <a
+          href="/downloads/goldfin-template-vault.zip"
+          download
+          onClick={() => track("vault_zip_downloaded", { source: "hero_success" })}
+          className="mt-4 block rounded-2xl border border-champagne-200/45 bg-champagne-50/60 p-4 transition-all duration-300 ease-cinema hover:-translate-y-px hover:border-champagne-200/70"
+        >
+          <div className="text-[14.5px] font-medium text-ink">Or download it right now (.zip)</div>
+          <div className="mt-1 text-[12.5px] text-ink/55">All four Excel workbooks — Command Center, 13-Week Cash Map, P&amp;L Review, Expense &amp; Vendor Audit.</div>
+        </a>
+        <p className="mt-3 text-[13.5px] leading-[1.6] text-ink/60">
           Over the next few days we will show you how owners use each template to review cash, profitability, expenses, and monthly decisions.
         </p>
         <button

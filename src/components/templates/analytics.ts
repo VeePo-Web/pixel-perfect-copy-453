@@ -4,6 +4,7 @@ export type TemplateEvent =
   | "template_preview_opened"
   | "template_download_started"
   | "template_download_completed"
+  | "vault_zip_downloaded"
   | "sample_briefing_clicked_from_templates"
   | "autofill_clicked_from_templates"
   | "apply_clicked_from_templates"

@@ -1,7 +1,6 @@
 ﻿import { useState } from "react";
 import { useEffect, useRef } from "react";
-import { supabase } from "../../integrations/supabase/client";
-import { analytics } from "../../lib/analytics";
+import { captureHomepageLead } from "../../lib/leads";
 
 function useInView(threshold = 0.15) {
   const ref = useRef<HTMLElement | null>(null);
@@ -37,25 +36,11 @@ export default function ClosingBaitCTA() {
     e.preventDefault();
     setStatus("sending");
 
-    const { error } = await supabase.from("leads").insert({
-      first_name: "Friend",
-      email,
-      business_type: "unknown",
-      goals: ["templates"],
-      template_id: "vault",
-      template_name: "Template Vault",
-      source: "homepage",
-      consent: true,
-    });
-
-    if (!error) {
-      setStatus("done");
-      if (analytics && typeof analytics.leadCaptured === "function") {
-        analytics.leadCaptured("vault");
-      }
-    } else {
-      setStatus("error");
-    }
+    // Single integration point: stores the lead AND fires the Vault delivery
+    // email (the zip). Reimplementing the insert here previously skipped the
+    // email entirely — homepage leads never received the Vault.
+    const { ok } = await captureHomepageLead(email);
+    setStatus(ok ? "done" : "error");
 
     window.history.pushState({}, "", "/templates"); window.dispatchEvent(new PopStateEvent("popstate")); window.scrollTo({ top: 0 });
   }
