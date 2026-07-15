@@ -1,66 +1,94 @@
 
-## How I'll self-test the Plaid journey
+## What we're building
 
-Your portal uses passwordless **email OTP** (with Google OAuth as the alternate). Both require an inbox I don't have, and OTP codes are stored as SHA-256 hashes in `login_otps` — I can't read the plaintext code from the database. So to run Track B/C/D myself I need one of these:
+An automated, idempotent, time-based email drip that fires after Email 1 (already live). Nothing about Email 1's copy or timing changes. Advisory-report emails are untouched.
 
-**Path I recommend (approve this):** Add a temporary, secret-gated **audit-bootstrap** edge function that uses the admin API to mint sessions for me, use it to run the whole audit end-to-end, then **delete the function and the test users** in the same turn. Nothing about it survives the audit.
+The engine has five moving parts, all following patterns already in the repo (`cron-run-reports`, `email-unsubscribe`, `schedule_reports.sql`).
 
-## Scope of the temporary bootstrap
+---
 
-**New file** (deleted at end of the audit):
-`supabase/functions/audit-bootstrap/index.ts`
+## 1. Migration — drip state (additive)
 
-Gated by a random `AUDIT_BOOTSTRAP_SECRET` I'll mint via `generate_secret` (32 chars, service-side only, never echoed to the user or logs). Any call missing or mismatching the `x-audit-bootstrap-secret` header → 401.
+New migration file `supabase/migrations/<ts>_lead_drip_state.sql`:
 
-Supported actions:
-- `mint` — `admin.auth.admin.createUser({ email, email_confirm: true })` (idempotent), then `admin.auth.admin.generateLink({ type:"magiclink", email })`, then `POST /auth/v1/verify { type:"magiclink", token_hash }` to convert the hashed token into a real session. Returns `{ user_id, access_token, refresh_token }` in memory only — never persisted.
-- `cleanup` — for each email, `admin.auth.admin.deleteUser(user_id)`. Cascade drops any `plaid_items` / `plaid_accounts` / `plaid_transactions` / `webhook_events` rows.
+- `ALTER TABLE public.leads ADD COLUMN IF NOT EXISTS` for `unsubscribe_token uuid NOT NULL DEFAULT gen_random_uuid()`, `unsubscribed_at timestamptz`, `converted_at timestamptz`.
+- `CREATE TABLE IF NOT EXISTS public.lead_email_sends` with `(id, email text, email_key text, sent_at, provider_message_id, UNIQUE(email, email_key))`.
+- Indexes: `leads(lower(email))`, `leads(created_at)`, `lead_email_sends(email)`.
+- GRANTs: `service_role` full; NO grants to `anon`/`authenticated`.
+- RLS enabled, no policies (deny-all outside service_role).
+- Wrapped in defensive `DO $$ ... EXCEPTION` block per existing convention.
 
-Two audit users, both throwaway:
-- `audit-a+<random>@goldfindesk.test`
-- `audit-b+<random>@goldfindesk.test`
+## 2. Edge function `lead-unsubscribe`
 
-`.test` is a reserved TLD that never routes to a real inbox, so no email is delivered and no user of yours is affected.
+`supabase/functions/lead-unsubscribe/index.ts`, mirroring `email-unsubscribe`:
 
-## Audit run (unchanged from the previously-approved audit plan)
+- GET `?token=<uuid>` → sets `unsubscribed_at = now()` on ALL leads matching the token's email (find email by token, then update by email), returns branded HTML page ("You are unsubscribed").
+- POST → RFC 8058 one-click (JSON `{token}` or form body); flips flag, returns 200 `ok`.
+- Invalid/missing token → branded "Link not recognized".
+- Register `[functions.lead-unsubscribe] verify_jwt = false` in `supabase/config.toml`.
 
-**Track B — signed-in E2E as user A, sandbox:**
-1. `plaid-create-link-token { mode:"create" }` → `link-sandbox-…`
-2. `plaid-sandbox-public-token { institution_id:"ins_109508", initial_products:["transactions"] }` → sandbox public_token
-3. `plaid-exchange-public-token { publicToken }` → `itemId`, `accountCount ≥ 1`
-4. DB assertions: `plaid_items` row present, `access_token_encrypted IS NOT NULL`, ≥1 `plaid_accounts` row
-5. `plaid-sync-accounts { itemId }` → 200, `last_synced_at` advances
-6. `plaid-sync-transactions { itemId }` → 200 with `{added, modified, removed, streams}` and populated `plaid_transactions` rows (category, merchant_name_norm, confidence)
-7. `plaid-sandbox-fire-webhook { itemId, code:"DEFAULT_UPDATE" }` → `webhook_events` `TRANSACTIONS.DEFAULT_UPDATE` row + `last_synced_at` advances again
-8. Fire `ITEM.ERROR` → `plaid_items.status='reauth_required'`; then `plaid-create-link-token { mode:"update", itemId }` returns a fresh link token
-9. `plaid-remove-item { itemId }` → row gone (cascade)
+## 3. Edge function `email-drip-worker`
 
-**Track C — cross-user isolation:**
-- As user B, hit `plaid-sync-accounts`, `plaid-sync-transactions`, `plaid-remove-item`, `plaid-create-link-token mode=update` with user A's `itemId` → all 404 "Item not found"
-- Confirm `plaid_get_access_token` / `plaid_set_access_token` / `_plaid_token_key` EXECUTE grants are service_role only (already verified in interim report; re-check)
+`supabase/functions/email-drip-worker/index.ts`:
 
-**Track D — Playwright UI as user A:**
-Inject the minted session into localStorage against `http://localhost:8080`, then:
-- `/portal/accounts` empty state renders correctly → screenshot
-- Click **Connect my bank** → Plaid Link iframe from `cdn.plaid.com` mounts (we stop at iframe — the exchange path is already covered in B) → screenshot
-- After B.3, refresh `/portal/accounts` → institution card, Active badge, N accounts, "Synced …" timestamp → screenshot
-- `/portal/report` → **Sync transactions** → success line → screenshot
-- After B.8, refresh `/portal/accounts` → "Re-auth required" + "Re-authenticate" button → screenshot
-- Click **Disconnect** → confirm → card gone → screenshot
+- Header gate: reject unless `x-cron-secret` matches `CRON_SECRET` env (same pattern as `cron-run-reports`).
+- Query `leads`, group by `lower(email)` keeping earliest `created_at`, join to `unsubscribed_at` and `converted_at` (any set counts).
+- For each contact, filter out: `unsubscribed_at` set, or email in `email_suppressions`, or has send within 48h in `lead_email_sends`.
+- Decide track:
+  - `converted_at` set → **ASCENSION** (asc_a1@0d, asc_a2@3d, asc_a3@17d, asc_a4@45d from `converted_at`).
+  - else → **SALES** (seq_2@2, seq_3@3, seq_4@4, seq_5@5, seq_6@7, seq_7@10, seq_8@14, seq_9@21, seq_10@30 from earliest `created_at`).
+- Pick highest-numbered due `email_key` NOT already in `lead_email_sends` for that email. Send at most one per contact per run; no backfill of skipped rungs.
+- Guard: INSERT into `lead_email_sends` with `ON CONFLICT DO NOTHING` BEFORE hitting Resend. If insert returns 0 rows, skip (concurrent-run guard).
+- Render via a shared HTML shell that matches `send-template-email` (GoldFin eyebrow, body/muted styles, `— Chris Sam` sig). Copy for each of 13 emails imported verbatim from `docs/email-sequence.md` into a `_shared/lead-drip-copy.ts` module (subject + HTML body per key). No paraphrasing.
+- `{{firstName}}` replacement: omit greeting name when firstName empty/"Friend". `{{SITE_URL}}` from `SITE_URL` secret, default `https://goldfindesk.com`.
+- Send via Resend gateway `https://connector-gateway.lovable.dev/resend/emails`, `from` = `RESEND_FROM`, `reply_to` = `REPLY_TO_EMAIL` if set, headers:
+  - `List-Unsubscribe: <https://<project>.supabase.co/functions/v1/lead-unsubscribe?token=<uuid>>`
+  - `List-Unsubscribe-Post: List-Unsubscribe=One-Click`
+- Every email body appends a footer with the unsubscribe link.
+- If Resend fails after ledger insert: log error; do NOT delete the ledger row (better a silent miss than a double-send). Provider message_id is patched into the ledger row on success.
+- Return `{ ok: true, considered, sent }` summary.
+- Register `[functions.email-drip-worker] verify_jwt = false` in `supabase/config.toml`.
 
-## Cleanup (same turn)
+## 4. Conversion wiring (Stripe)
 
-1. Call `audit-bootstrap { action:"cleanup" }` to delete user A + user B (cascades all Plaid rows).
-2. `rm supabase/functions/audit-bootstrap/index.ts`.
-3. `delete_secret AUDIT_BOOTSTRAP_SECRET`.
-4. Verify: `select count(*) from auth.users where email like 'audit-%@goldfindesk.test'` returns 0; `plaid_items` back to 0; the function is gone.
+Edit `supabase/functions/payments-webhook/index.ts` `handleCheckoutCompleted`:
 
-## Deliverable
+- After the existing subscription handling, when `email` is set and plan is one of `["auto-fill-monthly","auto_fill_monthly"]`, run:
+  ```
+  UPDATE public.leads SET converted_at = now()
+   WHERE lower(email) = lower($1) AND converted_at IS NULL;
+  ```
+- Wrapped in try/catch — never fails the webhook. This is a reliable server-side hook (Stripe → webhook), so no client-side fallback is needed.
 
-Final green/yellow/red report with response codes, DB row evidence, and Playwright screenshots. I'll flag anything red before touching code, per the earlier plan.
+## 5. Cron schedule migration
 
-### Why this is safe
-- Bootstrap function is protected by a random 32-char secret; without it every call is 401.
-- Test emails use the reserved `.test` TLD, so no real inbox is touched.
-- Function file and secret both removed at the end of the audit — leaves no back door.
-- Only test users are created; your real `auth.users` rows are untouched.
+`supabase/migrations/<ts>_schedule_email_drip.sql`, cloned defensively from `schedule_reports.sql`:
+
+- `cron.schedule('email-drip-hourly', '5 * * * *', ...)`
+- `net.http_post` to `https://paarucbnaxorpxqjecrz.supabase.co/functions/v1/email-drip-worker` with `x-cron-secret` from Vault `cron_secret` (already provisioned).
+
+---
+
+## Copy source
+
+All 13 email bodies (seq_2 … seq_10, asc_a1 … asc_a4) will be extracted verbatim from `docs/email-sequence.md` and stored in `supabase/functions/_shared/lead-drip-copy.ts` as `{ subject, html }` entries. I will not alter a word. HTML shell only adds the header eyebrow, sign-off, footer, and unsubscribe link — matching Email 1's visual language.
+
+## Secrets (operator sets — never in code)
+
+`RESEND_API_KEY` ✅ present, `RESEND_FROM`, `REPLY_TO_EMAIL`, `SITE_URL`, `CRON_SECRET` ✅ present (+ Vault `cron_secret`), `RESEND_WEBHOOK_SECRET` (already in use by suppression webhook).
+
+## Explicitly NOT doing
+
+- Not editing Email 1 content/timing (only adding drip-related additions — Email 1 stays as-is; footer/one-click apply to seq_/asc_ only per the doc, since Email 1 is transactional delivery).
+- Not building behavioral branches A–E, lead scoring, or A/B tests.
+- Not touching `cron-run-reports`, `report-delivery.ts`, `report_email_deliveries`, or `email_preferences`.
+
+## Acceptance verification (post-build)
+
+1. Manually invoke `email-drip-worker` with a lead where `created_at = now() - '2 days'` → confirm one seq_2 row appears in `lead_email_sends`, a second invocation adds nothing.
+2. Insert a `lead_email_sends` row with `sent_at = now() - '10 hours'` → confirm worker skips that contact.
+3. Set `unsubscribed_at` → confirm skip. Insert into `email_suppressions` → confirm skip.
+4. Set `converted_at = now()` → confirm next run sends asc_a1 (not any seq_).
+5. GET `/functions/v1/lead-unsubscribe?token=…` → confirmation page renders, `unsubscribed_at` set on all matching leads. POST → returns 200.
+6. Grep `docs/email-sequence.md` vs `_shared/lead-drip-copy.ts` for seq_6 value stack + asc_a4 invitation verbatim.
+7. `bun run test` — existing tests still pass; migrations apply clean.
