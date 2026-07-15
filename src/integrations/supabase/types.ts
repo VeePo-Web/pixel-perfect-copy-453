@@ -587,6 +587,7 @@ export type Database = {
           email: string | null
           first_name: string | null
           id: string
+          internal_test_allow: boolean
           last_name: string | null
           phone: string | null
           updated_at: string
@@ -598,6 +599,7 @@ export type Database = {
           email?: string | null
           first_name?: string | null
           id: string
+          internal_test_allow?: boolean
           last_name?: string | null
           phone?: string | null
           updated_at?: string
@@ -609,6 +611,7 @@ export type Database = {
           email?: string | null
           first_name?: string | null
           id?: string
+          internal_test_allow?: boolean
           last_name?: string | null
           phone?: string | null
           updated_at?: string
