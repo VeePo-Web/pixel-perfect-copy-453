@@ -153,8 +153,9 @@ Deno.serve(async (req) => {
         };
         const rec = await plaid<{ outflow_streams: Stream[]; inflow_streams: Stream[] }>(
           "/transactions/recurring/get",
-          { access_token: accessToken, account_ids: accountIds },
+          { access_token: accessToken, account_ids: accountIds, personal_finance_category_version: "v2" },
         );
+
         const mapStream = (s: Stream, direction: string) => ({
           user_id: item.user_id,
           plaid_item_id: item.id,
