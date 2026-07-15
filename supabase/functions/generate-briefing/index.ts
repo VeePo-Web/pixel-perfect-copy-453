@@ -17,10 +17,37 @@ Return EXACTLY six sections, in this order, with these exact labels: "Cash Movem
 
 Reflect the specifics the owner mentioned (industry, team size, revenue, the tension they named) so the briefing reads as if written about their actual business.`;
 
+// In-memory IP rate limit — Task 4 of the pipeline audit. `generate-briefing`
+// is intentionally public (marketing demo) so an anonymous flood could still
+// burn credits. Instance-local map with a rolling hourly window is enough to
+// stop scripted spikes without adding a DB round-trip to every request.
+const IP_BUCKET_LIMIT = 20;             // requests per hour per IP
+const IP_BUCKET_WINDOW_MS = 60 * 60 * 1000;
+const ipBuckets = new Map<string, { hits: number[] }>();
+function pruneAndCount(ip: string): number {
+  const now = Date.now();
+  const bucket = ipBuckets.get(ip) ?? { hits: [] };
+  bucket.hits = bucket.hits.filter((t) => now - t < IP_BUCKET_WINDOW_MS);
+  bucket.hits.push(now);
+  ipBuckets.set(ip, bucket);
+  return bucket.hits.length;
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
 
   try {
+    // Rate-limit by first hop in x-forwarded-for (Supabase edge sets this).
+    const fwd = req.headers.get('x-forwarded-for') ?? '';
+    const ip = fwd.split(',')[0].trim() || 'unknown';
+    const count = pruneAndCount(ip);
+    if (count > IP_BUCKET_LIMIT) {
+      return new Response(
+        JSON.stringify({ error: 'rate_limited', limit: IP_BUCKET_LIMIT, window_hours: 1 }),
+        { status: 429, headers: { ...corsHeaders, 'Content-Type': 'application/json', 'Retry-After': '3600' } },
+      );
+    }
+
     const { prompt } = await req.json();
     if (typeof prompt !== 'string' || prompt.trim().length === 0) {
       return new Response(JSON.stringify({ error: 'prompt required' }), {
@@ -28,6 +55,7 @@ Deno.serve(async (req) => {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
+
 
     const apiKey = Deno.env.get('LOVABLE_API_KEY');
     if (!apiKey) {
