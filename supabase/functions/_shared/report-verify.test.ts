@@ -78,3 +78,52 @@ describe("verifyReport — benchmark allow-list", () => {
     expect(v.passed).toBe(true);
   });
 });
+
+describe("verifyReport — separated allow-lists (Tasks 3+5)", () => {
+  it("blocks structural counts written as DOLLARS ($60 is not the 60-day window)", () => {
+    const v = verifyReport("You could recover $60 by acting today.", payload);
+    expect(v.passed).toBe(false);
+    expect(v.orphans.some((o) => o.value === 60 && o.kind === "money")).toBe(true);
+  });
+
+  it("blocks small structural integers written as dollars ($12)", () => {
+    const v = verifyReport("That's only $12 out of pocket.", payload);
+    expect(v.passed).toBe(false);
+  });
+
+  it("still allows Profit First percents but blocks them as dollars", () => {
+    const ok = verifyReport("Set aside 15% for tax and 50% for owner pay.", payload);
+    expect(ok.passed).toBe(true);
+    const bad = verifyReport("Set aside $15 for tax and $50 for owner pay.", payload);
+    expect(bad.passed).toBe(false);
+  });
+
+  it("blocks near-miss dollar figures the old ±1% band would have passed", () => {
+    // cashOnHand is 30000; $30,300 is within 1% but is NOT the figure.
+    const v = verifyReport("You have $30,300 in cash.", payload);
+    expect(v.passed).toBe(false);
+  });
+
+  it("accepts nearest-dollar rounding of a real figure", () => {
+    const v = verifyReport("Runway math uses $30,000 of cash and $5,000 net.", payload);
+    expect(v.passed).toBe(true);
+  });
+
+  it("catches BARE ungrounded numbers with no $ / % marker", () => {
+    const v = verifyReport("You will save 87,500 by switching vendors.", payload);
+    expect(v.passed).toBe(false);
+    expect(v.orphans.some((o) => o.value === 87500 && o.kind === "bare")).toBe(true);
+  });
+
+  it("allows bare numbers that trace to real figures, and years", () => {
+    const v = verifyReport("In 2026 your inflow reached 10,000 against 5,000 out.", payload);
+    expect(v.passed).toBe(true);
+  });
+
+  it("allows narrative integer month durations but blocks fabricated decimals", () => {
+    const ok = verifyReport("Over the next 12 months, hold 3 months of reserve.", payload);
+    expect(ok.passed).toBe(true);
+    const bad = verifyReport("You have 4.5 months of runway.", payload);
+    expect(bad.passed).toBe(false);
+  });
+});

@@ -255,17 +255,19 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
   // Handoff Task 7: (a) consume matched indices so one true duplicate doesn't
   // fan out into N-1 false pairs, and (b) skip merchants already flagged as
   // recurring — a monthly subscription IS supposed to charge the same amount
-  // on the same day; that's not a card-fraud signal.
+  // on a schedule; that's not a card-fraud signal. Uppercase comparison +
+  // description fallback maximizes recall against normalization drift.
   const recurringMerchants = new Set(
     input.recurringStreams
-      .filter((s) => s.direction === "outflow")
-      .map((s) => (s.merchant_name ?? "").toString())
-      .filter(Boolean),
+      .filter((s) => s.direction === "outflow" && s.is_active !== false)
+      .flatMap((s) => [s.merchant_name, s.description])
+      .filter((m): m is string => !!m)
+      .map((m) => m.toUpperCase()),
   );
   const duplicates: DuplicateItem[] = [];
   const spends = operating
     .filter((t) => outflow(t) > 0 && t.merchant_name_norm)
-    .filter((t) => !recurringMerchants.has(t.merchant_name_norm as string))
+    .filter((t) => !recurringMerchants.has((t.merchant_name_norm as string).toUpperCase()))
     .sort((a, b) => a.posted_date.localeCompare(b.posted_date));
   const consumed = new Set<number>();
   for (let i = 0; i < spends.length; i++) {
@@ -277,6 +279,8 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
       if (Math.abs(a.amount - b.amount) > 0.001) continue;
       const gap = daysBetween(a.posted_date, b.posted_date);
       if (gap < 0 || gap > 2) continue;
+      consumed.add(i);
+      consumed.add(j);
       duplicates.push({
         merchant: a.merchant_name_norm as string,
         amount: r2(a.amount),

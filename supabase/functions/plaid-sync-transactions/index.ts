@@ -81,10 +81,14 @@ Deno.serve(async (req) => {
         access_token: accessToken,
         cursor: cursor ?? null,
         count: 500,
-        // Handoff Task 6: pin PFC v2 so category taxonomy is stable across
-        // Plaid rollouts (v1 is being deprecated).
-        options: { include_personal_finance_category: true },
-        personal_finance_category_version: "v2",
+        // PFCv2 taxonomy (Dec 2025): +10% primary / +20% detailed accuracy →
+        // fewer mis-tagged transfers, higher coverage (fix-handoff Task 6).
+        // Plaid docs place the version flag INSIDE options
+        // (options.personal_finance_category_version) — verified 2026-07-14.
+        options: {
+          include_personal_finance_category: true,
+          personal_finance_category_version: "v2",
+        },
       });
 
 
@@ -153,7 +157,11 @@ Deno.serve(async (req) => {
         };
         const rec = await plaid<{ outflow_streams: Stream[]; inflow_streams: Stream[] }>(
           "/transactions/recurring/get",
-          { access_token: accessToken, account_ids: accountIds, personal_finance_category_version: "v2" },
+          {
+            access_token: accessToken,
+            account_ids: accountIds,
+            options: { personal_finance_category_version: "v2" },
+          },
         );
 
         const mapStream = (s: Stream, direction: string) => ({
