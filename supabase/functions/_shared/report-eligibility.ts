@@ -7,12 +7,32 @@ export const ACTIVE_STATUSES = ["active", "trialing"] as const;
 
 import type { SupabaseClient } from "npm:@supabase/supabase-js@2.45.0";
 
+/** Server-side internal-test allowlist. MUST be an edge-function secret
+ *  (comma-separated emails), never a user-writable DB column.
+ *
+ *  SECURITY (2026-07-15): the previous implementation trusted
+ *  `profiles.internal_test_allow`, but the profiles UPDATE policy is own-row
+ *  (`auth.uid() = id`) with a table-wide column grant, so ANY authenticated
+ *  user could PATCH `internal_test_allow=true` on their own row and bypass the
+ *  paywall — confirmed exploitable live (402 → 422 after self-setting the
+ *  flag). The bypass is now keyed to a server secret the user cannot write. */
+function isInternalTestEmail(email: string | null | undefined): boolean {
+  if (!email) return false;
+  const allow = (Deno.env.get("ADVISORY_TEST_EMAILS") ?? "")
+    .toLowerCase().split(",").map((s) => s.trim()).filter(Boolean);
+  return allow.includes(email.toLowerCase());
+}
+
 /** Returns true if the user has an active advisory-eligible subscription
- *  OR is flagged as an internal test account (profiles.internal_test_allow). */
-export async function hasReportAccess(admin: SupabaseClient, userId: string): Promise<boolean> {
-  const { data: prof } = await admin
-    .from("profiles").select("internal_test_allow").eq("id", userId).maybeSingle();
-  if (prof && (prof as { internal_test_allow?: boolean }).internal_test_allow === true) return true;
+ *  OR their email is on the server-side internal-test allowlist. The caller
+ *  passes the email from the verified JWT (getUserFromRequest), never from a
+ *  client-writable source. */
+export async function hasReportAccess(
+  admin: SupabaseClient,
+  userId: string,
+  email?: string | null,
+): Promise<boolean> {
+  if (isInternalTestEmail(email)) return true;
   const { data: sub } = await admin
     .from("subscriptions").select("id")
     .eq("user_id", userId)

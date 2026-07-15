@@ -6,8 +6,12 @@
 // Abuse hole closed 2026-07-15 (Task 4 of the pipeline audit): signup is open
 // + auto-confirmed on this project, so requiring only a logged-in user let
 // anyone script signups and burn unlimited AI-gateway credits. Now the caller
-// must (a) hold an eligible active subscription OR (b) be flagged
-// profiles.internal_test_allow=true, AND (c) not exceed 3 generations per 24h.
+// must (a) hold an eligible active subscription OR (b) be on the server-side
+// ADVISORY_TEST_EMAILS allowlist, AND (c) not exceed 3 generations per 24h.
+//
+// SECURITY (2026-07-15, follow-up): the internal-test bypass was moved off the
+// user-writable profiles.internal_test_allow column (self-settable → paywall
+// bypass, confirmed live) onto a server secret. See report-eligibility.ts.
 import { z } from "npm:zod@3.23.8";
 import { adminClient, corsHeaders, getUserFromRequest, json } from "../_shared/auth-context.ts";
 import { generateReportForUser } from "../_shared/report-core.ts";
@@ -25,8 +29,10 @@ Deno.serve(async (req) => {
 
     const admin = adminClient();
 
-    // (a/b) Subscription or internal-test bypass.
-    const allowed = await hasReportAccess(admin, user.id);
+    // (a/b) Subscription or internal-test bypass. Email comes from the verified
+    // JWT (getUserFromRequest), never a client-writable source — see the
+    // report-eligibility security note.
+    const allowed = await hasReportAccess(admin, user.id, user.email);
     if (!allowed) {
       return json({
         error: "subscription_required",
