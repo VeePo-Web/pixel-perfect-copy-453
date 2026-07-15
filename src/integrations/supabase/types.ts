@@ -16,37 +16,61 @@ export type Database = {
     Tables: {
       advisory_reports: {
         Row: {
+          coverage_pct: number | null
           created_at: string
+          generated_at: string | null
+          generation_error: string | null
           id: string
           metrics_snapshot: Json | null
+          model: string | null
+          narrative: Json | null
           period_end: string | null
           period_start: string | null
           recommendations: Json | null
           status: string
+          subject_line: string | null
           updated_at: string
           user_id: string
+          verification_notes: Json | null
+          verification_passed: boolean | null
         }
         Insert: {
+          coverage_pct?: number | null
           created_at?: string
+          generated_at?: string | null
+          generation_error?: string | null
           id?: string
           metrics_snapshot?: Json | null
+          model?: string | null
+          narrative?: Json | null
           period_end?: string | null
           period_start?: string | null
           recommendations?: Json | null
           status?: string
+          subject_line?: string | null
           updated_at?: string
           user_id: string
+          verification_notes?: Json | null
+          verification_passed?: boolean | null
         }
         Update: {
+          coverage_pct?: number | null
           created_at?: string
+          generated_at?: string | null
+          generation_error?: string | null
           id?: string
           metrics_snapshot?: Json | null
+          model?: string | null
+          narrative?: Json | null
           period_end?: string | null
           period_start?: string | null
           recommendations?: Json | null
           status?: string
+          subject_line?: string | null
           updated_at?: string
           user_id?: string
+          verification_notes?: Json | null
+          verification_passed?: boolean | null
         }
         Relationships: []
       }
@@ -587,6 +611,7 @@ export type Database = {
           email: string | null
           first_name: string | null
           id: string
+          internal_test_allow: boolean
           last_name: string | null
           phone: string | null
           updated_at: string
@@ -598,6 +623,7 @@ export type Database = {
           email?: string | null
           first_name?: string | null
           id: string
+          internal_test_allow?: boolean
           last_name?: string | null
           phone?: string | null
           updated_at?: string
@@ -609,6 +635,7 @@ export type Database = {
           email?: string | null
           first_name?: string | null
           id?: string
+          internal_test_allow?: boolean
           last_name?: string | null
           phone?: string | null
           updated_at?: string

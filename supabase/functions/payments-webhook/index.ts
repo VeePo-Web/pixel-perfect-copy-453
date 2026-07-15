@@ -58,22 +58,6 @@ async function handleCheckoutCompleted(session: any, env: StripeEnv) {
   }
   if (email && plan) await sendWelcomeEmail(email, plan);
 
-  // Mark the lead as converted so the marketing drip stops (sales spine) and
-  // the ascension track starts on the next email-drip-worker run. Safe to run
-  // for every checkout — no-ops when the email isn't in leads. Errors here
-  // must never fail the webhook.
-  if (email) {
-    try {
-      await getSupabase()
-        .from("leads")
-        .update({ converted_at: new Date().toISOString() })
-        .ilike("email", email)
-        .is("converted_at", null);
-    } catch (e) {
-      console.error("lead conversion flag failed:", e);
-    }
-  }
-
   // Kickoff first advisory report immediately for paying users who already
   // connected a bank — so they don't wait up to 13 days for the cron pass.
   const ELIGIBLE_PLANS = ["auto-fill-monthly", "auto_fill_monthly"];

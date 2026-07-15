@@ -1,94 +1,72 @@
 
-## What we're building
+# Plan — Fix + Verify Plaid → Paid → Auto-Fill → Bi-Weekly Report Pipeline
 
-An automated, idempotent, time-based email drip that fires after Email 1 (already live). Nothing about Email 1's copy or timing changes. Advisory-report emails are untouched.
-
-The engine has five moving parts, all following patterns already in the repo (`cron-run-reports`, `email-unsubscribe`, `schedule_reports.sql`).
+Executed in six tasks, in order. Each task ends with observed values written into the final checklist.
 
 ---
 
-## 1. Migration — drip state (additive)
+## Task 1 — Deploy the model fix, prove report generation
 
-New migration file `supabase/migrations/<ts>_lead_drip_state.sql`:
+1. Confirm `supabase/functions/_shared/report-core.ts` on `main` defaults to `google/gemini-3.1-pro-preview` and reads `ADVISORY_MODEL`. Set `ADVISORY_MODEL=google/gemini-3.1-pro-preview` as a belt-and-braces secret.
+2. Redeploy: `generate-advisory-report`, `cron-run-reports`, `payments-webhook`, `admin-trigger-cron` (any function that imports `report-core.ts`).
+3. Invoke `generate-advisory-report` `{send:false}` as test user `35c8c3ef-…`.
+4. Success gate: HTTP 200, `ok:true`, `verification_passed:true`, `advisory_reports` row `status='generated'` with populated `metrics_snapshot`, `narrative`, `recommendations`. If verifier flags orphans, tighten prompt (not verifier).
 
-- `ALTER TABLE public.leads ADD COLUMN IF NOT EXISTS` for `unsubscribe_token uuid NOT NULL DEFAULT gen_random_uuid()`, `unsubscribed_at timestamptz`, `converted_at timestamptz`.
-- `CREATE TABLE IF NOT EXISTS public.lead_email_sends` with `(id, email text, email_key text, sent_at, provider_message_id, UNIQUE(email, email_key))`.
-- Indexes: `leads(lower(email))`, `leads(created_at)`, `lead_email_sends(email)`.
-- GRANTs: `service_role` full; NO grants to `anon`/`authenticated`.
-- RLS enabled, no policies (deny-all outside service_role).
-- Wrapped in defensive `DO $$ ... EXCEPTION` block per existing convention.
+## Task 2 — Prove the paid path in Stripe sandbox
 
-## 2. Edge function `lead-unsubscribe`
+1. Create a sandbox checkout session for `auto-fill-monthly`, pay with `4242 4242 4242 4242`.
+2. Assert `subscriptions` row: `user_id=<test>`, `environment='sandbox'`, `status ∈ (active,trialing)`, `price_id` matches auto-fill-monthly slug.
+3. Assert `payments-webhook` kickoff report: new `advisory_reports` row + `report_email_deliveries` row for it (bank already connected from previous audit).
+4. Invoke `cron-run-reports` with `x-cron-secret`; assert user counted as candidate and `skipped` (13-day gate). Proves gating both directions.
 
-`supabase/functions/lead-unsubscribe/index.ts`, mirroring `email-unsubscribe`:
+## Task 3 — Prove email + auto-filled workbook delivery
 
-- GET `?token=<uuid>` → sets `unsubscribed_at = now()` on ALL leads matching the token's email (find email by token, then update by email), returns branded HTML page ("You are unsubscribed").
-- POST → RFC 8058 one-click (JSON `{token}` or form body); flips flag, returns 200 `ok`.
-- Invalid/missing token → branded "Link not recognized".
-- Register `[functions.lead-unsubscribe] verify_jwt = false` in `supabase/config.toml`.
+1. Update `profiles.email` to a reachable inbox for the test user. Invoke `generate-advisory-report` `{send:true}`.
+2. Confirm email arrives; `resend-webhook` flips `report_email_deliveries` to `delivered`.
+3. In portal, open report → confirm `TemplateDownloadCard` renders auto-filled templates on-screen; download `.xlsx` and `.csv`. Spot-check workbook numbers match `metrics_snapshot`. `UntraceableWorkbookCellError` must not fire.
 
-## 3. Edge function `email-drip-worker`
+## Task 4 — Close abuse hole on `generate-advisory-report`
 
-`supabase/functions/email-drip-worker/index.ts`:
+Edit `supabase/functions/generate-advisory-report/index.ts`:
+1. Add subscription eligibility check (reuse `ELIGIBLE_PRICES` + `ACTIVE_STATUSES` from `cron-run-reports`). Bypass if `profiles.internal_test_allow = true`.
+2. Add per-user 24h rate limit: `SELECT count(*) FROM advisory_reports WHERE user_id=$1 AND created_at > now()-interval '24 hours'`; reject if ≥3.
+3. Migration: `ALTER TABLE profiles ADD COLUMN internal_test_allow boolean NOT NULL DEFAULT false;` (additive, defensive `IF NOT EXISTS`).
+4. Audit `generate-briefing`: add IP-based rate limit if missing (in-memory or ledger table keyed by IP + hour).
 
-- Header gate: reject unless `x-cron-secret` matches `CRON_SECRET` env (same pattern as `cron-run-reports`).
-- Query `leads`, group by `lower(email)` keeping earliest `created_at`, join to `unsubscribed_at` and `converted_at` (any set counts).
-- For each contact, filter out: `unsubscribed_at` set, or email in `email_suppressions`, or has send within 48h in `lead_email_sends`.
-- Decide track:
-  - `converted_at` set → **ASCENSION** (asc_a1@0d, asc_a2@3d, asc_a3@17d, asc_a4@45d from `converted_at`).
-  - else → **SALES** (seq_2@2, seq_3@3, seq_4@4, seq_5@5, seq_6@7, seq_7@10, seq_8@14, seq_9@21, seq_10@30 from earliest `created_at`).
-- Pick highest-numbered due `email_key` NOT already in `lead_email_sends` for that email. Send at most one per contact per run; no backfill of skipped rungs.
-- Guard: INSERT into `lead_email_sends` with `ON CONFLICT DO NOTHING` BEFORE hitting Resend. If insert returns 0 rows, skip (concurrent-run guard).
-- Render via a shared HTML shell that matches `send-template-email` (GoldFin eyebrow, body/muted styles, `— Chris Sam` sig). Copy for each of 13 emails imported verbatim from `docs/email-sequence.md` into a `_shared/lead-drip-copy.ts` module (subject + HTML body per key). No paraphrasing.
-- `{{firstName}}` replacement: omit greeting name when firstName empty/"Friend". `{{SITE_URL}}` from `SITE_URL` secret, default `https://goldfindesk.com`.
-- Send via Resend gateway `https://connector-gateway.lovable.dev/resend/emails`, `from` = `RESEND_FROM`, `reply_to` = `REPLY_TO_EMAIL` if set, headers:
-  - `List-Unsubscribe: <https://<project>.supabase.co/functions/v1/lead-unsubscribe?token=<uuid>>`
-  - `List-Unsubscribe-Post: List-Unsubscribe=One-Click`
-- Every email body appends a footer with the unsubscribe link.
-- If Resend fails after ledger insert: log error; do NOT delete the ledger row (better a silent miss than a double-send). Provider message_id is patched into the ledger row on success.
-- Return `{ ok: true, considered, sent }` summary.
-- Register `[functions.email-drip-worker] verify_jwt = false` in `supabase/config.toml`.
+## Task 5 — Handoff tasks 3–7 (correctness)
 
-## 4. Conversion wiring (Stripe)
+**Task 3+5 verifier split** — `supabase/functions/_shared/report-verify.ts`:
+- Replace single `structuralAllowed` set with three: `countAllowed` (integer counts), `currencyAllowed` (dollar amounts), `percentAllowed` (percentages).
+- Match `$X` against `currencyAllowed` with tolerance = max($1, 0.5% of value); match `X%` against `percentAllowed` ±0.5pp; match bare integers against `countAllowed`.
+- Add bare-number scan: any number ≥100 without `$`, `%`, or "months"/"days" trailing token flagged, excluding 4-digit years 2000–2099.
 
-Edit `supabase/functions/payments-webhook/index.ts` `handleCheckoutCompleted`:
+**Task 4 trailing tax window** — `report-core.ts`:
+- Replace `annualNet = profitProxy * (365/14)` with trailing 180-day (fallback 90-day if <180d history) window after transfer/owner-draw exclusion.
+- Include window length in `TAX_FLAG` output (e.g. `"based on trailing 180 days"`).
 
-- After the existing subscription handling, when `email` is set and plan is one of `["auto-fill-monthly","auto_fill_monthly"]`, run:
-  ```
-  UPDATE public.leads SET converted_at = now()
-   WHERE lower(email) = lower($1) AND converted_at IS NULL;
-  ```
-- Wrapped in try/catch — never fails the webhook. This is a reliable server-side hook (Stripe → webhook), so no client-side fallback is needed.
+**Task 6 PFCv2** — `plaid-sync-transactions/index.ts`:
+- Add `personal_finance_category_version: "v2"` to `/transactions/sync` and `/transactions/recurring/get` request bodies.
 
-## 5. Cron schedule migration
+**Task 7 duplicate detector** — same file:
+- Track matched indices; do not re-match. Skip merchants already present in `recurring_streams` for the item.
 
-`supabase/migrations/<ts>_schedule_email_drip.sql`, cloned defensively from `schedule_reports.sql`:
+## Task 6 — Cleanup
 
-- `cron.schedule('email-drip-hourly', '5 * * * *', ...)`
-- `net.http_post` to `https://paarucbnaxorpxqjecrz.supabase.co/functions/v1/email-drip-worker` with `x-cron-secret` from Vault `cron_secret` (already provisioned).
+1. Call `plaid-remove-item` for test user's `plaid_items` (removes at Plaid).
+2. Call `admin-wipe-users` (or admin RPC) for `35c8c3ef-…`.
+3. Verify: no rows in `plaid_items`, `plaid_accounts`, `plaid_transactions`, `advisory_reports`, `subscriptions`, `report_email_deliveries`, `recurring_streams` for that user.
+4. `plaid_get_access_token(<old item id>)` returns null.
 
 ---
 
-## Copy source
+## Technical notes
 
-All 13 email bodies (seq_2 … seq_10, asc_a1 … asc_a4) will be extracted verbatim from `docs/email-sequence.md` and stored in `supabase/functions/_shared/lead-drip-copy.ts` as `{ subject, html }` entries. I will not alter a word. HTML shell only adds the header eyebrow, sign-off, footer, and unsubscribe link — matching Email 1's visual language.
+- Verifier changes must include unit tests in `supabase/functions/_shared/__tests__/report-verify.test.ts` covering: `$60` unlisted → fail; `$60.30` when snapshot has `$60.00` → pass; `30%` unlisted → fail; bare `250` unlisted → fail; `2026` year → pass.
+- Tax window change: add tests for 200-day and 45-day histories.
+- Rate limit: return HTTP 429 with `Retry-After` header.
+- All migrations use `IF NOT EXISTS` / `ADD COLUMN IF NOT EXISTS` per project convention.
+- Preserve existing `ELIGIBLE_PRICES` set — do not narrow.
 
-## Secrets (operator sets — never in code)
+## Final deliverable
 
-`RESEND_API_KEY` ✅ present, `RESEND_FROM`, `REPLY_TO_EMAIL`, `SITE_URL`, `CRON_SECRET` ✅ present (+ Vault `cron_secret`), `RESEND_WEBHOOK_SECRET` (already in use by suppression webhook).
-
-## Explicitly NOT doing
-
-- Not editing Email 1 content/timing (only adding drip-related additions — Email 1 stays as-is; footer/one-click apply to seq_/asc_ only per the doc, since Email 1 is transactional delivery).
-- Not building behavioral branches A–E, lead scoring, or A/B tests.
-- Not touching `cron-run-reports`, `report-delivery.ts`, `report_email_deliveries`, or `email_preferences`.
-
-## Acceptance verification (post-build)
-
-1. Manually invoke `email-drip-worker` with a lead where `created_at = now() - '2 days'` → confirm one seq_2 row appears in `lead_email_sends`, a second invocation adds nothing.
-2. Insert a `lead_email_sends` row with `sent_at = now() - '10 hours'` → confirm worker skips that contact.
-3. Set `unsubscribed_at` → confirm skip. Insert into `email_suppressions` → confirm skip.
-4. Set `converted_at = now()` → confirm next run sends asc_a1 (not any seq_).
-5. GET `/functions/v1/lead-unsubscribe?token=…` → confirmation page renders, `unsubscribed_at` set on all matching leads. POST → returns 200.
-6. Grep `docs/email-sequence.md` vs `_shared/lead-drip-copy.ts` for seq_6 value stack + asc_a4 invitation verbatim.
-7. `bun run test` — existing tests still pass; migrations apply clean.
+A checklist mirroring Tasks 1–6 with observed values: report id from Task 1, subscription id + kickoff report id from Task 2, delivery id + workbook file hashes from Task 3, 429 response body from Task 4 rate-limit smoke test, verifier test output from Task 5, and empty-row confirmations from Task 6.

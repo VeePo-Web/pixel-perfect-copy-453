@@ -81,7 +81,12 @@ Deno.serve(async (req) => {
         access_token: accessToken,
         cursor: cursor ?? null,
         count: 500,
+        // Handoff Task 6: pin PFC v2 so category taxonomy is stable across
+        // Plaid rollouts (v1 is being deprecated).
+        options: { include_personal_finance_category: true },
+        personal_finance_category_version: "v2",
       });
+
 
       const upserts = [...resp.added, ...resp.modified].map((t) => {
         const pf = t.personal_finance_category ?? null;
@@ -148,8 +153,9 @@ Deno.serve(async (req) => {
         };
         const rec = await plaid<{ outflow_streams: Stream[]; inflow_streams: Stream[] }>(
           "/transactions/recurring/get",
-          { access_token: accessToken, account_ids: accountIds },
+          { access_token: accessToken, account_ids: accountIds, personal_finance_category_version: "v2" },
         );
+
         const mapStream = (s: Stream, direction: string) => ({
           user_id: item.user_id,
           plaid_item_id: item.id,

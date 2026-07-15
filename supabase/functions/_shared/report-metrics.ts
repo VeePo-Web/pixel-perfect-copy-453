@@ -252,12 +252,26 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
     }));
 
   // --- CARD AUDIT: duplicate charges (same merchant + amount within 2 days) ---
+  // Handoff Task 7: (a) consume matched indices so one true duplicate doesn't
+  // fan out into N-1 false pairs, and (b) skip merchants already flagged as
+  // recurring — a monthly subscription IS supposed to charge the same amount
+  // on the same day; that's not a card-fraud signal.
+  const recurringMerchants = new Set(
+    input.recurringStreams
+      .filter((s) => s.direction === "outflow")
+      .map((s) => (s.merchant_name ?? "").toString())
+      .filter(Boolean),
+  );
   const duplicates: DuplicateItem[] = [];
   const spends = operating
     .filter((t) => outflow(t) > 0 && t.merchant_name_norm)
+    .filter((t) => !recurringMerchants.has(t.merchant_name_norm as string))
     .sort((a, b) => a.posted_date.localeCompare(b.posted_date));
+  const consumed = new Set<number>();
   for (let i = 0; i < spends.length; i++) {
+    if (consumed.has(i)) continue;
     for (let j = i + 1; j < spends.length; j++) {
+      if (consumed.has(j)) continue;
       const a = spends[i], b = spends[j];
       if (a.merchant_name_norm !== b.merchant_name_norm) continue;
       if (Math.abs(a.amount - b.amount) > 0.001) continue;
@@ -269,9 +283,12 @@ export function computeMetrics(input: MetricsInput): MetricsPayload {
         date: b.posted_date,
         disputeBy: addDays(b.posted_date, 60), // 60-day federal dispute window
       });
+      consumed.add(i);
+      consumed.add(j);
       break;
     }
   }
+
 
   // --- CARD AUDIT: unfamiliar/large charges (first-seen merchant this period
   //     above threshold). Completes the card-statement audit — a merchant that
