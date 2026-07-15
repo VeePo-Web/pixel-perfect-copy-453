@@ -6,9 +6,32 @@
 //   Layer 4 verify (block invented numbers)  Layer 5 persist + email
 // =========================================================================
 import type { SupabaseClient } from "npm:@supabase/supabase-js@2.45.0";
-import { computeMetrics, type MetricsPayload, type Txn } from "./report-metrics.ts";
+import { computeMetrics, isNonOperating, type MetricsPayload, type Txn } from "./report-metrics.ts";
 import { verifyReport } from "./report-verify.ts";
 import { deliverReportEmail } from "./report-delivery.ts";
+
+// Handoff Task 4: trailing-window tax annualization. Uses the SAME
+// isNonOperating filter as the metrics engine so transfers, card payoffs,
+// and owner draws never inflate the S-corp eligibility check.
+function computeAnnualNet(txns: Txn[], today: string): { annualNet: number; taxWindowDays: number } {
+  const operating = txns.filter((t) => !isNonOperating(t));
+  if (operating.length === 0) return { annualNet: 0, taxWindowDays: 0 };
+  const dates = operating.map((t) => Date.parse(t.posted_date)).sort((a, b) => a - b);
+  const firstMs = dates[0];
+  const lastMs = Math.max(dates[dates.length - 1], Date.parse(today));
+  const spanDays = Math.max(1, Math.round((lastMs - firstMs) / 86_400_000));
+  // Prefer 180d, fall back to 90d if history is shorter. Below 30d, refuse
+  // to annualize — the caller treats annualNet=0 as tax-ineligible.
+  const windowDays = spanDays >= 180 ? 180 : spanDays >= 90 ? 90 : spanDays >= 30 ? spanDays : 0;
+  if (windowDays === 0) return { annualNet: 0, taxWindowDays: spanDays };
+  const cutoffMs = lastMs - windowDays * 86_400_000;
+  const inWindow = operating.filter((t) => Date.parse(t.posted_date) >= cutoffMs);
+  // Plaid sign: positive = out (spend), negative = in (income).
+  const net = inWindow.reduce((s, t) => s - t.amount, 0);
+  const annualNet = Math.round(net * (365 / windowDays));
+  return { annualNet, taxWindowDays: windowDays };
+}
+
 
 const BENCHMARKS: Record<string, { nums: number[]; text: string }> = {
   restaurant: { nums: [55, 65, 28, 35], text: "Prime cost target 55–65% of sales; food cost 28–35%." },
