@@ -110,7 +110,7 @@ export async function generateReportForUser(
   const cur = periodRange(periodEnd, 14);
   const prior = periodRange(cur.start, 14);
 
-  const [profileRes, acctRes, txRes, streamRes, ledgerRes, priorReportRes, profEmailRes, inputsRes] = await Promise.all([
+  const [profileRes, acctRes, txRes, streamRes, ledgerRes, priorReportRes, profEmailRes, inputsRes, taxWindowRes] = await Promise.all([
     admin.from("business_profiles").select("business_name, industry, entity_type, reserve_floor_months").eq("user_id", userId).maybeSingle(),
     admin.from("plaid_accounts").select("current_balance, type").eq("user_id", userId),
     admin.from("plaid_transactions").select("posted_date, name, merchant_name_norm, amount, category, category_raw, confidence").eq("user_id", userId).gte("posted_date", prior.start).lte("posted_date", cur.end),
@@ -119,6 +119,15 @@ export async function generateReportForUser(
     admin.from("advisory_reports").select("metrics_snapshot, recommendations, period_end").eq("user_id", userId).eq("status", "generated").order("created_at", { ascending: false }).limit(1).maybeSingle(),
     admin.from("profiles").select("email, first_name").eq("id", userId).maybeSingle(),
     admin.from("business_metric_inputs").select("inputs").eq("user_id", userId).gte("period_end", cur.start).order("period_end", { ascending: false }).limit(1).maybeSingle(),
+    // Handoff Task 4: trailing 180-day window for tax annualization. The old
+    // `profitProxy * (365/14)` extrapolation could flip S-corp eligibility on
+    // one big deposit; a longer window smooths that. Fall back to 90d when
+    // history is short.
+    admin.from("plaid_transactions")
+      .select("posted_date, name, merchant_name_norm, amount, category, category_raw, confidence")
+      .eq("user_id", userId)
+      .gte("posted_date", new Date(Date.parse(cur.end) - 180 * 86_400_000).toISOString().slice(0, 10))
+      .lte("posted_date", cur.end),
   ]);
 
   const profile = profileRes.data ?? { business_name: null, industry: "other", entity_type: "unknown", reserve_floor_months: 3 };
@@ -134,7 +143,13 @@ export async function generateReportForUser(
     profile, periodStart: cur.start, periodEnd: cur.end, today: opts.today,
   });
 
-  const annualNet = metrics.profitProxy * (365 / 14);
+  // ---- Handoff Task 4: trailing-window tax annualization -----------------
+  // Use trailing 180 days (fallback 90) of OPERATING net cash — same
+  // isNonOperating filter as the metrics engine — instead of a 14-day
+  // extrapolation. Report the window used in TAX_FLAG so the model can
+  // cite it accurately (and the verifier can trace it).
+  const taxWindowTx = ((taxWindowRes.data ?? []) as Txn[]);
+  const { annualNet, taxWindowDays } = computeAnnualNet(taxWindowTx, opts.today);
   const taxEligible = ["sole_proprietor", "llc_sole_prop"].includes(profile.entity_type) && annualNet >= 60_000;
   const taxLow = taxEligible ? Math.round(annualNet * 0.06) : 0;
   const taxHigh = taxEligible ? Math.round(annualNet * 0.09) : 0;
@@ -146,8 +161,15 @@ export async function generateReportForUser(
     METRICS: metrics,
     MEMORY: { prior_period_end: priorRpt?.period_end ?? null, prior_recommendations: priorRpt?.recommendations ?? [] },
     PROFILE: profile, BENCHMARK: bench.text,
-    TAX_FLAG: taxEligible ? { eligible: true, annualNet: Math.round(annualNet), savingsLow: taxLow, savingsHigh: taxHigh, note: "S-corp election estimate — route to CPA before year-end." } : { eligible: false },
+    TAX_FLAG: taxEligible ? {
+      eligible: true,
+      annualNet: Math.round(annualNet),
+      savingsLow: taxLow, savingsHigh: taxHigh,
+      window_days: taxWindowDays,
+      note: `S-corp election estimate based on trailing ${taxWindowDays} days of operating cash — route to CPA before year-end.`,
+    } : { eligible: false },
   };
+
 
   async function callModel(extra?: string) {
     const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
