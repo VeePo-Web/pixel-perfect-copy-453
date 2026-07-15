@@ -27,6 +27,14 @@ verify_jwt = false
 [functions.email-unsubscribe]
 verify_jwt = false
 
+# Public one-click unsubscribe for the marketing drip (token-gated).
+[functions.lead-unsubscribe]
+verify_jwt = false
+
+# Cron-triggered email drip worker; gated by CRON_SECRET header.
+[functions.email-drip-worker]
+verify_jwt = false
+
 # Resend (Svix) email webhook; signature-verified inside the function.
 [functions.resend-webhook]
 verify_jwt = false
