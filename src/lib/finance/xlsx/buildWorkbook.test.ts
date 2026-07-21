@@ -51,7 +51,9 @@ test("vault XLSX is a valid package with visible template sheets and hidden audi
     assert.ok(!workbook.includes(`name="${deferred}"`), `deferred sheet should not ship: ${deferred}`);
   }
   for (const hidden of ["__metrics", "__raw_transactions", "__mapping", "__checks"]) {
-    assert.ok(workbook.includes(`name="${hidden}" state="hidden"`), `missing hidden sheet ${hidden}`);
+    // Attribute-order-independent: the <sheet> element carries name, sheetId,
+    // and state — assert the hidden sheet's element exists with state="hidden".
+    assert.match(workbook, new RegExp(`name="${hidden}"[^>]*state="hidden"`), `missing hidden sheet ${hidden}`);
   }
 });
 
@@ -73,7 +75,7 @@ test("individual template workbooks include only the requested visible template"
   const workbook = readStoredZipText(bytes, "xl/workbook.xml");
   assert.ok(workbook.includes('name="13-Week Cash Map"'));
   assert.ok(!workbook.includes('name="Expense And Vendor Audit"'));
-  assert.ok(workbook.includes('name="__checks" state="hidden"'));
+  assert.match(workbook, /name="__checks"[^>]*state="hidden"/);
 });
 
 test("deferred individual workbook titles are refused", () => {

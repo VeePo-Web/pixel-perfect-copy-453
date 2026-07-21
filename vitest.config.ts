@@ -5,7 +5,9 @@ import { defineConfig } from "vitest/config";
 // (metrics math + the anti-hallucination verification layer).
 export default defineConfig({
   test: {
-    include: ["supabase/functions/_shared/*.test.ts", "src/lib/finance/*.test.ts"],
+    // `**` so the XLSX builder tests under src/lib/finance/xlsx/ actually run —
+    // the single-level glob silently excluded the customer-facing workbook suite.
+    include: ["supabase/functions/_shared/**/*.test.ts", "src/lib/finance/**/*.test.ts"],
     environment: "node",
   },
 });

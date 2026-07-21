@@ -16,6 +16,21 @@ export class UntraceableWorkbookCellError extends Error {
   }
 }
 
+/** A metric reached the workbook non-finite (NaN / ±Infinity). Writing it would
+ *  produce `<v>NaN</v>` — a package Excel refuses to open — and it would slip
+ *  the trace gate (Set.has(NaN) is true). We fail LOUD instead: the caller's
+ *  download gate catches this and never ships a corrupt/wrong workbook. */
+export class NonFiniteWorkbookCellError extends Error {
+  constructor(
+    readonly sheet: string,
+    readonly label: string,
+    readonly value: number,
+  ) {
+    super(`Non-finite XLSX cell in "${sheet}" -> "${label}" = ${value}`);
+    this.name = "NonFiniteWorkbookCellError";
+  }
+}
+
 type CellStyle =
   | "default"
   | "coverBrand"
@@ -63,8 +78,22 @@ const STYLE_INDEX: Record<CellStyle, number> = {
   memo: 13,
 };
 
+// XML 1.0 forbids the C0 control block except tab/LF/CR, even when escaped -
+// a single one (real bank descriptors carry them) makes the whole workbook
+// unreadable. Strip them (char-code arithmetic, no literal control chars in
+// source) before escaping so the readable text survives.
+function stripXmlIllegal(s: string): string {
+  let out = "";
+  for (let i = 0; i < s.length; i += 1) {
+    const code = s.charCodeAt(i);
+    if (code < 0x20 && code !== 0x09 && code !== 0x0a && code !== 0x0d) continue;
+    out += s[i];
+  }
+  return out;
+}
+
 function esc(s: string): string {
-  return s
+  return stripXmlIllegal(s)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
@@ -257,8 +286,15 @@ function assertTraceable(sheet: string, rows: readonly (readonly Cell[])[], allo
   for (const r of rows) {
     const label = String(r[0]?.value ?? "cell");
     for (const cell of r) {
-      if (typeof cell.value === "number" && cell.traceLabel && !allowed.has(cell.value)) {
-        throw new UntraceableWorkbookCellError(sheet, cell.traceLabel || label, cell.value);
+      if (typeof cell.value === "number" && cell.traceLabel) {
+        // A non-finite value is a distinct, more informative failure than
+        // "untraceable" — and it must never pass (Set.has(NaN) is true).
+        if (!Number.isFinite(cell.value)) {
+          throw new NonFiniteWorkbookCellError(sheet, cell.traceLabel || label, cell.value);
+        }
+        if (!allowed.has(cell.value)) {
+          throw new UntraceableWorkbookCellError(sheet, cell.traceLabel || label, cell.value);
+        }
       }
     }
   }
@@ -279,7 +315,14 @@ function sheetXml(sheet: SheetDef): string {
           if (cell.value === null || cell.value === undefined) return "";
           const ref = `${colName(cIdx + 1)}${rowNum}`;
           const style = STYLE_INDEX[cell.style ?? "default"];
-          if (typeof cell.value === "number") return `<c r="${ref}" s="${style}"><v>${cell.value}</v></c>`;
+          if (typeof cell.value === "number") {
+            // Fail LOUD on NaN/±Infinity — writing <v>NaN</v> yields a package
+            // Excel refuses to open, and NaN would slip the trace gate.
+            if (!Number.isFinite(cell.value)) {
+              throw new NonFiniteWorkbookCellError(sheet.name, cell.traceLabel ?? String(cells[0]?.value ?? ref), cell.value);
+            }
+            return `<c r="${ref}" s="${style}"><v>${cell.value}</v></c>`;
+          }
           return `<c r="${ref}" s="${style}" t="inlineStr"><is><t>${esc(cell.value)}</t></is></c>`;
         })
         .join("");

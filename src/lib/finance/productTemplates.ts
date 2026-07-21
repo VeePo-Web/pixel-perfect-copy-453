@@ -341,7 +341,9 @@ export function traceableValues(m: ProductMetrics): ReadonlySet<number> {
   const out = new Set<number>([0]);
   for (const tpl of [...fillAllTemplates(m), fillMonthlyReview(m)]) {
     for (const row of tpl.rows) {
-      if (row.value !== null) out.add(row.value);
+      // Only finite values are legitimately citable; a non-finite value in the
+      // allow-set would let a corrupt NaN cell pass the workbook trace gate.
+      if (row.value !== null && Number.isFinite(row.value)) out.add(row.value);
     }
   }
   return out;
