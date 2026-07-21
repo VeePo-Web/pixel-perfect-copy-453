@@ -45,12 +45,20 @@ type CellStyle =
   | "percent"
   | "months"
   | "count"
-  | "memo";
+  | "memo"
+  // Shaded, editable input cells for the fillable (free) templates.
+  | "input"
+  | "inputCount"
+  | "inputPercent";
 
 type Cell = {
   readonly value: string | number | null;
   readonly style?: CellStyle;
   readonly traceLabel?: string;
+  // Excel formula (without the leading "="). When present, the cell writes
+  // <f>formula</f><v>cachedValue</v> — Excel recalculates from the formula, and
+  // `value` is the GoldFin-computed cached result (still non-finite-guarded).
+  readonly formula?: string;
 };
 
 type SheetDef = {
@@ -76,6 +84,9 @@ const STYLE_INDEX: Record<CellStyle, number> = {
   months: 11,
   count: 12,
   memo: 13,
+  input: 14,
+  inputCount: 15,
+  inputPercent: 16,
 };
 
 // XML 1.0 forbids the C0 control block except tab/LF/CR, even when escaped -
@@ -334,6 +345,11 @@ function sheetXml(sheet: SheetDef): string {
             if (!Number.isFinite(cell.value)) {
               throw new NonFiniteWorkbookCellError(sheet.name, cell.traceLabel ?? String(cells[0]?.value ?? ref), cell.value);
             }
+            if (cell.formula) {
+              // <f> recalculates in Excel; <v> is GoldFin's cached result so the
+              // sheet shows correct numbers before the first recalc.
+              return `<c r="${ref}" s="${style}"><f>${esc(cell.formula)}</f><v>${cell.value}</v></c>`;
+            }
             return `<c r="${ref}" s="${style}"><v>${cell.value}</v></c>`;
           }
           return `<c r="${ref}" s="${style}" t="inlineStr"><is><t>${esc(cell.value)}</t></is></c>`;
@@ -359,7 +375,7 @@ function workbookRelsXml(sheets: readonly SheetDef[]): string {
 }
 
 function stylesXml(): string {
-  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="${NS_MAIN}"><numFmts count="4"><numFmt numFmtId="164" formatCode="$#,##0;[Red]($#,##0);-"/><numFmt numFmtId="165" formatCode="0.0&quot;%&quot;"/><numFmt numFmtId="166" formatCode="0.0&quot; mo&quot;"/><numFmt numFmtId="167" formatCode="#,##0"/></numFmts><fonts count="6"><font><sz val="11"/><name val="Aptos"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Aptos"/></font><font><b/><sz val="22"/><color rgb="FF0B0D12"/><name val="Aptos Display"/></font><font><b/><sz val="13"/><color rgb="FF0B0D12"/><name val="Aptos"/></font><font><sz val="10"/><color rgb="FF6B6253"/><name val="Aptos"/></font><font><b/><sz val="11"/><color rgb="FFC9A24A"/><name val="Aptos"/></font></fonts><fills count="6"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF0B0D12"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFF7F1DF"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFC9A24A"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFFDFBF6"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="3"><border><left/><right/><top/><bottom/><diagonal/></border><border><left style="thin"><color rgb="FFE7D8AF"/></left><right style="thin"><color rgb="FFE7D8AF"/></right><top style="thin"><color rgb="FFE7D8AF"/></top><bottom style="thin"><color rgb="FFE7D8AF"/></bottom><diagonal/></border><border><bottom style="thin"><color rgb="FF0B0D12"/></bottom></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="14"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFill="1" applyFont="1"><alignment horizontal="center"/></xf><xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="4" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="3" fillId="0" borderId="2" xfId="0" applyFont="1" applyBorder="1"/><xf numFmtId="0" fontId="5" fillId="3" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFill="1" applyFont="1"/><xf numFmtId="0" fontId="0" fillId="5" borderId="0" xfId="0" applyFill="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="164" fontId="3" fillId="3" borderId="1" xfId="0" applyNumberFormat="1" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="165" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="166" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="167" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="0" fontId="4" fillId="0" borderId="0" xfId="0" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="${NS_MAIN}"><numFmts count="4"><numFmt numFmtId="164" formatCode="$#,##0;[Red]($#,##0);-"/><numFmt numFmtId="165" formatCode="0.0&quot;%&quot;"/><numFmt numFmtId="166" formatCode="0.0&quot; mo&quot;"/><numFmt numFmtId="167" formatCode="#,##0"/></numFmts><fonts count="6"><font><sz val="11"/><name val="Aptos"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Aptos"/></font><font><b/><sz val="22"/><color rgb="FF0B0D12"/><name val="Aptos Display"/></font><font><b/><sz val="13"/><color rgb="FF0B0D12"/><name val="Aptos"/></font><font><sz val="10"/><color rgb="FF6B6253"/><name val="Aptos"/></font><font><b/><sz val="11"/><color rgb="FFC9A24A"/><name val="Aptos"/></font></fonts><fills count="7"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF0B0D12"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFF7F1DF"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFC9A24A"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFFDFBF6"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFFBF0CE"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="3"><border><left/><right/><top/><bottom/><diagonal/></border><border><left style="thin"><color rgb="FFE7D8AF"/></left><right style="thin"><color rgb="FFE7D8AF"/></right><top style="thin"><color rgb="FFE7D8AF"/></top><bottom style="thin"><color rgb="FFE7D8AF"/></bottom><diagonal/></border><border><bottom style="thin"><color rgb="FF0B0D12"/></bottom></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="17"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFill="1" applyFont="1"><alignment horizontal="center"/></xf><xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="4" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="3" fillId="0" borderId="2" xfId="0" applyFont="1" applyBorder="1"/><xf numFmtId="0" fontId="5" fillId="3" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFill="1" applyFont="1"/><xf numFmtId="0" fontId="0" fillId="5" borderId="0" xfId="0" applyFill="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="164" fontId="3" fillId="3" borderId="1" xfId="0" applyNumberFormat="1" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="165" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="166" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="167" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="0" fontId="4" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="164" fontId="0" fillId="6" borderId="1" xfId="0" applyNumberFormat="1" applyFill="1" applyBorder="1"/><xf numFmtId="167" fontId="0" fillId="6" borderId="1" xfId="0" applyNumberFormat="1" applyFill="1" applyBorder="1"/><xf numFmtId="165" fontId="0" fillId="6" borderId="1" xfId="0" applyNumberFormat="1" applyFill="1" applyBorder="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
 }
 
 function contentTypesXml(sheets: readonly SheetDef[]): string {
@@ -425,4 +441,230 @@ export function goldfinTemplateXlsxFileName(title: string, periodEnd = "current"
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
   return `goldfin-${slug || "template"}-${periodEnd}.xlsx`;
+}
+
+// =========================================================================
+// FILLABLE (FREE) TEMPLATES
+// The lead-magnet workbooks are genuine, self-contained planning models: the
+// owner types their own numbers into shaded input cells and every result is an
+// Excel FORMULA that recalculates. Distinct from the paid export above (a
+// static, verified report of a closed period). Provenance here is the formula
+// itself — transparent by construction — so these skip the anti-fabrication
+// trace gate but keep the non-finite guard in sheetXml.
+// =========================================================================
+
+export type FillableInputs = {
+  readonly periodLabel: string;
+  readonly cashOnHand: number;
+  readonly moneyIn: number;
+  readonly moneyOut: number;
+  readonly reserveMonths: number;
+  readonly weeklyIn: number;
+  readonly weeklyOut: number;
+  readonly taxRatePct: number;
+  readonly vendors: ReadonlyArray<{ readonly name: string; readonly monthly: number }>;
+};
+
+// A coherent sample business (mirrors SAMPLE_METRICS' story) pre-filled so the
+// downloaded sample looks complete and reconciles, yet recalculates on edit.
+export const DEFAULT_FILLABLE_INPUTS: FillableInputs = {
+  periodLabel: "2026-05-01 to 2026-05-31",
+  cashOnHand: 268000,
+  moneyIn: 96400,
+  moneyOut: 71900,
+  reserveMonths: 3,
+  weeklyIn: 22493,
+  weeklyOut: 16777,
+  taxRatePct: 15,
+  vendors: [
+    { name: "Unused SaaS seat", monthly: 49 },
+    { name: "Old design tool", monthly: 30 },
+    { name: "Cloud hosting", monthly: 410 },
+  ],
+};
+
+const round2f = (n: number): number => Math.round((n + Number.EPSILON) * 100) / 100;
+
+/** Small row builder that tracks each input/result cell's B-column coordinate
+ *  so downstream formulas can reference it (absolute, e.g. "$B$7"). */
+function fillableBuilder() {
+  const rows: Cell[][] = [];
+  const at = new Map<string, number>();
+  const api = {
+    rows,
+    brand(title: string) { rows.push([c("GOLDFIN DESK", "coverBrand"), c(title, "sheetTitle")]); return api; },
+    kv(label: string, val: string) { rows.push([c(label, "coverMeta"), c(val, "memo")]); return api; },
+    note(text: string) { rows.push([c(text, "coverMeta")]); return api; },
+    blank() { rows.push([]); return api; },
+    section(title: string) { rows.push([c(title, "section"), c(null)]); return api; },
+    head(a: string, b: string) { rows.push([c(a, "header"), c(b, "header")]); return api; },
+    input(label: string, value: number, style: CellStyle = "input") {
+      rows.push([c(label, "label"), { value, style }]);
+      at.set(label, rows.length);
+      return api;
+    },
+    result(label: string, formula: string, cached: number, style: CellStyle = "money") {
+      rows.push([c(label, "label"), { value: cached, style, formula }]);
+      at.set(label, rows.length);
+      return api;
+    },
+    ref(label: string): string {
+      const r = at.get(label);
+      if (!r) throw new Error(`fillable: no cell reference for "${label}"`);
+      return `$B$${r}`;
+    },
+    push(cells: Cell[]) { rows.push(cells); return rows.length; },
+  };
+  return api;
+}
+
+const HOW_TO = "How to use: type your own numbers into the shaded gold cells. Every grey result cell recalculates automatically.";
+
+function fcOwnerCommand(i: FillableInputs): SheetDef {
+  const b = fillableBuilder();
+  b.brand("Owner Command Center").kv("Period", i.periodLabel).blank().note(HOW_TO).blank();
+  b.section("Your inputs");
+  b.input("Cash on hand", i.cashOnHand);
+  b.input("Money in (this month)", i.moneyIn);
+  b.input("Money out (this month)", i.moneyOut);
+  b.input("Reserve months target", i.reserveMonths, "inputCount");
+  b.blank().section("Results");
+  const cash = b.ref("Cash on hand"), inn = b.ref("Money in (this month)"),
+    out = b.ref("Money out (this month)"), mo = b.ref("Reserve months target");
+  b.result("Net cash", `${inn}-${out}`, i.moneyIn - i.moneyOut, "moneyTotal");
+  b.result("Cash coverage (months, if income paused)", `IF(${out}=0,0,${cash}/${out})`, round2f(i.cashOnHand / (i.moneyOut || 1)), "months");
+  b.result("Reserve floor target", `${out}*${mo}`, i.moneyOut * i.reserveMonths);
+  b.result("Cash over / (under) reserve", `${cash}-${out}*${mo}`, i.cashOnHand - i.moneyOut * i.reserveMonths, "moneyTotal");
+  return { name: "Command Center", rows: b.rows, widths: [46, 18] };
+}
+
+function fcCashMap(i: FillableInputs): SheetDef {
+  const b = fillableBuilder();
+  b.brand("13-Week Cash Map").kv("Period", i.periodLabel).blank().note(HOW_TO).blank();
+  b.section("Your inputs");
+  b.input("Starting cash", i.cashOnHand);
+  b.input("Weekly money in", i.weeklyIn);
+  b.input("Weekly money out", i.weeklyOut);
+  b.blank().section("Results");
+  const start = b.ref("Starting cash"), wi = b.ref("Weekly money in"), wo = b.ref("Weekly money out");
+  b.result("Weekly net cash", `${wi}-${wo}`, i.weeklyIn - i.weeklyOut, "moneyTotal");
+  b.section("13-week cash path");
+  for (let n = 1; n <= 13; n += 1) {
+    b.result(`Projected cash - week ${n}`, `${start}+(${wi}-${wo})*${n}`, i.cashOnHand + (i.weeklyIn - i.weeklyOut) * n);
+  }
+  return { name: "13-Week Cash Map", rows: b.rows, widths: [46, 18] };
+}
+
+function fcCashPnl(i: FillableInputs): SheetDef {
+  const b = fillableBuilder();
+  b.brand("Cash-Basis P&L Review").kv("Period", i.periodLabel).blank().note(HOW_TO).blank();
+  b.section("Your inputs");
+  b.input("Deposits (money in)", i.moneyIn);
+  b.input("Operating cash out", i.moneyOut);
+  b.input("Tax reserve rate (%)", i.taxRatePct, "inputPercent");
+  b.blank().section("Results");
+  const dep = b.ref("Deposits (money in)"), oout = b.ref("Operating cash out"), rate = b.ref("Tax reserve rate (%)");
+  b.result("Cash profit proxy", `${dep}-${oout}`, i.moneyIn - i.moneyOut, "moneyTotal");
+  b.result("Tax reserve target", `${dep}*${rate}/100`, round2f(i.moneyIn * i.taxRatePct / 100));
+  b.result("After-tax cash proxy", `(${dep}-${oout})-${dep}*${rate}/100`, round2f(i.moneyIn - i.moneyOut - i.moneyIn * i.taxRatePct / 100), "moneyTotal");
+  return { name: "Cash P&L", rows: b.rows, widths: [46, 18] };
+}
+
+function fcVendorAudit(i: FillableInputs): SheetDef {
+  const b = fillableBuilder();
+  b.brand("Expense & Vendor Audit").kv("Period", i.periodLabel).blank();
+  b.note("List your recurring vendors and their monthly cost in the shaded cells. Totals update automatically; add rows as needed.").blank();
+  b.section("Recurring vendors").head("Vendor", "Monthly cost");
+  const first = b.rows.length + 1;
+  for (const v of i.vendors) b.push([{ value: v.name, style: "input" }, { value: v.monthly, style: "input" }]);
+  for (let k = 0; k < 3; k += 1) b.push([{ value: "(add a vendor)", style: "input" }, { value: 0, style: "input" }]);
+  const last = b.rows.length;
+  const sum = i.vendors.reduce((s, v) => s + v.monthly, 0);
+  b.blank().section("Totals");
+  b.result("Total monthly recurring", `SUM(B${first}:B${last})`, sum, "moneyTotal");
+  b.result("Annualized", `SUM(B${first}:B${last})*12`, sum * 12);
+  return { name: "Vendor Audit", rows: b.rows, widths: [46, 18] };
+}
+
+function fillableCoverSheet(i: FillableInputs, title: string): SheetDef {
+  return {
+    name: "Start here",
+    widths: [30, 30, 30],
+    rows: [
+      [c("GF", "coverBrand"), c("GOLDFIN DESK", "coverBrand"), c(null)],
+      [c(title, "coverTitle"), c(null), c(null)],
+      [c("A fill-in-yourself planning workbook. Type your numbers in the shaded gold cells and every result recalculates.", "memo"), c(null), c(null)],
+      [],
+      [c("How it works", "section")],
+      [c("1. Open a template tab below.", "memo")],
+      [c("2. Type your own figures into the shaded gold cells.", "memo")],
+      [c("3. The grey result cells recalculate instantly.", "memo")],
+      [],
+      [c("Sample figures", "section")],
+      ...([
+        ["Cash on hand", i.cashOnHand],
+        ["Money in", i.moneyIn],
+        ["Money out", i.moneyOut],
+      ] as [string, number][]).map(([k, v]) => row(k, v)),
+      [],
+      [c("Prefer it filled from your bank every month? That is GoldFin Reports - goldfindesk.com/pricing", "memo")],
+      [c("A planning artifact, not tax, accounting, credit, legal, or investment advice.", "memo")],
+    ],
+  };
+}
+
+function fillableAboutSheet(): SheetDef {
+  return {
+    name: "About",
+    widths: [30, 90],
+    rows: [
+      [c("GOLDFIN DESK", "coverBrand"), c("About this workbook", "sheetTitle")],
+      [],
+      row("Shaded gold cells", "Your inputs. Type over the sample numbers with your own.", "memo"),
+      row("Grey result cells", "Formulas that recalculate automatically from your inputs.", "memo"),
+      row("Self-contained", "Everything computes from the numbers you enter - no bank connection needed.", "memo"),
+      row("Not advice", "A planning aid, not tax, accounting, credit, legal, or investment advice.", "memo"),
+      row("Done for you", "GoldFin Reports fills these from your real bank activity every month, with a plain-English briefing. See goldfindesk.com/pricing.", "memo"),
+    ],
+  };
+}
+
+function fillableWorkbookBytes(sheets: readonly SheetDef[]): Uint8Array {
+  // No trace gate: fillable values are input/formula-derived (transparent
+  // provenance). sheetXml still guards against non-finite cached values.
+  return createStoredZip([
+    { path: "[Content_Types].xml", data: contentTypesXml(sheets) },
+    { path: "_rels/.rels", data: ROOT_RELS },
+    { path: "docProps/core.xml", data: CORE_PROPS },
+    { path: "docProps/app.xml", data: APP_PROPS },
+    { path: "xl/workbook.xml", data: workbookXml(sheets) },
+    { path: "xl/_rels/workbook.xml.rels", data: workbookRelsXml(sheets) },
+    { path: "xl/styles.xml", data: stylesXml() },
+    ...sheets.map((sheet, i) => ({ path: `xl/worksheets/sheet${i + 1}.xml`, data: sheetXml(sheet) })),
+  ]);
+}
+
+const FILLABLE_BUILDERS: Record<string, (i: FillableInputs) => SheetDef> = {
+  "Owner Command Center": fcOwnerCommand,
+  "13-Week Cash Map": fcCashMap,
+  "Cash-Basis P&L Review": fcCashPnl,
+  "Expense & Vendor Audit": fcVendorAudit,
+};
+
+/** The full fillable lead-magnet vault: all four interactive templates. */
+export function buildGoldfinFillableVaultXlsx(inputs: FillableInputs = DEFAULT_FILLABLE_INPUTS): Uint8Array {
+  const sheets: SheetDef[] = [
+    fillableCoverSheet(inputs, "GoldFin Template Vault"),
+    ...Object.values(FILLABLE_BUILDERS).map((fn) => fn(inputs)),
+    fillableAboutSheet(),
+  ];
+  return fillableWorkbookBytes(sheets);
+}
+
+/** One fillable template workbook by title. */
+export function buildGoldfinFillableTemplateXlsx(title: string, inputs: FillableInputs = DEFAULT_FILLABLE_INPUTS): Uint8Array {
+  const fn = FILLABLE_BUILDERS[title];
+  if (!fn) throw new Error(`Unknown fillable GoldFin template: ${title}`);
+  const sheets: SheetDef[] = [fillableCoverSheet(inputs, title), fn(inputs), fillableAboutSheet()];
+  return fillableWorkbookBytes(sheets);
 }
