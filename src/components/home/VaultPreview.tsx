@@ -17,14 +17,16 @@ interface VaultItem {
 }
 
 const VAULT: VaultItem[] = [
+  // Numbers mirror SAMPLE_METRICS (sampleTemplates.ts) so the homepage preview
+  // matches the figures in the downloadable sample workbook exactly.
   {
     icon: "command",
     label: "Owner Command Center",
     decision: "What should I look at first?",
     rows: [
-      { key: "Cash on hand", value: "$84,200" },
-      { key: "Net cash", value: "+$44,860" },
-      { key: "Runway", value: "0.44 mo" },
+      { key: "Cash on hand", value: "$268,000" },
+      { key: "Net cash", value: "+$24,500" },
+      { key: "Runway", value: "3.7 mo" },
     ],
   },
   {
@@ -32,9 +34,9 @@ const VAULT: VaultItem[] = [
     label: "13-Week Cash Map",
     decision: "Will cash feel tight next quarter?",
     rows: [
-      { key: "Starting cash", value: "$84,200" },
-      { key: "Weekly in", value: "+$66,200" },
-      { key: "Week 13 cash", value: "$375,790" },
+      { key: "Starting cash", value: "$268,000" },
+      { key: "Weekly in", value: "+$22,493" },
+      { key: "Week 13 cash", value: "$342,317" },
     ],
   },
   {
@@ -42,9 +44,9 @@ const VAULT: VaultItem[] = [
     label: "Cash-Basis P&L Review",
     decision: "Is operating activity actually profitable?",
     rows: [
-      { key: "Deposits", value: "$132,400" },
-      { key: "Outflow", value: "-$87,540" },
-      { key: "Profit proxy", value: "$44,860" },
+      { key: "Deposits", value: "$96,400" },
+      { key: "Outflow", value: "-$71,900" },
+      { key: "Profit proxy", value: "$24,500" },
     ],
   },
   {
@@ -52,7 +54,7 @@ const VAULT: VaultItem[] = [
     label: "Expense And Vendor Audit",
     decision: "Where did the money go?",
     rows: [
-      { key: "Outflow", value: "$87,540" },
+      { key: "Outflow", value: "$71,900" },
       { key: "Duplicate-like", value: "1" },
       { key: "Biggest mover", value: "Software" },
     ],

@@ -233,11 +233,24 @@ function metricsSheet(metrics: ProductMetrics): SheetDef {
     ["transactionsCount", metrics.transactionsCount],
     ["reserve_floor_months", metrics.profile.reserve_floor_months],
   ];
+  // Style each metric by its real unit — a currency format on a months/percent/
+  // count value renders "$6" for 5.6 months or "$94" for 94%. Even though this
+  // sheet is hidden, a shipped artifact must be correct if a user unhides it.
+  const PERCENT_KEYS = new Set(["revenueVsPriorPct", "profitVsPriorPct", "coveragePct"]);
+  const MONTHS_KEYS = new Set(["runwayMonths"]);
+  const COUNT_KEYS = new Set(["transactionsCount", "reserve_floor_months"]);
+  const styleForMetric = (k: string, v: number | string | null): CellStyle => {
+    if (typeof v !== "number") return "memo";
+    if (PERCENT_KEYS.has(k)) return "percent";
+    if (MONTHS_KEYS.has(k)) return "months";
+    if (COUNT_KEYS.has(k)) return "count";
+    return "money";
+  };
   return {
     name: "__metrics",
     hidden: true,
     widths: [32, 20],
-    rows: [[c("Metric", "header"), c("Value", "header")], ...entries.map(([k, v]) => row(k, v, typeof v === "number" ? "money" : "memo"))],
+    rows: [[c("Metric", "header"), c("Value", "header")], ...entries.map(([k, v]) => row(k, v, styleForMetric(k, v)))],
   };
 }
 
@@ -262,8 +275,8 @@ function rawTransactionsSheet(): SheetDef {
     hidden: true,
     widths: [42, 96],
     rows: [
-      [c("Status", "header"), c("Note", "header")],
-      row("Not embedded", "The current frontend report snapshot does not include raw transaction rows. Server-side XLSX generation can populate this sheet from the transactions table.", "memo"),
+      [c("Detail", "header"), c("Note", "header")],
+      row("Transaction detail", "This planning workbook summarizes your connected bank and card activity. Line-item transaction detail lives in your GoldFin Desk account and your own bank export.", "memo"),
     ],
   };
 }
@@ -346,7 +359,7 @@ function workbookRelsXml(sheets: readonly SheetDef[]): string {
 }
 
 function stylesXml(): string {
-  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="${NS_MAIN}"><numFmts count="4"><numFmt numFmtId="164" formatCode="$#,##0;[Red]($#,##0);-"/><numFmt numFmtId="165" formatCode="0.0"/><numFmt numFmtId="166" formatCode="0.0"/><numFmt numFmtId="167" formatCode="#,##0"/></numFmts><fonts count="6"><font><sz val="11"/><name val="Aptos"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Aptos"/></font><font><b/><sz val="22"/><color rgb="FF0B0D12"/><name val="Aptos Display"/></font><font><b/><sz val="13"/><color rgb="FF0B0D12"/><name val="Aptos"/></font><font><sz val="10"/><color rgb="FF6B6253"/><name val="Aptos"/></font><font><b/><sz val="11"/><color rgb="FFC9A24A"/><name val="Aptos"/></font></fonts><fills count="6"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF0B0D12"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFF7F1DF"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFC9A24A"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFFDFBF6"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="3"><border><left/><right/><top/><bottom/><diagonal/></border><border><left style="thin"><color rgb="FFE7D8AF"/></left><right style="thin"><color rgb="FFE7D8AF"/></right><top style="thin"><color rgb="FFE7D8AF"/></top><bottom style="thin"><color rgb="FFE7D8AF"/></bottom><diagonal/></border><border><bottom style="thin"><color rgb="FF0B0D12"/></bottom></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="14"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFill="1" applyFont="1"><alignment horizontal="center"/></xf><xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="4" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="3" fillId="0" borderId="2" xfId="0" applyFont="1" applyBorder="1"/><xf numFmtId="0" fontId="5" fillId="3" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFill="1" applyFont="1"/><xf numFmtId="0" fontId="0" fillId="5" borderId="0" xfId="0" applyFill="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="164" fontId="3" fillId="3" borderId="1" xfId="0" applyNumberFormat="1" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="165" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="166" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="167" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="0" fontId="4" fillId="0" borderId="0" xfId="0" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="${NS_MAIN}"><numFmts count="4"><numFmt numFmtId="164" formatCode="$#,##0;[Red]($#,##0);-"/><numFmt numFmtId="165" formatCode="0.0&quot;%&quot;"/><numFmt numFmtId="166" formatCode="0.0&quot; mo&quot;"/><numFmt numFmtId="167" formatCode="#,##0"/></numFmts><fonts count="6"><font><sz val="11"/><name val="Aptos"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Aptos"/></font><font><b/><sz val="22"/><color rgb="FF0B0D12"/><name val="Aptos Display"/></font><font><b/><sz val="13"/><color rgb="FF0B0D12"/><name val="Aptos"/></font><font><sz val="10"/><color rgb="FF6B6253"/><name val="Aptos"/></font><font><b/><sz val="11"/><color rgb="FFC9A24A"/><name val="Aptos"/></font></fonts><fills count="6"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF0B0D12"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFF7F1DF"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFC9A24A"/><bgColor indexed="64"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFFDFBF6"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="3"><border><left/><right/><top/><bottom/><diagonal/></border><border><left style="thin"><color rgb="FFE7D8AF"/></left><right style="thin"><color rgb="FFE7D8AF"/></right><top style="thin"><color rgb="FFE7D8AF"/></top><bottom style="thin"><color rgb="FFE7D8AF"/></bottom><diagonal/></border><border><bottom style="thin"><color rgb="FF0B0D12"/></bottom></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="14"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFill="1" applyFont="1"><alignment horizontal="center"/></xf><xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="4" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="3" fillId="0" borderId="2" xfId="0" applyFont="1" applyBorder="1"/><xf numFmtId="0" fontId="5" fillId="3" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFill="1" applyFont="1"/><xf numFmtId="0" fontId="0" fillId="5" borderId="0" xfId="0" applyFill="1"/><xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="164" fontId="3" fillId="3" borderId="1" xfId="0" applyNumberFormat="1" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="165" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="166" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="167" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/><xf numFmtId="0" fontId="4" fillId="0" borderId="0" xfId="0" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`;
 }
 
 function contentTypesXml(sheets: readonly SheetDef[]): string {

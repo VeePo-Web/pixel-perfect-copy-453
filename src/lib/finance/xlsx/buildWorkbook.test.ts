@@ -64,10 +64,13 @@ test("XLSX stores native numbers instead of preformatted currency strings", () =
   assert.ok(!cover.includes("$84,200"));
 });
 
-test("style formats percent-point metrics without Excel percentage scaling", () => {
+test("style formats percent-point metrics with a literal % (no Excel percentage scaling)", () => {
   const styles = readStoredZipText(buildGoldfinTemplateVaultXlsx(M), "xl/styles.xml");
-  assert.ok(styles.includes('numFmtId="165" formatCode="0.0"'));
+  // 94 must render as "94.0%", not "9400%" (scaling) and not a bare "94.0".
+  assert.ok(styles.includes('numFmtId="165" formatCode="0.0&quot;%&quot;"'));
   assert.ok(!styles.includes('formatCode="0.0%"'));
+  // Months carry a " mo" suffix so a bare figure is never mistaken for dollars.
+  assert.ok(styles.includes('numFmtId="166" formatCode="0.0&quot; mo&quot;"'));
 });
 
 test("individual template workbooks include only the requested visible template", () => {
