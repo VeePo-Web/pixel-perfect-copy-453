@@ -70,7 +70,41 @@ from the code again.
 
 ---
 
-## RESOLVED — the free templates are now genuinely fillable
+## RESOLVED (v2) — banker's review: from calculators to decision tools
+
+A CFO-lens pass (would a business owner actually *use* these?) found the first
+fillable version was mechanically correct but shallow — a couple of formulas per
+sheet with no verdict, no ratios, no breakdown. Redesigned each into a real
+decision tool, and **verified with a live Excel formula engine** (`formulas`)
+that they evaluate correctly and recalculate when an input changes:
+
+- **Owner Command Center** now opens with a plain-English **verdict** computed
+  from the numbers (`=IF((in-out)<0,"…act now",IF(cash<reserve,"…build cash",…))`)
+  and shows the ratios an owner actually steers by: **profit margin %**, **owner
+  pay as % of income**, **cash coverage in months**, reserve floor, cash vs
+  reserve. Engine check: margin 25.4%, coverage 3.73mo; edit Money in
+  96,400→150,000 and profit recalculates 24,500→78,100, margin→52.07%.
+- **13-Week Cash Map** is now a real liquidity model: a **per-week table** (edit
+  any week's money in/out), a **running ending-cash** formula that chains week to
+  week, and **crunch detection** — `MIN()` lowest week, `COUNTIF()` weeks below
+  your floor, and a verdict. Engine check: inject a 200k week-5 outflow and the
+  lowest-cash figure drops 273,716→113,357.
+- **Cash-Basis P&L** is now **categorized** (materials, payroll, rent, software,
+  marketing, owner pay, other) with **each cost as % of revenue**, a SUM total,
+  **operating profit**, **profit margin**, and a tax reserve. Engine check:
+  operating profit 24,500, margin 25.4%.
+- **Expense & Vendor Audit** is now a **cut-decision tool**: per-vendor annual
+  drain (`×12`), **% of total**, a Keep/Review/Cut column, and a **SUMIF** that
+  totals the annual savings of everything marked "Cut." Engine check: 948/yr.
+
+The `formulas` engine also caught a real defect during verification — a cover
+cell emitting `s="undefined"` (a `c()`-vs-`row()` misuse) that would have made
+Excel refuse the file; fixed, plus a `sheetXml` guard so an unmapped style can
+never emit `s="undefined"` again.
+
+---
+
+## RESOLVED (v1) — the free templates are now genuinely fillable
 
 The "not fillable" gap below is **closed**. The free lead-magnet workbooks are now
 interactive, self-contained planning models:

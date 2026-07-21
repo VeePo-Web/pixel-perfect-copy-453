@@ -338,7 +338,14 @@ function sheetXml(sheet: SheetDef): string {
         .map((cell, cIdx) => {
           if (cell.value === null || cell.value === undefined) return "";
           const ref = `${colName(cIdx + 1)}${rowNum}`;
-          const style = STYLE_INDEX[cell.style ?? "default"];
+          // Fall back to default (0) if a style name is ever unmapped, so a
+          // typo can never emit s="undefined" (which corrupts the package).
+          const style = STYLE_INDEX[cell.style ?? "default"] ?? 0;
+          // A formula that returns TEXT (e.g. a plain-English verdict) — cached
+          // as a string result. t="str" tells Excel the formula yields text.
+          if (cell.formula && typeof cell.value === "string") {
+            return `<c r="${ref}" s="${style}" t="str"><f>${esc(cell.formula)}</f><v>${esc(cell.value)}</v></c>`;
+          }
           if (typeof cell.value === "number") {
             // Fail LOUD on NaN/±Infinity — writing <v>NaN</v> yields a package
             // Excel refuses to open, and NaN would slip the trace gate.
@@ -459,31 +466,50 @@ export type FillableInputs = {
   readonly moneyIn: number;
   readonly moneyOut: number;
   readonly reserveMonths: number;
+  readonly ownerPayTaken: number;
   readonly weeklyIn: number;
   readonly weeklyOut: number;
   readonly taxRatePct: number;
-  readonly vendors: ReadonlyArray<{ readonly name: string; readonly monthly: number }>;
+  readonly costs: {
+    readonly materials: number;
+    readonly payroll: number;
+    readonly rent: number;
+    readonly software: number;
+    readonly marketing: number;
+    readonly ownerPay: number;
+    readonly other: number;
+  };
+  readonly vendors: ReadonlyArray<{ readonly name: string; readonly monthly: number; readonly decision: string }>;
 };
 
 // A coherent sample business (mirrors SAMPLE_METRICS' story) pre-filled so the
 // downloaded sample looks complete and reconciles, yet recalculates on edit.
+// The cost buckets sum to moneyOut (71,900) so the P&L ties to the cash view.
 export const DEFAULT_FILLABLE_INPUTS: FillableInputs = {
   periodLabel: "2026-05-01 to 2026-05-31",
   cashOnHand: 268000,
   moneyIn: 96400,
   moneyOut: 71900,
   reserveMonths: 3,
+  ownerPayTaken: 8000,
   weeklyIn: 22493,
   weeklyOut: 16777,
   taxRatePct: 15,
+  costs: { materials: 15000, payroll: 30000, rent: 6000, software: 4500, marketing: 5400, ownerPay: 8000, other: 3000 },
   vendors: [
-    { name: "Unused SaaS seat", monthly: 49 },
-    { name: "Old design tool", monthly: 30 },
-    { name: "Cloud hosting", monthly: 410 },
+    { name: "Unused SaaS seat", monthly: 49, decision: "Cut" },
+    { name: "Old design tool", monthly: 30, decision: "Cut" },
+    { name: "Cloud hosting", monthly: 410, decision: "Keep" },
   ],
 };
 
 const round2f = (n: number): number => Math.round((n + Number.EPSILON) * 100) / 100;
+const pctOf = (part: number, whole: number): number => (whole === 0 ? 0 : round2f((part / whole) * 100));
+const icell = (value: number | string, style: CellStyle = "input"): Cell => ({ value, style });
+const fnum = (formula: string, cached: number, style: CellStyle = "money"): Cell => ({ value: cached, style, formula });
+// A formula that returns a plain-English verdict (a CFO reading, in a cell).
+const ftext = (formula: string, cached: string): Cell => ({ value: cached, style: "memo", formula });
+const hcell = (t: string): Cell => c(t, "header");
 
 /** Small row builder that tracks each input/result cell's B-column coordinate
  *  so downstream formulas can reference it (absolute, e.g. "$B$7"). */
@@ -497,7 +523,6 @@ function fillableBuilder() {
     note(text: string) { rows.push([c(text, "coverMeta")]); return api; },
     blank() { rows.push([]); return api; },
     section(title: string) { rows.push([c(title, "section"), c(null)]); return api; },
-    head(a: string, b: string) { rows.push([c(a, "header"), c(b, "header")]); return api; },
     input(label: string, value: number, style: CellStyle = "input") {
       rows.push([c(label, "label"), { value, style }]);
       at.set(label, rows.length);
@@ -513,13 +538,15 @@ function fillableBuilder() {
       if (!r) throw new Error(`fillable: no cell reference for "${label}"`);
       return `$B$${r}`;
     },
-    push(cells: Cell[]) { rows.push(cells); return rows.length; },
+    push(cells: Cell[]): number { rows.push(cells); return rows.length; },
+    nextRow(): number { return rows.length + 1; },
   };
   return api;
 }
 
 const HOW_TO = "How to use: type your own numbers into the shaded gold cells. Every grey result cell recalculates automatically.";
 
+// 1. OWNER COMMAND CENTER — "Am I okay?" answered with a verdict + the ratios.
 function fcOwnerCommand(i: FillableInputs): SheetDef {
   const b = fillableBuilder();
   b.brand("Owner Command Center").kv("Period", i.periodLabel).blank().note(HOW_TO).blank();
@@ -527,63 +554,140 @@ function fcOwnerCommand(i: FillableInputs): SheetDef {
   b.input("Cash on hand", i.cashOnHand);
   b.input("Money in (this month)", i.moneyIn);
   b.input("Money out (this month)", i.moneyOut);
+  b.input("Owner pay you took (this month)", i.ownerPayTaken);
   b.input("Reserve months target", i.reserveMonths, "inputCount");
-  b.blank().section("Results");
-  const cash = b.ref("Cash on hand"), inn = b.ref("Money in (this month)"),
-    out = b.ref("Money out (this month)"), mo = b.ref("Reserve months target");
-  b.result("Net cash", `${inn}-${out}`, i.moneyIn - i.moneyOut, "moneyTotal");
-  b.result("Cash coverage (months, if income paused)", `IF(${out}=0,0,${cash}/${out})`, round2f(i.cashOnHand / (i.moneyOut || 1)), "months");
-  b.result("Reserve floor target", `${out}*${mo}`, i.moneyOut * i.reserveMonths);
-  b.result("Cash over / (under) reserve", `${cash}-${out}*${mo}`, i.cashOnHand - i.moneyOut * i.reserveMonths, "moneyTotal");
-  return { name: "Command Center", rows: b.rows, widths: [46, 18] };
+  const cash = b.ref("Cash on hand"), inn = b.ref("Money in (this month)"), out = b.ref("Money out (this month)"),
+    own = b.ref("Owner pay you took (this month)"), mo = b.ref("Reserve months target");
+  const net = i.moneyIn - i.moneyOut, floor = i.moneyOut * i.reserveMonths;
+  const verdict =
+    net < 0 ? "You spent more than you earned this month - act now"
+      : i.cashOnHand < floor ? "Below your cash reserve - build cash before new spending"
+      : i.moneyIn === 0 ? "No income yet - enter your numbers"
+      : net / i.moneyIn < 0.1 ? "Thin profit margin - review pricing or costs"
+      : "Healthy - profitable and above your reserve";
+  b.blank().section("Where you stand");
+  b.push([ftext(
+    `IF((${inn}-${out})<0,"You spent more than you earned this month - act now",IF(${cash}<${out}*${mo},"Below your cash reserve - build cash before new spending",IF(${inn}=0,"No income yet - enter your numbers",IF((${inn}-${out})/${inn}<0.1,"Thin profit margin - review pricing or costs","Healthy - profitable and above your reserve"))))`,
+    verdict)]);
+  b.blank().section("The numbers that matter");
+  b.result("Profit this month (net cash)", `${inn}-${out}`, net, "moneyTotal");
+  b.result("Profit margin", `IF(${inn}=0,0,(${inn}-${out})/${inn}*100)`, pctOf(net, i.moneyIn), "percent");
+  b.result("Owner pay as % of income", `IF(${inn}=0,0,${own}/${inn}*100)`, pctOf(i.ownerPayTaken, i.moneyIn), "percent");
+  b.result("Cash coverage (months at this burn)", `IF(${out}=0,0,${cash}/${out})`, round2f(i.moneyOut === 0 ? 0 : i.cashOnHand / i.moneyOut), "months");
+  b.result("Reserve floor target", `${out}*${mo}`, floor);
+  b.result("Cash over / (under) reserve", `${cash}-${out}*${mo}`, i.cashOnHand - floor, "moneyTotal");
+  return { name: "Command Center", rows: b.rows, widths: [46, 22] };
 }
 
+// 2. 13-WEEK CASH MAP — a real liquidity model: edit any week, see the crunch.
 function fcCashMap(i: FillableInputs): SheetDef {
   const b = fillableBuilder();
   b.brand("13-Week Cash Map").kv("Period", i.periodLabel).blank().note(HOW_TO).blank();
   b.section("Your inputs");
   b.input("Starting cash", i.cashOnHand);
-  b.input("Weekly money in", i.weeklyIn);
-  b.input("Weekly money out", i.weeklyOut);
-  b.blank().section("Results");
-  const start = b.ref("Starting cash"), wi = b.ref("Weekly money in"), wo = b.ref("Weekly money out");
-  b.result("Weekly net cash", `${wi}-${wo}`, i.weeklyIn - i.weeklyOut, "moneyTotal");
-  b.section("13-week cash path");
+  const floorDefault = Math.round((i.weeklyOut * 4) / 1000) * 1000;
+  b.input("Cash floor to stay above", floorDefault);
+  const start = b.ref("Starting cash"), floorRef = b.ref("Cash floor to stay above");
+  b.blank().section("13-week plan (edit any week's money in and out)");
+  const headRow = b.push([hcell("Week"), hcell("Money in"), hcell("Money out"), hcell("Ending cash")]);
+  const firstWeek = headRow + 1;
+  const wnet = i.weeklyIn - i.weeklyOut;
+  const endings: number[] = [];
   for (let n = 1; n <= 13; n += 1) {
-    b.result(`Projected cash - week ${n}`, `${start}+(${wi}-${wo})*${n}`, i.cashOnHand + (i.weeklyIn - i.weeklyOut) * n);
+    const r = firstWeek + (n - 1);
+    const ending = i.cashOnHand + wnet * n;
+    endings.push(ending);
+    const formula = n === 1 ? `${start}+B${r}-C${r}` : `D${r - 1}+B${r}-C${r}`;
+    b.push([c(`Week ${n}`, "label"), icell(i.weeklyIn), icell(i.weeklyOut), fnum(formula, ending)]);
   }
-  return { name: "13-Week Cash Map", rows: b.rows, widths: [46, 18] };
+  const lastWeek = firstWeek + 12;
+  const minEnding = Math.min(...endings), weeksBelow = endings.filter((e) => e < floorDefault).length;
+  const range = `D${firstWeek}:D${lastWeek}`;
+  b.blank().section("Watch for the crunch");
+  b.result("Lowest weekly cash", `MIN(${range})`, minEnding);
+  b.result("Weeks ending below your floor", `COUNTIF(${range},"<"&${floorRef})`, weeksBelow, "count");
+  const mapVerdict =
+    minEnding < 0 ? "Cash goes negative in this window - line up funding or slow outflows"
+      : minEnding < floorDefault ? "Cash dips below your floor - watch the tightest week"
+      : "Cash stays above your floor across all 13 weeks";
+  b.blank();
+  b.push([ftext(
+    `IF(MIN(${range})<0,"Cash goes negative in this window - line up funding or slow outflows",IF(MIN(${range})<${floorRef},"Cash dips below your floor - watch the tightest week","Cash stays above your floor across all 13 weeks"))`,
+    mapVerdict)]);
+  return { name: "13-Week Cash Map", rows: b.rows, widths: [16, 16, 16, 18] };
 }
 
+// 3. CASH-BASIS P&L — categorized, with each cost as a % of revenue + margin.
 function fcCashPnl(i: FillableInputs): SheetDef {
   const b = fillableBuilder();
   b.brand("Cash-Basis P&L Review").kv("Period", i.periodLabel).blank().note(HOW_TO).blank();
-  b.section("Your inputs");
-  b.input("Deposits (money in)", i.moneyIn);
-  b.input("Operating cash out", i.moneyOut);
+  b.section("Revenue & assumptions");
+  b.input("Revenue (deposits / money in)", i.moneyIn);
   b.input("Tax reserve rate (%)", i.taxRatePct, "inputPercent");
-  b.blank().section("Results");
-  const dep = b.ref("Deposits (money in)"), oout = b.ref("Operating cash out"), rate = b.ref("Tax reserve rate (%)");
-  b.result("Cash profit proxy", `${dep}-${oout}`, i.moneyIn - i.moneyOut, "moneyTotal");
-  b.result("Tax reserve target", `${dep}*${rate}/100`, round2f(i.moneyIn * i.taxRatePct / 100));
-  b.result("After-tax cash proxy", `(${dep}-${oout})-${dep}*${rate}/100`, round2f(i.moneyIn - i.moneyOut - i.moneyIn * i.taxRatePct / 100), "moneyTotal");
-  return { name: "Cash P&L", rows: b.rows, widths: [46, 18] };
+  const rev = b.ref("Revenue (deposits / money in)"), rate = b.ref("Tax reserve rate (%)");
+  b.blank().section("Where the money went (edit these)");
+  const headRow = b.push([hcell("Item"), hcell("Amount"), hcell("% of revenue")]);
+  const first = headRow + 1;
+  const costRows: [string, number][] = [
+    ["Materials / cost of goods", i.costs.materials],
+    ["Payroll & contractors", i.costs.payroll],
+    ["Rent & utilities", i.costs.rent],
+    ["Software & subscriptions", i.costs.software],
+    ["Marketing & sales", i.costs.marketing],
+    ["Owner pay", i.costs.ownerPay],
+    ["Other", i.costs.other],
+  ];
+  costRows.forEach(([name, amt], idx) => {
+    const r = first + idx;
+    b.push([c(name, "label"), icell(amt), fnum(`IF(${rev}=0,0,B${r}/${rev}*100)`, pctOf(amt, i.moneyIn), "percent")]);
+  });
+  const last = first + costRows.length - 1;
+  const totalCosts = costRows.reduce((s, [, a]) => s + a, 0);
+  const totalRow = b.nextRow();
+  b.push([c("Total spending", "label"), fnum(`SUM(B${first}:B${last})`, totalCosts, "moneyTotal"), fnum(`IF(${rev}=0,0,B${totalRow}/${rev}*100)`, pctOf(totalCosts, i.moneyIn), "percent")]);
+  const opProfit = i.moneyIn - totalCosts;
+  b.blank().section("Profit");
+  b.result("Operating profit", `${rev}-B${totalRow}`, opProfit, "moneyTotal");
+  b.result("Profit margin", `IF(${rev}=0,0,(${rev}-B${totalRow})/${rev}*100)`, pctOf(opProfit, i.moneyIn), "percent");
+  b.result("Tax reserve target", `(${rev}-B${totalRow})*${rate}/100`, round2f(opProfit * i.taxRatePct / 100));
+  b.result("Cash left after tax reserve", `(${rev}-B${totalRow})-(${rev}-B${totalRow})*${rate}/100`, round2f(opProfit - opProfit * i.taxRatePct / 100), "moneyTotal");
+  return { name: "Cash P&L", rows: b.rows, widths: [40, 18, 16] };
 }
 
+// 4. EXPENSE & VENDOR AUDIT — a cut decision, with annual drain + savings.
 function fcVendorAudit(i: FillableInputs): SheetDef {
   const b = fillableBuilder();
   b.brand("Expense & Vendor Audit").kv("Period", i.periodLabel).blank();
-  b.note("List your recurring vendors and their monthly cost in the shaded cells. Totals update automatically; add rows as needed.").blank();
-  b.section("Recurring vendors").head("Vendor", "Monthly cost");
-  const first = b.rows.length + 1;
-  for (const v of i.vendors) b.push([{ value: v.name, style: "input" }, { value: v.monthly, style: "input" }]);
-  for (let k = 0; k < 3; k += 1) b.push([{ value: "(add a vendor)", style: "input" }, { value: 0, style: "input" }]);
-  const last = b.rows.length;
-  const sum = i.vendors.reduce((s, v) => s + v.monthly, 0);
-  b.blank().section("Totals");
-  b.result("Total monthly recurring", `SUM(B${first}:B${last})`, sum, "moneyTotal");
-  b.result("Annualized", `SUM(B${first}:B${last})*12`, sum * 12);
-  return { name: "Vendor Audit", rows: b.rows, widths: [46, 18] };
+  b.note("List each recurring vendor, its monthly cost, and whether to Keep, Review, or Cut it. Totals and savings update as you edit.").blank();
+  b.section("Recurring vendors (edit these)");
+  const headRow = b.push([hcell("Vendor"), hcell("Monthly"), hcell("Annual"), hcell("% of total"), hcell("Keep / Review / Cut")]);
+  const first = headRow + 1;
+  const rowsData: [string, number, string][] = [
+    ...i.vendors.map((v) => [v.name, v.monthly, v.decision] as [string, number, string]),
+    ...Array.from({ length: 3 }, () => ["(add a vendor)", 0, ""] as [string, number, string]),
+  ];
+  const totalRow = first + rowsData.length;
+  const totalMonthly = i.vendors.reduce((s, v) => s + v.monthly, 0);
+  rowsData.forEach(([name, monthly, decision], idx) => {
+    const r = first + idx;
+    b.push([
+      icell(name), icell(monthly),
+      fnum(`B${r}*12`, monthly * 12),
+      fnum(`IF($B$${totalRow}=0,0,B${r}/$B$${totalRow}*100)`, pctOf(monthly, totalMonthly), "percent"),
+      icell(decision),
+    ]);
+  });
+  const last = first + rowsData.length - 1;
+  b.push([c("Total", "label"), fnum(`SUM(B${first}:B${last})`, totalMonthly, "moneyTotal"), fnum(`SUM(C${first}:C${last})`, totalMonthly * 12), c(null), c(null)]);
+  const cutMonthly = i.vendors.filter((v) => v.decision.toLowerCase() === "cut").reduce((s, v) => s + v.monthly, 0);
+  b.blank().section("Your savings opportunity");
+  b.result("Monthly cost of vendors marked Cut", `SUMIF(E${first}:E${last},"Cut",B${first}:B${last})`, cutMonthly);
+  b.result("Annual savings if you cut them", `SUMIF(E${first}:E${last},"Cut",C${first}:C${last})`, cutMonthly * 12);
+  b.blank();
+  b.push([ftext(
+    `IF(SUMIF(E${first}:E${last},"Cut",C${first}:C${last})>0,"Cutting the vendors you marked Cut saves the annual amount above","Mark any vendor Cut to see the annual savings")`,
+    cutMonthly > 0 ? "Cutting the vendors you marked Cut saves the annual amount above" : "Mark any vendor Cut to see the annual savings")]);
+  return { name: "Vendor Audit", rows: b.rows, widths: [34, 14, 14, 14, 20] };
 }
 
 function fillableCoverSheet(i: FillableInputs, title: string): SheetDef {
@@ -600,12 +704,14 @@ function fillableCoverSheet(i: FillableInputs, title: string): SheetDef {
       [c("2. Type your own figures into the shaded gold cells.", "memo")],
       [c("3. The grey result cells recalculate instantly.", "memo")],
       [],
-      [c("Sample figures", "section")],
+      [c("Sample figures (pre-filled - type over them)", "section")],
       ...([
         ["Cash on hand", i.cashOnHand],
         ["Money in", i.moneyIn],
         ["Money out", i.moneyOut],
+        ["Profit this month", i.moneyIn - i.moneyOut],
       ] as [string, number][]).map(([k, v]) => row(k, v)),
+      row("Profit margin", pctOf(i.moneyIn - i.moneyOut, i.moneyIn), "percent"),
       [],
       [c("Prefer it filled from your bank every month? That is GoldFin Reports - goldfindesk.com/pricing", "memo")],
       [c("A planning artifact, not tax, accounting, credit, legal, or investment advice.", "memo")],
