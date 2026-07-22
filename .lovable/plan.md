@@ -1,72 +1,38 @@
+# Founder test bypass — one code, full pipeline
 
-# Plan — Fix + Verify Plaid → Paid → Auto-Fill → Bi-Weekly Report Pipeline
+## Goal
+You (and anyone you hand the code to) can log into the live site, connect a bank via Plaid, and get a real auto-filled spreadsheet + advisory report — **without** a $150/mo subscription and without exposing a free tier to the public.
 
-Executed in six tasks, in order. Each task ends with observed values written into the final checklist.
+## How the bypass will work
+The paywall (`hasReportAccess` in `supabase/functions/_shared/report-eligibility.ts`) already honors a server-side allowlist secret called `ADVISORY_TEST_EMAILS` (comma-separated emails). It was built exactly for this — the previous DB-column bypass was a security hole, this one is not user-writable.
 
----
+So the "founder code" is really: **your email on the allowlist**. Anyone on the list gets unlimited generation, real Plaid connect, real spreadsheets, real emails — bypassing Stripe entirely. Removing them is one secret edit.
 
-## Task 1 — Deploy the model fix, prove report generation
+## Plan
 
-1. Confirm `supabase/functions/_shared/report-core.ts` on `main` defaults to `google/gemini-3.1-pro-preview` and reads `ADVISORY_MODEL`. Set `ADVISORY_MODEL=google/gemini-3.1-pro-preview` as a belt-and-braces secret.
-2. Redeploy: `generate-advisory-report`, `cron-run-reports`, `payments-webhook`, `admin-trigger-cron` (any function that imports `report-core.ts`).
-3. Invoke `generate-advisory-report` `{send:false}` as test user `35c8c3ef-…`.
-4. Success gate: HTTP 200, `ok:true`, `verification_passed:true`, `advisory_reports` row `status='generated'` with populated `metrics_snapshot`, `narrative`, `recommendations`. If verifier flags orphans, tighten prompt (not verifier).
+### 1. Add a "Founder Test" panel to the portal
+New card on `/portal/dashboard` (only visible when `hasRole('admin')` is true) with three buttons wired to existing edge functions:
 
-## Task 2 — Prove the paid path in Stripe sandbox
+1. **Connect sandbox bank** — calls `plaid-sandbox-public-token` then `plaid-exchange-public-token` (creates a Plaid item using `user_good` / `pass_good` — First Platypus Bank test data). Skips Plaid Link UI so it's one click.
+2. **Sync now** — calls `plaid-sync-accounts` + `plaid-sync-transactions`.
+3. **Generate report now** — calls `generate-advisory-report` with `send: true`.
 
-1. Create a sandbox checkout session for `auto-fill-monthly`, pay with `4242 4242 4242 4242`.
-2. Assert `subscriptions` row: `user_id=<test>`, `environment='sandbox'`, `status ∈ (active,trialing)`, `price_id` matches auto-fill-monthly slug.
-3. Assert `payments-webhook` kickoff report: new `advisory_reports` row + `report_email_deliveries` row for it (bank already connected from previous audit).
-4. Invoke `cron-run-reports` with `x-cron-secret`; assert user counted as candidate and `skipped` (13-day gate). Proves gating both directions.
+Each button shows the raw JSON result inline so you can see what happened.
 
-## Task 3 — Prove email + auto-filled workbook delivery
+The panel is admin-only because `handle_new_user()` already grants admin to the first user; anyone else signing up gets `member` and never sees it.
 
-1. Update `profiles.email` to a reachable inbox for the test user. Invoke `generate-advisory-report` `{send:true}`.
-2. Confirm email arrives; `resend-webhook` flips `report_email_deliveries` to `delivered`.
-3. In portal, open report → confirm `TemplateDownloadCard` renders auto-filled templates on-screen; download `.xlsx` and `.csv`. Spot-check workbook numbers match `metrics_snapshot`. `UntraceableWorkbookCellError` must not fire.
+### 2. Add your email(s) to `ADVISORY_TEST_EMAILS`
+One `set_secret` call. Comma-separated. Never rendered in the UI, never leaked to the client.
 
-## Task 4 — Close abuse hole on `generate-advisory-report`
-
-Edit `supabase/functions/generate-advisory-report/index.ts`:
-1. Add subscription eligibility check (reuse `ELIGIBLE_PRICES` + `ACTIVE_STATUSES` from `cron-run-reports`). Bypass if `profiles.internal_test_allow = true`.
-2. Add per-user 24h rate limit: `SELECT count(*) FROM advisory_reports WHERE user_id=$1 AND created_at > now()-interval '24 hours'`; reject if ≥3.
-3. Migration: `ALTER TABLE profiles ADD COLUMN internal_test_allow boolean NOT NULL DEFAULT false;` (additive, defensive `IF NOT EXISTS`).
-4. Audit `generate-briefing`: add IP-based rate limit if missing (in-memory or ledger table keyed by IP + hour).
-
-## Task 5 — Handoff tasks 3–7 (correctness)
-
-**Task 3+5 verifier split** — `supabase/functions/_shared/report-verify.ts`:
-- Replace single `structuralAllowed` set with three: `countAllowed` (integer counts), `currencyAllowed` (dollar amounts), `percentAllowed` (percentages).
-- Match `$X` against `currencyAllowed` with tolerance = max($1, 0.5% of value); match `X%` against `percentAllowed` ±0.5pp; match bare integers against `countAllowed`.
-- Add bare-number scan: any number ≥100 without `$`, `%`, or "months"/"days" trailing token flagged, excluding 4-digit years 2000–2099.
-
-**Task 4 trailing tax window** — `report-core.ts`:
-- Replace `annualNet = profitProxy * (365/14)` with trailing 180-day (fallback 90-day if <180d history) window after transfer/owner-draw exclusion.
-- Include window length in `TAX_FLAG` output (e.g. `"based on trailing 180 days"`).
-
-**Task 6 PFCv2** — `plaid-sync-transactions/index.ts`:
-- Add `personal_finance_category_version: "v2"` to `/transactions/sync` and `/transactions/recurring/get` request bodies.
-
-**Task 7 duplicate detector** — same file:
-- Track matched indices; do not re-match. Skip merchants already present in `recurring_streams` for the item.
-
-## Task 6 — Cleanup
-
-1. Call `plaid-remove-item` for test user's `plaid_items` (removes at Plaid).
-2. Call `admin-wipe-users` (or admin RPC) for `35c8c3ef-…`.
-3. Verify: no rows in `plaid_items`, `plaid_accounts`, `plaid_transactions`, `advisory_reports`, `subscriptions`, `report_email_deliveries`, `recurring_streams` for that user.
-4. `plaid_get_access_token(<old item id>)` returns null.
-
----
+### 3. Document the flow
+Short section in `docs/plaid-sandbox-setup.md` covering: sign in → open portal → click the three founder buttons → check your inbox → open the auto-filled `.xlsx` from the report page.
 
 ## Technical notes
+- No new edge functions — reuses `plaid-sandbox-public-token`, `plaid-sandbox-fire-webhook`, `plaid-exchange-public-token`, `plaid-sync-*`, `generate-advisory-report`.
+- Sandbox functions are already gated to `PLAID_ENV=sandbox` (currently true), so this panel simply won't work once you flip to production — which is what you want.
+- No Stripe changes. No schema changes. No new RLS.
+- Removing bypass = remove email from the secret. Instant.
 
-- Verifier changes must include unit tests in `supabase/functions/_shared/__tests__/report-verify.test.ts` covering: `$60` unlisted → fail; `$60.30` when snapshot has `$60.00` → pass; `30%` unlisted → fail; bare `250` unlisted → fail; `2026` year → pass.
-- Tax window change: add tests for 200-day and 45-day histories.
-- Rate limit: return HTTP 429 with `Retry-After` header.
-- All migrations use `IF NOT EXISTS` / `ADD COLUMN IF NOT EXISTS` per project convention.
-- Preserve existing `ELIGIBLE_PRICES` set — do not narrow.
+## One question before I build
 
-## Final deliverable
-
-A checklist mirroring Tasks 1–6 with observed values: report id from Task 1, subscription id + kickoff report id from Task 2, delivery id + workbook file hashes from Task 3, 429 response body from Task 4 rate-limit smoke test, verifier test output from Task 5, and empty-row confirmations from Task 6.
+**Which emails should I put on the allowlist?** Please paste them (comma-separated). I'll assume your login email at minimum; add Chris/Parker if you want them in too.
