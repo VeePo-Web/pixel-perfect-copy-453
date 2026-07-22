@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "bunx tsx scripts/generate-sitemap.ts",
     "dev": "vite --host ",
+    "prebuild": "bunx tsx scripts/generate-sitemap.ts",
     "build": "tsc -b && vite build",
     "build:dev": "vite build --mode development",
     "test": "vitest run",
