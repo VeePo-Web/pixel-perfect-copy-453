@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PortalLayout from "../../components/portal/PortalLayout";
 import ProtectedRoute from "../../components/portal/ProtectedRoute";
 import ActivationChecklist from "../../components/portal/ActivationChecklist";
+import FounderTestPanel from "../../components/portal/FounderTestPanel";
 import { supabase } from "../../integrations/supabase/client";
 
 export default function Dashboard() {
@@ -72,6 +73,8 @@ export default function Dashboard() {
         {accountCount != null && accountCount > 0 && (
           <ActivationChecklist accountCount={accountCount} />
         )}
+
+        <FounderTestPanel />
       </PortalLayout>
     </ProtectedRoute>
   );
